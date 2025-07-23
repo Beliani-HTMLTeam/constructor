@@ -1,0 +1,1 @@
+Move usefull scripts here (to be ran with `pnpm run` / `node [file.js]`) or .html files eg. categories canvas generator
