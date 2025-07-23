@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vanilla from "vite-plugin-vanilla";
+import AutoImport from "unplugin-auto-import/vite";
 
 const aliasEntries = {
   "@": "./",
@@ -20,19 +21,35 @@ const aliasEntries = {
 
 export default defineConfig({
   plugins: [
+    AutoImport({
+      imports: [
+        {
+          "@utils/ImageManager.js": ["getImageUrl"],
+          "@templates/index.js": ["templates"],
+          "@entities/index.js": ["entities"],
+          "@utils/types.js": [["default", "types"]],
+        },
+      ],
+      include: [
+        /campaigns\/[^/]+\/[^/]+\.js$/, // matches campaigns/KamilO/somefile.js
+      ],
+      dts: "./auto-imports.d.ts", // Optional: generates TypeScript types
+    }),
+
     // vanilla({
     //   include: "**/*.html",
     //   base: "/",
     // }),
   ],
 
-  // Server configuration
-  // By default, Vite uses port 3000, but we use 5500 for compatibility (e.g., with Google redirects)
+  define: {
+    __SCOPE__: JSON.stringify(process.env.VITE_SCOPE),
+  },
+
   server: {
     port: 5500,
   },
 
-  // Tells Vite (build process) how to resolve import paths
   resolve: {
     alias: Object.fromEntries(
       Object.entries(aliasEntries).map(([key, relPath]) => [

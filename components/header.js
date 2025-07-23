@@ -1,5 +1,5 @@
 import types from "../utils/types.js";
-import {getImageUrl} from "../app.js";
+;
 export function Header(sections, options) {
   const json_header = {
     advantages: {
