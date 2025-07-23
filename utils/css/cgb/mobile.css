@@ -1,0 +1,28 @@
+.xyzGridContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-content: center;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.cgbContainer a {
+  color: #000000;
+}
+
+.xyCTA {
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-thickness: 1px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.xyHeader1 {
+  font-size: 26px;
+  line-height: 36px;
+}
+.xyHeader3 {
+  font-size: 12px;
+}

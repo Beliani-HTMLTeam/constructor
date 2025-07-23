@@ -1,6 +1,6 @@
-import { Image } from "./Image.js";
-import { OriginHref } from "./OriginHref.js";
-import { SlugImage } from "./SlugImage.js";
+import { Image } from "@entities/Image.js";
+import { OriginHref } from "@entities/OriginHref.js";
+import { SlugImage } from "@entities/SlugImage.js";
 
 export class FooterLinks {
   footer_cat = [];

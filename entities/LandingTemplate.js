@@ -1,4 +1,4 @@
-import { TemplateLinks } from "./TemplateLinks.js";
+import { TemplateLinks } from "@entities/TemplateLinks.js";
 
 function Template() {
   return "Template not found.";

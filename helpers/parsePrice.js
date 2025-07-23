@@ -1,5 +1,5 @@
-import { getState } from "../main/initApp.js";
-import { priceFormats } from "./priceFormats.js";
+import { getState } from "@main/initApp.js";
+import { priceFormats } from "@helpers/priceFormats.js";
 
 export function parsePrice(product, options) {
   const shop = getState("shop");

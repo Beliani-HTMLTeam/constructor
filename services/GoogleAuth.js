@@ -1,4 +1,4 @@
-import generateLoginURL from "../utils/generateLoginURL.js";
+import generateLoginURL from "@utils/generateLoginURL.js";
 
 export class GoogleAuth {
   static async login() {

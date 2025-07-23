@@ -1,8 +1,8 @@
-import { Iterate } from "../components/Iterate.js";
-import { OfferPart } from "../components/OfferPart.js";
-import { YouTube } from "../components/YouTube.js";
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { Iterate } from "@components/Iterate.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { YouTube } from "@components/YouTube.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -14,7 +14,7 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "../components/index.js";
+} from "@components/index.js";
 
 export async function CategoriesRowsLine({
   links,

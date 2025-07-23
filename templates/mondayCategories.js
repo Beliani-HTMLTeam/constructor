@@ -1,6 +1,6 @@
-import { OfferPartCode } from "../components/OfferPartCode.js";
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { OfferPartCode } from "@components/OfferPartCode.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -12,8 +12,8 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "../components/index.js";
-import { priceFree } from "../helpers/priceFree.js";
+} from "@components/index.js";
+import { priceFree } from "@helpers/priceFree.js";
 
 export async function mondayCategories({
   links,

@@ -1,6 +1,6 @@
-import { Footer } from "../components/footer.js";
-import FreebiesGenerator from "../components/FreebiesGenerator.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import FreebiesGenerator from "@components/FreebiesGenerator.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -13,12 +13,11 @@ import {
   Product,
   ProductWithSize,
   OfferPartCodes,
-  TopImageTitle,
-} from "../components/index.js";
-import { OfferPart } from "../components/OfferPart.js";
-import { OfferPartCode } from "../components/OfferPartCode.js";
-import { priceFree } from "../helpers/priceFree.js";
-import { getCodes } from "../utils/getCodes.js";
+} from "@components/index.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { OfferPartCode } from "@components/OfferPartCode.js";
+import { priceFree } from "@helpers/priceFree.js";
+import { getCodes } from "@utils/getCodes.js";
 
 export async function mondayOfferFreeebies({
   links,
@@ -39,11 +38,9 @@ export async function mondayOfferFreeebies({
   background,
   offerPart,
   intro,
-  inside,
-  date,
 }) {
   const codes = getCodes(queries);
-  console.log(offerPart);
+
   return `
   ${Header(
     {
@@ -93,36 +90,14 @@ export async function mondayOfferFreeebies({
   )}
   <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
         <tbody>
-              ${type === "newsletter" ? 
-                `<tr>
-                      <td align="center">
-                        ${ImageWithLink({
-                          href: links[0],
-                          src: links[1],
-                        })}
-                      </td>
-                  </tr>`
-                : 
-                  `<tr>
-                      <td align="center">
-                        ${!queries.tit ?
-                        `
-                          ${ImageWithLink({
-                            href: links[0],
-                            src: links[1],
-                          })}` 
-                        :
-                        `${TopImageTitle({
-                            href: links[0],
-                            title1: queries.tit[0],
-                            title2: queries.tit[1],
-                            color: offerPart.color,
-                            type: "standard",
-                          })}`
-                        }
-                      </td>
-                  </tr>`
-              }
+              <tr>
+                  <td align="center">
+                    ${ImageWithLink({
+                      href: links[0],
+                      src: links[1],
+                    })}
+                  </td>
+              </tr>
               <tr>
                   <td align="center">
                     ${ImageWithLink({
@@ -132,42 +107,27 @@ export async function mondayOfferFreeebies({
                   </td>
               </tr>
 
-              ${!inside ?
-              `
-                <tr>
-                  <td style="background-color: ${offerPart.background || background}; color: ${offerPart.color || "#000"};">
-                    ${Space()}
-                  </td>
-                </tr>
-              `
-              :
-              `<tr>
-                  <td style="background-color: ${inside.background || background}; color: ${inside.color || "#000"};">
-                    ${Space()}
-                    ${ImageWithLink({
-                      href: links[8],
-                      src: links[9],
-                    })}
-                    ${Space({ className: "newsletterBottom60px" })}
-                  </td>
-              </tr>`
-              }
 
               <tr>
-                  <td class="newsletterContainer" style="background-color: ${
-                    freebies.options.background || background
-                    }; color: ${
-                    offerPart.color || "#fff"
+                  <td class="newsletterContainer" style="color: ${
+                    offerPart.color || "#000"
                   };">
+                      ${Space()}
                       ${
                         offerPart.type === "code"
                           ? OfferPartCode({
                               color: offerPart.color,
-                              data: queries.offerPart,
+                              paragraph1: queries.offerPart[0],
+                              paragraph2: queries.offerPart[1],
+                              paragraph3: queries.offerPart[2],
+                              paragraph4: getPhrase("Choose from:"),
+                              offerDate: queries.offerPart[2],
                               href: links[0],
-                              getPhrase,
+                              code:
+                                type === "newsletter"
+                                  ? getPhrase("Get code")
+                                  : queries.code,
                               type,
-                              queries
                             })
                           : ""
                       }
@@ -175,7 +135,6 @@ export async function mondayOfferFreeebies({
                         offerPart.type === "codes"
                           ? OfferPartCodes({
                               type,
-                              color: offerPart.color,
                               offerParts: [
                                 {
                                   paragraph: queries.offerPart[0],
@@ -197,13 +156,10 @@ export async function mondayOfferFreeebies({
                                   href: links[0],
                                   type: "newsletter",
                                 },
-                                type === 'newsletter' ? 
-                                `{
+                                {
                                   paragraph: queries.offerPart[3],
                                   class: "newsletterBottom35px",
-                                }` : 
-                                ``,
-
+                                },
                                 {
                                   paragraph: getPhrase("Choose from:"),
                                 },
@@ -217,38 +173,38 @@ export async function mondayOfferFreeebies({
               </tr>
 
               <tr>
-                <td style="background-color: ${ freebies.options.background || background }; color: ${ freebies.options?.color || "#000" };">
-                ${FreebiesGenerator({
-                  background,
-                  freebies: freebies.items,
-                  getProductById,
-                })}
-                  </td>
-              </tr>
-              <tr>
-                  <td style="background-color: ${ freebies.options.background || background }; color: ${ freebies.options?.color || "#000" };">
-                      ${Space({ className: "newsletterBottom60px" })}
-                  </td>
-              </tr>
-              <tr>
-                  <td style="background-color: ${ intro.background || background };">
-                    ${Space()}
+                <td style="background-color: ${background}; color: ${
+    freebies.options.color || "#000"
+  };">
+                  ${FreebiesGenerator({
+                    freebies: freebies.items,
+                    getProductById,
+                  })}
                   </td>
               </tr>
 
-              <tr>
-                  <td class="newsletterContainer" style="background-color: ${
-                    intro.background || background
-                  };">
-                      ${Intro({
-                        data: queries.intro,
-                        color: intro?.color,
-                        title: {
-                          className: "newsletterIntroTitle",
-                        },
-                      })}
-                  </td>
-              </tr>
+
+                <tr>
+                    <td style="background-color: ${
+                      intro.background || background
+                    };">
+                      ${Space()}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="newsletterContainer" style="background-color: ${
+                      intro.background || background
+                    };">
+                        ${Intro({
+                          data: queries.intro,
+                          color: intro?.color,
+                          title: {
+                            className: "newsletterIntroTitle",
+                          },
+                        })}
+                    </td>
+                </tr>
 
                 <tr>
                     <td style="background-color: ${
@@ -326,7 +282,7 @@ export async function mondayOfferFreeebies({
                     }; color: ${categories[2]?.color || "#000000"}">
                         ${Category({
                           href:
-                            typeof categories[2].href === "object"
+                            typeof categories[0].href === "object"
                               ? categories[2].href[country]
                               : getCategoryLink(categories[2].href),
                           name: queries?.categories
@@ -368,9 +324,8 @@ export async function mondayOfferFreeebies({
                           color: categories[3]?.color,
                           type: categories[3].type,
                           products: categories[3].products.map((item) =>
-                            getProductById(item.id, item.src, item.name)
+                            getProductById(item.id, item.src)
                           ),
-                          
                         })}
                     </td>
                 </tr>
@@ -474,7 +429,7 @@ export async function mondayOfferFreeebies({
           klarna: {
             src: getFooter("Klarna src"),
             href: getFooter("Klarna href"),
-            //exclude: ["HU"].includes(country),
+            exclude: ["SK", "HU", "BEFR", "BENL"].includes(country),
           },
           socials: {
             title: getFooter("Socials Title"),

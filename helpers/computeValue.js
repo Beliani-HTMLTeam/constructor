@@ -1,4 +1,4 @@
-import { getState } from "../main/initApp.js";
+import { getState } from "@main/initApp.js";
 
 const types = {
   relation: handleRelation,

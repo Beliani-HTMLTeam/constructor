@@ -1,6 +1,6 @@
-import { OfferPart } from "../components/OfferPart.js";
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -12,7 +12,7 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "../components/index.js";
+} from "@components/index.js";
 
 export async function CategoriesGridOffertPart({
   links,
@@ -99,7 +99,6 @@ export async function CategoriesGridOffertPart({
 
               <tr>
                 <td align="center" style="background-color: #ffccb7;">
-
                   </td>
               </tr>
 

@@ -1,5 +1,5 @@
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -12,13 +12,13 @@ import {
   OfferPartCodes,
   Timer,
   ColumnsTwoPeak,
-} from "../components/index.js";
-import { OfferPart } from "../components/OfferPart.js";
-import { OfferPartCode } from "../components/OfferPartCode.js";
-import { NewsletterTemplate } from "../entities/NewsletterTemplate.js";
-import { priceFree } from "../helpers/priceFree.js";
-import templates from "../main/data/templates.js";
-import { getCodes } from "../utils/getCodes.js";
+} from "@components/index.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { OfferPartCode } from "@components/OfferPartCode.js";
+import { NewsletterTemplate } from "@entities/NewsletterTemplate.js";
+import { priceFree } from "@helpers/priceFree.js";
+import templates from "@data/templates.js";
+import { getCodes } from "@utils/getCodes.js";
 
 export async function FrenchDays({
   links,

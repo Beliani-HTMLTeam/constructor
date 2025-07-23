@@ -1,4 +1,4 @@
-import { ProductInstance } from "./ProductInstance.js";
+import { ProductInstance } from "@entities/ProductInstance.js";
 
 export class MondayCategoryProducts {
   name;

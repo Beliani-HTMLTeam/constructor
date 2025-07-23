@@ -1,6 +1,6 @@
-import { Footer } from "../components/footer.js";
-import FreebiesGenerator from "../components/FreebiesGenerator.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import FreebiesGenerator from "@components/FreebiesGenerator.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -14,11 +14,11 @@ import {
   ProductWithSize,
   OfferPartCodes,
   TopImageTitle,
-} from "../components/index.js";
-import { OfferPart } from "../components/OfferPart.js";
-import { OfferPartCode } from "../components/OfferPartCode.js";
-import { priceFree } from "../helpers/priceFree.js";
-import { getCodes } from "../utils/getCodes.js";
+} from "@components/index.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { OfferPartCode } from "@components/OfferPartCode.js";
+import { priceFree } from "@helpers/priceFree.js";
+import { getCodes } from "@utils/getCodes.js";
 
 export async function mondayOfferLines({
   links,

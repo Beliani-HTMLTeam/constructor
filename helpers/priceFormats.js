@@ -1,4 +1,4 @@
-import { normalize } from "./normalizePrice.js";
+import { normalize } from "@helpers/normalizePrice.js";
 
 const currencies = {
   euro: "€",

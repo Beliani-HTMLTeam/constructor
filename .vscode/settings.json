@@ -1,3 +1,10 @@
 {
-    "liveServer.settings.port": 5500
+  // dont use live server, use vite
+	"liveServer.settings.port": 2137,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"files.exclude": {
+		"**/node_modules": true
+	},
+	// settings for vite extension, vite config is inside vite.config.js
+	"vite.port": 5500,
 }

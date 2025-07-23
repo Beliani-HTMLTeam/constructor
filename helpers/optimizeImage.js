@@ -1,5 +1,5 @@
-import { getState } from "../main/initApp.js";
-import { swapImage } from "./swapImage.js";
+import { getState } from "@main/initApp.js";
+import { swapImage } from "@helpers/swapImage.js";
 
 export function optimize(component) {
   return (...args) => {

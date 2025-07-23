@@ -1,4 +1,4 @@
-import { TableQueryCSV } from "./TableQueryCSV.js";
+import { TableQueryCSV } from "@entities/TableQueryCSV.js";
 
 export class TableQueryCategoryLinks extends TableQueryCSV {
   tableColumns = false;

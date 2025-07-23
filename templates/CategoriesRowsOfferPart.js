@@ -1,7 +1,7 @@
-import { OfferPart } from "../components/OfferPart.js";
-import { YouTube } from "../components/YouTube.js";
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { YouTube } from "@components/YouTube.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -14,7 +14,7 @@ import {
   Product,
   ProductWithSize,
   Title,
-} from "../components/index.js";
+} from "@components/index.js";
 
 export async function CategoriesRowsOfferPart({
   links,

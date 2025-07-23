@@ -1,6 +1,6 @@
-import { Create2Columns_Grid } from "../components/Create2Columns_Grid.js";
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { Create2Columns_Grid } from "@components/Create2Columns_Grid.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -14,7 +14,7 @@ import {
   ProductWithSize,
   Image,
   Title,
-} from "../components/index.js";
+} from "@components/index.js";
 
 export async function CategoriesGrid({
   links,

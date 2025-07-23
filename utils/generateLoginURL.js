@@ -1,4 +1,4 @@
-import { config } from "./config.js";
+import { config } from "@utils/config.js";
 
 const generateLoginURL = () => {
   const baseURL = new URL("https://accounts.google.com/o/oauth2/v2/auth");

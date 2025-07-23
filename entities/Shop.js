@@ -1,5 +1,5 @@
-import { PriceFormat } from "./PriceFormat.js";
-import { Language } from "./Language.js";
+import { PriceFormat } from "@entities/PriceFormat.js";
+import { Language } from "@entities/Language.js";
 
 export class Shop {
   constructor({ origin, shopId, seller, slug, languages, price_format }) {

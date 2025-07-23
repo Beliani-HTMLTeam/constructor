@@ -1,4 +1,4 @@
-import { getState } from "../main/initApp.js";
+import { getState } from "@main/initApp.js";
 
 export const normalizeTranslations = (translations, fallbacks, range) => {
   const config = getState("config");

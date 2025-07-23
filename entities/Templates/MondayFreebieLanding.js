@@ -1,7 +1,7 @@
-import { templates } from "../../templates/index.js";
-import types from "../../utils/types.js";
-import { FreebieItem } from "../FreebiewItem.js";
-import { LandingTemplate } from "../LandingTemplate.js";
+import { templates } from "@templates/index.js";
+import types from "@utils/types.js";
+import { FreebieItem } from "@entities/FreebiewItem.js";
+import { LandingTemplate } from "@entities/LandingTemplate.js";
 
 export class MondayFreebieLanding extends LandingTemplate {
   offerPart = {

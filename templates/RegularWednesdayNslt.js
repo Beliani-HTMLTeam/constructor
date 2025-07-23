@@ -1,5 +1,5 @@
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -12,12 +12,12 @@ import {
   Timer,
   TopImageTitle,
   AdditionalCategories,
-} from "../components/index.js";
-import { OfferPart } from "../components/OfferPart.js";
-import { OfferPartCode } from "../components/OfferPartCode.js";
-import { priceFree } from "../helpers/priceFree.js";
-import templates from "../main/data/templates.js";
-import { getCodes } from "../utils/getCodes.js";
+} from "@components/index.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { OfferPartCode } from "@components/OfferPartCode.js";
+import { priceFree } from "@helpers/priceFree.js";
+import templates from "@data/templates.js";
+import { getCodes } from "@utils/getCodes.js";
 
 export async function RegularWednesdayNslt({
   links,
@@ -33,6 +33,7 @@ export async function RegularWednesdayNslt({
   country,
   type,
   categories,
+  categories_add,
   background,
   header,
   offerPart,
@@ -63,6 +64,7 @@ export async function RegularWednesdayNslt({
     NO: [""],
     SK: [""],
   };
+  
   return `
   ${Header(
     {
@@ -139,82 +141,105 @@ export async function RegularWednesdayNslt({
                           href: links[0],
                           title1: queries.tit[0],
                           title2: queries.tit[1],
-                          color: "#000000",
+                          color: "#000",
                           type: "up_to",
                         })}
                       `
                       }
                     </td>
                 </tr>
-                  
+
               `
             }
             <tr>
-                <td style="background-color: ${categories[0]?.background || background}; color: ${categories[0]?.color || "#000000"}">
-                    <tbody>
-                    ${categories
-                      .map((item, index) => {
-                        console.log(`Sprawdzam href dla kategorii ${index}:`, item.href);
-                        const isLast = index === categories.length - 1; // Sprawdzenie, czy to ostatni element
-                        const background = item.background; // Domyślny kolor tła
-                        const color = item.color; // Domyślny kolor tekstu
-                        const srcValue = item.src?.value || ""; // Pobranie `value`, jeśli istnieje
-                    
-                        // Pobieranie poprawnego indeksu dla `queries.categories`
-                        const dataIndex = index * 2; 
-                        if (dataIndex >= queries.categories.length) return ""; // Zabezpieczenie przed wyjściem poza zakres
-                    
-                        const title = queries.categories[dataIndex] || "Default Title";
-                        const paragraph = queries.categories[dataIndex + 1] || "Default Paragraph";
-                    
-                        return `
-                        <tr>
-                            <td style="background-color: ${background}; color: ${color};">
-                              ${Category({
-                                data: [title, paragraph], // Przekazanie poprawnej pary danych
-                                href: getCategoryLink(item.href),
-                                name: title,
-                                color: item.color,
-                                desc: paragraph,
-                                src: item.src,
-                                cta: getPhrase("Shop now"),
-                                type: "wednesday",
-                                products: item.products?.map((item) =>
-                                  getProductById(item.id, item.src)
-                                ) || [],
-                              })}
-                            </td>
-                        </tr>
-                        `;
-                      })
-                      .join("")}
-                </td>
-            </tr>
-            <tr>
-                <td style="background-color: #ffffff; color: #000000;">
-                    ${AdditionalCategories({
-                      // text1: queries.additional[0],
-                      // text2: queries.additional[1],
-                      // text3: queries.additional[2],
-                      // text4: queries.additional[3],
-                      // text5: queries.additional[4],
-                      // href1: categories[4].href,
-                      // href2: categories[5].href,
-                      // href3: categories[6].href,
-                      // href4: categories[7].href,
-                      // src1: categories[4].src,
-                      // src2: categories[5].src,
-                      // src3: categories[6].src,
-                      // src4: categories[7].src,
-                        ...queries.additional.reduce((acc, text, i) => ({ ...acc, [`text${i + 1}`]: text }), {}),
-                        ...[4, 5, 6, 7].reduce((acc, i, idx) => ({
-                          ...acc,
-                          [`href${idx + 1}`]: categories[i]?.href,
-                          [`src${idx + 1}`]: categories[i]?.src
-                        }), {})
-                    })}
-                </td>
-            </tr>
+            <td style="background-color: ${categories[0]?.background || background}; color: ${categories[0]?.color || "#000000"}">
+              <tbody>
+                ${categories
+                  .map((item, index) => {
+                    const isLast = index === categories.length - 1; // Czy to ostatnia kategoria?
+                    const background = item.background;
+                    const color = item.color;
+                    const srcValue = item.src?.value || "";
+          
+                    const dataIndex = index * 2;
+                    if (dataIndex >= queries.categories.length) return "";
+          
+                    const title = queries.categories[dataIndex] || "Default Title";
+                    const paragraph = queries.categories[dataIndex + 1] || "Default Paragraph";
+          
+                    // Ustal właściwą wartość lastbottomclass
+                    const lastbottomclass = isLast ? "newsletterBottom40px" : "newsletterBottom80px";
+          
+                    // Używamy TYLKO komponentu Category
+                    return `
+                      <tr>
+                        <td style="background-color: ${background}; color: ${color};">
+                          ${Category({
+                            data: [title, paragraph],
+                            href: getCategoryLink(item.href),
+                            name: title,
+                            color: item.color,
+                            desc: paragraph,
+                            src: item.src,
+                            lastbottomclass,
+                            cta: getPhrase("Shop now"),
+                            type: "wednesday",
+                            products: item.products?.map((product) =>
+                              getProductById(product.id, product.src)
+                            ) || [],
+                          })}
+                        </td>
+                      </tr>
+                    `;
+                  })
+                  .join("")}
+              </tbody>
+            </td>
+          </tr>
+          <tr>
+              <td style="background-color: ${categories[4]?.background || "#ffffff"}; color: ${categories[4]?.color || "#000000"}">
+                  ${Space({ className: "newsletterBottom40px" })}
+              </td>
+          </tr>
+          <tr>
+            <td align="center" class="newsletterContainer" style="background-color: ${categories[4]?.background || "#ffffff"}; color: ${categories[4]?.color || "#000000"}">
+              <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+                <tr>
+                  <td align="center" class="newsletterBottom35px">
+                    <span class="newsletterAditionalTitle">${queries.additionalt[0]}</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" class="newsletterContainer" style="background-color: ${categories[4]?.background || "#ffffff"}; color: ${categories[4]?.color || "#000000"}">
+              <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+                ${
+                  [0, 1].map(rowIndex => `
+                    <tr>
+                      ${
+                        [0, 1].map(colIndex => {
+                          const index = rowIndex * 2 + colIndex;
+                          if (!categories_add[index]) return "";
+                          // Ustalanie wartości paddingside na podstawie index
+                          const paddingside = (index === 0 || index === 2) ? "newsletterRight10px" : "newsletterLeft10px";
+                          return `
+                            ${AdditionalCategories({
+                              name: queries.additional[index],
+                              href: getCategoryLink(categories_add[index].href),
+                              src: categories_add[index].src,
+                              paddingside: paddingside,
+                            })}
+                          `;
+                        }).join("")
+                      }
+                    </tr>
+                  `).join("")
+                }
+              </table>
+            </td>
+          </tr>
         <tbody>
       </table>
       <table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
@@ -237,18 +262,18 @@ export async function RegularWednesdayNslt({
                               </tr>
                               <tr>
                                   <td align="left" class="newsletterBottom20px">
-                                      <a href=${links[4]}>
+                                      <a href=${links[5]}>
                                           <img loading="lazy" src=${
-                                            links[5]
+                                            links[6]
                                           } style="display: block;" width="100%">
                                       </a>
                                   </td>
                               </tr>
                               <tr>
                                   <td align="left" class="newsletterBottom35px">
-                                      <a href=${links[6]}>
+                                      <a href=${links[7]}>
                                           <img loading="lazy" src=${
-                                            links[7]
+                                            links[8]
                                           } style="display: block;" width="100%">
                                       </a>
                                   </td>
@@ -280,41 +305,40 @@ export async function RegularWednesdayNslt({
             title: getFooter("Title"),
             firstCategory: {
               src: getFooter("Category src 1"),
-              href: getFooter("Category href 1"),
+              href: getCategoryLink("https://www.beliani.co.uk/sofas/all+products"),//href: getFooter("Category href 1"),
             },
             secondCategory: {
               src: getFooter("Category src 2"),
-              href: getFooter("Category href 2"),
+              href: getCategoryLink("https://www.beliani.co.uk/beds/all+products"),//href: getFooter("Category href 2"),
             },
             thirdCategory: {
               src: getFooter("Category src 3"),
-              href: getFooter("Category href 3"),
+              href: getCategoryLink("https://www.beliani.co.uk/tables/coffee-tables"),//href: getFooter("Category href 3"),
             },
             foutrthCategory: {
               src: getFooter("Category src 4"),
-              href: getFooter("Category href 4"),
+              href: getCategoryLink("https://www.beliani.co.uk/chairs/all+products"),//href: getFooter("Category href 4"),
             },
             fifthCategory: {
               src: getFooter("Category src 5"),
-              href: getFooter("Category href 5"),
+              href: getCategoryLink("https://www.beliani.co.uk/armchairs/all+products"),//href: getFooter("Category href 5"),
             },
             sixthCategory: {
               src: getFooter("Category src 6"),
-              href: getFooter("Category href 6"),
+              href: getCategoryLink("https://www.beliani.co.uk/storage/sideboards"),//href: getFooter("Category href 6"),
             },
             seventhCategory: {
               src: getFooter("Category src 7"),
-              href: getFooter("Category href 7"),
+              href: getCategoryLink("https://www.beliani.co.uk/lighting/all+products"),//href: getFooter("Category href 7"),
             },
             eigthCategory: {
               src: getFooter("Category src 8"),
-              href: getFooter("Category href 8"),
+              href: getCategoryLink("https://www.beliani.co.uk/rugs/all+products"),//href: getFooter("Category href 8"),
             },
           },
           klarna: {
             src: getFooter("Klarna src"),
             href: getFooter("Klarna href"),
-            //exclude: ["HU"].includes(country),
           },
           socials: {
             title: getFooter("Socials Title"),

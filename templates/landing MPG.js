@@ -1,5 +1,5 @@
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -11,7 +11,7 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "../components/index.js";
+} from "@components/index.js";
 
 export async function landing_MPG({
   links,
@@ -33,7 +33,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_04.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_04.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/"
@@ -44,7 +44,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_05.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_05.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/outdoor-furniture/garden-dining-sets/"
@@ -55,7 +55,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_06.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_06.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/outdoor-furniture/sun-loungers/"
@@ -66,7 +66,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_07.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_07.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/outdoor-furniture/storage-boxes/"
@@ -77,7 +77,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_08.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_08.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/outdoor-furniture/balcony-furniture/"
@@ -88,7 +88,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_09.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_09.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/garden-furniture/garden-accessories/pots-and-planters/"
@@ -99,7 +99,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_10.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_10.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/garden-furniture/garden-accessories/fire-pits/"
@@ -110,7 +110,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_11.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_11.jpg",
       },
       href: getCategoryLink("https://www.beliani.ch/garden-furniture/parasols/"),
     },
@@ -119,7 +119,7 @@ export async function landing_MPG({
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "45",
-        value: "https://pictureserver.net/static/2024/20240520_12.jpg",
+        value: "https://upload.pictureserver.net/static/2024/20240520_12.jpg",
       },
       href: getCategoryLink(
         "https://www.beliani.ch/garden-furniture/outdoor-textiles/"
@@ -319,7 +319,7 @@ export async function landing_MPG({
           klarna: {
             src: getFooter("Klarna src"),
             href: getFooter("Klarna href"),
-            //exclude: ["HU"].includes(country),
+            exclude: ["SK", "HU", "BEFR", "BENL"].includes(country),
           },
           socials: {
             title: getFooter("Socials Title"),

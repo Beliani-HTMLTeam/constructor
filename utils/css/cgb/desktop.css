@@ -1,0 +1,59 @@
+.cgbContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cgbContainer a {
+  color: #000000;
+}
+
+.xyCTA {
+  text-decoration: none;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-thickness: 1px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.xyHeader1 {
+  font-size: 45px;
+  line-height: 1.2;
+}
+.xyHeader3 {
+  font-size: 20px;
+}
+
+.textContainer1 {
+  padding-left: min(24px, 2vw);
+  min-width: 35%;
+  flex: 0 1 35%;
+}
+
+@media screen and (max-width: 1200px) {
+  .xyHeader1 {
+    font-size: 32px;
+  }
+  .xyHeader3 {
+    font-size: 18px;
+  }
+  .xyCTA {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .xyHeader1 {
+    font-size: 30px;
+  }
+  .xyHeader3 {
+    font-size: 14px;
+  }
+  .xyCTA {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .xyHeader1 {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+		// Tells VS Code how to resolve and autocomplete paths for intellisense, navigation, and error checking
+    "paths": {
+      "@/*": ["./*"],
+      "@api/*": ["./api/*"],
+      "@components/*": ["./components/*"],
+      "@config/*": ["./config/*"],
+      "@entities/*": ["./entities/*"],
+      "@helpers/*": ["./helpers/*"],
+      "@main/*": ["./main/*"],
+      "@data/*": ["./main/data/*"],
+      "@handlers/*": ["./main/handlers/*"],
+      "@services/*": ["./services/*"],
+      "@templates/*": ["./templates/*"],
+      "@utils/*": ["./utils/*"],
+      "@css/*": ["./utils/css/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

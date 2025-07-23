@@ -1,5 +1,5 @@
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -11,8 +11,8 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "../components/index.js";
-import { priceFree } from "../helpers/priceFree.js";
+} from "@components/index.js";
+import { priceFree } from "@helpers/priceFree.js";
 
 export async function TimerGIF({
   links,
@@ -113,25 +113,25 @@ export async function TimerGIF({
                           "https://www.beliani.ch/office-furniture/desks-eng/"
                         ),
                         name: queries.categories[0],
-                        src: "https://pictureserver.net/static/2024/20240603Category1.png",
+                        src: "https://upload.pictureserver.net/static/2024/20240603Category1.png",
                         cta: queries.cta,
                         type: "monday",
                         products: [
                           getProductById(
                             "238646",
-                            "https://pictureserver.net/static/2024/20240603Category11.png"
+                            "https://upload.pictureserver.net/static/2024/20240603Category11.png"
                           ),
                           getProductById(
                             "319065",
-                            "https://pictureserver.net/static/2024/20240603Category12.png"
+                            "https://upload.pictureserver.net/static/2024/20240603Category12.png"
                           ),
                           getProductById(
                             "319062",
-                            "https://pictureserver.net/static/2024/20240603Category13.png"
+                            "https://upload.pictureserver.net/static/2024/20240603Category13.png"
                           ),
                           getProductById(
                             "310523",
-                            "https://pictureserver.net/static/2024/20240603Category14.png"
+                            "https://upload.pictureserver.net/static/2024/20240603Category14.png"
                           ),
                         ],
                       })}
@@ -354,7 +354,7 @@ export async function TimerGIF({
           klarna: {
             src: getFooter("Klarna src"),
             href: getFooter("Klarna href"),
-            //exclude: ["HU"].includes(country),
+            exclude: ["SK", "HU", "BEFR", "BENL"].includes(country),
           },
           socials: {
             title: getFooter("Socials Title"),

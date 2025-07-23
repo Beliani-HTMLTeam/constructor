@@ -1,6 +1,6 @@
-import { Footer } from "../components/footer.js";
-import FreebiesGenerator from "../components/FreebiesGenerator.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import FreebiesGenerator from "@components/FreebiesGenerator.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -15,12 +15,12 @@ import {
   OfferPartCodes,
   TopImageTitle,
   ColumnsTwoPeak,
-} from "../components/index.js";
-import { OfferPart } from "../components/OfferPart.js";
-import { OfferPartCode } from "../components/OfferPartCode.js";
-import { priceFree } from "../helpers/priceFree.js";
-import { getCodes } from "../utils/getCodes.js";
-import { Create2Columns_Grid } from "../components/index.js";
+} from "@components/index.js";
+import { OfferPart } from "@components/OfferPart.js";
+import { OfferPartCode } from "@components/OfferPartCode.js";
+import { priceFree } from "@helpers/priceFree.js";
+import { getCodes } from "@utils/getCodes.js";
+import { Create2Columns_Grid } from "@components/index.js";
 
 /**
  * Funkcja generująca sekcje kategorii dla newslettera/landing page

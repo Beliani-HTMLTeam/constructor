@@ -1,5 +1,5 @@
-import { Footer } from "../components/footer.js";
-import { Header } from "../components/header.js";
+import { Footer } from "@components/footer.js";
+import { Header } from "@components/header.js";
 import {
   Line,
   Category,
@@ -11,7 +11,7 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "../components/index.js";
+} from "@components/index.js";
 
 export async function newsletter_FGG({
   links,
@@ -1019,7 +1019,7 @@ export async function newsletter_FGG({
           klarna: {
             src: getFooter("Klarna src"),
             href: getFooter("Klarna href"),
-            //exclude: ["HU"].includes(country),
+            exclude: ["SK", "HU", "BEFR", "BENL"].includes(country),
           },
           socials: {
             title: getFooter("Socials Title"),

@@ -1,5 +1,5 @@
-import { getState } from "../main/initApp.js";
-import { computeValue } from "./computeValue.js";
+import { getState } from "@main/initApp.js";
+import { computeValue } from "@helpers/computeValue.js";
 
 export function addParams({ links }) {
   const country = getState("country");

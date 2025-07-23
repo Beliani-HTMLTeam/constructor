@@ -1,4 +1,4 @@
-import {getState} from "../main/initApp.js"
+import {getState} from "@main/initApp.js"
 
 const free = {
   UK: "FREE",
@@ -18,14 +18,23 @@ const free = {
   DK: "GRATIS",
   NO: "GRATIS",
   FI: "ILMAINEN",
-  SE: "GRATIS",
+  SE: "PÅ KÖPET",
   CZ: "ZDARMA",
   SK: "GRÁTIS",
   HU: "AJÁNDÉK",
   RO: "CADOU",
 }
 
-export function priceFree(product) {
+export function priceFree(product, normalPrice) {
   const country = getState("country")
-  return {...product, lowPrice: free[country], highPrice: product.lowPrice}
+  const normal_product = {...product, lowPrice: product.lowPrice, highPrice: product.highPrice}
+  const free_product = {...product, lowPrice: free[country], highPrice: product.lowPrice}
+  return normalPrice === true ? normal_product : free_product;
+ 
 }
+
+// export function priceFree(product) {
+//   const country = getState("country")
+  
+//   return {...product, lowPrice: free[country], highPrice: product.lowPrice}
+// }

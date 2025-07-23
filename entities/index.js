@@ -1,22 +1,21 @@
-import { Campaign } from "./Campaign.js";
-import { MondayNewsletter } from "./Templates/MondayNewsletter.js";
-import { TableQuery } from "./TableQuery.js";
-import { OriginHref } from "./OriginHref.js";
-import { SlugImage } from "./SlugImage.js";
-import { Image } from "./Image.js";
-import { TemplateLinks } from "./TemplateLinks.js";
-import { FooterLinks } from "./FooterLinks.js";
-import { MondayCategoryProducts } from "./MondayCategoryProducts.js";
-import { ProductInstance } from "./ProductInstance.js";
-import { MondayFreebieNewsletter } from "./Templates/MondayFreebieNewsletter.js";
-import { FreebieItem } from "./FreebiewItem.js";
-import { TableQueryCSV } from "./TableQueryCSV.js";
-import { TableQueryHeader } from "./TableQueryHeader.js";
-import { TableQueryFooter } from "./TableQueryFooter.js";
-import { TableQueryTranslationTemplates } from "./TableQueryTranslationTemplates.js";
-import { TableQueryCategoryLinks } from "./TableQueryCategoryLinks.js";
-import { TableQueryCategoryTitles } from "./TableQueryCategoryTitles.js";
-import { MondayFreebieLanding } from "./Templates/MondayFreebieLanding.js";
+import { Campaign } from "@entities/Campaign.js";
+import { MondayNewsletter } from "@entities/Templates/MondayNewsletter.js";
+import { TableQuery } from "@entities/TableQuery.js";
+import { OriginHref } from "@entities/OriginHref.js";
+import { SlugImage } from "@entities/SlugImage.js";
+import { Image } from "@entities/Image.js";
+import { TemplateLinks } from "@entities/TemplateLinks.js";
+import { MondayCategoryProducts } from "@entities/MondayCategoryProducts.js";
+import { ProductInstance } from "@entities/ProductInstance.js";
+import { MondayFreebieNewsletter } from "@entities/Templates/MondayFreebieNewsletter.js";
+import { FreebieItem } from "@entities/FreebiewItem.js";
+import { TableQueryCSV } from "@entities/TableQueryCSV.js";
+import { TableQueryHeader } from "@entities/TableQueryHeader.js";
+import { TableQueryFooter } from "@entities/TableQueryFooter.js";
+import { TableQueryTranslationTemplates } from "@entities/TableQueryTranslationTemplates.js";
+import { TableQueryCategoryLinks } from "@entities/TableQueryCategoryLinks.js";
+import { TableQueryCategoryTitles } from "@entities/TableQueryCategoryTitles.js";
+import { MondayFreebieLanding } from "@entities/Templates/MondayFreebieLanding.js";
 
 export const entities = {
   Campaign,
@@ -27,7 +26,6 @@ export const entities = {
   SlugImage,
   Image,
   TemplateLinks,
-  FooterLinks,
   MondayCategoryProducts,
   ProductInstance,
   MondayFreebieNewsletter,

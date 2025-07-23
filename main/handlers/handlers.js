@@ -1,11 +1,11 @@
-import { handleProduct } from "./index.js";
-import { getQueryLink } from "../../helpers/getQueryLink.js";
-import { getState } from "../initApp.js";
-import _templates from "../data/templates.js";
-import _categoriesLinks from "../data/categoriesLinks.js";
-import _categoriesTitles from "../data/categoriesTitles.js";
-import _header from "../data/header.js";
-import _footer from "../data/footer.js";
+import { handleProduct } from "@handlers/index.js";
+import { getQueryLink } from "@helpers/getQueryLink.js";
+import { getState } from "@main/initApp.js";
+import _templates from "@data/templates.js";
+import _categoriesLinks from "@data/categoriesLinks.js";
+import _categoriesTitles from "@data/categoriesTitles.js";
+import _header from "@data/header.js";
+import _footer from "@data/footer.js";
 
 export class TemplateHandlers {
   isCalled = false;

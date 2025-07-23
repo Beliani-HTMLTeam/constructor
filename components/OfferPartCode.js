@@ -6,7 +6,12 @@ export function OfferPartCode({ color, data, getPhrase, queries, paragraph1, par
   const newsletter = `
     <tr>
       <td style="color: ${color}">
-        ${Paragraph(data ? data[0] : paragraph1  || "Missing Offer - part 1", "center", `color: ${color}`)}
+        ${
+          new Paragraph({
+            paragraph: Array.isArray(data) && data[0] ? data[0] : paragraph1 || "Missing Offer - part 1",
+            align: "center",
+          }).htmlOutput
+        }
       </td>
     </tr>
     <tr>
@@ -17,7 +22,12 @@ export function OfferPartCode({ color, data, getPhrase, queries, paragraph1, par
 
     <tr>
       <td >
-        ${Paragraph(data ? data[1] : paragraph2, "center", `color: ${color}`)}
+           ${
+             new Paragraph({
+               paragraph: Array.isArray(data) && data[1] ? data[1] : paragraph2,
+               align: "center",
+             }).htmlOutput
+           }
       </td>
     </tr>
     <tr>
@@ -45,7 +55,12 @@ export function OfferPartCode({ color, data, getPhrase, queries, paragraph1, par
     
     <tr>
       <td >
-        ${Paragraph(data ? data[3] :paragraph3, "center", `color: ${color}`)}
+            ${
+              new Paragraph({
+                paragraph: Array.isArray(data) && data[3] ? data[3] : paragraph3,
+                align: "center",
+              }).htmlOutput
+            }
       </td>
     </tr>
 
@@ -57,14 +72,25 @@ export function OfferPartCode({ color, data, getPhrase, queries, paragraph1, par
     
     <tr>
       <td >
-        ${Paragraph(getPhrase("Choose from:"), "center", `color: ${color}`)}
+        ${
+          new Paragraph({
+            paragraph: getPhrase("Choose from:"),
+            align: "center",
+            style: `color: ${color}`,
+          }).htmlOutput
+        }
       </td>
     </tr>
   `;
   const landing = `
     <tr>
       <td >
-        ${Paragraph(data ? data[0] :paragraph1, "center")}
+            ${
+              new Paragraph({
+                paragraph: Array.isArray(data) && data[0] ? data[0] : paragraph1 || "Missing Offer - part 1",
+                align: "center",
+              }).htmlOutput
+            }
       </td>
     </tr>
     <tr>
@@ -75,7 +101,12 @@ export function OfferPartCode({ color, data, getPhrase, queries, paragraph1, par
 
     <tr>
       <td >
-        ${Paragraph(data ? data[1] :paragraph2, "center")}
+           ${
+             new Paragraph({
+               paragraph: Array.isArray(data) && data[1] ? data[1] : paragraph2,
+               align: "center",
+             }).htmlOutput
+           }
       </td>
     </tr>
     <tr>
@@ -103,7 +134,12 @@ export function OfferPartCode({ color, data, getPhrase, queries, paragraph1, par
     
     <tr>
       <td >
-        ${Paragraph(data ? data[3] :paragraph3, "center")}
+            ${
+              new Paragraph({
+                paragraph: Array.isArray(data) && data[3] ? data[3] : paragraph3,
+                align: "center",
+              }).htmlOutput
+            }
       </td>
     </tr>
 
@@ -115,7 +151,13 @@ export function OfferPartCode({ color, data, getPhrase, queries, paragraph1, par
     
     <tr>
       <td >
-        ${Paragraph(getPhrase("Choose from:"), "center")}
+        ${
+          new Paragraph({
+            paragraph: getPhrase("Choose from:"),
+            align: "center",
+            style: `color: ${color}`,
+          }).htmlOutput
+        }
       </td>
     </tr>
   `;
