@@ -15,7 +15,7 @@ import { fetchTranslations } from "@api/fetchTranslations.js";
 import { normalizeProducts } from "@utils/normalizeProducts.js";
 import { isQuotaExceededError } from "@helpers/isQuotaExceededError.js";
 import { computeValue } from "@helpers/computeValue.js";
-import { getTrackingUrl } from "@utils/geTrackingUrl.js";
+import { getTrackingUrl } from "@utils/getTrackingUrl.js";
 import { generateLpLinks } from "@helpers/generateLpLinks.js";
 
 const state = {
