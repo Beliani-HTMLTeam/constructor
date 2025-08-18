@@ -2,7 +2,7 @@ import { getState } from "@/main/state/appState";
 import { adjustTableRangeToCountry } from "@/utils/fixRange.js";
 import { normalizeTranslations } from "@/utils/normalizeTranslations.js";
 import { GoogleAuth } from "@/services/GoogleAuth.js";
-
+import Toastify from "toastify-js";
 export const fetchTranslations = async ({ tableQueries }) => {
   const name = getState("name");
   const shop = getState("shop");
@@ -35,20 +35,27 @@ export const fetchTranslations = async ({ tableQueries }) => {
 
   const computedPromise = [];
   for (const { value } of promisesResult) {
-    if (value.error && value.error.code === 400) {
-      throw new Error(value.error.message);
-    }
-    if (value.error && value.error.code === 401) {
-      setTimeout(() => {
-        GoogleAuth.login();
-      }, 3000);
-      throw new Error("Token will be updated in 3 seconds.");
-    }
-    if (value.error && value.error.code === 429) {
-      throw new Error("Too many request. Please, try again later.");
-    }
-    if (value.error && value.error.code === 503) {
-      throw new Error("Service currently unavailable");
+    console.log(value);
+
+    if (value.error) {
+      let error = value.error;
+      let code = error.code;
+      let message = error.message;
+
+      switch (code) {
+        case 400:
+          throw new Error(message);
+        case 401:
+          GoogleAuth.login();
+          break;
+        case 429:
+          throw new Error("Too many request. Please, try again later.");
+        case 503:
+          throw new Error("Service currently unavailable");
+        default:
+          throw new Error("Unknown error", error);
+          break;
+      }
     }
 
     if ("values" in value && value.values.length > 0) {

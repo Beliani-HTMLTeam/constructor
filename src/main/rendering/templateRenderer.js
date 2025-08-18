@@ -7,7 +7,6 @@ import { normalizeProducts } from "@/utils/normalizeProducts.js";
 import { computeValue } from "@/helpers/computeValue.js";
 import { getTrackingUrl } from "@/utils/getTrackingUrl.js";
 import { root } from "@/app.js";
-
 export async function renderTemplate(getState, setState) {
   if (!getState("country")) return;
 

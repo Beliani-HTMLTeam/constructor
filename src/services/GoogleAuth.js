@@ -1,5 +1,5 @@
 import generateLoginURL from "@utils/generateLoginURL.js";
-
+import Toastify from "toastify-js";
 export class GoogleAuth {
   static async login() {
     window.location.href = generateLoginURL();

@@ -6,8 +6,8 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const entities: typeof import('@entities/index.js')['entities']
+  const entities: (typeof import("@entities/index.js"))["entities"]
   const getImageUrl: typeof import('@utils/ImageManager.js')['getImageUrl']
-  const templates: typeof import('@templates/index.js')['templates']
-  const types: typeof import('@utils/types.js')['types']
+  const templates: (typeof import("@templates/index.js"))["templates"]
+  const types: (typeof import("@utils/types.js"))["types"]
 }

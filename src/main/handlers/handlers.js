@@ -6,7 +6,7 @@ import _categoriesLinks from "@/main/data/categoriesLinks.js";
 import _categoriesTitles from "@/main/data/categoriesTitles.js";
 import _header from "@/main/data/header.js";
 import _footer from "@/main/data/footer.js";
-
+import Toastify from "toastify-js";
 export class TemplateHandlers {
   isCalled = false;
   constructor({

@@ -1,6 +1,6 @@
 import { incrementId } from "@/helpers/incrementId.js";
 import { getState, setState } from "@/main/state/appState";
-
+import Toastify from "toastify-js";
 function openCampaignHandler(id) {
   const config = getState("config");
   if (!id) {

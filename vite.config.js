@@ -29,9 +29,7 @@ export default defineConfig({
           "@utils/types.js": ["types"],
         },
       ],
-      include: [
-        /campaigns\/[^/]+\/[^/]+\.js$/,
-      ],
+      include: [/campaigns\/[^/]+\/[^/]+\.js$/],
       dts: "./auto-imports.d.ts",
     }),
 
