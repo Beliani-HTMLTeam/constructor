@@ -1,22 +1,15 @@
-export const adjustTableRangeToCountry = (query, tableColumn) => {
-  if ("tableColumns" in query && query.tableColumns === false) {
-    return query;
-  }
-  if (query.tableRange.includes(":")) {
-    const splitRange = query.tableRange.split(":");
-    const tableRange =
-      tableColumn + splitRange[0] + ":" + tableColumn + splitRange[1];
-    query = {
-      ...query,
-      tableRange,
-    };
-    return query;
-  } else {
-    const tableRange = tableColumn + query.tableRange;
-    query = {
-      ...query,
-      tableRange,
-    };
-    return query;
-  }
+export const adjustTableRangeToCountry = (query, column) => {
+  if (!query || !query.tableRange) return query;
+  if (query.tableColumns === false) return query;
+
+  const range = String(query.tableRange).trim();
+
+  // if letters are present assume already adjusted
+  if (/[A-Za-z]/.test(range)) return query;
+
+  // insert column before every numeric token (handles "14", "14:17", "01:02", etc.)
+  // regex /\d+/g matches any digit
+  const tableRange = range.replace(/\d+/g, (n) => `${column}${n}`);
+
+  return { ...query, tableRange };
 };
