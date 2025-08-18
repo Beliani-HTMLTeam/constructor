@@ -2,19 +2,19 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@api/*": ["./api/*"],
-      "@components/*": ["./components/*"],
-      "@config/*": ["./config/*"],
-      "@entities/*": ["./entities/*"],
-      "@helpers/*": ["./helpers/*"],
-      "@main/*": ["./main/*"],
-      "@data/*": ["./main/data/*"],
-      "@handlers/*": ["./main/handlers/*"],
-      "@services/*": ["./services/*"],
-      "@templates/*": ["./templates/*"],
-      "@utils/*": ["./utils/*"],
-      "@css/*": ["./utils/css/*"]
+      "@/*": ["src/*"],
+      "@api/*": ["src/api/*"],
+      "@components/*": ["src/components/*"],
+      "@config/*": ["src/config/*"],
+      "@entities/*": ["src/entities/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@main/*": ["src/main/*"],
+      "@data/*": ["src/main/data/*"],
+      "@handlers/*": ["src/main/handlers/*"],
+      "@services/*": ["src/services/*"],
+      "@templates/*": ["src/templates/*"],
+      "@utils/*": ["src/utils/*"],
+      "@css/*": ["src/utils/css/*"]
     }
   },
   "exclude": ["node_modules", "dist"],

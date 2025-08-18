@@ -1,4 +1,4 @@
-new entities.Campaign({
+export default new entities.Campaign({
   startId: "29056",
   name: "Newsletter free candles",
   date: "2025.12.16",

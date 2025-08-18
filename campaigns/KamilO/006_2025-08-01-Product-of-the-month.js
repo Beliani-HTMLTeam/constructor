@@ -1,8 +1,9 @@
 export default new entities.Campaign({
   date: "2025.08.01",
-  issueCardId: "385016",
+  issueCardId: "387131",
   name: "Product of the month",
-  startId: "35702",
+  startId: "35734",
+  lpId: "26097",
   figmaUrl:
     "https://www.figma.com/design/AEqGIkFxZbc8oL0H803qtE/2025.08.01---Product-of-the-month--Copy-?node-id=0-1&p=f&t=Eo7Zs65O7y68CFvj-0",
   alarm: {

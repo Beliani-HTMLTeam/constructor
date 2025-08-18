@@ -1,18 +1,21 @@
 ## Shortcuts
 
-```CTRL + D``` Select all\
-```CTRL + ALT + I``` Increment\
-```ALT + SHIFT + F``` Prettier\
-```SHIFT + ALT + ARROW LEFT/RIGHT``` Select to the end of the string
+`CTRL + D` Select all\
+`CTRL + ALT + I` Increment\
+`ALT + SHIFT + F` Prettier\
+`SHIFT + ALT + ARROW LEFT/RIGHT` Select to the end of the string
 
 ## API DOCUMENTATION: How to fetch spreadsheet data
+
 #### https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values
+
 #### path: api/fetchTranslations.js
-Function ```getTranslations```
+
+Function `getTranslations`
 responsible for fetching translation for every tableQuery provided in **app.js** file. But before making it, app will modify/prepare in proper look tableRange by splitting it and concatenate backwards with country column provided in **config/shops.js**
 
-
 ## Config object in app.js
+
 ```
 {
     campaign_url: "https://www.prologistics.info/news_email.php?id=",
@@ -23,32 +26,46 @@ responsible for fetching translation for every tableQuery provided in **app.js**
     emptyCell: (message) => `<span style='font-size: 20px; background: #ff0000;'>${message || "Cell is empty"}</span>`,
 }
 ```
+
 #### campaign_url string
+
 > Value will be concatenated with campaign id provided in app.js in field: startId
+
 #### issue_url string
+
 > Value will be concatenated with issue id provided in app.js in field: issueCardId
+
 #### alarm_days number
+
 > Define alarm days to notify you if alarm for some campaign is active
+
 ```
 alarm: {
   isActive: true,
   description: "Add soonending banners",
 }
 ```
+
 #### confetti boolean
+
 > Decide whether app should notify you if copy template button clicked.
+
 #### replaceToBrs boolean
+
 > Decide whether app should replace '\n' to | '<br>' when fetching spreadsheet data
+
 #### emptyCell function
+
 > Error message will be placed if fallback is not provided for tableQuery and cell is empty in spreadsheet.
 
-
 ## How to setup global function/variable to access it everywhere
+
 1. Open **index.html** file
-2. Create ```<script></script>``` tag BEFORE ```<script type="module" src="app.js"></script>``` tag.
+2. Create `<script></script>` tag BEFORE `<script type="module" src="app.js"></script>` tag.
 3. Now, everything that will be defined inside script is accessible globally across whole app.
 
 Example:
+
 ```
     <script>
         // variable
@@ -63,11 +80,12 @@ Example:
 </html>
 ```
 
-
 ## How to access last item in loop
-```index === [array_item_name].length - 1```
+
+`index === [array_item_name].length - 1`
 
 Example:
+
 ```
     categories.map((item, idx) => {
         if (idx === categories.length - 1) {
@@ -78,11 +96,12 @@ Example:
 ```
 
 Or use Iterate component which has 3 properties:\
-**items**       -> to iterate through\
-**lastItemFn**  -> function to render last item\
-**itemFn**      -> function to render each item
+**items** -> to iterate through\
+**lastItemFn** -> function to render last item\
+**itemFn** -> function to render each item
 
-  EXAMPLE:
+EXAMPLE:
+
 ```
     Iterate({
       items: categories,
@@ -123,38 +142,48 @@ Or use Iterate component which has 3 properties:\
       },
     })
 ```
-    
 
 ## Template rendering happens inside main/initApp.js
+
 From line 69 to 225. \
 There is some checks\
 Data mutations for links, categories provided in **app.js**
 
 ## What not to do:
+
 ### Try to not change any values in components. only extend them or copy.
+
 If some value will ba changed in component, it can affect other templates,
 campaigns. Instead, just copy current component and create new one. In order to make safe changes.
 
 ## Errors:
-```http://127.0.0.1:5500/templates/[file_name].js net::ERR_ABORTED 404 (Not Found)``` \
+
+`http://127.0.0.1:5500/templates/[file_name].js net::ERR_ABORTED 404 (Not Found)` \
 -File name import not found.\
 -File doesn't exist.\
 -File ends on template_name but should template_name.js
 
 ## Set CLIENT ID to read values from spreadsheet
+
 #### path: utils/config.js
+
 #### url: https://console.cloud.google.com/apis/credentials
 
 ## Where Css and Types located
+
 #### path: utils/types.js
 
 ## Add new shop and language
+
 #### path: config/shops.js
+
 #### path: config/languages.js
 
 ## Create new template
+
 1. Create file **[template_name].js** in templates folder
 2. Paste code below into created file
+
 ```
 export async function [template_name]({
    links,
@@ -180,7 +209,8 @@ export async function [template_name]({
 }
 ```
 
- 3. Change **[template_name]** to your name:
+3.  Change **[template_name]** to your name:
+
 ```
  export async function MondayTemplate({
    links,
@@ -204,11 +234,13 @@ export async function [template_name]({
     return `<p>MondayTemplate</p>`
 }
 ```
+
 4. Add template import to **/templates/index.js**
 5. Add template to templates object.
 6. Use it in **app.js** file by accessing templates.[template_name]
 
 ## Every template that will be rendered has access to:
+
 ```
 {
   links,             -> links provided by user in app.js file for template
@@ -233,16 +265,21 @@ export async function [template_name]({
 ```
 
 ## Entities:
+
 #### path: entities/shops.js
+
 #### description: Main problem why sometimes app doesn't work, because of lack provided data to render template, whether it is newsletter or landing page.
+
 > Since we all work on this version, where we have to change data inside application some problems may appear because of lack some code.\
 > Entities allows safely initialize each propery for campaign, template, tableQuery.\
 > If something is wrong, notification will appear.\
 > If you don't know which property to define, by clicking Ctrl+Space you will get hint window.\
-**But you can always define everything as we do previously.**
+> **But you can always define everything as we do previously.**
 
 ## Example
+
 #### Campaign -> to initialize campaign in app.js
+
 ```
 new entities.Campaign({
         startId: "28753",
@@ -260,10 +297,13 @@ new entities.Campaign({
         products: []
 }),
 ```
+
 #### products
+
 Imported products from extension. If not provided, products from localStorage will be taken.
 
 #### MondayFreebieNewsletter -> to initialize template inside **templates: []** with known properties
+
 ```
           new entities.MondayFreebieNewsletter({
             name: "Newsletter",
@@ -475,7 +515,9 @@ Imported products from extension. If not provided, products from localStorage wi
             },
           })
 ```
+
 #### MondayCategoryProducts -> to initialize category products list for template in app.js
+
 ```
 new entities.MondayCategoryProducts({
                 name: "Storage beds",
@@ -505,13 +547,16 @@ new entities.MondayCategoryProducts({
 ```
 
 #### ProductInstance -> to initialize in **products: []** in app.js for **template**
+
 ```
 new entities.ProductInstance({
                     id: "564062",
                     src: "https://upload.pictureserver.net/static/2024/20241209Category11.png",
                   })
 ```
+
 #### FreebieItem -> to initialize in **freebies: { items: [] }** for **template**
+
 ```
 new entities.FreebieItem({
                   row: 1,
@@ -532,11 +577,13 @@ new entities.FreebieItem({
 ```
 
 #### OriginHref -> to initialize href that is based on origin
+
 ```
 new entities.OriginHref({ value: "content/lp24-12-09" })
 ```
 
 #### SlugImage -> to initialize image that is based on slug
+
 ```
 new entities.SlugImage({
                 value:
@@ -545,8 +592,10 @@ new entities.SlugImage({
 ```
 
 #### TableQuery -> to initialize table query for tableQueries in app.js for template
-> fallback: ```TYPE: [] OPTIONAL``` \
+
+> fallback: `TYPE: [] OPTIONAL` \
 > description: Fallback value will be palced in case of cell in spreadsheet is empty. Perfect for testing scenario.
+
 ```
 new entities.TableQuery({
   tableId: "1sVDViDxz4CVoDaa7di4oVC7Oa-8uyKmzhMAs9lQIV88",
@@ -562,36 +611,47 @@ new entities.TableQuery({
 ```
 
 #### TableQueryHeader -> to initialize table query for Header spreadsheet
+
 ```
 tableQueries: [
     new TableQueryHeader(),
 ]
 ```
+
 #### TableQueryFooter -> to initialize table query for Header spreadsheet
+
 ```
 tableQueries: [
     new TableQueryFooter(),
 ]
 ```
+
 #### TableQueryTranslationTemplates -> to initialize table query for Header spreadsheet
+
 ```
 tableQueries: [
     new TableQueryTranslationTemplates(),
 ]
 ```
+
 #### TableQueryCategoryLinks -> to initialize table query for Header spreadsheet
+
 ```
 tableQueries: [
     new TableQueryCategoryLinks(),
 ]
 ```
+
 #### TableQueryCategoryTitles -> to initialize table query for Header spreadsheet
+
 ```
 tableQueries: [
     new TableQueryCategoryTitles(),
 ]
 ```
+
 #### TemplateLinks -> to initialize Template Links in app.js for template
+
 ```
 new entities.TemplateLinks([
               new entities.OriginHref({ value: "content/lp24-12-09" }),
@@ -616,7 +676,9 @@ new entities.TemplateLinks([
               }),
             ])
 ```
-#### Image -> to initialize image that is not based on nothing inside **links: []""
+
+#### Image -> to initialize image that is not based on nothing inside \*\*links: []""
+
 ```
 new entities.Image({
                 value:
@@ -625,26 +687,32 @@ new entities.Image({
 ```
 
 ## To use internally
+
 #### Language -> to initialize language for shops
+
 #### TableQueryCSV -> to initialize table query for tableQueries in app.js for template
+
 #### NewsletterTemplate -> to extend new Template (see) entities/Templates/Monday.js
 
-
 ## Campaign render flow
+
 1. Define campaign using Campaign class in **app.js** file.
 2. Add templates to campaign using Template classes or as always defined object by yourself.
-  -Newsletter template should have type newsletter, wrapper field in newsletter responsible for adding: DOCTYPE, HEAD, TITLE, META tags and others (see: Where Css and Types located)
-  -Landing template should have type landing (see: Where Css and Types located)
+   -Newsletter template should have type newsletter, wrapper field in newsletter responsible for adding: DOCTYPE, HEAD, TITLE, META tags and others (see: Where Css and Types located)
+   -Landing template should have type landing (see: Where Css and Types located)
 3. Run live server.
 4. Select Campaign, Template, Seller, Country.
 
 ## Update Footer, Header, Translation templates, Category Links, Category Titles
+
 ### path: main/data
+
 By default app will read everything from this files.
 If you want fetch it dynamically, define TableQuery using class or object manually.
 Also you have ability to fetch Footer, Header, Category Links, Category Titles using classes.
 
 ## Example: TableQuery class
+
 ```
 tableQueries: [
     new TableQuery({
@@ -657,6 +725,7 @@ tableQueries: [
 ```
 
 ## Example: object manually
+
 ```
 tableQueries: [
     {
@@ -667,7 +736,9 @@ tableQueries: [
     }
 ]
 ```
+
 ## Example: Footer, Header, Translation templates, Category Links, Category Titles
+
 ```
 tableQueries: [
     new TableQueryHeader(),
@@ -677,19 +748,21 @@ tableQueries: [
     new TableQueryCategoryTitles(),
 ]
 ```
+
 If Footer, Header, Translation templates, Category Links, Category Titles fetched dynamically
 functions getHeader, getFooter, getPhrase wil use fetched data.
 If not fetched dynamically will use local data which is located inside: main/data/[...].js
 
-
 ## Add campaign data
+
 1. Open standart CSV compatable table (slugs should be UPPERCASE)
 2. Copy values from spreadsheet from 1 row and column to last row last column
 3. Open https://csvjson.com/csv2json select Hash option
 4. Convert value to JSON
-5. Add ```data``` property for Campaign in **app.js** file
+5. Add `data` property for Campaign in **app.js** file
 
 #### Example
+
 ```
       new entities.Campaign({
         data: {
@@ -1230,17 +1303,20 @@ If not fetched dynamically will use local data which is located inside: main/dat
 ```
 
 ## Use campaign data in template
+
 1. Check if function "getCampaignData" has been added in template
 2. Call "getCampaignData" function with Column name parameter in template place where you want get result.
 
-#### Example 
+#### Example
+
 ```
   getCampaignData("Regular Conditions")
 ```
 
-
 ## Products render flow
+
 #### path: main/initApp.js line 143
+
 - Get products from localstorage
 - If products defined parse products array if not assing empty array
 - Find products for campaign by startId (campaign_id)
@@ -1248,7 +1324,9 @@ If not fetched dynamically will use local data which is located inside: main/dat
 - Provide getProductById function for template properites
 
 ## Products parsing flow
+
 #### path: main/initApp.js line 228
+
 - Listen to button click
 - Call prompt to receive input from user
 - If no input provided show Toast: Input incorrect
@@ -1262,12 +1340,14 @@ If not fetched dynamically will use local data which is located inside: main/dat
 - If products already exist in localStorage for this campaign override them with new provided one.
 - If error happend while updating localStorage and error is isQuotaExceededError ask user about removing some localStorage data.
 
-
 ## How to clear localStorage
+
 For new version: \
+
 - click **Clear storage** button
 
 For old version: \
+
 - click **F12**
 - open **Application** tab
 - select **Local storage** on the sidebar

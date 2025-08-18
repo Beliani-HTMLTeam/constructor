@@ -4,19 +4,19 @@ import vanilla from "vite-plugin-vanilla";
 import AutoImport from "unplugin-auto-import/vite";
 
 const aliasEntries = {
-  "@": "./",
-  "@api": "./api",
-  "@components": "./components",
-  "@config": "./config",
-  "@entities": "./entities",
-  "@helpers": "./helpers",
-  "@main": "./main",
-  "@data": "./main/data",
-  "@handlers": "./main/handlers",
-  "@services": "./services",
-  "@templates": "./templates",
-  "@utils": "./utils",
-  "@css": "./utils/css",
+  "@": "./src",
+  "@api": "./src/api",
+  "@components": "./src/components",
+  "@config": "./src/config",
+  "@entities": "./src/entities",
+  "@helpers": "./src/helpers",
+  "@main": "./src/main",
+  "@data": "./src/main/data",
+  "@handlers": "./src/main/handlers",
+  "@services": "./src/services",
+  "@templates": "./src/templates",
+  "@utils": "./src/utils",
+  "@css": "./src/utils/css",
 };
 
 export default defineConfig({
@@ -24,22 +24,30 @@ export default defineConfig({
     AutoImport({
       imports: [
         {
-          "@utils/ImageManager.js": ["getImageUrl"],
           "@templates/index.js": ["templates"],
           "@entities/index.js": ["entities"],
-          "@utils/types.js": [["default", "types"]],
+          "@utils/types.js": ["types"],
         },
       ],
       include: [
-        /campaigns\/[^/]+\/[^/]+\.js$/, // matches campaigns/KamilO/somefile.js
+        /campaigns\/[^/]+\/[^/]+\.js$/,
       ],
-      dts: "./auto-imports.d.ts", // Optional: generates TypeScript types
+      dts: "./auto-imports.d.ts",
     }),
 
-    // vanilla({
-    //   include: "**/*.html",
-    //   base: "/",
-    // }),
+    AutoImport({
+      imports: [
+        {
+          "@utils/ImageManager.js": ["getImageUrl"],
+        },
+      ],
+      dts: "./auto-imports.d.ts",
+    }),
+
+    vanilla({
+      include: "**/*.html",
+      base: "/",
+    }),
   ],
 
   define: {
@@ -55,7 +63,7 @@ export default defineConfig({
       Object.entries(aliasEntries).map(([key, relPath]) => [
         key,
         fileURLToPath(new URL(relPath, import.meta.url)),
-      ])
+      ]),
     ),
   },
 });

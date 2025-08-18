@@ -17,6 +17,34 @@ export default new entities.Campaign({
       template: templates.CategoriesRowsLine,
       background: "#ffe8df",
       categories: [
+        new entities.Category({
+          src: getImageUrl("20250120Category1.png", true),
+          href: "category-link",
+          name: "Category Name",
+          type: "monday_freebies",
+          products: [
+            new entities.Product({
+              id: "376648",
+              src: getImageUrl("250416product_01.png", true),
+            }),
+            {
+              id: "376648",
+              src: getImageUrl("250416product_01.png", true),
+            },
+            {
+              id: "517212",
+              src: getImageUrl("250416product_02.png", true),
+            },
+            {
+              id: "193871",
+              src: getImageUrl("250416product_03.png", true),
+            },
+            {
+              id: "207163",
+              src: getImageUrl("250416product_04.png", true),
+            },
+          ],
+        }),
         {
           src: {
             type: "relation",
