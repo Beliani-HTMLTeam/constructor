@@ -18,6 +18,7 @@ import {
   setupOpenIssueHandler,
   setupOpenFigmaHandler,
   setupOpenLPHandler,
+  setupNewCampaignHandler,
 } from "@/main/ui/buttonHandlers.js";
 import { createSetSelectedTemplate } from "@/main/ui/templateHelpers.js";
 import { handleSlugChange } from "@/main/events.js";
@@ -69,6 +70,7 @@ function setupEventListeners(elements, campaigns, shops, jsConfetti) {
   // Setup button handlers
   setupProductsHandler(elements, setState, getState);
   setupClearStorageHandler(elements);
+  setupNewCampaignHandler(elements, campaigns);
   setupCopyTemplateHandler(elements, getState, jsConfetti);
   setupOpenCampaignHandler(elements, getState);
   setupOpenIssueHandler(elements, getState);

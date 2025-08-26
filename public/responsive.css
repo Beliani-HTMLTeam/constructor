@@ -70,6 +70,7 @@
 
   /* Close button inside panel */
   .menu-close {
+    cursor: pointer;
     position: absolute;
     z-index: 5;
     color: rgba(40, 40, 40, 0.75);

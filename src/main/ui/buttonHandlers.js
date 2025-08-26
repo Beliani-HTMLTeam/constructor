@@ -8,6 +8,9 @@ import {
 import { generateLpLinks } from "@/helpers/generateLpLinks.js";
 import { normalizeProducts } from "@/utils/normalizeProducts.js";
 import { isQuotaExceededError } from "@/helpers/isQuotaExceededError.js";
+import { openCreateCampaignModal } from "@/main/ui/createCampaign.js";
+import { createSelectOption } from "@/utils/domUtils.js";
+import { setState } from "@/main/state/appState.js";
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;
@@ -274,6 +277,27 @@ export function setupOpenLPHandler(elements, getState) {
     );
 
     openLpHandler(lpLinks, country);
+  });
+}
+
+// Setup new campaign creation handler
+export function setupNewCampaignHandler(elements, campaigns) {
+  const { newCampaign, selectCampaigns } = elements;
+
+  newCampaign?.addEventListener("click", () => {
+    openCreateCampaignModal((campaign) => {
+      // Basic validation
+      if (!campaign.startId || !campaign.name) {
+        Toastify({ text: "Campaign missing required fields", duration: 3000 }).showToast();
+        return false; // signal error — keep modal open
+      }
+
+      // For now, just log the campaign to console instead of mutating files/UI
+      console.log("New campaign (preview):", campaign);
+
+      Toastify({ text: "Campaign preview logged to console.", duration: 2000 }).showToast();
+      return true; // success — allow modal to close
+    });
   });
 }
 
