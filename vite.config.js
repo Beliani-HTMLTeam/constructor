@@ -1,67 +1,78 @@
 import { fileURLToPath, URL } from "node:url";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import vanilla from "vite-plugin-vanilla";
 import AutoImport from "unplugin-auto-import/vite";
+import { saveCampaignPlugin } from "./plugins/save-campaign-plugin.js";
 
-const aliasEntries = {
-  "@": "./src",
-  "@api": "./src/api",
-  "@components": "./src/components",
-  "@config": "./src/config",
-  "@entities": "./src/entities",
-  "@helpers": "./src/helpers",
-  "@main": "./src/main",
-  "@data": "./src/main/data",
-  "@handlers": "./src/main/handlers",
-  "@services": "./src/services",
-  "@templates": "./src/templates",
-  "@utils": "./src/utils",
-  "@css": "./src/utils/css",
-};
+export default defineConfig(({ mode }) => {
+  // Load env vars based on `mode` in the current working directory.
+  const env = loadEnv(mode, process.cwd(), "");
+  console.log("VITE_SCOPE from env:", env.VITE_SCOPE);
 
-export default defineConfig({
-  plugins: [
-    AutoImport({
-      imports: [
-        {
-          "@templates/index.js": ["templates"],
-          "@entities/index.js": ["entities"],
-          "@utils/types.js": ["types"],
-        },
-      ],
-      include: [/campaigns\/[^/]+\/[^/]+\.js$/],
-      dts: "./auto-imports.d.ts",
-    }),
+  const aliasEntries = {
+    "@": "./src",
+    "@api": "./src/api",
+    "@components": "./src/components",
+    "@config": "./src/config",
+    "@entities": "./src/entities",
+    "@helpers": "./src/helpers",
+    "@main": "./src/main",
+    "@data": "./src/main/data",
+    "@handlers": "./src/main/handlers",
+    "@services": "./src/services",
+    "@templates": "./src/templates",
+    "@utils": "./src/utils",
+    "@css": "./src/utils/css",
+  };
 
-    AutoImport({
-      imports: [
-        {
-          "@utils/ImageManager.js": ["getImageUrl"],
-        },
-      ],
-      dts: "./auto-imports.d.ts",
-    }),
+  return {
+    plugins: [
+      saveCampaignPlugin(), // Add our custom plugin first
+      AutoImport({
+        imports: [
+          {
+            "@templates/index.js": ["templates"],
+            "@entities/index.js": ["entities"],
+            "@utils/types.js": ["types"],
+            "@helpers/translateImage.js": ["translateImage"],
+            "@helpers/translateLink.js": ["translateLink"],
+          },
+        ],
+        include: [/campaigns\/[^/]+\/[^/]+\.js$/],
+        dts: "./auto-imports.d.ts",
+      }),
 
-    vanilla({
-      include: "**/*.html",
-      base: "/",
-    }),
-  ],
+      AutoImport({
+        imports: [
+          {
+            "@utils/ImageManager.js": ["getImageUrl"],
+          },
+        ],
+        dts: "./auto-imports.d.ts",
+      }),
 
-  define: {
-    __SCOPE__: JSON.stringify(process.env.VITE_SCOPE),
-  },
+      vanilla({
+        include: "**/*.html",
+        base: "/",
+      }),
+    ],
 
-  server: {
-    port: 5500,
-  },
+    define: {
+      __SCOPE__: JSON.stringify(env.VITE_SCOPE),
+      "import.meta.env.VITE_SCOPE": JSON.stringify(env.VITE_SCOPE),
+    },
 
-  resolve: {
-    alias: Object.fromEntries(
-      Object.entries(aliasEntries).map(([key, relPath]) => [
-        key,
-        fileURLToPath(new URL(relPath, import.meta.url)),
-      ]),
-    ),
-  },
+    server: {
+      port: 5500,
+    },
+
+    resolve: {
+      alias: Object.fromEntries(
+        Object.entries(aliasEntries).map(([key, relPath]) => [
+          key,
+          fileURLToPath(new URL(relPath, import.meta.url)),
+        ])
+      ),
+    },
+  };
 });

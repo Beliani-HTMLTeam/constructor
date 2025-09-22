@@ -40,6 +40,12 @@ const createInput = (field, hidden) => {
   input.placeholder = field.placeholder || "";
   if (field.required) input.required = true;
   if (field.disabled) input.disabled = true;
+  if (field.value) input.value = field.value;
+  if (field.type === "colorhex") {
+    input.type = "text";
+    input.pattern = "#[0-9A-Fa-f]{6}";
+    input.maxLength = 7;
+  }
   return input;
 };
 
@@ -71,7 +77,12 @@ const createToggle = (field) => {
   // switch (label with aria-checked)
   const switchLabel = document.createElement("label");
   switchLabel.classList.add("fv-switch");
-  switchLabel.setAttribute("aria-checked", "true");
+  
+  // Set default state based on defaultValue or option1 (NEW)
+  const defaultValue = field.defaultValue !== undefined ? field.defaultValue : field.option1.value;
+  const isDefaultNew = defaultValue === field.option1.value;
+  
+  switchLabel.setAttribute("aria-checked", isDefaultNew ? "false" : "true");
   switchLabel.tabIndex = 0;
 
   const hiddenCheckbox = document.createElement("input");
@@ -79,6 +90,7 @@ const createToggle = (field) => {
   hiddenCheckbox.id = "fv-toggle";
   hiddenCheckbox.setAttribute("aria-hidden", "true");
   hiddenCheckbox.style.display = "none";
+  hiddenCheckbox.checked = !isDefaultNew; // checked means OLD (option2)
 
   const slider = document.createElement("span");
   slider.classList.add("fv-slider");
@@ -89,14 +101,31 @@ const createToggle = (field) => {
   // NEW label
   const newSpan = createOptionSpan(field.option2);
 
-  // hidden input with default value NEW
+  // hidden input with correct default value
   const hiddenInput = createInput(field, true);
-  hiddenInput.value = field.option2.value;
+  hiddenInput.value = defaultValue;
 
   toggle.appendChild(oldSpan);
   toggle.appendChild(switchLabel);
   toggle.appendChild(newSpan);
   toggle.appendChild(hiddenInput);
+
+  // Add click handler to toggle between options
+  switchLabel.addEventListener('click', function() {
+    const isCurrentlyNew = hiddenInput.value == field.option1.value;
+    
+    if (isCurrentlyNew) {
+      // Switch to OLD
+      hiddenInput.value = field.option2.value;
+      hiddenCheckbox.checked = true;
+      switchLabel.setAttribute("aria-checked", "true");
+    } else {
+      // Switch to NEW
+      hiddenInput.value = field.option1.value;
+      hiddenCheckbox.checked = false;
+      switchLabel.setAttribute("aria-checked", "false");
+    }
+  });
 
   outer.appendChild(toggle);
 
@@ -108,14 +137,14 @@ const setupFormNavigationButton = (action, page_id) => {
   button.textContent = action === "next" ? "Next" : "Back";
   button.addEventListener("click", () => {
     if (action === "next") {
-      // Show next page
       const nextPage = document.getElementById(`creatorpage-${page_id + 1}`);
+
       if (nextPage) {
         nextPage.classList.remove("hidden");
       }
     } else {
-      // Show previous page
       const prevPage = document.getElementById(`creatorpage-${page_id - 1}`);
+
       if (prevPage) {
         prevPage.classList.remove("hidden");
       }
