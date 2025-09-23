@@ -9,16 +9,6 @@ import { generateLpLinks } from '@/helpers/generateLpLinks.js';
 import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { isQuotaExceededError } from '@/helpers/isQuotaExceededError.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
-import getHeaderTranslations from '@/translations-api/getHeaderTranslations';
-
-export function setupTestTranslationsHandler(elements) {
-  const { testHeader } = elements;
-
-  testHeader?.addEventListener('click', async () => {
-    const translations = await getHeaderTranslations();
-    console.log(translations);
-  });
-}
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;

@@ -4,14 +4,16 @@ import { setState, getState } from '@/main/state/appState.js';
 import { initCampaigns } from '@/main/initCampaigns.js';
 import { GoogleAuth } from '@/services/GoogleAuth.js';
 import { renderTemplate } from '@/main/rendering/templateRenderer.js';
+import initStaticTranslations from '@/translations-api/getStaticTranslations';
+
 import {
   setupSelectCampaigns,
   setupSelectShop,
   setupSelectLanguage,
   setupSelectTemplate,
 } from '@/main/ui/selectSetup.js';
+
 import {
-  setupTestTranslationsHandler,
   setupProductsHandler,
   setupClearStorageHandler,
   setupCopyTemplateHandler,
@@ -52,8 +54,6 @@ function setupEventListeners(elements, campaigns, shops, jsConfetti) {
   setupSelectTemplate(elements, setState, getState, render, setSelectedTemplate);
 
   // Setup button handlers
-  setupTestTranslationsHandler(elements);
-
   setupProductsHandler(elements, setState, getState);
   setupClearStorageHandler(elements);
   setupNewCampaignHandler(elements, campaigns);

@@ -7,15 +7,16 @@ import _categoriesTitles from '@/main/data/categoriesTitles.js';
 import _header from '@/main/data/header.js';
 import _footer from '@/main/data/footer.js';
 import Toastify from 'toastify-js';
+import { staticTranslations } from '@/translations-api/getStaticTranslations';
 export class TemplateHandlers {
   isCalled = false;
   constructor({ products, categoriesLinks, categoriesTitles, footer, header, templates }) {
     this.products = products;
-    this.categoriesLinks = categoriesLinks;
-    this.categoriesTitles = categoriesTitles;
-    this.footer = footer;
-    this.header = header;
-    this.templates = templates;
+    // this.categoriesLinks = categoriesLinks;
+    // this.categoriesTitles = categoriesTitles;
+    // this.footer = footer;
+    // this.header = header;
+    // this.templates = templates;
   }
 
   getProductById = (productId, src, options) => {
@@ -53,91 +54,182 @@ export class TemplateHandlers {
   };
 
   getCategoryTitle = (column) => {
-    const country = getState('country');
+    let slug = getState('country');
+    slug = String(slug).toLowerCase();
 
-    const CSV_CATEGORIES = this.categoriesTitles
-      ? this.#toCSV(this.categoriesTitles)
-      : _categoriesTitles;
-    let country_categories = CSV_CATEGORIES.find(
-      (category) => category.slug === country.toLowerCase()
-    );
+    const slugIndex = staticTranslations.category_titles.slug.findIndex((item) => item === slug);
 
-    if (country_categories) {
-      return country_categories[column];
+    const title = staticTranslations.category_titles[column][slugIndex];
+
+    if (title === '' || title == null) {
+      return undefined;
     }
-    return undefined;
+
+    return title;
+
+    // const country = getState('country');
+
+    // const CSV_CATEGORIES = this.categoriesTitles
+    //   ? this.#toCSV(this.categoriesTitles)
+    //   : _categoriesTitles;
+    // let country_categories = CSV_CATEGORIES.find(
+    //   (category) => category.slug === country.toLowerCase()
+    // );
+
+    // if (country_categories) {
+    //   return country_categories[column];
+    // }
+    // return undefined;
   };
 
   getCategoryLink = (category, options) => {
     const shop = getState('shop');
-    const country = getState('country');
+    let slug = getState('country');
+    slug = String(slug).toLowerCase();
 
-    let new_link = new URL(shop.origin);
+    const slugIndex = staticTranslations.category_links.slug.findIndex((item) => item === slug);
 
-    const category_url = new URL(category);
-    for (const [key, value] of category_url.searchParams.entries()) {
-      new_link.searchParams.append(key, value);
-    }
+    // https://www.beliani.ch/sofas/corner-sofas/ => ["sofas", "corner-sofas"]
 
-    const CSV_CATEGORIES = this.categoriesLinks
-      ? this.#toCSV(this.categoriesLinks)
-      : _categoriesLinks;
-    let country_categories = CSV_CATEGORIES.find(
-      (category) => category.slug === country.toLowerCase()
-    );
+    // eg. category === https://www.beliani.ch/sofas/corner-sofas/
+    const url = new URL(category);
+    const path = url.pathname;
 
-    const pathnames = category_url.pathname.split('/').filter((pathname) => pathname.length > 0);
-    const parsed_country_categories = [];
-    for (const category of pathnames) {
-      const categoryCandidate = country_categories[category];
-      if (categoryCandidate) {
-        parsed_country_categories.push(categoryCandidate);
+    //  we get array of path parts without empty parts
+    // (eg. instead of ["", "sofas", "corner-sofas", "" we get ["sofas", "corner-sofas"])
+    const categories = path.split('/').filter((part) => part.length > 0);
+
+    let partsTranslations = [];
+
+    categories.forEach((item) => {
+      const translation = staticTranslations.category_links[item][slugIndex];
+      if (translation) {
+        partsTranslations.push(translation);
       } else {
+        partsTranslations.push(item);
         Toastify({
-          text: `Category <a target="_blank" style="weight: semibold; color: white;" href="https://www.prologistics.info/shop_cats.php?shop_id=1">${category}</a> not found in <a href="https://docs.google.com/spreadsheets/d/1g4YNCi3FzxsYpbP-BWMmz9vBJuZCz_yNIfcatqUf6O8/edit#gid=0" target="_blank" style="weight: semibold; color: white;">data/categories/data.js</a>`,
+          text: `Category ${item} not found in translations!\nCheck console for further help.`,
           escapeMarkup: false,
           duration: 3000,
         }).showToast();
+        console.log('This category part was not found in translations:');
+        console.log(
+          'https://docs.google.com/spreadsheets/d/1Y9blxN4paEV05s6AvdWmH5fBELTUvDz3ax5skmgVrsQ/edit?gid=0#gid=0'
+        );
+        console.log(
+          'Please add it to the category_links tab. "Static" translations are cached and you might need to wait a while.'
+        );
       }
-    }
-    new_link.pathname += parsed_country_categories.join('/');
-    if (options && options.origin === false) {
-      const cutUrl = new URL(getQueryLink(new_link)).pathname;
-      return cutUrl;
-    }
+    });
 
-    return getQueryLink(new_link);
+    let translatedLink = new URL(shop.origin + partsTranslations.join('/'));
+
+    return getQueryLink(translatedLink);
+
+    // const shop = getState('shop');
+    // const country = getState('country');
+
+    // let new_link = new URL(shop.origin);
+
+    // const category_url = new URL(category);
+    // for (const [key, value] of category_url.searchParams.entries()) {
+    //   new_link.searchParams.append(key, value);
+    // }
+
+    // const CSV_CATEGORIES = this.categoriesLinks
+    //   ? this.#toCSV(this.categoriesLinks)
+    //   : _categoriesLinks;
+    // let country_categories = CSV_CATEGORIES.find(
+    //   (category) => category.slug === country.toLowerCase()
+    // );
+
+    // const pathnames = category_url.pathname.split('/').filter((pathname) => pathname.length > 0);
+    // const parsed_country_categories = [];
+    // for (const category of pathnames) {
+    //   const categoryCandidate = country_categories[category];
+    //   if (categoryCandidate) {
+    //     parsed_country_categories.push(categoryCandidate);
+    //   } else {
+    //     Toastify({
+    //       text: `Category <a target="_blank" style="weight: semibold; color: white;" href="https://www.prologistics.info/shop_cats.php?shop_id=1">${category}</a> not found in <a href="https://docs.google.com/spreadsheets/d/1g4YNCi3FzxsYpbP-BWMmz9vBJuZCz_yNIfcatqUf6O8/edit#gid=0" target="_blank" style="weight: semibold; color: white;">data/categories/data.js</a>`,
+    //       escapeMarkup: false,
+    //       duration: 3000,
+    //     }).showToast();
+    //   }
+    // }
+    // new_link.pathname += parsed_country_categories.join('/');
+    // if (options && options.origin === false) {
+    //   const cutUrl = new URL(getQueryLink(new_link)).pathname;
+    //   return cutUrl;
+    // }
+
+    // return getQueryLink(new_link);
   };
 
   getFooter = (column) => {
-    const country = getState('country');
-    const CSV_FOOTER = this.footer ? this.#toCSV(this.footer) : _footer;
-    let country_footer = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
-    if (country_footer) {
-      return country_footer[column];
+    let slug = getState('country');
+    slug = String(slug).toLowerCase();
+
+    const slugIndex = staticTranslations.footer.slug.findIndex((item) => item === slug);
+
+    const footer = staticTranslations.footer[column][slugIndex];
+
+    if (footer === '' || footer == null) {
+      return undefined;
     }
-    return undefined;
+
+    return footer;
+    // const CSV_FOOTER = this.footer ? this.#toCSV(this.footer) : _footer;
+    // let country_footer = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
+    // if (country_footer) {
+    //   return country_footer[column];
+    // }
+    // return undefined;
   };
 
   getPhrase = (column) => {
-    const country = getState('country');
-    const CSV_FOOTER = this.templates ? this.#toCSV(this.templates) : _templates;
-    let country_phrase = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
-    if (country_phrase) {
-      return country_phrase[column];
+    let slug = getState('country');
+    slug = String(slug).toLowerCase();
+
+    const slugIndex = staticTranslations.templates.slug.findIndex((item) => item === slug);
+
+    const template = staticTranslations.templates[column][slugIndex];
+
+    if (template === '' || template == null) {
+      return undefined;
     }
-    return undefined;
+
+    return template;
+
+    // const country = getState('country');
+    // const CSV_FOOTER = this.templates ? this.#toCSV(this.templates) : _templates;
+    // let country_phrase = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
+    // if (country_phrase) {
+    //   return country_phrase[column];
+    // }
+    // return undefined;
   };
 
   getHeader = (column) => {
-    const country = getState('country');
+    let slug = getState('country');
+    slug = String(slug).toLowerCase();
 
-    const CSV_FOOTER = this.header ? this.#toCSV(this.header) : _header;
-    let country_header = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
-    if (country_header) {
-      return country_header[column];
+    const slugIndex = staticTranslations.header.slug.findIndex((item) => item === slug);
+
+    const header = staticTranslations.header[column][slugIndex];
+
+    if (header === '' || header == null) {
+      return undefined;
     }
-    return undefined;
+
+    return header;
+
+    // const CSV_FOOTER = this.header ? this.#toCSV(this.header) : _header;
+    // let country_header = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
+    // if (country_header) {
+    //   return country_header[column];
+    // }
+    // return undefined;
   };
 
   #toCSV = (data) => {

@@ -97,11 +97,11 @@ export async function renderTemplate(getState, setState) {
 
   // Create template handlers
   const handlers = new TemplateHandlers({
-    templates: getState('queries').templates,
-    header: getState('queries').header,
-    footer: getState('queries').footer,
-    categoriesLinks: getState('queries').categoriesLinks,
-    categoriesTitles: getState('queries').categoriesTitles,
+    // templates: getState('queries').templates,
+    // header: getState('queries').header,
+    // footer: getState('queries').footer,
+    // categoriesLinks: getState('queries').categoriesLinks,
+    // categoriesTitles: getState('queries').categoriesTitles,
     products: localProducts ? parsedProducts : campaignProducts?.products,
   });
 
