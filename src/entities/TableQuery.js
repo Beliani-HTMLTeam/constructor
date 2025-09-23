@@ -6,16 +6,16 @@ export class TableQuery {
   fallback;
   constructor({ tableId, tableName, name, tableRange, fallback }) {
     if (!tableId) {
-      throw new Error("tableId for TableQuery not found");
+      throw new Error('tableId for TableQuery not found');
     }
     if (!tableName) {
-      throw new Error("tableName for TableQuery not found");
+      throw new Error('tableName for TableQuery not found');
     }
     if (!name) {
-      throw new Error("name for TableQuery not found");
+      throw new Error('name for TableQuery not found');
     }
     if (!tableRange) {
-      throw new Error("tableRange for TableQuery not found");
+      throw new Error('tableRange for TableQuery not found');
     }
     this.tableId = tableId;
     this.tableName = tableName;

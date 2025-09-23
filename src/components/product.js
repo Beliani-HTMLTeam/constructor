@@ -1,13 +1,13 @@
-import { ImageWithLink } from "./ImageWithLink.js";
+import { ImageWithLink } from './ImageWithLink.js';
 
-export function Product(product, align = "left", style) {
+export function Product(product, align = 'left', style) {
   return `
-  <table cellspacing="0" cellpadding="0" style="width: 100%; ${style ?? ""}">
+  <table cellspacing="0" cellpadding="0" style="width: 100%; ${style ?? ''}">
     <tbody>
       <tr>
         <td>
           ${
-            "src" in product && product.src !== null
+            'src' in product && product.src !== null
               ? `<table cellspacing="0" cellpadding="0" style="width: 100%; ">
             <tbody>
               <tr>
@@ -21,21 +21,21 @@ export function Product(product, align = "left", style) {
               </tr>
             </tbody>
           </table>`
-              : ""
+              : ''
           }
           <table cellspacing="0" cellpadding="0" style="width: 100%; ">
             <tbody>
               <tr>
                 <td align="${align}">
-                  <span class="newsletterProductTitle" style="${style ?? ""}">${product.name}</span>
+                  <span class="newsletterProductTitle" style="${style ?? ''}">${product.name}</span>
                 </td>
               </tr>
               <tr>
                 <td align="${align}" style="padding-bottom: 8px;">
-                  <span class="newsletterProductLowPrice" style="${style ?? ""}">${
+                  <span class="newsletterProductLowPrice" style="${style ?? ''}">${
                     product.lowPrice
                   } </span>
-                  <span class="newsletterProductHightPrice" style="${style ?? ""}">${
+                  <span class="newsletterProductHightPrice" style="${style ?? ''}">${
                     product.highPrice
                   }</span>
                 </td>

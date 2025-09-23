@@ -1,19 +1,9 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { ImageWithLink, Product, BigProduct, Title, Line } from "./index.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { ImageWithLink, Product, BigProduct, Title, Line } from './index.js';
 
 export const sCategory = isAllowToRender(
-  ({
-    name,
-    desc,
-    href,
-    src,
-    products,
-    ctaComponent,
-    color,
-    cta = "CTA",
-    type = "wednesday",
-  }) => {
-    if (type === "wednesday") {
+  ({ name, desc, href, src, products, ctaComponent, color, cta = 'CTA', type = 'wednesday' }) => {
+    if (type === 'wednesday') {
       return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <thead>
@@ -22,7 +12,7 @@ export const sCategory = isAllowToRender(
       </tr>
       <tr>
         <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-          ${Title({ title: name, align: "left", color: "#000000" })}
+          ${Title({ title: name, align: 'left', color: '#000000' })}
         </td>
       </tr>
       <tr>
@@ -48,7 +38,7 @@ export const sCategory = isAllowToRender(
       </tr>
       <tr>
         <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%">
-            ${BigProduct(products[0], "left", `color: ${color || "#000000"}`)}
+            ${BigProduct(products[0], 'left', `color: ${color || '#000000'}`)}
         </td>
       </tr>
       <tr>
@@ -67,19 +57,11 @@ export const sCategory = isAllowToRender(
                   <tr>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                      ${Product(
-                        products[1],
-                        "left",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[1], 'left', `color: ${color || '#000000'}`)}
                     </td>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                      ${Product(
-                        products[2],
-                        "left",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[2], 'left', `color: ${color || '#000000'}`)}
                     </td>
                   </tr>
                 </table>
@@ -92,19 +74,11 @@ export const sCategory = isAllowToRender(
                   <tr>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                      ${Product(
-                        products[3],
-                        "left",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[3], 'left', `color: ${color || '#000000'}`)}
                     </td>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                      ${Product(
-                        products[4],
-                        "left",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[4], 'left', `color: ${color || '#000000'}`)}
                     </td>
                   </tr>
                 </table>
@@ -119,7 +93,7 @@ export const sCategory = isAllowToRender(
       </tr>
       <tr>
         <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%">
-            ${BigProduct(products[5], "left", `color: ${color || "#000000"}`)}
+            ${BigProduct(products[5], 'left', `color: ${color || '#000000'}`)}
         </td>
       </tr>
       <tr>
@@ -137,7 +111,7 @@ export const sCategory = isAllowToRender(
                       ? ctaComponent(href, cta)
                       : `
                       <a href="${href}" style="color:${
-                        color || "#000"
+                        color || '#000'
                       }; text-decoration: underline;">
                         <span class="newsletterCta">${cta}</span>
                       </a>
@@ -154,7 +128,7 @@ export const sCategory = isAllowToRender(
   `;
     }
 
-    if (type === "image") {
+    if (type === 'image') {
       return `
     <table cellspacing="0" cellpadding="0" border="0" width="100%">
       <thead>
@@ -167,5 +141,5 @@ export const sCategory = isAllowToRender(
     </table>
     `;
     }
-  },
+  }
 );

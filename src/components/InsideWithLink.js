@@ -1,7 +1,7 @@
-import { isAllowToRender, optimize } from "@helpers/optimizeImage.js";
+import { isAllowToRender, optimize } from '@helpers/optimizeImage.js';
 
 export const InsideWithLink = isAllowToRender(
-  optimize(({ insidehref, insidesrc, insidealt = "" }) => {
+  optimize(({ insidehref, insidesrc, insidealt = '' }) => {
     return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%" >
         <tbody>
@@ -15,5 +15,5 @@ export const InsideWithLink = isAllowToRender(
         </tbody>
     </table>
   `;
-  }),
+  })
 );

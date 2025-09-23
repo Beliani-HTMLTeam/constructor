@@ -1,56 +1,56 @@
 const countryOrderOld = [
-  "CHDE",
-  "CHFR",
-  "UK",
-  "DE",
-  "FR",
-  "AT",
-  "ES",
-  "PL",
-  "NL",
-  "PT",
-  "IT",
-  "SE",
-  "HU",
-  "DK",
-  "CZ",
-  "FI",
-  "NO",
-  "SK",
-  "BENL",
-  "BEFR",
-  "RO",
+  'CHDE',
+  'CHFR',
+  'UK',
+  'DE',
+  'FR',
+  'AT',
+  'ES',
+  'PL',
+  'NL',
+  'PT',
+  'IT',
+  'SE',
+  'HU',
+  'DK',
+  'CZ',
+  'FI',
+  'NO',
+  'SK',
+  'BENL',
+  'BEFR',
+  'RO',
 ];
 
 const countryOrderNew = [
-  "CHDE",
-  "CHFR",
-  "UK",
-  "DE",
-  "FR",
-  "AT",
-  "ES",
-  "PL",
-  "NL",
-  "BENL",
-  "BEFR",
-  "PT",
-  "IT",
-  "SE",
-  "HU",
-  "DK",
-  "CZ",
-  "FI",
-  "NO",
-  "SK",
-  "RO",
+  'CHDE',
+  'CHFR',
+  'UK',
+  'DE',
+  'FR',
+  'AT',
+  'ES',
+  'PL',
+  'NL',
+  'BENL',
+  'BEFR',
+  'PT',
+  'IT',
+  'SE',
+  'HU',
+  'DK',
+  'CZ',
+  'FI',
+  'NO',
+  'SK',
+  'RO',
 ];
 
-export function incrementLpId(lpId, version = "old", countriesOrdering = null) {
+export function incrementLpId(lpId, version = 'old', countriesOrdering = null) {
   // Wybór kolejności na podstawie wersji lub przekazanego argumentu
   const countries = countriesOrdering
     ? countriesOrdering
-    : version === "new"
+    : version === 'new'
       ? countryOrderNew
       : countryOrderOld;
 
@@ -82,9 +82,9 @@ export function incrementLpId(lpId, version = "old", countriesOrdering = null) {
   countries.forEach((country, idx) => {
     let countryOffset = idx;
     // Specjalne przypadki dla old version — zachowane oryginalne zasady:
-    if (version === "old") {
-      if (country === "BENL" || country === "BEFR") countryOffset = 17;
-      if (country === "RO") countryOffset = 18;
+    if (version === 'old') {
+      if (country === 'BENL' || country === 'BEFR') countryOffset = 17;
+      if (country === 'RO') countryOffset = 18;
     }
     // W wersji new, kolejność offsetów jest taka, jak w tablicy countryOrderNew
     // (nie trzeba już nadpisywać offsetów ręcznie)

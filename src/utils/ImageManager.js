@@ -1,4 +1,4 @@
-import { appConfig as config } from "@/utils/config.js";
+import { appConfig as config } from '@/utils/config.js';
 
 /**
  * Aktualizuje rok w konfiguracji na podstawie aktualnego roku systemowego
@@ -18,7 +18,7 @@ function updateConfigWithCurrentYear(config) {
  */
 export function getImageVersion(imageName) {
   // Klucz do przechowywania wersji w localStorage
-  const storageKey = "image_versions";
+  const storageKey = 'image_versions';
 
   // Pobierz zapisane wersje z localStorage
   let versionsMap = {};
@@ -28,7 +28,7 @@ export function getImageVersion(imageName) {
       versionsMap = JSON.parse(storedVersions);
     }
   } catch (error) {
-    console.warn("Błąd podczas odczytu wersji obrazów:", error);
+    console.warn('Błąd podczas odczytu wersji obrazów:', error);
   }
 
   // Sprawdź aktualną wersję obrazu lub ustaw domyślną wartość 1
@@ -42,7 +42,7 @@ export function getImageVersion(imageName) {
   try {
     localStorage.setItem(storageKey, JSON.stringify(versionsMap));
   } catch (error) {
-    console.warn("Błąd podczas zapisu wersji obrazów:", error);
+    console.warn('Błąd podczas zapisu wersji obrazów:', error);
   }
 
   return newVersion;
@@ -65,7 +65,7 @@ export function getImageUrl(imageName, version) {
   let versionParam;
 
   // Jeśli wersja jest stringiem lub liczbą, użyj jej bezpośrednio
-  if (typeof version === "string" || typeof version === "number") {
+  if (typeof version === 'string' || typeof version === 'number') {
     versionParam = version;
   }
   // Jeśli wersja jest false, użyj stałej wartości 1
@@ -78,5 +78,5 @@ export function getImageUrl(imageName, version) {
   }
 
   // Zwróć pełny URL z parametrem wersji
-  return updatedConfig.server_url + imageName + "?ver=" + versionParam;
+  return updatedConfig.server_url + imageName + '?ver=' + versionParam;
 }

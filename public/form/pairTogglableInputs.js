@@ -1,34 +1,24 @@
 export const pairToggles = () => {
   const pairs = [
-    { toggleId: "specialLPToggle", targetId: "specialLPIds" },
-    { toggleId: "alarmEnabled", targetId: "alarmDescription" },
+    { toggleId: 'specialLPToggle', targetId: 'specialLPIds' },
+    { toggleId: 'alarmEnabled', targetId: 'alarmDescription' },
     {
-      toggleId: "insideEnabled",
+      toggleId: 'insideEnabled',
       targetId: [
-        "insideBackground",
-        "insideColor",
-        "insideType",
-        "insideImage",
-        "insideTranslateImage",
+        'insideBackground',
+        'insideColor',
+        'insideType',
+        'insideImage',
+        'insideTranslateImage',
       ],
     },
     {
-      toggleId: "introEnabled",
-      targetId: [
-        "introBackground",
-        "introColor",
-        "introType",
-        "introAlignment",
-      ],
+      toggleId: 'introEnabled',
+      targetId: ['introBackground', 'introColor', 'introType', 'introAlignment'],
     },
     {
-      toggleId: "offerPartEnabled",
-      targetId: [
-        "offerPartBackground",
-        "offerPartColor",
-        "offerPartType",
-        "offerPartAlignment",
-      ],
+      toggleId: 'offerPartEnabled',
+      targetId: ['offerPartBackground', 'offerPartColor', 'offerPartType', 'offerPartAlignment'],
     },
   ];
 
@@ -48,6 +38,6 @@ export const pairToggles = () => {
     // initial state
     sync();
 
-    toggle.addEventListener("change", sync);
+    toggle.addEventListener('change', sync);
   });
 };

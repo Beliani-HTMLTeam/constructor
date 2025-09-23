@@ -47,7 +47,7 @@ export function Create2Columns({ iter, left, right, shuffle }) {
                   <tbody>
                     <tr>
                       <td>
-                        ${columns.join("")}
+                        ${columns.join('')}
                       </td>
                     </tr>
                   </tbody>
@@ -58,6 +58,6 @@ export function Create2Columns({ iter, left, right, shuffle }) {
         </table>
         `;
       })
-      .join("")}
+      .join('')}
     `;
 }

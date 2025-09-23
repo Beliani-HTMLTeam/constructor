@@ -1,15 +1,9 @@
-import { ImageWithLink } from "./ImageWithLink.js";
+import { ImageWithLink } from './ImageWithLink.js';
 
-export function FreebieProduct(
-  product,
-  align = "center",
-  style,
-  containerAlign = "center",
-  color,
-) {
+export function FreebieProduct(product, align = 'center', style, containerAlign = 'center', color) {
   return `
 
-<table cellspacing="0" cellpadding="0" style="width: 100%; ${style ?? ""}" align=${containerAlign}>
+<table cellspacing="0" cellpadding="0" style="width: 100%; ${style ?? ''}" align=${containerAlign}>
     <tbody>
       <tr>
         <td align=${containerAlign}>
@@ -37,13 +31,13 @@ export function FreebieProduct(
                         </td>
                       </tr>
                       ${
-                        "size" in product
+                        'size' in product
                           ? `<tr>
                           <td align="${align}" style="padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px;">
                             <span class="newsletterProductTitleFreebie">${product.size}</span>
                           </td>
                         </tr>`
-                          : ""
+                          : ''
                       }
                       <tr>
                         <td align="${align}" style="color: ${color}">

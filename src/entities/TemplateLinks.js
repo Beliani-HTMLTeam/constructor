@@ -1,12 +1,12 @@
-import { Image } from "@/entities/Image.js";
-import { OriginHref } from "@/entities/OriginHref.js";
-import { SlugImage } from "@/entities/SlugImage.js";
+import { Image } from '@/entities/Image.js';
+import { OriginHref } from '@/entities/OriginHref.js';
+import { SlugImage } from '@/entities/SlugImage.js';
 
 export class TemplateLinks {
   links = [];
   constructor(links = []) {
     if (!Array.isArray(links)) {
-      throw new Error("Links should be array property type.");
+      throw new Error('Links should be array property type.');
     }
     for (const linkObject of links) {
       if (
@@ -16,12 +16,9 @@ export class TemplateLinks {
       ) {
         continue;
       } else {
-        console.log(
-          linkObject,
-          " Is not instance of OriginHref SlugImage Image",
-        );
+        console.log(linkObject, ' Is not instance of OriginHref SlugImage Image');
         throw new Error(
-          "Please, use OriginHref, SlugImage, Image to define link in app.js. More details in console.",
+          'Please, use OriginHref, SlugImage, Image to define link in app.js. More details in console.'
         );
       }
     }

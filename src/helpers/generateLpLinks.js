@@ -1,33 +1,33 @@
 export function generateLpLinks(
   lpId,
   countriesOrdering = null,
-  campaignName = "",
-  specialLpIds = {},
+  campaignName = '',
+  specialLpIds = {}
 ) {
   const countries = countriesOrdering
     ? countriesOrdering
     : [
-        "CHDE",
-        "CHFR",
-        "UK",
-        "DE",
-        "FR",
-        "AT",
-        "ES",
-        "PL",
-        "NL",
-        "PT",
-        "IT",
-        "SE",
-        "HU",
-        "DK",
-        "CZ",
-        "FI",
-        "NO",
-        "SK",
-        "BENL",
-        "BEFR",
-        "RO",
+        'CHDE',
+        'CHFR',
+        'UK',
+        'DE',
+        'FR',
+        'AT',
+        'ES',
+        'PL',
+        'NL',
+        'PT',
+        'IT',
+        'SE',
+        'HU',
+        'DK',
+        'CZ',
+        'FI',
+        'NO',
+        'SK',
+        'BENL',
+        'BEFR',
+        'RO',
       ];
   const shopIdMap = {
     CHDE: 1,
@@ -55,8 +55,8 @@ export function generateLpLinks(
 
   // Grupy krajów ze wspólnym offsetem
   const sharedOffsetGroups = [
-    ["CHDE", "CHFR"],
-    ["BENL", "BEFR"],
+    ['CHDE', 'CHFR'],
+    ['BENL', 'BEFR'],
   ];
 
   const countryOffsets = {};

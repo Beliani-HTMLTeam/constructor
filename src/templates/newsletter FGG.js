@@ -1,5 +1,5 @@
-import { Footer } from "@/components/footer.js";
-import { Header } from "@/components/header.js";
+import { Footer } from '@/components/footer.js';
+import { Header } from '@/components/header.js';
 import {
   Line,
   Category,
@@ -11,7 +11,7 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "@/components/index.js";
+} from '@/components/index.js';
 
 export async function newsletter_FGG({
   links,
@@ -33,47 +33,47 @@ export async function newsletter_FGG({
     {
       id,
       advantages: {
-        freeDelivery: getHeader("Free Delivery"),
-        daysReturn: getHeader("365-Day Return"),
+        freeDelivery: getHeader('Free Delivery'),
+        daysReturn: getHeader('365-Day Return'),
       },
       paragraph: {
-        troubleViewing: getHeader("Trouble viewing"),
-        troubleViewingHrefText: getHeader("Trouble viewing href text"),
-        addBeliani: getHeader("Add Beliani to your"),
-        whiteList: getHeader("Whitelist"),
-        whitelistHref: getHeader("Whitelist href"),
+        troubleViewing: getHeader('Trouble viewing'),
+        troubleViewingHrefText: getHeader('Trouble viewing href text'),
+        addBeliani: getHeader('Add Beliani to your'),
+        whiteList: getHeader('Whitelist'),
+        whitelistHref: getHeader('Whitelist href'),
       },
       topImage: {
-        src: getHeader("Top image src"),
-        href: getHeader("Top image href"),
+        src: getHeader('Top image src'),
+        href: getHeader('Top image href'),
       },
       categories: {
         firstCategory: {
-          src: getHeader("Header Category 1 src"),
-          href: getHeader("Header Category 1 href"),
+          src: getHeader('Header Category 1 src'),
+          href: getHeader('Header Category 1 href'),
         },
         secondCategory: {
-          src: getHeader("Header Category 2 src"),
-          href: getHeader("Header Category 2 href"),
+          src: getHeader('Header Category 2 src'),
+          href: getHeader('Header Category 2 href'),
         },
         thirdCategory: {
-          src: getHeader("Header Category 3 src"),
-          href: getHeader("Header Category 3 href"),
+          src: getHeader('Header Category 3 src'),
+          href: getHeader('Header Category 3 href'),
         },
       },
       assembly: {
-        src: ["AT", "PL", "FR", "UK"].includes(country)
-          ? ["#fd9000"].includes(background)
-            ? getHeader("Header delivery_cosy src")
-            : getHeader("Header delivery src")
-          : ["#750000"].includes(background)
-            ? getHeader("Header asembly src")
-            : getHeader("Header asembly_cosy src"),
-        href: getHeader("Header asembly href"),
+        src: ['AT', 'PL', 'FR', 'UK'].includes(country)
+          ? ['#fd9000'].includes(background)
+            ? getHeader('Header delivery_cosy src')
+            : getHeader('Header delivery src')
+          : ['#750000'].includes(background)
+            ? getHeader('Header asembly src')
+            : getHeader('Header asembly_cosy src'),
+        href: getHeader('Header asembly href'),
         exclude: true,
       },
     },
-    { type },
+    { type }
   )}
   <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
   <tbody>
@@ -85,9 +85,7 @@ export async function newsletter_FGG({
       <tr>
           <td>
               <a href="${links[0]}">
-                  <img alt="" src="${
-                    links[1]
-                  }" style="display: block; width: 100%">
+                  <img alt="" src="${links[1]}" style="display: block; width: 100%">
               </a>
           </td>
       </tr>
@@ -104,9 +102,7 @@ export async function newsletter_FGG({
       <tr>
           <td>
               <a href="${links[2]}">
-                  <img alt="" src=${
-                    links[3]
-                  } style="display: block; width: 100%">
+                  <img alt="" src=${links[3]} style="display: block; width: 100%">
               </a>
           </td>
       </tr>
@@ -168,9 +164,7 @@ export async function newsletter_FGG({
           <tbody>
             <tr>
               <td width="50%">
-                <a href="${getCategoryLink(
-                  "https://www.beliani.ch/outdoor-furniture/",
-                )}">
+                <a href="${getCategoryLink('https://www.beliani.ch/outdoor-furniture/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category1.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -189,11 +183,9 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/outdoor-furniture/",
+                  'https://www.beliani.ch/outdoor-furniture/'
                 )}" style="color: #000000; text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
             </tr>
@@ -233,15 +225,13 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/sofas/",
+                  'https://www.beliani.ch/sofas/'
                 )}" style="color: #000000;  text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/sofas/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/sofas/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category2.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -267,7 +257,7 @@ export async function newsletter_FGG({
   <tbody>
   <tr>
   <td width="50%">
-  <a href="${getCategoryLink("https://www.beliani.ch/beds/")}">
+  <a href="${getCategoryLink('https://www.beliani.ch/beds/')}">
   <img src="https://beliani.info/newsletter/2022/240223Category3.png" alt="" style="display: block; max-width: 100%;">
   </a>
   </td>
@@ -286,11 +276,9 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/beds/",
+                  'https://www.beliani.ch/beds/'
                 )}" style="color: #000000; text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
             </tr>
@@ -330,15 +318,13 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/armchairs/",
+                  'https://www.beliani.ch/armchairs/'
                 )}" style="color: #000000;  text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/armchairs/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/armchairs/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category4.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -364,7 +350,7 @@ export async function newsletter_FGG({
           <tbody>
             <tr>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/chairs/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/chairs/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category5.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -383,11 +369,9 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/chairs/",
+                  'https://www.beliani.ch/chairs/'
                 )}" style="color: #000000; text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
             </tr>
@@ -427,15 +411,13 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/tables/",
+                  'https://www.beliani.ch/tables/'
                 )}" style="color: #000000;  text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/tables/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/tables/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category6.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -461,7 +443,7 @@ export async function newsletter_FGG({
           <tbody>
             <tr>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/storage/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/storage/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category7.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -480,11 +462,9 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/storage/",
+                  'https://www.beliani.ch/storage/'
                 )}" style="color: #000000; text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
             </tr>
@@ -524,15 +504,13 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/lighting/",
+                  'https://www.beliani.ch/lighting/'
                 )}" style="color: #000000;  text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/lighting/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/lighting/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category8.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -558,9 +536,7 @@ export async function newsletter_FGG({
           <tbody>
             <tr>
               <td width="50%">
-                <a href="${getCategoryLink(
-                  "https://www.beliani.ch/bathtubs-hot-tubs/",
-                )}">
+                <a href="${getCategoryLink('https://www.beliani.ch/bathtubs-hot-tubs/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category9.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -579,11 +555,9 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/bathtubs-hot-tubs/",
+                  'https://www.beliani.ch/bathtubs-hot-tubs/'
                 )}" style="color: #000000; text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
             </tr>
@@ -623,17 +597,13 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/office-furniture/desks-eng/",
+                  'https://www.beliani.ch/office-furniture/desks-eng/'
                 )}" style="color: #000000;  text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
               <td width="50%">
-                <a href="${getCategoryLink(
-                  "https://www.beliani.ch/office-furniture/desks-eng/",
-                )}">
+                <a href="${getCategoryLink('https://www.beliani.ch/office-furniture/desks-eng/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category10.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -659,7 +629,7 @@ export async function newsletter_FGG({
           <tbody>
             <tr>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/rugs/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/rugs/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category11.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -678,11 +648,9 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/rugs/",
+                  'https://www.beliani.ch/rugs/'
                 )}" style="color: #000000; text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
             </tr>
@@ -722,17 +690,13 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/home-accessories/",
+                  'https://www.beliani.ch/home-accessories/'
                 )}" style="color: #000000;  text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
               <td width="50%">
-                <a href="${getCategoryLink(
-                  "https://www.beliani.ch/home-accessories/",
-                )}">
+                <a href="${getCategoryLink('https://www.beliani.ch/home-accessories/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category12.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -758,7 +722,7 @@ export async function newsletter_FGG({
           <tbody>
             <tr>
               <td width="50%">
-                <a href="${getCategoryLink("https://www.beliani.ch/textiles/")}">
+                <a href="${getCategoryLink('https://www.beliani.ch/textiles/')}">
                   <img src="https://beliani.info/newsletter/2022/240223Category13.png" alt="" style="display: block; max-width: 100%;">
                 </a>
               </td>
@@ -777,11 +741,9 @@ export async function newsletter_FGG({
   </table>
   
                 <a href="${getCategoryLink(
-                  "https://www.beliani.ch/textiles/",
+                  'https://www.beliani.ch/textiles/'
                 )}" style="color: #000000; text-decoration: underline;">
-                  <span style="color: #000000; " class="newsletterCta">${
-                    queries.shopNow
-                  }</span>
+                  <span style="color: #000000; " class="newsletterCta">${queries.shopNow}</span>
                 </a>
               </td>
             </tr>
@@ -880,7 +842,7 @@ export async function newsletter_FGG({
   <tbody>
       <tr>
           <td>
-              <a href="${getCategoryLink("https://www.beliani.ch/gift-cards/")}">
+              <a href="${getCategoryLink('https://www.beliani.ch/gift-cards/')}">
                   <img alt="" src="https://beliani.info/newsletter/2022/240223Voucher.png" style="display: block; width: 100%">
               </a>
           </td>
@@ -911,7 +873,7 @@ export async function newsletter_FGG({
         <tr>
           <td style="padding-top: 0px; padding-left: 0px; padding-right: 0px; text-align: center;">
             <a href="${getCategoryLink(
-              "https://www.beliani.ch/gift-cards/",
+              'https://www.beliani.ch/gift-cards/'
             )}" style="color:#000; text-decoration: underline;">
               <span class="newsletterCta">${queries.shopNow}</span>
             </a>
@@ -936,7 +898,7 @@ export async function newsletter_FGG({
                                   <tr>
                                       <td align="left" class="newsletterBottom35px">
                                           <span class="newsletterFooterTitle">${getPhrase(
-                                            "Shop limited-time deals",
+                                            'Shop limited-time deals'
                                           )}</span>
                                       </td>
                                   </tr>
@@ -968,120 +930,118 @@ export async function newsletter_FGG({
         {
           id,
           assembly: {
-            src: ["AT", "PL", "FR", "UK"].includes(country)
-              ? getFooter("Delivery src")
-              : getFooter("Asembly src"),
-            href: getFooter("Asembly href"),
-            exclude: ["SK", "CHIT", "SE", "NO", "FI", "BEFR", "BENL"].includes(
-              country,
-            ),
+            src: ['AT', 'PL', 'FR', 'UK'].includes(country)
+              ? getFooter('Delivery src')
+              : getFooter('Asembly src'),
+            href: getFooter('Asembly href'),
+            exclude: ['SK', 'CHIT', 'SE', 'NO', 'FI', 'BEFR', 'BENL'].includes(country),
           },
           workBanner: {
-            src: getFooter("Job src"),
-            href: getFooter("Job href"),
-            exclude: !["PL"].includes(country),
+            src: getFooter('Job src'),
+            href: getFooter('Job href'),
+            exclude: !['PL'].includes(country),
           },
           thousandsMore: {
-            title: getFooter("Title"),
+            title: getFooter('Title'),
             firstCategory: {
-              src: getFooter("Category src 1"),
-              href: getFooter("Category href 1"),
+              src: getFooter('Category src 1'),
+              href: getFooter('Category href 1'),
             },
             secondCategory: {
-              src: getFooter("Category src 2"),
-              href: getFooter("Category href 2"),
+              src: getFooter('Category src 2'),
+              href: getFooter('Category href 2'),
             },
             thirdCategory: {
-              src: getFooter("Category src 3"),
-              href: getFooter("Category href 3"),
+              src: getFooter('Category src 3'),
+              href: getFooter('Category href 3'),
             },
             foutrthCategory: {
-              src: getFooter("Category src 4"),
-              href: getFooter("Category href 4"),
+              src: getFooter('Category src 4'),
+              href: getFooter('Category href 4'),
             },
             fifthCategory: {
-              src: getFooter("Category src 5"),
-              href: getFooter("Category href 5"),
+              src: getFooter('Category src 5'),
+              href: getFooter('Category href 5'),
             },
             sixthCategory: {
-              src: getFooter("Category src 6"),
-              href: getFooter("Category href 6"),
+              src: getFooter('Category src 6'),
+              href: getFooter('Category href 6'),
             },
             seventhCategory: {
-              src: getFooter("Category src 7"),
-              href: getFooter("Category href 7"),
+              src: getFooter('Category src 7'),
+              href: getFooter('Category href 7'),
             },
             eigthCategory: {
-              src: getFooter("Category src 8"),
-              href: getFooter("Category href 8"),
+              src: getFooter('Category src 8'),
+              href: getFooter('Category href 8'),
             },
           },
           klarna: {
-            src: getFooter("Klarna src"),
-            href: getFooter("Klarna href"),
-            exclude: ["SK", "HU", "BEFR", "BENL"].includes(country),
+            src: getFooter('Klarna src'),
+            href: getFooter('Klarna href'),
+            exclude: ['SK', 'HU', 'BEFR', 'BENL'].includes(country),
           },
           socials: {
-            title: getFooter("Socials Title"),
+            title: getFooter('Socials Title'),
             instagram: {
-              src: getFooter("Instagram src"),
-              href: getFooter("Instagram href"),
+              src: getFooter('Instagram src'),
+              href: getFooter('Instagram href'),
             },
             facebook: {
-              src: getFooter("Facebook src"),
-              href: getFooter("Facebook href"),
+              src: getFooter('Facebook src'),
+              href: getFooter('Facebook href'),
             },
             youtube: {
-              src: getFooter("Youtube src"),
-              href: getFooter("Youtube href"),
+              src: getFooter('Youtube src'),
+              href: getFooter('Youtube href'),
             },
             pinterest: {
-              src: getFooter("Pinterest src"),
-              href: getFooter("Pinterest href"),
+              src: getFooter('Pinterest src'),
+              href: getFooter('Pinterest href'),
             },
             Xsocial: {
-              src: getFooter("X src"),
-              href: getFooter("X href"),
+              src: getFooter('X src'),
+              href: getFooter('X href'),
             },
             Tiktok: {
-              src: getFooter("Tiktok src"),
-              href: getFooter("Tiktok href"),
+              src: getFooter('Tiktok src'),
+              href: getFooter('Tiktok href'),
             },
           },
           advantages: {
             firstAdvantage: {
-              src: getFooter("Advantages src 1"),
-              href: getFooter("Advantages href 1"),
+              src: getFooter('Advantages src 1'),
+              href: getFooter('Advantages href 1'),
             },
             secondAdvantage: {
-              src: getFooter("Advantages src 2"),
-              href: getFooter("Advantages href 2"),
+              src: getFooter('Advantages src 2'),
+              href: getFooter('Advantages href 2'),
             },
             thirdAdvantage: {
-              src: getFooter("Advantages src 3"),
-              href: getFooter("Advantages href 3"),
+              src: getFooter('Advantages src 3'),
+              href: getFooter('Advantages href 3'),
             },
             fourthAdvantage: {
-              src: getFooter("Advantages src 4"),
-              href: getFooter("Advantages href 4"),
+              src: getFooter('Advantages src 4'),
+              href: getFooter('Advantages href 4'),
             },
           },
           conditions: {
-            conditionsTitle: getFooter("Conditions title"),
+            conditionsTitle: getFooter('Conditions title'),
             conditionsText: queries.condition,
           },
           companyDetails: {
-            title: getFooter("Company Details"),
-            address: getFooter("Address"),
-            mobileNumber: getFooter("Mobile number"),
-            emailAddress: getFooter("Email address"),
-            mailTo: getFooter("Mail to"),
-            email: getFooter("Email"),
-            commercialRegister: getFooter("Commercial register"),
-            vat: getFooter("VAT"),
+            title: getFooter('Company Details'),
+            address: getFooter('Address'),
+            mobileNumber: getFooter('Mobile number'),
+            emailAddress: getFooter('Email address'),
+            mailTo: getFooter('Mail to'),
+            email: getFooter('Email'),
+            commercialRegister: getFooter('Commercial register'),
+            vat: getFooter('VAT'),
           },
         },
-        { type },
+        { type }
       )}
     `;
 }

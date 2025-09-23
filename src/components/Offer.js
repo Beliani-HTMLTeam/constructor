@@ -1,5 +1,5 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { ImageWithLink, ProductFree, Title } from "./index.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { ImageWithLink, ProductFree, Title } from './index.js';
 
 export const OfferFree = isAllowToRender(
   ({
@@ -24,9 +24,9 @@ export const OfferFree = isAllowToRender(
     ctatext,
     free,
     align,
-    type = "wednesday",
+    type = 'wednesday',
   }) => {
-    if (type === "wednesday") {
+    if (type === 'wednesday') {
       return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <thead>
@@ -123,20 +123,10 @@ export const OfferFree = isAllowToRender(
             <tbody>
               <tr>
                 <td style="vertical-align: top; width: 50%;">
-                  ${ProductFree(
-                    products[0],
-                    "center",
-                    free,
-                    `color: ${color || "#ffffff"}`,
-                  )}
+                  ${ProductFree(products[0], 'center', free, `color: ${color || '#ffffff'}`)}
                 </td>
                 <td style="vertical-align: top; width: 50%;">
-                  ${ProductFree(
-                    products[1],
-                    "center",
-                    free,
-                    `color: ${color || "#ffffff"}`,
-                  )}
+                  ${ProductFree(products[1], 'center', free, `color: ${color || '#ffffff'}`)}
                 </td>
               </tr>
             </tbody>
@@ -153,20 +143,10 @@ export const OfferFree = isAllowToRender(
             <tbody>
               <tr>
                 <td style="vertical-align: top; width: 50%;">
-                  ${ProductFree(
-                    products[2],
-                    "center",
-                    free,
-                    `color: ${color || "#ffffff"}`,
-                  )}
+                  ${ProductFree(products[2], 'center', free, `color: ${color || '#ffffff'}`)}
                 </td>
                 <td style="vertical-align: top; width: 50%;">
-                  ${ProductFree(
-                    products[3],
-                    "center",
-                    free,
-                    `color: ${color || "#ffffff"}`,
-                  )}
+                  ${ProductFree(products[3], 'center', free, `color: ${color || '#ffffff'}`)}
                 </td>
               </tr>
             </tbody>
@@ -188,7 +168,7 @@ export const OfferFree = isAllowToRender(
                       ? ctaComponent(ctahref, ctatext)
                       : `
                       <a href="${ctahref}" style="color:${
-                        color || "#ffffff"
+                        color || '#ffffff'
                       }; text-decoration: underline;">
                         <span class="newsletterCta">${ctatext}</span>
                       </a>
@@ -205,7 +185,7 @@ export const OfferFree = isAllowToRender(
   `;
     }
 
-    if (type === "image") {
+    if (type === 'image') {
       return `
     <table cellspacing="0" cellpadding="0" border="0" width="100%">
       <thead>
@@ -218,5 +198,5 @@ export const OfferFree = isAllowToRender(
     </table>
     `;
     }
-  },
+  }
 );

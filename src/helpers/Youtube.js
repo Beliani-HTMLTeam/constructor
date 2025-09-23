@@ -45,7 +45,7 @@
 }
 
 // Id of iframe in selectors
-const selectorss = ["newsletterIFrame"];
+const selectorss = ['newsletterIFrame'];
 
 function onYouTubeIframeAPIReady() {
   selectorss.forEach((selector) => {
@@ -64,9 +64,9 @@ function saveEvent(event) {
 }
 
 function mountIntersectionMobile() {
-  var tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName("script")[0];
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
@@ -85,7 +85,5 @@ function handleIntersectingMobile(elements, observer) {
 const observerMobile = new IntersectionObserver(handleIntersectingMobile);
 window.onload = () => {
   mountIntersectionMobile();
-  selectorss.forEach((frame) =>
-    observerMobile.observe(document.querySelector("#" + frame)),
-  );
+  selectorss.forEach((frame) => observerMobile.observe(document.querySelector('#' + frame)));
 };

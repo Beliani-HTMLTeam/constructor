@@ -1,9 +1,8 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { ImageWithLink, Line, Product, Space, Title } from "./index.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { ImageWithLink, Line, Product, Space, Title } from './index.js';
 
-export const TwoCategory = isAllowToRender(
-  ({ hrefLeft, hrefRight, scrLeft, srcRight }) => {
-    return `
+export const TwoCategory = isAllowToRender(({ hrefLeft, hrefRight, scrLeft, srcRight }) => {
+  return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tbody>
       <tr>
@@ -33,5 +32,4 @@ export const TwoCategory = isAllowToRender(
     </tbody>
   </table>
   `;
-  },
-);
+});

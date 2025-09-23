@@ -1,17 +1,17 @@
-import nslt_regular from "@css/newsletter/regular.css?inline";
-import nslt_blackweek from "@css/newsletter/blackweek.css?inline";
-import nslt_mattress from "@css/newsletter/mattress.css?inline";
+import nslt_regular from '@css/newsletter/regular.css?inline';
+import nslt_blackweek from '@css/newsletter/blackweek.css?inline';
+import nslt_mattress from '@css/newsletter/mattress.css?inline';
 
-import lp_regular from "@css/landing/regular.css?inline";
-import lp_blackwek from "@css/landing/blackweek.css?inline";
-import lp_mattress from "@css/landing/mattress.css?inline";
+import lp_regular from '@css/landing/regular.css?inline';
+import lp_blackwek from '@css/landing/blackweek.css?inline';
+import lp_mattress from '@css/landing/mattress.css?inline';
 
-import cgb_desktop from "@css/cgb/desktop.css?inline";
-import cgb_mobile from "@css/cgb/mobile.css?inline";
+import cgb_desktop from '@css/cgb/desktop.css?inline';
+import cgb_mobile from '@css/cgb/mobile.css?inline';
 
 export const types = {
-  NEWSLETTER: "newsletter",
-  LANDINGPAGE: "landing",
+  NEWSLETTER: 'newsletter',
+  LANDINGPAGE: 'landing',
   CSS: {
     NS: nslt_regular,
     NS_BLACK_WEEK: nslt_blackweek,

@@ -1,6 +1,6 @@
-import { isAllowToRender, optimize } from "@helpers/optimizeImage.js";
-import { Space } from "./Space.js";
-import { ImageWithLink } from "./ImageWithLink.js";
+import { isAllowToRender, optimize } from '@helpers/optimizeImage.js';
+import { Space } from './Space.js';
+import { ImageWithLink } from './ImageWithLink.js';
 
 export const Earth_Day = isAllowToRender(
   ({
@@ -9,15 +9,15 @@ export const Earth_Day = isAllowToRender(
     data,
     spaceClassName,
     ctaComponent,
-    color = "#000000",
-    align = "left",
-    type = "title&paragraph",
+    color = '#000000',
+    align = 'left',
+    type = 'title&paragraph',
     idx,
     len,
     href,
     cta,
   }) => {
-    if (idx !== len) return ""; // Jeśli idx nie jest ostatnim elementem, zwracamy pusty string.
+    if (idx !== len) return ''; // Jeśli idx nie jest ostatnim elementem, zwracamy pusty string.
 
     // Expected data structure:
     // data[0] = title text ("Our green initiatives")
@@ -31,12 +31,12 @@ export const Earth_Day = isAllowToRender(
 
     const templates = {
       title: `
-      <span class="${title?.className || "newsletterTitle"}" style="color: ${color}">
+      <span class="${title?.className || 'newsletterTitle'}" style="color: ${color}">
         ${data ? data[0] : title?.value}
       </span>
     `,
-      "title&paragraph": `
-      <span class="${title?.className || "newsletterTitle"}" style="color: ${color}">
+      'title&paragraph': `
+      <span class="${title?.className || 'newsletterTitle'}" style="color: ${color}">
         ${data ? data[0] : title?.value}
       </span>
       ${Space({ className: spaceClassName })}
@@ -61,13 +61,13 @@ export const Earth_Day = isAllowToRender(
               ${initiative.title}
             </a>
           </td>
-          `,
+          `
             )
-            .join("")}
+            .join('')}
         </tr>
         <tr>
           <td colspan="${data[2].length}" align="center">
-            ${Space({ className: "newsletterBottom20px" })}
+            ${Space({ className: 'newsletterBottom20px' })}
           </td>
         </tr>
         <tr>
@@ -82,9 +82,9 @@ export const Earth_Day = isAllowToRender(
               attrs: 'width="100%"',
             })}
           </td>
-          `,
+          `
             )
-            .join("")}
+            .join('')}
         </tr>
 
       </tbody>
@@ -105,7 +105,7 @@ export const Earth_Day = isAllowToRender(
                       ? ctaComponent(href, cta)
                       : `
                       <a href="${href}" style="color:${
-                        color || "#000"
+                        color || '#000'
                       }; text-decoration: underline;">
                         <span class="newsletterCta">${cta}</span>
                       </a>
@@ -121,14 +121,14 @@ export const Earth_Day = isAllowToRender(
   </table>
 
   `
-        : "";
+        : '';
 
     return `
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
       <tbody>
         <tr>
           <td align="${align}">
-            ${templates[type] || ""}
+            ${templates[type] || ''}
           </td>
         </tr>
         ${
@@ -140,10 +140,10 @@ export const Earth_Day = isAllowToRender(
           </td>
         </tr>
         `
-            : ""
+            : ''
         }
       </tbody>
     </table>
   `;
-  },
+  }
 );

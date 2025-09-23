@@ -1,22 +1,15 @@
-import { handleProduct } from "@/main/handlers/index.js";
-import { getQueryLink } from "@/helpers/getQueryLink.js";
-import { getState } from "@/main/state/appState";
-import _templates from "@/main/data/templates.js";
-import _categoriesLinks from "@/main/data/categoriesLinks.js";
-import _categoriesTitles from "@/main/data/categoriesTitles.js";
-import _header from "@/main/data/header.js";
-import _footer from "@/main/data/footer.js";
-import Toastify from "toastify-js";
+import { handleProduct } from '@/main/handlers/index.js';
+import { getQueryLink } from '@/helpers/getQueryLink.js';
+import { getState } from '@/main/state/appState';
+import _templates from '@/main/data/templates.js';
+import _categoriesLinks from '@/main/data/categoriesLinks.js';
+import _categoriesTitles from '@/main/data/categoriesTitles.js';
+import _header from '@/main/data/header.js';
+import _footer from '@/main/data/footer.js';
+import Toastify from 'toastify-js';
 export class TemplateHandlers {
   isCalled = false;
-  constructor({
-    products,
-    categoriesLinks,
-    categoriesTitles,
-    footer,
-    header,
-    templates,
-  }) {
+  constructor({ products, categoriesLinks, categoriesTitles, footer, header, templates }) {
     this.products = products;
     this.categoriesLinks = categoriesLinks;
     this.categoriesTitles = categoriesTitles;
@@ -29,52 +22,44 @@ export class TemplateHandlers {
     if (!this.isCalled && !this.products) {
       this.isCalled = true;
       Toastify({
-        text: "Set products for campaign.",
+        text: 'Set products for campaign.',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
     }
-    const country = getState("country");
-    const shop = getState("shop");
-    const languageHREF = shop.languages.find(
-      (item) => item.language.slug === country,
-    );
+    const country = getState('country');
+    const shop = getState('shop');
+    const languageHREF = shop.languages.find((item) => item.language.slug === country);
 
     let country_products = this.products?.filter(
-      (product) => product.country === shop.slug.toLowerCase(),
+      (product) => product.country === shop.slug.toLowerCase()
     );
 
     const product = country_products?.find(
-      (product) => Number(product.main_id) === Number(productId),
+      (product) => Number(product.main_id) === Number(productId)
     );
 
     if (!product) {
       return {
         name: `Product ${productId} not found`,
-        lowPrice: "00.00",
-        highPrice: "00.00",
+        lowPrice: '00.00',
+        highPrice: '00.00',
         src: src,
       };
     }
 
-    const href =
-      shop.origin +
-      product.href.hrefs[languageHREF.language.title].value +
-      ".html";
-    return handleProduct(
-      src ? { ...product, href, src } : { ...product, href },
-      options,
-    );
+    const href = shop.origin + product.href.hrefs[languageHREF.language.title].value + '.html';
+    return handleProduct(src ? { ...product, href, src } : { ...product, href }, options);
   };
 
   getCategoryTitle = (column) => {
-    const country = getState("country");
+    const country = getState('country');
 
     const CSV_CATEGORIES = this.categoriesTitles
       ? this.#toCSV(this.categoriesTitles)
       : _categoriesTitles;
     let country_categories = CSV_CATEGORIES.find(
-      (category) => category.slug === country.toLowerCase(),
+      (category) => category.slug === country.toLowerCase()
     );
 
     if (country_categories) {
@@ -84,8 +69,8 @@ export class TemplateHandlers {
   };
 
   getCategoryLink = (category, options) => {
-    const shop = getState("shop");
-    const country = getState("country");
+    const shop = getState('shop');
+    const country = getState('country');
 
     let new_link = new URL(shop.origin);
 
@@ -98,12 +83,10 @@ export class TemplateHandlers {
       ? this.#toCSV(this.categoriesLinks)
       : _categoriesLinks;
     let country_categories = CSV_CATEGORIES.find(
-      (category) => category.slug === country.toLowerCase(),
+      (category) => category.slug === country.toLowerCase()
     );
 
-    const pathnames = category_url.pathname
-      .split("/")
-      .filter((pathname) => pathname.length > 0);
+    const pathnames = category_url.pathname.split('/').filter((pathname) => pathname.length > 0);
     const parsed_country_categories = [];
     for (const category of pathnames) {
       const categoryCandidate = country_categories[category];
@@ -117,7 +100,7 @@ export class TemplateHandlers {
         }).showToast();
       }
     }
-    new_link.pathname += parsed_country_categories.join("/");
+    new_link.pathname += parsed_country_categories.join('/');
     if (options && options.origin === false) {
       const cutUrl = new URL(getQueryLink(new_link)).pathname;
       return cutUrl;
@@ -127,11 +110,9 @@ export class TemplateHandlers {
   };
 
   getFooter = (column) => {
-    const country = getState("country");
+    const country = getState('country');
     const CSV_FOOTER = this.footer ? this.#toCSV(this.footer) : _footer;
-    let country_footer = CSV_FOOTER.find(
-      (category) => category.slug === country.toLowerCase(),
-    );
+    let country_footer = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
     if (country_footer) {
       return country_footer[column];
     }
@@ -139,13 +120,9 @@ export class TemplateHandlers {
   };
 
   getPhrase = (column) => {
-    const country = getState("country");
-    const CSV_FOOTER = this.templates
-      ? this.#toCSV(this.templates)
-      : _templates;
-    let country_phrase = CSV_FOOTER.find(
-      (category) => category.slug === country.toLowerCase(),
-    );
+    const country = getState('country');
+    const CSV_FOOTER = this.templates ? this.#toCSV(this.templates) : _templates;
+    let country_phrase = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
     if (country_phrase) {
       return country_phrase[column];
     }
@@ -153,12 +130,10 @@ export class TemplateHandlers {
   };
 
   getHeader = (column) => {
-    const country = getState("country");
+    const country = getState('country');
 
     const CSV_FOOTER = this.header ? this.#toCSV(this.header) : _header;
-    let country_header = CSV_FOOTER.find(
-      (category) => category.slug === country.toLowerCase(),
-    );
+    let country_header = CSV_FOOTER.find((category) => category.slug === country.toLowerCase());
     if (country_header) {
       return country_header[column];
     }

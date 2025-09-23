@@ -1,5 +1,5 @@
-import { Footer } from "@/components/footer.js";
-import { Header } from "@/components/header.js";
+import { Footer } from '@/components/footer.js';
+import { Header } from '@/components/header.js';
 import {
   Line,
   Category,
@@ -18,12 +18,12 @@ import {
   CategoryOneLast,
   CategoryThree,
   CategoryThreeLast,
-} from "@/components/index.js";
-import { OfferPart } from "@/components/OfferPart.js";
-import { OfferPartCode } from "@/components/OfferPartCode.js";
-import { priceFree } from "@/helpers/priceFree.js";
-import templates from "@/main/data/templates.js";
-import { getCodes } from "@/utils/getCodes.js";
+} from '@/components/index.js';
+import { OfferPart } from '@/components/OfferPart.js';
+import { OfferPartCode } from '@/components/OfferPartCode.js';
+import { priceFree } from '@/helpers/priceFree.js';
+import templates from '@/main/data/templates.js';
+import { getCodes } from '@/utils/getCodes.js';
 
 export async function BirthdayNL({
   links,
@@ -51,24 +51,24 @@ export async function BirthdayNL({
 }) {
   const codes = getCodes(queries);
   const timer_link = {
-    CHDE: [""],
-    CHFR: [""],
-    UK: [""],
-    DE: [""],
-    FR: [""],
-    AT: [""],
-    ES: [""],
-    PL: [""],
-    NL: [""],
-    PT: [""],
-    IT: [""],
-    SE: [""],
-    HU: [""],
-    DK: [""],
-    CZ: [""],
-    FI: [""],
-    NO: [""],
-    SK: [""],
+    CHDE: [''],
+    CHFR: [''],
+    UK: [''],
+    DE: [''],
+    FR: [''],
+    AT: [''],
+    ES: [''],
+    PL: [''],
+    NL: [''],
+    PT: [''],
+    IT: [''],
+    SE: [''],
+    HU: [''],
+    DK: [''],
+    CZ: [''],
+    FI: [''],
+    NO: [''],
+    SK: [''],
   };
 
   return `
@@ -76,52 +76,52 @@ export async function BirthdayNL({
     {
       id,
       advantages: {
-        freeDelivery: getHeader("Free Delivery"),
-        daysReturn: getHeader("365-Day Return"),
+        freeDelivery: getHeader('Free Delivery'),
+        daysReturn: getHeader('365-Day Return'),
       },
       paragraph: {
-        troubleViewing: getHeader("Trouble viewing"),
-        troubleViewingHrefText: getHeader("Trouble viewing href text"),
-        addBeliani: getHeader("Add Beliani to your"),
-        whiteList: getHeader("Whitelist"),
-        whitelistHref: getHeader("Whitelist href"),
+        troubleViewing: getHeader('Trouble viewing'),
+        troubleViewingHrefText: getHeader('Trouble viewing href text'),
+        addBeliani: getHeader('Add Beliani to your'),
+        whiteList: getHeader('Whitelist'),
+        whitelistHref: getHeader('Whitelist href'),
       },
       topImage: {
-        src: getHeader("Top image src"),
-        href: getHeader("Top image href"),
+        src: getHeader('Top image src'),
+        href: getHeader('Top image href'),
       },
       categories: {
         firstCategory: {
-          src: getHeader("Header Category 1 src"),
-          href: getHeader("Header Category 1 href"),
+          src: getHeader('Header Category 1 src'),
+          href: getHeader('Header Category 1 href'),
         },
         secondCategory: {
-          src: getHeader("Header Category 2 src"),
-          href: getHeader("Header Category 2 href"),
+          src: getHeader('Header Category 2 src'),
+          href: getHeader('Header Category 2 href'),
         },
         thirdCategory: {
-          src: getHeader("Header Category 3 src"),
-          href: getHeader("Header Category 3 href"),
+          src: getHeader('Header Category 3 src'),
+          href: getHeader('Header Category 3 href'),
         },
       },
       assembly: {
-        src: ["AT", "PL", "FR", "UK"].includes(country)
-          ? ["#fd9000"].includes(background)
-            ? getHeader("Header delivery_cosy src")
-            : getHeader("Header delivery src")
-          : ["#750000"].includes(background)
-            ? getHeader("Header asembly src")
-            : getHeader("Header asembly_cosy src"),
-        href: getHeader("Header asembly href"),
+        src: ['AT', 'PL', 'FR', 'UK'].includes(country)
+          ? ['#fd9000'].includes(background)
+            ? getHeader('Header delivery_cosy src')
+            : getHeader('Header delivery src')
+          : ['#750000'].includes(background)
+            ? getHeader('Header asembly src')
+            : getHeader('Header asembly_cosy src'),
+        href: getHeader('Header asembly href'),
         exclude: true,
       },
     },
-    { type },
+    { type }
   )}
   <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
         <tbody>
             ${
-              type === "newsletter"
+              type === 'newsletter'
                 ? `
                 <tr>
                     <td align="center">
@@ -148,8 +148,8 @@ export async function BirthdayNL({
                           href: links[0],
                           title1: queries.tit[0],
                           title2: queries.tit[1],
-                          color: "#750000",
-                          type: "birthday",
+                          color: '#750000',
+                          type: 'birthday',
                         })}
                       `
                       }
@@ -172,7 +172,7 @@ export async function BirthdayNL({
                         <tbody>
                             <tr>
                                 <td align="center">
-                                    <span class="newsletterParagraph" style="color: ${categories[0]?.color || "#000000"}">
+                                    <span class="newsletterParagraph" style="color: ${categories[0]?.color || '#000000'}">
                                         ${queries.intro}
                                     </span>
                                 </td>
@@ -185,49 +185,38 @@ export async function BirthdayNL({
               <td class="newsletterBottom35px"></td>
             </tr>
             <tr>
-            <td style="background-color: ${categories[0]?.background || background}; color: ${categories[0]?.color || "#000000"}">
+            <td style="background-color: ${categories[0]?.background || background}; color: ${categories[0]?.color || '#000000'}">
               <tbody>
               ${categories
                 .map((item, index) => {
-                  console.log(
-                    `Sprawdzam href dla kategorii ${index}:`,
-                    item.href,
-                  );
+                  console.log(`Sprawdzam href dla kategorii ${index}:`, item.href);
 
-                  if (index >= 5) return ""; // Obsługa tylko 5 kategorii
+                  if (index >= 5) return ''; // Obsługa tylko 5 kategorii
 
                   const isLast = index === 4;
-                  const background = item.background || "#ffffff";
-                  const color = item.color || "#000000";
-                  const srcValue = item.src?.value || "";
+                  const background = item.background || '#ffffff';
+                  const color = item.color || '#000000';
+                  const srcValue = item.src?.value || '';
 
-                  const title = queries.categories[index] || "Default Title";
+                  const title = queries.categories[index] || 'Default Title';
 
                   // Pobranie i zabezpieczenie listy produktów
-                  const allProducts = Array.isArray(item.products)
-                    ? item.products
-                    : [];
+                  const allProducts = Array.isArray(item.products) ? item.products : [];
 
                   // Produkt do linku (pierwszy)
                   const firstProductRaw = allProducts[0];
                   const firstProduct =
-                    firstProductRaw &&
-                    getProductById(firstProductRaw.id, firstProductRaw.src);
+                    firstProductRaw && getProductById(firstProductRaw.id, firstProductRaw.src);
 
-                  const href = firstProduct?.href || "#";
+                  const href = firstProduct?.href || '#';
 
                   // Produkty 2, 3, 4 (indeksy 1, 2, 3)
                   const remainingProducts = allProducts.slice(1, 4);
                   const products = remainingProducts
-                    .map(
-                      (product) =>
-                        product && getProductById(product.id, product.src),
-                    )
+                    .map((product) => product && getProductById(product.id, product.src))
                     .filter((p) => p); // Usuń undefined
 
-                  const categoryComponent = isLast
-                    ? CategoryThreeLast
-                    : CategoryThree;
+                  const categoryComponent = isLast ? CategoryThreeLast : CategoryThree;
 
                   return `
                     <tr>
@@ -236,19 +225,19 @@ export async function BirthdayNL({
                           href: getCategoryLink(item.href),
                           name: title,
                           src: item.src,
-                          cta: getPhrase("Shop now"),
-                          type: "monday",
+                          cta: getPhrase('Shop now'),
+                          type: 'monday',
                           color: color,
                           products:
                             item.products?.map((product) =>
-                              getProductById(product.id, product.src),
+                              getProductById(product.id, product.src)
                             ) || [],
                         })}
                       </td>
                     </tr>
                   `;
                 })
-                .join("")}
+                .join('')}
               </tbody>
             </td>
           </tr>
@@ -268,7 +257,7 @@ export async function BirthdayNL({
                               <tr>
                                   <td align="left" class="newsletterBottom35px">
                                       <span class="newsletterFooterTitle">${getPhrase(
-                                        "Shop limited-time deals",
+                                        'Shop limited-time deals'
                                       )}</span>
                                   </td>
                               </tr>
@@ -300,133 +289,117 @@ export async function BirthdayNL({
         {
           id,
           assembly: {
-            src: ["AT", "PL", "FR", "UK"].includes(country)
-              ? getFooter("Delivery src")
-              : getFooter("Asembly src"),
-            href: getFooter("Asembly href"),
-            exclude: ["CHIT"].includes(country),
+            src: ['AT', 'PL', 'FR', 'UK'].includes(country)
+              ? getFooter('Delivery src')
+              : getFooter('Asembly src'),
+            href: getFooter('Asembly href'),
+            exclude: ['CHIT'].includes(country),
           },
           workBanner: {
-            src: getFooter("Job src"),
-            href: getFooter("Job href"),
-            exclude: !["PL"].includes(country),
+            src: getFooter('Job src'),
+            href: getFooter('Job href'),
+            exclude: !['PL'].includes(country),
           },
           thousandsMore: {
-            title: getFooter("Title"),
+            title: getFooter('Title'),
             firstCategory: {
-              src: getFooter("Category src 1"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/sofas/all+products",
-              ), //href: getFooter("Category href 1"),
+              src: getFooter('Category src 1'),
+              href: getCategoryLink('https://www.beliani.co.uk/sofas/all+products'), //href: getFooter("Category href 1"),
             },
             secondCategory: {
-              src: getFooter("Category src 2"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/beds/all+products",
-              ), //href: getFooter("Category href 2"),
+              src: getFooter('Category src 2'),
+              href: getCategoryLink('https://www.beliani.co.uk/beds/all+products'), //href: getFooter("Category href 2"),
             },
             thirdCategory: {
-              src: getFooter("Category src 3"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/tables/coffee-tables",
-              ), //href: getFooter("Category href 3"),
+              src: getFooter('Category src 3'),
+              href: getCategoryLink('https://www.beliani.co.uk/tables/coffee-tables'), //href: getFooter("Category href 3"),
             },
             foutrthCategory: {
-              src: getFooter("Category src 4"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/chairs/all+products",
-              ), //href: getFooter("Category href 4"),
+              src: getFooter('Category src 4'),
+              href: getCategoryLink('https://www.beliani.co.uk/chairs/all+products'), //href: getFooter("Category href 4"),
             },
             fifthCategory: {
-              src: getFooter("Category src 5"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/armchairs/all+products",
-              ), //href: getFooter("Category href 5"),
+              src: getFooter('Category src 5'),
+              href: getCategoryLink('https://www.beliani.co.uk/armchairs/all+products'), //href: getFooter("Category href 5"),
             },
             sixthCategory: {
-              src: getFooter("Category src 6"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/storage/sideboards",
-              ), //href: getFooter("Category href 6"),
+              src: getFooter('Category src 6'),
+              href: getCategoryLink('https://www.beliani.co.uk/storage/sideboards'), //href: getFooter("Category href 6"),
             },
             seventhCategory: {
-              src: getFooter("Category src 7"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/lighting/all+products",
-              ), //href: getFooter("Category href 7"),
+              src: getFooter('Category src 7'),
+              href: getCategoryLink('https://www.beliani.co.uk/lighting/all+products'), //href: getFooter("Category href 7"),
             },
             eigthCategory: {
-              src: getFooter("Category src 8"),
-              href: getCategoryLink(
-                "https://www.beliani.co.uk/rugs/all+products",
-              ), //href: getFooter("Category href 8"),
+              src: getFooter('Category src 8'),
+              href: getCategoryLink('https://www.beliani.co.uk/rugs/all+products'), //href: getFooter("Category href 8"),
             },
           },
           klarna: {
-            src: getFooter("Klarna src"),
-            href: getFooter("Klarna href"),
+            src: getFooter('Klarna src'),
+            href: getFooter('Klarna href'),
           },
           socials: {
-            title: getFooter("Socials Title"),
+            title: getFooter('Socials Title'),
             instagram: {
-              src: getFooter("Instagram src"),
-              href: getFooter("Instagram href"),
+              src: getFooter('Instagram src'),
+              href: getFooter('Instagram href'),
             },
             facebook: {
-              src: getFooter("Facebook src"),
-              href: getFooter("Facebook href"),
+              src: getFooter('Facebook src'),
+              href: getFooter('Facebook href'),
             },
             youtube: {
-              src: getFooter("Youtube src"),
-              href: getFooter("Youtube href"),
+              src: getFooter('Youtube src'),
+              href: getFooter('Youtube href'),
             },
             pinterest: {
-              src: getFooter("Pinterest src"),
-              href: getFooter("Pinterest href"),
+              src: getFooter('Pinterest src'),
+              href: getFooter('Pinterest href'),
             },
             Xsocial: {
-              src: getFooter("X src"),
-              href: getFooter("X href"),
+              src: getFooter('X src'),
+              href: getFooter('X href'),
             },
             Tiktok: {
-              src: getFooter("Tiktok src"),
-              href: getFooter("Tiktok href"),
+              src: getFooter('Tiktok src'),
+              href: getFooter('Tiktok href'),
             },
           },
           advantages: {
             firstAdvantage: {
-              src: getFooter("Advantages src 1"),
-              href: getFooter("Advantages href 1"),
+              src: getFooter('Advantages src 1'),
+              href: getFooter('Advantages href 1'),
             },
             secondAdvantage: {
-              src: getFooter("Advantages src 2"),
-              href: getFooter("Advantages href 2"),
+              src: getFooter('Advantages src 2'),
+              href: getFooter('Advantages href 2'),
             },
             thirdAdvantage: {
-              src: getFooter("Advantages src 3"),
-              href: getFooter("Advantages href 3"),
+              src: getFooter('Advantages src 3'),
+              href: getFooter('Advantages href 3'),
             },
             fourthAdvantage: {
-              src: getFooter("Advantages src 4"),
-              href: getFooter("Advantages href 4"),
+              src: getFooter('Advantages src 4'),
+              href: getFooter('Advantages href 4'),
             },
           },
           conditions: {
-            conditionsTitle: getFooter("Conditions title"),
+            conditionsTitle: getFooter('Conditions title'),
             conditionsText: queries.condition,
           },
           companyDetails: {
-            title: getFooter("Company Details"),
-            address: getFooter("Address"),
-            mobileNumber: getFooter("Mobile number"),
-            emailAddress: getFooter("Email address"),
-            mailTo: getFooter("Mail to"),
-            email: getFooter("Email"),
-            commercialRegister: getFooter("Commercial register"),
-            vat: getFooter("VAT"),
+            title: getFooter('Company Details'),
+            address: getFooter('Address'),
+            mobileNumber: getFooter('Mobile number'),
+            emailAddress: getFooter('Email address'),
+            mailTo: getFooter('Mail to'),
+            email: getFooter('Email'),
+            commercialRegister: getFooter('Commercial register'),
+            vat: getFooter('VAT'),
           },
         },
-        { type },
+        { type }
       )}
     `;
 }

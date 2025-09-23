@@ -1,17 +1,8 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { Space } from "./Space.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { Space } from './Space.js';
 
 export const MyIntro = isAllowToRender(
-  ({
-    href,
-    cathref,
-    src,
-    paragraph1,
-    paragraph2,
-    data,
-    color,
-    align = "left",
-  }) => {
+  ({ href, cathref, src, paragraph1, paragraph2, data, color, align = 'left' }) => {
     return `
   <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tbody>
@@ -59,5 +50,5 @@ export const MyIntro = isAllowToRender(
     </tbody>
   </table>
     `;
-  },
+  }
 );

@@ -10,7 +10,7 @@ export function initCampaigns(campaigns, config) {
     }
 
     // Handle campaign to alarm
-    if ("date" in campaign) {
+    if ('date' in campaign) {
       const date = new Date(campaign.date);
       const difference = date - now;
       if (difference > 0) {
@@ -21,16 +21,14 @@ export function initCampaigns(campaigns, config) {
       }
     }
 
-    const option = document.createElement("option");
+    const option = document.createElement('option');
     option.value = campaign.startId;
-    option.textContent = campaign.name + " - " + campaign.date;
+    option.textContent = campaign.name + ' - ' + campaign.date;
     campaigns_nodes.push(option);
   }
 
   for (const campaign of campaigns_to_alarm) {
-    alert(
-      campaign.alarm.description + " " + campaign.name + " " + campaign.date,
-    );
+    alert(campaign.alarm.description + ' ' + campaign.name + ' ' + campaign.date);
   }
 
   return campaigns_nodes;

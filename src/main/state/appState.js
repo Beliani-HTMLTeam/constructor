@@ -1,9 +1,9 @@
-import { root } from "@/app.js";
-import { SpinnerInit } from "@/helpers/spinner/spinerOptions.js";
+import { root } from '@/app.js';
+import { SpinnerInit } from '@/helpers/spinner/spinerOptions.js';
 
 const state = {
   queries: {},
-  country: "",
+  country: '',
   loading: false,
   ids: {},
   translations: {},
@@ -15,12 +15,12 @@ const state = {
 export function setState(key, value) {
   state[key] = value;
 
-  if (key === "loading" && value === true) {
-    root.innerHTML = "";
+  if (key === 'loading' && value === true) {
+    root.innerHTML = '';
     SpinnerInit.spin(root);
   }
 
-  if (key === "loading" && value === false) {
+  if (key === 'loading' && value === false) {
     SpinnerInit.stop(root);
   }
 }

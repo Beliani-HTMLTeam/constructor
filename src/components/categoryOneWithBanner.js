@@ -1,11 +1,5 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import {
-  ImageWithLink,
-  InsideWithLink,
-  Product,
-  Title,
-  Paragraph,
-} from "./index.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { ImageWithLink, InsideWithLink, Product, Title, Paragraph } from './index.js';
 
 export const CategoryOneWithBanner = isAllowToRender(
   ({
@@ -18,10 +12,10 @@ export const CategoryOneWithBanner = isAllowToRender(
     products,
     ctaComponent,
     color,
-    cta = "CTA",
-    type = "wednesday",
+    cta = 'CTA',
+    type = 'wednesday',
   }) => {
-    if (type === "wednesday") {
+    if (type === 'wednesday') {
       return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <thead>
@@ -43,7 +37,7 @@ export const CategoryOneWithBanner = isAllowToRender(
       </tr>
       <tr>
         <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-          ${Title({ title: name, align: "center", color: color })}
+          ${Title({ title: name, align: 'center', color: color })}
         </td>
       </tr>
       <tr>
@@ -79,19 +73,11 @@ export const CategoryOneWithBanner = isAllowToRender(
                   <tr>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                      ${Product(
-                        products[0],
-                        "center",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[0], 'center', `color: ${color || '#000000'}`)}
                     </td>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                      ${Product(
-                        products[1],
-                        "center",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[1], 'center', `color: ${color || '#000000'}`)}
                     </td>
                   </tr>
                 </table>
@@ -104,19 +90,11 @@ export const CategoryOneWithBanner = isAllowToRender(
                   <tr>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                      ${Product(
-                        products[2],
-                        "center",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[2], 'center', `color: ${color || '#000000'}`)}
                     </td>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                      ${Product(
-                        products[3],
-                        "center",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${Product(products[3], 'center', `color: ${color || '#000000'}`)}
                     </td>
                   </tr>
                 </table>
@@ -140,7 +118,7 @@ export const CategoryOneWithBanner = isAllowToRender(
                       ? ctaComponent(href, cta)
                       : `
                       <a href="${href}" style="color:${
-                        color || "#000"
+                        color || '#000'
                       }; text-decoration: underline;">
                         <span class="newsletterCta">${cta}</span>
                       </a>
@@ -157,7 +135,7 @@ export const CategoryOneWithBanner = isAllowToRender(
   `;
     }
 
-    if (type === "image") {
+    if (type === 'image') {
       return `
     <table cellspacing="0" cellpadding="0" border="0" width="100%">
       <thead>
@@ -170,5 +148,5 @@ export const CategoryOneWithBanner = isAllowToRender(
     </table>
     `;
     }
-  },
+  }
 );

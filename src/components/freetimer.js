@@ -1,17 +1,8 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { Space } from "./Space.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { Space } from './Space.js';
 
 export const FreeTimer = isAllowToRender(
-  ({
-    href,
-    timertitle1,
-    timertitle2,
-    timersn,
-    timersrc,
-    freesrc,
-    color,
-    align = "left",
-  }) => {
+  ({ href, timertitle1, timertitle2, timersn, timersrc, freesrc, color, align = 'left' }) => {
     return `
   <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tbody>
@@ -86,5 +77,5 @@ export const FreeTimer = isAllowToRender(
     </tbody>
   </table>
     `;
-  },
+  }
 );

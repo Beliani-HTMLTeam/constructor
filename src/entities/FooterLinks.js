@@ -1,12 +1,12 @@
-import { Image } from "@/entities/Image.js";
-import { OriginHref } from "@/entities/OriginHref.js";
-import { SlugImage } from "@/entities/SlugImage.js";
+import { Image } from '@/entities/Image.js';
+import { OriginHref } from '@/entities/OriginHref.js';
+import { SlugImage } from '@/entities/SlugImage.js';
 
 export class FooterLinks {
   footer_cat = [];
   constructor(footer_cat = []) {
     if (!Array.isArray(footer_cat)) {
-      throw new Error("Links should be array property type.");
+      throw new Error('Links should be array property type.');
     }
     for (const linkObject of footer_cat) {
       if (
@@ -16,12 +16,9 @@ export class FooterLinks {
       ) {
         continue;
       } else {
-        console.log(
-          linkObject,
-          " Is not instance of OriginHref SlugImage Image",
-        );
+        console.log(linkObject, ' Is not instance of OriginHref SlugImage Image');
         throw new Error(
-          "Please, use OriginHref, SlugImage, Image to define link in app.js. More details in console.",
+          'Please, use OriginHref, SlugImage, Image to define link in app.js. More details in console.'
         );
       }
     }

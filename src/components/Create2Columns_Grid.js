@@ -1,5 +1,5 @@
 export function Create2Columns_Grid({ iter, left, right, shuffle }) {
-  if (!iter || iter.length === 0) return "";
+  if (!iter || iter.length === 0) return '';
 
   const rows = [];
 
@@ -23,7 +23,7 @@ export function Create2Columns_Grid({ iter, left, right, shuffle }) {
           <table cellspacing="0" cellpadding="0" border="0" width="100%">
             <tbody>
               <tr>
-                ${columns.join("")}
+                ${columns.join('')}
               </tr>
             </tbody>
           </table>
@@ -32,5 +32,5 @@ export function Create2Columns_Grid({ iter, left, right, shuffle }) {
     `);
   }
 
-  return rows.join("");
+  return rows.join('');
 }

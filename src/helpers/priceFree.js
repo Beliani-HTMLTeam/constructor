@@ -1,32 +1,32 @@
-import { getState } from "@/main/state/appState";
+import { getState } from '@/main/state/appState';
 
 const free = {
-  UK: "FREE",
-  PL: "GRATIS",
-  DE: "GRATIS",
-  AT: "GRATIS",
-  CHDE: "GRATIS",
-  NL: "GRATIS",
-  FR: "GRATUIT",
-  CHFR: "GRATUIT",
-  CHIT: "GRATIS",
-  BEFR: "GRATUIT",
-  BENL: "GRATIS",
-  ES: "GRATIS",
-  PT: "GRÁTIS",
-  IT: "GRATIS",
-  DK: "GRATIS",
-  NO: "GRATIS",
-  FI: "ILMAINEN",
-  SE: "PÅ KÖPET",
-  CZ: "ZDARMA",
-  SK: "GRÁTIS",
-  HU: "AJÁNDÉK",
-  RO: "CADOU",
+  UK: 'FREE',
+  PL: 'GRATIS',
+  DE: 'GRATIS',
+  AT: 'GRATIS',
+  CHDE: 'GRATIS',
+  NL: 'GRATIS',
+  FR: 'GRATUIT',
+  CHFR: 'GRATUIT',
+  CHIT: 'GRATIS',
+  BEFR: 'GRATUIT',
+  BENL: 'GRATIS',
+  ES: 'GRATIS',
+  PT: 'GRÁTIS',
+  IT: 'GRATIS',
+  DK: 'GRATIS',
+  NO: 'GRATIS',
+  FI: 'ILMAINEN',
+  SE: 'PÅ KÖPET',
+  CZ: 'ZDARMA',
+  SK: 'GRÁTIS',
+  HU: 'AJÁNDÉK',
+  RO: 'CADOU',
 };
 
 export function priceFree(product, normalPrice) {
-  const country = getState("country");
+  const country = getState('country');
   const normal_product = {
     ...product,
     lowPrice: product.lowPrice,

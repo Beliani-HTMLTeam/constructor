@@ -4,76 +4,71 @@ import {
   createLabel,
   createToggle,
   setupFormNavigationButton,
-} from "./domUtils.js";
-import { pairToggles } from "./pairTogglableInputs.js";
-import { enhanceJSON } from "./enhanceJSON.js";
-import { createAndSaveCampaignFile } from "./createCampaignFile.js";
-import { schema } from "./form.schema.js";
+} from './domUtils.js';
+import { pairToggles } from './pairTogglableInputs.js';
+import { enhanceJSON } from './enhanceJSON.js';
+import { createAndSaveCampaignFile } from './createCampaignFile.js';
+import { schema } from './form.schema.js';
 
 const scope = __SCOPE__ || import.meta.env?.VITE_SCOPE;
-console.log("prepareCreatorForm.js - scope:", scope); // Debug log
+console.log('prepareCreatorForm.js - scope:', scope); // Debug log
 
 if (!scope) {
-  console.error("VITE_SCOPE is not defined in environment variables!");
-  alert("Error: User scope (VITE_SCOPE) is not configured. Please check your .env file.");
+  console.error('VITE_SCOPE is not defined in environment variables!');
+  alert('Error: User scope (VITE_SCOPE) is not configured. Please check your .env file.');
 }
-const formContent = document.querySelector(".form-content");
+const formContent = document.querySelector('.form-content');
 
 // Add a close button to the modal header that hides the modal with id `formModal`
 (() => {
-  const modal = document.getElementById("formModal");
-  const header = document.querySelector(".modal-header");
+  const modal = document.getElementById('formModal');
+  const header = document.querySelector('.modal-header');
   if (!modal || !header) return;
 
-  const closeBtn = document.createElement("button");
-  closeBtn.type = "button";
-  closeBtn.classList.add("close-modal");
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button';
+  closeBtn.classList.add('close-modal');
 
-  const xImg = document.createElement("img");
-  xImg.src = "/icons/ep--close-bold.svg";
+  const xImg = document.createElement('img');
+  xImg.src = '/icons/ep--close-bold.svg';
 
   closeBtn.appendChild(xImg);
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
   });
 
   header.appendChild(closeBtn);
 
   // allow Escape key to close the modal
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") modal.style.display = "none";
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') modal.style.display = 'none';
   });
 })();
 
 // Delegated handler: ensure any Cancel button (existing or added later) closes the modal
-document.addEventListener("click", (e) => {
+document.addEventListener('click', (e) => {
   const target = e.target;
-  const cancel = target.closest ? target.closest(".cancel-btn") : null;
-  const close = target.closest ? target.closest(".close-modal") : null;
+  const cancel = target.closest ? target.closest('.cancel-btn') : null;
+  const close = target.closest ? target.closest('.close-modal') : null;
   if (!cancel && !close) return;
-  const modal = document.getElementById("formModal");
-  if (modal) modal.style.display = "none";
+  const modal = document.getElementById('formModal');
+  if (modal) modal.style.display = 'none';
 });
 
 schema.forEach((page, page_id) => {
-  const pageSection = document.createElement("section");
+  const pageSection = document.createElement('section');
 
   pageSection.name = `creatorpage-${page_id}`;
   pageSection.id = `creatorpage-${page_id}`;
 
   if (page_id > 0) {
-    pageSection.classList.add("hidden");
+    pageSection.classList.add('hidden');
   }
 
   // helper: render a normal row (array of field descriptors).
   // parentEl: element to append created row containers into (defaults to pageSection)
   // inGroup: when true, mark created row containers with `.form-group-row` class
-  const renderRowArray = (
-    rowArray,
-    baseRowId,
-    parentEl = pageSection,
-    inGroup = false
-  ) => {
+  const renderRowArray = (rowArray, baseRowId, parentEl = pageSection, inGroup = false) => {
     const maxPerLine = 5;
     let startIndex = 0;
     let chunkCounter = 0;
@@ -83,20 +78,18 @@ schema.forEach((page, page_id) => {
     // out of a multi-field group row (e.g. Other Settings first row).
     if (
       rowArray.length > 0 &&
-      rowArray[0].type === "checkbox" &&
+      rowArray[0].type === 'checkbox' &&
       (rowArray.length === 1 || !inGroup)
     ) {
-      const singleRowContainer = createContainer(
-        `row-${baseRowId}-${chunkCounter}`
-      );
+      const singleRowContainer = createContainer(`row-${baseRowId}-${chunkCounter}`);
       // use CSS class for centering instead of inline style
-      singleRowContainer.classList.add("form-row-centered");
-      if (inGroup) singleRowContainer.classList.add("form-group-row");
+      singleRowContainer.classList.add('form-row-centered');
+      if (inGroup) singleRowContainer.classList.add('form-group-row');
 
       const container = createContainer();
       const input = createInput(rowArray[0]);
       const label = createLabel(rowArray[0]);
-      container.style.flex = "none";
+      container.style.flex = 'none';
       container.appendChild(label);
       container.appendChild(input);
       singleRowContainer.appendChild(container);
@@ -109,7 +102,7 @@ schema.forEach((page, page_id) => {
     for (let start = startIndex; start < rowArray.length; start += maxPerLine) {
       const chunk = rowArray.slice(start, start + maxPerLine);
       const rowContainer = createContainer(`row-${baseRowId}-${chunkCounter}`);
-      if (inGroup) rowContainer.classList.add("form-group-row");
+      if (inGroup) rowContainer.classList.add('form-group-row');
       chunkCounter++;
 
       chunk.forEach((field) => {
@@ -117,13 +110,13 @@ schema.forEach((page, page_id) => {
         let input;
 
         switch (field.type) {
-          case "toggle":
+          case 'toggle':
             input = createToggle(field);
             break;
-          case "checkbox":
-          case "date":
+          case 'checkbox':
+          case 'date':
             input = createInput(field);
-            if (chunk.length === 2) container.style.flex = ".47";
+            if (chunk.length === 2) container.style.flex = '.47';
             break;
           default:
             input = createInput(field);
@@ -147,15 +140,15 @@ schema.forEach((page, page_id) => {
     }
 
     // group object support: { type: 'group' | group: true, title: string, rows: [...] }
-    if (row && (row.type === "group" || row.group)) {
+    if (row && (row.type === 'group' || row.group)) {
       // top gap (separate group from previous rows)
-      const gap = document.createElement("div");
-      gap.classList.add("form-row-gap");
+      const gap = document.createElement('div');
+      gap.classList.add('form-row-gap');
       pageSection.appendChild(gap);
 
       // group wrapper
-      const groupContainer = document.createElement("div");
-      groupContainer.classList.add("form-group");
+      const groupContainer = document.createElement('div');
+      groupContainer.classList.add('form-group');
 
       // extract leading checkbox from group's first row if it matches *Enabled pattern
       let titleCheckboxField = null;
@@ -168,7 +161,7 @@ schema.forEach((page, page_id) => {
         const firstField = row.rows[0][0];
         if (
           firstField &&
-          firstField.type === "checkbox" &&
+          firstField.type === 'checkbox' &&
           /(?:Enabled|Toggle)$/i.test(firstField.name)
         ) {
           titleCheckboxField = firstField;
@@ -181,51 +174,51 @@ schema.forEach((page, page_id) => {
       }
 
       // title bar: clickable label + optional checkbox on right
-      const titleBar = document.createElement("div");
-      titleBar.classList.add("form-group-title");
+      const titleBar = document.createElement('div');
+      titleBar.classList.add('form-group-title');
 
-      const titleLabel = document.createElement("div");
-      titleLabel.classList.add("form-group-title-label");
-      titleLabel.textContent = row.title || "";
+      const titleLabel = document.createElement('div');
+      titleLabel.classList.add('form-group-title-label');
+      titleLabel.textContent = row.title || '';
       titleBar.appendChild(titleLabel);
 
       // show an expand/collapse arrow on the right when there's no title checkbox
       let expandEl = null;
       if (!titleCheckboxField) {
-        expandEl = document.createElement("div");
-        expandEl.classList.add("form-group-expand");
-        expandEl.textContent = "◀";
+        expandEl = document.createElement('div');
+        expandEl.classList.add('form-group-expand');
+        expandEl.textContent = '◀';
         titleBar.appendChild(expandEl);
       }
 
       // checkbox placed on title line (if found)
-      const rowsWrapper = document.createElement("div");
-      rowsWrapper.classList.add("form-group-rows");
+      const rowsWrapper = document.createElement('div');
+      rowsWrapper.classList.add('form-group-rows');
 
       let expanded = true;
       const setExpanded = (val) => {
         expanded = !!val;
         if (expanded) {
-          rowsWrapper.style.display = "";
-          titleBar.setAttribute("aria-expanded", "true");
-          groupContainer.classList.remove("collapsed");
+          rowsWrapper.style.display = '';
+          titleBar.setAttribute('aria-expanded', 'true');
+          groupContainer.classList.remove('collapsed');
         } else {
-          rowsWrapper.style.display = "none";
-          titleBar.setAttribute("aria-expanded", "false");
-          groupContainer.classList.add("collapsed");
+          rowsWrapper.style.display = 'none';
+          titleBar.setAttribute('aria-expanded', 'false');
+          groupContainer.classList.add('collapsed');
         }
       };
 
       if (titleCheckboxField) {
-        const chkContainer = document.createElement("div");
-        chkContainer.classList.add("form-group-title-checkbox");
+        const chkContainer = document.createElement('div');
+        chkContainer.classList.add('form-group-title-checkbox');
 
         const chkLabel = createLabel(titleCheckboxField);
         const chkInput = createInput(titleCheckboxField);
 
         // prevent clicks on the checkbox label/input from bubbling
-        chkInput.addEventListener("click", (ev) => ev.stopPropagation());
-        chkLabel.addEventListener("click", (ev) => ev.stopPropagation());
+        chkInput.addEventListener('click', (ev) => ev.stopPropagation());
+        chkLabel.addEventListener('click', (ev) => ev.stopPropagation());
 
         chkContainer.appendChild(chkLabel);
         chkContainer.appendChild(chkInput);
@@ -237,7 +230,7 @@ schema.forEach((page, page_id) => {
           setExpanded(isEnabled);
         };
 
-        chkInput.addEventListener("change", (ev) => {
+        chkInput.addEventListener('change', (ev) => {
           ev.stopPropagation();
           updateExpandedFromCheckbox();
         });
@@ -246,7 +239,7 @@ schema.forEach((page, page_id) => {
         const mo = new MutationObserver(() => updateExpandedFromCheckbox());
         mo.observe(chkInput, {
           attributes: true,
-          attributeFilter: ["disabled"],
+          attributeFilter: ['disabled'],
         });
 
         // set initial state from checkbox
@@ -254,15 +247,15 @@ schema.forEach((page, page_id) => {
         var initialExpanded = !!chkInput.checked && !chkInput.disabled;
       } else {
         // clicking the title label toggles collapse when there's no title checkbox
-        titleLabel.style.cursor = "pointer";
-        titleLabel.addEventListener("click", () => setExpanded(!expanded));
+        titleLabel.style.cursor = 'pointer';
+        titleLabel.addEventListener('click', () => setExpanded(!expanded));
       }
 
       groupContainer.appendChild(titleBar);
 
       // top separator
-      const sepTop = document.createElement("div");
-      sepTop.classList.add("form-group-separator");
+      const sepTop = document.createElement('div');
+      sepTop.classList.add('form-group-separator');
       groupContainer.appendChild(sepTop);
 
       // render internal rows into rowsWrapper
@@ -284,7 +277,7 @@ schema.forEach((page, page_id) => {
       pageSection.appendChild(groupContainer);
 
       // initial state: if we had a title checkbox use its state, otherwise expanded
-      if (typeof initialExpanded !== "undefined") {
+      if (typeof initialExpanded !== 'undefined') {
         setExpanded(initialExpanded);
       } else {
         setExpanded(true);
@@ -294,7 +287,7 @@ schema.forEach((page, page_id) => {
     }
 
     // fallback: try to treat as a normal row
-    if (row && typeof row === "object") {
+    if (row && typeof row === 'object') {
       // if it's an object that isn't a group but contains fields, try to render as array
       if (Array.isArray(row.fields)) {
         renderRowArray(row.fields, row_id);
@@ -306,69 +299,69 @@ schema.forEach((page, page_id) => {
   });
 
   if (page_id + 1 !== schema.length) {
-    const nav = document.createElement("div");
-    nav.classList.add("form-nav");
+    const nav = document.createElement('div');
+    nav.classList.add('form-nav');
 
     if (page_id > 0) {
-      const backBtn = setupFormNavigationButton("back", page_id);
+      const backBtn = setupFormNavigationButton('back', page_id);
 
-      backBtn.classList.add("back-btn");
-      backBtn.addEventListener("click", (e) => {
+      backBtn.classList.add('back-btn');
+      backBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const current = document.getElementById(`creatorpage-${page_id}`);
-        if (current) current.classList.add("hidden");
+        if (current) current.classList.add('hidden');
       });
 
       nav.appendChild(backBtn);
     }
 
-    const cancelBtn = document.createElement("button");
+    const cancelBtn = document.createElement('button');
 
-    cancelBtn.type = "button";
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.classList.add("cancel-btn");
-    cancelBtn.addEventListener("click", () => {
-      const modal = document.getElementById("formModal");
-      if (modal) modal.style.display = "none";
+    cancelBtn.type = 'button';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.classList.add('cancel-btn');
+    cancelBtn.addEventListener('click', () => {
+      const modal = document.getElementById('formModal');
+      if (modal) modal.style.display = 'none';
     });
 
     nav.appendChild(cancelBtn);
 
-    const nextBtn = setupFormNavigationButton("next", page_id);
-    nextBtn.classList.add("next-btn");
-    nextBtn.addEventListener("click", (e) => {
+    const nextBtn = setupFormNavigationButton('next', page_id);
+    nextBtn.classList.add('next-btn');
+    nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const current = document.getElementById(`creatorpage-${page_id}`);
-      if (current) current.classList.add("hidden");
+      if (current) current.classList.add('hidden');
     });
     nav.appendChild(nextBtn);
     pageSection.appendChild(nav);
   } else if (page_id === 0) {
-    const nav = document.createElement("div");
+    const nav = document.createElement('div');
 
-    nav.classList.add("form-nav");
+    nav.classList.add('form-nav');
 
-    const cancelBtn = document.createElement("button");
+    const cancelBtn = document.createElement('button');
 
-    cancelBtn.type = "button";
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.classList.add("cancel-btn");
+    cancelBtn.type = 'button';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.classList.add('cancel-btn');
 
-    cancelBtn.addEventListener("click", () => {
-      const modal = document.getElementById("formModal");
-      if (modal) modal.style.display = "none";
+    cancelBtn.addEventListener('click', () => {
+      const modal = document.getElementById('formModal');
+      if (modal) modal.style.display = 'none';
     });
 
-    const nextBtn = setupFormNavigationButton("next", page_id);
+    const nextBtn = setupFormNavigationButton('next', page_id);
 
-    nextBtn.classList.add("next-btn");
+    nextBtn.classList.add('next-btn');
 
-    nextBtn.addEventListener("click", (e) => {
+    nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
 
       const current = document.getElementById(`creatorpage-${page_id}`);
 
-      if (current) current.classList.add("hidden");
+      if (current) current.classList.add('hidden');
     });
 
     nav.appendChild(cancelBtn);
@@ -376,40 +369,40 @@ schema.forEach((page, page_id) => {
     pageSection.appendChild(nav);
   } else {
     // last page: show back and submit
-    const nav = document.createElement("div");
-    nav.classList.add("form-nav");
+    const nav = document.createElement('div');
+    nav.classList.add('form-nav');
 
-    const backBtn = setupFormNavigationButton("back", page_id);
-    backBtn.classList.add("back-btn");
-    backBtn.addEventListener("click", (e) => {
+    const backBtn = setupFormNavigationButton('back', page_id);
+    backBtn.classList.add('back-btn');
+    backBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const current = document.getElementById(`creatorpage-${page_id}`);
-      if (current) current.classList.add("hidden");
+      if (current) current.classList.add('hidden');
     });
     nav.appendChild(backBtn);
 
-    const cancelBtn = document.createElement("button");
-    cancelBtn.type = "button";
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.classList.add("cancel-btn");
-    cancelBtn.addEventListener("click", () => {
-      const modal = document.getElementById("formModal");
-      if (modal) modal.style.display = "none";
+    const cancelBtn = document.createElement('button');
+    cancelBtn.type = 'button';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.classList.add('cancel-btn');
+    cancelBtn.addEventListener('click', () => {
+      const modal = document.getElementById('formModal');
+      if (modal) modal.style.display = 'none';
     });
     nav.appendChild(cancelBtn);
 
-    const submitBtn = document.createElement("button");
-    submitBtn.type = "button";
-    submitBtn.textContent = "Submit";
-    submitBtn.classList.add("submit-btn");
+    const submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.textContent = 'Submit';
+    submitBtn.classList.add('submit-btn');
     // simple submit behavior: collect inputs and log as form data
-    submitBtn.addEventListener("click", () => {
-      const inputs = formContent.querySelectorAll("input, textarea");
+    submitBtn.addEventListener('click', () => {
+      const inputs = formContent.querySelectorAll('input, textarea');
       const data = {};
 
       inputs.forEach((el) => {
         if (!el.name) return;
-        if (el.type === "checkbox") {
+        if (el.type === 'checkbox') {
           data[el.name] = el.checked;
           return;
         }
@@ -417,7 +410,7 @@ schema.forEach((page, page_id) => {
       });
 
       // trigger a custom event with the collected data for other code to handle
-      const evt = new CustomEvent("creatorFormSubmit", { detail: data });
+      const evt = new CustomEvent('creatorFormSubmit', { detail: data });
       document.dispatchEvent(evt);
     });
     nav.appendChild(submitBtn);
@@ -432,19 +425,19 @@ pairToggles();
 enhanceJSON();
 
 // Handle form submission to create campaign file
-document.addEventListener("creatorFormSubmit", async (event) => {
+document.addEventListener('creatorFormSubmit', async (event) => {
   const formData = event.detail;
-  console.log("Form submitted with data:", formData);
+  console.log('Form submitted with data:', formData);
 
   try {
     // Validate scope first
     if (!scope) {
-      throw new Error("User scope (VITE_SCOPE) is not configured. Please check your .env file.");
+      throw new Error('User scope (VITE_SCOPE) is not configured. Please check your .env file.');
     }
 
     // Validate required fields
     if (!formData.campaignName || !formData.campaignDate) {
-      alert("Campaign Name and Date are required!");
+      alert('Campaign Name and Date are required!');
       return;
     }
 
@@ -452,10 +445,10 @@ document.addEventListener("creatorFormSubmit", async (event) => {
     const { filename, path } = await createAndSaveCampaignFile(formData, scope);
 
     // Show success message
-    const modal = document.getElementById("formModal");
+    const modal = document.getElementById('formModal');
     if (modal) {
       // Create success message
-      const successDiv = document.createElement("div");
+      const successDiv = document.createElement('div');
       successDiv.style.cssText = `
         position: fixed;
         top: 50%;
@@ -494,10 +487,10 @@ document.addEventListener("creatorFormSubmit", async (event) => {
       }, 5000);
 
       // Hide form modal
-      modal.style.display = "none";
+      modal.style.display = 'none';
     }
   } catch (error) {
-    console.error("Error creating campaign file:", error);
-    alert("Error creating campaign file: " + error.message);
+    console.error('Error creating campaign file:', error);
+    alert('Error creating campaign file: ' + error.message);
   }
 });

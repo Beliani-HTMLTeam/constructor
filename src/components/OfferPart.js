@@ -1,7 +1,7 @@
-import { Paragraph } from "./Paragraph.js";
-import { Space } from "./Space.js";
-import { GetCode } from "./getCode.js";
-import { Intro } from "./intro.js";
+import { Paragraph } from './Paragraph.js';
+import { Space } from './Space.js';
+import { GetCode } from './getCode.js';
+import { Intro } from './intro.js';
 
 export function OfferPart({ offers, offerDate, href, code, type, color }) {
   const newsletter = `
@@ -13,9 +13,9 @@ export function OfferPart({ offers, offerDate, href, code, type, color }) {
         ${Intro({
           title: item.title,
           paragraph: item.paragraph,
-          align: "center",
+          align: 'center',
           color,
-          spaceClassName: "newsletterBottom20px",
+          spaceClassName: 'newsletterBottom20px',
         })}
         </td>
     </tr>
@@ -24,7 +24,7 @@ export function OfferPart({ offers, offerDate, href, code, type, color }) {
         ? `
       <tr>
         <td >
-            ${Space({ className: "newsletterBottom60px" })}
+            ${Space({ className: 'newsletterBottom60px' })}
         </td>
       </tr>
       `
@@ -40,7 +40,7 @@ export function OfferPart({ offers, offerDate, href, code, type, color }) {
 
       return newsletter;
     })
-    .join("")}
+    .join('')}
 
     <tr>
       <td >
@@ -55,13 +55,13 @@ export function OfferPart({ offers, offerDate, href, code, type, color }) {
 
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom60px" })}
+        ${Space({ className: 'newsletterBottom60px' })}
       </td>
     </tr>
     
     <tr>
       <td >
-        ${Paragraph(offerDate, "center")}
+        ${Paragraph(offerDate, 'center')}
       </td>
     </tr>
   `;
@@ -74,15 +74,15 @@ export function OfferPart({ offers, offerDate, href, code, type, color }) {
               ${Intro({
                 title: item.title,
                 paragraph: item.paragraph,
-                align: "center",
+                align: 'center',
                 color,
-                spaceClassName: "newsletterBottom20px",
+                spaceClassName: 'newsletterBottom20px',
               })}
               </td>
           </tr>
           <tr>
             <td >
-                ${Space({ className: "newsletterBottom20px" })}
+                ${Space({ className: 'newsletterBottom20px' })}
             </td>
           </tr>
           <tr>
@@ -100,17 +100,17 @@ export function OfferPart({ offers, offerDate, href, code, type, color }) {
           `;
             return landing;
           })
-          .join("")}
+          .join('')}
 
           <tr>
             <td >
-              ${Paragraph(offerDate, "center")}
+              ${Paragraph(offerDate, 'center')}
             </td>
           </tr>
   `;
   return `
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
-    ${type === "newsletter" ? newsletter : landing}
+    ${type === 'newsletter' ? newsletter : landing}
   </table>
   `;
 }

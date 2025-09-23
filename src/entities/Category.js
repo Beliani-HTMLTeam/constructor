@@ -1,4 +1,4 @@
-import { Product } from "./Product.js";
+import { Product } from './Product.js';
 
 export class Category {
   constructor({ src, href, name, type, products = [] }) {
@@ -6,9 +6,7 @@ export class Category {
     this.href = href;
     this.name = name;
     this.type = type;
-    this.products = products.map((p) =>
-      p instanceof Product ? p : new Product(p),
-    );
+    this.products = products.map((p) => (p instanceof Product ? p : new Product(p)));
   }
 
   toJSON() {

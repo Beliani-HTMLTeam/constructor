@@ -1,9 +1,9 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { ImageWithLink, Product, Title, Paragraph } from "./index.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { ImageWithLink, Product, Title, Paragraph } from './index.js';
 
 export const CategoryBlock = isAllowToRender(
-  ({ href1, href2, name1, name2, type = "wednesday" }) => {
-    if (type === "wednesday") {
+  ({ href1, href2, name1, name2, type = 'wednesday' }) => {
+    if (type === 'wednesday') {
       return `
       <tr>
         <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
@@ -33,5 +33,5 @@ export const CategoryBlock = isAllowToRender(
       </tr>
     `;
     }
-  },
+  }
 );

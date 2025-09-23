@@ -1,12 +1,12 @@
-import { selectCampaignHandler, handleShopChange } from "@/main/events.js";
-import { renderAvailableTemplates } from "@/main/renderAvailableTemplates.js";
+import { selectCampaignHandler, handleShopChange } from '@/main/events.js';
+import { renderAvailableTemplates } from '@/main/renderAvailableTemplates.js';
 import {
   populateSelect,
   createSelectOption,
   showElements,
   hideElements,
-} from "@/utils/domUtils.js";
-import { root } from "@/app.js";
+} from '@/utils/domUtils.js';
+import { root } from '@/app.js';
 
 export function setupSelectCampaigns(
   elements,
@@ -14,58 +14,48 @@ export function setupSelectCampaigns(
   setState,
   getState,
   render,
-  setSelectedTemplate,
+  setSelectedTemplate
 ) {
-  const {
-    selectCampaigns,
-    selectTemplates,
-    selectTemplatesWrapper,
-    openIssue,
-    openFigma,
-  } = elements;
+  const { selectCampaigns, selectTemplates, selectTemplatesWrapper, openIssue, openFigma } =
+    elements;
 
-  selectCampaigns.addEventListener("change", (ev) => {
-    if (ev.target.value === "default") {
+  selectCampaigns.addEventListener('change', (ev) => {
+    if (ev.target.value === 'default') {
       return;
     }
 
     // Show select templates after selecting campaign
     showElements(selectTemplates, selectTemplatesWrapper, openIssue, openFigma);
 
-    const { selectedCampaign, templates } = selectCampaignHandler(
-      ev,
-      campaigns,
-    );
+    const { selectedCampaign, templates } = selectCampaignHandler(ev, campaigns);
 
-    root.innerHTML = "";
-    selectTemplates.innerHTML =
-      '<option value="default">Select template</option>';
+    root.innerHTML = '';
+    selectTemplates.innerHTML = '<option value="default">Select template</option>';
     selectTemplates.append(...renderAvailableTemplates(templates));
 
-    setState("selectedTemplates", templates);
-    setState("selectedCampaign", selectedCampaign);
-    setState("optimizeImg", selectedCampaign.optimizeImg || false);
+    setState('selectedTemplates', templates);
+    setState('selectedCampaign', selectedCampaign);
+    setState('optimizeImg', selectedCampaign.optimizeImg || false);
   });
 }
 
 export function setupSelectShop(elements, shops, setState, getState, render) {
-  const { selectShop, selectLanguage, selectLanguageWrapper, copyTemplate } =
-    elements;
+  const { selectShop, selectLanguage, selectLanguageWrapper, copyTemplate } = elements;
 
   // Populate shop options
   const shopItems = shops.map((shop) => ({
     value: shop.shopId,
     text: shop.seller,
   }));
-  populateSelect(selectShop, shopItems, "Select shop");
+  populateSelect(selectShop, shopItems, 'Select shop');
 
-  selectShop.addEventListener("change", (ev) => {
-    if (ev.target.value === "default") {
+  selectShop.addEventListener('change', (ev) => {
+    if (ev.target.value === 'default') {
       return;
     }
 
     handleShopChange(ev, shops);
-    const shop = getState("shop");
+    const shop = getState('shop');
 
     // Setup language options based on selected shop
     const languageItems = shop.languages.map(({ language }) => ({
@@ -73,12 +63,12 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
       text: language.name,
     }));
 
-    populateSelect(selectLanguage, languageItems, "Select language");
+    populateSelect(selectLanguage, languageItems, 'Select language');
 
     // Style language options
     Array.from(selectLanguage.options).forEach((option) => {
-      if (option.value !== "default") {
-        option.style.textTransform = "capitalize";
+      if (option.value !== 'default') {
+        option.style.textTransform = 'capitalize';
       }
     });
 
@@ -86,23 +76,11 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
   });
 }
 
-export function setupSelectLanguage(
-  elements,
-  setState,
-  getState,
-  render,
-  handleSlugChange,
-) {
-  const {
-    selectLanguage,
-    selectShop,
-    selectShopWrapper,
-    openLP,
-    openCampaign,
-  } = elements;
+export function setupSelectLanguage(elements, setState, getState, render, handleSlugChange) {
+  const { selectLanguage, selectShop, selectShopWrapper, openLP, openCampaign } = elements;
 
-  selectLanguage.addEventListener("change", (ev) => {
-    if (ev.target.value === "default") {
+  selectLanguage.addEventListener('change', (ev) => {
+    if (ev.target.value === 'default') {
       return;
     }
 
@@ -114,17 +92,11 @@ export function setupSelectLanguage(
   });
 }
 
-export function setupSelectTemplate(
-  elements,
-  setState,
-  getState,
-  render,
-  setSelectedTemplate,
-) {
+export function setupSelectTemplate(elements, setState, getState, render, setSelectedTemplate) {
   const { selectTemplates, selectShop, selectShopWrapper } = elements;
 
-  selectTemplates.addEventListener("change", (ev) => {
-    if (ev.target.value === "default") {
+  selectTemplates.addEventListener('change', (ev) => {
+    if (ev.target.value === 'default') {
       return;
     }
 

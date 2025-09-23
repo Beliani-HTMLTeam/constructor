@@ -3,11 +3,11 @@ function rowFn(item) {
 }
 
 function colFn(item, width) {
-  return `<td style="vertical-align: top; width: ${width + "%"};">${item}</td>`;
+  return `<td style="vertical-align: top; width: ${width + '%'};">${item}</td>`;
 }
 
 export function Matrix({ row, col, html }) {
-  const matrix = Array(Number(row)).fill(Array(Number(col)).fill(""));
+  const matrix = Array(Number(row)).fill(Array(Number(col)).fill(''));
   const itemsAmount = html.length;
   let index = 0;
   let width = 100 / (itemsAmount / row);
@@ -17,12 +17,12 @@ export function Matrix({ row, col, html }) {
         col
           .map((_, i) => {
             if (index >= itemsAmount) {
-              return colFn("<span>Not enough items to render</span>");
+              return colFn('<span>Not enough items to render</span>');
             }
             return colFn(html[index++], width);
           })
-          .join(""),
+          .join('')
       );
     })
-    .join("");
+    .join('');
 }

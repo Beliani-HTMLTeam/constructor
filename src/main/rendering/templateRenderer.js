@@ -1,22 +1,22 @@
-import Toastify from "toastify-js";
-import { addParams } from "@/helpers/getQueryLink.js";
-import { TemplateHandlers } from "@/main/handlers/handlers.js";
-import { wrapTemplate } from "@/helpers/wrapTemplate.js";
-import { fetchTranslations } from "@/api/fetchTranslations.js";
-import { normalizeProducts } from "@/utils/normalizeProducts.js";
-import { computeValue } from "@/helpers/computeValue.js";
-import { getTrackingUrl } from "@/utils/getTrackingUrl.js";
-import { root } from "@/app.js";
+import Toastify from 'toastify-js';
+import { addParams } from '@/helpers/getQueryLink.js';
+import { TemplateHandlers } from '@/main/handlers/handlers.js';
+import { wrapTemplate } from '@/helpers/wrapTemplate.js';
+import { fetchTranslations } from '@/api/fetchTranslations.js';
+import { normalizeProducts } from '@/utils/normalizeProducts.js';
+import { computeValue } from '@/helpers/computeValue.js';
+import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
+import { root } from '@/app.js';
 export async function renderTemplate(getState, setState) {
-  if (!getState("country")) return;
+  if (!getState('country')) return;
 
-  const country = getState("country");
-  const templateToRender = getState("template");
-  const selectedCampaign = getState("selectedCampaign");
+  const country = getState('country');
+  const templateToRender = getState('template');
+  const selectedCampaign = getState('selectedCampaign');
 
   if (!selectedCampaign) {
     Toastify({
-      text: "Select campaign.",
+      text: 'Select campaign.',
       escapeMarkup: false,
       duration: 3000,
     }).showToast();
@@ -25,7 +25,7 @@ export async function renderTemplate(getState, setState) {
 
   if (!templateToRender) {
     Toastify({
-      text: "Select template.",
+      text: 'Select template.',
       escapeMarkup: false,
       duration: 3000,
     }).showToast();
@@ -35,7 +35,7 @@ export async function renderTemplate(getState, setState) {
   // Handle translations if needed
   if (!selectedCampaign.data && templateToRender.tableQueries.length > 0) {
     try {
-      setState("loading", true);
+      setState('loading', true);
       const translationsResult = await fetchTranslations({
         tableQueries: templateToRender.tableQueries,
       });
@@ -43,10 +43,10 @@ export async function renderTemplate(getState, setState) {
       for (const translation of translationsResult) {
         queries[translation.name] = translation.data;
       }
-      setState("loading", false);
-      setState("queries", queries);
+      setState('loading', false);
+      setState('queries', queries);
     } catch (error) {
-      setState("loading", false);
+      setState('loading', false);
       console.log(error);
       Toastify({
         text: error,
@@ -63,7 +63,7 @@ export async function renderTemplate(getState, setState) {
     for (const translation of templateToRender.tableQueries) {
       queries[translation.name] = translation.fallback;
     }
-    setState("queries", queries);
+    setState('queries', queries);
   }
 
   // Get country-specific data
@@ -83,9 +83,9 @@ export async function renderTemplate(getState, setState) {
 
   // Process links and products
   const links = addParams({ links: templateToRender.links });
-  const ids = getState("ids");
-  const localProducts = getState("selectedCampaign").products;
-  const LSProducts = localProducts || localStorage.getItem("products");
+  const ids = getState('ids');
+  const localProducts = getState('selectedCampaign').products;
+  const LSProducts = localProducts || localStorage.getItem('products');
   const parsedProducts = localProducts
     ? normalizeProducts(localProducts)
     : LSProducts
@@ -93,42 +93,40 @@ export async function renderTemplate(getState, setState) {
       : [];
   const campaignProducts = localProducts
     ? parsedProducts
-    : parsedProducts.find(
-        (item) => item.campaign_id === getState("selectedCampaign").startId,
-      );
+    : parsedProducts.find((item) => item.campaign_id === getState('selectedCampaign').startId);
 
   // Create template handlers
   const handlers = new TemplateHandlers({
-    templates: getState("queries").templates,
-    header: getState("queries").header,
-    footer: getState("queries").footer,
-    categoriesLinks: getState("queries").categoriesLinks,
-    categoriesTitles: getState("queries").categoriesTitles,
+    templates: getState('queries').templates,
+    header: getState('queries').header,
+    footer: getState('queries').footer,
+    categoriesLinks: getState('queries').categoriesLinks,
+    categoriesTitles: getState('queries').categoriesTitles,
     products: localProducts ? parsedProducts : campaignProducts?.products,
   });
 
   try {
     const state = {
-      queries: getState("queries"),
-      country: getState("country"),
-      loading: getState("loading"),
-      ids: getState("ids"),
-      translations: getState("translations"),
-      selectedCampaign: getState("selectedCampaign"),
-      selectedTemplates: getState("selectedTemplates"),
-      shop: getState("shop"),
+      queries: getState('queries'),
+      country: getState('country'),
+      loading: getState('loading'),
+      ids: getState('ids'),
+      translations: getState('translations'),
+      selectedCampaign: getState('selectedCampaign'),
+      selectedTemplates: getState('selectedTemplates'),
+      shop: getState('shop'),
     };
 
     const html = await templateToRender.template({
       ...state,
       ...templateToRender,
-      background: templateToRender.background || "#ffffff",
+      background: templateToRender.background || '#ffffff',
       country,
       id: ids[country],
       categories: templateToRender.categories?.map((item) =>
         Array.isArray(item)
           ? item.map((item) => computeValue({ ...item }))
-          : computeValue({ ...item }),
+          : computeValue({ ...item })
       ),
       type: templateToRender.type,
       getProductById: handlers.getProductById,
@@ -138,10 +136,8 @@ export async function renderTemplate(getState, setState) {
       getHeader: handlers.getHeader,
       getPhrase: handlers.getPhrase,
       add_utm: (link) =>
-        templateToRender.type == "newsletter"
-          ? link +
-            "?utm_source=newsletter&utm_medium=email&utm_campaign=" +
-            ids[country]
+        templateToRender.type == 'newsletter'
+          ? link + '?utm_source=newsletter&utm_medium=email&utm_campaign=' + ids[country]
           : link,
       getCampaignData: (key) => {
         if (key in slugData) {
@@ -155,25 +151,23 @@ export async function renderTemplate(getState, setState) {
     });
 
     const withStylesOrNo =
-      "css" in templateToRender
-        ? `<style>${templateToRender.css}</style>` + html
-        : html;
+      'css' in templateToRender ? `<style>${templateToRender.css}</style>` + html : html;
 
     const wrappedHtml = templateToRender.wrapper
       ? wrapTemplate(templateToRender.wrapper, {
-          style: templateToRender.css ?? "",
+          style: templateToRender.css ?? '',
           html: html,
         })
       : withStylesOrNo;
 
-    setState("html", wrappedHtml);
+    setState('html', wrappedHtml);
 
-    if (withStylesOrNo.includes("undefined")) {
-      if (confirm("Do you want to render template with undefined value?")) {
+    if (withStylesOrNo.includes('undefined')) {
+      if (confirm('Do you want to render template with undefined value?')) {
         return (root.innerHTML = withStylesOrNo);
       } else {
         Toastify({
-          text: "Error rendering. HTML code has undefined value.",
+          text: 'Error rendering. HTML code has undefined value.',
           escapeMarkup: false,
           duration: 3000,
         }).showToast();
@@ -184,7 +178,7 @@ export async function renderTemplate(getState, setState) {
   } catch (error) {
     console.log(error);
     Toastify({
-      text: "Please check console. " + error.message,
+      text: 'Please check console. ' + error.message,
       escapeMarkup: false,
       duration: 3000,
     }).showToast();

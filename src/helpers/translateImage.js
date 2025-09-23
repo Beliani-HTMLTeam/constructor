@@ -1,10 +1,10 @@
-import { getImageUrl } from "@utils/ImageManager.js";
+import { getImageUrl } from '@utils/ImageManager.js';
 
 const translateImage = ({
   value,
-  type = "relation",
-  relyOn = "slug",
-  placeholderPosition = "38",
+  type = 'relation',
+  relyOn = 'slug',
+  placeholderPosition = '38',
 }) => ({
   src: {
     type: type,

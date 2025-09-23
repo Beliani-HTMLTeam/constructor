@@ -1,4 +1,4 @@
-import { ProductInstance } from "@/entities/ProductInstance.js";
+import { ProductInstance } from '@/entities/ProductInstance.js';
 
 export class MondayCategoryProducts {
   name;
@@ -10,24 +10,24 @@ export class MondayCategoryProducts {
   products;
   constructor({ src, products, href, name, background, color }) {
     if (!Array.isArray(products)) {
-      throw new Error("Products should be array property type.");
+      throw new Error('Products should be array property type.');
     }
     for (const productObject of products) {
       if (productObject instanceof ProductInstance) {
         continue;
       } else {
-        console.log(productObject, " Is not instance of ProductInstance");
+        console.log(productObject, ' Is not instance of ProductInstance');
         throw new Error(
-          "Please, use ProductInstance to define product in app.js. More details in console.",
+          'Please, use ProductInstance to define product in app.js. More details in console.'
         );
       }
     }
-    this.background = background || "#ffffff";
-    this.color = color || "#000000";
+    this.background = background || '#ffffff';
+    this.color = color || '#000000';
     this.href = href;
     this.name = name;
     this.products = products;
     this.src = src;
-    this.type = "monday";
+    this.type = 'monday';
   }
 }

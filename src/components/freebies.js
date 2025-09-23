@@ -1,5 +1,5 @@
-import { FreebieProduct } from "./freebieProduct.js";
-import { Matrix } from "./matrix.js";
+import { FreebieProduct } from './freebieProduct.js';
+import { Matrix } from './matrix.js';
 
 export function Freebies({ products, size = { row: 2, col: 2 }, color }) {
   size = {
@@ -23,8 +23,8 @@ export function Freebies({ products, size = { row: 2, col: 2 }, color }) {
               product.align,
               product.style,
               product.containerAlign,
-              color,
-            ),
+              color
+            )
           ),
         })}
       </tbody>

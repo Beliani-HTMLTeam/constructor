@@ -1,24 +1,24 @@
-import { Product } from "@/entities/Product.js";
+import { Product } from '@/entities/Product.js';
 
 const allowedSellers = [
-  "Beliani UK",
-  "Beliani DE",
-  "Beliani FR",
-  "Beliani AT",
-  "Beliani SP",
-  "Beliani PL",
-  "Beliani NL",
-  "Beliani PT",
-  "Beliani IT",
-  "Beliani SE",
-  "Beliani HU",
-  "Beliani DK",
-  "Beliani CZ",
-  "Beliani FI",
-  "Beliani NO",
-  "Beliani SK",
-  "Beliani BE",
-  "Beliani RO",
+  'Beliani UK',
+  'Beliani DE',
+  'Beliani FR',
+  'Beliani AT',
+  'Beliani SP',
+  'Beliani PL',
+  'Beliani NL',
+  'Beliani PT',
+  'Beliani IT',
+  'Beliani SE',
+  'Beliani HU',
+  'Beliani DK',
+  'Beliani CZ',
+  'Beliani FI',
+  'Beliani NO',
+  'Beliani SK',
+  'Beliani BE',
+  'Beliani RO',
 ];
 
 export function normalizeProducts(products) {
@@ -26,16 +26,16 @@ export function normalizeProducts(products) {
   const master_products = {};
 
   for (const element of products) {
-    if (!("saved_params" in element)) continue;
-    if (element.saved_params.username === "Beliani") {
+    if (!('saved_params' in element)) continue;
+    if (element.saved_params.username === 'Beliani') {
       master_products[element.id] = element;
     }
   }
 
   for (const element of products) {
-    if (!("saved_params" in element)) continue;
+    if (!('saved_params' in element)) continue;
 
-    if (element.saved_params.username === "Beliani") {
+    if (element.saved_params.username === 'Beliani') {
       normalized.push(new Product({ ...element, hrefs: element.ShopSAAlias }));
     }
 
@@ -45,8 +45,8 @@ export function normalizeProducts(products) {
       normalized.push(
         new Product({
           ...element,
-          hrefs: master_products[element.saved_params.master_sa]["ShopSAAlias"],
-        }),
+          hrefs: master_products[element.saved_params.master_sa]['ShopSAAlias'],
+        })
       );
     }
   }

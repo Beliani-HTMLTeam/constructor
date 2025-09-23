@@ -1,16 +1,13 @@
 export function YouTube({ type, queries, src, getField }) {
-  const path = new URL(getField(queries.youtubeHref, "Href")).pathname.replace(
-    "/",
-    "",
-  );
+  const path = new URL(getField(queries.youtubeHref, 'Href')).pathname.replace('/', '');
 
   return `
     ${
-      type === "newsletter"
+      type === 'newsletter'
         ? `
                 <tr>
                 <td align="center">
-                  <a href="${getField(queries.youtubeHref, "Href")}">
+                  <a href="${getField(queries.youtubeHref, 'Href')}">
                     <img alt="" src="${src}" style="vertical-align: middle; max-width: 100%;" loading="lazy">
                   </a>
                 </td>
@@ -24,7 +21,7 @@ export function YouTube({ type, queries, src, getField }) {
                 <td align="center">
                   <a href="${getField(
                     queries.youtubeHref,
-                    "Href",
+                    'Href'
                   )}" style="color:#ffffff; text-decoration: underline;">
                     <span class="newsletterCta">${queries.watchNow}</span>
                   </a>
@@ -51,7 +48,7 @@ export function YouTube({ type, queries, src, getField }) {
               <td align="center">
                 <a href="${getField(
                   queries.youtubeHref,
-                  "Href",
+                  'Href'
                 )}" style="color:#ffffff; text-decoration: underline;">
                   <span class="newsletterCta">${queries.watchNow}</span>
                 </a>

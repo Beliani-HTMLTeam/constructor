@@ -1,8 +1,8 @@
 const translateLink = ({
   value,
-  type = "relation",
-  relyOn = "origin",
-  placeholderPosition = "0",
+  type = 'relation',
+  relyOn = 'origin',
+  placeholderPosition = '0',
 }) => ({
   query: true,
   href: {

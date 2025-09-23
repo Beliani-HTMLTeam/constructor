@@ -1,4 +1,4 @@
-import { getState } from "@/main/state/appState";
+import { getState } from '@/main/state/appState';
 
 const types = {
   relation: handleRelation,
@@ -10,7 +10,7 @@ export function computeValue(value) {
     return value.map(computeValue);
   }
 
-  if (typeof value === "object" && value !== null) {
+  if (typeof value === 'object' && value !== null) {
     // If this object has query property and href, it's a translateLink object
     if (value.query && value.href && value.href.type) {
       // Return object with query flag and translated href for getQueryLink.js
@@ -39,66 +39,66 @@ export function computeValue(value) {
 }
 
 function handleRelation(relation) {
-  const shop = getState("shop");
-  const country = getState("country");
+  const shop = getState('shop');
+  const country = getState('country');
   const { value, placeholderPosition, relyOn } = relation;
 
   if (!value) {
-    return "";
+    return '';
   }
 
-  let relyOnValue = "";
-  if (relyOn === "slug") {
-    relyOnValue = country || "";
+  let relyOnValue = '';
+  if (relyOn === 'slug') {
+    relyOnValue = country || '';
   }
 
-  if (relyOn === "origin") {
-    relyOnValue = shop?.origin || "";
+  if (relyOn === 'origin') {
+    relyOnValue = shop?.origin || '';
   }
 
   // Convert placeholderPosition to number if it's a string
   const position =
-    typeof placeholderPosition === "string"
+    typeof placeholderPosition === 'string'
       ? parseInt(placeholderPosition, 10)
       : placeholderPosition;
 
-  if (typeof position !== "number" || isNaN(position)) {
+  if (typeof position !== 'number' || isNaN(position)) {
     return value;
   }
 
-  const arrayValue = value.split("");
+  const arrayValue = value.split('');
   const splitted = arrayValue.toSpliced(position, 0, relyOnValue.toLowerCase());
-  const newValue = splitted.join("");
+  const newValue = splitted.join('');
 
   return newValue;
 }
 
 function handleLinkRelation(relation) {
-  const shop = getState("shop");
-  const country = getState("country");
+  const shop = getState('shop');
+  const country = getState('country');
   const { baseUrl, categoryPath, relyOn } = relation;
 
-  let relyOnValue = "";
-  if (relyOn === "slug") {
+  let relyOnValue = '';
+  if (relyOn === 'slug') {
     relyOnValue = country;
   }
 
-  if (relyOn === "origin") {
+  if (relyOn === 'origin') {
     relyOnValue = shop.origin;
   }
 
   // If baseUrl is provided, use it as the base, otherwise use shop origin
-  const base = baseUrl || shop?.origin || "";
+  const base = baseUrl || shop?.origin || '';
 
   // If categoryPath is provided, append the translated country code
   if (categoryPath) {
     const translatedPath = categoryPath.replace(
-      "{country}",
-      relyOnValue ? relyOnValue.toLowerCase() : "",
+      '{country}',
+      relyOnValue ? relyOnValue.toLowerCase() : ''
     );
     return base + translatedPath;
   }
 
   // Always return a string, never undefined
-  return base || "";
+  return base || '';
 }

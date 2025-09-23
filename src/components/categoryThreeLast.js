@@ -1,24 +1,15 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { ImageWithLink, Product, Title } from "./index.js";
-import { ProductFirst } from "./productFirst.js";
-import { ProductIMG } from "./productIMG.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { ImageWithLink, Product, Title } from './index.js';
+import { ProductFirst } from './productFirst.js';
+import { ProductIMG } from './productIMG.js';
 
 export const CategoryThreeLast = isAllowToRender(
-  ({
-    name,
-    href,
-    src,
-    products,
-    ctaComponent,
-    color,
-    cta = "CTA",
-    type = "monday",
-  }) => {
+  ({ name, href, src, products, ctaComponent, color, cta = 'CTA', type = 'monday' }) => {
     if (!type) {
-      return "Please specify type category.";
+      return 'Please specify type category.';
     }
 
-    if (type === "no_products") {
+    if (type === 'no_products') {
       return `
     <table border="0" cellspacing="0" cellpadding="0" width="100%">
       <tbody>
@@ -27,7 +18,7 @@ export const CategoryThreeLast = isAllowToRender(
         </tr>
         <tr>
           <td>
-            ${Title({ title: name, align: "left", color: color })}
+            ${Title({ title: name, align: 'left', color: color })}
           </td>
         </tr>
         <tr>
@@ -49,9 +40,7 @@ export const CategoryThreeLast = isAllowToRender(
               ctaComponent
                 ? ctaComponent(href, cta)
                 : `
-                <a href="${href}" style="color:${
-                  color || "#000"
-                }; text-decoration: underline;">
+                <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                   <span class="newsletterCta">${cta}</span>
                 </a>
               `
@@ -63,13 +52,13 @@ export const CategoryThreeLast = isAllowToRender(
     `;
     }
 
-    if (type === "monday") {
+    if (type === 'monday') {
       return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <thead>
       <tr>
         <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-          ${Title({ title: name, align: "left", color: color })}
+          ${Title({ title: name, align: 'left', color: color })}
         </td>
       </tr>
       <tr>
@@ -77,12 +66,7 @@ export const CategoryThreeLast = isAllowToRender(
       </tr>
       <tr>
         <td>
-          ${ProductFirst(
-            products[0],
-            src,
-            "left",
-            `color: ${color || "#000000"}`,
-          )}
+          ${ProductFirst(products[0], src, 'left', `color: ${color || '#000000'}`)}
         </td>
       </tr>
       <tr>
@@ -95,25 +79,13 @@ export const CategoryThreeLast = isAllowToRender(
           <table cellspacing="0" cellpadding="0" border="0" align="center">
             <tr>
                     <td style="vertical-align: top; width: 33.333333333333336%;">
-                      ${ProductIMG(
-                        products[1],
-                        "left",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${ProductIMG(products[1], 'left', `color: ${color || '#000000'}`)}
                     </td>
                     <td style="vertical-align: top; width: 33.333333333333336%;">
-                      ${ProductIMG(
-                        products[2],
-                        "left",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${ProductIMG(products[2], 'left', `color: ${color || '#000000'}`)}
                     </td>
                     <td style="vertical-align: top; width: 33.333333333333336%;">
-                      ${ProductIMG(
-                        products[3],
-                        "left",
-                        `color: ${color || "#000000"}`,
-                      )}
+                      ${ProductIMG(products[3], 'left', `color: ${color || '#000000'}`)}
                     </td>
             </tr>
           </table>
@@ -134,7 +106,7 @@ export const CategoryThreeLast = isAllowToRender(
                       ? ctaComponent(href, cta)
                       : `
                       <a href="${href}" style="color:${
-                        color || "#000"
+                        color || '#000'
                       }; text-decoration: underline;">
                         <span class="newsletterCta">${cta}</span>
                       </a>
@@ -151,7 +123,7 @@ export const CategoryThreeLast = isAllowToRender(
   `;
     }
 
-    if (type === "image") {
+    if (type === 'image') {
       return `
     <table cellspacing="0" cellpadding="0" border="0" width="100%">
       <thead>
@@ -164,5 +136,5 @@ export const CategoryThreeLast = isAllowToRender(
     </table>
     `;
     }
-  },
+  }
 );

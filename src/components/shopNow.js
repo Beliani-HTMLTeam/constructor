@@ -1,17 +1,11 @@
-import { Space } from "./Space.js";
+import { Space } from './Space.js';
 
-export const shopNow = ({
-  href,
-  cta,
-  textColor,
-  space = false,
-  backgorund = "#FD9000",
-}) => {
+export const shopNow = ({ href, cta, textColor, space = false, backgorund = '#FD9000' }) => {
   return `
         
             <tr>
                 <td align="center" style="background-color:${backgorund}">
-                    ${Space({ className: "newsletterBottom35px" })}
+                    ${Space({ className: 'newsletterBottom35px' })}
                 </td>
             </tr>
             <tr>
@@ -27,7 +21,7 @@ export const shopNow = ({
                     <td style="background-color:${backgorund}" class="newsletterBottom${space}px"></td>
                  </tr>
                 `
-                : ""
+                : ''
             }
             
        

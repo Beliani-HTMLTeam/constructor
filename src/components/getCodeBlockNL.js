@@ -13,7 +13,7 @@ export function GetCodeBlockNL({
   href,
   text,
 }) {
-  if (type === "newsletter") {
+  if (type === 'newsletter') {
     return `
           <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
             <tbody>

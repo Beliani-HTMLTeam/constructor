@@ -6,14 +6,14 @@ export class FreebieItem {
   };
   constructor({ row, col, products }) {
     if (!Array.isArray(products)) {
-      throw new Error("Links should be array property type.");
+      throw new Error('Links should be array property type.');
     }
 
     for (const freeebieProduct of products) {
-      if (!("src" in freeebieProduct) || !("id" in freeebieProduct)) {
-        console.log(freeebieProduct, " src is not defined in freeebieProduct");
+      if (!('src' in freeebieProduct) || !('id' in freeebieProduct)) {
+        console.log(freeebieProduct, ' src is not defined in freeebieProduct');
         throw new Error(
-          "Please, add src and id to FreebieItem in app.js. More details in console.",
+          'Please, add src and id to FreebieItem in app.js. More details in console.'
         );
       }
     }

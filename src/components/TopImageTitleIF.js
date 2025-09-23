@@ -1,16 +1,15 @@
-import { isAllowToRender, optimize } from "@helpers/optimizeImage.js";
-import { Space } from "./Space.js";
+import { isAllowToRender, optimize } from '@helpers/optimizeImage.js';
+import { Space } from './Space.js';
 
 export const TopImageTitleIF = isAllowToRender(
-  optimize(
-    ({ href, href2, title1, title2, color, type = "standard", idx, len }) => {
-      if (("IT", "PT", "ES")) {
-        if (!type) {
-          return "Please specify type of TiT.";
-        }
-        if (type === "standard") {
-          if (idx === len) {
-            return `
+  optimize(({ href, href2, title1, title2, color, type = 'standard', idx, len }) => {
+    if (('IT', 'PT', 'ES')) {
+      if (!type) {
+        return 'Please specify type of TiT.';
+      }
+      if (type === 'standard') {
+        if (idx === len) {
+          return `
             <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                 <tbody>
                     <tr>
@@ -26,11 +25,11 @@ export const TopImageTitleIF = isAllowToRender(
                 </tbody>
             </table>
             `;
-          }
         }
-        if (type === "equals") {
-          if (idx === len) {
-            return `
+      }
+      if (type === 'equals') {
+        if (idx === len) {
+          return `
             <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                 <tbody>
                     <tr>
@@ -46,11 +45,11 @@ export const TopImageTitleIF = isAllowToRender(
                 </tbody>
             </table>
             `;
-          }
         }
-        if (type === "inverse") {
-          if (idx === len) {
-            return `
+      }
+      if (type === 'inverse') {
+        if (idx === len) {
+          return `
             <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                 <tbody>
                     <tr>
@@ -66,11 +65,11 @@ export const TopImageTitleIF = isAllowToRender(
                 </tbody>
             </table>
             `;
-          }
         }
-        if (type === "singleLine") {
-          if (idx === len) {
-            return `
+      }
+      if (type === 'singleLine') {
+        if (idx === len) {
+          return `
             <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                 <tbody>
                     <tr>
@@ -85,15 +84,15 @@ export const TopImageTitleIF = isAllowToRender(
                 </tbody>
             </table>
             `;
-          }
         }
-      } else {
-        if (!type) {
-          return "Please specify type of TiT.";
-        }
-        if (type === "standard") {
-          if (idx === len) {
-            return `
+      }
+    } else {
+      if (!type) {
+        return 'Please specify type of TiT.';
+      }
+      if (type === 'standard') {
+        if (idx === len) {
+          return `
                 <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                     <tbody>
                         <tr>
@@ -109,11 +108,11 @@ export const TopImageTitleIF = isAllowToRender(
                     </tbody>
                 </table>
                 `;
-          }
         }
-        if (type === "equals") {
-          if (idx === len) {
-            return `
+      }
+      if (type === 'equals') {
+        if (idx === len) {
+          return `
                 <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                     <tbody>
                         <tr>
@@ -129,11 +128,11 @@ export const TopImageTitleIF = isAllowToRender(
                     </tbody>
                 </table>
                 `;
-          }
         }
-        if (type === "inverse") {
-          if (idx === len) {
-            return `
+      }
+      if (type === 'inverse') {
+        if (idx === len) {
+          return `
                 <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                     <tbody>
                         <tr>
@@ -149,11 +148,11 @@ export const TopImageTitleIF = isAllowToRender(
                     </tbody>
                 </table>
                 `;
-          }
         }
-        if (type === "singleLine") {
-          if (idx === len) {
-            return `
+      }
+      if (type === 'singleLine') {
+        if (idx === len) {
+          return `
                 <table border="0" cellspacing="0" cellpadding="0" width="100%" >
                     <tbody>
                         <tr>
@@ -168,9 +167,8 @@ export const TopImageTitleIF = isAllowToRender(
                     </tbody>
                 </table>
                 `;
-          }
         }
       }
-    },
-  ),
+    }
+  })
 );

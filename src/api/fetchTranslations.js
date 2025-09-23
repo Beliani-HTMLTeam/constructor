@@ -1,14 +1,12 @@
-import { getState } from "@/main/state/appState";
-import { adjustTableRangeToCountry } from "@/utils/fixRange.js";
-import { normalizeTranslations } from "@/utils/normalizeTranslations.js";
-import { GoogleAuth } from "@/services/GoogleAuth.js";
-import Toastify from "toastify-js";
+import { getState } from '@/main/state/appState';
+import { adjustTableRangeToCountry } from '@/utils/fixRange.js';
+import { normalizeTranslations } from '@/utils/normalizeTranslations.js';
+import { GoogleAuth } from '@/services/GoogleAuth.js';
+import Toastify from 'toastify-js';
 export const fetchTranslations = async ({ tableQueries }) => {
-  const name = getState("name");
-  const shop = getState("shop");
-  const tableColumn = shop.languages.find(
-    (item) => item.language.name === name,
-  );
+  const name = getState('name');
+  const shop = getState('shop');
+  const tableColumn = shop.languages.find((item) => item.language.name === name);
 
   if (!tableColumn.tableColumn) {
     Toastify({
@@ -20,17 +18,12 @@ export const fetchTranslations = async ({ tableQueries }) => {
   }
   const promises = [];
   for (const query of tableQueries) {
-    const queryWithAdjustedRange = adjustTableRangeToCountry(
-      query,
-      tableColumn.tableColumn,
-    );
+    const queryWithAdjustedRange = adjustTableRangeToCountry(query, tableColumn.tableColumn);
     promises.push(queryWithAdjustedRange);
   }
 
   const promisesResult = await Promise.allSettled(
-    promises.map((queryWithAdjustedRange) =>
-      getTranslations(queryWithAdjustedRange),
-    ),
+    promises.map((queryWithAdjustedRange) => getTranslations(queryWithAdjustedRange))
   );
 
   const computedPromise = [];
@@ -49,19 +42,19 @@ export const fetchTranslations = async ({ tableQueries }) => {
           GoogleAuth.login();
           break;
         case 429:
-          throw new Error("Too many request. Please, try again later.");
+          throw new Error('Too many request. Please, try again later.');
         case 503:
-          throw new Error("Service currently unavailable");
+          throw new Error('Service currently unavailable');
         default:
-          throw new Error("Unknown error", error);
+          throw new Error('Unknown error', error);
           break;
       }
     }
 
-    if ("values" in value && value.values.length > 0) {
+    if ('values' in value && value.values.length > 0) {
       computedPromise.push({
         data:
-          value.majorDimension === "COLUMNS"
+          value.majorDimension === 'COLUMNS'
             ? value.values
             : normalizeTranslations(value.values, value.fallback, value.range),
         name: value.name,
@@ -77,25 +70,19 @@ export const fetchTranslations = async ({ tableQueries }) => {
   return computedPromise;
 };
 
-export async function getTranslations({
-  tableId,
-  tableName,
-  tableRange,
-  fallback,
-  name,
-}) {
-  const token = localStorage.getItem("token");
+export async function getTranslations({ tableId, tableName, tableRange, fallback, name }) {
+  const token = localStorage.getItem('token');
   // includeGridData
   try {
     const response = await fetch(
       `https://sheets.googleapis.com/v4/spreadsheets/${tableId}/values/${tableName}${tableRange}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
         },
-      },
+      }
     );
     const data = await response.json();
     return { ...data, name, fallback };

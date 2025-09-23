@@ -8,10 +8,10 @@ export async function createCampaignFile(formData, userScope = null) {
   // Get user scope from environment if not provided
   if (!userScope) {
     userScope = __SCOPE__ || import.meta.env?.VITE_SCOPE;
-    console.log("createCampaignFile.js - userScope:", userScope); // Debug log
-    
+    console.log('createCampaignFile.js - userScope:', userScope); // Debug log
+
     if (!userScope) {
-      throw new Error("User scope (VITE_SCOPE) is not configured. Please check your .env file.");
+      throw new Error('User scope (VITE_SCOPE) is not configured. Please check your .env file.');
     }
   }
 
@@ -22,24 +22,24 @@ export async function createCampaignFile(formData, userScope = null) {
       // Use the new API endpoint to get campaign files
       const response = await fetch(`/api/campaigns?scope=${userScope}`);
       console.log('API response status:', response.status, response.ok);
-      
+
       if (response.ok) {
         const data = await response.json();
         console.log('Campaign files from API:', data.files);
-        
+
         const numbers = data.files
-          .filter(filename => filename.match(/^\d{3}_/)) // Files starting with 3 digits and underscore
-          .map(filename => {
+          .filter((filename) => filename.match(/^\d{3}_/)) // Files starting with 3 digits and underscore
+          .map((filename) => {
             const match = filename.match(/^(\d{3})_/);
             const number = match ? parseInt(match[1]) : null;
             console.log(`Extracting number from: ${filename} -> ${number}`);
             return number;
           })
-          .filter(num => num !== null && !isNaN(num)) // Remove invalid numbers
+          .filter((num) => num !== null && !isNaN(num)) // Remove invalid numbers
           .sort((a, b) => b - a); // Sort descending
-        
+
         console.log(`Found campaign numbers in ${userScope}:`, numbers);
-        
+
         const nextNum = numbers.length > 0 ? numbers[0] + 1 : 1;
         console.log(`Next campaign number will be: ${nextNum}`);
         return String(nextNum).padStart(3, '0');
@@ -49,9 +49,9 @@ export async function createCampaignFile(formData, userScope = null) {
     } catch (error) {
       console.warn('Could not fetch existing campaigns via API, using fallback', error);
     }
-    
+
     // Fallback: start from 001
-    return "001";
+    return '001';
   };
 
   // Helper function to format campaign name for filename
@@ -77,7 +77,7 @@ export async function createCampaignFile(formData, userScope = null) {
 
   // Generate campaign content
   const content = generateCampaignContent(formData, campaignNumber);
-  
+
   return { filename, content, userScope };
 }
 
@@ -89,37 +89,37 @@ export async function createCampaignFile(formData, userScope = null) {
  */
 function generateCampaignContent(formData, campaignNumber) {
   const {
-    campaignName = "Untitled Campaign",
+    campaignName = 'Untitled Campaign',
     campaignDate = new Date().toISOString().split('T')[0],
-    newsletterId = "",
-    contentPageId = "",
-    issueCardId = "",
+    newsletterId = '',
+    contentPageId = '',
+    issueCardId = '',
     specialLPToggle = false,
-    specialLPIds = "",
+    specialLPIds = '',
     alarmEnabled = false,
-    alarmDescription = "",
+    alarmDescription = '',
     isArchive = false,
     optimizeImages = false,
-    figmaURL = "",
+    figmaURL = '',
     familyVersion = 0, // 0 = NEW (default), 1 = OLD
-    background = "#750000",
-    color = "#000000",
+    background = '#750000',
+    color = '#000000',
     insideEnabled = false,
-    insideColor = "#000000",
-    insideBackground = "#FFFFFF",
-    insideType = "code",
-    insideImage = "",
+    insideColor = '#000000',
+    insideBackground = '#FFFFFF',
+    insideType = 'code',
+    insideImage = '',
     insideTranslateImage = false,
     introEnabled = false,
-    introColor = "#000000",
-    introBackground = "#FFFFFF",
-    introAlignment = "left",
-    introType = "paragraph",
+    introColor = '#000000',
+    introBackground = '#FFFFFF',
+    introAlignment = 'left',
+    introType = 'paragraph',
     offerPartEnabled = false,
-    offerPartColor = "#000000",
-    offerPartBackground = "#FFFFFF",
-    offerPartAlignment = "left",
-    offerPartType = "paragraph"
+    offerPartColor = '#000000',
+    offerPartBackground = '#FFFFFF',
+    offerPartAlignment = 'left',
+    offerPartType = 'paragraph',
   } = formData;
 
   // Parse special LP IDs if provided
@@ -134,15 +134,18 @@ function generateCampaignContent(formData, campaignNumber) {
 
   // Format date for campaign object and translation sheet
   const formattedDate = new Date(campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
-  const shortDate = new Date(campaignDate).toLocaleDateString('en-GB', { 
-    day: '2-digit', 
-    month: '2-digit', 
-    year: '2-digit' 
-  }).replace(/\//g, '.');
+  const shortDate = new Date(campaignDate)
+    .toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+    })
+    .replace(/\//g, '.');
 
   // Generate automatic links structure
   const defaultLinks = {
-    TopImageTitle_href: "translateLink({ value: 'content/lp" + campaignDate.replace(/-/g, '-') + "' })",
+    TopImageTitle_href:
+      "translateLink({ value: 'content/lp" + campaignDate.replace(/-/g, '-') + "' })",
     TopImageTitle_src: "translateImage({ value: '" + campaignDate.replace(/-/g, '') + "_01.png' })",
     TopImage: "getImageUrl('" + campaignDate.replace(/-/g, '') + "_Pic.png', true)",
     Banner_1: "translateLink({ value: 'content/lp-placeholder-1' })",
@@ -182,7 +185,12 @@ const links = {`;
   // Add links object properties
   Object.entries(defaultLinks).forEach(([key, value], index, arr) => {
     const isLastItem = index === arr.length - 1;
-    if (typeof value === 'string' && (value.startsWith('translateLink') || value.startsWith('translateImage') || value.startsWith('getImageUrl'))) {
+    if (
+      typeof value === 'string' &&
+      (value.startsWith('translateLink') ||
+        value.startsWith('translateImage') ||
+        value.startsWith('getImageUrl'))
+    ) {
       campaignContent += `
   ${key}: ${value},`;
     } else {
@@ -231,12 +239,12 @@ export default new entities.Campaign({
   campaignContent += `
   alarm: {
     isActive: ${alarmEnabled},`;
-  
+
   if (alarmEnabled && alarmDescription) {
     campaignContent += `
     description: "${alarmDescription}",`;
   }
-  
+
   campaignContent += `
   },`;
 
@@ -257,22 +265,30 @@ export default new entities.Campaign({
 
   // Build template components array
   let templateComponents = [];
-  
+
   // Always include TopImageTitle and categories
   templateComponents.push('TopImageTitle_data: TopImageTitle_data');
   templateComponents.push('categories: categories');
-  
+
   // Add Inside component if enabled
   if (insideEnabled) {
     templateComponents.push(`Inside: {
         color: "${insideColor}",
         backgroundColor: "${insideBackground}",
-        type: "${insideType}",${insideImage ? `
-        image: "${insideImage}",${insideTranslateImage ? `
-        translateImage: true,` : ''}` : ''}
+        type: "${insideType}",${
+          insideImage
+            ? `
+        image: "${insideImage}",${
+          insideTranslateImage
+            ? `
+        translateImage: true,`
+            : ''
+        }`
+            : ''
+        }
       }`);
   }
-  
+
   // Add Intro component if enabled
   if (introEnabled) {
     templateComponents.push(`intro: {
@@ -282,7 +298,7 @@ export default new entities.Campaign({
         type: "${introType}",
       }`);
   }
-  
+
   // Add OfferPart component if enabled
   if (offerPartEnabled) {
     templateComponents.push(`OfferPart: {
@@ -330,7 +346,7 @@ export default new entities.Campaign({
 /**
  * Saves the campaign file to the campaigns directory via API
  * @param {string} filename - The filename
- * @param {string} content - The file content  
+ * @param {string} content - The file content
  * @param {string} userScope - User scope for directory
  * @returns {Promise<string>} - Save path or error message
  */
@@ -344,8 +360,8 @@ export async function saveCampaignFile(filename, content, userScope) {
       body: JSON.stringify({
         filename,
         content,
-        userScope
-      })
+        userScope,
+      }),
     });
 
     const result = await response.json();
@@ -356,10 +372,9 @@ export async function saveCampaignFile(filename, content, userScope) {
 
     console.log('Campaign file saved:', result.path);
     return result.path;
-
   } catch (error) {
     console.error('Error saving campaign file:', error);
-    
+
     // Fallback to browser download if API fails
     console.log('Falling back to browser download...');
     const blob = new Blob([content], { type: 'application/javascript' });
@@ -371,7 +386,7 @@ export async function saveCampaignFile(filename, content, userScope) {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    
+
     return `Downloaded: ${filename}`;
   }
 }
@@ -383,8 +398,12 @@ export async function saveCampaignFile(filename, content, userScope) {
  * @returns {Promise<{filename: string, path: string}>}
  */
 export async function createAndSaveCampaignFile(formData, userScope = null) {
-  const { filename, content, userScope: resolvedUserScope } = await createCampaignFile(formData, userScope);
+  const {
+    filename,
+    content,
+    userScope: resolvedUserScope,
+  } = await createCampaignFile(formData, userScope);
   const savePath = await saveCampaignFile(filename, content, resolvedUserScope);
-  
+
   return { filename, path: savePath };
 }

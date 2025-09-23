@@ -1,8 +1,8 @@
-import { incrementId } from "@/helpers/incrementId.js";
-import { getState, setState } from "@/main/state/appState";
-import Toastify from "toastify-js";
+import { incrementId } from '@/helpers/incrementId.js';
+import { getState, setState } from '@/main/state/appState';
+import Toastify from 'toastify-js';
 function openCampaignHandler(id) {
-  const config = getState("config");
+  const config = getState('config');
   if (!id) {
     Toastify({
       text: `Select campaign.`,
@@ -11,7 +11,7 @@ function openCampaignHandler(id) {
     }).showToast();
     return;
   }
-  window.open(config.campaign_url + id, "_blank");
+  window.open(config.campaign_url + id, '_blank');
 }
 
 function openLpHandler(lpLinks, country) {
@@ -23,25 +23,23 @@ function openLpHandler(lpLinks, country) {
     }).showToast();
     return;
   }
-  window.open(lpLinks[country], "_blank");
+  window.open(lpLinks[country], '_blank');
 }
 
 function openIssueHandler(id) {
-  const config = getState("config");
+  const config = getState('config');
 
-  window.open(config.issue_url + id, "_blank");
+  window.open(config.issue_url + id, '_blank');
 }
 
 function figmaCardHandler(url) {
-  const config = getState("config");
+  const config = getState('config');
 
-  window.open(url, "_blank");
+  window.open(url, '_blank');
 }
 
 function selectCampaignHandler(ev, campaigns) {
-  const selectedCampaign = campaigns.find(
-    (campaign) => campaign.startId === ev.target.value,
-  );
+  const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
 
   if (!selectedCampaign) {
     Toastify({
@@ -53,16 +51,13 @@ function selectCampaignHandler(ev, campaigns) {
   }
 
   // Dla pewności pokaż całą kampanię w konsoli (do debugowania)
-  console.log("selectedCampaign z campaigns:", selectedCampaign);
+  console.log('selectedCampaign z campaigns:', selectedCampaign);
 
   // Ustawienie mapy inkrementowanych ID (do "Open campaign")
-  setState(
-    "ids",
-    incrementId(selectedCampaign.startId, selectedCampaign.version || "new"),
-  );
+  setState('ids', incrementId(selectedCampaign.startId, selectedCampaign.version || 'new'));
 
   // Ustawienie wybranej kampanii z najważniejszymi polami
-  setState("selectedCampaign", {
+  setState('selectedCampaign', {
     startId: selectedCampaign.startId,
     name: selectedCampaign.name,
     templates: selectedCampaign.templates,
@@ -71,7 +66,7 @@ function selectCampaignHandler(ev, campaigns) {
     date: selectedCampaign.date, // <-- Dodaj, jeśli chcesz
     issueCardId: selectedCampaign.issueCardId, // <-- Dodaj, jeśli chcesz
     figmaUrl: selectedCampaign.figmaUrl, // <-- Dodaj, jeśli chcesz
-    version: selectedCampaign.version || "new",
+    version: selectedCampaign.version || 'new',
     // Dodaj tutaj inne pola, których potrzebujesz!
   });
 
@@ -80,14 +75,14 @@ function selectCampaignHandler(ev, campaigns) {
 }
 
 function handleSlugChange(ev) {
-  const slugAndName = ev.target.value.split("-");
-  setState("country", slugAndName[0]);
-  setState("name", slugAndName[1]);
+  const slugAndName = ev.target.value.split('-');
+  setState('country', slugAndName[0]);
+  setState('name', slugAndName[1]);
 }
 
 function handleShopChange(ev, shops) {
   const shop = shops.find((item) => item.shopId === ev.target.value);
-  setState("shop", shop);
+  setState('shop', shop);
 }
 
 export {

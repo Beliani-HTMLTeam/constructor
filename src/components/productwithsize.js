@@ -1,4 +1,4 @@
-export function ProductWithSize(product, align = "left") {
+export function ProductWithSize(product, align = 'left') {
   return `
   <table cellspacing="0" cellpadding="0" style="width: 100%; ">
     <tbody>

@@ -1,5 +1,5 @@
 export class Paragraph {
-  constructor({ paragraph, align = "left", style, type = "standard" }) {
+  constructor({ paragraph, align = 'left', style, type = 'standard' }) {
     this.paragraph = paragraph;
     this.align = align;
     this.style = style;
@@ -20,7 +20,7 @@ export class Paragraph {
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tbody>
                     <tr>
-                        <td  align="${this.align}" style="${this.style ?? ""}">
+                        <td  align="${this.align}" style="${this.style ?? ''}">
                             ${layout}
                         </td>
                     </tr>

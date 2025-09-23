@@ -1,25 +1,33 @@
-import Toastify from "toastify-js";
+import Toastify from 'toastify-js';
 import {
   openCampaignHandler,
   openIssueHandler,
   figmaCardHandler,
   openLpHandler,
-} from "@/main/events.js";
-import { generateLpLinks } from "@/helpers/generateLpLinks.js";
-import { normalizeProducts } from "@/utils/normalizeProducts.js";
-import { isQuotaExceededError } from "@/helpers/isQuotaExceededError.js";
-import { openCreateCampaignModal } from "@/main/ui/createCampaign.js";
-import { createSelectOption } from "@/utils/domUtils.js";
-import { setState } from "@/main/state/appState.js";
+} from '@/main/events.js';
+import { generateLpLinks } from '@/helpers/generateLpLinks.js';
+import { normalizeProducts } from '@/utils/normalizeProducts.js';
+import { isQuotaExceededError } from '@/helpers/isQuotaExceededError.js';
+import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
+import getHeaderTranslations from '@/translations-api/getHeaderTranslations';
+
+export function setupTestTranslationsHandler(elements) {
+  const { testHeader } = elements;
+
+  testHeader?.addEventListener('click', async () => {
+    const translations = await getHeaderTranslations();
+    console.log(translations);
+  });
+}
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;
 
-  newProducts?.addEventListener("click", () => {
-    const products = prompt("Provide products");
+  newProducts?.addEventListener('click', () => {
+    const products = prompt('Provide products');
     if (!products) {
       return Toastify({
-        text: "Input incorrect",
+        text: 'Input incorrect',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
@@ -31,20 +39,20 @@ export function setupProductsHandler(elements, setState, getState) {
     } catch (error) {
       console.log(error);
       Toastify({
-        text: "Products parse error: " + error.message,
+        text: 'Products parse error: ' + error.message,
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
       return;
     }
 
-    const selectedCampaign = getState("selectedCampaign");
-    const prev = localStorage.getItem("products");
+    const selectedCampaign = getState('selectedCampaign');
+    const prev = localStorage.getItem('products');
 
     try {
       const prevProducts = prev ? JSON.parse(prev) : [];
       const isProductsSetted = prevProducts.find(
-        (item) => item.campaign_id === selectedCampaign.startId,
+        (item) => item.campaign_id === selectedCampaign.startId
       );
 
       const normalizedProducts = normalizeProducts(newProductsData);
@@ -62,49 +70,39 @@ export function setupProductsHandler(elements, setState, getState) {
         });
 
         try {
-          localStorage.setItem("products", JSON.stringify(updatedProducts));
+          localStorage.setItem('products', JSON.stringify(updatedProducts));
           Toastify({
-            text: "Products successfully saved.",
+            text: 'Products successfully saved.',
             escapeMarkup: false,
             duration: 3000,
           }).showToast();
         } catch (error) {
-          handleStorageQuotaError(
-            error,
-            prevProducts,
-            selectedCampaign,
-            normalizedProducts,
-          );
+          handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
         }
       } else {
         try {
           localStorage.setItem(
-            "products",
+            'products',
             JSON.stringify([
               ...prevProducts,
               {
                 campaign_id: selectedCampaign.startId,
                 products: normalizedProducts,
               },
-            ]),
+            ])
           );
           Toastify({
-            text: "Products successfully saved.",
+            text: 'Products successfully saved.',
             escapeMarkup: false,
             duration: 3000,
           }).showToast();
         } catch (error) {
-          handleStorageQuotaError(
-            error,
-            prevProducts,
-            selectedCampaign,
-            normalizedProducts,
-          );
+          handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
         }
       }
     } catch (error) {
       Toastify({
-        text: "Products error: " + error.message,
+        text: 'Products error: ' + error.message,
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
@@ -115,11 +113,11 @@ export function setupProductsHandler(elements, setState, getState) {
 export function setupClearStorageHandler(elements) {
   const { clearStorage } = elements;
 
-  clearStorage?.addEventListener("click", () => {
-    if (confirm("All data will be removed from localstorage! Are you sure?")) {
+  clearStorage?.addEventListener('click', () => {
+    if (confirm('All data will be removed from localstorage! Are you sure?')) {
       localStorage.clear();
       Toastify({
-        text: "Storage has been cleared.",
+        text: 'Storage has been cleared.',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
@@ -130,18 +128,18 @@ export function setupClearStorageHandler(elements) {
 export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
   const { copyTemplate } = elements;
 
-  copyTemplate?.addEventListener("click", () => {
-    const html = getState("html");
+  copyTemplate?.addEventListener('click', () => {
+    const html = getState('html');
     if (!html) {
       Toastify({
-        text: "Render HTML.",
+        text: 'Render HTML.',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
       return;
     }
 
-    const config = getState("config");
+    const config = getState('config');
     if (config?.confetti) {
       jsConfetti.addConfetti({
         emojiSize: 20,
@@ -151,7 +149,7 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
 
     navigator.clipboard.writeText(html);
     Toastify({
-      text: "Template copied to clipboard",
+      text: 'Template copied to clipboard',
       escapeMarkup: false,
       duration: 3000,
     }).showToast();
@@ -161,9 +159,9 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
 export function setupOpenCampaignHandler(elements, getState) {
   const { openCampaign } = elements;
 
-  openCampaign?.addEventListener("click", () => {
-    const ids = getState("ids");
-    const country = getState("country");
+  openCampaign?.addEventListener('click', () => {
+    const ids = getState('ids');
+    const country = getState('country');
     openCampaignHandler(ids[country]);
   });
 }
@@ -171,11 +169,11 @@ export function setupOpenCampaignHandler(elements, getState) {
 export function setupOpenIssueHandler(elements, getState) {
   const { openIssue } = elements;
 
-  openIssue?.addEventListener("click", () => {
-    const selectedCampaign = getState("selectedCampaign");
+  openIssue?.addEventListener('click', () => {
+    const selectedCampaign = getState('selectedCampaign');
     if (!selectedCampaign.issueCardId) {
       Toastify({
-        text: "Select campaign.",
+        text: 'Select campaign.',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
@@ -188,11 +186,11 @@ export function setupOpenIssueHandler(elements, getState) {
 export function setupOpenFigmaHandler(elements, getState) {
   const { openFigma } = elements;
 
-  openFigma?.addEventListener("click", () => {
-    const selectedCampaign = getState("selectedCampaign");
+  openFigma?.addEventListener('click', () => {
+    const selectedCampaign = getState('selectedCampaign');
     if (!selectedCampaign.figmaUrl) {
       Toastify({
-        text: "Figma url not found.",
+        text: 'Figma url not found.',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
@@ -205,13 +203,13 @@ export function setupOpenFigmaHandler(elements, getState) {
 export function setupOpenLPHandler(elements, getState) {
   const { openLP } = elements;
 
-  openLP?.addEventListener("click", () => {
-    const selectedCampaign = getState("selectedCampaign");
-    const country = getState("country");
+  openLP?.addEventListener('click', () => {
+    const selectedCampaign = getState('selectedCampaign');
+    const country = getState('country');
 
     if (!selectedCampaign.lpId) {
       Toastify({
-        text: "You not selected campaign or not set LP id in app.js.",
+        text: 'You not selected campaign or not set LP id in app.js.',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
@@ -219,61 +217,61 @@ export function setupOpenLPHandler(elements, getState) {
     }
 
     const countryOrderOld = [
-      "CHDE",
-      "CHFR",
-      "UK",
-      "DE",
-      "FR",
-      "AT",
-      "ES",
-      "PL",
-      "NL",
-      "PT",
-      "IT",
-      "SE",
-      "HU",
-      "DK",
-      "CZ",
-      "FI",
-      "NO",
-      "SK",
-      "BENL",
-      "BEFR",
-      "RO",
+      'CHDE',
+      'CHFR',
+      'UK',
+      'DE',
+      'FR',
+      'AT',
+      'ES',
+      'PL',
+      'NL',
+      'PT',
+      'IT',
+      'SE',
+      'HU',
+      'DK',
+      'CZ',
+      'FI',
+      'NO',
+      'SK',
+      'BENL',
+      'BEFR',
+      'RO',
     ];
 
     const countryOrderNew = [
-      "CHDE",
-      "CHFR",
-      "UK",
-      "DE",
-      "FR",
-      "AT",
-      "ES",
-      "PL",
-      "NL",
-      "BENL",
-      "BEFR",
-      "PT",
-      "IT",
-      "SE",
-      "HU",
-      "DK",
-      "CZ",
-      "FI",
-      "NO",
-      "SK",
-      "RO",
+      'CHDE',
+      'CHFR',
+      'UK',
+      'DE',
+      'FR',
+      'AT',
+      'ES',
+      'PL',
+      'NL',
+      'BENL',
+      'BEFR',
+      'PT',
+      'IT',
+      'SE',
+      'HU',
+      'DK',
+      'CZ',
+      'FI',
+      'NO',
+      'SK',
+      'RO',
     ];
 
     const selectedCountryOrder =
-      selectedCampaign.version === "new" ? countryOrderNew : countryOrderOld;
+      selectedCampaign.version === 'new' ? countryOrderNew : countryOrderOld;
 
     const lpLinks = generateLpLinks(
       selectedCampaign.lpId,
       selectedCountryOrder,
       selectedCampaign.name,
-      selectedCampaign.specialLpIds,
+      selectedCampaign.specialLpIds
     );
 
     openLpHandler(lpLinks, country);
@@ -284,35 +282,36 @@ export function setupOpenLPHandler(elements, getState) {
 export function setupNewCampaignHandler(elements, campaigns) {
   const { newCampaign, selectCampaigns } = elements;
 
-  newCampaign?.addEventListener("click", () => {
+  newCampaign?.addEventListener('click', () => {
     openCreateCampaignModal((campaign) => {
       // Basic validation
       if (!campaign.startId || !campaign.name) {
-        Toastify({ text: "Campaign missing required fields", duration: 3000 }).showToast();
+        Toastify({
+          text: 'Campaign missing required fields',
+          duration: 3000,
+        }).showToast();
         return false; // signal error — keep modal open
       }
 
       // For now, just log the campaign to console instead of mutating files/UI
-      console.log("New campaign (preview):", campaign);
+      console.log('New campaign (preview):', campaign);
 
-      Toastify({ text: "Campaign preview logged to console.", duration: 2000 }).showToast();
+      Toastify({
+        text: 'Campaign preview logged to console.',
+        duration: 2000,
+      }).showToast();
       return true; // success — allow modal to close
     });
   });
 }
 
 // Helper function to handle storage quota errors
-function handleStorageQuotaError(
-  error,
-  prevProducts,
-  selectedCampaign,
-  normalizedProducts,
-) {
+function handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts) {
   const quotaExceededError = isQuotaExceededError(error);
   if (quotaExceededError) {
     const ids = prevProducts.map((item) => item.campaign_id);
     const deleteCampaignId = prompt(
-      "Memory exceeded, please enter startId to delete: " + ids.join(","),
+      'Memory exceeded, please enter startId to delete: ' + ids.join(',')
     );
 
     if (!deleteCampaignId) {
@@ -321,30 +320,28 @@ function handleStorageQuotaError(
 
     if (!ids.includes(deleteCampaignId)) {
       Toastify({
-        text: "Invalid campaign ID!",
+        text: 'Invalid campaign ID!',
         escapeMarkup: false,
         duration: 3000,
       }).showToast();
       return;
     }
 
-    const prevCampaigns = prevProducts.filter(
-      (item) => item.campaign_id !== deleteCampaignId,
-    );
+    const prevCampaigns = prevProducts.filter((item) => item.campaign_id !== deleteCampaignId);
 
     localStorage.setItem(
-      "products",
+      'products',
       JSON.stringify([
         ...prevCampaigns,
         {
           campaign_id: selectedCampaign.startId,
           products: normalizedProducts,
         },
-      ]),
+      ])
     );
 
     Toastify({
-      text: "Products successfully saved.",
+      text: 'Products successfully saved.',
       escapeMarkup: false,
       duration: 3000,
     }).showToast();

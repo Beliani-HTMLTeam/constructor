@@ -1,8 +1,8 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { getState } from "@main/state/appState";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { getState } from '@main/state/appState';
 
 export const Space = isAllowToRender((props) => {
-  const country = getState("country");
+  const country = getState('country');
   for (const item of props?.renderOn || []) {
     if (country in item) {
       props[item.field] = item[country];
@@ -10,14 +10,14 @@ export const Space = isAllowToRender((props) => {
   }
 
   if (props?.className === null) {
-    return "";
+    return '';
   }
 
   return `
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tbody>
         <tr>
-            <td class="${props?.className || "newsletterBottom35px"}">
+            <td class="${props?.className || 'newsletterBottom35px'}">
             </td>
         </tr>
     </tbody>

@@ -1,6 +1,7 @@
 {
+  "prettier.configPath": "./.prettierrc",
   // dont use live server, use vite
-  "liveServer.settings.port": 2137,
+  "liveServer.settings.port": 5500,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
     "**/node_modules": true
@@ -10,5 +11,11 @@
   "vite.autoStart": false,
   "vite.browserType": "system",
   "vite.buildCommand": "",
-  "vite.devCommand": "pnpm run start"
+  "vite.devCommand": "pnpm run start",
+	"conventionalCommits.autoCommit": false,
+	"conventionalCommits.lineBreak": "\\n",
+	"conventionalCommits.showEditor": true,
+	"editor.mouseWheelZoom": true,
+	"editor.autoIndentOnPaste": true,
+	"javascript.validate.enable": false,
 }

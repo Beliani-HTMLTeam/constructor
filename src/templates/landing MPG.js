@@ -1,5 +1,5 @@
-import { Footer } from "@/components/footer.js";
-import { Header } from "@/components/header.js";
+import { Footer } from '@/components/footer.js';
+import { Header } from '@/components/header.js';
 import {
   Line,
   Category,
@@ -11,7 +11,7 @@ import {
   Freebies,
   Product,
   ProductWithSize,
-} from "@/components/index.js";
+} from '@/components/index.js';
 
 export async function landing_MPG({
   links,
@@ -30,102 +30,90 @@ export async function landing_MPG({
   const categories = [
     {
       src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_04.jpg",
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_04.jpg',
       },
       href: getCategoryLink(
-        "https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/",
+        'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/'
       ),
     },
     {
       src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_05.jpg",
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_05.jpg',
+      },
+      href: getCategoryLink('https://www.beliani.ch/outdoor-furniture/garden-dining-sets/'),
+    },
+    {
+      src: {
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_06.jpg',
+      },
+      href: getCategoryLink('https://www.beliani.ch/outdoor-furniture/sun-loungers/'),
+    },
+    {
+      src: {
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_07.jpg',
+      },
+      href: getCategoryLink('https://www.beliani.ch/outdoor-furniture/storage-boxes/'),
+    },
+    {
+      src: {
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_08.jpg',
+      },
+      href: getCategoryLink('https://www.beliani.ch/outdoor-furniture/balcony-furniture/'),
+    },
+    {
+      src: {
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_09.jpg',
       },
       href: getCategoryLink(
-        "https://www.beliani.ch/outdoor-furniture/garden-dining-sets/",
+        'https://www.beliani.ch/garden-furniture/garden-accessories/pots-and-planters/'
       ),
     },
     {
       src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_06.jpg",
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_10.jpg',
       },
       href: getCategoryLink(
-        "https://www.beliani.ch/outdoor-furniture/sun-loungers/",
+        'https://www.beliani.ch/garden-furniture/garden-accessories/fire-pits/'
       ),
     },
     {
       src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_07.jpg",
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_11.jpg',
       },
-      href: getCategoryLink(
-        "https://www.beliani.ch/outdoor-furniture/storage-boxes/",
-      ),
+      href: getCategoryLink('https://www.beliani.ch/garden-furniture/parasols/'),
     },
     {
       src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_08.jpg",
+        type: 'relation',
+        relyOn: 'slug',
+        placeholderPosition: '45',
+        value: 'https://upload.pictureserver.net/static/2024/20240520_12.jpg',
       },
-      href: getCategoryLink(
-        "https://www.beliani.ch/outdoor-furniture/balcony-furniture/",
-      ),
-    },
-    {
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_09.jpg",
-      },
-      href: getCategoryLink(
-        "https://www.beliani.ch/garden-furniture/garden-accessories/pots-and-planters/",
-      ),
-    },
-    {
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_10.jpg",
-      },
-      href: getCategoryLink(
-        "https://www.beliani.ch/garden-furniture/garden-accessories/fire-pits/",
-      ),
-    },
-    {
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_11.jpg",
-      },
-      href: getCategoryLink(
-        "https://www.beliani.ch/garden-furniture/parasols/",
-      ),
-    },
-    {
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "45",
-        value: "https://upload.pictureserver.net/static/2024/20240520_12.jpg",
-      },
-      href: getCategoryLink(
-        "https://www.beliani.ch/garden-furniture/outdoor-textiles/",
-      ),
+      href: getCategoryLink('https://www.beliani.ch/garden-furniture/outdoor-textiles/'),
     },
   ];
 
@@ -173,7 +161,7 @@ export async function landing_MPG({
 
               <tr>
                 <td style="background-color: #ff2f00;">
-                  ${Space("newsletterBottom80px")}
+                  ${Space('newsletterBottom80px')}
                 </td>
               </tr>
 
@@ -193,7 +181,7 @@ export async function landing_MPG({
                             </tr>
                             `;
                             })
-                            .join("")}
+                            .join('')}
                       </tbody>
                   </table>
                 </td>
@@ -238,7 +226,7 @@ export async function landing_MPG({
                               <tr>
                                   <td align="left" class="newsletterBottom35px">
                                       <span class="newsletterFooterTitle">${getPhrase(
-                                        "Shop limited-time deals",
+                                        'Shop limited-time deals'
                                       )}</span>
                                   </td>
                               </tr>
@@ -270,120 +258,118 @@ export async function landing_MPG({
         {
           id,
           assembly: {
-            src: ["AT", "PL", "FR", "UK"].includes(country)
-              ? getFooter("Delivery src")
-              : getFooter("Asembly src"),
-            href: getFooter("Asembly href"),
-            exclude: ["SK", "CHIT", "SE", "NO", "FI", "BEFR", "BENL"].includes(
-              country,
-            ),
+            src: ['AT', 'PL', 'FR', 'UK'].includes(country)
+              ? getFooter('Delivery src')
+              : getFooter('Asembly src'),
+            href: getFooter('Asembly href'),
+            exclude: ['SK', 'CHIT', 'SE', 'NO', 'FI', 'BEFR', 'BENL'].includes(country),
           },
           workBanner: {
-            src: getFooter("Job src"),
-            href: getFooter("Job href"),
-            exclude: !["PL"].includes(country),
+            src: getFooter('Job src'),
+            href: getFooter('Job href'),
+            exclude: !['PL'].includes(country),
           },
           thousandsMore: {
-            title: getFooter("Title"),
+            title: getFooter('Title'),
             firstCategory: {
-              src: getFooter("Category src 1"),
-              href: getFooter("Category href 1"),
+              src: getFooter('Category src 1'),
+              href: getFooter('Category href 1'),
             },
             secondCategory: {
-              src: getFooter("Category src 2"),
-              href: getFooter("Category href 2"),
+              src: getFooter('Category src 2'),
+              href: getFooter('Category href 2'),
             },
             thirdCategory: {
-              src: getFooter("Category src 3"),
-              href: getFooter("Category href 3"),
+              src: getFooter('Category src 3'),
+              href: getFooter('Category href 3'),
             },
             foutrthCategory: {
-              src: getFooter("Category src 4"),
-              href: getFooter("Category href 4"),
+              src: getFooter('Category src 4'),
+              href: getFooter('Category href 4'),
             },
             fifthCategory: {
-              src: getFooter("Category src 5"),
-              href: getFooter("Category href 5"),
+              src: getFooter('Category src 5'),
+              href: getFooter('Category href 5'),
             },
             sixthCategory: {
-              src: getFooter("Category src 6"),
-              href: getFooter("Category href 6"),
+              src: getFooter('Category src 6'),
+              href: getFooter('Category href 6'),
             },
             seventhCategory: {
-              src: getFooter("Category src 7"),
-              href: getFooter("Category href 7"),
+              src: getFooter('Category src 7'),
+              href: getFooter('Category href 7'),
             },
             eigthCategory: {
-              src: getFooter("Category src 8"),
-              href: getFooter("Category href 8"),
+              src: getFooter('Category src 8'),
+              href: getFooter('Category href 8'),
             },
           },
           klarna: {
-            src: getFooter("Klarna src"),
-            href: getFooter("Klarna href"),
-            exclude: ["SK", "HU", "BEFR", "BENL"].includes(country),
+            src: getFooter('Klarna src'),
+            href: getFooter('Klarna href'),
+            exclude: ['SK', 'HU', 'BEFR', 'BENL'].includes(country),
           },
           socials: {
-            title: getFooter("Socials Title"),
+            title: getFooter('Socials Title'),
             instagram: {
-              src: getFooter("Instagram src"),
-              href: getFooter("Instagram href"),
+              src: getFooter('Instagram src'),
+              href: getFooter('Instagram href'),
             },
             facebook: {
-              src: getFooter("Facebook src"),
-              href: getFooter("Facebook href"),
+              src: getFooter('Facebook src'),
+              href: getFooter('Facebook href'),
             },
             youtube: {
-              src: getFooter("Youtube src"),
-              href: getFooter("Youtube href"),
+              src: getFooter('Youtube src'),
+              href: getFooter('Youtube href'),
             },
             pinterest: {
-              src: getFooter("Pinterest src"),
-              href: getFooter("Pinterest href"),
+              src: getFooter('Pinterest src'),
+              href: getFooter('Pinterest href'),
             },
             Xsocial: {
-              src: getFooter("X src"),
-              href: getFooter("X href"),
+              src: getFooter('X src'),
+              href: getFooter('X href'),
             },
             Tiktok: {
-              src: getFooter("Tiktok src"),
-              href: getFooter("Tiktok href"),
+              src: getFooter('Tiktok src'),
+              href: getFooter('Tiktok href'),
             },
           },
           advantages: {
             firstAdvantage: {
-              src: getFooter("Advantages src 1"),
-              href: getFooter("Advantages href 1"),
+              src: getFooter('Advantages src 1'),
+              href: getFooter('Advantages href 1'),
             },
             secondAdvantage: {
-              src: getFooter("Advantages src 2"),
-              href: getFooter("Advantages href 2"),
+              src: getFooter('Advantages src 2'),
+              href: getFooter('Advantages href 2'),
             },
             thirdAdvantage: {
-              src: getFooter("Advantages src 3"),
-              href: getFooter("Advantages href 3"),
+              src: getFooter('Advantages src 3'),
+              href: getFooter('Advantages href 3'),
             },
             fourthAdvantage: {
-              src: getFooter("Advantages src 4"),
-              href: getFooter("Advantages href 4"),
+              src: getFooter('Advantages src 4'),
+              href: getFooter('Advantages href 4'),
             },
           },
           conditions: {
-            conditionsTitle: getFooter("Conditions title"),
+            conditionsTitle: getFooter('Conditions title'),
             conditionsText: queries.condition,
           },
           companyDetails: {
-            title: getFooter("Company Details"),
-            address: getFooter("Address"),
-            mobileNumber: getFooter("Mobile number"),
-            emailAddress: getFooter("Email address"),
-            mailTo: getFooter("Mail to"),
-            email: getFooter("Email"),
-            commercialRegister: getFooter("Commercial register"),
-            vat: getFooter("VAT"),
+            title: getFooter('Company Details'),
+            address: getFooter('Address'),
+            mobileNumber: getFooter('Mobile number'),
+            emailAddress: getFooter('Email address'),
+            mailTo: getFooter('Mail to'),
+            email: getFooter('Email'),
+            commercialRegister: getFooter('Commercial register'),
+            vat: getFooter('VAT'),
           },
         },
-        { type },
+        { type }
       )}
     `;
 }

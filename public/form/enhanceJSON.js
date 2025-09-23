@@ -1,5 +1,5 @@
 export const enhanceJSON = () => {
-  const ids = ["specialLPIds"];
+  const ids = ['specialLPIds'];
 
   const debounce = (fn, wait = 300) => {
     let t;
@@ -22,22 +22,22 @@ export const enhanceJSON = () => {
     if (!ta) return;
 
     // Tab inserts two spaces (or a tab char) instead of moving focus
-    ta.addEventListener("keydown", (e) => {
-      if (e.key === "Tab") {
+    ta.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
         e.preventDefault();
         const start = ta.selectionStart;
         const end = ta.selectionEnd;
         const value = ta.value;
-        const insert = "  ";
+        const insert = '  ';
         ta.value = value.substring(0, start) + insert + value.substring(end);
         ta.selectionStart = ta.selectionEnd = start + insert.length;
       }
 
       // auto closing { [ ( " '
       const pairs = {
-        "{": "}",
-        "[": "]",
-        "(": ")",
+        '{': '}',
+        '[': ']',
+        '(': ')',
         '"': '"',
         "'": "'",
       };
@@ -50,21 +50,20 @@ export const enhanceJSON = () => {
         const close = pairs[e.key];
         const value = ta.value;
         // insert pair and place caret between
-        ta.value =
-          value.substring(0, start) + open + close + value.substring(end);
+        ta.value = value.substring(0, start) + open + close + value.substring(end);
         ta.selectionStart = ta.selectionEnd = start + 1;
       }
     });
 
     // Validate JSON on input (debounced)
     const mark = (valid) => {
-      if (valid) ta.classList.remove("json-invalid");
-      else ta.classList.add("json-invalid");
+      if (valid) ta.classList.remove('json-invalid');
+      else ta.classList.add('json-invalid');
     };
 
     const onInput = debounce(() => {
       const v = ta.value.trim();
-      if (v === "") {
+      if (v === '') {
         mark(true);
         return;
       }
@@ -72,7 +71,7 @@ export const enhanceJSON = () => {
       mark(ok);
     }, 350);
 
-    ta.addEventListener("input", onInput);
+    ta.addEventListener('input', onInput);
     // run initial validation
     onInput();
   };

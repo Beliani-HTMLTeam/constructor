@@ -1,4 +1,4 @@
-import { getState } from "@/main/state/appState";
+import { getState } from '@/main/state/appState';
 
 export const normalizeTranslations = (translations, fallbacks, range) => {
   // console.log(`translations: ${translations}`);
@@ -6,17 +6,16 @@ export const normalizeTranslations = (translations, fallbacks, range) => {
   // console.log(`range: ${range}`);
   // console.log("\n\n");
 
-  const config = getState("config");
-  if (!config || typeof config !== "object") {
+  const config = getState('config');
+  if (!config || typeof config !== 'object') {
     return Toastify({
-      text: "bledna konfiguracja",
+      text: 'bledna konfiguracja',
       duration: 3000,
     });
   }
 
   const emptyCellMessage =
-    config?.emptyCell(`Cell is empty for ${range}`) ||
-    `Translation undefined for ${range}`;
+    config?.emptyCell(`Cell is empty for ${range}`) || `Translation undefined for ${range}`;
 
   const translationsMapped = translations.map((item, idx) => {
     if (item.length !== 0) {
@@ -35,5 +34,5 @@ export const normalizeTranslations = (translations, fallbacks, range) => {
 
   return translationsMapped
     .flat()
-    .map((t) => (config?.replaceToBrs ? t.replaceAll("\n", "<br />") : t));
+    .map((t) => (config?.replaceToBrs ? t.replaceAll('\n', '<br />') : t));
 };

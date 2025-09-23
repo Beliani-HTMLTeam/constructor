@@ -1,26 +1,26 @@
 export class TableQueryCSV {
   tableId;
   tableName;
-  tableRange = "?majorDimension=COLUMNS";
+  tableRange = '?majorDimension=COLUMNS';
   name;
   fallback;
   tableColumns = false;
   constructor({ tableId, tableName, name, fallback }) {
     if (!tableId) {
-      throw new Error("tableId for TableQueryCSV not found");
+      throw new Error('tableId for TableQueryCSV not found');
     }
     if (!tableName) {
-      throw new Error("tableName for TableQueryCSV not found");
+      throw new Error('tableName for TableQueryCSV not found');
     }
     if (!name) {
-      throw new Error("name for TableQueryCSV not found");
+      throw new Error('name for TableQueryCSV not found');
     }
     if (
-      name === "templates" ||
-      name === "header" ||
-      name === "footer" ||
-      name === "categoriesLinks" ||
-      name === "categoriesTitles"
+      name === 'templates' ||
+      name === 'header' ||
+      name === 'footer' ||
+      name === 'categoriesLinks' ||
+      name === 'categoriesTitles'
     ) {
       this.tableId = tableId;
       this.tableName = tableName;
@@ -33,7 +33,7 @@ export class TableQueryCSV {
       return;
     }
     throw new Error(
-      "name property for TableQueryCSV can be: templates, header, footer, categoriesLinks, categoriesTitles",
+      'name property for TableQueryCSV can be: templates, header, footer, categoriesLinks, categoriesTitles'
     );
   }
 }

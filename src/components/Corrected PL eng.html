@@ -7,7 +7,7 @@
       font-size: 14px;
       color: #ffffff !important;
       cursor: pointer;
-      font-family: "Poppins";
+      font-family: 'Poppins';
       background-color: #750000;
       border-radius: 4px;
       transition-duration: 1s;
@@ -19,7 +19,7 @@
       font-size: 14px;
       color: #750000 !important;
       cursor: pointer;
-      font-family: "Poppins";
+      font-family: 'Poppins';
       background-color: #ffffff;
       border-radius: 4px;
       transition-duration: 1s;
@@ -46,15 +46,12 @@
 
   <h2 class="b-header2_semibold">Helpdesk & Orders</h2>
 
-  <p>
-    Please note that we sell exclusively online. We have no physical store or
-    showrooms.
-  </p>
+  <p>Please note that we sell exclusively online. We have no physical store or showrooms.</p>
 
   <p>
-    Would you like to place an order or ask about your <b>purchase</b>? You can
-    also contact us via phone, email or chat. If available, please prepare your
-    order number to help us process your request faster.
+    Would you like to place an order or ask about your <b>purchase</b>? You can also contact us via
+    phone, email or chat. If available, please prepare your order number to help us process your
+    request faster.
   </p>
 
   <p><b>E-Mail:</b> <a href="mailto:mail@beliani.pl">mail@beliani.pl</a></p>
@@ -71,8 +68,8 @@
     <script>
       function openChat() {
         window.open(
-          "https://app.chaport.com/widget/show.html?appid=63c661238998c327000fe701",
-          "_blank",
+          'https://app.chaport.com/widget/show.html?appid=63c661238998c327000fe701',
+          '_blank'
         );
       }
 
@@ -80,17 +77,17 @@
         var now = new Date();
         var hour = now.getHours();
         var dayOfWeek = now.getDay();
-        var button = document.getElementById("chat-button");
+        var button = document.getElementById('chat-button');
 
         if (dayOfWeek >= 1 && dayOfWeek <= 6 && hour >= 8 && hour < 18) {
-          button.innerText = "Chat now";
+          button.innerText = 'Chat now';
           button.disabled = false;
-          button.style.color = "white";
-          button.classList.add("green");
+          button.style.color = 'white';
+          button.classList.add('green');
         } else {
-          button.innerText = "Chat offline";
+          button.innerText = 'Chat offline';
           button.disabled = true;
-          button.classList.add("red");
+          button.classList.add('red');
         }
       }
 
@@ -104,12 +101,12 @@
       // Skrypt Chaport Live Chat
       (function (w, d, v3) {
         w.chaportConfig = {
-          appId: "63c661238998c327000fe701",
-          operators: ["649d35cc567e4030a039d936", "649d35e80d8b6b3074ef8193"],
+          appId: '63c661238998c327000fe701',
+          operators: ['649d35cc567e4030a039d936', '649d35e80d8b6b3074ef8193'],
           appearance: {
-            teamName: "Beliani UK",
-            onlineWelcome: "Welcome to Beliani. How can we help you?",
-            offlineWelcome: "Welcome to Beliani.",
+            teamName: 'Beliani UK',
+            onlineWelcome: 'Welcome to Beliani. How can we help you?',
+            offlineWelcome: 'Welcome to Beliani.',
           },
         };
 
@@ -138,11 +135,11 @@
         }
 
         function insertChaportScript() {
-          var s = d.createElement("script");
-          s.type = "text/javascript";
+          var s = d.createElement('script');
+          s.type = 'text/javascript';
           s.async = true;
-          s.src = "https://app.chaport.com/javascripts/insert.js";
-          var ss = d.getElementsByTagName("script")[0];
+          s.src = 'https://app.chaport.com/javascripts/insert.js';
+          var ss = d.getElementsByTagName('script')[0];
           ss.parentNode.insertBefore(s, ss);
         }
 
@@ -160,8 +157,8 @@
   <h2 class="b-header2_semibold">Marketing</h2>
 
   <p>
-    Would you like to <b>promote</b> our products? Feel free to contact us in
-    matters related to <b>promos, media, social media</b>, etc.
+    Would you like to <b>promote</b> our products? Feel free to contact us in matters related to
+    <b>promos, media, social media</b>, etc.
   </p>
 
   <p>
@@ -172,14 +169,13 @@
   <h2 class="b-header2_semibold">Become Our Supplier</h2>
 
   <p>
-    If you would like to become our supplier, get in touch with us using via
-    mail <a href="mailto:purchasing@beliani.com ">purchasing@beliani.com</a>.
+    If you would like to become our supplier, get in touch with us using via mail
+    <a href="mailto:purchasing@beliani.com ">purchasing@beliani.com</a>.
   </p>
 
   <p>
     To learn more about the whole process and our requirements, please see our
-    <a href="https://www.beliani.ch/content/how-to-become-supplier/ "
-      ><u>Supplier page</u></a
+    <a href="https://www.beliani.ch/content/how-to-become-supplier/ "><u>Supplier page</u></a
     >.
   </p>
 
@@ -194,9 +190,8 @@
 
   <p>
     Before returning the goods, please contact our
-    <a href="mailto:mail@beliani.pl "><u>Customer Service Department</u></a> to
-    generate a return number. Shipments without a return number affixed will not
-    be accepted.
+    <a href="mailto:mail@beliani.pl "><u>Customer Service Department</u></a> to generate a return
+    number. Shipments without a return number affixed will not be accepted.
   </p>
   <p>
     Please kindly read about our Return Policy in our <a

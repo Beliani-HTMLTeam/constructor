@@ -1,11 +1,11 @@
 export function Iterate({ items, lastItemFn, itemFn }) {
   if (!Array.isArray(items)) {
-    throw new Error("items properrty should be array -> []");
+    throw new Error('items properrty should be array -> []');
   }
 
   if (!itemFn) {
     throw new Error(
-      "itemFn properrty should be defined in template -> (element, index) => { return '' }",
+      "itemFn properrty should be defined in template -> (element, index) => { return '' }"
     );
   }
 
@@ -23,5 +23,5 @@ export function Iterate({ items, lastItemFn, itemFn }) {
     }
   }
 
-  return rows.join("");
+  return rows.join('');
 }

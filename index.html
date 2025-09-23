@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,6 +33,8 @@
           <img src="/icons/close.svg" class="svg-icon" />
         </div>
         <div class="upper_navigation">
+          <button id="header_translations">Header Translations</button>
+
           <div class="group">
             <div class="select-wrapper">
               <select class="select-select" id="campaigns">
@@ -106,15 +108,7 @@
 
         <div id="action_buttons" class="group">
           <button id="render_template">
-            <span
-              style="
-                width: 25px;
-                height: 24px;
-                line-height: 24px;
-                text-align: center;
-              "
-              >👷🏿</span
-            >
+            <span style="width: 25px; height: 24px; line-height: 24px; text-align: center">👷🏿</span>
             Render Template
           </button>
 
@@ -137,7 +131,7 @@
       --></div>
     </div>
 
-    <div id="formModal" class="modal-backdrop">
+    <div id="formModal" class="modal-backdrop" style="display: none">
       <div class="modal-content">
         <div class="modal-header">
           <div>

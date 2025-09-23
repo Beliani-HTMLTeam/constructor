@@ -1,4 +1,4 @@
-import { types } from "@utils/types.js";
+import { types } from '@utils/types.js';
 
 export function Header(sections, options) {
   const json_header = {
@@ -15,7 +15,7 @@ export function Header(sections, options) {
                   </p>`,
       },
       [types.LANDINGPAGE]: {
-        value: () => "",
+        value: () => '',
       },
     },
     paragraph: {
@@ -26,14 +26,12 @@ export function Header(sections, options) {
               </p>`,
       },
       [types.LANDINGPAGE]: {
-        value: () => "",
+        value: () => '',
       },
     },
     topImage: {
       [types.NEWSLETTER]: {
-        value: (
-          topImage,
-        ) => `<table align="center" cellspacing="0" cellpadding="0" border="0"
+        value: (topImage) => `<table align="center" cellspacing="0" cellpadding="0" border="0"
                     style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
@@ -47,7 +45,7 @@ export function Header(sections, options) {
                 </table>`,
       },
       [types.LANDINGPAGE]: {
-        value: () => "",
+        value: () => '',
       },
     },
     categories: {
@@ -77,13 +75,13 @@ export function Header(sections, options) {
                 </table>`,
       },
       [types.LANDINGPAGE]: {
-        value: () => "",
+        value: () => '',
       },
     },
     assembly: {
       [types.NEWSLETTER]: {
         value: (
-          assembly,
+          assembly
         ) => `<table align="center" cellspacing="0" cellpadding="0" border="0"  style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
@@ -98,7 +96,7 @@ export function Header(sections, options) {
       },
       [types.LANDINGPAGE]: {
         value: (
-          assembly,
+          assembly
         ) => `<table align="center" cellspacing="0" cellpadding="0" border="0"  style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
@@ -114,22 +112,22 @@ export function Header(sections, options) {
     },
   };
 
-  let html = "";
+  let html = '';
   for (const section in sections) {
     const elem = sections[section];
-    if (typeof elem !== "object") continue;
+    if (typeof elem !== 'object') continue;
 
     if (section in json_header) {
-      if (!("exclude" in elem)) {
+      if (!('exclude' in elem)) {
         const conditionalSections = {};
 
         for (const key in elem) {
           let element = elem[key];
           if (element === undefined) {
-            element = "";
+            element = '';
           }
 
-          if (typeof elem !== "object") {
+          if (typeof elem !== 'object') {
             conditionalSections[key] = element;
             continue;
           }
@@ -147,9 +145,9 @@ export function Header(sections, options) {
         for (const key in elem) {
           let element = elem[key];
           if (element === undefined) {
-            element = "";
+            element = '';
           }
-          if (typeof elem !== "object") {
+          if (typeof elem !== 'object') {
             conditionalSections[key] = element;
             continue;
           }
@@ -161,9 +159,7 @@ export function Header(sections, options) {
         html += json_header[section][options.type].value(conditionalSections);
       }
     } else {
-      throw new Error(
-        "Dodaj sekcje: " + section + ". Do json_header in Header.js",
-      );
+      throw new Error('Dodaj sekcje: ' + section + '. Do json_header in Header.js');
     }
   }
   return html;

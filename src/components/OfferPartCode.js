@@ -1,6 +1,6 @@
-import { Paragraph } from "./Paragraph.js";
-import { Space } from "./Space.js";
-import { GetCode } from "./getCode.js";
+import { Paragraph } from './Paragraph.js';
+import { Space } from './Space.js';
+import { GetCode } from './getCode.js';
 
 export function OfferPartCode({
   color,
@@ -19,17 +19,15 @@ export function OfferPartCode({
         ${
           new Paragraph({
             paragraph:
-              Array.isArray(data) && data[0]
-                ? data[0]
-                : paragraph1 || "Missing Offer - part 1",
-            align: "center",
+              Array.isArray(data) && data[0] ? data[0] : paragraph1 || 'Missing Offer - part 1',
+            align: 'center',
           }).htmlOutput
         }
       </td>
     </tr>
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
 
@@ -38,14 +36,14 @@ export function OfferPartCode({
            ${
              new Paragraph({
                paragraph: Array.isArray(data) && data[1] ? data[1] : paragraph2,
-               align: "center",
+               align: 'center',
              }).htmlOutput
            }
       </td>
     </tr>
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
 
@@ -53,7 +51,7 @@ export function OfferPartCode({
       <td >
         ${GetCode({
           color: color,
-          code: queries?.codeCTA || "Code tableQuery not found.",
+          code: queries?.codeCTA || 'Code tableQuery not found.',
           link: href,
           type,
         })}
@@ -62,7 +60,7 @@ export function OfferPartCode({
 
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
     
@@ -70,9 +68,8 @@ export function OfferPartCode({
       <td >
             ${
               new Paragraph({
-                paragraph:
-                  Array.isArray(data) && data[3] ? data[3] : paragraph3,
-                align: "center",
+                paragraph: Array.isArray(data) && data[3] ? data[3] : paragraph3,
+                align: 'center',
               }).htmlOutput
             }
       </td>
@@ -80,7 +77,7 @@ export function OfferPartCode({
 
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
     
@@ -88,8 +85,8 @@ export function OfferPartCode({
       <td >
         ${
           new Paragraph({
-            paragraph: getPhrase("Choose from:"),
-            align: "center",
+            paragraph: getPhrase('Choose from:'),
+            align: 'center',
             style: `color: ${color}`,
           }).htmlOutput
         }
@@ -102,17 +99,15 @@ export function OfferPartCode({
             ${
               new Paragraph({
                 paragraph:
-                  Array.isArray(data) && data[0]
-                    ? data[0]
-                    : paragraph1 || "Missing Offer - part 1",
-                align: "center",
+                  Array.isArray(data) && data[0] ? data[0] : paragraph1 || 'Missing Offer - part 1',
+                align: 'center',
               }).htmlOutput
             }
       </td>
     </tr>
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
 
@@ -121,14 +116,14 @@ export function OfferPartCode({
            ${
              new Paragraph({
                paragraph: Array.isArray(data) && data[1] ? data[1] : paragraph2,
-               align: "center",
+               align: 'center',
              }).htmlOutput
            }
       </td>
     </tr>
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
 
@@ -136,7 +131,7 @@ export function OfferPartCode({
       <td >
         ${GetCode({
           color: color,
-          code: queries?.code || "Code tableQuery not found.",
+          code: queries?.code || 'Code tableQuery not found.',
           link: href,
           type,
         })}
@@ -145,7 +140,7 @@ export function OfferPartCode({
 
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
     
@@ -153,9 +148,8 @@ export function OfferPartCode({
       <td >
             ${
               new Paragraph({
-                paragraph:
-                  Array.isArray(data) && data[3] ? data[3] : paragraph3,
-                align: "center",
+                paragraph: Array.isArray(data) && data[3] ? data[3] : paragraph3,
+                align: 'center',
               }).htmlOutput
             }
       </td>
@@ -163,7 +157,7 @@ export function OfferPartCode({
 
     <tr>
       <td >
-        ${Space({ className: "newsletterBottom35px" })}
+        ${Space({ className: 'newsletterBottom35px' })}
       </td>
     </tr>
     
@@ -171,8 +165,8 @@ export function OfferPartCode({
       <td >
         ${
           new Paragraph({
-            paragraph: getPhrase("Choose from:"),
-            align: "center",
+            paragraph: getPhrase('Choose from:'),
+            align: 'center',
             style: `color: ${color}`,
           }).htmlOutput
         }
@@ -181,7 +175,7 @@ export function OfferPartCode({
   `;
   return `
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
-    ${type === "newsletter" ? newsletter : landing}
+    ${type === 'newsletter' ? newsletter : landing}
   </table>
   `;
 }

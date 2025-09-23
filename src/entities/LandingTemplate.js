@@ -1,7 +1,7 @@
-import { TemplateLinks } from "@/entities/TemplateLinks.js";
+import { TemplateLinks } from '@/entities/TemplateLinks.js';
 
 function Template() {
-  return "Template not found.";
+  return 'Template not found.';
 }
 
 export class LandingTemplate {
@@ -11,10 +11,10 @@ export class LandingTemplate {
   links;
   tableQueries;
   template;
-  background = "#ffffff";
+  background = '#ffffff';
   constructor({ type, name, css, links, tableQueries, template, background }) {
     if (!(links instanceof TemplateLinks)) {
-      throw new Error("Please, use TemplateLinks to define links in Template.");
+      throw new Error('Please, use TemplateLinks to define links in Template.');
     }
     this.type = type;
     this.name = name;

@@ -1,5 +1,5 @@
-import { types } from "@utils/types.js";
-import { Line } from "@components/Line.js";
+import { types } from '@utils/types.js';
+import { Line } from '@components/Line.js';
 
 export function Footer(sections, options) {
   const id = sections.id;
@@ -342,15 +342,7 @@ export function Footer(sections, options) {
     },
     socials: {
       [types.NEWSLETTER]: {
-        value: ({
-          title,
-          instagram,
-          facebook,
-          youtube,
-          pinterest,
-          Xsocial,
-          Tiktok,
-        }) => {
+        value: ({ title, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => {
           return `
             <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
             <tbody>
@@ -406,8 +398,7 @@ export function Footer(sections, options) {
                                                         </a>
                                                     </td>
                                                     ${
-                                                      youtube.href &&
-                                                      youtube.src
+                                                      youtube.href && youtube.src
                                                         ? `
                                                         <td class="newsletterSocialIcon">
                                                             <a
@@ -418,7 +409,7 @@ export function Footer(sections, options) {
                                                             </a>
                                                         </td>
                                                         `
-                                                        : ""
+                                                        : ''
                                                     }
                                                     <td class="newsletterSocialIcon">
                                                         <a
@@ -444,7 +435,7 @@ export function Footer(sections, options) {
                                                             </a>
                                                         </td>   
                                                         `
-                                                        : ""
+                                                        : ''
                                                     }
                                                     ${
                                                       Tiktok
@@ -458,7 +449,7 @@ export function Footer(sections, options) {
                                                             </a>
                                                         </td>   
                                                         `
-                                                        : ""
+                                                        : ''
                                                     }
                                                 </tr>
                                             </tbody>
@@ -475,15 +466,7 @@ export function Footer(sections, options) {
         },
       },
       [types.LANDINGPAGE]: {
-        value: ({
-          title,
-          instagram,
-          facebook,
-          youtube,
-          pinterest,
-          Xsocial,
-          Tiktok,
-        }) => `
+        value: ({ title, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => `
         <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
@@ -515,9 +498,7 @@ export function Footer(sections, options) {
                                                 <tr>
                                                     <td class="newsletterSocialIcon">
                                                         <a
-                                                            href="${
-                                                              instagram.href
-                                                            }">
+                                                            href="${instagram.href}">
                                                             <img loading="lazy" src="${
                                                               instagram.src
                                                             }"
@@ -527,9 +508,7 @@ export function Footer(sections, options) {
                                                     </td>
                                                     <td class="newsletterSocialIcon">
                                                         <a
-                                                            href="${
-                                                              facebook.href
-                                                            }">
+                                                            href="${facebook.href}">
                                                             <img loading="lazy" src="${
                                                               facebook.src
                                                             }"
@@ -538,8 +517,7 @@ export function Footer(sections, options) {
                                                         </a>
                                                     </td>
                                                     ${
-                                                      youtube.href &&
-                                                      youtube.src
+                                                      youtube.href && youtube.src
                                                         ? `
                                                         <td class="newsletterSocialIcon">
                                                             <a
@@ -550,13 +528,11 @@ export function Footer(sections, options) {
                                                             </a>
                                                         </td>
                                                         `
-                                                        : ""
+                                                        : ''
                                                     }
                                                     <td class="newsletterSocialIcon">
                                                         <a
-                                                            href="${
-                                                              pinterest.href
-                                                            }">
+                                                            href="${pinterest.href}">
                                                             <img loading="lazy" src="${
                                                               pinterest.src
                                                             }"
@@ -576,7 +552,7 @@ export function Footer(sections, options) {
                                                             </a>
                                                         </td>   
                                                         `
-                                                        : ""
+                                                        : ''
                                                     }
                                                     ${
                                                       Tiktok
@@ -590,7 +566,7 @@ export function Footer(sections, options) {
                                                             </a>
                                                         </td>   
                                                         `
-                                                        : ""
+                                                        : ''
                                                     }
                                                 </tr>
                                             </tbody>
@@ -608,12 +584,7 @@ export function Footer(sections, options) {
     },
     advantages: {
       [types.NEWSLETTER]: {
-        value: ({
-          firstAdvantage,
-          secondAdvantage,
-          thirdAdvantage,
-          fourthAdvantage,
-        }) => {
+        value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
           return `
         <table cellspacing="0" class="newsletterContainer" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" >
             <tbody>
@@ -673,12 +644,7 @@ export function Footer(sections, options) {
         },
       },
       [types.LANDINGPAGE]: {
-        value: ({
-          firstAdvantage,
-          secondAdvantage,
-          thirdAdvantage,
-          fourthAdvantage,
-        }) => "",
+        value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => '',
       },
     },
     conditions: {
@@ -696,12 +662,12 @@ export function Footer(sections, options) {
                     <td class="newsletterTopBottomContainer" align="left">
                         <span class="newsletterConditions" style="color: #000000;">${conditionsTitle} ${
                           conditionsText.length === 2
-                            ? conditionsText[0] + " " + conditionsText[1]
+                            ? conditionsText[0] + ' ' + conditionsText[1]
                             : conditionsText.length === 3
                               ? conditionsText[0] +
-                                " " +
+                                ' ' +
                                 conditionsText[1] +
-                                " " +
+                                ' ' +
                                 conditionsText[2]
                               : conditionsText
                         }</span>
@@ -725,11 +691,11 @@ export function Footer(sections, options) {
                     <td class="newsletterTopBottomContainer" align="left">
                         <span class="newsletterConditions" style="color: #000000;">${conditionsTitle} ${
                           conditionsText.length === 5
-                            ? conditionsText[4] + " " + conditionsText[1]
+                            ? conditionsText[4] + ' ' + conditionsText[1]
                             : conditionsText.length === 4
-                              ? conditionsText[3] + " " + conditionsText[1]
+                              ? conditionsText[3] + ' ' + conditionsText[1]
                               : conditionsText.length === 3
-                                ? conditionsText[0] + " " + conditionsText[1]
+                                ? conditionsText[0] + ' ' + conditionsText[1]
                                 : conditionsText.length === 2
                                   ? conditionsText[0]
                                   : conditionsText[0]
@@ -781,26 +747,26 @@ export function Footer(sections, options) {
           email,
           commercialRegister,
           vat,
-        }) => "",
+        }) => '',
       },
     },
   };
 
-  let html = "";
+  let html = '';
   for (const section in sections) {
     const elem = sections[section];
-    if (typeof elem !== "object") continue;
+    if (typeof elem !== 'object') continue;
 
     if (section in json_footer) {
-      if (!("exclude" in elem)) {
+      if (!('exclude' in elem)) {
         const conditionalSections = {};
 
         for (const key in elem) {
-          const element = elem[key] || "";
+          const element = elem[key] || '';
           if (elem[key] === undefined) {
-            console.log("Value for " + key + " not found.");
+            console.log('Value for ' + key + ' not found.');
           }
-          if (typeof elem !== "object") {
+          if (typeof elem !== 'object') {
             conditionalSections[key] = element;
             continue;
           }
@@ -816,11 +782,11 @@ export function Footer(sections, options) {
         const conditionalSections = {};
 
         for (const key in elem) {
-          const element = elem[key] || "";
+          const element = elem[key] || '';
           if (elem[key] === undefined) {
-            console.log("Value for " + key + " not found.");
+            console.log('Value for ' + key + ' not found.');
           }
-          if (typeof elem !== "object") {
+          if (typeof elem !== 'object') {
             conditionalSections[key] = element;
             continue;
           }
@@ -832,9 +798,7 @@ export function Footer(sections, options) {
         html += json_footer[section][options.type].value(conditionalSections);
       }
     } else {
-      throw new Error(
-        "Dodaj sekcje: " + section + ". Do json_footer in Footer.js",
-      );
+      throw new Error('Dodaj sekcje: ' + section + '. Do json_footer in Footer.js');
     }
   }
   return html;

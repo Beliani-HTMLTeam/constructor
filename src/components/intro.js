@@ -1,6 +1,6 @@
-import { isAllowToRender } from "@helpers/optimizeImage.js";
-import { Space } from "./Space.js";
-import { Line } from "./index.js";
+import { isAllowToRender } from '@helpers/optimizeImage.js';
+import { Space } from './Space.js';
+import { Line } from './index.js';
 
 export const Intro = isAllowToRender(
   ({
@@ -8,15 +8,15 @@ export const Intro = isAllowToRender(
     paragraph,
     data,
     spaceClassName,
-    color = "#000000",
-    align = "left",
-    type = "title&paragraph",
+    color = '#000000',
+    align = 'left',
+    type = 'title&paragraph',
     idx,
     introLine,
     len,
     add_utm,
   }) => {
-    if (idx !== len) return ""; // Jeśli idx nie jest ostatnim elementem, zwracamy pusty string.
+    if (idx !== len) return ''; // Jeśli idx nie jest ostatnim elementem, zwracamy pusty string.
     console.log(data);
 
     const templates = {
@@ -26,15 +26,15 @@ export const Intro = isAllowToRender(
       </span>
     `,
 
-      "title&paragraph": `
+      'title&paragraph': `
 
       ${
         data
           ? `
-        <span class="${title?.className || "newsletterTitle"}" style="color: ${color}">
+        <span class="${title?.className || 'newsletterTitle'}" style="color: ${color}">
           ${data ? data[0] : title?.value}
         </span>`
-          : ""
+          : ''
       }
         ${Space({ className: spaceClassName })}
         <span class="newsletterParagraph" style="color: ${color}">
@@ -46,9 +46,9 @@ export const Intro = isAllowToRender(
         data && data[2]
           ? `${Space({ className: spaceClassName })}
        <span class="newsletterParagraph" style="color: ${color}">
-        ${data[3].replace("variable", add_utm(data[4]))}
+        ${data[3].replace('variable', add_utm(data[4]))}
       </span>`
-          : ""
+          : ''
       }
     `,
     };
@@ -58,11 +58,11 @@ export const Intro = isAllowToRender(
       <tbody>
         <tr>
           <td align="${align}">
-            ${templates[type] || ""}
+            ${templates[type] || ''}
           </td>
         </tr>
       </tbody>
     </table>
   `;
-  },
+  }
 );

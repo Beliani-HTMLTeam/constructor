@@ -1,10 +1,13 @@
 export function getDOMElements() {
-  const selectShop = document.querySelector("#shops");
-  const selectLanguage = document.querySelector("#languages");
-  const selectCampaigns = document.querySelector("#campaigns");
-  const selectTemplates = document.querySelector("#templates");
+  const testHeader = document.querySelector('#header_translations');
+  const selectShop = document.querySelector('#shops');
+  const selectLanguage = document.querySelector('#languages');
+  const selectCampaigns = document.querySelector('#campaigns');
+  const selectTemplates = document.querySelector('#templates');
 
   return {
+    testHeader,
+
     selectShop,
     selectShopWrapper: selectShop?.parentElement,
 
@@ -17,22 +20,22 @@ export function getDOMElements() {
     selectTemplates,
     selectTemplatesWrapper: selectTemplates?.parentElement,
 
-    newProducts: document.querySelector("#new_products"),
-    clearStorage: document.querySelector(".clearStorage"),
-    newCampaign: document.querySelector("#new_campaign"),
-    copyTemplate: document.querySelector(".copyTemplate"),
-    openCampaign: document.querySelector(".openCampaign"),
-    openIssue: document.querySelector(".openIssue"),
-    openFigma: document.querySelector(".figmaCard"),
-    openLP: document.querySelector(".openLP"),
+    newProducts: document.querySelector('#new_products'),
+    clearStorage: document.querySelector('.clearStorage'),
+    newCampaign: document.querySelector('#new_campaign'),
+    copyTemplate: document.querySelector('.copyTemplate'),
+    openCampaign: document.querySelector('.openCampaign'),
+    openIssue: document.querySelector('.openIssue'),
+    openFigma: document.querySelector('.figmaCard'),
+    openLP: document.querySelector('.openLP'),
 
     // Login button is handled separately in setupEventListeners
-    login: document.querySelector("#login"),
+    login: document.querySelector('#login'),
   };
 }
 
 export function createSelectOption(value, text, isDefault = false) {
-  const option = document.createElement("option");
+  const option = document.createElement('option');
   option.value = value;
   option.textContent = text;
   if (isDefault) {
@@ -41,15 +44,11 @@ export function createSelectOption(value, text, isDefault = false) {
   return option;
 }
 
-export function populateSelect(
-  selectElement,
-  items,
-  defaultText = "Select option",
-) {
-  selectElement.innerHTML = "";
+export function populateSelect(selectElement, items, defaultText = 'Select option') {
+  selectElement.innerHTML = '';
 
   // Add default option
-  const defaultOption = createSelectOption("default", defaultText, true);
+  const defaultOption = createSelectOption('default', defaultText, true);
   selectElement.appendChild(defaultOption);
 
   // Add items
@@ -61,7 +60,7 @@ export function populateSelect(
 
 export function toggleElementDisplay(element, show = true) {
   if (element) {
-    element.style.display = show ? "inherit" : "none";
+    element.style.display = show ? 'inherit' : 'none';
   }
 }
 

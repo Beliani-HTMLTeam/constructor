@@ -1,10 +1,10 @@
-import { GetCode } from "./getCode.js";
+import { GetCode } from './getCode.js';
 
 export function OfferPartCodes({ offerParts, type }) {
   function newsletterIntro(item, i) {
     return `
     ${
-      "title" in item
+      'title' in item
         ? `
         <tr>
             <td align="center">
@@ -14,25 +14,23 @@ export function OfferPartCodes({ offerParts, type }) {
             </td>
         </tr>
         `
-        : ""
+        : ''
     }
     ${
-      "paragraph" in item
+      'paragraph' in item
         ? `
         <tr>
-            <td align="center" ${
-              offerParts.length - 1 !== i ? 'class="newsletterBottom35px"' : ""
-            }>
+            <td align="center" ${offerParts.length - 1 !== i ? 'class="newsletterBottom35px"' : ''}>
                 <span class="newsletterParagraph">
                     ${item.paragraph}
                 </span>
             </td>
         </tr>
         `
-        : ""
+        : ''
     }
     ${
-      "code" in item && item.type === "newsletter"
+      'code' in item && item.type === 'newsletter'
         ? `
           <tr>
             <td class="newsletterBottom35px">
@@ -44,7 +42,7 @@ export function OfferPartCodes({ offerParts, type }) {
             </td>
           </tr>
         `
-        : ""
+        : ''
     }
     `;
   }
@@ -52,7 +50,7 @@ export function OfferPartCodes({ offerParts, type }) {
   function landingIntro(item, i) {
     return `
     ${
-      "title" in item
+      'title' in item
         ? `
         <tr>
             <td align="center">
@@ -62,17 +60,17 @@ export function OfferPartCodes({ offerParts, type }) {
             </td>
         </tr>
         `
-        : ""
+        : ''
     }
     ${
-      "paragraph" in item
+      'paragraph' in item
         ? `
         <tr>
             <td align="center" ${
               item?.class
                 ? `class='${item.class}'`
                 : offerParts.length - 1 === i
-                  ? ""
+                  ? ''
                   : 'class="newsletterBottom20px"'
             }>
                 <span class="newsletterParagraph">
@@ -81,10 +79,10 @@ export function OfferPartCodes({ offerParts, type }) {
             </td>
         </tr>
         `
-        : ""
+        : ''
     }
     ${
-      "code" in item && item.type === "landing"
+      'code' in item && item.type === 'landing'
         ? `
           <tr>
             <td class="newsletterBottom35px">
@@ -96,7 +94,7 @@ export function OfferPartCodes({ offerParts, type }) {
             </td>
           </tr>
         `
-        : ""
+        : ''
     }
     `;
   }
@@ -106,15 +104,15 @@ export function OfferPartCodes({ offerParts, type }) {
         <tbody>
           ${offerParts
             .map((item, i) => {
-              if (type === "newsletter") {
+              if (type === 'newsletter') {
                 return newsletterIntro(item, i);
               }
 
-              if (type === "landing") {
+              if (type === 'landing') {
                 return landingIntro(item, i);
               }
             })
-            .join("")}
+            .join('')}
         </tbody>
     </table>
     `;

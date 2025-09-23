@@ -1,16 +1,7 @@
-import { Space } from "./Space.js";
+import { Space } from './Space.js';
 
-export const Timer = ({
-  title,
-  subtitle,
-  href,
-  imageSrc,
-  cta,
-  type,
-  insidehref,
-  insidesrc,
-}) => {
-  if (type === "gif_on_the_left_side") {
+export const Timer = ({ title, subtitle, href, imageSrc, cta, type, insidehref, insidesrc }) => {
+  if (type === 'gif_on_the_left_side') {
     return `
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
@@ -24,13 +15,13 @@ export const Timer = ({
                             ${title}
                         </span>
 
-                        ${Space({ className: "newsletterBottom60px" })}
+                        ${Space({ className: 'newsletterBottom60px' })}
             
                         <a href=${href}>
                             <img src="${imageSrc}" style="display: block; max-width: 100%;">
                         </a>
 
-                        ${Space({ className: "newsletterBottom60px" })}
+                        ${Space({ className: 'newsletterBottom60px' })}
 
                         <a href="${href}" style="color:#fff; text-decoration: underline;">
                             <span class="newsletterCta">${cta}</span>
@@ -45,7 +36,7 @@ export const Timer = ({
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
             <tr>
                 <td align="center" style="color: #000000">
-                    ${Space({ className: "newsletterBottom10px" })}
+                    ${Space({ className: 'newsletterBottom10px' })}
                 </td>
             </tr>
             <tr>
@@ -64,7 +55,7 @@ export const Timer = ({
             </tr>
             <tr>
                 <td align="center" style="color: #000000">
-                    ${Space({ className: "newsletterBottom20px" })}
+                    ${Space({ className: 'newsletterBottom20px' })}
                 </td>
             </tr>
             <tr>
@@ -76,7 +67,7 @@ export const Timer = ({
             </tr>
             <tr>
                 <td align="center" style="color: #000000">
-                    ${Space({ className: "newsletterBottom20px" })}
+                    ${Space({ className: 'newsletterBottom20px' })}
                 </td>
             </tr>
             <tr>
@@ -88,7 +79,7 @@ export const Timer = ({
             </tr>
             <tr>
             <td align="center" style="color: #000000">
-                    ${Space({ className: "newsletterBottom20px" })}
+                    ${Space({ className: 'newsletterBottom20px' })}
                 </td>
             </tr>
             <tr>
