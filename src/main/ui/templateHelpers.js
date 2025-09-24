@@ -1,5 +1,6 @@
-import Toastify from 'toastify-js';
 import { showElements, hideElements } from '@/utils/domUtils.js';
+
+import toast from '@/helpers/toastManager.js';
 
 export function createSetSelectedTemplate(elements, setState, getState) {
   const { newProducts, openCampaign } = elements;
@@ -10,14 +11,7 @@ export function createSetSelectedTemplate(elements, setState, getState) {
       (template) => template.type + '_' + template.name === ev.target.value
     );
 
-    if (!selectedTemplate) {
-      Toastify({
-        text: `Template ${ev.target.value} not found.`,
-        escapeMarkup: false,
-        duration: 3000,
-      }).showToast();
-      return;
-    }
+    if (!selectedTemplate) return toast({ message: `Template ${ev.target.value} not found.` });
 
     // Show/hide elements based on template type
     showElements(newProducts);

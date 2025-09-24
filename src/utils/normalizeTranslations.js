@@ -1,5 +1,7 @@
 import { getState } from '@/main/state/appState';
 
+import toast from '@/helpers/toastManager.js';
+
 export const normalizeTranslations = (translations, fallbacks, range) => {
   // console.log(`translations: ${translations}`);
   // console.log(`fallbacks: ${fallbacks}`);
@@ -8,9 +10,8 @@ export const normalizeTranslations = (translations, fallbacks, range) => {
 
   const config = getState('config');
   if (!config || typeof config !== 'object') {
-    return Toastify({
-      text: 'bledna konfiguracja',
-      duration: 3000,
+    return toast({
+      message: 'Invalid config object in app state.',
     });
   }
 

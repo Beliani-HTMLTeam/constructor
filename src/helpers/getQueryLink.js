@@ -1,6 +1,8 @@
 import { getState } from '@/main/state/appState';
 import { computeValue } from '@/helpers/computeValue.js';
-import Toastify from 'toastify-js';
+
+import toast from '@/helpers/toastManager.js';
+
 export function addParams({ links }) {
   const country = getState('country');
   const template = getState('template');
@@ -48,11 +50,8 @@ export function addParamsProduct(product) {
       href: url.href,
     };
   } catch (error) {
-    Toastify({
-      text: 'Product url parse error.',
-      escapeMarkup: false,
-      duration: 3000,
-    }).showToast();
+    toast({ message: 'Product url parse error.\nCheck console for details!' });
+    console.error(error.message);
     return;
   }
 }
@@ -89,30 +88,31 @@ export function getQueryLink(item) {
   const queryLink = new URL(item.href);
 
   // Category query doesn't work properly.
-  if (false) {
-    for (const [key, value] of item.searchParams.entries()) {
-      // Get filter name
-      const filterItem = filterNames.find((filter) => filter.title === key);
-      if (!filterItem) {
-        throw new Error(`Filter ${key} not found.`);
-      }
-      const filterName = filterItem.data[relativeLanguageToCountry[country]];
+  // todo: check what it does and fix it in the "free" time
+  // if (false) {
+  //   for (const [key, value] of item.searchParams.entries()) {
+  //     // Get filter name
+  //     const filterItem = filterNames.find((filter) => filter.title === key);
+  //     if (!filterItem) {
+  //       throw new Error(`Filter ${key} not found.`);
+  //     }
+  //     const filterName = filterItem.data[relativeLanguageToCountry[country]];
 
-      const allFilters = item.searchParams.get(key).split(',');
+  //     const allFilters = item.searchParams.get(key).split(',');
 
-      queryLink.searchParams.delete(key, value);
-      const collectFilters = [];
-      allFilters.forEach((filterTitle) => {
-        const filterItem = filterValues.find((filter) => filter.title === filterTitle);
-        const filterValue = filterItem.data[relativeLanguageToCountry[country]];
-        collectFilters.push(handleSpace(handleSpecialCharacters(filterValue)));
-      });
-      queryLink.searchParams.append(
-        handleSpace(handleSpecialCharacters(filterName)),
-        collectFilters.join(',')
-      );
-    }
-  }
+  //     queryLink.searchParams.delete(key, value);
+  //     const collectFilters = [];
+  //     allFilters.forEach((filterTitle) => {
+  //       const filterItem = filterValues.find((filter) => filter.title === filterTitle);
+  //       const filterValue = filterItem.data[relativeLanguageToCountry[country]];
+  //       collectFilters.push(handleSpace(handleSpecialCharacters(filterValue)));
+  //     });
+  //     queryLink.searchParams.append(
+  //       handleSpace(handleSpecialCharacters(filterName)),
+  //       collectFilters.join(',')
+  //     );
+  //   }
+  // }
   if (template.type === 'newsletter') {
     queryLink.searchParams.set('utm_source', 'newsletter');
     queryLink.searchParams.set('utm_medium', 'email');
@@ -187,6 +187,8 @@ function handleSpecialCharacters(filterValue) {
   return string;
 }
 
+// https://www.prologistics.info/api/sa_contents/list
+// https://www.prologistics.info/api/sa_contents/get/?id=545
 const filterNames = [
   {
     title: 'Material',

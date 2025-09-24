@@ -4,7 +4,7 @@ import { setState, getState } from '@/main/state/appState.js';
 import { initCampaigns } from '@/main/initCampaigns.js';
 import { GoogleAuth } from '@/services/GoogleAuth.js';
 import { renderTemplate } from '@/main/rendering/templateRenderer.js';
-import initStaticTranslations from '@/translations-api/getStaticTranslations';
+import initStaticTranslations from '@/translations-api/getTranslations';
 
 import {
   setupSelectCampaigns,

@@ -1,11 +1,14 @@
 import { getState } from '@/main/state/appState';
 import { adjustTableRangeToCountry } from '@/utils/fixRange.js';
 import { normalizeTranslations } from '@/utils/normalizeTranslations.js';
-import { getDynamicTranslation } from '@/translations-api/getStaticTranslations';
+import { getDynamicTranslation } from '@/translations-api/getTranslations';
 import { GoogleAuth } from '@/services/GoogleAuth.js';
-import Toastify from 'toastify-js';
+
+import toast from '@/helpers/toastManager.js';
+
 export const fetchTranslations = async ({ tableQueries }) => {
-  console.log(tableQueries)
+  // debug log table queries to see what we are working with
+  // console.log(tableQueries);
 
   let slug = getState('country');
   slug = String(slug).toUpperCase();
@@ -17,11 +20,16 @@ export const fetchTranslations = async ({ tableQueries }) => {
 
   for (const query of tableQueries) {
     if (!query.tableName || !query.name || !query.tableRange) {
+      toast({ message: `Table Name/Range or field name missing for ${JSON.stringify(query)}` });
       console.error(`Table Name/Range or field name missing for ${JSON.stringify(query)}`);
       continue;
     }
 
-    const res = await getDynamicTranslation({ tab: String(query.tableName).replace("!", ""), range: query.tableRange });
+    const res = await getDynamicTranslation({
+      // replace ! to mantain backward compatibility (old names had trailing exclamation mark)
+      tab: String(query.tableName).replace('!', ''),
+      range: query.tableRange,
+    });
     const data = res.data;
 
     if (data && data[slug]) {
@@ -29,16 +37,18 @@ export const fetchTranslations = async ({ tableQueries }) => {
     }
   }
 
-  console.log(translations)
+  // debug log final translations object
+  // console.log(translations);
 
   // Convert translations object to the expected array format
   const result = Object.entries(translations).map(([name, data]) => ({
     name,
-    data
+    data,
   }));
 
   return result;
 
+  // old implementation @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   // const tableColumn = shop.languages.find((item) => item.language.name === name);
 
   // if (!tableColumn.tableColumn) {
@@ -71,7 +81,7 @@ export const fetchTranslations = async ({ tableQueries }) => {
   //   //       ]
   //   //   ],
   //   //   "name": "cta"
-  //   // } 
+  //   // }
   //   // console.log(value);
 
   //   if (value.error) {
@@ -114,6 +124,7 @@ export const fetchTranslations = async ({ tableQueries }) => {
   // return computedPromise;
 };
 
+// old implementation using google apis directly @@@@@@@
 export async function getTranslations({ tableId, tableName, tableRange, fallback, name }) {
   const token = localStorage.getItem('token');
   // includeGridData

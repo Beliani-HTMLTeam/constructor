@@ -1,13 +1,16 @@
 import { handleProduct } from '@/main/handlers/index.js';
 import { getQueryLink } from '@/helpers/getQueryLink.js';
 import { getState } from '@/main/state/appState';
+import { staticTranslations } from '@/translations-api/getTranslations';
+
 import _templates from '@/main/data/templates.js';
 import _categoriesLinks from '@/main/data/categoriesLinks.js';
 import _categoriesTitles from '@/main/data/categoriesTitles.js';
 import _header from '@/main/data/header.js';
 import _footer from '@/main/data/footer.js';
-import Toastify from 'toastify-js';
-import { staticTranslations } from '@/translations-api/getStaticTranslations';
+
+import toast from '@/helpers/toastManager.js';
+
 export class TemplateHandlers {
   isCalled = false;
   constructor({ products, categoriesLinks, categoriesTitles, footer, header, templates }) {
@@ -22,12 +25,10 @@ export class TemplateHandlers {
   getProductById = (productId, src, options) => {
     if (!this.isCalled && !this.products) {
       this.isCalled = true;
-      Toastify({
-        text: 'Set products for campaign.',
-        escapeMarkup: false,
-        duration: 3000,
-      }).showToast();
+
+      return toast({ message: 'Products not found, add products to the campaign.' });
     }
+
     const country = getState('country');
     const shop = getState('shop');
     const languageHREF = shop.languages.find((item) => item.language.slug === country);
@@ -42,7 +43,7 @@ export class TemplateHandlers {
 
     if (!product) {
       return {
-        name: `Product ${productId} not found`,
+        name: `Product not found [id: ${productId}]`,
         lowPrice: '00.00',
         highPrice: '00.00',
         src: src,
@@ -107,11 +108,11 @@ export class TemplateHandlers {
         partsTranslations.push(translation);
       } else {
         partsTranslations.push(item);
-        Toastify({
-          text: `Category ${item} not found in translations!\nCheck console for further help.`,
-          escapeMarkup: false,
-          duration: 3000,
-        }).showToast();
+
+        toast({
+          message: `Couldn't find translations for '${item}' category!\nCheck console for details.`,
+        });
+
         console.log('This category part was not found in translations:');
         console.log(
           'https://docs.google.com/spreadsheets/d/1Y9blxN4paEV05s6AvdWmH5fBELTUvDz3ax5skmgVrsQ/edit?gid=0#gid=0'

@@ -1,4 +1,3 @@
-import Toastify from 'toastify-js';
 import { addParams } from '@/helpers/getQueryLink.js';
 import { TemplateHandlers } from '@/main/handlers/handlers.js';
 import { wrapTemplate } from '@/helpers/wrapTemplate.js';
@@ -7,6 +6,9 @@ import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { computeValue } from '@/helpers/computeValue.js';
 import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
 import { root } from '@/app.js';
+
+import toast from '@/helpers/toastManager.js';
+
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;
 
@@ -14,46 +16,31 @@ export async function renderTemplate(getState, setState) {
   const templateToRender = getState('template');
   const selectedCampaign = getState('selectedCampaign');
 
-  if (!selectedCampaign) {
-    Toastify({
-      text: 'Select campaign.',
-      escapeMarkup: false,
-      duration: 3000,
-    }).showToast();
-    return;
-  }
+  if (!selectedCampaign) return toast({ message: 'No campaign selected.' });
 
-  if (!templateToRender) {
-    Toastify({
-      text: 'Select template.',
-      escapeMarkup: false,
-      duration: 3000,
-    }).showToast();
-    return;
-  }
+  if (!templateToRender) return toast({ message: 'No template selected.' });
 
   // Handle translations if needed
   if (!selectedCampaign.data && templateToRender.tableQueries.length > 0) {
     try {
       setState('loading', true);
+
       const translationsResult = await fetchTranslations({
         tableQueries: templateToRender.tableQueries,
       });
+
       const queries = {};
       for (const translation of translationsResult) {
         queries[translation.name] = translation.data;
       }
+
       setState('loading', false);
       setState('queries', queries);
     } catch (error) {
       setState('loading', false);
-      console.log(error);
-      Toastify({
-        text: error,
-        escapeMarkup: false,
-        duration: 3000,
-      }).showToast();
-      return;
+      console.error(error);
+
+      return toast({ message: 'Something went wrong. More details in console.' });
     }
   }
 
@@ -63,6 +50,7 @@ export async function renderTemplate(getState, setState) {
     for (const translation of templateToRender.tableQueries) {
       queries[translation.name] = translation.fallback;
     }
+
     setState('queries', queries);
   }
 
@@ -72,12 +60,9 @@ export async function renderTemplate(getState, setState) {
     if (country in selectedCampaign.data) {
       slugData = selectedCampaign.data[country] || {};
     } else {
-      Toastify({
-        text: `Country ${country} not found in campaign data. For ${selectedCampaign.name}.`,
-        escapeMarkup: false,
-        duration: 3000,
-      }).showToast();
-      return;
+      return toast({
+        message: `Country ${country} not found in the ${selectedCampaign.name} campaign data.`,
+      });
     }
   }
 
@@ -89,8 +74,8 @@ export async function renderTemplate(getState, setState) {
   const parsedProducts = localProducts
     ? normalizeProducts(localProducts)
     : LSProducts
-      ? JSON.parse(LSProducts)
-      : [];
+    ? JSON.parse(LSProducts)
+    : [];
   const campaignProducts = localProducts
     ? parsedProducts
     : parsedProducts.find((item) => item.campaign_id === getState('selectedCampaign').startId);
@@ -166,21 +151,16 @@ export async function renderTemplate(getState, setState) {
       if (confirm('Do you want to render template with undefined value?')) {
         return (root.innerHTML = withStylesOrNo);
       } else {
-        Toastify({
-          text: 'Error rendering. HTML code has undefined value.',
-          escapeMarkup: false,
-          duration: 3000,
-        }).showToast();
+        toast({
+          message:
+            'Rendering cancelled. Check campaign file, template or products list for mistakes!',
+        });
       }
     } else {
       root.innerHTML = withStylesOrNo;
     }
   } catch (error) {
     console.log(error);
-    Toastify({
-      text: 'Please check console. ' + error.message,
-      escapeMarkup: false,
-      duration: 3000,
-    }).showToast();
+    toast({ message: 'Something went wrong. More details in console.' });
   }
 }
