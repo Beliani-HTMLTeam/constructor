@@ -46,7 +46,6 @@ table {
 #newsletter .newsletterCta {
   font-size: 20px;
   line-height: 1.2;
-  font-weight: 600;
 }
 
 #newsletter .newsletterCode {
@@ -74,16 +73,19 @@ table {
 #newsletter .newsletterParagraph {
   font-size: 18px;
   line-height: 1.2;
+  font-weight: 400;
 }
 
 #newsletter .newsletterTitle {
   font-size: 30px;
   line-height: 1.2;
+  font-weight: 400;
 }
 
 #newsletter .newsletterTitleOfferPart {
   font-size: 30px;
-  line-height: 1.2;
+  line-height: 1;
+  font-weight: 400;
 }
 
 #newsletter .newsletterProductTitle {

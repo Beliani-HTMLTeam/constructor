@@ -53,13 +53,14 @@ img {
 .newsletterCode {
   font-size: 30px;
   line-height: 1.2;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
 }
 
 .newsletterCta {
   font-size: 20px;
   line-height: 1.2;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .newsletterBottom20px {
@@ -76,39 +77,41 @@ img {
 
 .newsletterParagraph {
   font-size: 18px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.2;
+  font-weight: 400;
 }
 
 .newsletterTitleOfferPart {
   font-size: 30px;
-  font-family: "Open Sans", sans-serif;
-  line-height: 1.2;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1;
+  font-weight: 400;
 }
 
 .newsletterTitle {
   font-size: 30px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .newsletterProductTitle {
   font-size: 20px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.2;
 }
 
 .newsletterProductLowPrice {
   font-size: 18px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.2;
   font-weight: 600;
 }
 
 .newsletterProductHightPrice {
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.2;
   text-decoration: line-through;
 }
@@ -130,7 +133,7 @@ img {
 
 .newsletterConditions {
   color: black;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 8px;
 }
 
@@ -140,7 +143,7 @@ img {
   padding-right: 0px;
   padding-bottom: 20px;
   font-size: 11px;
-  font-family: "Open Sans", sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
   color: #000000;
   background: #ececec;
   width: 100%;
@@ -149,13 +152,13 @@ img {
 .newsletterFooterTitle {
   text-align: left;
   color: #000000;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
 }
 
 .newsletterProductTitleFreebie {
   text-align: center;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
 }
 
