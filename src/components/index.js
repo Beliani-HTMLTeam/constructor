@@ -49,8 +49,10 @@ import { sCategory } from './secondcategory.js';
 import { BigProduct } from './bigProduct.js';
 import { ColumnsTwoPeak } from './ColumnsTwoPeak.js';
 import { shopNow } from './shopNow.js';
+import { CTA } from './CTA.js';
 
 export {
+  CTA,
   ProductWithSize,
   shopNow,
   ColumnsTwoPeak,

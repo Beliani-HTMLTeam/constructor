@@ -6,10 +6,7 @@ import { GoogleAuth } from '@/services/GoogleAuth.js';
 
 import toast from '@/helpers/toastManager.js';
 
-export const fetchTranslations = async ({ tableQueries }) => {
-  // debug log table queries to see what we are working with
-  // console.log(tableQueries);
-
+export const fetchTranslations = async ({ tableQueries, tableName }) => {
   let slug = getState('country');
   slug = String(slug).toUpperCase();
 
@@ -18,8 +15,13 @@ export const fetchTranslations = async ({ tableQueries }) => {
 
   let translations = {};
 
-  for (const query of tableQueries) {
-    if (!query.tableName || !query.name || !query.tableRange) {
+  for (let query of tableQueries) {
+    if (!query.tableName) {
+      query['tableName'] = tableName;
+      console.log(query);
+    }
+
+    if (!query.name || !query.tableRange) {
       toast({ message: `Table Name/Range or field name missing for ${JSON.stringify(query)}` });
       console.error(`Table Name/Range or field name missing for ${JSON.stringify(query)}`);
       continue;
@@ -36,9 +38,6 @@ export const fetchTranslations = async ({ tableQueries }) => {
       translations[query.name] = Object.values(data[slug]);
     }
   }
-
-  // debug log final translations object
-  // console.log(translations);
 
   // Convert translations object to the expected array format
   const result = Object.entries(translations).map(([name, data]) => ({

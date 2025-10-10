@@ -6,6 +6,7 @@ import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { computeValue } from '@/helpers/computeValue.js';
 import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
 import { root } from '@/app.js';
+import { getState, setState } from '@/main/state/appState';
 
 import toast from '@/helpers/toastManager.js';
 
@@ -14,6 +15,7 @@ export async function renderTemplate(getState, setState) {
 
   const country = getState('country');
   const templateToRender = getState('template');
+  const spreadsheet = templateToRender?.translationsSpreadsheet || null;
   const selectedCampaign = getState('selectedCampaign');
 
   if (!selectedCampaign) return toast({ message: 'No campaign selected.' });
@@ -27,6 +29,7 @@ export async function renderTemplate(getState, setState) {
 
       const translationsResult = await fetchTranslations({
         tableQueries: templateToRender.tableQueries,
+        tableName: spreadsheet
       });
 
       const queries = {};
@@ -40,7 +43,7 @@ export async function renderTemplate(getState, setState) {
       setState('loading', false);
       console.error(error);
 
-      return toast({ message: 'Something went wrong. More details in console.' });
+      toast({ message: 'Something went wrong. More details in console.' });
     }
   }
 
