@@ -59,6 +59,13 @@ export class TemplateHandlers {
     slug = String(slug).toLowerCase();
 
     const slugIndex = staticTranslations.category_titles.slug.findIndex((item) => item === slug);
+    
+    const keys = Object.keys(staticTranslations.category_titles);
+
+    if (!keys.includes(column)) {
+      toast({ message: `Nie znaleziono tlumaczenia dla ${column}` });
+      return undefined;
+    }
 
     const title = staticTranslations.category_titles[column][slugIndex];
 
