@@ -1,21 +1,24 @@
 import { isAllowToRender } from '../helpers/optimizeImage.js';
-import { ImageWithLink, Line, Paragraph, Product, Space, Title } from './index.js';
+import { ImageWithLink, Line, Paragraph, Product, Space, Title, WhiteLine } from './index.js';
 
 export const Category = isAllowToRender(
   ({
     name,
+    queries,
     name1,
     href,
     src,
     products,
     productImg,
     ctaComponent,
+    getPhrase,
     color,
     line,
     len,
     desc,
     idx,
     cta = 'CTA',
+    utm,
     type,
     align,
     size,
@@ -23,10 +26,86 @@ export const Category = isAllowToRender(
     lastbottomclass,
     img_class,
   }) => {
-    console.log(type);
+    // console.log(type);
 
     if (!type) {
       return 'Please specify type category.';
+    }
+
+    if (type === 'blackweek_toprated') {
+      return `
+        <tr>
+          <td class="newsletterBottom35px"></td>
+        </tr>
+
+        <tr>
+          <td>
+            ${Title({ title: queries['cats'][idx] ?? name, color: color, align: 'center', className: 'newsletterTitle' })}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="newsletterBottom35px"></td>
+        </tr>
+
+        <!--- Products --->
+        <tr>
+          <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
+            <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+              <tr>
+                <td>
+                  <!-- 1-2 Products table -->
+                  <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+                    <tr>
+                      <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
+                      <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
+                        ${Product(products[0], 'left', `color: ${color || '#000000'}`, false)}
+                      </td>
+                      <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
+                      <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
+                        ${Product(products[1], 'left', `color: ${color || '#000000'}`, false)}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+    
+        <tr>
+          <td class="newsletterBottom35px"></td>
+        </tr>
+
+        <tr>
+          <td>
+            <table cellspacing="0" cellpadding="0" border="0" align="center">
+              <tr>
+                <td width="100%" style="text-align: center; color: #FFFFFF; text-decoration: underline;">
+                  <a href="${href}" style="color: #FFFFFF; text-decoration: underline;">
+                      <span class="newsletterCta">${getPhrase('Shop now')}</span>
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="newsletterBottom80px">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        ${
+          idx !== len - 1 ? `
+          <tr>
+            <td class="newsletterContainer">
+              ${WhiteLine()}
+            </td>
+          </tr>
+          ` : ``
+        }
+        `
     }
 
     if (type === 'image_with_2_product') {
