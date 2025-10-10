@@ -4,7 +4,7 @@ export function WhiteLine(img = 'https://upload.pictureserver.net/static/2024/wh
         <tbody>
             <tr>
                 <td>
-                    <img src=${img} style="display:block" width="100%" alt="">
+                    <img src=${img} style="display:block" width="100%" alt="Line separator"/>
                 </td>
             </tr>
         </tbody>
