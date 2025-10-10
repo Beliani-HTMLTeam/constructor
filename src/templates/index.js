@@ -44,8 +44,10 @@ import { SideLP } from '@/templates/SideLP.js';
 import { mondayRegularNslt } from '@templates/mondayRegularNslt.js';
 import { fridayDziwnyNsltr } from '@templates/fridayDziwnyNsltr.js';
 import { product_of_the_month } from '@templates/product_of_the_month.js';
+import { Blackweek } from '@/templates/Blackweek.js'
 
 export const templates = {
+  Blackweek,
   newsletter_FGG,
   product_of_the_month,
   mondayRegularNslt,

@@ -16,13 +16,11 @@ export function OfferPartCode({
   const newsletter = `
     <tr>
       <td style="color: ${color}">
-        ${
-          new Paragraph({
-            paragraph:
-              Array.isArray(data) && data[0] ? data[0] : paragraph1 || 'Missing Offer - part 1',
-            align: 'center',
-          }).htmlOutput
-        }
+        ${Paragraph(
+          data ? data[0] : paragraph1 || 'Missing Offer - part 1',
+          'center',
+          `color: ${color}`
+        )}
       </td>
     </tr>
     <tr>
@@ -33,12 +31,7 @@ export function OfferPartCode({
 
     <tr>
       <td >
-           ${
-             new Paragraph({
-               paragraph: Array.isArray(data) && data[1] ? data[1] : paragraph2,
-               align: 'center',
-             }).htmlOutput
-           }
+        ${Paragraph(data ? data[1] : paragraph2, 'center', `color: ${color}`)}
       </td>
     </tr>
     <tr>
@@ -66,12 +59,7 @@ export function OfferPartCode({
     
     <tr>
       <td >
-            ${
-              new Paragraph({
-                paragraph: Array.isArray(data) && data[3] ? data[3] : paragraph3,
-                align: 'center',
-              }).htmlOutput
-            }
+        ${Paragraph(data ? data[3] : paragraph3, 'center', `color: ${color}`)}
       </td>
     </tr>
 
@@ -83,26 +71,14 @@ export function OfferPartCode({
     
     <tr>
       <td >
-        ${
-          new Paragraph({
-            paragraph: getPhrase('Choose from:'),
-            align: 'center',
-            style: `color: ${color}`,
-          }).htmlOutput
-        }
+        ${Paragraph(getPhrase('Choose from:'), 'center', `color: ${color}`)}
       </td>
     </tr>
   `;
   const landing = `
     <tr>
       <td >
-            ${
-              new Paragraph({
-                paragraph:
-                  Array.isArray(data) && data[0] ? data[0] : paragraph1 || 'Missing Offer - part 1',
-                align: 'center',
-              }).htmlOutput
-            }
+        ${Paragraph(data ? data[0] : paragraph1, 'center')}
       </td>
     </tr>
     <tr>
@@ -113,12 +89,7 @@ export function OfferPartCode({
 
     <tr>
       <td >
-           ${
-             new Paragraph({
-               paragraph: Array.isArray(data) && data[1] ? data[1] : paragraph2,
-               align: 'center',
-             }).htmlOutput
-           }
+        ${Paragraph(data ? data[1] : paragraph2, 'center')}
       </td>
     </tr>
     <tr>
@@ -146,12 +117,7 @@ export function OfferPartCode({
     
     <tr>
       <td >
-            ${
-              new Paragraph({
-                paragraph: Array.isArray(data) && data[3] ? data[3] : paragraph3,
-                align: 'center',
-              }).htmlOutput
-            }
+        ${Paragraph(data ? data[3] : paragraph3, 'center')}
       </td>
     </tr>
 
@@ -163,13 +129,7 @@ export function OfferPartCode({
     
     <tr>
       <td >
-        ${
-          new Paragraph({
-            paragraph: getPhrase('Choose from:'),
-            align: 'center',
-            style: `color: ${color}`,
-          }).htmlOutput
-        }
+        ${Paragraph(getPhrase('Choose from:'), 'center')}
       </td>
     </tr>
   `;

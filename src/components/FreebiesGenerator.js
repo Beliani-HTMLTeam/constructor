@@ -2,7 +2,7 @@ import { priceFree } from '@helpers/priceFree.js';
 import { Space } from './Space.js';
 import { Freebies } from './freebies.js';
 
-const FreebiesGenerator = ({ freebies, getProductById, color }) => {
+const FreebiesGenerator = ({ freebies, getProductById, color, intro }) => {
   return freebies
     .map((freebie, idx) => {
       return `
@@ -14,10 +14,9 @@ const FreebiesGenerator = ({ freebies, getProductById, color }) => {
           size: freebie.size,
           color: color,
         })}
-        ${Space({ className: 'newsletterBottom20px' })}
-        `;
+        ${!intro && idx === 1 ? '' : Space({ className: 'newsletterBottom20px' })}
+         `;
     })
     .join('');
 };
-
 export default FreebiesGenerator;

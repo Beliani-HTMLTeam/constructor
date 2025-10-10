@@ -15,15 +15,17 @@ export const Intro = isAllowToRender(
     introLine,
     len,
     add_utm,
+    selectCampaign,
   }) => {
     if (idx !== len) return ''; // Jeśli idx nie jest ostatnim elementem, zwracamy pusty string.
-    console.log(data);
 
     const templates = {
       paragraph: `
       <span class="newsletterParagraph" style="color: ${color}">
         ${data ? data[0] : paragraph}
       </span>
+
+      ${selectCampaign.date === '2025.10.06' ? Space({ className: 'newsletterBottom35px' }) : ''}
     `,
 
       'title&paragraph': `
@@ -40,6 +42,7 @@ export const Intro = isAllowToRender(
         <span class="newsletterParagraph" style="color: ${color}">
           ${data ? data[1] : paragraph}
         </span>
+        ${selectCampaign.date === '2025.09.29' ? Space({ className: 'newsletterBottom45px' }) : ''}
       
     <!-- data[2] if you need an additional paragraph with a link example watch 28/07/25 -->
       ${
@@ -52,6 +55,8 @@ export const Intro = isAllowToRender(
       }
     `,
     };
+
+    console.log(templates[type]);
 
     return `
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
