@@ -17,6 +17,8 @@ export default function initStaticTranslations() {
 
 initStaticTranslations();
 
+// todo: make alternative functions to get translations directly from Google Sheets API
+
 async function getStaticTranslation({ sheet }) {
   const url = `${c.api_url}static/${sheet}/`;
   const headers = {
