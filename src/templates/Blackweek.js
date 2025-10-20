@@ -119,7 +119,7 @@ export async function Blackweek({
       </tr>
       
       <tr>
-        <td style="background-color: ${OfferPart.backgroundColor}">
+        <td class="newsletterContainer" style="background-color: ${OfferPart.backgroundColor}">
           ${OfferPartCodes({
             color: OfferPart.color,
             data: queries['OfferPart'],

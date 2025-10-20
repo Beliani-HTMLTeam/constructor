@@ -39,7 +39,7 @@ export const Category = isAllowToRender(
         </tr>
 
         <tr>
-          <td>
+          <td class="newsletterContainer">
             ${Title({ title: queries['cats'][idx] ?? name, color: color, align: 'center', className: 'newsletterTitle' })}
           </td>
         </tr>

@@ -1,41 +1,41 @@
-const campaignTranslationsSheet = 'Voucher - 13.11.25 - Black Week Categories Week 1';
+const campaignTranslationsSheet = 'Voucher - 27.11.25 - Black Week Categories Week 3';
 
 const tableQueries = [
   {
-    tableRange: '20:23',
+    tableRange: '19:22',
     name: 'cats',
   },
   {
-    tableRange: '24:27',
+    tableRange: '23:26',
     name: 'categoryLinks',
   },
   {
-    tableRange: '43',
+    tableRange: '42',
     name: 'codeCTA',
   },
   {
-    tableRange: '32:41',
+    tableRange: '31:40',
     name: 'OfferPart',
   },
   {
-    tableRange: '44:47',
+    tableRange: '43:46',
     name: 'codes',
   },
   {
-    tableRange: '48:49',
+    tableRange: '47:48',
     name: 'condition',
   },
 ];
 
 const links = {
-  TopImage_href: translateLink({ value: 'content/lp2025-11-13' }),
-  TopImage: getImageUrl('251113tit_test.gif', true),
-  //  translateImage({ value: '20251113_Gif.gif' }),
+  TopImage_href: translateLink({ value: 'content/lp2025-11-27' }),
+  TopImage: translateImage({ value: '20251127_gif.gif' }),
+  //  translateImage({ value: '20251127_Gif.gif' }),
 
-  Banner_1: translateLink({ value: 'content/lp25-11-06' }),
-  Banner_1_Image: translateImage({ value: '20251106b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-11-05' }),
-  Banner_2_Image: translateImage({ value: '20251105b.png' }),
+  Banner_1: translateLink({ value: 'content/lp25-11-20' }),
+  Banner_1_Image: translateImage({ value: '20251120b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-11-19' }),
+  Banner_2_Image: translateImage({ value: '20251119b.png' }),
 };
 
 const categories = [
@@ -43,17 +43,17 @@ const categories = [
     background: '#000000',
     color: '#FFFFFF',
     type: 'blackweek_toprated',
-    name: 'Chairs',
+    name: 'Sofas',
     products: [
-      // MELROSE
+      // OSLO
       {
-        id: '450043',
-        src: getImageUrl('20251113_Pic01.png', true),
+        id: '572017',
+        src: getImageUrl('20251127_Pic01.png', true),
       },
-      // LYNN
+      // CHEVANNES
       {
-        id: '91330',
-        src: getImageUrl('20251113_Pic02.png', true),
+        id: '389131',
+        src: getImageUrl('20251127_Pic02.png', true),
       },
     ],
   },
@@ -62,17 +62,17 @@ const categories = [
     background: '#000000',
     color: '#FFFFFF',
     type: 'blackweek_toprated',
-    name: 'Tables',
+    name: 'Desks',
     products: [
-      // KENDALL
+      // SHESLAY
       {
-        id: '581267',
-        src: getImageUrl('20251113_Pic11.png', true),
+        id: '172216',
+        src: getImageUrl('20251127_Pic11.png', true),
       },
-      // MADOX
+      // KENLY
       {
-        id: '28026',
-        src: getImageUrl('20251113_Pic12.png', true),
+        id: '354581',
+        src: getImageUrl('20251127_Pic12.png', true),
       },
     ],
   },
@@ -81,17 +81,17 @@ const categories = [
     background: '#000000',
     color: '#FFFFFF',
     type: 'blackweek_toprated',
-    name: 'Storage',
+    name: 'Bathtubs',
     products: [
-      // PASCO
+      // ANTIGUA
       {
-        id: '260509',
-        src: getImageUrl('20251113_Pic21.png', true),
+        id: '59126',
+        src: getImageUrl('20251127_Pic21.png', true),
       },
-      // ORILLA
+      // MEVES
       {
-        id: '86881',
-        src: getImageUrl('20251113_Pic22.png', true),
+        id: '82000',
+        src: getImageUrl('20251127_Pic22.png', true),
       },
     ],
   },
@@ -100,28 +100,28 @@ const categories = [
     background: '#000000',
     color: '#FFFFFF',
     type: 'blackweek_toprated',
-    name: 'Lamps',
+    name: 'Home Accessories',
     products: [
-      // FERGUS
+      // THAPSUS
       {
-        id: '71103',
-        src: getImageUrl('20251113_Pic31.png', true),
+        id: '307121',
+        src: getImageUrl('20251127_Pic31.png', true),
       },
-      // STILETTO
+      // LAPPAGO
       {
-        id: '49786',
-        src: getImageUrl('20251113_Pic32.png', true),
+        id: '408278',
+        src: getImageUrl('20251127_Pic32.png', true),
       },
     ],
   },
 ];
 
 export default new entities.Campaign({
-  startId: '37796',
-  name: 'Black Week Categories Week 1',
-  date: '13.11.2025',
-  issueCardId: '405629',
-  contentPageId: '27161',
+  startId: '38244',
+  name: 'Black Week Categories Week 3',
+  date: '27.11.2025',
+  issueCardId: '405756',
+  lpId: '27410',
   alarm: {
     isActive: false,
   },

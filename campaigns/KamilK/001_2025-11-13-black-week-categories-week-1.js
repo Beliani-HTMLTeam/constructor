@@ -28,8 +28,9 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImage_href: translateLink({ value: 'content/lp2025-11-13' }),
-  TopImage: getImageUrl('251113tit_test.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp25-11-13' }),
+  TopImage: translateImage({ value: '20251113_gif.gif' }),
+  // getImageUrl('251113tit_test.gif', true),
   //  translateImage({ value: '20251113_Gif.gif' }),
 
   Banner_1: translateLink({ value: 'content/lp25-11-06' }),
@@ -121,7 +122,7 @@ export default new entities.Campaign({
   name: 'Black Week Categories Week 1',
   date: '13.11.2025',
   issueCardId: '405629',
-  contentPageId: '27161',
+  lpId: '27161',
   alarm: {
     isActive: false,
   },
