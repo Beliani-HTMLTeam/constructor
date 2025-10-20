@@ -18,7 +18,7 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
   for (let query of tableQueries) {
     if (!query.tableName) {
       query['tableName'] = tableName;
-      console.log(query);
+      // console.log(query);
     }
 
     if (!query.name || !query.tableRange) {
