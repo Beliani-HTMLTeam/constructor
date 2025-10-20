@@ -11,9 +11,14 @@ import _footer from '@/main/data/footer.js';
 
 import toast from '@/helpers/toastManager.js';
 
+import prodJson from './products.example.json';
+
 export class TemplateHandlers {
   isCalled = false;
-  constructor({ products, categoriesLinks, categoriesTitles, footer, header, templates }) {
+  constructor({
+    products,
+    // , categoriesLinks, categoriesTitles, footer, header, templates
+  }) {
     this.products = products;
     // this.categoriesLinks = categoriesLinks;
     // this.categoriesTitles = categoriesTitles;
@@ -21,6 +26,32 @@ export class TemplateHandlers {
     // this.header = header;
     // this.templates = templates;
   }
+
+  // getProductById = (productId, src, options) => {
+  //   const shop = getState('shop') ?? {};
+  //   const rawSeller = String(shop.seller ?? '');
+  //   const seller = rawSeller.replace('Beliani.', '').toUpperCase();
+
+  //   const DEFAULT_SHOP = { price: '00.00', oldPrice: '00.00', url: undefined };
+
+  //   const match = prodJson[productId] ?? {
+  //     name: `Product not found [id: ${productId}]`,
+  //     shops: { [seller]: DEFAULT_SHOP },
+  //   };
+
+  //   const shopData = (match.shops && match.shops[seller]) ?? DEFAULT_SHOP;
+
+  //   let product = {
+  //     country: shop.slug,
+  //     src,
+  //     name: match.name ?? `Product not found [id: ${productId}]`,
+  //     lowPrice: shopData.price,
+  //     highPrice: shopData.oldPrice,
+  //     href: shopData.url,
+  //   };
+
+  //   return handleProduct(product, options);
+  // };
 
   getProductById = (productId, src, options) => {
     if (!this.isCalled && !this.products) {
@@ -59,7 +90,7 @@ export class TemplateHandlers {
     slug = String(slug).toLowerCase();
 
     const slugIndex = staticTranslations.category_titles.slug.findIndex((item) => item === slug);
-    
+
     const keys = Object.keys(staticTranslations.category_titles);
 
     if (!keys.includes(column)) {
