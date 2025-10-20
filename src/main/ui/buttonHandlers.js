@@ -53,6 +53,7 @@ export function setupProductsHandler(elements, setState, getState) {
         try {
           localStorage.setItem('products', JSON.stringify(updatedProducts));
           toast({ message: 'Products successfully updated.' });
+          window.location.reload();
         } catch (error) {
           handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
         }
@@ -71,6 +72,7 @@ export function setupProductsHandler(elements, setState, getState) {
             ])
           );
           toast({ message: 'Products successfully saved.' });
+          window.location.reload();
         } catch (error) {
           handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
         }
@@ -271,4 +273,5 @@ function handleStorageQuotaError(error, prevProducts, selectedCampaign, normaliz
   );
 
   toast({ message: 'Products successfully saved.' });
+  window.location.reload();
 }
