@@ -92,7 +92,7 @@ function generateCampaignContent(formData, campaignNumber) {
     campaignName = 'Untitled Campaign',
     campaignDate = new Date().toISOString().split('T')[0],
     newsletterId = '',
-    contentPageId = '',
+    lpId = '',
     issueCardId = '',
     specialLPToggle = false,
     specialLPIds = '',
@@ -224,9 +224,9 @@ export default new entities.Campaign({
   }
 
   // Add content page ID if provided
-  if (contentPageId) {
+  if (lpId) {
     campaignContent += `
-  contentPageId: "${contentPageId}",`;
+  lpId: "${lpId}",`;
   }
 
   // Add special LP IDs if enabled

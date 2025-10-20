@@ -41,8 +41,8 @@ const schema = [
             required: true,
           },
           {
-            name: 'contentPageId',
-            id: 'contentPageId',
+            name: 'lpId',
+            id: 'lpId',
             type: 'number',
             label: 'Content Page ID',
             placeholder: '21163',
