@@ -10,25 +10,25 @@ const tableQueries = [
     name: 'categoryLinks',
   },
   {
-    tableRange: '42',
+    tableRange: '43',
     name: 'codeCTA',
   },
   {
-    tableRange: '31:41',
+    tableRange: '32:41',
     name: 'OfferPart',
   },
   {
-    tableRange: '43:46',
+    tableRange: '44:47',
     name: 'codes',
   },
   {
-    tableRange: '47:48',
+    tableRange: '51:52',
     name: 'condition',
   },
 ];
 
 const links = {
-  TopImage_href: translateLink({ value: 'content/lp2025-11-20' }),
+  TopImage_href: translateLink({ value: 'content/lp25-11-20' }),
   TopImage: translateImage({ value: '20251120_gif.gif' }),
   //  translateImage({ value: '20251120_Gif.gif' }),
 

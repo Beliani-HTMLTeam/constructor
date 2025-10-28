@@ -2,11 +2,11 @@ const campaignTranslationsSheet = 'Voucher - 13.11.25 - Black Week Categories We
 
 const tableQueries = [
   {
-    tableRange: '20:23',
+    tableRange: '19:22',
     name: 'cats',
   },
   {
-    tableRange: '24:27',
+    tableRange: '23:26',
     name: 'categoryLinks',
   },
   {
@@ -22,7 +22,7 @@ const tableQueries = [
     name: 'codes',
   },
   {
-    tableRange: '48:49',
+    tableRange: '51:52',
     name: 'condition',
   },
 ];

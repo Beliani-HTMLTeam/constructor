@@ -10,25 +10,25 @@ const tableQueries = [
     name: 'categoryLinks',
   },
   {
-    tableRange: '42',
+    tableRange: '43',
     name: 'codeCTA',
   },
   {
-    tableRange: '31:40',
+    tableRange: '32:41',
     name: 'OfferPart',
   },
   {
-    tableRange: '43:46',
+    tableRange: '44:47',
     name: 'codes',
   },
   {
-    tableRange: '47:48',
+    tableRange: '51:52',
     name: 'condition',
   },
 ];
 
 const links = {
-  TopImage_href: translateLink({ value: 'content/lp2025-11-27' }),
+  TopImage_href: translateLink({ value: 'content/lp25-11-27' }),
   TopImage: translateImage({ value: '20251127_gif.gif' }),
   //  translateImage({ value: '20251127_Gif.gif' }),
 
@@ -102,9 +102,9 @@ const categories = [
     type: 'blackweek_toprated',
     name: 'Home Accessories',
     products: [
-      // THAPSUS
+      // ZINNIA
       {
-        id: '307121',
+        id: '380815',
         src: getImageUrl('20251127_Pic31.png', true),
       },
       // LAPPAGO
