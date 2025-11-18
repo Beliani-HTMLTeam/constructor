@@ -1,6 +1,6 @@
 import { showElements, hideElements } from '@/utils/domUtils.js';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 export function createSetSelectedTemplate(elements, setState, getState) {
   const { newProducts, openCampaign } = elements;
@@ -11,7 +11,7 @@ export function createSetSelectedTemplate(elements, setState, getState) {
       (template) => template.type + '_' + template.name === ev.target.value
     );
 
-    if (!selectedTemplate) return toast({ message: `Template ${ev.target.value} not found.` });
+    if (!selectedTemplate) return toast.error(`Template ${ev.target.value} not found.`);
 
     // Show/hide elements based on template type
     showElements(newProducts);

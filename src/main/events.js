@@ -1,20 +1,20 @@
 import { incrementId } from '@/helpers/incrementId.js';
 import { getState, setState } from '@/main/state/appState';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 function openCampaignHandler(id) {
   const config = getState('config');
 
-  if (!id) return toast({ message: 'No campaign id found! Select campaign.' });
+  if (!id) return toast.error('No campaign id found! Select campaign.');
 
   window.open(config.campaign_url + id, '_blank');
 }
 
 function openLpHandler(lpLinks, country) {
-  if (!lpLinks) return toast({ message: 'No lp links found!' });
+  if (!lpLinks) return toast.error('No lp links found!');
 
-  if (!lpLinks[country]) return toast({ message: `No lp links found for ${country}` });
+  if (!lpLinks[country]) return toast.error(`No lp links found for ${country}`);
 
   window.open(lpLinks[country], '_blank');
 }
@@ -35,7 +35,7 @@ function selectCampaignHandler(ev, campaigns) {
   const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
 
   if (!selectedCampaign)
-    return toast({ message: `Campaign startId ${ev.target.value} not found.` });
+    return toast.error(`Campaign startId ${ev.target.value} not found.`);
 
   // Dla pewności pokaż całą kampanię w konsoli (do debugowania)
   // console.log('selectedCampaign z campaigns:', selectedCampaign);

@@ -8,7 +8,7 @@ import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
 import { root } from '@/app.js';
 import { getState, setState } from '@/main/state/appState';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;
@@ -18,9 +18,9 @@ export async function renderTemplate(getState, setState) {
   const spreadsheet = templateToRender?.translationsSpreadsheet || null;
   const selectedCampaign = getState('selectedCampaign');
 
-  if (!selectedCampaign) return toast({ message: 'No campaign selected.' });
+  if (!selectedCampaign) return toast.error('No campaign selected.');
 
-  if (!templateToRender) return toast({ message: 'No template selected.' });
+  if (!templateToRender) return toast.error('No template selected.');
 
   // Handle translations if needed
   if (!selectedCampaign.data && templateToRender.tableQueries.length > 0) {
@@ -29,7 +29,7 @@ export async function renderTemplate(getState, setState) {
 
       const translationsResult = await fetchTranslations({
         tableQueries: templateToRender.tableQueries,
-        tableName: spreadsheet
+        tableName: spreadsheet,
       });
 
       const queries = {};
@@ -43,7 +43,7 @@ export async function renderTemplate(getState, setState) {
       setState('loading', false);
       console.error(error);
 
-      toast({ message: 'Something went wrong. More details in console.' });
+      toast.error('Something went wrong. More details in console.');
     }
   }
 
@@ -63,9 +63,9 @@ export async function renderTemplate(getState, setState) {
     if (country in selectedCampaign.data) {
       slugData = selectedCampaign.data[country] || {};
     } else {
-      return toast({
-        message: `Country ${country} not found in the ${selectedCampaign.name} campaign data.`,
-      });
+      return toast.error(
+        `Country ${country} not found in the ${selectedCampaign.name} campaign data.`
+      );
     }
   }
 
@@ -154,16 +154,15 @@ export async function renderTemplate(getState, setState) {
       if (confirm('Do you want to render template with undefined value?')) {
         return (root.innerHTML = withStylesOrNo);
       } else {
-        toast({
-          message:
-            'Rendering cancelled. Check campaign file, template or products list for mistakes!',
-        });
+        toast.error(
+          'Rendering cancelled. Check campaign file, template or products list for mistakes!'
+        );
       }
     } else {
       root.innerHTML = withStylesOrNo;
     }
   } catch (error) {
     console.log(error);
-    toast({ message: 'Something went wrong. More details in console.' });
+    toast.error('Something went wrong. More details in console.');
   }
 }

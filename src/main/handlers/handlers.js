@@ -9,7 +9,7 @@ import _categoriesTitles from '@/main/data/categoriesTitles.js';
 import _header from '@/main/data/header.js';
 import _footer from '@/main/data/footer.js';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 import prodJson from './products.example.json';
 
@@ -57,7 +57,7 @@ export class TemplateHandlers {
     if (!this.isCalled && !this.products) {
       this.isCalled = true;
 
-      return toast({ message: 'Products not found, add products to the campaign.' });
+      return toast.error('Products not found, add products to the campaign.');
     }
 
     const country = getState('country');
@@ -94,7 +94,7 @@ export class TemplateHandlers {
     const keys = Object.keys(staticTranslations.category_titles);
 
     if (!keys.includes(column)) {
-      toast({ message: `Nie znaleziono tlumaczenia dla ${column}` });
+      toast.error(`Nie znaleziono tlumaczenia dla ${column}`);
       return undefined;
     }
 
@@ -147,9 +147,9 @@ export class TemplateHandlers {
       } else {
         partsTranslations.push(item);
 
-        toast({
-          message: `Couldn't find translations for '${item}' category!\nCheck console for details.`,
-        });
+        toast.error(
+          `Couldn't find translations for '${item}' category!\nCheck console for details.`
+        );
 
         console.log('This category part was not found in translations:');
         console.log(

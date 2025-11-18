@@ -9,7 +9,7 @@ import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { isQuotaExceededError } from '@/helpers/isQuotaExceededError.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;
@@ -17,14 +17,14 @@ export function setupProductsHandler(elements, setState, getState) {
   newProducts?.addEventListener('click', () => {
     const products = prompt('Provide products');
     if (!products)
-      return toast({ message: 'Incorrect input! Please provide products JSON from extension.' });
+      return toast.error('Incorrect input! Please provide products JSON from extension.');
 
     let newProductsData;
     try {
       newProductsData = JSON.parse(products);
     } catch (error) {
       console.log(error);
-      return toast({ message: 'Products parse error. Check console for more details.' });
+      return toast.error('Products parse error. Check console for more details.');
     }
 
     const selectedCampaign = getState('selectedCampaign');
@@ -52,7 +52,7 @@ export function setupProductsHandler(elements, setState, getState) {
 
         try {
           localStorage.setItem('products', JSON.stringify(updatedProducts));
-          toast({ message: 'Products successfully updated.' });
+          toast.success('Products successfully updated.');
           window.location.reload();
         } catch (error) {
           handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
@@ -71,7 +71,7 @@ export function setupProductsHandler(elements, setState, getState) {
               },
             ])
           );
-          toast({ message: 'Products successfully saved.' });
+          toast.success('Products successfully saved.');
           window.location.reload();
         } catch (error) {
           handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
@@ -79,7 +79,7 @@ export function setupProductsHandler(elements, setState, getState) {
       }
     } catch (error) {
       console.error(error);
-      toast({ message: 'Error during saving products. Check console for more details.' });
+      toast.error('Error during saving products. Check console for more details.');
     }
   });
 }
@@ -91,7 +91,7 @@ export function setupClearStorageHandler(elements) {
     if (confirm('All data will be removed from localstorage! Are you sure?')) {
       localStorage.clear();
 
-      return toast({ message: 'Storage has been cleared.' });
+      return toast.success('Storage has been cleared.');
     }
   });
 }
@@ -101,10 +101,10 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
 
   copyTemplate?.addEventListener('click', () => {
     const html = getState('html');
-    if (!html) return toast({ message: 'No HTML to copy. Render template first.' });
+    if (!html) return toast.error('No HTML to copy. Render template first.');
 
     navigator.clipboard.writeText(html);
-    toast({ message: 'Template copied to clipboard!' });
+    toast.success('Template copied to clipboard!');
 
     const config = getState('config');
     if (!config?.confetti) return;
@@ -131,7 +131,7 @@ export function setupOpenIssueHandler(elements, getState) {
 
   openIssue?.addEventListener('click', () => {
     const selectedCampaign = getState('selectedCampaign');
-    if (!selectedCampaign.issueCardId) return toast({ message: 'Issue card id not found.' });
+    if (!selectedCampaign.issueCardId) return toast.error('Issue card id not found.');
 
     openIssueHandler(selectedCampaign.issueCardId);
   });
@@ -142,7 +142,7 @@ export function setupOpenFigmaHandler(elements, getState) {
 
   openFigma?.addEventListener('click', () => {
     const selectedCampaign = getState('selectedCampaign');
-    if (!selectedCampaign.figmaUrl) return toast({ message: 'Figma url not found.' });
+    if (!selectedCampaign.figmaUrl) return toast.error('Figma url not found.');
 
     figmaCardHandler(selectedCampaign.figmaUrl);
   });
@@ -156,9 +156,7 @@ export function setupOpenLPHandler(elements, getState) {
     const country = getState('country');
 
     if (!selectedCampaign.lpId)
-      return toast({
-        message: 'Campaign LP ID not found. Select campaign or update campaign file.',
-      });
+      return toast.error('Campaign LP ID not found. Select campaign or update campaign file.');
 
     const countryOrderOld = [
       'CHDE',
@@ -230,12 +228,12 @@ export function setupNewCampaignHandler(elements, campaigns) {
     openCreateCampaignModal((campaign) => {
       // Basic validation
       if (!campaign.startId) {
-        toast({ message: 'Campaign missing newsletter ID!' });
+        toast.error('Campaign missing newsletter ID!');
         return false;
       }
 
       if (!campaign.name) {
-        toast({ message: 'Campaign missing name!' });
+        toast.error('Campaign missing name!');
         return false;
       }
 
@@ -257,7 +255,7 @@ function handleStorageQuotaError(error, prevProducts, selectedCampaign, normaliz
 
   if (!deleteCampaignId) return;
 
-  if (!ids.includes(deleteCampaignId)) return toast({ message: 'Invalid campaign ID!' });
+  if (!ids.includes(deleteCampaignId)) return toast.error('Invalid campaign ID!');
 
   const prevCampaigns = prevProducts.filter((item) => item.campaign_id !== deleteCampaignId);
 
@@ -272,6 +270,6 @@ function handleStorageQuotaError(error, prevProducts, selectedCampaign, normaliz
     ])
   );
 
-  toast({ message: 'Products successfully saved.' });
+  toast.success('Products successfully saved.');
   window.location.reload();
 }

@@ -16,5 +16,5 @@ if (access) {
   localStorage.setItem('token', access);
   window.location.href = window.location.origin;
 
-  toast({ message: 'Token successfully set.' });
+  toast.success('Token successfully set.');
 }
