@@ -1,6 +1,6 @@
 import { getState } from '@/main/state/appState';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 export const normalizeTranslations = (translations, fallbacks, range) => {
   // console.log(`translations: ${translations}`);
@@ -10,9 +10,7 @@ export const normalizeTranslations = (translations, fallbacks, range) => {
 
   const config = getState('config');
   if (!config || typeof config !== 'object') {
-    return toast({
-      message: 'Invalid config object in app state.',
-    });
+    return toast.error('Invalid config object in app state.');
   }
 
   const emptyCellMessage =

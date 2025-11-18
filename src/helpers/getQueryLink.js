@@ -1,7 +1,7 @@
 import { getState } from '@/main/state/appState';
 import { computeValue } from '@/helpers/computeValue.js';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 export function addParams({ links }) {
   const country = getState('country');
@@ -77,7 +77,7 @@ export function addParamsProduct(product) {
       href: url.href,
     };
   } catch (error) {
-    toast({ message: 'Product url parse error.\nCheck console for details!' });
+    toast.error('Product url parse error.\nCheck console for details!');
     console.error(error.message);
     return;
   }

@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
 import vanilla from 'vite-plugin-vanilla';
 import AutoImport from 'unplugin-auto-import/vite';
 import { saveCampaignPlugin } from './plugins/save-campaign-plugin.js';
@@ -27,6 +28,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
+      react(),
       saveCampaignPlugin(), // Add our custom plugin first
       AutoImport({
         imports: [

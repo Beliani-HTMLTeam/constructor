@@ -4,7 +4,7 @@ import { normalizeTranslations } from '@/utils/normalizeTranslations.js';
 import { getDynamicTranslation } from '@/translations-api/getTranslations';
 import { GoogleAuth } from '@/services/GoogleAuth.js';
 
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
 
 export const fetchTranslations = async ({ tableQueries, tableName }) => {
   let slug = getState('country');
@@ -22,7 +22,7 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
     }
 
     if (!query.name || !query.tableRange) {
-      toast({ message: `Table Name/Range or field name missing for ${JSON.stringify(query)}` });
+      toast.error(`Table Name/Range or field name missing for ${JSON.stringify(query)}`);
       console.error(`Table Name/Range or field name missing for ${JSON.stringify(query)}`);
       continue;
     }

@@ -1,5 +1,8 @@
 import generateLoginURL from '@utils/generateLoginURL.js';
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
+
+/* @deprecated This class/file is deprecated and will be removed in future versions.
+We are using our API to gather translations now */
 
 export class GoogleAuth {
   static async login() {
@@ -13,5 +16,5 @@ if (access) {
   localStorage.setItem('token', access);
   window.location.href = window.location.origin;
 
-  toast({ message: 'Token successfully set.' });
+  toast.success('Token successfully set.');
 }
