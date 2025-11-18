@@ -1,5 +1,8 @@
 import generateLoginURL from '@utils/generateLoginURL.js';
-import toast from '@/helpers/toastManager.js';
+import { toast } from 'sonner';
+
+/* @deprecated This class/file is deprecated and will be removed in future versions.
+We are using our API to gather translations now */
 
 export class GoogleAuth {
   static async login() {
