@@ -3,11 +3,11 @@ const campaignTranslationsSheet = '03.12.25 - Advent calendar';
 
 const tableQueries = [
   {
-    tableRange: '17',
+    tableRange: '15',
     name: 'intro',
   },
   {
-    tableRange: '18:20',
+    tableRange: '17:18',
     name: 'condition',
   },
 ];
@@ -15,11 +15,14 @@ const tableQueries = [
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp25-12-03' }),
   TopImageTitle_src: translateImage({ value: '20251203_01.png' }),
+
   TopImage: getImageUrl('20251203_Gif.gif', true),
-  Banner_1: translateLink({ value: 'content/lp25-10-23' }),
-  Banner_1_Image: translateImage({ value: '20251023b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-10-15' }),
-  Banner_2_Image: translateImage({ value: '20251015b.png' }),
+
+  Banner_1: translateLink({ value: 'content/lp25-10-15' }),
+  Banner_1_Image: translateImage({ value: '20251015b.png' }),
+
+  Banner_2: translateLink({ value: 'content/lp25-10-02' }),
+  Banner_2_Image: translateImage({ value: '20251002b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -69,4 +72,3 @@ export default new entities.Campaign({
     },
   ],
 });
-
