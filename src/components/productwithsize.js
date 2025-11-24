@@ -31,7 +31,7 @@ export function ProductWithSize(product, align = 'left') {
               <tr>
                 <td align="${align}" style="padding-top: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px;">
                   <span class="newsletterProductLowPrice">${product.lowPrice} </span>
-                  <span class="newsletterProductHightPrice">${product.highPrice}</span>
+                  <span class="newsletterProductHighPrice">${product.highPrice}</span>
                 </td>
               </tr>
             </tbody>

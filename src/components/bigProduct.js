@@ -35,7 +35,7 @@ export function BigProduct(product, align = 'left', style) {
                   <span class="newsletterProductLowPrice" style="${style ?? ''}">${
                     product.lowPrice
                   } </span>
-                  <span class="newsletterProductHightPrice" style="${style ?? ''}">${
+                  <span class="newsletterProductHighPrice" style="${style ?? ''}">${
                     product.highPrice
                   }</span>
                 </td>

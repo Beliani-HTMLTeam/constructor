@@ -42,7 +42,7 @@ export function FreebieProduct(product, align = 'center', style, containerAlign 
                       <tr>
                         <td align="${align}" style="color: ${color}">
                           <span class="newsletterProductLowPrice" >${product.lowPrice} </span>
-                          <span class="newsletterProductHightPrice" >${product.highPrice}</span>
+                          <span class="newsletterProductHighPrice" >${product.highPrice}</span>
                         </td>
                       </tr>
                     </tbody>

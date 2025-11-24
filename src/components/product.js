@@ -36,7 +36,7 @@ export function Product(product, align = 'left', style, prices = true) {
                   <span class="newsletterProductLowPrice" style="${style ?? ''}">${
                     product.lowPrice
                   } </span>
-                  <span class="newsletterProductHightPrice" style="${style ?? ''}">${
+                  <span class="newsletterProductHighPrice" style="${style ?? ''}">${
                     product.highPrice
                   }</span>
                 </td>

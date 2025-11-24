@@ -62,7 +62,7 @@ export function ProductFree(product, country, free, align = 'left', style) {
               <tr>
                 <td align="center" style="padding-bottom: 8px;">
                   <span class="newsletterProductLowPrice" style="${style ?? ''}">${free} </span>
-                  <span class="newsletterProductHightPrice" style="${style ?? ''}">${
+                  <span class="newsletterProductHighPrice" style="${style ?? ''}">${
                     product.lowPrice
                   }</span>
                 </td>
