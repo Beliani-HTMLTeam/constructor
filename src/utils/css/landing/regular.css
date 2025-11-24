@@ -160,7 +160,7 @@ table {
   font-weight: 600;
 }
 
-#newsletter .newsletterProductHightPrice {
+#newsletter .newsletterProductHighPrice {
   font-size: 14px;
   line-height: 1.2;
   text-decoration: line-through;
@@ -329,7 +329,7 @@ table {
     font-size: 16px;
   }
 
-  #newsletter .newsletterProductHightPrice {
+  #newsletter .newsletterProductHighPrice {
     display: block;
   }
 
