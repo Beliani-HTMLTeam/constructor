@@ -91,14 +91,30 @@ export class TemplateHandlers {
 
     const slugIndex = staticTranslations.category_titles.slug.findIndex((item) => item === slug);
 
-    const keys = Object.keys(staticTranslations.category_titles);
-
-    if (!keys.includes(column)) {
-      toast.error(`Nie znaleziono tlumaczenia dla ${column}`);
+    if (slugIndex === -1) {
+      toast.error(`Nie znaleziono języka dla ${slug}`);
       return undefined;
     }
 
-    const title = staticTranslations.category_titles[column][slugIndex];
+    // Case-insensitive key lookup
+    const normalizedKeys = Object.keys(staticTranslations.category_titles).reduce((acc, key) => {
+      acc[key.toLowerCase()] = key;
+      return acc;
+    }, {});
+    const actualKey = normalizedKeys[column.toLowerCase()];
+
+    if (!actualKey) {
+      toast.error(`Nie znaleziono tłumaczenia dla ${column} (sprawdź wielkość liter)`);
+      return undefined;
+    }
+
+    const translationsArray = staticTranslations.category_titles[actualKey];
+    if (!Array.isArray(translationsArray) || translationsArray.length <= slugIndex) {
+      toast.error(`Błąd w danych tłumaczeń dla ${column}`);
+      return undefined;
+    }
+
+    const title = translationsArray[slugIndex];
 
     if (title === '' || title == null) {
       return undefined;
@@ -128,6 +144,12 @@ export class TemplateHandlers {
 
     const slugIndex = staticTranslations.category_links.slug.findIndex((item) => item === slug);
 
+    // Case-insensitive key lookup
+    const normalizedKeys = Object.keys(staticTranslations.category_links).reduce((acc, key) => {
+      acc[key.toLowerCase()] = key;
+      return acc;
+    }, {});
+
     // https://www.beliani.ch/sofas/corner-sofas/ => ["sofas", "corner-sofas"]
 
     // eg. category === https://www.beliani.ch/sofas/corner-sofas/
@@ -141,22 +163,26 @@ export class TemplateHandlers {
     let partsTranslations = [];
 
     categories.forEach((item) => {
-      const translation = staticTranslations.category_links[item][slugIndex];
-      if (translation) {
-        partsTranslations.push(translation);
+      const actualItem = normalizedKeys[item.toLowerCase()];
+      if (actualItem) {
+        const translation = staticTranslations.category_links[actualItem][slugIndex];
+        if (translation) {
+          partsTranslations.push(translation);
+        } else {
+          partsTranslations.push(item);
+          toast.error(`Brak tłumaczenia dla '${item}' w języku ${slug}`);
+        }
       } else {
         partsTranslations.push(item);
-
         toast.error(
-          `Couldn't find translations for '${item}' category!\nCheck console for details.`
+          `Nie znaleziono tłumaczenia dla '${item}' kategorii!\nSprawdź szczegóły w konsoli.`
         );
-
-        console.log('This category part was not found in translations:');
+        console.log('Ta część kategorii nie została znaleziona w tłumaczeniach:');
         console.log(
           'https://docs.google.com/spreadsheets/d/1Y9blxN4paEV05s6AvdWmH5fBELTUvDz3ax5skmgVrsQ/edit?gid=0#gid=0'
         );
         console.log(
-          'Please add it to the category_links tab. "Static" translations are cached and you might need to wait a while.'
+          'Dodaj ją do zakładki category_links. "Statyczne" tłumaczenia są cache\'owane i może być trzeba poczekać chwilę.'
         );
       }
     });
@@ -211,7 +237,19 @@ export class TemplateHandlers {
 
     const slugIndex = staticTranslations.footer.slug.findIndex((item) => item === slug);
 
-    const footer = staticTranslations.footer[column][slugIndex];
+    // Case-insensitive key lookup
+    const normalizedKeys = Object.keys(staticTranslations.footer).reduce((acc, key) => {
+      acc[key.toLowerCase()] = key;
+      return acc;
+    }, {});
+    const actualKey = normalizedKeys[column.toLowerCase()];
+
+    if (!actualKey) {
+      toast.error(`Nie znaleziono tłumaczenia dla ${column} w stopce (sprawdź wielkość liter)`);
+      return undefined;
+    }
+
+    const footer = staticTranslations.footer[actualKey][slugIndex];
 
     if (footer === '' || footer == null) {
       return undefined;
@@ -232,7 +270,19 @@ export class TemplateHandlers {
 
     const slugIndex = staticTranslations.templates.slug.findIndex((item) => item === slug);
 
-    const template = staticTranslations.templates[column][slugIndex];
+    // Case-insensitive key lookup
+    const normalizedKeys = Object.keys(staticTranslations.templates).reduce((acc, key) => {
+      acc[key.toLowerCase()] = key;
+      return acc;
+    }, {});
+    const actualKey = normalizedKeys[column.toLowerCase()];
+
+    if (!actualKey) {
+      toast.error(`Nie znaleziono tłumaczenia dla ${column} w szablonach (sprawdź wielkość liter)`);
+      return undefined;
+    }
+
+    const template = staticTranslations.templates[actualKey][slugIndex];
 
     if (template === '' || template == null) {
       return undefined;
@@ -255,7 +305,19 @@ export class TemplateHandlers {
 
     const slugIndex = staticTranslations.header.slug.findIndex((item) => item === slug);
 
-    const header = staticTranslations.header[column][slugIndex];
+    // Case-insensitive key lookup
+    const normalizedKeys = Object.keys(staticTranslations.header).reduce((acc, key) => {
+      acc[key.toLowerCase()] = key;
+      return acc;
+    }, {});
+    const actualKey = normalizedKeys[column.toLowerCase()];
+
+    if (!actualKey) {
+      toast.error(`Nie znaleziono tłumaczenia dla ${column} w nagłówku (sprawdź wielkość liter)`);
+      return undefined;
+    }
+
+    const header = staticTranslations.header[actualKey][slugIndex];
 
     if (header === '' || header == null) {
       return undefined;
