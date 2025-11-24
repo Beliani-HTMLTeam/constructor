@@ -9,6 +9,7 @@ import { root } from '@/app.js';
 import { getState, setState } from '@/main/state/appState';
 
 import { toast } from 'sonner';
+import { staticTranslations } from '@/translations-api/getTranslations';
 
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;
