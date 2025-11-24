@@ -1,4 +1,5 @@
 import { appConfig as c } from '@utils/config.js';
+import { toast } from 'sonner';
 
 export let staticTranslations = {
   header: {},
@@ -9,20 +10,33 @@ export let staticTranslations = {
 };
 
 export default async function initStaticTranslations() {
-  await Promise.all(
+  const loadPromise = Promise.all(
     Object.keys(staticTranslations).map(async (key) => {
       const translations = await getStaticTranslation({ sheet: key });
-
-      // console.log(`Translations for ${key}:`, translations);
+      // console.log(`Translations for ${key}:`, translations.data);
       staticTranslations[key] = translations.data;
     })
   );
+
+  // Add minimum delay to show loading toast
+  const delayedPromise = Promise.all([
+    loadPromise,
+    new Promise((resolve) => setTimeout(resolve, 1000)),
+  ]);
+
+  await toast.promise(delayedPromise, {
+    loading: 'Initializing translations...',
+    success: 'Translations successfully loaded',
+    error: 'Failed to load translations',
+  });
+
+  console.log('Static translations initialized.');
 
   // check if translations are present:
   // console.log(staticTranslations);
 }
 
-initStaticTranslations();
+await initStaticTranslations();
 
 // todo: make alternative functions to get translations directly from Google Sheets API
 
@@ -43,6 +57,7 @@ async function getStaticTranslation({ sheet }) {
 
   const translations = await res.json();
 
+  // console.log('Result for', sheet, translations);
   return translations;
 }
 
