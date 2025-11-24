@@ -88,6 +88,11 @@ table {
   padding-right: 20px;
 }
 
+.newsletterContainer60px {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
 #newsletter.newsletterContainer {
   padding-left: 20px;
   padding-right: 20px;
