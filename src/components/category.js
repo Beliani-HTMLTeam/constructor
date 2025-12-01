@@ -25,6 +25,8 @@ export const Category = isAllowToRender(
     className = 'newsletterContainer',
     lastbottomclass,
     img_class,
+    prices,
+    padding
   }) => {
     // console.log(type);
 
@@ -886,6 +888,146 @@ export const Category = isAllowToRender(
           </tbody>
         </table>
       `;
+    }
+
+    if (type === "EOL") {
+      return `
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <thead>
+      
+      <tr>
+        <td class="newsletterBottom35px">
+        </td>
+      </tr>
+      <tr>
+        <td class="newsletterContainer" style="padding-top: 0px; vertical-align: top;" >
+          ${Title({ title: name, align: "left", color: color })}
+        </td>
+      </tr>
+      <tr>
+        <td class="newsletterBottom35px">
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 0px; vertical-align: top;" >
+          ${Product(products[0], "left", `color: ${color || "#000000"}`, prices = false, padding = false)}
+        </td>
+      </tr>
+      <tr>
+        <td class="newsletterBottom35px">
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
+          <table cellspacing="0" cellpadding="0" border="0" width="100%">
+              <tbody>
+                  <tr>
+                      <td align=${align}>
+                          <span class="newsletterParagraph" style="color:${color}">
+                              ${desc}
+                          </span>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="newsletterBottom35px">
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
+          <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+            <tr>
+              <td>
+                <!-- 1-2 Products table -->
+                <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+                  <tr>
+                    <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
+                    <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
+                      ${Product(products[1], "left", `color: ${color || "#000000"}`, prices = true, padding = "newsletterBottom20px")}
+                    </td>
+                    <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
+                    <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
+                      ${Product(products[2], "left", `color: ${color || "#000000"}`, prices = true, padding = "newsletterBottom20px")}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td class="newsletterBottom35px">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
+          <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+            <tr>
+              <td>
+                <!-- 1-2 Products table -->
+                <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+                  <tr>
+                    <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
+                    <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
+                      ${Product(products[3], "left", `color: ${color || "#000000"}`, prices = true, padding = "newsletterBottom20px")}
+                    </td>
+                    <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
+                    <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
+                      ${Product(products[4], "left", `color: ${color || "#000000"}`, prices = true, padding = "newsletterBottom20px")}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      ${
+        idx === len
+          ? `
+      <tr>
+        <td class="newsletterBottom35px"></td>
+      </tr>
+      <tr>
+        <td>
+          <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+            <tbody>
+              <tr>
+                <td style="padding-top: 0px; padding-left: 0px; padding-right: 0px; text-align: center;">
+                  ${
+                    ctaComponent
+                      ? ctaComponent(href, cta)
+                      : `
+                      <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                        <span class="newsletterCta">${cta}</span>
+                      </a>
+                    `
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td class="newsletterBottom80px"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+          `
+          : `
+      <tr>
+        <td class="newsletterBottom80px"></td>
+      </tr>
+          `
+      }
+    </tbody>
+  </table>
+  `;
     }
   }
 );
