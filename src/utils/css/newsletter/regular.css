@@ -93,6 +93,10 @@ img {
   padding-bottom: 20px;
 }
 
+.newsletterBottom25px {
+  padding-bottom: 25px;
+}
+
 .newsletterBottom35px {
   padding-bottom: 35px;
 }
@@ -449,6 +453,10 @@ img {
   .newsletterFreebieContainer {
     padding-left: 10px;
     padding-right: 0px !important;
+  }
+
+  .newsletterBottom25px {
+    padding-bottom: 20px;
   }
 
   .newsletterBottom35px {
