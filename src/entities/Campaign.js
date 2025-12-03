@@ -12,6 +12,9 @@ export class Campaign {
   products;
   figmaUrl;
   version;
+  full_img_width;
+  white_line;
+  under_intro_line;
   constructor({
     date,
     data,
@@ -26,6 +29,9 @@ export class Campaign {
     specialLpIds = null,
     templates,
     figmaUrl,
+    full_img_width,
+    white_line,
+    under_intro_line,
     version = 'new',
   }) {
     if (!Array.isArray(templates)) {
@@ -67,5 +73,8 @@ export class Campaign {
     this.products = products || null;
     this.figmaUrl = figmaUrl || null;
     this.version = version || 'new';
+    this.full_img_width = full_img_width || false;
+    this.white_line = white_line || false;
+    this.under_intro_line = under_intro_line || false;
   }
 }

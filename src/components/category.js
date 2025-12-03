@@ -670,7 +670,7 @@ export const Category = isAllowToRender(
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
           <thead>
             <tr>
-              <td>
+              <td class="newsletterContainer">
                 ${ImageWithLink({ href: href, src: src, alt: name })}
               </td>
             </tr>
@@ -687,7 +687,7 @@ export const Category = isAllowToRender(
       <table cellspacing="0" cellpadding="0" border="0" width="100%">
         <thead>
           <tr>
-            <td>
+            <td class="newsletterContainer">
               ${ImageWithLink({ href: href, src: src, alt: name })}
             </td>
           </tr>
