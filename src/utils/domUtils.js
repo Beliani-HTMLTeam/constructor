@@ -27,7 +27,7 @@ export function getDOMElements() {
     openLP: document.querySelector('.openLP'),
 
     // Login button is handled separately in setupEventListeners
-    login: document.querySelector('#login'),
+    // login: document.querySelector('#login'),
   };
 }
 
