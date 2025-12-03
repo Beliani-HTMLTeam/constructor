@@ -17,7 +17,8 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
 
   for (let query of tableQueries) {
     if (!query.tableName) {
-      query['tableName'] = tableName;
+      query['tableName'] = tableName.split('::')[1];
+      query['year'] = tableName.split('::')[0]
       // console.log(query);
     }
 
@@ -29,6 +30,7 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
 
     const res = await getDynamicTranslation({
       // replace ! to mantain backward compatibility (old names had trailing exclamation mark)
+      year: Number(query.year),
       tab: String(query.tableName).replace('!', ''),
       range: query.tableRange,
     });
