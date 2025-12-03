@@ -1,13 +1,10 @@
 export function getDOMElements() {
-  const testHeader = document.querySelector('#header_translations');
   const selectShop = document.querySelector('#shops');
   const selectLanguage = document.querySelector('#languages');
   const selectCampaigns = document.querySelector('#campaigns');
   const selectTemplates = document.querySelector('#templates');
 
   return {
-    testHeader,
-
     selectShop,
     selectShopWrapper: selectShop?.parentElement,
 
