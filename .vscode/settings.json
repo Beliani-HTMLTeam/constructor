@@ -1,7 +1,7 @@
 {
   "prettier.configPath": "./.prettierrc",
   // dont use live server, use vite
-  "liveServer.settings.port": 5500,
+  "liveServer.settings.port": 5501,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
     "**/node_modules": true
