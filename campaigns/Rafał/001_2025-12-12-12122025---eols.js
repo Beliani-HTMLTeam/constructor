@@ -1,7 +1,7 @@
 import { FridayEolProducts } from "@/templates/FridayEolProducts";
 
 // Campaign generated from form
-const campaignTranslationsSheet = '12.12.2025 - EOLs';
+const campaignTranslationsSheet = '2025::12.12.2025 - EOLs';
 
 const tableQueries = [
   {
@@ -35,11 +35,11 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp2025-12-12' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp25-12-12' }),
   TopImageTitle_src: translateImage({ value: '20251212_01.png' }),
   TopImage: getImageUrl('20251212_gif.gif', true),
   TimerFrebie: getImageUrl('20251212free.png', true),
-  Timer_href: translateLink({ value: 'content/lp2025-12-08' }),
+  Timer_href: translateLink({ value: 'content/lp25-12-08' }),
   CTAcategory: translateLink({ value: 'last-pieces/' }),
   Banner_1: translateLink({ value: 'content/lp25-12-04' }),
   Banner_1_Image: translateImage({ value: '20251204b.png' }),
