@@ -176,7 +176,7 @@ function generateCampaignContent(formData, campaignNumber) {
 
   // Generate the campaign content with constants at the top
   let campaignContent = `// Campaign generated from form
-const campaignTranslationsSheet = '${shortDate} - ${campaignName}';
+const campaignTranslationsSheet = '2026::${shortDate} - ${campaignName}';
 
 const tableQueries = ${JSON.stringify(defaultTableQueries, null, 2)};
 
