@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = 'Voucher - 27.11.25 - Black Week Categories Week 3';
+const campaignTranslationsSheet = '2025::Voucher - 27.11.25 - Black Week Categories Week 3';
 
 const tableQueries = [
   {
