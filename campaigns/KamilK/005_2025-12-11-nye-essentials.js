@@ -1,7 +1,7 @@
 import { templates } from '@/templates/index.js';
 
 // Campaign generated from form
-const campaignTranslationsSheet = '11.12.25 - NYE essentials';
+const campaignTranslationsSheet = '2025::11.12.25 - NYE essentials';
 
 const tableQueries = [
   {
