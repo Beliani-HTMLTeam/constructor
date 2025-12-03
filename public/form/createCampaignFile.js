@@ -315,7 +315,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: null, // User should change this
+      template: templates.Thursday, // User should change this
       css: ${cssType},
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "${background}",
@@ -328,7 +328,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: null, // User should change this
+      template: templates.Thursday, // User should change this
       css: ${cssTypeLP},
       background: "${background}",
       color: "${color}",
