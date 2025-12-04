@@ -100,7 +100,7 @@ const renderCategory = async (
           : ''
       }
     `
-    : '';
+    :  Space({insideTr: true});
 
   const ProductsElement = category.products
     ? await renderProducts(

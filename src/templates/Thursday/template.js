@@ -76,7 +76,7 @@ const Thursday = async ({
   const IntroElement =
     intro && intro.type === 'paragraph'
       ? Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })
-      : '';
+     : '';
 
   const TimerElement =
     Inside && Inside.type === 'timer'
