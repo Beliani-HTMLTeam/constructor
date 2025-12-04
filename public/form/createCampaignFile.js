@@ -176,7 +176,7 @@ function generateCampaignContent(formData, campaignNumber) {
 
   // Generate the campaign content with constants at the top
   let campaignContent = `// Campaign generated from form
-const campaignTranslationsSheet = '${shortDate} - ${campaignName}';
+const campaignTranslationsSheet = '2026::${shortDate} - ${campaignName}';
 
 const tableQueries = ${JSON.stringify(defaultTableQueries, null, 2)};
 
@@ -315,7 +315,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: null, // User should change this
+      template: templates.Thursday, // User should change this
       css: ${cssType},
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "${background}",
@@ -328,7 +328,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: null, // User should change this
+      template: templates.Thursday, // User should change this
       css: ${cssTypeLP},
       background: "${background}",
       color: "${color}",
