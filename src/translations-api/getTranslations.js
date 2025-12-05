@@ -62,7 +62,12 @@ async function getStaticTranslation({ sheet }) {
 }
 
 export async function getDynamicTranslation({ year, tab, range }) {
-  const url = `${c.api_url}dynamic/${year}/${tab}/${range}/`;
+  // encode tab so spaces and special characters are safe in the URL
+  const encodedTab = encodeURIComponent(String(tab));
+  const encodedRange = encodeURIComponent(String(range));
+
+  const url = `${c.api_url}dynamic/${year}/${encodedTab}/${encodedRange}/`;
+  
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -76,7 +81,24 @@ export async function getDynamicTranslation({ year, tab, range }) {
     headers: headers,
   });
 
-  const translations = await res.json();
+  // parse body depending on content type
+  const ct = (res.headers.get('content-type') || '').toLowerCase();
+  
+  let body = null;
 
-  return translations;
+  try {
+    if (ct.includes('application/json')) {
+      body = await res.json();
+    } else {
+      body = await res.text();
+    }
+  } catch (err) {
+    body = await res.text().catch(() => null);
+  }
+
+  if (!res.ok) {
+    return { error: true, status: res.status, statusText: res.statusText, body };
+  }
+
+  return body;
 }
