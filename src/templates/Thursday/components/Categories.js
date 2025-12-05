@@ -45,7 +45,7 @@ const renderCategory = async (
 
   const styles = `background: ${background}; color: ${color}; ${category.styles || ''}`;
 
-  const catLinkQuery = queries.categoryLinks[id];
+  const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : "";
   const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
 
   const TitleElement = category?.title?.show
