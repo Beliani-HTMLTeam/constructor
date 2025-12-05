@@ -54,7 +54,7 @@ const categories = [
     },
     paragraph: {
       show: true,
-      align: 'left',
+      align: 'center',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom70px',
     },
