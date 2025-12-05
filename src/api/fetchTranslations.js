@@ -17,9 +17,16 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
 
   for (let query of tableQueries) {
     if (!query.tableName) {
-      query['tableName'] = tableName.split('::')[1];
-      query['year'] = tableName.split('::')[0]
+      const [tYear, tName] = tableName.split('::')
+     
+      query['tableName'] = tName;
+      query['year'] = tYear;
       // console.log(query);
+    } else {
+      const [tYear, tName] = query.tableName.split('::')
+     
+      query['tableName'] = tName;
+      query['year'] = tYear;
     }
 
     if (!query.name || !query.tableRange) {
