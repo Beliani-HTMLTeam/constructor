@@ -136,6 +136,7 @@ const renderCategory = async (
         ${ProductsElement}
 
         ${CTA({
+          color: category.color || '#000000',
           href: ctaHref,
           text: getPhrase('shop now'),
           insideTr: true,
