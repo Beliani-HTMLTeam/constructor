@@ -33,6 +33,7 @@ const Thursday = async ({
   getCategoryTitle,
   getPhrase,
   getProductById,
+  add_utm,
 }) => {
   console.log(categories);
 
@@ -70,8 +71,6 @@ const Thursday = async ({
           alt: 'Top Image',
         })
       : '';
-
-  console.log(queries.intro);
 
   const IntroElement =
     intro && intro.type === 'paragraph'
@@ -127,6 +126,7 @@ const Thursday = async ({
                 };
               }),
         queries,
+        add_utm,
       })
     : '';
 
