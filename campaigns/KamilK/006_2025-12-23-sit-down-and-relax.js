@@ -3,32 +3,31 @@ const campaignTranslationsSheet = '2025::23.12.25 - Sit down and relax';
 
 const tableQueries = [
   {
-    "tableRange": "15:16",
-    "name": "TopImageTitle"
+    tableRange: '15:16',
+    name: 'TopImageTitle',
   },
   {
-    "tableRange": "18",
-    "name": "intro"
+    tableRange: '16',
+    name: 'intro',
   },
   {
-    "tableRange": "19:22",
-    "name": "paragraphs"
+    tableRange: '23:24',
+    name: 'condition',
   },
-  {
-    "tableRange": "23:24",
-    "name": "condition"
-  }
 ];
 
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp25-12-23' }),
   TopImageTitle_src: translateImage({ value: '20251223_01.png' }),
+
   TopImage_src: getImageUrl('20251223_Pic.png', true),
   TopImage_href: translateLink({ value: 'content/lp25-12-23' }),
-  Banner_1: translateLink({ value: 'content/lp25-12-23' }),
-  Banner_1_Image: translateImage({ value: '{ddmmyyyy}b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-12-23' }),
-  Banner_2_Image: translateImage({ value: '{ddmmyyyy}b.png' }),
+
+  Banner_1: translateLink({ value: 'content/lp25-12-18' }),
+  Banner_1_Image: translateImage({ value: '20251218b.png' }),
+
+  Banner_2: translateLink({ value: 'content/lp25-12-17' }),
+  Banner_2_Image: translateImage({ value: '20251217b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -45,12 +44,13 @@ const categories = [
     background: '#FEB24D',
     color: '#000000',
     type: 'grid',
+    paddingTop: '35',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
+      show: false,
       align: 'left',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
@@ -88,14 +88,14 @@ const categories = [
     src: getImageUrl('20251223_Cat10.png', true),
     href: 'https://www.beliani.ch/armchairs/',
     background: '#892626',
-    color: '#000000',
+    color: '#ffffff',
     type: 'grid',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
+      show: false,
       align: 'left',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
@@ -140,7 +140,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
+      show: false,
       align: 'left',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
@@ -178,14 +178,14 @@ const categories = [
     src: getImageUrl('20251223_Cat30.png', true),
     href: 'https://www.beliani.ch/home-accessories/stools/',
     background: '#892626',
-    color: '#000000',
+    color: '#ffffff',
     type: 'grid',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
+      show: false,
       align: 'left',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
@@ -220,26 +220,27 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: "39146",
-  name: "Sit down and relax",
-  date: "23.12.2025",
-  issueCardId: "427132",
-  lpId: "27885",
+  startId: '39146',
+  name: 'Sit down and relax',
+  date: '23.12.2025',
+  issueCardId: '427132',
+  lpId: '27885',
   alarm: {
     isActive: false,
   },
   isArchive: false,
   optimizeImg: false,
-  figmaUrl: "https://www.figma.com/design/zSyoUbfuIVfL8INWxbl6Zz/COPY-%7C-2025.12.25--Sit-down-and-relax?node-id=9001-3963&t=BBSkbd8uOgPIYRKQ-1",
+  figmaUrl:
+    'https://www.figma.com/design/zSyoUbfuIVfL8INWxbl6Zz/COPY-%7C-2025.12.25--Sit-down-and-relax?node-id=9001-3963&t=BBSkbd8uOgPIYRKQ-1',
   templates: [
     {
-      name: "Newsletter",
+      name: 'Newsletter',
       type: types.NEWSLETTER,
       template: templates.Thursday, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: "#FEB24D",
-      color: "#000000",
+      background: '#FEB24D',
+      color: '#000000',
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       intro: {
@@ -253,12 +254,12 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
     },
     {
-      name: "Landing",
+      name: 'Landing',
       type: types.LANDINGPAGE,
       template: templates.Thursday, // User should change this
       css: types.CSS.LP,
-      background: "#FEB24D",
-      color: "#000000",
+      background: '#FEB24D',
+      color: '#000000',
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       intro: {
