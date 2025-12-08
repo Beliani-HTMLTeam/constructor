@@ -31,9 +31,7 @@ const links = {
   TopImageTitle_src: translateImage({ value: '20251219_01.png' }),
   TopImage_src: getImageUrl('20251219topimage.png', true),
   TopImage_href: translateLink({ value: 'content/lp25-12-19' }),
-
-  // TimerFrebie: getImageUrl('20251219free.png', true),
-  Timer_href: translateLink({ value: 'content/lp25-12-19' }),
+  Timer_href: translateLink({ value: 'content/lp25-12-15' }),
   CTAcategory: translateLink({ value: 'winter-essentials/' }),
   Banner_1: translateLink({ value: 'content/lp25-12-12' }),
   Banner_1_Image: translateImage({ value: '20251212b.png' }),

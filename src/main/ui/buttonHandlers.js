@@ -3,6 +3,7 @@ import {
   openIssueHandler,
   figmaCardHandler,
   openLpHandler,
+  purgeDynamicSpreadsheetData
 } from '@/main/events.js';
 import { generateLpLinks } from '@/helpers/generateLpLinks.js';
 import { normalizeProducts } from '@/utils/normalizeProducts.js';
@@ -134,6 +135,29 @@ export function setupOpenIssueHandler(elements, getState) {
     if (!selectedCampaign.issueCardId) return toast.error('Issue card id not found.');
 
     openIssueHandler(selectedCampaign.issueCardId);
+  });
+}
+
+export function setupPurgeDynamicSpreadsheetNameHandler(elements) {
+  const { tabName } = elements;
+
+  tabName?.addEventListener('change', () => {
+    const previousValue = tabName.value;
+    if (!previousValue) return toast.error('Previous value is empty!');
+
+    // Proceed with the change
+  })}
+
+export function setupPurgeDynamicSpreadsheetHandler(elements) {
+  const { purgeDynamicSpreadsheet, tabName, year } = elements;
+
+  purgeDynamicSpreadsheet?.addEventListener('click', () => {
+    // Call the purge function with tabName and year
+    if(!tabName.value || tabName.value === '' ) return toast.error('Tab name is missing!');
+    if(!year.value || year.value === 'default' ) return toast.error('Year is missing!');
+    purgeDynamicSpreadsheetData(tabName, year);
+    tabName.value = '';
+    year.value = 'default';
   });
 }
 

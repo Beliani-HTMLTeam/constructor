@@ -107,3 +107,26 @@ export function setupSelectTemplate(elements, setState, getState, render, setSel
     render();
   });
 }
+
+export function setupSelectPurge(elements) {
+  const { selectPurge } = elements;
+  selectPurge.addEventListener('change', (ev) => {
+    if (ev.target.value === 'default') {
+      return;
+    }
+
+    const purgeMap = {
+      'header': 'https://fed2n8e59dpq.share.zrok.io/static/header/force-refresh',
+      'footer': 'https://fed2n8e59dpq.share.zrok.io/static/footer/force-refresh',
+      'templates': 'https://fed2n8e59dpq.share.zrok.io/static/templates/force-refresh',
+      'category_links': 'https://fed2n8e59dpq.share.zrok.io/static/category_links/force-refresh',
+      'category_titles': 'https://fed2n8e59dpq.share.zrok.io/static/category_titles/force-refresh',
+    };
+
+    const url = purgeMap[ev.target.value];
+    if (url) {
+      window.open(url, '_blank');
+    }
+  })
+  
+}
