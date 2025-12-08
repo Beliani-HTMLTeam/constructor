@@ -164,10 +164,10 @@ function generateCampaignContent(formData, campaignNumber) {
 
     Banner_1: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
     // Banner images intentionally left as placeholders — they are often created on other dates
-    Banner_1_Image: `translateImage({ value: '{ddmmyyyy}b.png' })`,
+    Banner_1_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
 
     Banner_2: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
-    Banner_2_Image: `translateImage({ value: '{ddmmyyyy}b.png' })`,
+    Banner_2_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
   };
 
   // Generate automatic tableQueries structure
