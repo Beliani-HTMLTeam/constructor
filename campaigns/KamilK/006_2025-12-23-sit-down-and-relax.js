@@ -33,7 +33,7 @@ const links = {
 const TopImageTitle_data = {
   color: '#000000',
   backgroundColor: '#FEB24D',
-  type: 'sameTwoLines',
+  type: 'twoSameLines',
 };
 
 const categories = [
