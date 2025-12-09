@@ -162,11 +162,11 @@ function generateCampaignContent(formData, campaignNumber) {
     // prettier-ignore
     TopImage_href: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
 
-    Banner_1: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
+    Banner_1: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,
     // Banner images intentionally left as placeholders — they are often created on other dates
     Banner_1_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
 
-    Banner_2: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
+    Banner_2: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,
     Banner_2_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
   };
 
