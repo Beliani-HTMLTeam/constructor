@@ -75,7 +75,7 @@ const Thursday = async ({
   const IntroElement =
     intro && intro.type === 'paragraph'
       ? Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })
-     : '';
+      : '';
 
   const TimerElement =
     Inside && Inside.type === 'timer'
@@ -91,44 +91,65 @@ const Thursday = async ({
         })
       : '';
 
+  // be defensive: ensure `categories` is an array
+  const safeCategories = Array.isArray(categories) ? categories : [];
+
   const categoriesWithProducts = await Promise.all(
-    categories.map(async (category) => ({
-      ...category,
-      products: await Promise.all(category.products.map((p) => getProductById(p.id, p.src))),
-    }))
+    safeCategories.map(async (category) => {
+      const productEntries = Array.isArray(category && category.products) ? category.products : [];
+      const products = await Promise.all(
+        productEntries.map(async (p) => {
+          try {
+            if (!p) return null;
+            if (typeof getProductById === 'function') {
+              return await getProductById(p.id, p.src);
+            }
+            return null;
+          } catch (err) {
+            console.error('getProductById error for', p, err);
+            return null;
+          }
+        })
+      );
+
+      return {
+        ...category,
+        // filter out failed/undefined product lookups
+        products: products.filter(Boolean),
+      };
+    })
   );
 
-  const CategoriesElement = categories
-    ? await Categories({
-        getPhrase: getPhrase,
-        getCategoryLink: getCategoryLink,
-        getCategoryTitle: getCategoryTitle,
-        categories:
-          categoriesWithProducts.length > 0
-            ? categoriesWithProducts.map((category) => {
-                const href = category.href ? getCategoryLink(category.href) : category.href;
-                const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+  // build categories for rendering safely; if there are no categories, skip rendering
+  let CategoriesElement = '';
+  if (safeCategories.length > 0) {
+    const source = categoriesWithProducts.length > 0 ? categoriesWithProducts : safeCategories;
+    const categoriesForRender = source.map((category) => {
+      const href =
+        category && category.href && typeof getCategoryLink === 'function'
+          ? getCategoryLink(category.href)
+          : (category && category.href) || '';
+      const name =
+        typeof getCategoryTitle === 'function'
+          ? getCategoryTitle(category && category.name) || (category && category.name) || ''
+          : (category && category.name) || '';
 
-                return {
-                  ...category,
-                  href,
-                  name,
-                };
-              })
-            : categories.map((category) => {
-                const href = category.href ? getCategoryLink(category.href) : category.href;
-                const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+      return {
+        ...category,
+        href,
+        name,
+      };
+    });
 
-                return {
-                  ...category,
-                  href,
-                  name,
-                };
-              }),
-        queries,
-        add_utm,
-      })
-    : '';
+    CategoriesElement = await Categories({
+      getPhrase,
+      getCategoryLink,
+      getCategoryTitle,
+      categories: categoriesForRender,
+      queries,
+      add_utm,
+    });
+  }
 
   return `
     ${HeaderElement}
