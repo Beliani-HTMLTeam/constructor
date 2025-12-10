@@ -47,18 +47,28 @@ async function getStaticTranslation({ sheet }) {
     'Content-Type': 'application/json',
     Origin: 'https://kznlabs.com',
     skip_zrok_interstitial: 'true',
-    'User-Agent': 'skibidi-sigma-client',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.134 Safari/537.36',
   };
 
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: headers,
-  });
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: headers,
+    });
 
-  const translations = await res.json();
+    if (!res.ok) {
+      console.warn(`Failed to fetch static translations for '${sheet}': ${res.status} ${res.statusText}`);
+      return { data: {} }; // return empty data to prevent undefined in handlers
+    }
 
-  // console.log('Result for', sheet, translations);
-  return translations;
+    const translations = await res.json();
+
+    // console.log('Result for', sheet, translations);
+    return translations;
+  } catch (err) {
+    console.error(`Error fetching static translations for '${sheet}':`, err);
+    return { data: {} }; // return empty data on network error
+  }
 }
 
 export async function getDynamicTranslation({ year, tab, range }) {
@@ -70,10 +80,8 @@ export async function getDynamicTranslation({ year, tab, range }) {
   
   const headers = {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Origin: 'https://kznlabs.com',
+    // Removed 'Content-Type' for GET to avoid CORS preflight
     skip_zrok_interstitial: 'true',
-    'User-Agent': 'skibidi-sigma-client',
   };
 
   const res = await fetch(url, {
