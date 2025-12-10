@@ -16,7 +16,7 @@ export async function renderTemplate(getState, setState) {
 
   const country = getState('country');
   const templateToRender = getState('template');
-  const spreadsheet = templateToRender?.translationsSpreadsheet || null;
+  const spreadsheet = templateToRender?.translationsSpreadsheet;
   const selectedCampaign = getState('selectedCampaign');
 
   if (!selectedCampaign) return toast.error('No campaign selected.');

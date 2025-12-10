@@ -61,8 +61,8 @@ async function getStaticTranslation({ sheet }) {
   return translations;
 }
 
-export async function getDynamicTranslation({ tab, range }) {
-  const url = `${c.api_url}dynamic/${tab}/${range}/`;
+export async function getDynamicTranslation({ year, tab, range }) {
+  const url = `${c.api_url}dynamic/${year}/${tab}/${range}/`;
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',

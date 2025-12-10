@@ -39,7 +39,7 @@ export function initApp({ campaigns, shops, config }) {
 
 function setupEventListeners(elements, campaigns, shops, jsConfetti) {
   // Login button
-  elements.login?.addEventListener('click', GoogleAuth.login);
+  // elements.login?.addEventListener('click', GoogleAuth.login);
 
   // Render function with state access
   const render = () => renderTemplate(getState, setState);

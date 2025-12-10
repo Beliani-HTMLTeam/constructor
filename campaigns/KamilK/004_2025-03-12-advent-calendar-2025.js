@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '03.12.25 - Advent calendar';
+const campaignTranslationsSheet = '2025::03.12.25 - Advent calendar';
 
 const tableQueries = [
   {
