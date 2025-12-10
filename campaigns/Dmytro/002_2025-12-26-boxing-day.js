@@ -7,9 +7,10 @@ const tableQueries = [
     name: 'TopImageTitle',
   },
   {
-    tableRange: '22:25',
+    tableRange: '22:27',
     name: 'offerPart',
   },
+  { tableRange: '28:29', name: 'codeCTA' },
   {
     tableRange: '12:13',
     name: 'timer',
@@ -27,22 +28,19 @@ const tableQueries = [
 // images already uploaded to remote server
 
 const links = {
+  code_href: translateLink({ value: 'content/lp2025-12-26' }),
   TopImageTitle_href: translateLink({ value: 'content/lp2025-12-26' }),
   TopImageTitle_src: translateImage({ value: '20251226_01.png' }),
   TopImage_src: getImageUrl('20251226topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp2025-12-26' }),
   Timer_href: translateLink({ value: 'content/lp2025-12-20' }),
   CTAcategory: translateLink({ value: 'boxing-day-deals/' }),
-  Banner_1: translateLink({ value: 'content/lp25-12-12' }),
-  Banner_1_Image: translateImage({ value: '20251212b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-12-11' }),
-  Banner_2_Image: translateImage({ value: '20251211b.png' }),
 
   // That's what supposed to be here
-  // Banner_1: translateLink({ value: 'content/lp25-12-19' }),
-  // Banner_1_Image: translateImage({ value: '20251219b.png' }),
-  // Banner_2: translateLink({ value: 'content/lp25-12-18' }),
-  // Banner_2_Image: translateImage({ value: '20251218b.png' }),
+  Banner_1: translateLink({ value: 'content/lp25-12-19' }),
+  Banner_1_Image: translateImage({ value: '20251219b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-12-18' }),
+  Banner_2_Image: translateImage({ value: '20251218b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -208,13 +206,13 @@ const categories = [
     ],
   },
   {
-    name: 'Office',
+    name: 'Hallway',
     background: '#750000',
     color: '#FFFFFF',
     src1: getImageUrl('20251226Category6a.png', true),
     src2: getImageUrl('20251226Category6b.png', true),
     src3: getImageUrl('20251226Category6c.png', true),
-    href: 'https://www.beliani.ch/office-furniture/',
+    href: 'https://www.beliani.ch/hallway/',
     type: 'unique', // make it by hand (of from old constructor)
     title: {
       show: true,

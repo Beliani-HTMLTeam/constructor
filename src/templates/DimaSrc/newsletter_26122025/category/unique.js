@@ -9,7 +9,7 @@ export const render = (
   categoryIndex,
   insideContainer = true
 ) => {
-  console.log('products', products);
+  // console.log('products', products);
   const reverse = categoryIndex % 2 === 1;
 
   const row = (smallIdx, bigIdx) => `

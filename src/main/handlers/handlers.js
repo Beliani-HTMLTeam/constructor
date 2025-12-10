@@ -142,6 +142,8 @@ export class TemplateHandlers {
     let slug = getState('country');
     slug = String(slug).toLowerCase();
 
+    // console.log(' staticTranslations.category_links', staticTranslations.category_links.slug);
+
     const slugIndex = staticTranslations.category_links.slug.findIndex((item) => item === slug);
 
     // Case-insensitive key lookup

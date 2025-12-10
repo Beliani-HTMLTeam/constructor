@@ -9,11 +9,9 @@ export const renderProducts = async (
   categoryIndex
 ) => {
   const type = categoryType ? categoryType.toLowerCase() : 'default';
-  console.log(categoryType, type);
 
   try {
     const module = await import(`../../category/${type}.js`);
-    console.log('module', module);
 
     return module.render(products, showPrices, showName, queries, categoryIndex);
   } catch (e) {

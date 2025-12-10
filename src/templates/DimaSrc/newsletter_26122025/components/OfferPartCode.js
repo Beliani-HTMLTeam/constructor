@@ -15,6 +15,7 @@ export function OfferPartCode({
   type,
   backgroundColor,
 }) {
+  console.log('href:', href);
   const newsletter = NewsletterOfferPart({
     color,
     data,

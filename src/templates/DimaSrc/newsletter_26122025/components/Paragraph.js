@@ -7,7 +7,6 @@ const Paragraph = ({
   spanStyle,
   align = 'left',
 }) => {
-  console.log('text in paragraph', text);
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
   if (String(text).trim() === '') {

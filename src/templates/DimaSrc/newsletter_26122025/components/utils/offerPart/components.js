@@ -14,8 +14,6 @@ const NewsletterOfferPart = ({
   type,
   backgroundColor,
 }) => {
-  console.log('paragraphs in newsletter: ', paragraph1, paragraph2, paragraph3);
-  console.log('data', data ? data[0] : paragraph1 || 'Missing Offer - part 1');
   return `
     <tr>
       <td >
@@ -35,6 +33,11 @@ const NewsletterOfferPart = ({
   
     <tr>
       <td style="color: ${color}; text-align: center;">
+      ${Paragraph({ text: data ? data[1] : paragraph1, align: 'center' })}
+      </td>
+    </tr>
+    <tr>
+      <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}
       </td>
     </tr>
@@ -48,8 +51,7 @@ const NewsletterOfferPart = ({
       <td >
         ${GetCode({
           color: color,
-          // code: queries?.codeCTA || 'Code tableQuery not found.',
-          code: 'Get code',
+          code: queries?.codeCTA || 'Code tableQuery not found.',
           link: href,
           type,
         })}
@@ -64,7 +66,7 @@ const NewsletterOfferPart = ({
     
     <tr>
       <td style="color: ${color}; text-align: center;">
-        ${Paragraph({ text: data ? data[3] : paragraph3, align: 'center' })}
+        ${Paragraph({ text: data ? data[5] : paragraph3, align: 'center' })}
       </td> 
     </tr>
   
@@ -88,8 +90,6 @@ const LandingOfferPart = ({
   type,
   backgroundColor,
 }) => {
-  console.log('paragraphs in newsletter: ', paragraph1, paragraph2, paragraph3);
-  console.log('data in lp', data ? data[0] : paragraph1 || 'Missing Offer - part 1');
   return `
     <tr>
     <td >
@@ -114,6 +114,11 @@ const LandingOfferPart = ({
   </tr>
   <tr>
     <td style="color: ${color}; text-align: center;">
+      ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}
+    </td>
+  </tr>
+  <tr>
+    <td style="color: ${color}; text-align: center;">
       ${Space({ className: 'newsletterBottom35px' })}
     </td>
   </tr>
@@ -122,8 +127,7 @@ const LandingOfferPart = ({
     <td >
       ${GetCode({
         color: color,
-        // code: queries?.codeCTA || 'Code tableQuery not found.',
-        code: 'xxx',
+        code: queries?.codeCTA || 'Code tableQuery not found.',
         link: href,
         type,
       })}
@@ -138,7 +142,7 @@ const LandingOfferPart = ({
   
   <tr>
     <td style="color: ${color}; text-align: center;" >
-      ${Paragraph({ text: data ? data[3] : paragraph3, align: 'center' })}
+      ${Paragraph({ text: data ? data[5] : paragraph3, align: 'center' })}
     </td>
   </tr>
   

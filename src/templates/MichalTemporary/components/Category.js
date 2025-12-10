@@ -1,13 +1,6 @@
 import { isAllowToRender } from '@helpers/optimizeImage.js';
-import {
-  ImageWithLink,
-  Line,
-  Paragraph,
-  Space,
-  Title,
-  CTA,
-} from './index.js';
-import {translateImage} from '@helpers/translateImage.js';
+import { ImageWithLink, Line, Paragraph, Space, Title, CTA } from './index.js';
+import { translateImage } from '@helpers/translateImage.js';
 
 export const Category = isAllowToRender(
   ({
@@ -34,8 +27,7 @@ export const Category = isAllowToRender(
     type = 'monday',
     utm,
   }) => {
-
-    console.log(showPrices)
+    // console.log(showPrices)
     src = typeof src == 'object' ? src.src ?? src.value : src;
 
     // console.log(idx, queries.paragraphs[idx])
@@ -45,7 +37,6 @@ export const Category = isAllowToRender(
       return 'Please specify type category.';
     }
 
-    
     // <!-- ${ImageWithLink({ align: 'left', href: href, src: prods[0].src })} -->
     // <!-- ${ImageWithLink({ align: 'right', href: href, src: prods[0].src })} -->
 
@@ -202,8 +193,8 @@ export const Category = isAllowToRender(
               : ''
           }
 				`;
-        case 'xmas-gift-buttons':
-          return `
+      case 'xmas-gift-buttons':
+        return `
           ${
             title?.show
               ? `
@@ -236,7 +227,9 @@ export const Category = isAllowToRender(
               })}
               
               ${
-                !products || products.length === 0 ? `` : Space({ className: 'newsletterBottom35px' })
+                !products || products.length === 0
+                  ? ``
+                  : Space({ className: 'newsletterBottom35px' })
               }
               `
               : ``
@@ -341,10 +334,9 @@ export const Category = isAllowToRender(
             `
               : ''
           }`;
-  
+
       default:
         break;
     }
-
   }
 );

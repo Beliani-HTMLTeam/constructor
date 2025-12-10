@@ -37,7 +37,6 @@ const Friday = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log(queries);
   const selectCampaign = getState('selectedCampaign');
 
   // prettier-ignore
@@ -55,11 +54,10 @@ const Friday = async ({
       ? TopImageTitle({
           href: links.TopImageTitle_href,
           src: links.TopImageTitle_src,
-          // title1: queries.TopImageTitle[0] || 'Translation not found',
-          title1: 'Translation not found',
-
-          // title2: queries.TopImageTitle[1] || 'Translation not found',
-          title2: 'Translation not found',
+          title1: queries.TopImageTitle[0] || 'Translation not found',
+          // title1: 'Translation not found',
+          title2: queries.TopImageTitle[1] || 'Translation not found',
+          // title2: 'Translation not found',
           color: TopImageTitle_data.color,
           background: TopImageTitle_data.background,
           type: TopImageTitle_data.type,
@@ -78,13 +76,13 @@ const Friday = async ({
         })
       : '';
 
-  console.log('offer part:', queries.offerPart);
+  console.log('links in template', links);
   const OfferPartElement =
     OfferPart && OfferPart.type === 'code'
       ? OfferPartCode({
           color: OfferPart.color,
           data: queries.offerPart,
-          href: links[0],
+          href: links.code_href,
           getPhrase,
           type,
           queries,
@@ -103,10 +101,10 @@ const Friday = async ({
   const TimerElement =
     Inside && Inside.type === 'timer'
       ? Timer({
-          // title: queries.timer[0] || 'Translation not found',
-          title: 'Free mirrors',
-          // subtitle: queries.timer[1] || 'Translation not found',
-          subtitle: 'deal ends in:',
+          title: queries.timer[0] || 'Translation not found',
+          // title: 'Free mirrors',
+          subtitle: queries.timer[1] || 'Translation not found',
+          // subtitle: 'deal ends in:',
           href: links.Timer_href,
           src: timer.image[country],
           color: Inside.color,

@@ -74,7 +74,7 @@ function purgeDynamicSpreadsheetData(year, tabName) {
 
 function selectCampaignHandler(ev, campaigns) {
   const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
-  console.log('selected Campaign', selectedCampaign);
+  // console.log('selected Campaign', selectedCampaign);
 
   if (!selectedCampaign) return toast.error(`Campaign startId ${ev.target.value} not found.`);
 
