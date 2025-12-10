@@ -89,6 +89,16 @@ export class TemplateHandlers {
     let slug = getState('country');
     slug = String(slug).toLowerCase();
 
+    // defensive: ensure category_titles and slug field exist
+    if (
+      !staticTranslations.category_titles ||
+      !staticTranslations.category_titles.slug ||
+      !Array.isArray(staticTranslations.category_titles.slug)
+    ) {
+      console.warn('Static translations for category_titles not loaded or slug field missing');
+      return undefined;
+    }
+
     const slugIndex = staticTranslations.category_titles.slug.findIndex((item) => item === slug);
 
     if (slugIndex === -1) {
@@ -142,7 +152,15 @@ export class TemplateHandlers {
     let slug = getState('country');
     slug = String(slug).toLowerCase();
 
-    // console.log(' staticTranslations.category_links', staticTranslations.category_links.slug);
+    // defensive: ensure category_links and slug field exist
+    if (
+      !staticTranslations.category_links ||
+      !staticTranslations.category_links.slug ||
+      !Array.isArray(staticTranslations.category_links.slug)
+    ) {
+      console.warn('Static translations for category_links not loaded or slug field missing');
+      return category; // return original category as fallback
+    }
 
     const slugIndex = staticTranslations.category_links.slug.findIndex((item) => item === slug);
 
@@ -237,6 +255,16 @@ export class TemplateHandlers {
     let slug = getState('country');
     slug = String(slug).toLowerCase();
 
+    // defensive: ensure footer and slug field exist
+    if (
+      !staticTranslations.footer ||
+      !staticTranslations.footer.slug ||
+      !Array.isArray(staticTranslations.footer.slug)
+    ) {
+      console.warn('Static translations for footer not loaded or slug field missing');
+      return undefined;
+    }
+
     const slugIndex = staticTranslations.footer.slug.findIndex((item) => item === slug);
 
     // Case-insensitive key lookup
@@ -269,6 +297,16 @@ export class TemplateHandlers {
   getPhrase = (column) => {
     let slug = getState('country');
     slug = String(slug).toLowerCase();
+
+    // defensive: ensure templates and slug field exist
+    if (
+      !staticTranslations.templates ||
+      !staticTranslations.templates.slug ||
+      !Array.isArray(staticTranslations.templates.slug)
+    ) {
+      console.warn('Static translations for templates not loaded or slug field missing');
+      return undefined;
+    }
 
     const slugIndex = staticTranslations.templates.slug.findIndex((item) => item === slug);
 
@@ -304,6 +342,16 @@ export class TemplateHandlers {
   getHeader = (column) => {
     let slug = getState('country');
     slug = String(slug).toLowerCase();
+
+    // defensive: ensure header and slug field exist
+    if (
+      !staticTranslations.header ||
+      !staticTranslations.header.slug ||
+      !Array.isArray(staticTranslations.header.slug)
+    ) {
+      console.warn('Static translations for header not loaded or slug field missing');
+      return undefined;
+    }
 
     const slugIndex = staticTranslations.header.slug.findIndex((item) => item === slug);
 
