@@ -59,6 +59,7 @@ const renderCategory = async (
           background: background,
           align: 'left',
           insideTable: true,
+          spanStyle: `color: ${color};`,
           tableContainer: true,
           className: 'newsletterTitle',
         })}
@@ -96,6 +97,7 @@ const renderCategory = async (
             text: queries.paragraphs[id] || 'Translation not found',
             align: category.paragraph.align,
             insideTable: true,
+            spanStyle: `color: ${color};`,
             tableContainer: true,
           })}
         </td>
@@ -116,7 +118,9 @@ const renderCategory = async (
         category.showPrices || true,
         category.showName || true,
         queries,
-        category.type
+        category.type,
+        category.insideContainer || true,
+        category.color || '#000000'
       )
     : '';
 
@@ -168,7 +172,15 @@ const renderCategory = async (
   `;
 };
 
-const renderProducts = async (products, showPrices, showName, queries, categoryType) => {
+const renderProducts = async (
+  products,
+  showPrices,
+  showNames,
+  queries,
+  categoryType,
+  insideContainer,
+  color
+) => {
   // console.log('produkty ', products);
 
   const type = categoryType ? categoryType.toLowerCase() : 'default';
@@ -176,14 +188,14 @@ const renderProducts = async (products, showPrices, showName, queries, categoryT
   try {
     const module = await import(`./category/${type}.js`);
 
-    return module.render(products, showPrices, showName, queries);
+    return module.render(products, showPrices, showNames, queries, insideContainer, color);
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);
     console.error(e.message);
 
     const defaultModule = await import('./category/default.js');
 
-    return defaultModule.render(products, showPrices, showName, queries);
+    return defaultModule.render(products, showPrices, showNames, queries, insideContainer, color);
   }
 };
 

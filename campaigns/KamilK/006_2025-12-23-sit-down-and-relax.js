@@ -3,7 +3,7 @@ const campaignTranslationsSheet = '2025::23.12.25 - Sit down and relax';
 
 const tableQueries = [
   {
-    tableRange: '15:16',
+    tableRange: '13:14',
     name: 'TopImageTitle',
   },
   {
@@ -11,7 +11,7 @@ const tableQueries = [
     name: 'intro',
   },
   {
-    tableRange: '23:24',
+    tableRange: '21:22',
     name: 'condition',
   },
 ];
