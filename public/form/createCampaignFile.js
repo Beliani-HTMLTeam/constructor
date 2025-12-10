@@ -143,15 +143,31 @@ function generateCampaignContent(formData, campaignNumber) {
     .replace(/\//g, '.');
 
   // Generate automatic links structure
+  // derive date parts from campaignDate (expected format YYYY-MM-DD)
+  const _dateParts = (campaignDate || '').split('-');
+  const _yyyy = _dateParts[0] || '';
+  const _mm = _dateParts[1] || '';
+  const _dd = _dateParts[2] || '';
+  const _yy = _yyyy.length === 4 ? _yyyy.slice(2) : _yyyy;
+  const _yyyymmdd = `${_yyyy}${_mm}${_dd}`;
+
   const defaultLinks = {
-    TopImageTitle_href:
-      "translateLink({ value: 'content/lp" + campaignDate.replace(/-/g, '-') + "' })",
-    TopImageTitle_src: "translateImage({ value: '" + campaignDate.replace(/-/g, '') + "_01.png' })",
-    TopImage: "getImageUrl('" + campaignDate.replace(/-/g, '') + "_Pic.png', true)",
-    Banner_1: "translateLink({ value: 'content/lp-placeholder-1' })",
-    Banner_1_Image: "translateImage({ value: 'placeholder1.png' })",
-    Banner_2: "translateLink({ value: 'content/lp-placeholder-2' })",
-    Banner_2_Image: "translateImage({ value: 'placeholder2.png' })",
+    // hrefs should use lpYY-MM-DD format
+    TopImageTitle_href: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
+    // image src should use YYYYMMDD*_*.png pattern
+    TopImageTitle_src: `translateImage({ value: '${_yyyymmdd}_01.png' })`,
+
+    // prettier-ignore
+    TopImage_src: `getImageUrl('${_yyyymmdd}_Pic.png', true)`,
+    // prettier-ignore
+    TopImage_href: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
+
+    Banner_1: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,
+    // Banner images intentionally left as placeholders — they are often created on other dates
+    Banner_1_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
+
+    Banner_2: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,
+    Banner_2_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
   };
 
   // Generate automatic tableQueries structure
@@ -176,7 +192,7 @@ function generateCampaignContent(formData, campaignNumber) {
 
   // Generate the campaign content with constants at the top
   let campaignContent = `// Campaign generated from form
-const campaignTranslationsSheet = '${shortDate} - ${campaignName}';
+const campaignTranslationsSheet = '2026::${shortDate} - ${campaignName}';
 
 const tableQueries = ${JSON.stringify(defaultTableQueries, null, 2)};
 
@@ -315,7 +331,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: null, // User should change this
+      template: templates.Thursday, // User should change this
       css: ${cssType},
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "${background}",
@@ -328,7 +344,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: null, // User should change this
+      template: templates.Thursday, // User should change this
       css: ${cssTypeLP},
       background: "${background}",
       color: "${color}",

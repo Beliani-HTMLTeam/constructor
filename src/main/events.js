@@ -31,6 +31,10 @@ function figmaCardHandler(url) {
   window.open(url, '_blank');
 }
 
+function purgeDynamicSpreadsheetData(tabName, year) {
+  window.open(`https://fed2n8e59dpq.share.zrok.io/dynamic/${year.value}/${tabName.value}/force-refresh`, '_blank');
+}
+
 function selectCampaignHandler(ev, campaigns) {
   const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
 
@@ -80,4 +84,5 @@ export {
   handleShopChange,
   openIssueHandler,
   figmaCardHandler,
+  purgeDynamicSpreadsheetData,
 };

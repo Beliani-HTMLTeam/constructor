@@ -409,6 +409,12 @@ schema.forEach((page, page_id) => {
         data[el.name] = el.value;
       });
 
+      // `familyVersion` comes from a hidden input and should be numeric (0 = NEW, 1 = OLD)
+      if (typeof data.familyVersion !== 'undefined') {
+        const num = Number(data.familyVersion);
+        data.familyVersion = Number.isNaN(num) ? data.familyVersion : num;
+      }
+
       // trigger a custom event with the collected data for other code to handle
       const evt = new CustomEvent('creatorFormSubmit', { detail: data });
       document.dispatchEvent(evt);

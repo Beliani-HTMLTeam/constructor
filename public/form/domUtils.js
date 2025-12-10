@@ -71,26 +71,25 @@ const createToggle = (field) => {
   const toggle = document.createElement('div');
   toggle.classList.add('family-version-toggle');
 
-  // OLD label
-  const oldSpan = createOptionSpan(field.option1);
+  // NEW label (left) and OLD label (right) - use schema option1=NEW, option2=OLD
+  const newSpan = createOptionSpan(field.option1);
 
   // switch (label with aria-checked)
   const switchLabel = document.createElement('label');
   switchLabel.classList.add('fv-switch');
 
-  // Set default state based on defaultValue or option1 (NEW)
+  // Determine default value (numeric or string as provided in schema)
   const defaultValue = field.defaultValue !== undefined ? field.defaultValue : field.option1.value;
-  const isDefaultNew = defaultValue === field.option1.value;
+  const isDefaultNew = String(defaultValue) === String(field.option1.value);
 
-  switchLabel.setAttribute('aria-checked', isDefaultNew ? 'false' : 'true');
-  switchLabel.tabIndex = 0;
-
+  // Make the checkbox id unique per field to avoid collisions when multiple toggles exist
   const hiddenCheckbox = document.createElement('input');
   hiddenCheckbox.type = 'checkbox';
-  hiddenCheckbox.id = 'fv-toggle';
+  hiddenCheckbox.id = `${field.id}_fv_toggle`;
   hiddenCheckbox.setAttribute('aria-hidden', 'true');
   hiddenCheckbox.style.display = 'none';
-  hiddenCheckbox.checked = !isDefaultNew; // checked means OLD (option2)
+  // Make checked reflect NEW state (checked === NEW)
+  hiddenCheckbox.checked = !!isDefaultNew;
 
   const slider = document.createElement('span');
   slider.classList.add('fv-slider');
@@ -98,32 +97,41 @@ const createToggle = (field) => {
   switchLabel.appendChild(hiddenCheckbox);
   switchLabel.appendChild(slider);
 
-  // NEW label
-  const newSpan = createOptionSpan(field.option2);
+  // OLD label
+  const oldSpan = createOptionSpan(field.option2);
 
-  // hidden input with correct default value
+  // hidden input with correct default value (store as string)
   const hiddenInput = createInput(field, true);
-  hiddenInput.value = defaultValue;
+  hiddenInput.value = String(defaultValue);
 
+  // Render OLD on the left and NEW on the right so the slider position
+  // (aria-checked="true" -> slider moves right) visually highlights NEW.
   toggle.appendChild(oldSpan);
   toggle.appendChild(switchLabel);
   toggle.appendChild(newSpan);
   toggle.appendChild(hiddenInput);
 
-  // Add click handler to toggle between options
-  switchLabel.addEventListener('click', function () {
-    const isCurrentlyNew = hiddenInput.value == field.option1.value;
+  // Add click handler to toggle between options - keep value aligned with schema values
+  const setState = (isNew) => {
+    hiddenInput.value = String(isNew ? field.option1.value : field.option2.value);
+    hiddenCheckbox.checked = !!isNew;
+    switchLabel.setAttribute('aria-checked', isNew ? 'true' : 'false');
+  };
 
-    if (isCurrentlyNew) {
-      // Switch to OLD
-      hiddenInput.value = field.option2.value;
-      hiddenCheckbox.checked = true;
-      switchLabel.setAttribute('aria-checked', 'true');
-    } else {
-      // Switch to NEW
-      hiddenInput.value = field.option1.value;
-      hiddenCheckbox.checked = false;
-      switchLabel.setAttribute('aria-checked', 'false');
+  // initial state
+  setState(isDefaultNew);
+
+  switchLabel.addEventListener('click', function () {
+    const newState = !hiddenCheckbox.checked;
+    setState(newState);
+  });
+
+  // keyboard accessibility: toggle on Space or Enter
+  switchLabel.addEventListener('keydown', function (ev) {
+    if (ev.key === ' ' || ev.key === 'Enter') {
+      ev.preventDefault();
+      const newState = !hiddenCheckbox.checked;
+      setState(newState);
     }
   });
 

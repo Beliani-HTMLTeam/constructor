@@ -3,6 +3,7 @@ import { Space } from './Space.js';
 import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
+import { Line } from './Line.js';
 
 const Categories = async ({
   getPhrase,
@@ -10,6 +11,7 @@ const Categories = async ({
   getCategoryTitle,
   categories,
   queries,
+  add_utm,
 }) => {
   let html = '';
 
@@ -21,7 +23,8 @@ const Categories = async ({
         queries,
         getPhrase,
         getCategoryLink,
-        getCategoryTitle
+        getCategoryTitle,
+        add_utm
       );
     }
   }
@@ -35,12 +38,16 @@ const renderCategory = async (
   queries,
   getPhrase,
   getCategoryLink,
-  getCategoryTitle
+  getCategoryTitle,
+  add_utm
 ) => {
   const background = category.background || 'white';
   const color = category.color || '#000000';
 
   const styles = `background: ${background}; color: ${color}; ${category.styles || ''}`;
+
+  const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : '';
+  const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
 
   const TitleElement = category?.title?.show
     ? `
@@ -68,9 +75,10 @@ const renderCategory = async (
 
   const ImageElement = category.src
     ? ImageWithLink({
-        href: category.href,
+        href: ctaHref,
         src: category.src,
         insideTr: true,
+        tdClass: category.tdClass,
       })
     : '';
 
@@ -100,7 +108,7 @@ const renderCategory = async (
           : ''
       }
     `
-    : '';
+    : Space({ insideTr: true });
 
   const ProductsElement = category.products
     ? await renderProducts(
@@ -117,7 +125,14 @@ const renderCategory = async (
   <tr>
     <td>
       <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%">
-        ${Space({ insideTr: true, className: `newsletterBottom${id === 0 ? 60 : 35}px` })}
+        ${
+          !category.paddingTop || category.paddingTop > 0
+            ? Space({
+                insideTr: true,
+                className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 60 : 35)}px`,
+              })
+            : ''
+        }
 
         ${TitleElement}
 
@@ -128,13 +143,24 @@ const renderCategory = async (
         ${ProductsElement}
 
         ${CTA({
-          href: category.href || '',
+          color: category.color || '#000000',
+          href: ctaHref,
           text: getPhrase('shop now'),
           insideTr: true,
           tdClass: 'newsletterContainer',
         })}
 
         ${Space({ insideTr: true, className: 'newsletterBottom80px' })}
+
+        ${
+          category?.line?.show
+            ? Line({
+                insideTr: true,
+                insideContainer: category?.line?.insideContainer,
+                src: category?.line?.src,
+              })
+            : ''
+        }
       </table>
     </td>
   </tr>

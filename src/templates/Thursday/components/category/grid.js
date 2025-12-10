@@ -16,7 +16,7 @@ export const render = (products, showPrices, showNames, queries, insideContainer
       for (let c = 0; c < cols; c++) {
         const product = products[i + c];
         // prettier-ignore
-        productsInnerHtml += `<td style="width:50%" width="50%" ${(c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
+        productsInnerHtml += `<td style="width:50%;vertical-align:top;" width="50%" ${(c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
 
         if (product) {
           productsInnerHtml += Product(product, showPrices, showNames);

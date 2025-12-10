@@ -113,3 +113,16 @@ body {
   border-top: 6px solid #666;
   pointer-events: none;
 }
+
+/* Dmytro's styles */
+.block-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.purge-dynamic {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

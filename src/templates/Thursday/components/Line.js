@@ -1,6 +1,7 @@
 const Line = ({
   src = 'https://pictureserver.net/static/2025/line.jpg',
   insideTr = false,
+  insideContainer = false,
   insideTable = false,
   tableContainer = false,
 }) => {
@@ -11,7 +12,7 @@ const Line = ({
   html += `<img src=${src} style="display:block" width="100%" alt="Line separator" />`;
 
   if (insideTr) {
-    html = `<tr><td>${html}</td></tr>`;
+    html = `<tr><td${insideContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr>`;
   }
 
   if (insideTable) {

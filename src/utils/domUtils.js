@@ -3,6 +3,7 @@ export function getDOMElements() {
   const selectLanguage = document.querySelector('#languages');
   const selectCampaigns = document.querySelector('#campaigns');
   const selectTemplates = document.querySelector('#templates');
+  const selectPurge = document.querySelector('#purge');
 
   return {
     selectShop,
@@ -25,7 +26,13 @@ export function getDOMElements() {
     openIssue: document.querySelector('.openIssue'),
     openFigma: document.querySelector('.figmaCard'),
     openLP: document.querySelector('.openLP'),
+    
+    purgeDynamicSpreadsheet: document.querySelector('.purgeDynamicSpreadsheet'),
+    tabName: document.querySelector('#tabName'),
+    year: document.querySelector('#year'),
 
+    selectPurge,
+    selectPurgeWrapper: selectPurge?.parentElement,
     // Login button is handled separately in setupEventListeners
     // login: document.querySelector('#login'),
   };

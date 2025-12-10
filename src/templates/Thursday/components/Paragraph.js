@@ -15,10 +15,10 @@ const Paragraph = ({
 
   let html = '';
 
-  html += `<span class="${className}" style="${spanStyle ?? ''}">${text}</span>`;
+  html += `<span class="${className}" style="text-align: ${align}; ${spanStyle ?? ''}">${text}</span>`;
 
   if (insideTr) {
-    html = `<tr><td>${html}</td></tr>`;
+    html = `<tr><td style="text-align: ${align};">${html}</td></tr>`;
   }
 
   if (insideTable) {
@@ -29,7 +29,7 @@ const Paragraph = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes}><tr><td style="text-align: ${align};" ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
   }
 
   return html;
