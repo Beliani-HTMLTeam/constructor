@@ -3,7 +3,7 @@ import {
   openIssueHandler,
   figmaCardHandler,
   openLpHandler,
-  purgeDynamicSpreadsheetData
+  purgeDynamicSpreadsheetData,
 } from '@/main/events.js';
 import { generateLpLinks } from '@/helpers/generateLpLinks.js';
 import { normalizeProducts } from '@/utils/normalizeProducts.js';
@@ -11,6 +11,7 @@ import { isQuotaExceededError } from '@/helpers/isQuotaExceededError.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 
 import { toast } from 'sonner';
+import { getState } from '../state/appState';
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;
@@ -138,26 +139,28 @@ export function setupOpenIssueHandler(elements, getState) {
   });
 }
 
-export function setupPurgeDynamicSpreadsheetNameHandler(elements) {
-  const { tabName } = elements;
-
-  tabName?.addEventListener('change', () => {
-    const previousValue = tabName.value;
-    if (!previousValue) return toast.error('Previous value is empty!');
-
-    // Proceed with the change
-  })}
-
 export function setupPurgeDynamicSpreadsheetHandler(elements) {
   const { purgeDynamicSpreadsheet, tabName, year } = elements;
 
   purgeDynamicSpreadsheet?.addEventListener('click', () => {
-    // Call the purge function with tabName and year
-    if(!tabName.value || tabName.value === '' ) return toast.error('Tab name is missing!');
-    if(!year.value || year.value === 'default' ) return toast.error('Year is missing!');
-    purgeDynamicSpreadsheetData(tabName, year);
-    tabName.value = '';
-    year.value = 'default';
+    const selectedCampaign = getState('selectedCampaign');
+    if (!selectedCampaign || !selectedCampaign.startId) {
+      return toast.error('Please select a campaign first!');
+    }
+    const selectedTemplates = getState('selectedTemplates');
+    if (!selectedTemplates || selectedTemplates.length === 0) {
+      return toast.error('Please select a template first!');
+    }
+    const template = selectedTemplates[0];
+    if (!template.translationsSpreadsheet) {
+      return toast.error('Selected template does not have translations spreadsheet data!');
+    }
+    const spreadsheetData = template.translationsSpreadsheet.split('::');
+    if (spreadsheetData.length !== 2) {
+      return toast.error('Invalid translations spreadsheet format!');
+    }
+    const [autoYear, autoTabName] = spreadsheetData;
+    purgeDynamicSpreadsheetData(autoYear, autoTabName);
   });
 }
 

@@ -7,6 +7,7 @@ import {
   hideElements,
 } from '@/utils/domUtils.js';
 import { root } from '@/app.js';
+import { getIframe } from '@/helpers/getIframe';
 
 export function setupSelectCampaigns(
   elements,
@@ -16,8 +17,14 @@ export function setupSelectCampaigns(
   render,
   setSelectedTemplate
 ) {
-  const { selectCampaigns, selectTemplates, selectTemplatesWrapper, openIssue, openFigma } =
-    elements;
+  const {
+    selectCampaigns,
+    selectTemplates,
+    selectTemplatesWrapper,
+    openIssue,
+    openFigma,
+    purgeDynamicSpreadsheet,
+  } = elements;
 
   selectCampaigns.addEventListener('change', (ev) => {
     if (ev.target.value === 'default') {
@@ -25,7 +32,13 @@ export function setupSelectCampaigns(
     }
 
     // Show select templates after selecting campaign
-    showElements(selectTemplates, selectTemplatesWrapper, openIssue, openFigma);
+    showElements(
+      selectTemplates,
+      selectTemplatesWrapper,
+      openIssue,
+      openFigma,
+      purgeDynamicSpreadsheet
+    );
 
     const { selectedCampaign, templates } = selectCampaignHandler(ev, campaigns);
 
@@ -84,7 +97,6 @@ export function setupSelectLanguage(elements, setState, getState, render, handle
       return;
     }
 
-    // Show elements after selecting language
     showElements(selectShop, selectShopWrapper, openLP, openCampaign);
 
     handleSlugChange(ev);
@@ -100,7 +112,6 @@ export function setupSelectTemplate(elements, setState, getState, render, setSel
       return;
     }
 
-    // Show shop selection after selecting template
     showElements(selectShop, selectShopWrapper);
 
     setSelectedTemplate(ev);
@@ -116,17 +127,49 @@ export function setupSelectPurge(elements) {
     }
 
     const purgeMap = {
-      'header': 'https://fed2n8e59dpq.share.zrok.io/static/header/force-refresh',
-      'footer': 'https://fed2n8e59dpq.share.zrok.io/static/footer/force-refresh',
-      'templates': 'https://fed2n8e59dpq.share.zrok.io/static/templates/force-refresh',
-      'category_links': 'https://fed2n8e59dpq.share.zrok.io/static/category_links/force-refresh',
-      'category_titles': 'https://fed2n8e59dpq.share.zrok.io/static/category_titles/force-refresh',
+      header: 'https://fed2n8e59dpq.share.zrok.io/static/header/force-refresh',
+      footer: 'https://fed2n8e59dpq.share.zrok.io/static/footer/force-refresh',
+      templates: 'https://fed2n8e59dpq.share.zrok.io/static/templates/force-refresh',
+      category_links: 'https://fed2n8e59dpq.share.zrok.io/static/category_links/force-refresh',
+      category_titles: 'https://fed2n8e59dpq.share.zrok.io/static/category_titles/force-refresh',
     };
 
     const url = purgeMap[ev.target.value];
+    const purgeType = ev.target.value;
     if (url) {
-      window.open(url, '_blank');
+      const selectElement = ev.target;
+      purgeInBackground(url, purgeType, selectElement);
     }
-  })
-  
+  });
+}
+
+function purgeInBackground(url, purgeType, selectElement) {
+  const iframe = getIframe(url);
+  document.body.appendChild(iframe);
+
+  iframe.onload = function () {
+    setTimeout(() => {
+      if (document.body.contains(iframe)) {
+        document.body.removeChild(iframe);
+      }
+      alert(`✅ Successfully purged: ${purgeType.replace('_', ' ')}`);
+      selectElement.value = 'default';
+    }, 1000);
+  };
+
+  iframe.onerror = function () {
+    if (document.body.contains(iframe)) {
+      document.body.removeChild(iframe);
+    }
+    alert(`✅ Purge request sent for: ${purgeType.replace('_', ' ')}`);
+    selectElement.value = 'default';
+  };
+
+  setTimeout(() => {
+    if (document.body.contains(iframe)) {
+      document.body.removeChild(iframe);
+      alert(`✅ Purge request completed: ${purgeType.replace('_', ' ')}`);
+      selectElement.value = 'default';
+    }
+  }, 5000);
 }

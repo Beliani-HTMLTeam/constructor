@@ -2,7 +2,7 @@ import { types } from '@utils/types.js';
 import { Line } from '@components/Line.js';
 
 export function Footer(sections, options, name) {
-//   console.log(name);
+  //   console.log(name);
   const id = sections.id;
   const json_footer = {
     assembly: {

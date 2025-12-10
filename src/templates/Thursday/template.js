@@ -124,15 +124,16 @@ const Thursday = async ({
   let CategoriesElement = '';
   if (safeCategories.length > 0) {
     const source = categoriesWithProducts.length > 0 ? categoriesWithProducts : safeCategories;
-    const categoriesForRender = source.map((category) => {
+    const categoriesForRender = source.map((category, ind) => {
       const href =
         category && category.href && typeof getCategoryLink === 'function'
           ? getCategoryLink(category.href)
           : (category && category.href) || '';
-      const name =
-        typeof getCategoryTitle === 'function'
-          ? getCategoryTitle(category && category.name) || (category && category.name) || ''
-          : (category && category.name) || '';
+      const name = queries?.categories
+        ? queries.categories[ind]
+        : typeof getCategoryTitle === 'function'
+        ? getCategoryTitle(category && category.name) || (category && category.name) || ''
+        : (category && category.name) || '';
 
       return {
         ...category,

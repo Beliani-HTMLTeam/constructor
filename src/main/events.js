@@ -1,3 +1,4 @@
+import { getIframe } from '@/helpers/getIframe';
 import { incrementId } from '@/helpers/incrementId.js';
 import { getState, setState } from '@/main/state/appState';
 
@@ -31,15 +32,51 @@ function figmaCardHandler(url) {
   window.open(url, '_blank');
 }
 
-function purgeDynamicSpreadsheetData(tabName, year) {
-  window.open(`https://fed2n8e59dpq.share.zrok.io/dynamic/${year.value}/${tabName.value}/force-refresh`, '_blank');
+function purgeDynamicSpreadsheetData(year, tabName) {
+  const url = `https://fed2n8e59dpq.share.zrok.io/dynamic/${year}/${tabName}/force-refresh`;
+
+  const iframe = getIframe(url);
+  document.body.appendChild(iframe);
+
+  let purgeCompleted = false;
+  let cleanupDone = false;
+
+  function cleanup() {
+    if (cleanupDone) return;
+    cleanupDone = true;
+    if (document.body.contains(iframe)) {
+      document.body.removeChild(iframe);
+    }
+  }
+
+  iframe.onload = function () {
+    purgeCompleted = true;
+    setTimeout(() => {
+      cleanup();
+      alert(`✅ Successfully purged dynamic spreadsheet:\nYear: ${year}\nTab: ${tabName}`);
+    }, 3000);
+  };
+
+  iframe.onerror = function () {
+    cleanup();
+    alert(`❌ Failed to purge dynamic spreadsheet:\nYear: ${year}\nTab: ${tabName}`);
+  };
+
+  setTimeout(() => {
+    if (!purgeCompleted && !cleanupDone) {
+      cleanup();
+      alert(
+        `⚠️ Purge request took too long:\nYear: ${year}\nTab: ${tabName}\n\nThe request was sent but may still be processing.`
+      );
+    }
+  }, 10000);
 }
 
 function selectCampaignHandler(ev, campaigns) {
   const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
+  console.log('selected Campaign', selectedCampaign);
 
-  if (!selectedCampaign)
-    return toast.error(`Campaign startId ${ev.target.value} not found.`);
+  if (!selectedCampaign) return toast.error(`Campaign startId ${ev.target.value} not found.`);
 
   // Dla pewności pokaż całą kampanię w konsoli (do debugowania)
   // console.log('selectedCampaign z campaigns:', selectedCampaign);
