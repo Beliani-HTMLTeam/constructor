@@ -121,10 +121,13 @@ export function setupSelectTemplate(elements, setState, getState, render, setSel
 
 export function setupSelectPurge(elements) {
   const { selectPurge } = elements;
-  selectPurge.addEventListener('change', (ev) => {
+
+  selectPurge.addEventListener('change', async (ev) => {
     if (ev.target.value === 'default') {
       return;
     }
+
+    const prettierTabName = ev.target.value.replace('_', ' ');
 
     const purgeMap = {
       header: 'https://fed2n8e59dpq.share.zrok.io/static/header/force-refresh',
@@ -135,10 +138,31 @@ export function setupSelectPurge(elements) {
     };
 
     const url = purgeMap[ev.target.value];
-    const purgeType = ev.target.value;
-    if (url) {
-      const selectElement = ev.target;
-      purgeInBackground(url, purgeType, selectElement);
+    if (!url) return;
+
+    try {
+      const headers = {
+        Accept: 'application/json',
+        skip_zrok_interstitial: 'true',
+      };
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: headers,
+        mode: 'cors',
+        credentials: 'omit',
+      });
+
+      if (response.ok) {
+        alert(`✅ Successfully purged: ${prettierTabName}`);
+      } else {
+        alert(`❌ Failed to purge ${prettierTabName}: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error during purge:', error);
+      alert(`❌ Error during purge ${prettierTabName}: ${error.message}`);
+    } finally {
+      ev.target.value = 'default';
     }
   });
 }
@@ -148,28 +172,95 @@ function purgeInBackground(url, purgeType, selectElement) {
   document.body.appendChild(iframe);
 
   iframe.onload = function () {
-    setTimeout(() => {
+    console.log('inside here');
+    try {
+      setTimeout(() => {
+        try {
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+          const visitButton = iframeDoc.querySelector('button[onclick*="onClick"]');
+          console.log('onClick', visitButton);
+          if (visitButton) {
+            visitButton.click();
+          } else {
+            const buttons = iframeDoc.querySelectorAll('button');
+            const visitBtn = Array.from(buttons).find(
+              (btn) => btn.textContent.includes('Visit') || btn.textContent.includes('Share')
+            );
+            if (visitBtn) {
+              visitBtn.click();
+            } else {
+              iframe.contentWindow.onClick && iframe.contentWindow.onClick();
+            }
+          }
+
+          // const originalOnLoad = iframe.onload;
+          // iframe.onload = function () {
+          //   // This fires after the interstitial is bypassed and the actual purge page loads
+          //   setTimeout(() => {
+          //     if (document.body.contains(iframe)) {
+          //       document.body.removeChild(iframe);
+          //     }
+          //     alert(`✅ Successfully purged: ${purgeType.replace('_', ' ')}`);
+          //     selectElement.value = 'default';
+          //   }, 1000);
+          // };
+        } catch (error) {
+          console.error('Error clicking button:', error);
+          // Fallback: close iframe and show alert
+          if (document.body.contains(iframe)) {
+            document.body.removeChild(iframe);
+          }
+          alert(`✅ Purge request sent (interstitial bypassed): ${purgeType.replace('_', ' ')}`);
+          selectElement.value = 'default';
+        }
+      }, 40000); // Wait 500ms for iframe to fully load
+    } catch (error) {
+      console.error('Error accessing iframe:', error);
       if (document.body.contains(iframe)) {
         document.body.removeChild(iframe);
       }
-      alert(`✅ Successfully purged: ${purgeType.replace('_', ' ')}`);
+      alert(`✅ Purge request initiated: ${purgeType.replace('_', ' ')}`);
       selectElement.value = 'default';
-    }, 1000);
+    }
   };
-
   iframe.onerror = function () {
     if (document.body.contains(iframe)) {
       document.body.removeChild(iframe);
     }
-    alert(`✅ Purge request sent for: ${purgeType.replace('_', ' ')}`);
+    alert(`❌ Failed to load purge page: ${purgeType.replace('_', ' ')}`);
     selectElement.value = 'default';
   };
 
-  setTimeout(() => {
-    if (document.body.contains(iframe)) {
-      document.body.removeChild(iframe);
-      alert(`✅ Purge request completed: ${purgeType.replace('_', ' ')}`);
-      selectElement.value = 'default';
-    }
-  }, 5000);
+  // Safety timeout
+  // setTimeout(() => {
+  //   if (document.body.contains(iframe)) {
+  //     document.body.removeChild(iframe);
+  //     alert(`⚠️ Purge timeout: ${purgeType.replace('_', ' ')}`);
+  //     selectElement.value = 'default';
+  //   }
+  // }, 10000);
 }
+// setTimeout(() => {
+//   if (document.body.contains(iframe)) {
+//     document.body.removeChild(iframe);
+//   }
+//   alert(`✅ Successfully purged: ${purgeType.replace('_', ' ')}`);
+//   selectElement.value = 'default';
+// }, 1000);
+
+// iframe.onerror = function () {
+//   if (document.body.contains(iframe)) {
+//     document.body.removeChild(iframe);
+//   }
+//   alert(`✅ Purge request sent for: ${purgeType.replace('_', ' ')}`);
+//   selectElement.value = 'default';
+// };
+
+// setTimeout(() => {
+//   if (document.body.contains(iframe)) {
+//     document.body.removeChild(iframe);
+//     alert(`✅ Purge request completed: ${purgeType.replace('_', ' ')}`);
+//     selectElement.value = 'default';
+//   }
+// }, 5000);

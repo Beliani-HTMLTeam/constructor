@@ -1,3 +1,4 @@
+import { Line } from '@/templates/Thursday/components/Line';
 import { CTA } from '../CTA';
 import { ImageWithLink } from '../ImageWithLink';
 import { Paragraph } from '../Paragraph';
@@ -26,13 +27,12 @@ export const renderCategory = async (
   const TitleElement = category?.title?.show
     ? `
       <tr>
-        <td>
+        <td style="text-align: center;">
           ${Paragraph({
             text: category.name,
             color: color,
             background: background,
             align: 'center',
-            insideTable: true,
             tableContainer: true,
             className: 'newsletterTitle',
           })}
@@ -68,7 +68,6 @@ export const renderCategory = async (
             ${Paragraph({
               text: queries.paragraphs[id] || 'Translation not found',
               align: category.paragraph.align,
-              insideTable: true,
               tableContainer: true,
             })}
           </td>
@@ -107,7 +106,7 @@ export const renderCategory = async (
             !category.paddingTop || category.paddingTop > 0
               ? Space({
                   insideTr: true,
-                  className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 60 : 35)}px`,
+                  className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 80 : 35)}px`,
                 })
               : ''
           }
@@ -139,11 +138,11 @@ export const renderCategory = async (
       ${
         id < categoriesLength - 1
           ? `
-      <tr>
-        <td>
-          ${WhiteLine()}
-        </td>
-      </tr> 
+          ${Line({
+            insideTr: true,
+            src: 'https://upload.pictureserver.net/static/2024/white_line.jpg',
+            insideContainer: true,
+          })}
     `
           : ''
       }

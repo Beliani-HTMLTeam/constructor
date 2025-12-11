@@ -15,21 +15,13 @@ const NewsletterOfferPart = ({
   backgroundColor,
 }) => {
   return `
-    <tr>
-      <td >
-      ${Space({ className: 'newsletterBottom35px' })}
-      </td>
-    </tr>
+      ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
     <tr>
       <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center' })}
       </td>
     </tr>
-    <tr>
-      <td >
-        ${Space({ className: 'newsletterBottom35px' })}
-      </td>
-    </tr>
+    ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
   
     <tr>
       <td style="color: ${color}; text-align: center;">
@@ -41,11 +33,7 @@ const NewsletterOfferPart = ({
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}
       </td>
     </tr>
-    <tr>
-      <td >
-        ${Space({ className: 'newsletterBottom35px' })}
-      </td>
-    </tr>
+    ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
   
     <tr>
       <td >
@@ -58,11 +46,7 @@ const NewsletterOfferPart = ({
       </td>
     </tr>
   
-    <tr>
-      <td >
-        ${Space({ className: 'newsletterBottom35px' })}
-      </td>
-    </tr>
+    ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
     
     <tr>
       <td style="color: ${color}; text-align: center;">
@@ -70,11 +54,7 @@ const NewsletterOfferPart = ({
       </td> 
     </tr>
   
-    <tr>
-      <td >
-        ${Space({ className: 'newsletterBottom35px' })}
-      </td>
-    </tr>
+    ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
   `;
 };
 

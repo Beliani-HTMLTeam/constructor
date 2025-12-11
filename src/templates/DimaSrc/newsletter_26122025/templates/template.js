@@ -98,6 +98,7 @@ const Friday = async ({
         })
       : '';
 
+  console.log('timer', queries);
   const TimerElement =
     Inside && Inside.type === 'timer'
       ? Timer({

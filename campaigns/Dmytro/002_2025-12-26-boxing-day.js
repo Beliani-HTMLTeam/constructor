@@ -12,7 +12,7 @@ const tableQueries = [
   },
   { tableRange: '28:29', name: 'codeCTA' },
   {
-    tableRange: '12:13',
+    tableRange: '54:55',
     name: 'timer',
   },
   {
@@ -25,18 +25,15 @@ const tableQueries = [
   },
 ];
 
-// images already uploaded to remote server
-
 const links = {
-  code_href: translateLink({ value: 'content/lp2025-12-26' }),
-  TopImageTitle_href: translateLink({ value: 'content/lp2025-12-26' }),
+  code_href: translateLink({ value: 'content/lp25-12-26' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp25-12-26' }),
   TopImageTitle_src: translateImage({ value: '20251226_01.png' }),
   TopImage_src: getImageUrl('20251226topgif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp2025-12-26' }),
-  Timer_href: translateLink({ value: 'content/lp2025-12-20' }),
+  TopImage_href: translateLink({ value: 'content/lp25-12-26' }),
+  Timer_href: translateLink({ value: 'content/lp25-12-22' }),
   CTAcategory: translateLink({ value: 'boxing-day-deals/' }),
 
-  // That's what supposed to be here
   Banner_1: translateLink({ value: 'content/lp25-12-19' }),
   Banner_1_Image: translateImage({ value: '20251219b.png' }),
   Banner_2: translateLink({ value: 'content/lp25-12-18' }),
