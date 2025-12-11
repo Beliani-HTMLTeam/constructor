@@ -53,13 +53,13 @@ async function purgeDynamicSpreadsheetData(year, tabName) {
     if (response.ok) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      alert(`✅ Successfully purged dynamic spreadsheet!\nYear: ${year}\nTab: ${tabName}`);
+      toast.success(`Successfully purged dynamic spreadsheet!\nYear: ${year}\nTab: ${tabName}`);
     } else {
-      alert(`❌ Failed to purge (${response.status}):\nYear: ${year}\nTab: ${tabName}`);
+      toast.error(`Failed to purge (${response.status}):\nYear: ${year}\nTab: ${tabName}`);
     }
   } catch (error) {
     console.error('Purge error: ', error);
-    alert(`❌ Error during purge:\nYear: ${year}\nTab: ${tabName}\nError: ${error.message}`);
+    toast.error(`Error during purge:\nYear: ${year}\nTab: ${tabName}\nError: ${error.message}`);
   }
 }
 
