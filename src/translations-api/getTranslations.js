@@ -42,15 +42,14 @@ await initStaticTranslations();
 
 async function getStaticTranslation({ sheet }) {
   const url = `${c.api_url}static/${sheet}`;
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Origin: 'https://kznlabs.com',
-    skip_zrok_interstitial: 'true',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.134 Safari/537.36',
-  };
 
   try {
+    const headers = {
+      Accept: 'application/json',
+      // Removed 'Content-Type' for GET to avoid CORS preflight
+      skip_zrok_interstitial: 'true',
+    };
+  
     const res = await fetch(url, {
       method: 'GET',
       headers: headers,
