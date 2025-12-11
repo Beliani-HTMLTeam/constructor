@@ -9,6 +9,9 @@ import { Space } from './Space.js';
 import { Timer } from './Timer.js';
 import { Title } from './Title.js';
 import { TopImageTitle } from './TopImageTitle.js';
+import { Create2Columns_Grid } from './Create2Columns_Grid.js';
+import { CategoriesColumns } from './CategoriesColumns.js';
+import { shopNow } from './shopNow.js';
 
 export {
   Category,
@@ -22,4 +25,7 @@ export {
   Timer,
   Title,
   TopImageTitle,
+  Create2Columns_Grid,
+  CategoriesColumns,
+  shopNow,
 };
