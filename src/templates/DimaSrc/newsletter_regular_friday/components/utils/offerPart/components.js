@@ -28,7 +28,6 @@ const NewsletterOfferPart = ({
       ${Paragraph({ text: data ? data[1] : paragraph1, align: 'center' })}
       </td>
     </tr>
-    
     <tr>
       <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}

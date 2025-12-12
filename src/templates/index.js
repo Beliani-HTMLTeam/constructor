@@ -4,7 +4,8 @@ import { Thursday } from '@/templates/Thursday/template.js';
 import { MichalTemporary } from '@/templates/MichalTemporary/MichalTemporary.js';
 import { MichalTemporaryLP } from '@/templates/MichalTemporary/MichalTemporaryLP.js';
 import { FridayEolProducts } from './FridayEolProducts';
-import { Friday } from './DimaSrc/newsletter_26122025/templates/template';
+import { Friday } from '@/templates//DimaSrc/newsletter_26122025/templates/template';
+import { RegularFridayNslt } from '@/templates//DimaSrc/newsletter_regular_friday/templates/regularFridayNslt';
 
 export const templates = {
   Blackweek,
@@ -14,4 +15,5 @@ export const templates = {
   MichalTemporary,
   MichalTemporaryLP,
   Friday,
+  RegularFridayNslt,
 };

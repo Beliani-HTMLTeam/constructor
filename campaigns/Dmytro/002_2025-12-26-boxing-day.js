@@ -16,7 +16,7 @@ const tableQueries = [
     name: 'timer',
   },
   {
-    tableRange: '46:48',
+    tableRange: '47:49',
     name: 'condition',
   },
   {
@@ -29,7 +29,7 @@ const links = {
   code_href: translateLink({ value: 'content/lp25-12-26' }),
   TopImageTitle_href: translateLink({ value: 'content/lp25-12-26' }),
   TopImageTitle_src: translateImage({ value: '20251226_01.png' }),
-  TopImage_src: getImageUrl('20251226topgif.gif', true),
+  TopImage_src: translateImage({ value: '20251226topgif.gif' }),
   TopImage_href: translateLink({ value: 'content/lp25-12-26' }),
   Timer_href: translateLink({ value: 'content/lp25-12-22' }),
   CTAcategory: translateLink({ value: 'boxing-day-deals/' }),
