@@ -1,9 +1,10 @@
 import { Blackweek } from '@/templates/Blackweek.js';
 import { AdventCalendar } from '@/templates/AdventCalendar.js';
 import { Thursday } from '@/templates/Thursday/template.js';
-import { MichalTemporary } from '@/templates/MichalTemporary/MichalTemporary.js';
-import { MichalTemporaryLP } from '@/templates/MichalTemporary/MichalTemporaryLP.js';
+import { ThreeCategoriesUnder } from '@/templates/MichalTemporary/ThreeCategoriesUnder.js';
+import { ThreeCategoriesUnderLP } from '@/templates/MichalTemporary/ThreeCategoriesUnderLP.js';
 import { FridayEolProducts } from './FridayEolProducts';
+import { Categories2Columns } from './MichalTemporary/Categories2Columns';
 import { Friday } from '@/templates//DimaSrc/newsletter_26122025/templates/template';
 import { RegularFridayNslt } from '@/templates//DimaSrc/newsletter_regular_friday/templates/regularFridayNslt';
 
@@ -12,8 +13,9 @@ export const templates = {
   AdventCalendar,
   Thursday,
   FridayEolProducts,
-  MichalTemporary,
-  MichalTemporaryLP,
+  ThreeCategoriesUnder,
+  ThreeCategoriesUnderLP,
+  Categories2Columns,
   Friday,
   RegularFridayNslt,
 };

@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '10.12.25 - Christmas gift guide last moment';
+const campaignTranslationsSheet = '2025::10.12.25 - Christmas gift guide last moment';
 
 const tableQueries = [
   {
@@ -133,7 +133,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.MichalTemporary, // User should change this
+      template: templates.ThreeCategoriesUnder, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#750000",
@@ -151,7 +151,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.MichalTemporaryLP, // User should change this
+      template: templates.ThreeCategoriesUnderLP, // User should change this
       css: types.CSS.LP,
       intro: {
         align: 'center',
