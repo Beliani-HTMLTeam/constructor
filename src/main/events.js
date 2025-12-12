@@ -32,49 +32,40 @@ function figmaCardHandler(url) {
   window.open(url, '_blank');
 }
 
-function purgeDynamicSpreadsheetData(year, tabName) {
+async function purgeDynamicSpreadsheetData(year, tabName) {
   const url = `https://fed2n8e59dpq.share.zrok.io/dynamic/${year}/${tabName}/force-refresh`;
 
-  const iframe = getIframe(url);
-  document.body.appendChild(iframe);
+  try {
+    toast(`🔄 Purging dynamic spreadsheet...\nYear: ${year}\nTab: ${tabName}`);
 
-  let purgeCompleted = false;
-  let cleanupDone = false;
+    const headers = {
+      Accept: 'application/json',
+      skip_zrok_interstitial: 'true',
+    };
 
-  function cleanup() {
-    if (cleanupDone) return;
-    cleanupDone = true;
-    if (document.body.contains(iframe)) {
-      document.body.removeChild(iframe);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: headers,
+      mode: 'cors',
+      credentials: 'omit',
+    });
+
+    if (response.ok) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      toast.success(`Successfully purged dynamic spreadsheet!\nYear: ${year}\nTab: ${tabName}`);
+    } else {
+      toast.error(`Failed to purge (${response.status}):\nYear: ${year}\nTab: ${tabName}`);
     }
+  } catch (error) {
+    console.error('Purge error: ', error);
+    toast.error(`Error during purge:\nYear: ${year}\nTab: ${tabName}\nError: ${error.message}`);
   }
-
-  iframe.onload = function () {
-    purgeCompleted = true;
-    setTimeout(() => {
-      cleanup();
-      alert(`✅ Successfully purged dynamic spreadsheet:\nYear: ${year}\nTab: ${tabName}`);
-    }, 3000);
-  };
-
-  iframe.onerror = function () {
-    cleanup();
-    alert(`❌ Failed to purge dynamic spreadsheet:\nYear: ${year}\nTab: ${tabName}`);
-  };
-
-  setTimeout(() => {
-    if (!purgeCompleted && !cleanupDone) {
-      cleanup();
-      alert(
-        `⚠️ Purge request took too long:\nYear: ${year}\nTab: ${tabName}\n\nThe request was sent but may still be processing.`
-      );
-    }
-  }, 10000);
 }
 
 function selectCampaignHandler(ev, campaigns) {
   const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
-  console.log('selected Campaign', selectedCampaign);
+  // console.log('selected Campaign', selectedCampaign);
 
   if (!selectedCampaign) return toast.error(`Campaign startId ${ev.target.value} not found.`);
 

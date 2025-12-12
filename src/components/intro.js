@@ -56,7 +56,7 @@ export const Intro = isAllowToRender(
     `,
     };
 
-    console.log(templates[type]);
+    // console.log(templates[type]);
 
     return `
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">

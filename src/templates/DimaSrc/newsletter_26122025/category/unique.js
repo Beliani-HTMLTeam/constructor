@@ -1,15 +1,9 @@
 import { ImageWithLink } from '../components/ImageWithLink';
 import { Product } from '../components/Product.js';
 
-export const render = (
-  products,
-  showPrices,
-  showNames,
-  queries,
-  categoryIndex,
-  insideContainer = true
-) => {
-  console.log('products', products);
+export const render = (products, showPrices, showNames, queries, categoryIndex, insideContainer = true) => {
+  // console.log('products', products);
+  console.log('render products', products);
   const reverse = categoryIndex % 2 === 1;
 
   const row = (smallIdx, bigIdx) => `

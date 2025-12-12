@@ -1,30 +1,13 @@
 import { selectCampaignHandler, handleShopChange } from '@/main/events.js';
 import { renderAvailableTemplates } from '@/main/renderAvailableTemplates.js';
-import {
-  populateSelect,
-  createSelectOption,
-  showElements,
-  hideElements,
-} from '@/utils/domUtils.js';
+import { populateSelect, createSelectOption, showElements, hideElements } from '@/utils/domUtils.js';
 import { root } from '@/app.js';
 import { getIframe } from '@/helpers/getIframe';
+import { toast } from 'sonner';
 
-export function setupSelectCampaigns(
-  elements,
-  campaigns,
-  setState,
-  getState,
-  render,
-  setSelectedTemplate
-) {
-  const {
-    selectCampaigns,
-    selectTemplates,
-    selectTemplatesWrapper,
-    openIssue,
-    openFigma,
-    purgeDynamicSpreadsheet,
-  } = elements;
+export function setupSelectCampaigns(elements, campaigns, setState, getState, render, setSelectedTemplate) {
+  const { selectCampaigns, selectTemplates, selectTemplatesWrapper, openIssue, openFigma, purgeDynamicSpreadsheet } =
+    elements;
 
   selectCampaigns.addEventListener('change', (ev) => {
     if (ev.target.value === 'default') {
@@ -32,13 +15,7 @@ export function setupSelectCampaigns(
     }
 
     // Show select templates after selecting campaign
-    showElements(
-      selectTemplates,
-      selectTemplatesWrapper,
-      openIssue,
-      openFigma,
-      purgeDynamicSpreadsheet
-    );
+    showElements(selectTemplates, selectTemplatesWrapper, openIssue, openFigma, purgeDynamicSpreadsheet);
 
     const { selectedCampaign, templates } = selectCampaignHandler(ev, campaigns);
 
@@ -121,10 +98,13 @@ export function setupSelectTemplate(elements, setState, getState, render, setSel
 
 export function setupSelectPurge(elements) {
   const { selectPurge } = elements;
-  selectPurge.addEventListener('change', (ev) => {
+
+  selectPurge.addEventListener('change', async (ev) => {
     if (ev.target.value === 'default') {
       return;
     }
+
+    const prettierTabName = ev.target.value.replace('_', ' ');
 
     const purgeMap = {
       header: 'https://fed2n8e59dpq.share.zrok.io/static/header/force-refresh',
@@ -135,41 +115,31 @@ export function setupSelectPurge(elements) {
     };
 
     const url = purgeMap[ev.target.value];
-    const purgeType = ev.target.value;
-    if (url) {
-      const selectElement = ev.target;
-      purgeInBackground(url, purgeType, selectElement);
+    if (!url) return;
+
+    try {
+      const headers = {
+        Accept: 'application/json',
+        skip_zrok_interstitial: 'true',
+      };
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: headers,
+        mode: 'cors',
+        credentials: 'omit',
+      });
+
+      if (response.ok) {
+        toast.success(`Successfully purged: ${prettierTabName}`);
+      } else {
+        toast.error(`Failed to purge: ${prettierTabName} (${response.status})`);
+      }
+    } catch (error) {
+      console.error('Error during purge:', error);
+      toast.error(`Error during purge ${prettierTabName}: ${error.message}`);
+    } finally {
+      ev.target.value = 'default';
     }
   });
-}
-
-function purgeInBackground(url, purgeType, selectElement) {
-  const iframe = getIframe(url);
-  document.body.appendChild(iframe);
-
-  iframe.onload = function () {
-    setTimeout(() => {
-      if (document.body.contains(iframe)) {
-        document.body.removeChild(iframe);
-      }
-      alert(`✅ Successfully purged: ${purgeType.replace('_', ' ')}`);
-      selectElement.value = 'default';
-    }, 1000);
-  };
-
-  iframe.onerror = function () {
-    if (document.body.contains(iframe)) {
-      document.body.removeChild(iframe);
-    }
-    alert(`✅ Purge request sent for: ${purgeType.replace('_', ' ')}`);
-    selectElement.value = 'default';
-  };
-
-  setTimeout(() => {
-    if (document.body.contains(iframe)) {
-      document.body.removeChild(iframe);
-      alert(`✅ Purge request completed: ${purgeType.replace('_', ' ')}`);
-      selectElement.value = 'default';
-    }
-  }, 5000);
 }
