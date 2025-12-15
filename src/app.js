@@ -12,9 +12,19 @@ export const root = document.querySelector('#app');
 async function initializeApp() {
   try {
     const userCampaigns = await getUserCampaigns();
+    // console.log('user campaigns', userCampaigns);
+    const sortedUserCampaigns = userCampaigns.sort((a, b) => {
+      const parseDate = (dateStr) => {
+        const [day, month, year] = dateStr.split('.');
+        return new Date(`${year}-${month}-${day}`);
+      };
+      return parseDate(b.date) - parseDate(a.date);
+    });
+
+    // console.log('sorted user campaigns', sortedUserCampaigns);
 
     initApp({
-      campaigns: userCampaigns,
+      campaigns: sortedUserCampaigns,
       shops: SHOPS,
       config: config,
     });
