@@ -1,7 +1,7 @@
 import { addParams } from '@/helpers/getQueryLink.js';
 import { TemplateHandlers } from '@/main/handlers/handlers.js';
 import { wrapTemplate } from '@/helpers/wrapTemplate.js';
-import { fetchTranslations } from '@/api/fetchTranslations.js';
+import { fetchTranslations } from '@/old-api/fetchTranslations.js';
 import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { computeValue } from '@/helpers/computeValue.js';
 import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
@@ -9,7 +9,7 @@ import { root } from '@/app.js';
 import { getState, setState } from '@/main/state/appState';
 
 import { toast } from 'sonner';
-import { staticTranslations } from '@/translations-api/getTranslations';
+import { staticTranslations } from '@/old-api/translations-api/getTranslations';
 
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;

@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@api/*": ["src/api/*"],
+      "@api/*": ["src/old-api/*"],
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
       "@entities/*": ["src/entities/*"],
@@ -11,7 +12,7 @@
       "@main/*": ["src/main/*"],
       "@data/*": ["src/main/data/*"],
       "@handlers/*": ["src/main/handlers/*"],
-      "@services/*": ["src/services/*"],
+      "@services/*": ["src/old-api/services/*"],
       "@templates/*": ["src/templates/*"],
       "@utils/*": ["src/utils/*"],
       "@css/*": ["src/utils/css/*"]

@@ -1,8 +1,8 @@
 import { getState } from '@/main/state/appState';
 import { adjustTableRangeToCountry } from '@/utils/fixRange.js';
 import { normalizeTranslations } from '@/utils/normalizeTranslations.js';
-import { getDynamicTranslation } from '@/translations-api/getTranslations';
-import { GoogleAuth } from '@/services/GoogleAuth.js';
+import { getDynamicTranslation } from '@/old-api/translations-api/getTranslations';
+import { GoogleAuth } from '@/old-api/services/GoogleAuth.js';
 
 import { toast } from 'sonner';
 

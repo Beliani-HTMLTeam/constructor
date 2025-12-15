@@ -7,13 +7,15 @@
     "start": "vite"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^5.1.1",
+    "@vitejs/plugin-react": "^5.1.2",
     "dotenv": "^17.2.3",
+    "google-auth-library": "^10.5.0",
+    "google-spreadsheet": "^5.0.2",
     "js-confetti": "^0.12.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "sonner": "^2.0.7",
-    "vite": "^7.2.2"
+    "vite": "^7.3.0"
   },
   "devDependencies": {
     "unplugin-auto-import": "^19.3.0",

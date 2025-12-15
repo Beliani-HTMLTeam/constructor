@@ -62,6 +62,7 @@ export default defineConfig(({ mode }) => {
     define: {
       __SCOPE__: JSON.stringify(env.VITE_SCOPE),
       'import.meta.env.VITE_SCOPE': JSON.stringify(env.VITE_SCOPE),
+      'process.browser': true,
     },
 
     server: {
@@ -70,10 +71,7 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: Object.fromEntries(
-        Object.entries(aliasEntries).map(([key, relPath]) => [
-          key,
-          fileURLToPath(new URL(relPath, import.meta.url)),
-        ])
+        Object.entries(aliasEntries).map(([key, relPath]) => [key, fileURLToPath(new URL(relPath, import.meta.url))])
       ),
     },
   };
