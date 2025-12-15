@@ -5,14 +5,7 @@ import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
-const Categories = async ({
-  getPhrase,
-  getCategoryLink,
-  getCategoryTitle,
-  categories,
-  queries,
-  add_utm,
-}) => {
+const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm }) => {
   let html = '';
 
   if (Array.isArray(categories)) {
@@ -32,15 +25,7 @@ const Categories = async ({
   return html;
 };
 
-const renderCategory = async (
-  category,
-  id,
-  queries,
-  getPhrase,
-  getCategoryLink,
-  getCategoryTitle,
-  add_utm
-) => {
+const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm) => {
   const background = category.background || 'white';
   const color = category.color || '#000000';
 
@@ -66,11 +51,7 @@ const renderCategory = async (
       </td>
     </tr>
 
-    ${
-      category.title.spaceAfter
-        ? Space({ insideTr: true, className: category.title.spaceAfter })
-        : ''
-    }
+    ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter }) : ''}
     `
     : '';
 
@@ -85,11 +66,7 @@ const renderCategory = async (
 
   const ParagraphElement = category?.paragraph?.show
     ? `
-      ${
-        category.paragraph.spaceBefore
-          ? Space({ insideTr: true, className: category.paragraph.spaceBefore })
-          : ''
-      }
+      ${category.paragraph.spaceBefore ? Space({ insideTr: true, className: category.paragraph.spaceBefore }) : ''}
 
       <tr>
         <td>
@@ -104,13 +81,9 @@ const renderCategory = async (
       </tr>
 
       
-      ${
-        category.paragraph.spaceAfter
-          ? Space({ insideTr: true, className: category.paragraph.spaceAfter })
-          : ''
-      }
+      ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
     `
-    : Space({ insideTr: true });
+    : Space({ insideTr: true, className: category.paragraph.spaceAfter ?? 'newsletterBottom35px' });
 
   const ProductsElement = category.products
     ? await renderProducts(
@@ -122,6 +95,16 @@ const renderCategory = async (
         category.insideContainer || true,
         category.color || '#000000'
       )
+    : '';
+
+  const CTAElement = category.cta
+    ? CTA({
+        color: category.color || '#000000',
+        href: ctaHref,
+        text: getPhrase('shop now'),
+        insideTr: true,
+        tdClass: 'newsletterContainer',
+      })
     : '';
 
   return `
@@ -146,15 +129,9 @@ const renderCategory = async (
 
         ${ProductsElement}
 
-        ${CTA({
-          color: category.color || '#000000',
-          href: ctaHref,
-          text: getPhrase('shop now'),
-          insideTr: true,
-          tdClass: 'newsletterContainer',
-        })}
+        ${CTAElement}
 
-        ${Space({ insideTr: true, className: 'newsletterBottom80px' })}
+        ${Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom80px' })}
 
         ${
           category?.line?.show
@@ -172,15 +149,7 @@ const renderCategory = async (
   `;
 };
 
-const renderProducts = async (
-  products,
-  showPrices,
-  showNames,
-  queries,
-  categoryType,
-  insideContainer,
-  color
-) => {
+const renderProducts = async (products, showPrices, showNames, queries, categoryType, insideContainer, color) => {
   // console.log('produkty ', products);
 
   const type = categoryType ? categoryType.toLowerCase() : 'default';

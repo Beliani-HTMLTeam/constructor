@@ -52,6 +52,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     type: 'default',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -76,6 +77,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     type: 'default',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -100,6 +102,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     type: 'default',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -124,6 +127,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     type: 'default',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -148,6 +152,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     type: 'default',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -172,6 +177,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     type: 'default',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',

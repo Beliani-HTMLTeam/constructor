@@ -44,6 +44,7 @@ const categories = [
     background: '#FEB24D',
     color: '#000000',
     type: 'grid',
+    cta: true,
     paddingTop: '35',
     title: {
       show: true,
@@ -90,6 +91,7 @@ const categories = [
     background: '#892626',
     color: '#ffffff',
     type: 'grid',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -135,6 +137,7 @@ const categories = [
     background: '#FEB24D',
     color: '#000000',
     type: 'grid',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -180,6 +183,7 @@ const categories = [
     background: '#892626',
     color: '#ffffff',
     type: 'grid',
+    cta: true,
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',

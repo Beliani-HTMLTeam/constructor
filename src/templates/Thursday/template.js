@@ -8,6 +8,7 @@ import { TopImageTitle } from './components/TopImageTitle.js';
 import { ImageWithLink } from './components/ImageWithLink.js';
 import { Line } from './components/Line.js';
 import { Categories } from './components/Categories.js';
+import { CTA } from './components/CTA.js';
 
 const Thursday = async ({
   links,
@@ -74,7 +75,24 @@ const Thursday = async ({
 
   const IntroElement =
     intro && intro.type === 'paragraph'
-      ? Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })
+      ? `
+      ${Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })}
+      ${
+        intro.cta
+          ? `
+          ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
+          ${CTA({
+            href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+            text: shopNow,
+            color: '#000000',
+            align: 'center',
+            insideTr: true,
+          })}
+          ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
+            `
+          : ''
+      }
+      `
       : '';
 
   const TimerElement =
