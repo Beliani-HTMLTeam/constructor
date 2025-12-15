@@ -60,6 +60,7 @@ const Timer = ({
           ${CTA({
             href: href,
             text: ctaText,
+            color: color,
             align: 'center',
             insideTr: true,
           })}
@@ -72,7 +73,7 @@ const Timer = ({
             ${ImageWithLink({ insideTr: true, src: freebies, href: href, alt: 'Freebies Image' })}  
 
             `
-              : `${Space({ insideTr: true, className: 'newsletterBottom15px' })}`
+              : `${Space({ insideTr: true, className: 'newsletterBottom10px' })}`
           }
         </table>
       </td>
