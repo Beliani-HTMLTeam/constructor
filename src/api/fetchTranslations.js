@@ -1,8 +1,7 @@
-import { getState } from '@/main/state/appState';
+import { getState } from '@/main/state/appState.js';
 import { adjustTableRangeToCountry } from '@/utils/fixRange.js';
 import { normalizeTranslations } from '@/utils/normalizeTranslations.js';
-import { getDynamicTranslation } from '@/old-api/translations-api/getTranslations';
-import { GoogleAuth } from '@/old-api/services/GoogleAuth.js';
+import { getDynamicTranslation } from '@/api/translations';
 
 import { toast } from 'sonner';
 
@@ -14,6 +13,9 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
   const shop = getState('shop');
 
   let translations = {};
+
+  // Group queries by tableName to fetch entire spreadsheets once
+  const groupedQueries = new Map();
 
   for (let query of tableQueries) {
     // don't mutate original query objects - compute year/tab locally
@@ -73,12 +75,29 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
     }
 
     const sanitizedTab = String(tab).replace('!', '').trim();
+    const tableKey = `${yearNum}::${sanitizedTab}`;
+
+    if (!groupedQueries.has(tableKey)) {
+      groupedQueries.set(tableKey, {
+        year: yearNum,
+        tab: sanitizedTab,
+        queries: []
+      });
+    }
+
+    groupedQueries.get(tableKey).queries.push(query);
+  }
+
+  // Now fetch entire spreadsheets for each unique tableName
+  for (const [tableKey, group] of groupedQueries) {
     let res;
     try {
+      console.log(`Fetching dynamic translation for tab: "${group.tab}", year: ${group.year}`);
+      // Fetch entire spreadsheet (no range specified)
       res = await getDynamicTranslation({
-      year: yearNum,
-      tab: sanitizedTab,
-      range: query.tableRange,
+        year: group.year,
+        tab: group.tab,
+        // range: undefined - always fetch entire sheet
       });
     } catch (err) {
       console.error('Network or unexpected error fetching dynamic translation', err);
@@ -91,14 +110,14 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
 
         // unauthorized - not yet implemented on the api side
         case 401:
-          console.warn('Unauthorized when fetching translations', { tab: sanitizedTab, year: yearNum, res });
+          console.warn('Unauthorized when fetching translations', { tab: group.tab, year: group.year, res });
           toast.error('Unauthorized: refresh credentials');
           break;
 
         // not found
         case 404:
-          toast.error(`Translation tab not found: ${sanitizedTab} (year ${yearNum})`);
-          console.error(`Translation tab not found: ${sanitizedTab} (year ${yearNum})`, res);
+          toast.error(`Translation tab not found: ${group.tab} (year ${group.year})`);
+          console.error(`Translation tab not found: ${group.tab} (year ${group.year})`, res);
           break;
 
         // rate limit - not yet implemented on the api side
@@ -116,16 +135,21 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
 
         // other errors
         default:
-          toast.error(`Failed to fetch translations for ${sanitizedTab} (${res.status})`);
+          toast.error(`Failed to fetch translations for ${group.tab} (${res.status})`);
           console.error('Failed fetching translations', res);
       }
       continue;
     }
 
-    const data = res.data;
+    const fullSheetData = res.data;
 
-    if (data && data[slug]) {
-      translations[query.name] = Object.values(data[slug]);
+    // Now extract data for each query in this group based on their ranges
+    for (const query of group.queries) {
+      if (fullSheetData && fullSheetData[slug]) {
+        // Extract specific range from the full sheet data
+        const rangeData = extractRangeFromSheet(fullSheetData[slug], query.tableRange);
+        translations[query.name] = rangeData;
+      }
     }
   }
 
@@ -136,101 +160,28 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
   }));
 
   return result;
-
-  // old implementation @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  // const tableColumn = shop.languages.find((item) => item.language.name === name);
-
-  // if (!tableColumn.tableColumn) {
-  //   Toastify({
-  //     text: `Table column is empty`,
-  //     escapeMarkup: false,
-  //     duration: 3000,
-  //   }).showToast();
-  //   return;
-  // }
-  // const promises = [];
-  // for (const query of tableQueries) {
-  //   const queryWithAdjustedRange = adjustTableRangeToCountry(query, tableColumn.tableColumn);
-  //   promises.push(queryWithAdjustedRange);
-  // }
-
-  // const promisesResult = await Promise.allSettled(
-  //   promises.map((queryWithAdjustedRange) => getTranslations(queryWithAdjustedRange))
-  // );
-
-  // const computedPromise = [];
-  // for (const { value } of promisesResult) {
-  //   // example log:
-  //   //  {
-  //   //   "range": "'25.07.25 - Outdoor rugs'!N24",
-  //   //   "majorDimension": "ROWS",
-  //   //   "values": [
-  //   //       [
-  //   //           "Jetzt shoppen"
-  //   //       ]
-  //   //   ],
-  //   //   "name": "cta"
-  //   // }
-  //   // console.log(value);
-
-  //   if (value.error) {
-  //     let error = value.error;
-  //     let code = error.code;
-  //     let message = error.message;
-
-  //     switch (code) {
-  //       case 400:
-  //         throw new Error(message);
-  //       case 401:
-  //         GoogleAuth.login();
-  //         break;
-  //       case 429:
-  //         throw new Error('Too many request. Please, try again later.');
-  //       case 503:
-  //         throw new Error('Service currently unavailable');
-  //       default:
-  //         throw new Error('Unknown error', error);
-  //         break;
-  //     }
-  //   }
-
-  //   if ('values' in value && value.values.length > 0) {
-  //     computedPromise.push({
-  //       data:
-  //         value.majorDimension === 'COLUMNS'
-  //           ? value.values
-  //           : normalizeTranslations(value.values, value.fallback, value.range),
-  //       name: value.name,
-  //     });
-  //   } else {
-  //     computedPromise.push({
-  //       data: value.fallback || undefined,
-  //       name: value.name,
-  //     });
-  //   }
-  // }
-
-  // return computedPromise;
 };
 
-// old implementation using google apis directly @@@@@@@
-export async function getTranslations({ tableId, tableName, tableRange, fallback, name }) {
-  const token = localStorage.getItem('token');
-  // includeGridData
-  try {
-    const response = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${tableId}/values/${tableName}${tableRange}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        },
-      }
-    );
-    const data = await response.json();
-    return { ...data, name, fallback };
-  } catch (error) {
-    console.log(error);
+
+// Helper function to extract specific range from full sheet data
+function extractRangeFromSheet(fullSheetData, range) {
+  if (!Array.isArray(fullSheetData)) {
+    return [];
   }
+
+  const isRangeValid = /^\d+:\d+$|^\d+$/.test(range);
+  if (!isRangeValid) {
+    console.error(`Invalid range format: ${range}`);
+    return [];
+  }
+
+  const [startStr, endStr] = range.split(':');
+  // Row 1 is header, so row 2 = index 0, row 3 = index 1, etc.
+  const start = parseInt(startStr, 10) - 2; // Convert to 0-based index (accounting for header row)
+  const end = endStr ? parseInt(endStr, 10) - 1 : start + 1; // End is exclusive in slice
+
+  // Extract the specified range
+  const rangeData = fullSheetData.slice(start, end);
+  
+  return rangeData;
 }

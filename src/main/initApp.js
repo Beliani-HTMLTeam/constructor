@@ -2,9 +2,7 @@ import JSConfetti from 'js-confetti';
 import { getDOMElements } from '@/utils/domUtils.js';
 import { setState, getState } from '@/main/state/appState.js';
 import { initCampaigns } from '@/main/initCampaigns.js';
-import { GoogleAuth } from '@/old-api/services/GoogleAuth.js';
 import { renderTemplate } from '@/main/rendering/templateRenderer.js';
-import initStaticTranslations from '@/old-api/translations-api/getTranslations';
 
 import {
   setupSelectCampaigns,

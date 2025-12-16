@@ -1,7 +1,6 @@
 import { appConfig as config } from '@utils/config.js';
 import { initApp } from '@main/initApp.js';
 import { getUserCampaigns } from './utils/getUserCampaigns';
-import { testGTranslations } from '../testTranslations.js';
 
 import './toast.jsx'; // Initialize React and Toaster
 import { toast } from 'sonner';
@@ -36,5 +35,3 @@ async function initializeApp() {
 }
 
 initializeApp();
-
-testGTranslations();

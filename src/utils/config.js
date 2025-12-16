@@ -5,7 +5,8 @@ export const googleAuthConfig = {
 };
 
 export const appConfig = {
-  api_url: 'https://fed2n8e59dpq.share.zrok.io/',
+  api_url: 'http://localhost:3001/api/local/',
+  external_api_url: 'https://fed2n8e59dpq.share.zrok.io/',
   server_url: 'https://pictureserver.net/static/2024/',
   campaign_url: 'https://www.prologistics.info/news_email.php?id=',
   issue_url: 'https://www.prologistics.info/react/logs/issue_logs/',

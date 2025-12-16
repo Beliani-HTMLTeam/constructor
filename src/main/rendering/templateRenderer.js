@@ -1,7 +1,7 @@
 import { addParams } from '@/helpers/getQueryLink.js';
 import { TemplateHandlers } from '@/main/handlers/handlers.js';
 import { wrapTemplate } from '@/helpers/wrapTemplate.js';
-import { fetchTranslations } from '@/old-api/fetchTranslations.js';
+import { fetchTranslations } from '@/api/fetchTranslations.js';
 import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { computeValue } from '@/helpers/computeValue.js';
 import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
@@ -9,7 +9,7 @@ import { root } from '@/app.js';
 import { getState, setState } from '@/main/state/appState';
 
 import { toast } from 'sonner';
-import { staticTranslations } from '@/old-api/translations-api/getTranslations';
+import { staticTranslations, setQueries, getQueries } from '@/api/translations';
 
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;
@@ -28,14 +28,30 @@ export async function renderTemplate(getState, setState) {
     try {
       setState('loading', true);
 
-      const translationsResult = await fetchTranslations({
-        tableQueries: templateToRender.tableQueries,
-        tableName: spreadsheet,
-      });
+      // Check if we already have queries for this campaign and slug
+      const campaignId = selectedCampaign.startId;
+      const existingQueries = getQueries(campaignId, country);
 
-      const queries = {};
-      for (const translation of translationsResult) {
-        queries[translation.name] = translation.data;
+      let queries;
+      if (Object.keys(existingQueries).length > 0) {
+        // Use cached queries
+        queries = existingQueries;
+        console.log(`Using cached queries for campaign ${campaignId}, slug ${country}`);
+      } else {
+        // Fetch new queries
+        const translationsResult = await fetchTranslations({
+          tableQueries: templateToRender.tableQueries,
+          tableName: spreadsheet,
+        });
+
+        queries = {};
+        for (const translation of translationsResult) {
+          queries[translation.name] = translation.data;
+        }
+
+        // Cache queries
+        setQueries(campaignId, country, queries);
+        console.log(`Cached queries for campaign ${campaignId}, slug ${country}`);
       }
 
       setState('loading', false);
@@ -50,9 +66,21 @@ export async function renderTemplate(getState, setState) {
 
   // Handle fallback data
   if (selectedCampaign.data && templateToRender.tableQueries.length > 0) {
-    const queries = {};
-    for (const translation of templateToRender.tableQueries) {
-      queries[translation.name] = translation.fallback;
+    const campaignId = selectedCampaign.startId;
+    const existingQueries = getQueries(campaignId, country);
+
+    let queries;
+    if (Object.keys(existingQueries).length > 0) {
+      queries = existingQueries;
+      console.log(`Using cached fallback queries for campaign ${campaignId}, slug ${country}`);
+    } else {
+      queries = {};
+      for (const translation of templateToRender.tableQueries) {
+        queries[translation.name] = translation.fallback;
+      }
+      // Cache fallback queries too
+      setQueries(campaignId, country, queries);
+      console.log(`Cached fallback queries for campaign ${campaignId}, slug ${country}`);
     }
 
     setState('queries', queries);

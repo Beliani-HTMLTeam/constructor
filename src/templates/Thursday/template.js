@@ -53,8 +53,8 @@ const Thursday = async ({
       ? TopImageTitle({
           href: links.TopImageTitle_href,
           src: links.TopImageTitle_src,
-          title1: queries.TopImageTitle[0] || 'Translation not found',
-          title2: queries.TopImageTitle[1] || 'Translation not found',
+          title1: queries.TopImageTitle[0] ?? 'Translation not found',
+          title2: queries.TopImageTitle[1] ?? 'Translation not found',
           color: TopImageTitle_data.color,
           background: TopImageTitle_data.background,
           type: TopImageTitle_data.type,
@@ -98,8 +98,8 @@ const Thursday = async ({
   const TimerElement =
     Inside && Inside.type === 'timer'
       ? Timer({
-          title: queries.timer[0] || 'Translation not found',
-          subtitle: queries.timer[1] || 'Translation not found',
+          title: queries.timer[0] ?? 'Translation not found',
+          subtitle: queries.timer[1] ?? 'Translation not found',
           href: links.Timer_href,
           src: timer.image[country],
           color: Inside.color,
