@@ -1,6 +1,6 @@
 import { getState } from '@/main/state/appState';
-import { swapImage } from '@/helpers/swapImage.js';
 
+// @deprecated - images are optimized at rendering time now
 export function optimize(component) {
   return (...args) => {
     const { src, ...other } = args[0];

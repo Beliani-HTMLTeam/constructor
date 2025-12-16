@@ -8,6 +8,8 @@ import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
 import { root } from '@/app.js';
 import { getState, setState } from '@/main/state/appState';
 
+import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
+
 import { toast } from 'sonner';
 import { staticTranslations, setQueries, getQueries } from '@/api/translations';
 
@@ -177,18 +179,21 @@ export async function renderTemplate(getState, setState) {
         })
       : withStylesOrNo;
 
-    setState('html', wrappedHtml);
+    const finalHtml = optimizeHtmlImages(wrappedHtml, getState);
 
-    if (withStylesOrNo.includes('undefined')) {
+    setState('html', finalHtml);
+
+    if (finalHtml.includes('undefined')) {
       if (confirm('Do you want to render template with undefined value?')) {
-        return (root.innerHTML = withStylesOrNo);
+        root.innerHTML = finalHtml;
+        return;
       } else {
         toast.error(
           'Rendering cancelled. Check campaign file, template or products list for mistakes!'
         );
       }
     } else {
-      root.innerHTML = withStylesOrNo;
+      root.innerHTML = finalHtml;
     }
   } catch (error) {
     console.log(error);
