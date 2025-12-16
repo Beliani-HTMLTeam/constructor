@@ -64,17 +64,6 @@ export default defineConfig(({ mode }) => {
       'import.meta.env.VITE_SCOPE': JSON.stringify(env.VITE_SCOPE),
     },
 
-    server: {
-      port: 5500,
-      proxy: {
-        '/api': {
-          target: 'http://localhost:3001',
-          changeOrigin: true,
-          secure: false,
-        }
-      }
-    },
-
     resolve: {
       alias: Object.fromEntries(
         Object.entries(aliasEntries).map(([key, relPath]) => [key, fileURLToPath(new URL(relPath, import.meta.url))])
