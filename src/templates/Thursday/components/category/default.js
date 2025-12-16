@@ -1,6 +1,8 @@
 // served as a debug purpose, planned in future: 1 product = 1 row
 
-export const render = (products, queries) => {
+import { Product } from "../Product";
+
+export const render = (products, showPrices, showNames, queries, insideContainer = true, color, id, imageSide) => {
   let productsInnerHtml = '';
 
   if (Array.isArray(products)) {
@@ -9,13 +11,7 @@ export const render = (products, queries) => {
       productsInnerHtml += `
         <tr>
           <td>
-            <a href="${product.href}" style="color: inherit; text-decoration: none;">
-              <img src="${product.src}" alt="${product.name}" style="max-width: 100px; height: auto;" />
-              <br />
-              ${product.name}
-              <br />
-              ${product.lowPrice}
-            </a>
+            ${Product(product, false, false, '#000')}  
           </td>
         </tr>
       `;
