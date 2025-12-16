@@ -42,7 +42,7 @@ const Product = (product, showPrices, showName, color) => {
   }
 
   html += `
-    ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+    ${Space({ insideTr: true, className: product.spaceAfter ?? 'newsletterBottom35px' })}
   </table>`;
 
   return html;
