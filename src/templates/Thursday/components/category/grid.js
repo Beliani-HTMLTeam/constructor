@@ -1,6 +1,6 @@
 import { Product } from '../Product.js';
 
-export const render = (products, showPrices, showNames, queries, insideContainer = true, color) => {
+export const render = (products, showPrices, showNames, queries, insideContainer = true, color, id, imageSide) => {
   let productsInnerHtml = '';
 
   if (Array.isArray(products)) {

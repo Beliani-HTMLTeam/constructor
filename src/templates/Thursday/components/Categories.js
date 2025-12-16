@@ -26,8 +26,8 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
 };
 
 const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm) => {
-  const background = category.background || 'white';
-  const color = category.color || '#000000';
+  const background = category.background ?? 'white';
+  const color = category.color ?? '#000000';
 
   const styles = `background: ${background}; color: ${color}; ${category.styles || ''}`;
 
@@ -71,7 +71,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       <tr>
         <td>
           ${Paragraph({
-            text: queries.paragraphs[id] || 'Translation not found',
+            text: queries.paragraphs[id] ?? 'Translation not found',
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
@@ -88,18 +88,20 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const ProductsElement = category.products
     ? await renderProducts(
         category.products,
-        category.showPrices || true,
-        category.showName || true,
+        category.showPrices ?? true,
+        category.showNames ?? true,
         queries,
         category.type,
-        category.insideContainer || true,
-        category.color || '#000000'
+        category.insideContainer ?? true,
+        category.color ?? '#000000',
+        id,
+        category.imageSide
       )
     : '';
 
   const CTAElement = category.cta
     ? CTA({
-        color: category.color || '#000000',
+        color: category.color ?? '#000000',
         href: ctaHref,
         text: getPhrase('shop now'),
         insideTr: true,
@@ -149,7 +151,17 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   `;
 };
 
-const renderProducts = async (products, showPrices, showNames, queries, categoryType, insideContainer, color) => {
+const renderProducts = async (
+  products,
+  showPrices,
+  showNames,
+  queries,
+  categoryType,
+  insideContainer,
+  color,
+  id,
+  imageSide
+) => {
   // console.log('produkty ', products);
 
   const type = categoryType ? categoryType.toLowerCase() : 'default';
@@ -157,14 +169,14 @@ const renderProducts = async (products, showPrices, showNames, queries, category
   try {
     const module = await import(`./category/${type}.js`);
 
-    return module.render(products, showPrices, showNames, queries, insideContainer, color);
+    return module.render(products, showPrices, showNames, queries, insideContainer, color, id, imageSide);
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);
     console.error(e.message);
 
     const defaultModule = await import('./category/default.js');
 
-    return defaultModule.render(products, showPrices, showNames, queries, insideContainer, color);
+    return defaultModule.render(products, showPrices, showNames, queries, insideContainer, color, id, imageSide);
   }
 };
 
