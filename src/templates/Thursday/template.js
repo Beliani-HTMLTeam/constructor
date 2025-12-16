@@ -120,7 +120,8 @@ const Thursday = async ({
           try {
             if (!p) return null;
             if (typeof getProductById === 'function') {
-              return await getProductById(p.id, p.src);
+              const fetchedProduct = await getProductById(p.id, p.src);
+              return fetchedProduct ? { ...p, ...fetchedProduct } : null;
             }
             return null;
           } catch (err) {
