@@ -5,7 +5,7 @@ import { fetchSheetData } from './api/google/fetchSheetData.js';
 import { getStaticTranslation, getDynamicTranslation, getAllStaticTranslations } from './api/local/getTranslations.js';
 
 const app = express();
-const PORT = process.env.API_PORT || 3001;
+const PORT = process.env.API_PORT;
 
 // Middleware
 app.use(cors());
@@ -200,13 +200,4 @@ app.get('/api/local/dynamic/:year/:tab/:range', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 API Server running on http://localhost:${PORT}`);
-  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`🌐 Static API: http://localhost:${PORT}/api/static`);
-  console.log(`🔄 Dynamic API: http://localhost:${PORT}/api/dynamic/{year}/{sheetTab}`);
-  console.log(`📏 Dynamic Range API: http://localhost:${PORT}/api/dynamic/{year}/{sheetTab}/{range}`);
-  console.log(`🏠 Local Static API: http://localhost:${PORT}/api/local/static`);
-  console.log(`🏠 Local Static Sheet API: http://localhost:${PORT}/api/local/static/{sheet}`);
-  console.log(`🏠 Local Dynamic API: http://localhost:${PORT}/api/local/dynamic/{year}/{tab}/{range}`);
-});
+app.listen(PORT);

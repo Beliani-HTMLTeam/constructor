@@ -4,6 +4,7 @@ import { normalizeTranslations } from '@/utils/normalizeTranslations.js';
 import { getDynamicTranslation } from '@/api/translations';
 
 import { toast } from 'sonner';
+import { getSheet, setSheet, clearSheets, getSheetKeys } from '@/api/cache.js';
 
 export const fetchTranslations = async ({ tableQueries, tableName }) => {
   let slug = getState('country');
@@ -81,7 +82,7 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
       groupedQueries.set(tableKey, {
         year: yearNum,
         tab: sanitizedTab,
-        queries: []
+        queries: [],
       });
     }
 
@@ -91,23 +92,32 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
   // Now fetch entire spreadsheets for each unique tableName
   for (const [tableKey, group] of groupedQueries) {
     let res;
-    try {
-      console.log(`Fetching dynamic translation for tab: "${group.tab}", year: ${group.year}`);
-      // Fetch entire spreadsheet (no range specified)
-      res = await getDynamicTranslation({
-        year: group.year,
-        tab: group.tab,
-        // range: undefined - always fetch entire sheet
-      });
-    } catch (err) {
-      console.error('Network or unexpected error fetching dynamic translation', err);
-      toast.error('Failed to fetch translations due to a network or unexpected error');
-      continue;
+
+    const cached = getSheet(tableKey);
+    if (cached) {
+      console.log(`Using frontend cached sheet for ${tableKey}`);
+      res = { data: cached };
+    } else {
+      try {
+        console.log(`Fetching dynamic translation for tab: "${group.tab}", year: ${group.year}`);
+
+        res = await getDynamicTranslation({
+          year: group.year,
+          tab: group.tab,
+        });
+
+        if (res && !res.error && res.data) {
+          setSheet(tableKey, res.data);
+        }
+      } catch (err) {
+        console.error('Network or unexpected error fetching dynamic translation', err);
+        toast.error('Failed to fetch translations due to a network or unexpected error');
+        continue;
+      }
     }
 
     if (res && res.error) {
       switch (res.status) {
-
         // unauthorized - not yet implemented on the api side
         case 401:
           console.warn('Unauthorized when fetching translations', { tab: group.tab, year: group.year, res });
@@ -162,8 +172,8 @@ export const fetchTranslations = async ({ tableQueries, tableName }) => {
   return result;
 };
 
-
 // Helper function to extract specific range from full sheet data
+// --- same as in bun translations api (server)
 function extractRangeFromSheet(fullSheetData, range) {
   if (!Array.isArray(fullSheetData)) {
     return [];
@@ -182,6 +192,9 @@ function extractRangeFromSheet(fullSheetData, range) {
 
   // Extract the specified range
   const rangeData = fullSheetData.slice(start, end);
-  
+
   return rangeData;
 }
+
+// Expose cache controls for external use
+export { clearSheets as clearSheetCache, getSheetKeys };

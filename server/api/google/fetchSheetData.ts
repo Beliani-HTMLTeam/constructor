@@ -2,9 +2,6 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { Result } from '../types/Result.ts';
 import { getStaticTranslations, getDynamicTranslations } from './auth';
 
-// Simple in-memory cache for fetched sheets to avoid repeated Google API calls
-const SHEET_CACHE: Map<string, { code: number; message?: string; dataOrigin?: string; executionTime?: number; data: Record<string, any> }> = new Map();
-
 let messages = {
   CATEGORY_LINKS: 'Category links fetched successfully',
   CATEGORY_TITLES: 'Category titles fetched successfully',
@@ -16,23 +13,12 @@ let messages = {
 export async function fetchSheetData(
   spreadsheet: string,
   sheetName: string,
-  year?: number): Promise<Result<Record<string, any>>> {
+  year?: number
+): Promise<Result<Record<string, any>>> {
   let document: GoogleSpreadsheet;
 
   let start_time = Date.now();
   let message: string;
-
-  const cacheKey = `${spreadsheet}::${year ?? ''}::${String(sheetName).trim()}`;
-  if (SHEET_CACHE.has(cacheKey)) {
-    const cached = SHEET_CACHE.get(cacheKey)!;
-    return {
-      code: cached.code,
-      message: cached.message || 'Fetched from cache',
-      dataOrigin: cached.dataOrigin || 'cache',
-      executionTime: cached.executionTime || 0,
-      data: cached.data || {},
-    };
-  }
 
   switch (spreadsheet) {
     case 'STATIC':
@@ -77,13 +63,6 @@ export async function fetchSheetData(
     message = messages[sheetName];
   }
 
-  // cache full sheet result
-  try {
-    cacheSheet(cacheKey, { message, dataOrigin: 'googleAPI', executionTime: responseTime, data: result });
-  } catch (err) {
-    console.warn('Failed to cache sheet result', err);
-  }
-
   return {
     message: message,
     dataOrigin: 'googleAPI',
@@ -91,19 +70,4 @@ export async function fetchSheetData(
     code: 200,
     data: result,
   };
-}
-
-// Cache the full sheet data after fetching to speed up subsequent requests
-function cacheSheet(key: string, payload: { message?: string; dataOrigin?: string; executionTime?: number; data: Record<string, any> }) {
-  try {
-    SHEET_CACHE.set(key, {
-      code: 200,
-      message: payload.message,
-      dataOrigin: payload.dataOrigin,
-      executionTime: payload.executionTime,
-      data: payload.data,
-    });
-  } catch (err) {
-    console.warn('Failed to cache sheet data', err);
-  }
 }

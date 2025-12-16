@@ -94,7 +94,7 @@ export async function getDynamicTranslation(year, tab, range) {
     // First try external API (ZROK)
     const encodedTab = encodeURIComponent(String(tab));
     let externalUrl;
-    
+
     if (range) {
       const encodedRange = encodeURIComponent(String(range));
       externalUrl = `${api_url}dynamic/${year}/${encodedTab}/${encodedRange}`;
@@ -102,7 +102,7 @@ export async function getDynamicTranslation(year, tab, range) {
       // Fetch entire sheet
       externalUrl = `${api_url}dynamic/${year}/${encodedTab}`;
     }
-    
+
     console.log(`Trying external API: ${externalUrl}`);
 
     const externalResponse = await fetch(externalUrl, {
@@ -126,7 +126,11 @@ export async function getDynamicTranslation(year, tab, range) {
       }
     }
 
-    console.log(`External API failed for ${year}-${tab}${range ? `-${range}` : ''} (${externalResponse.status}), trying Google Sheets fallback`);
+    console.log(
+      `External API failed for ${year}-${tab}${range ? `-${range}` : ''} (${
+        externalResponse.status
+      }), trying Google Sheets fallback`
+    );
 
     // Fallback to Google Sheets API
     const response = await fetchSheetData('DYNAMIC', tab, year, range);

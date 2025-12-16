@@ -1,19 +1,35 @@
 import { JWT } from 'google-auth-library';
-import gcredentials from './google-credentials.json';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
+const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
+let privateKey = process.env.GOOGLE_PRIVATE_KEY;
+
+if (!clientEmail || !privateKey) {
+  console.warn(
+    'Google credentials not fully provided via environment variables (GOOGLE_CLIENT_EMAIL / GOOGLE_PRIVATE_KEY).'
+  );
+}
+
+// fix escaped newlines in the private key (yes, there can be random \n in that key xD)
+if (privateKey && privateKey.includes('\\n')) {
+  privateKey = privateKey.replace(/\\n/g, '\n');
+}
+
 const xlsxAccount = new JWT({
-  email: gcredentials.client_email,
-  key: gcredentials.private_key,
+  email: clientEmail,
+  key: privateKey,
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-const STATIC_TRANSLATIONS = new GoogleSpreadsheet('1Y9blxN4paEV05s6AvdWmH5fBELTUvDz3ax5skmgVrsQ', xlsxAccount);
+const STATIC_SHEET_ID = process.env.GOOGLE_STATIC_SHEET_ID;
+const DYNAMIC_2025_ID = process.env.GOOGLE_DYNAMIC_2025_ID;
+const DYNAMIC_2026_ID = process.env.GOOGLE_DYNAMIC_2026_ID;
 
-// Dynamic spreadsheets per year
+const STATIC_TRANSLATIONS = new GoogleSpreadsheet(STATIC_SHEET_ID, xlsxAccount);
+
 const DYNAMIC_SHEETS: Record<number, GoogleSpreadsheet> = {
-  2025: new GoogleSpreadsheet('1djnjfhsFX4-Fghv5cQU_UNYaEhVL9Ban4VUqIfHsWdc', xlsxAccount),
-  2026: new GoogleSpreadsheet('1RcsQspit0B3b3xX1NwZ9RWnUzZrkoVDULu2cnPMZ04U', xlsxAccount),
+  2025: new GoogleSpreadsheet(DYNAMIC_2025_ID, xlsxAccount),
+  2026: new GoogleSpreadsheet(DYNAMIC_2026_ID, xlsxAccount),
 };
 
 export async function getStaticTranslations() {

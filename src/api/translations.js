@@ -1,13 +1,14 @@
 import { appConfig as c } from '@utils/config.js';
 import { toast } from 'sonner';
+import {
+  getStatic,
+  setStatic,
+  clearStatic,
+  registerStaticLoader,
+  refreshStatic as cacheRefreshStatic,
+} from '@/api/cache.js';
 
-export let staticTranslations = {
-  header: {},
-  footer: {},
-  templates: {},
-  category_links: {},
-  category_titles: {},
-};
+export const staticTranslations = getStatic();
 
 export let queries = {}; // campaignId -> slug -> { name: data, ... }
 
@@ -22,37 +23,42 @@ export function getQueries(campaignId, slug) {
   return queries[campaignId]?.[slug] || {};
 }
 
-export default async function initStaticTranslations() {
+export default async function initStaticTranslations({ force = false } = {}) {
   // Check if static translations are already loaded
-  const isAlreadyLoaded = Object.values(staticTranslations).some(sheet => Object.keys(sheet).length > 0);
-  
+  const isAlreadyLoaded = Object.values(staticTranslations).some((sheet) => Object.keys(sheet).length > 0);
+
   console.log('Checking if static translations are loaded:', isAlreadyLoaded);
-  console.log('Current staticTranslations state:', Object.keys(staticTranslations).map(key => ({ key, length: Object.keys(staticTranslations[key]).length })));
-  
-  if (isAlreadyLoaded) {
+  console.log(
+    'Current staticTranslations state:',
+    Object.keys(staticTranslations).map((key) => ({ key, length: Object.keys(staticTranslations[key]).length }))
+  );
+
+  if (isAlreadyLoaded && !force) {
     console.log('Static translations already loaded, skipping initialization');
     return;
   }
 
+  if (force) {
+    // clear existing translations before forcing a reload
+    clearStatic();
+  }
+
   console.log('Initializing static translations...');
-  
+
   const loadPromise = Promise.all(
     Object.keys(staticTranslations).map(async (key, index) => {
       // Add delay between requests to avoid Google Sheets API quota limits
       if (index > 0) {
-        await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 second delay
       }
       const translations = await getStaticTranslation({ sheet: key });
       // console.log(`Translations for ${key} loaded from ${translations.source || 'unknown'}:`, translations.data);
-      staticTranslations[key] = translations.data;
+      setStatic(key, translations.data || {});
     })
   );
 
   // Add minimum delay to show loading toast
-  const delayedPromise = Promise.all([
-    loadPromise,
-    new Promise((resolve) => setTimeout(resolve, 1000)),
-  ]);
+  const delayedPromise = Promise.all([loadPromise, new Promise((resolve) => setTimeout(resolve, 1000))]);
 
   await toast.promise(delayedPromise, {
     loading: 'Initializing translations...',
@@ -68,7 +74,24 @@ export default async function initStaticTranslations() {
   // console.log(staticTranslations);
 }
 
+// Register this module's loader in cache so external callers can trigger refresh
+registerStaticLoader(async () => await initStaticTranslations({ force: true }));
+
+// Immediately warm up static translations on module load (non-forced)
 await initStaticTranslations();
+
+// Helpers to manage frontend in-memory cache for static translations
+export function isStaticTranslationsLoaded() {
+  return Object.values(staticTranslations).some((sheet) => Object.keys(sheet).length > 0);
+}
+
+export function clearStaticTranslations() {
+  clearStatic();
+}
+
+export async function refreshStaticTranslations() {
+  await cacheRefreshStatic();
+}
 
 // todo: make alternative functions to get translations directly from Google Sheets API
 
@@ -80,7 +103,7 @@ async function getStaticTranslation({ sheet }) {
       Accept: 'application/json',
       skip_zrok_interstitial: 'true',
     };
-  
+
     const res = await fetch(url, {
       method: 'GET',
       headers: headers,
@@ -102,10 +125,10 @@ async function getStaticTranslation({ sheet }) {
 export async function getDynamicTranslation({ year, tab, range }) {
   // encode tab so spaces and special characters are safe in the URL
   const encodedTab = encodeURIComponent(String(tab));
-  
+
   // Always fetch entire sheet, range will be extracted locally
   const url = `${c.api_url}dynamic/${year}/${encodedTab}`;
-  
+
   const headers = {
     Accept: 'application/json',
     // Removed 'Content-Type' for GET to avoid CORS preflight
@@ -119,7 +142,7 @@ export async function getDynamicTranslation({ year, tab, range }) {
 
   // parse body depending on content type
   const ct = (res.headers.get('content-type') || '').toLowerCase();
-  
+
   let body = null;
 
   try {
