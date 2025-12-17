@@ -13,6 +13,7 @@ const Categories = async ({
   getCategoryLink,
   getCategoryTitle,
   categories,
+  categories_line,
   queries,
   add_utm,
 }) => {
@@ -28,7 +29,8 @@ const Categories = async ({
         getPhrase,
         getCategoryLink,
         getCategoryTitle,
-        add_utm
+        add_utm,
+        categories_line
       );
     }
   }

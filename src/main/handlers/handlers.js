@@ -64,13 +64,9 @@ export class TemplateHandlers {
     const shop = getState('shop');
     const languageHREF = shop.languages.find((item) => item.language.slug === country);
 
-    let country_products = this.products?.filter(
-      (product) => product.country === shop.slug.toLowerCase()
-    );
+    let country_products = this.products?.filter((product) => product.country === shop.slug.toLowerCase());
 
-    const product = country_products?.find(
-      (product) => Number(product.main_id) === Number(productId)
-    );
+    const product = country_products?.find((product) => Number(product.main_id) === Number(productId));
 
     if (!product) {
       return {
@@ -194,9 +190,7 @@ export class TemplateHandlers {
         }
       } else {
         partsTranslations.push(item);
-        toast.error(
-          `Nie znaleziono tłumaczenia dla '${item}' kategorii!\nSprawdź szczegóły w konsoli.`
-        );
+        toast.error(`Nie znaleziono tłumaczenia dla '${item}' kategorii!\nSprawdź szczegóły w konsoli.`);
         console.log('Ta część kategorii nie została znaleziona w tłumaczeniach:');
         console.log(
           'https://docs.google.com/spreadsheets/d/1Y9blxN4paEV05s6AvdWmH5fBELTUvDz3ax5skmgVrsQ/edit?gid=0#gid=0'

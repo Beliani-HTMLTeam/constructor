@@ -304,6 +304,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       timer: timer,
+      titlesSource: 'queries',
     },
     {
       name: 'Landing',
@@ -330,6 +331,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       timer: timer,
+      titlesSource: 'queries',
     },
   ],
 });

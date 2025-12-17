@@ -9,6 +9,11 @@ import { Categories } from '../components/Categories';
 import { Line } from '../../components/components/Line';
 import { Space } from '../components/Space';
 import { SoonEndingBanner } from '../components/SoonEndingBanner';
+import { shopNow } from '../components/shopNow';
+import { Create2Columns_Grid } from '../components/Create2Columns_Grid';
+import { render as category2Columns_Grid } from '../category/category2Columns_Grid';
+import { Intro } from '../components/Intro';
+import { CTA } from '../components/CTA';
 
 const RegularFridayNslt = async ({
   links,
@@ -18,12 +23,15 @@ const RegularFridayNslt = async ({
   type,
   id,
   categories,
+  categories_type,
+  categories_line,
   background,
   color,
 
   // campaign elements
   Inside,
   OfferPart,
+  intro,
   timer,
   TopImageTitle_data,
 
@@ -46,7 +54,7 @@ const RegularFridayNslt = async ({
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
-  const shopNow = getPhrase('Shop now');
+  const shopNowPhrase = getPhrase('Shop now');
 
   const TopImageTitleElement =
     // are both href and src available?
@@ -54,10 +62,12 @@ const RegularFridayNslt = async ({
       ? TopImageTitle({
           href: links.TopImageTitle_href,
           src: links.TopImageTitle_src,
-          title1: queries.TopImageTitle[0] || 'Translation not found',
-          // title1: 'Translation not found',
-          title2: queries.TopImageTitle[1] || 'Translation not found',
-          // title2: 'Translation not found',
+          // title1: queries.TopImageTitle[0] || 'Translation not found',
+          // title2: queries.TopImageTitle[1] || 'Translation not found',
+
+          // placeholder
+          title1: 'Living-room trends 2026',
+          title2: 'Comfort and style for every home',
           color: TopImageTitle_data.color,
           background: TopImageTitle_data.background,
           type: TopImageTitle_data.type,
@@ -98,7 +108,49 @@ const RegularFridayNslt = async ({
         })
       : '';
 
-  console.log('timer', queries);
+  const IntroElement =
+    intro && intro.type === 'paragraph'
+      ? // ? `
+        //   ${Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })}
+        //   ${
+        //     intro.cta
+        //       ? `
+        //       ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
+        //       ${CTA({
+        //         href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+        //         text: shopNow,
+        //         color: '#000000',
+        //         align: 'center',
+        //         insideTr: true,
+        //       })}
+        //       ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
+        //         `
+        //       : ''
+        //   }
+        //   `
+        `
+        ${Intro({
+          text: 'Step into 2026 with living-room trends that celebrate comfort, personality, and the art of creating a space that evolves with your life.',
+          paragraphAlign: intro.alignment,
+        })}
+        ${
+          intro.cta
+            ? `
+            ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
+            ${CTA({
+              href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+              text: shopNow,
+              color: '#000000',
+              align: 'center',
+              insideTr: true,
+            })}
+            ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
+              `
+            : ''
+        }
+        `
+      : '';
+
   const TimerElement =
     Inside && Inside.type === 'timer'
       ? Timer({
@@ -112,7 +164,8 @@ const RegularFridayNslt = async ({
           background: Inside.backgroundColor,
           freebies: timer.freebies,
           isCtaVisible: timer.isCtaVisible,
-          ctaText: shopNow,
+          ctaText: shopNowPhrase,
+          spaceAfter: Inside.spaceAfter,
         })
       : '';
   const categoriesWithProducts = await Promise.all(
@@ -127,37 +180,65 @@ const RegularFridayNslt = async ({
     })
   );
 
-  //   const CategoriesElement = categories
-  //     ? await Categories({
-  //         getPhrase: getPhrase,
-  //         getCategoryLink: getCategoryLink,
-  //         getCategoryTitle: getCategoryTitle,
-  //         categories:
-  //           categoriesWithProducts.length > 0
-  //             ? categoriesWithProducts.map((category) => {
-  //                 const href = category.href ? getCategoryLink(category.href) : category.href;
-  //                 const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+  const CategoriesElement =
+    categories && categories_type !== 'twoColumnsGrid'
+      ? await Categories({
+          getPhrase: getPhrase,
+          getCategoryLink: getCategoryLink,
+          getCategoryTitle: getCategoryTitle,
+          categories:
+            categoriesWithProducts.length > 0
+              ? categoriesWithProducts.map((category) => {
+                  const href = category.href ? getCategoryLink(category.href) : category.href;
+                  const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
 
-  //                 return {
-  //                   ...category,
-  //                   href,
-  //                   name,
-  //                 };
-  //               })
-  //             : categories.map((category) => {
-  //                 const href = category.href ? getCategoryLink(category.href) : category.href;
-  //                 const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+                  return {
+                    ...category,
+                    href,
+                    name,
+                  };
+                })
+              : categories.map((category) => {
+                  const href = category.href ? getCategoryLink(category.href) : category.href;
+                  const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
 
-  //                 return {
-  //                   ...category,
-  //                   href,
-  //                   name,
-  //                 };
-  //               }),
-  //         queries,
-  //         add_utm,
-  //       })
-  //     : '';
+                  return {
+                    ...category,
+                    href,
+                    name,
+                  };
+                }),
+          categories_line,
+          queries,
+          add_utm,
+        })
+      : categories && categories_type === 'twoColumnsGrid'
+      ? `
+
+      <tr>
+                <td style="background-color: #750000;" class="newsletterContainer">
+                  ${Create2Columns_Grid({
+                    shuffle: false,
+                    iter: categories,
+                    left: (categories) =>
+                      category2Columns_Grid({
+                        getCategoryLink,
+                        getCategoryTitle,
+                        categories,
+                        paddingStyle: 'padding-right:6px',
+                      }),
+                    right: (categories) =>
+                      category2Columns_Grid({
+                        getCategoryLink,
+                        getCategoryTitle,
+                        categories,
+                        paddingStyle: 'padding-left:6px',
+                      }),
+                  })}
+                </td>
+              </tr>
+              `
+      : '';
 
   return `
     ${HeaderElement}
@@ -169,10 +250,25 @@ const RegularFridayNslt = async ({
 
       ${TopImageElement}
 
+      ${IntroElement}
+
       ${OfferPartElement}
 
-      ${timer.position === 'afterOfferPart' ? TimerElement : ''}
-
+      ${timer.position === 'outsideTopImageTitle' ? TimerElement : ''}
+      
+      ${CategoriesElement}
+              
+      ${
+        links['ShopCTA']
+          ? shopNow({
+              href: links['ShopCTA'],
+              cta: queries['shopall'][0],
+              textColor: '#FFFFFF',
+              backgorund: '#750000',
+              space: '35',
+            })
+          : ''
+      }
     
     </table>
 

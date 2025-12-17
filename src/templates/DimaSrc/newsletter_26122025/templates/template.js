@@ -21,6 +21,7 @@ const Friday = async ({
   categories,
   background,
   color,
+  titlesSource = 'translations',
 
   // campaign elements
   Inside,
@@ -129,9 +130,15 @@ const Friday = async ({
         getCategoryTitle: getCategoryTitle,
         categories:
           categoriesWithProducts.length > 0
-            ? categoriesWithProducts.map((category) => {
+            ? categoriesWithProducts.map((category, idx) => {
                 const href = category.href ? getCategoryLink(category.href) : category.href;
-                const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+                // const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+                const name =
+                  titlesSource === 'queries'
+                    ? queries.categories[idx]
+                    : getCategoryTitle
+                    ? getCategoryTitle(category.name)
+                    : category.name;
 
                 return {
                   ...category,
@@ -141,7 +148,12 @@ const Friday = async ({
               })
             : categories.map((category) => {
                 const href = category.href ? getCategoryLink(category.href) : category.href;
-                const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+                const name =
+                  titlesSource === 'queries'
+                    ? queries.categories[idx]
+                    : getCategoryTitle
+                    ? getCategoryTitle(category.name)
+                    : category.name;
 
                 return {
                   ...category,

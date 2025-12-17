@@ -2,7 +2,7 @@
   "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "dev": "concurrently \"bun server/api-server.js\" \"vite --port 5000\"",
+    "dev": "concurrently \"bun server/api-server.js\" \"vite --port 5500\"",
     "build": "vite build",
     "preview": "concurrently \"bun server/api-server.js\" \"vite preview --port 5000\"",
     "start": "concurrently \"bun server/api-server.js\" \"vite preview --port 5000\"",
