@@ -17,6 +17,8 @@ const tableQueries = [
     tableRange: '25:32',
     name: 'offerPart',
   },
+  { tableRange: '29', name: 'codeCTA' },
+  { tableRange: '31', name: 'code' },
 ];
 
 const links = {
@@ -27,8 +29,8 @@ const links = {
   TopImage_href: translateLink({ value: 'content/lp26-01-13' }),
   Banner_1: translateLink({ value: 'content/lp25-12-23' }),
   Banner_1_Image: translateImage({ value: '20251223b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-12-18' }),
-  Banner_2_Image: translateImage({ value: '20251218b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-12-09' }),
+  Banner_2_Image: translateImage({ value: '20251209b.png' }),
 };
 
 const TopImageTitle_data = {
