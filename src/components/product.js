@@ -11,7 +11,7 @@ export function Product(product, align = 'left', style, prices = true, padding =
               ? `<table cellspacing="0" cellpadding="0" style="width: 100%; ">
             <tbody>
               <tr>
-                <td align="${align}" class= ${padding ?? "newsletterBottom20px"}>
+                <td align="${align}" class= ${padding ? "newsletterBottom20px" : ""}>
                   ${ImageWithLink({
                     href: product.href,
                     src: product.src,

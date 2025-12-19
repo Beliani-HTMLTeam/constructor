@@ -15,6 +15,7 @@ export class Campaign {
   full_img_width;
   white_line;
   under_intro_line;
+  soon_banners;
   constructor({
     date,
     data,
@@ -32,6 +33,7 @@ export class Campaign {
     full_img_width,
     white_line,
     under_intro_line,
+    soon_banners,
     version = 'new',
   }) {
     if (!Array.isArray(templates)) {
@@ -76,5 +78,6 @@ export class Campaign {
     this.full_img_width = full_img_width || false;
     this.white_line = white_line || false;
     this.under_intro_line = under_intro_line || false;
+    this.soon_banners = soon_banners || false;
   }
 }
