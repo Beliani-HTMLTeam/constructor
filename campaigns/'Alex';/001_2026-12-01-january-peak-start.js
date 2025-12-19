@@ -198,7 +198,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: false,
+  optimizeImg: true,
   figmaUrl:
     'https://www.figma.com/design/g8eV3FPLQ2dcogr3rcOETq/2026.12.01---First-newsletter-January-Peak-Start--Copy-?node-id=0-1&p=f&t=uvnNveO4HE2uu5ia-0',
   templates: [
