@@ -62,12 +62,12 @@ const RegularFridayNslt = async ({
       ? TopImageTitle({
           href: links.TopImageTitle_href,
           src: links.TopImageTitle_src,
-          // title1: queries.TopImageTitle[0] || 'Translation not found',
-          // title2: queries.TopImageTitle[1] || 'Translation not found',
+          title1: queries.TopImageTitle[0] || 'Translation not found',
+          title2: queries.TopImageTitle[1] || 'Translation not found',
 
           // placeholder
-          title1: 'Living-room trends 2026',
-          title2: 'Comfort and style for every home',
+          // title1: 'Living-room trends 2026',
+          // title2: 'Comfort and style for every home',
           color: TopImageTitle_data.color,
           background: TopImageTitle_data.background,
           type: TopImageTitle_data.type,
@@ -110,45 +110,24 @@ const RegularFridayNslt = async ({
 
   const IntroElement =
     intro && intro.type === 'paragraph'
-      ? // ? `
-        //   ${Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })}
-        //   ${
-        //     intro.cta
-        //       ? `
-        //       ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
-        //       ${CTA({
-        //         href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
-        //         text: shopNow,
-        //         color: '#000000',
-        //         align: 'center',
-        //         insideTr: true,
-        //       })}
-        //       ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
-        //         `
-        //       : ''
-        //   }
-        //   `
-        `
-        ${Intro({
-          text: 'Step into 2026 with living-room trends that celebrate comfort, personality, and the art of creating a space that evolves with your life.',
-          paragraphAlign: intro.alignment,
-        })}
-        ${
-          intro.cta
-            ? `
-            ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
-            ${CTA({
-              href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
-              text: shopNow,
-              color: '#000000',
-              align: 'center',
-              insideTr: true,
-            })}
-            ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
-              `
-            : ''
-        }
-        `
+      ? `
+          ${Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })}
+          ${
+            intro.cta
+              ? `
+              ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
+              ${CTA({
+                href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+                text: shopNow,
+                color: '#000000',
+                align: 'center',
+                insideTr: true,
+              })}
+              ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
+                `
+              : ''
+          }
+          `
       : '';
 
   const TimerElement =
@@ -188,9 +167,14 @@ const RegularFridayNslt = async ({
           getCategoryTitle: getCategoryTitle,
           categories:
             categoriesWithProducts.length > 0
-              ? categoriesWithProducts.map((category) => {
+              ? categoriesWithProducts.map((category, idx) => {
                   const href = category.href ? getCategoryLink(category.href) : category.href;
-                  const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+                  const name =
+                    category.title.source === 'queries'
+                      ? queries.categories[idx]
+                      : getCategoryTitle
+                      ? getCategoryTitle(category.name)
+                      : category.name;
 
                   return {
                     ...category,
@@ -198,9 +182,14 @@ const RegularFridayNslt = async ({
                     name,
                   };
                 })
-              : categories.map((category) => {
+              : categories.map((category, idx) => {
                   const href = category.href ? getCategoryLink(category.href) : category.href;
-                  const name = getCategoryTitle ? getCategoryTitle(category.name) : category.name;
+                  const name =
+                    category.title.source === 'queries'
+                      ? queries.categories[idx]
+                      : getCategoryTitle
+                      ? getCategoryTitle(category.name)
+                      : category.name;
 
                   return {
                     ...category,

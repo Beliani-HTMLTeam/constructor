@@ -62,8 +62,7 @@ export const renderCategory = async (
         <tr>
           <td class="newsletterContainer">
             ${Paragraph({
-              // text: queries.paragraphs[id] || 'Translation not found',
-              text: 'Refresh your living room with clean lines, tapered wooden legs, and warm walnut tones that bring the refined ease of Mid-Century Modern design to anyone who values timeless simplicity.',
+              text: queries.paragraphs[id] || 'Translation not found',
               align: category.paragraph.align,
               tableContainer: true,
             })}

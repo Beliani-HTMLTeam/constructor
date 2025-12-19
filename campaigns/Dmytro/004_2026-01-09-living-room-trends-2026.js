@@ -19,8 +19,12 @@ const tableQueries = [
     name: 'condition',
   },
   {
-    tableRange: '21:26',
+    tableRange: '21:23',
     name: 'categories',
+  },
+  {
+    tableRange: '24:26',
+    name: 'paragraphs',
   },
 ];
 
@@ -30,13 +34,8 @@ const links = {
   TopImage_src: getImageUrl('20260109topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-01-09' }),
   Timer_href: translateLink({ value: 'content/lp26-01-05' }),
-  // that's what should be here
-  // Banner_1: translateLink({ value: 'content/lp26-01-02' }),
-  // Banner_1_Image: translateImage({ value: '20260102b.png' }),
-
-  // placeholder
-  Banner_1: translateLink({ value: 'content/lp25-12-19' }),
-  Banner_1_Image: translateImage({ value: '20251219b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-01-02' }),
+  Banner_1_Image: translateImage({ value: '20260102b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-01-01' }),
   Banner_2_Image: translateImage({ value: '20251218b.png' }),
 };
@@ -59,6 +58,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
       spaceBefore: 'newsletterBottom35px',
@@ -96,6 +96,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
       spaceBefore: 'newsletterBottom35px',
@@ -133,6 +134,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
       spaceBefore: 'newsletterBottom35px',
