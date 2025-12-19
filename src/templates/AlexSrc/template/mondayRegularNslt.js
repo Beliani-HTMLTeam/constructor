@@ -223,6 +223,7 @@ function generateCategoriesSection(
                 : 'https://beliani.info/newsletter/2022/line.jpg',
 
             selectCampaign: selectCampaign,
+            padding: true,
             categoryIntro: queries?.categoryIntro?.[index] || '',
           })}
         </td>
@@ -265,12 +266,11 @@ export async function mondayRegularNslt({
   full_img_width,
 }) {
   const codes = getCodes(queries);
+  console.log('type', type);
   const selectCampaign = getState('selectedCampaign');
   const colorLine = white_line
     ? 'https://pictureserver.net/static/2024/white_line.jpg'
     : 'https://beliani.info/newsletter/2022/line.jpg';
-
-  console.log(full_img_width, 'tyt');
 
   const categoriesSectionHTML = generateCategoriesSection(
     categories,
@@ -284,8 +284,6 @@ export async function mondayRegularNslt({
     getPhrase,
     getCategoryLink
   );
-
-  console.log(full_img_width, 'neeeeew');
 
   return `
   ${Header(
@@ -364,7 +362,7 @@ export async function mondayRegularNslt({
                     <td align="center">
                       ${ImageWithLink({
                         href: links.TopImageTitle_href,
-                        src: links.TopImage,
+                        src: links.TopImage_src,
                       })}
                     </td>
                 </tr>`
@@ -407,7 +405,7 @@ export async function mondayRegularNslt({
                               color: offerPart.color,
                               data: queries.offerPart,
                               //data2: queries.ChooseFrom,
-                              href: links[0],
+                              href: links.TopImageTitle_href,
                               getPhrase,
                               type,
                               queries,
@@ -575,42 +573,49 @@ export async function mondayRegularNslt({
           <tbody>
       </table>
       
-      <table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
-      <tbody>
-        <tr>
-            <td >
-                ${Line()}
-            </td>
-        </tr>
-        <tr>
-            <td class="newsletterBottom35px" >
-            </td>
-        </tr>
-        <tr>
-            <td align="left" class="newsletterBottom35px">
-                <span class="newsletterFooterTitle">${getPhrase('Shop limited-time deals')}</span>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" class="newsletterBottom20px">
-                <a href=${links.Banner_1}>
-                    <img alt="Soon Ending Banner 1" loading="lazy" src=${
-                      links.Banner_1_Image
-                    } style="display: block;" width="100%">
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" class="newsletterBottom35px">
-                <a href=${links.Banner_2}>
-                    <img alt="Soon Ending Banner 2" loading="lazy" src=${
-                      links.Banner_2_Image
-                    } style="display: block;" width="100%">
-                </a>
-            </td>
-        </tr>
-      </tbody>
-  </table>
+
+      ${type === 'landing' && soon_banners || type === 'newsletter' ?
+          `<table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
+            <tbody>
+              <tr>
+                  <td >
+                      ${Line()}
+                  </td>
+              </tr>
+              <tr>
+                  <td class="newsletterBottom35px" >
+                  </td>
+              </tr>
+              <tr>
+                  <td align="left" class="newsletterBottom35px">
+                      <span class="newsletterFooterTitle">${getPhrase('Shop limited-time deals')}</span>
+                  </td>
+              </tr>
+              <tr>
+                  <td align="left" class="newsletterBottom20px">
+                      <a href=${links.Banner_1}>
+                          <img alt="Soon Ending Banner 1" loading="lazy" src=${
+                            links.Banner_1_Image
+                          } style="display: block;" width="100%">
+                      </a>
+                  </td>
+              </tr>
+              <tr>
+                  <td align="left" class="newsletterBottom35px">
+                      <a href=${links.Banner_2}>
+                          <img alt="Soon Ending Banner 2" loading="lazy" src=${
+                            links.Banner_2_Image
+                          } style="display: block;" width="100%">
+                      </a>
+                  </td>
+              </tr>
+            </tbody>
+        </table>`
+        :
+       ""
+      }
+
+    
       ${Footer(
         {
           id,

@@ -12,7 +12,8 @@ export function OfferPartCode({
   paragraph3,
   href,
   type,
-}) {
+}){
+  console.log(queries);
   const newsletter = `
     <tr>
       <td style="color: ${color}">

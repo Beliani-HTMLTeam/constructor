@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '2025::24.12.25 - Merry Christmas';
+const campaignTranslationsSheet = '2025::31.12.25 - Happy new year';
 
 const tableQueries = [
   {
@@ -11,54 +11,35 @@ const tableQueries = [
     name: "intro",
   },
   {
-    tableRange: "30",
+    tableRange: "28",
     name: "shopall",
   },
   {
-    tableRange: "33:34",
+    tableRange: "31:32",
     name: "condition",
   },
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp25-12-24' }),
-  TopImageTitle_src: translateImage({ value: '20251224_01.png' }),
-  TopImage_src: getImageUrl('20251224_Pic.png', true),
-  TopImage_href: translateLink({ value: 'content/lp25-12-24' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp25-12-31' }),
+  TopImageTitle_src: translateImage({ value: '20251231_01.png' }),
+  TopImage_src: getImageUrl('20251231_Pic.png', true),
+  TopImage_href: translateLink({ value: 'content/lp25-12-31' }),
   ShopCTA: translateLink({ value: ' ' }),
-  Banner_1: translateLink({ value: 'content/lp25-12-18' }),
-  Banner_1_Image: translateImage({ value: '20251218b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-12-17' }),
-  Banner_2_Image: translateImage({ value: '20251217b.png' }),
+  Banner_1: translateLink({ value: 'content/lp25-12-23' }),
+  Banner_1_Image: translateImage({ value: '20251223b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-12-19' }),
+  Banner_2_Image: translateImage({ value: '20251219b.png' }),
 };
 
 const TopImageTitle_data = {
-  color: '#FFFFFF',
-  backgroundColor: '#750000',
+  color: '#000000',
+  backgroundColor: '#FFE9CC',
   type: 'twoSameLines',
 };
 
 const categories = [
   //Outdoor
-    {
-      name: 'Outdoor',
-      href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/',
-      title: { show: true, align: 'center' },
-      type: 'image-4productsgrid',
-      background: '#750000',
-      color: '#FFFFFF',
-      ctaElement: { show: true },
-      showParagraph: false,
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "38",
-        value: getImageUrl('_cat_1__20251224.png', true),
-      },
-      showWhiteLine: true,
-      products: [],
-    },
-  //Sofas
     {
       name: 'Sofas',
       href: 'https://www.beliani.ch/sofas/',
@@ -68,16 +49,16 @@ const categories = [
       color: '#FFFFFF',
       ctaElement: { show: true },
       showParagraph: false,
-      showWhiteLine: true,
       src: {
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_2__20251224.png', true),
+        value: getImageUrl('_cat_1__20251231.png', true),
       },
+      showWhiteLine: true,
       products: [],
     },
-  //Beds
+  //Sofas
     {
       name: 'Beds',
       href: 'https://www.beliani.ch/beds/',
@@ -92,14 +73,33 @@ const categories = [
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_3__20251224.png', true),
+        value: getImageUrl('_cat_2__20251231.png', true),
+      },
+      products: [],
+    },
+  //Beds
+    {
+      name: 'Armchairs',
+      href: 'https://www.beliani.ch/armchairs/',
+      title: { show: true, align: 'center' },
+      type: 'image-4productsgrid',
+      background: '#750000',
+      color: '#FFFFFF',
+      ctaElement: { show: true },
+      showParagraph: false,
+      showWhiteLine: true,
+      src: {
+        type: "relation",
+        relyOn: "slug",
+        placeholderPosition: "38",
+        value: getImageUrl('_cat_3__20251231.png', true),
       },
       products: [],
     },
   //Armchairs
     {
-      name: 'Armchairs',
-      href: 'https://www.beliani.ch/armchairs/',
+      name: 'Chairs',
+      href: 'https://www.beliani.ch/chairs/',
       title: { show: true, align: 'center' },
       type: 'xmas-gift-buttons',
       background: '#750000',
@@ -111,30 +111,11 @@ const categories = [
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_4__20251224.png', true),
+        value: getImageUrl('_cat_4__20251231.png', true),
       },
       products: [],
     },
   //Chairs
-    {
-      name: 'Chairs',
-      href: 'https://www.beliani.ch/chairs/',
-      title: { show: true, align: 'center' },
-      type: 'image-4productsgrid',
-      background: '#750000',
-      color: '#FFFFFF',
-      ctaElement: { show: true },
-      showParagraph: false,
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "38",
-        value: getImageUrl('_cat_5__20251224.png', true),
-      },
-      showWhiteLine: true,
-      products: [],
-    },
-  //Tables
     {
       name: 'Tables',
       href: 'https://www.beliani.ch/tables/',
@@ -144,16 +125,16 @@ const categories = [
       color: '#FFFFFF',
       ctaElement: { show: true },
       showParagraph: false,
-      showWhiteLine: true,
       src: {
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_6__20251224.png', true),
+        value: getImageUrl('_cat_5__20251231.png', true),
       },
+      showWhiteLine: true,
       products: [],
     },
-  //Storage
+  //Tables
     {
       name: 'Storage',
       href: 'https://www.beliani.ch/storage/',
@@ -168,14 +149,33 @@ const categories = [
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_7__20251224.png', true),
+        value: getImageUrl('_cat_6__20251231.png', true),
+      },
+      products: [],
+    },
+  //Storage
+    {
+      name: 'Kids Room',
+      href: 'https://www.beliani.ch/children-room/',
+      title: { show: true, align: 'center' },
+      type: 'image-4productsgrid',
+      background: '#750000',
+      color: '#FFFFFF',
+      ctaElement: { show: true },
+      showParagraph: false,
+      showWhiteLine: true,
+      src: {
+        type: "relation",
+        relyOn: "slug",
+        placeholderPosition: "38",
+        value: getImageUrl('_cat_7__20251231.png', true),
       },
       products: [],
     },
   //Kids
     {
-      name: 'Kids Room',
-      href: 'https://www.beliani.ch/children-room/',
+      name: 'Textiles',
+      href: 'https://www.beliani.ch/textiles/',
       title: { show: true, align: 'center' },
       type: 'xmas-gift-buttons',
       background: '#750000',
@@ -187,30 +187,11 @@ const categories = [
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_8__20251224.png', true),
+        value: getImageUrl('_cat_8__20251231.png', true),
       },
       products: [],
     },
   //Textiles
-    {
-      name: 'Textiles',
-      href: 'https://www.beliani.ch/textiles/',
-      title: { show: true, align: 'center' },
-      type: 'image-4productsgrid',
-      background: '#750000',
-      color: '#FFFFFF',
-      ctaElement: { show: true },
-      showParagraph: false,
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "38",
-        value: getImageUrl('_cat_9__20251224.png', true),
-      },
-      showWhiteLine: true,
-      products: [],
-    },
-  //Lighting
     {
       name: 'Lighting',
       href: 'https://www.beliani.ch/lighting/',
@@ -220,16 +201,16 @@ const categories = [
       color: '#FFFFFF',
       ctaElement: { show: true },
       showParagraph: false,
-      showWhiteLine: true,
       src: {
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_10__20251224.png', true),
+        value: getImageUrl('_cat_9__20251231.png', true),
       },
+      showWhiteLine: true,
       products: [],
     },
-  //Bathtubs
+  //Lighting
     {
       name: 'Bathtubs',
       href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
@@ -244,33 +225,14 @@ const categories = [
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_11__20251224.png', true),
+        value: getImageUrl('_cat_10__20251231.png', true),
       },
       products: [],
     },
-  //Desks
+  //Bathtubs
     {
       name: 'Desks',
       href: 'https://www.beliani.ch/desks-eng/',
-      title: { show: true, align: 'center' },
-      type: 'xmas-gift-buttons',
-      background: '#750000',
-      color: '#FFFFFF',
-      ctaElement: { show: false },
-      showParagraph: false,
-      showWhiteLine: true,
-      src: {
-        type: "relation",
-        relyOn: "slug",
-        placeholderPosition: "38",
-        value: getImageUrl('_cat_12__20251224.png', true),
-      },
-      products: [],
-    },
-  //Rugs
-    {
-      name: 'Rugs',
-      href: 'https://www.beliani.ch/rugs/',
       title: { show: true, align: 'center' },
       type: 'image-4productsgrid',
       background: '#750000',
@@ -282,14 +244,14 @@ const categories = [
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_13__20251224.png', true),
+        value: getImageUrl('_cat_11__20251231.png', true),
       },
       products: [],
     },
-  //Accessories
+  //Desks
     {
-      name: 'Accessories',
-      href: 'https://www.beliani.ch/home-accessories/accessories-decor/',
+      name: 'Rugs',
+      href: 'https://www.beliani.ch/rugs/',
       title: { show: true, align: 'center' },
       type: 'xmas-gift-buttons',
       background: '#750000',
@@ -301,24 +263,24 @@ const categories = [
         type: "relation",
         relyOn: "slug",
         placeholderPosition: "38",
-        value: getImageUrl('_cat_14__20251224.png', true),
+        value: getImageUrl('_cat_12__20251231.png', true),
       },
       products: [],
     },
 ];
 
 export default new entities.Campaign({
-  startId: "39306",
-  name: "Merry Christmas",
-  date: "24.12.2025",
-  issueCardId: "427111",
-  lpId: "27962",
+  startId: "39692",
+  name: "Happy New Year - Friday",
+  date: "31.12.2025",
+  issueCardId: "432018",
+  lpId: "28154",
   alarm: {
     isActive: false,
   },
   isArchive: false,
   optimizeImg: false,
-  figmaUrl: "https://www.figma.com/design/6zsTz0B5H5i6NafAWDPmmC/Merry-Christmas---Wednesday-2025.12.24?node-id=0-1&t=sbaUMz0kmOPWHn0o-1",
+  figmaUrl: "https://www.figma.com/design/1jaa1XJFokgoZsSfYgOCb1/2025.12.31---Happy-new-year?node-id=0-1&p=f&t=V9HV9oTOZ9JZdGvd-0",
   templates: [
     {
       name: "Newsletter",
@@ -326,13 +288,13 @@ export default new entities.Campaign({
       template: templates.Categories2Columns, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: "#750000",
-      color: "#FFFFFF",
+      background: "#FFE9CC",
+      color: "#000000",
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       intro: {
-        color: '#FFFFFF', // unused
-        backgroundColor: '#750000', // unused
+        color: '#000000', // unused
+        backgroundColor: '#FFE9CC', // unused
         alignment: 'center',
         type: 'paragraph',
       },
@@ -345,13 +307,13 @@ export default new entities.Campaign({
       type: types.LANDINGPAGE,
       template: templates.Categories2Columns, // User should change this
       css: types.CSS.LP,
-      background: "#750000",
-      color: "#FFFFFF",
+      background: "#FFE9CC",
+      color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       intro: {
-        color: '#FFFFFF', // unused
-        backgroundColor: '#750000', // unused
+        color: '#000000', // unused
+        backgroundColor: '#FFE9CC', // unused
         alignment: 'center',
         type: 'paragraph',
       },
