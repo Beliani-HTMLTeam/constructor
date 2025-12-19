@@ -143,7 +143,7 @@ export async function Categories2Columns({
         ${IntroElement}
 
         <tr>
-          <td style="background-color: #750000;" class="newsletterContainer">
+          <td style="background-color: ${background}" class="newsletterContainer">
             ${Create2Columns_Grid({
               shuffle: false,
               iter: categories,
@@ -183,8 +183,8 @@ export async function Categories2Columns({
         ${shopNow({
           href: links['ShopCTA'],
           cta: queries['shopall'][0],
-          textColor: '#FFFFFF',
-          backgorund: '#750000',
+          textColor: color,
+          backgorund: background,
         })}
         <tr>
             ${Space({})}

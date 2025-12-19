@@ -10,6 +10,9 @@ import {
   Space,
   TopImageTitle,
   Category,
+  IntroOld,
+  CategoryOld,
+  CTAOld,
 } from './components/index.js';
 
 import { getTrackingUrl } from '@utils/getTrackingUrl.js';
@@ -131,7 +134,7 @@ export async function ThreeCategoriesUnderLP({
             ? `
               <tr>
                 <td>	
-                  ${Intro({
+                  ${IntroOld({
                     paragraph: queries['intro'],
                     color: intro.color ?? color,
                     background: intro.background ?? background,
@@ -146,7 +149,7 @@ export async function ThreeCategoriesUnderLP({
               <tr>
                 <td>
                   <table cellspacing="0" cellpadding="0" border="0" align="center">
-                    ${CTA({
+                    ${CTAOld({
                       align: 'center',
                       spaceAfter: { class: intro.ctaSpace ?? 'newsletterBottom35px' },
                       text: queries['Explore'][0],
@@ -192,7 +195,7 @@ export async function ThreeCategoriesUnderLP({
             <tr>
               <td align="center">
               <table cellspacing="0" cellpadding="0" border="0" align="center" style="${cat_styles}">
-                ${Category({
+                ${CategoryOld({
                   links: links,
                   queries: queries,
                   name: category?.name,
