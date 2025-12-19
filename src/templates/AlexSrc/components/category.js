@@ -23,6 +23,7 @@ export const Category = isAllowToRender(
     img_class,
     selectCampaign,
     categoryIntro,
+    padding,
   }) => {
     if (!type) {
       return "Please specify type category.";
@@ -275,11 +276,11 @@ export const Category = isAllowToRender(
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[0], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[0], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[1], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[1], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                         </tr>
                       </table>
@@ -292,11 +293,11 @@ export const Category = isAllowToRender(
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[2], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[2], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[3], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[3], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                         </tr>
                       </table>
@@ -378,18 +379,18 @@ export const Category = isAllowToRender(
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
                 <table cellspacing="0" cellpadding="0" style="width: 100%; ">
-                  <tr>
+                  <tr class="newsletterBottom20px">
                     <td class="newsletterBottom20px">
                       <!-- 1-2 Products table -->
                       <table cellspacing="0" cellpadding="0" style="width: 100%; ">
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[0], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[0], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[1], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[1], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                         </tr>
                       </table>
@@ -402,11 +403,11 @@ export const Category = isAllowToRender(
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[2], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[2], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[3], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                            ${Product(products[3], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
                           </td>
                         </tr>
                       </table>
@@ -442,17 +443,6 @@ export const Category = isAllowToRender(
               </td>
             </tr>
             <tr>
-            ${
-              selectCampaign.date !== '2025.12.15' ? 
-              `
-              <td class="newsletterContainer">
-                ${Line(line)}
-              </td>
-              `
-              :
-              
-              ""
-            }
           </tr>
           </tbody>
         </table>

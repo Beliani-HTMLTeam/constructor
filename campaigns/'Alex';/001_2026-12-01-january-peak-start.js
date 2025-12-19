@@ -28,11 +28,11 @@ const tableQueries = [
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-01-12' }),
   TopImageTitle_src: translateImage({ value: '20260112_01.png' }),
-  TopImage: translateImage({ value: '20260112_gif.gif' }),
-  Banner_1: translateLink({ value: 'content/lp25-12-04' }),
-  Banner_1_Image: translateImage({ value: '20251204b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-12-03' }),
-  Banner_2_Image: translateImage({ value: '20251203b.png' }),
+  TopImage_src: translateImage({ value: '20260112_gif.gif' }),
+  Banner_1: translateLink({ value: 'content/lp25-12-18' }),
+  Banner_1_Image: translateImage({ value: '20251218b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-12-09' }),
+  Banner_2_Image: translateImage({ value: '20251209b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -209,6 +209,7 @@ export default new entities.Campaign({
       full_img_width: false,
       white_line: true,
       under_intro_line: false,
+      soon_banners: true,
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: '#FF2F00',
@@ -232,6 +233,7 @@ export default new entities.Campaign({
       full_img_width: false,
       white_line: true,
       under_intro_line: false,
+      soon_banners: false,
       css: types.CSS.LP,
       background: '#FF2F00',
       color: '#fff',

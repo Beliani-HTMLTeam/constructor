@@ -64,9 +64,7 @@ export async function renderTemplate(getState, setState) {
     if (country in selectedCampaign.data) {
       slugData = selectedCampaign.data[country] || {};
     } else {
-      return toast.error(
-        `Country ${country} not found in the ${selectedCampaign.name} campaign data.`
-      );
+      return toast.error(`Country ${country} not found in the ${selectedCampaign.name} campaign data.`);
     }
   }
 
@@ -75,11 +73,7 @@ export async function renderTemplate(getState, setState) {
   const ids = getState('ids');
   const localProducts = getState('selectedCampaign').products;
   const LSProducts = localProducts || localStorage.getItem('products');
-  const parsedProducts = localProducts
-    ? normalizeProducts(localProducts)
-    : LSProducts
-    ? JSON.parse(LSProducts)
-    : [];
+  const parsedProducts = localProducts ? normalizeProducts(localProducts) : LSProducts ? JSON.parse(LSProducts) : [];
   const campaignProducts = localProducts
     ? parsedProducts
     : parsedProducts.find((item) => item.campaign_id === getState('selectedCampaign').startId);
@@ -113,9 +107,7 @@ export async function renderTemplate(getState, setState) {
       country,
       id: ids[country],
       categories: templateToRender.categories?.map((item) =>
-        Array.isArray(item)
-          ? item.map((item) => computeValue({ ...item }))
-          : computeValue({ ...item })
+        Array.isArray(item) ? item.map((item) => computeValue({ ...item })) : computeValue({ ...item })
       ),
       type: templateToRender.type,
       getProductById: handlers.getProductById,
@@ -139,8 +131,7 @@ export async function renderTemplate(getState, setState) {
       utm: getTrackingUrl({ type: templateToRender.type, id: ids[country] }),
     });
 
-    const withStylesOrNo =
-      'css' in templateToRender ? `<style>${templateToRender.css}</style>` + html : html;
+    const withStylesOrNo = 'css' in templateToRender ? `<style>${templateToRender.css}</style>` + html : html;
 
     const wrappedHtml = templateToRender.wrapper
       ? wrapTemplate(templateToRender.wrapper, {
@@ -155,9 +146,7 @@ export async function renderTemplate(getState, setState) {
       if (confirm('Do you want to render template with undefined value?')) {
         return (root.innerHTML = withStylesOrNo);
       } else {
-        toast.error(
-          'Rendering cancelled. Check campaign file, template or products list for mistakes!'
-        );
+        toast.error('Rendering cancelled. Check campaign file, template or products list for mistakes!');
       }
     } else {
       root.innerHTML = withStylesOrNo;

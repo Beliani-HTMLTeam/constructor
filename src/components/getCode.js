@@ -8,7 +8,7 @@ export function GetCode({ type, code, link, color }) {
           <tbody>
               <tr>
                   <td align="center">
-                    <a href=${link} style="text-decoration:underline!important; color: ${
+                    <a href="${link}" style="text-decoration:underline!important; color: ${
           color || '#000'
         };">
                         <span class="newsletterCode">
@@ -26,7 +26,7 @@ export function GetCode({ type, code, link, color }) {
             <tr>
                 <td align="center">
                     <span class="newsletterCode" style="color: ${color || '#000'}">
-                        ${code[1]}
+                        ${code[0]}
                     </span>
                 </td>
             </tr>
@@ -36,3 +36,5 @@ export function GetCode({ type, code, link, color }) {
   }
   `;
 }
+
+
