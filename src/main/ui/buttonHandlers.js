@@ -12,6 +12,7 @@ import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 
 import { toast } from 'sonner';
 import { getState } from '../state/appState';
+import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;
@@ -105,7 +106,8 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     const html = getState('html');
     if (!html) return toast.error('No HTML to copy. Render template first.');
 
-    navigator.clipboard.writeText(html);
+    const finalHtml = optimizeHtmlImages(html, getState);
+    navigator.clipboard.writeText(finalHtml);
     toast.success('Template copied to clipboard!');
 
     const config = getState('config');

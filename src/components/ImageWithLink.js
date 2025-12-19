@@ -1,7 +1,6 @@
 import { isAllowToRender, optimize } from '@helpers/optimizeImage.js';
 
-export const ImageWithLink = isAllowToRender(
-  optimize(({ href, src, alt = 'Newsletter Image', attrs }) => {
+export const ImageWithLink = ({ href, src, alt = 'Newsletter Image', attrs }) => {
     return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%" >
         <tbody>
@@ -17,5 +16,4 @@ export const ImageWithLink = isAllowToRender(
         </tbody>
     </table>
   `;
-  })
-);
+  };

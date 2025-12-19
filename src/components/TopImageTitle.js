@@ -1,8 +1,7 @@
 import { isAllowToRender, optimize } from '@helpers/optimizeImage.js';
 import { Space } from './Space.js';
 
-export const TopImageTitle = isAllowToRender(
-  optimize(({ href, title1, title2, color, type }) => {
+export const TopImageTitle = ({ href, title1, title2, color, type }) => {
     if (!type) return 'Please specify type of TiT.';
 
     const templates = {
@@ -50,5 +49,4 @@ export const TopImageTitle = isAllowToRender(
         </tbody>
       </table>
     `;
-  })
-);
+  };
