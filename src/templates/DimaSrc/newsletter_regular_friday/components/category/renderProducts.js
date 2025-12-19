@@ -6,14 +6,23 @@ export const renderProducts = async (
   showName,
   queries,
   categoryType,
-  categoryIndex
+  categoryIndex,
+  color = '#000000'
 ) => {
   const type = categoryType ? categoryType.toLowerCase() : 'default';
+
+  console.log('renderProducts', type);
 
   try {
     const module = await import(`../../category/${type}.js`);
 
-    return module.render(products, showPrices, showName, queries, categoryIndex);
+    if (type === 'unique') {
+      return module.render(products, showPrices, showName, queries, categoryIndex);
+    } else if (type === 'grid') {
+      return module.render(products, showPrices, showName, queries, false, color);
+    }
+
+    return module.render(products, showPrices, showName, queries);
   } catch (e) {
     console.log('error');
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

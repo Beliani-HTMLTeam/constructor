@@ -6,6 +6,9 @@ import { Space } from '../Space';
 import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 
+const whiteLineSrc = 'https://upload.pictureserver.net/static/2024/white_line.jpg';
+const blackLineSrc = 'https://pictureserver.net/static/2025/line.jpg';
+
 export const renderCategory = async (
   category,
   id,
@@ -14,7 +17,8 @@ export const renderCategory = async (
   getPhrase,
   getCategoryLink,
   getCategoryTitle,
-  add_utm
+  add_utm,
+  lineType = 'white'
 ) => {
   const background = category.background || 'white';
   const color = category.color || '#000000';
@@ -27,23 +31,19 @@ export const renderCategory = async (
   const TitleElement = category?.title?.show
     ? `
       <tr>
-        <td style="text-align: center;">
+        <td class="newsletterContainer">
           ${Paragraph({
             text: category.name,
             color: color,
             background: background,
-            align: 'center',
+            align: category.title?.align || 'center',
             tableContainer: true,
             className: 'newsletterTitle',
           })}
         </td>
       </tr>
   
-      ${
-        category.title.spaceAfter
-          ? Space({ insideTr: true, className: category.title.spaceAfter })
-          : ''
-      }
+      ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter }) : ''}
       `
     : '';
 
@@ -57,16 +57,13 @@ export const renderCategory = async (
 
   const ParagraphElement = category?.paragraph?.show
     ? `
-        ${
-          category.paragraph.spaceBefore
-            ? Space({ insideTr: true, className: category.paragraph.spaceBefore })
-            : ''
-        }
+        ${category.paragraph.spaceBefore ? Space({ insideTr: true, className: category.paragraph.spaceBefore }) : ''}
   
         <tr>
-          <td>
+          <td class="newsletterContainer">
             ${Paragraph({
-              text: queries.paragraphs[id] || 'Translation not found',
+              // text: queries.paragraphs[id] || 'Translation not found',
+              text: 'Refresh your living room with clean lines, tapered wooden legs, and warm walnut tones that bring the refined ease of Mid-Century Modern design to anyone who values timeless simplicity.',
               align: category.paragraph.align,
               tableContainer: true,
             })}
@@ -74,28 +71,33 @@ export const renderCategory = async (
         </tr>
   
         
-        ${
-          category.paragraph.spaceAfter
-            ? Space({ insideTr: true, className: category.paragraph.spaceAfter })
-            : ''
-        }
+        ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
       `
     : Space({ insideTr: true });
 
   const ProductsElement = category.products
-    ? await renderProducts(
-        [
-          ...category.products,
-          { href: ctaHref, src: category.src1 },
-          { href: ctaHref, src: category.src2 },
-          { href: ctaHref, src: category.src3 },
-        ],
-        category.showPrices || true,
-        category.showName || true,
-        queries,
-        category.type,
-        id
-      )
+    ? category.type === 'unique'
+      ? await renderProducts(
+          [
+            ...category.products,
+            { href: ctaHref, src: category.src1 },
+            { href: ctaHref, src: category.src2 },
+            { href: ctaHref, src: category.src3 },
+          ],
+          category.showPrices || true,
+          category.showName || true,
+          queries,
+          category.type,
+          id
+        )
+      : await renderProducts(
+          category.products,
+          category.showPrices || true,
+          category.showName || true,
+          queries,
+          category.type,
+          id
+        )
     : '';
 
   return `
@@ -114,6 +116,8 @@ export const renderCategory = async (
           ${TitleElement}
   
           ${ImageElement}
+
+          ${ParagraphElement}
   
           ${ProductsElement}
           
@@ -140,7 +144,7 @@ export const renderCategory = async (
           ? `
           ${Line({
             insideTr: true,
-            src: 'https://upload.pictureserver.net/static/2024/white_line.jpg',
+            src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
             insideContainer: true,
           })}
     `

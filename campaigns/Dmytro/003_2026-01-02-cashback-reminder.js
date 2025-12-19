@@ -12,12 +12,16 @@ const tableQueries = [
   },
   { tableRange: '26:27', name: 'codeCTA' },
   {
-    tableRange: '44:46',
+    tableRange: '45:47',
     name: 'condition',
   },
   {
     tableRange: '29:40',
     name: 'categories',
+  },
+  {
+    tableRange: '41',
+    name: 'shopall',
   },
 ];
 
@@ -27,90 +31,248 @@ const links = {
   TopImageTitle_src: translateImage({ value: '20260102_01.png' }),
   TopImage_src: getImageUrl('20260102topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-01-02' }),
+  Timer_href: translateLink({ value: 'content/lp26-01-02' }),
   Banner_1: translateLink({ value: 'content/lp25-12-26' }),
   Banner_1_Image: translateImage({ value: '20251226b.png' }),
-  Banner_2: translateLink({ value: 'content/lp25-12-25' }),
-  Banner_2_Image: translateImage({ value: '20251225b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-12-23' }),
+  Banner_2_Image: translateImage({ value: '20251223b.png' }),
+  ShopCTA: translateLink({ value: ' ' }),
 };
 
 const TopImageTitle_data = {
   color: '#FFFFFF',
   backgroundColor: '#750000',
-  type: 'standard',
+  type: 'twoSameLines',
 };
 
 const categories = [
+  //Sofas
   {
     name: 'Sofas',
-    src: getImageUrl('chde_cat_1__20260102.png', true),
     href: 'https://www.beliani.ch/sofas/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_2__20260102.png', true),
+    },
+    products: [],
   },
+  //Beds
   {
     name: 'Beds',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
     href: 'https://www.beliani.ch/beds/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_3__20260102.png', true),
+    },
+    products: [],
   },
+  //Armchairs
   {
     name: 'Armchairs',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
     href: 'https://www.beliani.ch/armchairs/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'xmas-gift-buttons',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: false },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_4__20260102.png', true),
+    },
+    products: [],
   },
+  //Chairs
   {
     name: 'Chairs',
-    src: getImageUrl('chde_cat_1__20260102.png', true),
     href: 'https://www.beliani.ch/chairs/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_5__20260102.png', true),
+    },
+    showWhiteLine: true,
+    products: [],
   },
+  //Tables
   {
     name: 'Tables',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
     href: 'https://www.beliani.ch/tables/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_6__20260102.png', true),
+    },
+    products: [],
   },
+  //Storage
   {
     name: 'Storage',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
     href: 'https://www.beliani.ch/storage/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_7__20260102.png', true),
+    },
+    products: [],
   },
+  //Kids
   {
-    name: 'Kids',
-    src: getImageUrl('chde_cat_1__20260102.png', true),
+    name: 'Kids Room',
     href: 'https://www.beliani.ch/children-room/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'xmas-gift-buttons',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: false },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_8__20260102.png', true),
+    },
+    products: [],
   },
+  //Textiles
   {
     name: 'Textiles',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
     href: 'https://www.beliani.ch/textiles/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_9__20260102.png', true),
+    },
+    showWhiteLine: true,
+    products: [],
   },
+  //Lighting
   {
     name: 'Lighting',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
     href: 'https://www.beliani.ch/lighting/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_10__20260102.png', true),
+    },
+    products: [],
   },
+  //Bathtubs
   {
     name: 'Bathtubs',
-    src: getImageUrl('chde_cat_1__20260102.png', true),
     href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_11__20260102.png', true),
+    },
+    products: [],
   },
+  //Desks
   {
     name: 'Desks',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
-    href: 'https://www.beliani.ch/office-furniture/desks-eng/ ',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    href: 'https://www.beliani.ch/desks-eng/',
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: false },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_12__20260102.png', true),
+    },
+    products: [],
   },
+  //Rugs
   {
     name: 'Rugs',
-    src: getImageUrl('chde_cat_2__20260102.png', true),
-    href: 'https://www.beliani.ch/rugs/ ',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    href: 'https://www.beliani.ch/rugs/',
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#750000',
+    color: '#FFFFFF',
+    ctaElement: { show: true },
+    showParagraph: false,
+    showWhiteLine: true,
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('_cat_13__20260102.png', true),
+    },
+    products: [],
   },
 ];
 
@@ -169,6 +331,7 @@ export default new entities.Campaign({
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
+      categories_type: 'twoColumnsGrid',
       Inside: {
         color: '#FFFFFF',
         backgroundColor: '#750000',
@@ -195,6 +358,7 @@ export default new entities.Campaign({
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
+      categories_type: 'twoColumnsGrid',
       Inside: {
         color: '#FFFFFF',
         backgroundColor: '#750000',
@@ -213,4 +377,3 @@ export default new entities.Campaign({
     },
   ],
 });
-

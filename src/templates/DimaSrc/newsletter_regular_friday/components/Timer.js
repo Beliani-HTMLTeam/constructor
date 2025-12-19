@@ -13,6 +13,7 @@ const Timer = ({
   freebies,
   isCtaVisible,
   ctaText,
+  spaceAfter = '',
 }) => {
   // console.log("Timer Component:", { title, subtitle, href, src, color, background, freebies, ctaText });
 
@@ -90,6 +91,7 @@ const Timer = ({
         </table>
       </td>
     </tr>
+    ${spaceAfter ? Space({ insideTr: true, className: spaceAfter }) : ''}
   `;
 };
 
