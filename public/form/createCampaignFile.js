@@ -221,7 +221,35 @@ const links = {`;
 const TopImageTitle_data = {
   color: '${color}',
   backgroundColor: '${background}',
-  type: 'up_to',
+  type: 'twoSameLines',
+};
+
+const timer = {
+  freebies: getImageUrl('YYYYMMDD_Free.png', true),
+  // ! REMEMBER TO REPLACE THOSE URLS
+  image: {
+    CHDE: 'https://gen.sendtric.com/countdown/3x5402a5a5',
+    CHFR: 'https://gen.sendtric.com/countdown/7d3zl0s986',
+    FR: 'https://gen.sendtric.com/countdown/12rdr6dtgo',
+    DE: 'https://gen.sendtric.com/countdown/sv2q3k1x3y',
+    UK: 'https://gen.sendtric.com/countdown/c4cghowbf1',
+    AT: 'https://gen.sendtric.com/countdown/ypa0wk4eup',
+    ES: 'https://gen.sendtric.com/countdown/sehb5k3z7z',
+    PL: 'https://gen.sendtric.com/countdown/zlnhbu660w',
+    NL: 'https://gen.sendtric.com/countdown/mr9bn0q4c8',
+    PT: 'https://gen.sendtric.com/countdown/61n8wy3y4m',
+    IT: 'https://gen.sendtric.com/countdown/lxloewzogf',
+    SE: 'https://gen.sendtric.com/countdown/y2imagqwpt',
+    HU: 'https://gen.sendtric.com/countdown/udnrsqd4o8',
+    DK: 'https://gen.sendtric.com/countdown/uvfzgmkwr6',
+    CZ: 'https://gen.sendtric.com/countdown/ajq5qcnl44',
+    FI: 'https://gen.sendtric.com/countdown/hgh6virvh8',
+    NO: 'https://gen.sendtric.com/countdown/nfx8ncvozu',
+    SK: 'https://gen.sendtric.com/countdown/x8yr4llgxx',
+    BENL: 'https://gen.sendtric.com/countdown/442t1ogqur',
+    BEFR: 'https://gen.sendtric.com/countdown/kgyur9di1m',
+    RO: 'https://gen.sendtric.com/countdown/ke5m9a4zrx',
+  },
 };
 
 const categories = [
@@ -285,6 +313,10 @@ export default new entities.Campaign({
   // Always include TopImageTitle and categories
   templateComponents.push('TopImageTitle_data: TopImageTitle_data');
   templateComponents.push('categories: categories');
+  templateComponents.push('timer: timer');
+  templateComponents.push('full_img_width: false');
+  templateComponents.push('white_line: false');
+  templateComponents.push('under_intro_line: false');
 
   // Add Inside component if enabled
   if (insideEnabled) {
