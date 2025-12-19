@@ -3,15 +3,15 @@ const campaignTranslationsSheet = '2026::08.01.26 - Lighting';
 
 const tableQueries = [
   {
-    tableRange: '13:14',
+    tableRange: '15:16',
     name: 'TopImageTitle',
   },
   {
-    tableRange: '16',
+    tableRange: '18',
     name: 'intro',
   },
   {
-    tableRange: '21:22',
+    tableRange: '23:24',
     name: 'condition',
   },
   {
@@ -28,11 +28,11 @@ const links = {
   TopImage_src: getImageUrl('20260108_Gif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-01-08' }),
 
-  Banner_1: translateLink({ value: 'content/lp25-01-31' }),
-  Banner_1_Image: translateImage({ value: '20250131b.png' }),
+  Banner_1: translateLink({ value: 'content/lp25-12-23' }),
+  Banner_1_Image: translateImage({ value: '20251223b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-01-01' }),
-  Banner_2_Image: translateImage({ value: '20260101b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-12-18' }),
+  Banner_2_Image: translateImage({ value: '20251218b.png' }),
 
   Timer_href: translateLink({ value: 'content/lp26-01-05' }),
 };
@@ -52,7 +52,7 @@ const categories = [
     color: '#000000',
     type: 'grid',
     cta: true,
-    paddingTop: '35',
+    paddingTop: '60',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -92,7 +92,7 @@ const categories = [
   },
   {
     name: 'Table & Bedside Lamps',
-    src: getImageUrl('20260108_Cat00.gif', true),
+    src: getImageUrl('20260108_Cat10.gif', true),
     href: 'https://www.beliani.ch/lighting/table-lamps/',
     background: '#B37373',
     color: '#000000',
@@ -117,28 +117,28 @@ const categories = [
       // TULUN
       {
         id: '526167',
-        src: getImageUrl('20260108_Pic01.png', true),
+        src: getImageUrl('20260108_Pic11.png', true),
       },
       // BALUARTE
       {
         id: '458785',
-        src: getImageUrl('20260108_Pic02.png', true),
+        src: getImageUrl('20260108_Pic12.png', true),
       },
       // ZARIMA
       {
         id: '315313',
-        src: getImageUrl('20260108_Pic03.png', true),
+        src: getImageUrl('20260108_Pic13.png', true),
       },
       // VILAR
       {
         id: '443134',
-        src: getImageUrl('20260108_Pic04.png', true),
+        src: getImageUrl('20260108_Pic14.png', true),
       },
     ],
   },
   {
     name: 'Wall Lamps',
-    src: getImageUrl('20260108_Cat00.gif', true),
+    src: getImageUrl('20260108_Cat20.gif', true),
     href: 'https://www.beliani.ch/lighting/wall-lamps/',
     background: '#FFD8A6',
     color: '#000000',
@@ -163,28 +163,28 @@ const categories = [
       // LOVAT
       {
         id: '194079',
-        src: getImageUrl('20260108_Pic01.png', true),
+        src: getImageUrl('20260108_Pic21.png', true),
       },
       // TULIJA
       {
         id: '397160',
-        src: getImageUrl('20260108_Pic02.png', true),
+        src: getImageUrl('20260108_Pic22.png', true),
       },
       // JAMMA
       {
         id: '447950',
-        src: getImageUrl('20260108_Pic03.png', true),
+        src: getImageUrl('20260108_Pic23.png', true),
       },
       // MOKVI
       {
         id: '420272',
-        src: getImageUrl('20260108_Pic04.png', true),
+        src: getImageUrl('20260108_Pic24.png', true),
       },
     ],
   },
   {
     name: 'Decorative Lighting',
-    src: getImageUrl('20260108_Cat00.gif', true),
+    src: getImageUrl('20260108_Cat30.gif', true),
     href: 'https://www.beliani.ch/lighting/decorative-lighting/',
     background: '#B37373',
     color: '#000000',
@@ -209,22 +209,22 @@ const categories = [
       // MUSONE
       {
         id: '69649',
-        src: getImageUrl('20260108_Pic01.png', true),
+        src: getImageUrl('20260108_Pic31.png', true),
       },
       // PROCYON
       {
         id: '429055',
-        src: getImageUrl('20260108_Pic02.png', true),
+        src: getImageUrl('20260108_Pic32.png', true),
       },
       // FLORA
       {
         id: '367074',
-        src: getImageUrl('20260108_Pic03.png', true),
+        src: getImageUrl('20260108_Pic33.png', true),
       },
       // HADAR
       {
         id: '429089',
-        src: getImageUrl('20260108_Pic04.png', true),
+        src: getImageUrl('20260108_Pic34.png', true),
       },
     ],
   },
@@ -233,27 +233,27 @@ const categories = [
 const timer = {
   freebies: getImageUrl('20260108_free.png', true),
   image: {
-    CHDE: 'https://gen.sendtric.com/countdown/sw0f5qbl32',
-    CHFR: 'https://gen.sendtric.com/countdown/1xzhngpodf',
-    FR: 'https://gen.sendtric.com/countdown/h1yzod4cme',
-    DE: 'https://gen.sendtric.com/countdown/nm6c9z86df',
-    UK: 'https://gen.sendtric.com/countdown/ilwhx0breu',
-    AT: 'https://gen.sendtric.com/countdown/jczaq10q52',
-    ES: 'https://gen.sendtric.com/countdown/ncxh1y0nbv',
-    PL: 'https://gen.sendtric.com/countdown/o4on8h66ly',
-    NL: 'https://gen.sendtric.com/countdown/fg7pvcrz4g',
-    PT: 'https://gen.sendtric.com/countdown/7xynup71a9',
-    IT: 'https://gen.sendtric.com/countdown/b3y7myqebh',
-    SE: 'https://gen.sendtric.com/countdown/brj7jva6dn',
-    HU: 'https://gen.sendtric.com/countdown/xbkzauobsn',
-    DK: 'https://gen.sendtric.com/countdown/hdfqymvef5',
-    CZ: 'https://gen.sendtric.com/countdown/x1dk1ec3ar',
-    FI: 'https://gen.sendtric.com/countdown/zi7xycdkrq',
-    NO: 'https://gen.sendtric.com/countdown/lje7y7wsw7',
-    SK: 'https://gen.sendtric.com/countdown/mi7qz9wp1i',
-    BENL: 'https://gen.sendtric.com/countdown/0uqpfp4gyc',
-    BEFR: 'https://gen.sendtric.com/countdown/s6dpb00gf7',
-    RO: 'https://gen.sendtric.com/countdown/1nd6lzz3nh',
+    CHDE: 'https://gen.sendtric.com/countdown/elbeltru9e',
+    CHFR: 'https://gen.sendtric.com/countdown/z6viltmf0m',
+    FR: 'https://gen.sendtric.com/countdown/bwozlf7slj',
+    DE: 'https://gen.sendtric.com/countdown/r324j96yc2',
+    UK: 'https://gen.sendtric.com/countdown/qm4pobhxm1',
+    AT: 'https://gen.sendtric.com/countdown/i8s6iq2nxs',
+    ES: 'https://gen.sendtric.com/countdown/g4hel9wuok',
+    PL: 'https://gen.sendtric.com/countdown/ho93s63vgi',
+    NL: 'https://gen.sendtric.com/countdown/50dxbr0g3n',
+    PT: 'https://gen.sendtric.com/countdown/1mbzalup5p',
+    IT: 'https://gen.sendtric.com/countdown/4o89tgq1dh',
+    SE: 'https://gen.sendtric.com/countdown/mvirdz72gg',
+    HU: 'https://gen.sendtric.com/countdown/nqu7vfn1be',
+    DK: 'https://gen.sendtric.com/countdown/ngu2f8u136',
+    CZ: 'https://gen.sendtric.com/countdown/0rs3r59474',
+    FI: 'https://gen.sendtric.com/countdown/s54lwt9znc',
+    NO: 'https://gen.sendtric.com/countdown/hpoves697m',
+    SK: 'https://gen.sendtric.com/countdown/f435s8n3n5',
+    BENL: 'https://gen.sendtric.com/countdown/e61qrnvpqg',
+    BEFR: 'https://gen.sendtric.com/countdown/rj0r191w60',
+    RO: 'https://gen.sendtric.com/countdown/3r8wq7vudg',
   },
 };
 
@@ -324,4 +324,3 @@ export default new entities.Campaign({
     },
   ],
 });
-
