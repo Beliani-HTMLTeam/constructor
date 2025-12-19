@@ -1,4 +1,5 @@
-import { GetCode, Paragraph, Space } from '@/components';
+import { Paragraph, Space } from '@/components';
+import { GetCode } from './DimaSrc/newsletter_regular_friday/components/getCode';
 
 export function PeakOfferPartCode({ color, data, getPhrase, queries, paragraph1, paragraph2, paragraph3, href, type }) {
   console.log('data', data, data ? 'true' : 'false');
