@@ -9,6 +9,9 @@ import lp_mattress from '@css/landing/mattress.css?inline';
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
 
+import md_nslt from '@css/newsletter/md.css?inline';
+import md_lp from '@css/landing/md.css?inline';
+
 export const types = {
   NEWSLETTER: 'newsletter',
   LANDINGPAGE: 'landing',
@@ -16,10 +19,12 @@ export const types = {
     NS: nslt_regular,
     NS_BLACK_WEEK: nslt_blackweek,
     NS_MATTRESS: nslt_mattress,
+    NS_MD: md_nslt,
 
     LP: lp_regular,
     LP_BLACK_WEEK: lp_blackwek,
     LP_MATTRESS: lp_mattress,
+    LP_MD: md_lp,
 
     CGB: {
       DESKTOP: cgb_desktop,
