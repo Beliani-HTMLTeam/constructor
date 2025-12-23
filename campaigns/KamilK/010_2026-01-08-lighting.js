@@ -267,7 +267,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: true,
+  optimizeImg: false,
   figmaUrl:
     'https://www.figma.com/design/bQNokqtNDvCKI7KBPOoSEU/COPY-%7C-2026.01.08---Lighting?node-id=0-1&t=yYirct5tpb9cTUlJ-1',
   templates: [
