@@ -24,7 +24,7 @@ export function GetCode({ type, code, link, color }) {
             <tr>
                 <td align="center">
                     <span class="newsletterCode" style="color: ${color || '#000'}">
-                        ${code[1]}
+                        ${code[0]}
                     </span>
                 </td>
             </tr>

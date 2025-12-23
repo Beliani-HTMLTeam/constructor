@@ -207,7 +207,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl:
     'https://www.figma.com/design/Zmpm6OUlozYMmFFVK24cMi/2025.12.22-Free-bathroom-set--Copy-?node-id=0-1&p=f&t=OgPWusq5f6PRNGfD-0',
