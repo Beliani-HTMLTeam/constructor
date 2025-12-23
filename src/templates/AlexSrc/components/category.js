@@ -327,7 +327,6 @@ export const Category = isAllowToRender(
                         }
                       </td>
                     </tr>
-                    
                   </tbody>
                 </table>
               </td>
