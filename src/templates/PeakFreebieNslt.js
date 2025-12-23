@@ -6,6 +6,7 @@ import { FreeCreate2Columns_Grid } from './FreeCreate2Columns_Grid';
 import { getCodes } from '@/utils/getCodes';
 import { getState } from '@/main/state/appState';
 import { PeakOfferPartCode } from './PeakOfferPartCode';
+import { CampaignWrapper } from './DimaSrc/utils/UrlModificator';
 
 export function PeakFreebieNslt({
   links,
@@ -45,6 +46,11 @@ export function PeakFreebieNslt({
     : 'https://beliani.info/newsletter/2022/line.jpg';
 
   console.log(full_img_width, 'tyt');
+
+  categories = categories.map((category) => ({
+    ...category,
+    src: { src: CampaignWrapper(category.src.src, '20260113') },
+  }));
 
   // const categoriesSectionHTML = generateCategoriesSection(
   //   categories,

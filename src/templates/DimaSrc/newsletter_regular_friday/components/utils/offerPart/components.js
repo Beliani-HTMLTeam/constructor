@@ -1,4 +1,4 @@
-import { GetCode } from '@/components';
+import { GetCode } from '../../getCode';
 import { Paragraph } from '../../Paragraph';
 import { Space } from '../../Space';
 
@@ -14,6 +14,7 @@ const NewsletterOfferPart = ({
   type,
   backgroundColor,
 }) => {
+  console.log('data in code', queries);
   return `
       ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
     <tr>
@@ -107,7 +108,7 @@ const LandingOfferPart = ({
     <td >
       ${GetCode({
         color: color,
-        code: queries?.codeCTA || 'Code tableQuery not found.',
+        code: queries?.code || 'Code tableQuery not found.',
         link: href,
         type,
       })}

@@ -10,7 +10,8 @@ const tableQueries = [
     tableRange: '20:25',
     name: 'offerPart',
   },
-  { tableRange: '26:27', name: 'codeCTA' },
+  { tableRange: '26', name: 'codeCTA' },
+  { tableRange: '27', name: 'code' },
   {
     tableRange: '45:47',
     name: 'condition',

@@ -34,9 +34,9 @@ const links = {
   TopImage_src: getImageUrl('20260109topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-01-09' }),
   Timer_href: translateLink({ value: 'content/lp26-01-05' }),
-  Banner_1: translateLink({ value: 'content/lp26-01-02' }),
-  Banner_1_Image: translateImage({ value: '20260102b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-01-01' }),
+  Banner_1: translateLink({ value: 'content/lp26-01-01' }),
+  Banner_1_Image: translateImage({ value: '20260101b.png' }),
+  Banner_2: translateLink({ value: 'content/lp25-12-18' }),
   Banner_2_Image: translateImage({ value: '20251218b.png' }),
 };
 
@@ -52,7 +52,7 @@ const categories = [
     background: '#FFE9CC',
     color: '#000000',
     src: getImageUrl('20260109Category10.png', true),
-    href: 'https://www.beliani.ch/',
+    href: 'https://www.beliani.ch/meet-beliani/meet-beliani-vintage-style/',
     type: 'grid',
     title: {
       show: true,
@@ -90,7 +90,7 @@ const categories = [
     background: '#FFE9CC',
     color: '#000000',
     src: getImageUrl('20260109Category20.png', true),
-    href: 'https://www.beliani.ch/', // change
+    href: 'https://www.beliani.ch/trends/memphis-design/', // change
     type: 'grid',
     title: {
       show: true,
@@ -128,7 +128,7 @@ const categories = [
     background: '#FFE9CC',
     color: '#000000',
     src: getImageUrl('20260109Category30.png', true),
-    href: 'https://www.beliani.ch/', // change
+    href: 'https://www.beliani.ch/curved-furniture/', // change
     type: 'grid',
     title: {
       show: true,
@@ -165,6 +165,7 @@ const categories = [
 
 const timer = {
   position: 'outsideTopImageTitle',
+  isWithTitles: true,
   background: '#FFCCB7',
   color: '#000000',
   freebies: getImageUrl('20260109free.png', true),

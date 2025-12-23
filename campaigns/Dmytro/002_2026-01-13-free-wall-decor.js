@@ -108,7 +108,7 @@ const categories = [
   },
   {
     name: 'Rugs',
-    src: translateImage({ value: '_cat_13__20260113.png' }),
+    src: translateImage({ value: '_cat_13__20260113.png', wrapperFolder: '20260113/' }),
     href: 'https://www.beliani.ch/rugs/ ',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
@@ -126,12 +126,12 @@ const freebies = {
       products: [
         {
           id: '358302',
-          src: getImageUrl('20260113free1.png', true),
+          src: getImageUrl('20260113/20260113free1.png', true),
           style: 'padding-right: 5px; padding-left: 103px;',
         },
         {
           id: '373375',
-          src: getImageUrl('20260113free2.png', true),
+          src: getImageUrl('20260113/20260113free2.png', true),
           style: 'padding-right: 103px; padding-left: 5px;',
         },
       ],
@@ -142,12 +142,12 @@ const freebies = {
       products: [
         {
           id: '358267',
-          src: getImageUrl('20260113free3.png', true),
+          src: getImageUrl('20260113/20260113free3.png', true),
           style: 'padding-right: 5px; padding-left: 103px;',
         },
         {
           id: '353281',
-          src: getImageUrl('20260113free4.png', true),
+          src: getImageUrl('20260113/20260113free4.png', true),
           style: 'padding-right: 103px; padding-left: 5px;',
         },
       ],
@@ -165,6 +165,8 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
+  // docelowo
+  // optimizeImg: true,
   optimizeImg: false,
   figmaUrl:
     'figma.com/design/nz4mr68AmIWmn11QpYuOFp/2026.01.13---Newsletter-Free-wall-decor--Copy-?m=auto&fuid=1328681953229888224',

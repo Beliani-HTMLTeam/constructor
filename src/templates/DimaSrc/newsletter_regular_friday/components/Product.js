@@ -21,7 +21,7 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true)
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       
       <tr>
-        <td class="newsletterProductTitle ${idx % 2 === 0 ? 'newsletterLeft20px' : ''}">${product.name}</td>
+        <td class="newsletterProductTitle" style="${idx % 2 === 0 ? 'padding-left: 20px;' : ''}">${product.name}</td>
       </tr>
     `;
   }
