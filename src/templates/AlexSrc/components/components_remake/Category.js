@@ -44,6 +44,7 @@ export const Category = isAllowToRender(
 
     // console.log(idx, queries.paragraphs[idx])
     // console.log(title);
+    console.log(queries);
 
     if (!type) {
       return 'Please specify type category.';
@@ -55,7 +56,6 @@ export const Category = isAllowToRender(
     switch (type) {
       case 'test-cat':
         function productsContainer(imageSide = 'left', prods = products.slice(0, 3)) {
-          console.log(idx === len);
           return `
           <tr>
             <td class="newsletterContainer" align="center">
@@ -196,7 +196,7 @@ export const Category = isAllowToRender(
                 </td>
               </tr>
               `
-            : ''
+              : ''
           } 
         `;
 
@@ -547,7 +547,7 @@ export const Category = isAllowToRender(
               }
               ${Title({
                 color: color,
-                title: queries.categories[idx],
+                title: queries?.gift[0] || queries.categories[idx],
                 align: title.align ?? 'left',
                 insideContainer: true,
               })}
@@ -571,21 +571,12 @@ export const Category = isAllowToRender(
               : ``
           }
 
-					
-
 					${
             showParagraph
-              ? queries.paragraphs
-                ? queries.paragraphs[idx]
-                  ? `${Paragraph(queries.paragraphs[idx], 'left')} ${Space({
-                      className: 'newsletterBottom35px',
-                    })}`
-                  : ``
-                : queries.paragraph
-                ? `${Paragraph(queries.paragraph, 'left')} ${Space({
-                    className: 'newsletterBottom35px',
-                  })}`
-                : ``
+              ? `${Space({
+                  className: 'newsletterBottom35px',
+                })}
+              ${Paragraph(queries?.gift[1] || queries.paragraphs[idx], 'center')}`
               : ``
           }
 
@@ -651,8 +642,8 @@ export const Category = isAllowToRender(
             ctaElement?.show
               ? CTA({
                   align: 'center',
-                  spaceAfter: { class: 'newsletterBottom80px' },
-                  text: getPhrase('Shop now'),
+                  spaceAfter: { class: 'newsletterBottom70px' },
+                  text: queries?.gift[2] || getPhrase('Shop Gift Card now'),
                   href: href || queries['linkWithFilter'],
                   color: color,
                 })

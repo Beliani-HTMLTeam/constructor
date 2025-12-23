@@ -259,6 +259,19 @@ const categories = [
       },
     ],
   },
+  {
+    name: 'Gift Vouchers',
+    href: 'https://www.beliani.ch/gift-cards/',
+    title: { show: true, align: 'center' },
+    type: 'image-4productsgrid',
+    background: '#FFEDE6',
+    color: '#000000',
+    ctaElement: { show: true },
+    showParagraph: true,
+    showWhiteLine: false,
+    src: getImageUrl('giftVoucherMD.png', true),
+    products: [],
+  },
 ];
 
 export default new entities.Campaign({
