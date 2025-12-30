@@ -6,7 +6,7 @@ const campaignTranslationsSheet = '2026::Voucher - 05.01.26 - Free duvet cover';
 const tableQueries = [
   {
     tableRange: '22:23',
-    name: 'TopImageTitle',
+    name: 'tit',
   },
   {
     tableRange: '25:29',
@@ -47,7 +47,7 @@ const links = {
 const TopImageTitle_data = {
   color: '#000000',
   backgroundColor: '#FFCCB7',
-  type: 'up_to',
+  type: 'standard',
 };
 
 const categories = [
@@ -231,6 +231,7 @@ export default new entities.Campaign({
       color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
+      soon_banners: true,
       categories: categories,
       freebies: freebies,
       intro: {
