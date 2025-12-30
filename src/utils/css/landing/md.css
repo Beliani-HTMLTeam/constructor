@@ -53,7 +53,7 @@
         }
      
      table {
-       table-collapse: unset;
+       border-collapse: unset;
        border-collapse: separate;
      }
      
