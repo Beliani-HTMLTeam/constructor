@@ -72,7 +72,7 @@ const categories = [
         src: getImageUrl('20260109Category11.png', true),
       },
       {
-        id: '508409',
+        id: '576830',
         src: getImageUrl('20260109Category12.png', true),
       },
       {
