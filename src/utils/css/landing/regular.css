@@ -148,7 +148,6 @@ table {
 
 #newsletter .newsletterIntroTitle {
   font-size: 35px;
-  font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-weight: 600;
 }
@@ -210,7 +209,6 @@ table {
   padding-right: 0px;
   padding-bottom: 20px;
   font-size: 11px;
-  font-family: "Open Sans", sans-serif !important;
   color: #000000;
   background: #ececec;
   width: 100%;

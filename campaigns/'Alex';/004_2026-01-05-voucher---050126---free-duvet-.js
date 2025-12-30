@@ -231,6 +231,7 @@ export default new entities.Campaign({
       color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
+      soon_banners: true,
       categories: categories,
       freebies: freebies,
       intro: {
