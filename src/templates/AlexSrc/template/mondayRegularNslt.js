@@ -264,6 +264,7 @@ export async function mondayRegularNslt({
   under_intro_line,
   category_2_columns,
   full_img_width,
+  TopImageTitle_data
 }) {
   const codes = getCodes(queries);
   console.log('type', type);
@@ -348,8 +349,8 @@ export async function mondayRegularNslt({
                           href: links.TopImageTitle_href,
                           title1: queries.tit[0],
                           title2: queries.tit[1],
-                          color: tit?.color || '#000',
-                          type: tit?.type || 'standart',
+                          color: TopImageTitle_data?.color || '#000',
+                          type: TopImageTitle_data?.type || 'standard',
                         })
                       : ``
                   }
