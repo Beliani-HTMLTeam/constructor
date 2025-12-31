@@ -1,4 +1,4 @@
-export function Line(img = "https://pictureserver.net/static/2025/line.jpg") {
+export function Line(img = "https://pictureserver.net/static/2026/footer/line.jpg") {
     return `
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
           <tbody>

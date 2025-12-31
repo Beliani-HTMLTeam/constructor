@@ -192,7 +192,7 @@ export const Category = isAllowToRender(
               ? `
               <tr>
                 <td class="newsletterContainer">
-                  <img src="https://pictureserver.net/static/2025/line.jpg" style="display:block" width="100%" alt="Line Separator">
+                  <img src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block" width="100%" alt="Line Separator">
                 </td>
               </tr>
               `

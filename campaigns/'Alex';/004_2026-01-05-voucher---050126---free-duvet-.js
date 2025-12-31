@@ -195,7 +195,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: false,
+  optimizeImg: true,
   figmaUrl: "https://www.figma.com/design/KWvBW4N3zJWPECBRTtsTim/2025.01.05---Newsletter---Free-duvet-cover--Copy-?node-id=0-1&p=f&t=FnKAgxPS3f6P0xPN-0",
   templates: [
     {

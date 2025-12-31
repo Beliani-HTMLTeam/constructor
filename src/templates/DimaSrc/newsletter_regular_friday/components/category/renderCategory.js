@@ -6,8 +6,8 @@ import { Space } from '../Space';
 import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 
-const whiteLineSrc = 'https://upload.pictureserver.net/static/2024/white_line.jpg';
-const blackLineSrc = 'https://pictureserver.net/static/2025/line.jpg';
+const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
+const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
 
 export const renderCategory = async (
   category,
