@@ -7,7 +7,7 @@ import { appConfig as config } from '@/utils/config.js';
  */
 function updateConfigWithCurrentYear(config) {
   const currentYear = new Date().getFullYear();
-  config.server_url = config.server_url.replace(/\d{4}/, currentYear);
+  config.server_url = config.server_url.replace(/\d{4}/, config.override_year ?? currentYear);
   return config;
 }
 
