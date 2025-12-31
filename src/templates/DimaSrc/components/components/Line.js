@@ -1,5 +1,5 @@
 const Line = ({
-  src = 'https://pictureserver.net/static/2025/line.jpg',
+  src = 'https://pictureserver.net/static/2026/footer/line.jpg',
   insideTr = false,
   insideTable = false,
   tableContainer = false,

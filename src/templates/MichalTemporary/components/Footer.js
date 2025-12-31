@@ -108,7 +108,7 @@ export function Footer(sections, options) {
 			<tbody>
 				<tr>
 					<td>
-						<img loading="lazy" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+						<img loading="lazy" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
 					</td>
 				</tr>
 				<tr>
@@ -211,7 +211,7 @@ export function Footer(sections, options) {
 			<tbody>
 				<tr>
 					<td>
-						<img loading="lazy" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+						<img loading="lazy" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
 					</td>
 				</tr>
 				<tr>
@@ -306,7 +306,7 @@ export function Footer(sections, options) {
 		<table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
 			<tbody>
 					<tr>
-						<td><img alt="Line separator" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;" /></td>
+						<td><img alt="Line separator" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;" /></td>
 					</tr>
 				  <!--KLARNA-->
 					<tr>
@@ -326,7 +326,7 @@ export function Footer(sections, options) {
 		<table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
 			<tbody>
 				<tr>
-					<td><img alt="Line separator" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  /></td>
+					<td><img alt="Line separator" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  /></td>
 				</tr>
 				<!--KLARNA-->
 				<tr>
@@ -349,7 +349,7 @@ export function Footer(sections, options) {
 			<tbody>
 				<tr>
 					<td>
-						<img loading="lazy" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+						<img loading="lazy" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
 					</td>
 				</tr>
 				<tr>
@@ -460,7 +460,7 @@ export function Footer(sections, options) {
 			<tbody>
 				<tr>
 					<td>
-						<img loading="lazy" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+						<img loading="lazy" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
 					</td>
 				</tr>
 				<tr>
@@ -573,7 +573,7 @@ export function Footer(sections, options) {
 			<tbody>
 				<tr>
 					<td>
-						<img loading="lazy" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+						<img loading="lazy" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
 					</td>
 				</tr>
 				<!-- ADVANTAGES -->
@@ -638,7 +638,7 @@ export function Footer(sections, options) {
 			<tbody>
 				<tr>
 					<td>
-						<img loading="lazy" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+						<img loading="lazy" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
 					</td>
 				</tr>
 				<tr>
@@ -663,7 +663,7 @@ export function Footer(sections, options) {
 			<tbody>
 				<tr>
 					<td>
-						<img loading="lazy" src="https://pictureserver.net/static/2025/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+						<img loading="lazy" src="https://pictureserver.net/static/2026/footer/line.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
 					</td>
 				</tr>
 				<tr>

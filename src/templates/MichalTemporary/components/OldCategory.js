@@ -315,7 +315,7 @@ export const CategoryOld = isAllowToRender(
           showRedLine
             ? `<tr>
               <td class="newsletterContainer">
-                  <img src="https://pictureserver.net/static/2025/redline.png?ver=264" style="display:block" width="100%" alt="Line Separator">
+                  <img src="https://pictureserver.net/static/2026/footer/redline.png?ver=264" style="display:block" width="100%" alt="Line Separator">
               </td>s
           </tr>
           `
@@ -327,7 +327,7 @@ export const CategoryOld = isAllowToRender(
             ? `
           <tr>
             <td class="newsletterContainer">${Line(
-              'https://pictureserver.net/static/2025/line.jpg?ver=264'
+              'https://pictureserver.net/static/2026/footer/line.jpg?ver=264'
             )}</td>
           </tr>
           `
