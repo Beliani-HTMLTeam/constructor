@@ -168,7 +168,12 @@ const RegularFridayNslt = async ({
           categories:
             categoriesWithProducts.length > 0
               ? categoriesWithProducts.map((category, idx) => {
-                  const href = category.href ? getCategoryLink(category.href) : category.href;
+                  const href =
+                    category.hrefSource && category.hrefSource === 'queries'
+                      ? add_utm(queries.categoryLinks[idx])
+                      : category.href
+                      ? getCategoryLink(category.href)
+                      : category.href;
                   const name =
                     category.title.source === 'queries'
                       ? queries.categories[idx]
@@ -183,7 +188,12 @@ const RegularFridayNslt = async ({
                   };
                 })
               : categories.map((category, idx) => {
-                  const href = category.href ? getCategoryLink(category.href) : category.href;
+                  const href =
+                    category.hrefSource && category.hrefSource === 'queries'
+                      ? add_utm(queries.categoryLinks[idx])
+                      : category.href
+                      ? getCategoryLink(category.href)
+                      : category.href;
                   const name =
                     category.title.source === 'queries'
                       ? queries.categories[idx]

@@ -29,7 +29,7 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true)
   if (showPrices && (product.lowPrice || product.highPrice)) {
     html += `
       <tr>
-        <td class="${idx % 2 === 0 ? 'newsletterLeft20px' : ''}">
+        <td style="${idx % 2 === 0 ? 'padding-left: 20px;' : ''}">
           ${Prices({
             high: product.highPrice || '',
             low: product.lowPrice || '',
