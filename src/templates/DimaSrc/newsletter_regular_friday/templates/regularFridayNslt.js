@@ -34,6 +34,7 @@ const RegularFridayNslt = async ({
   intro,
   timer,
   TopImageTitle_data,
+  shopCTA,
 
   // functions passed:
   getHeader,
@@ -111,7 +112,11 @@ const RegularFridayNslt = async ({
   const IntroElement =
     intro && intro.type === 'paragraph'
       ? `
-          ${Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })}
+          ${Intro({
+            text: queries.intro || 'Translation not found',
+            paragraphAlign: intro.alignment,
+            color: intro.color,
+          })}
           ${
             intro.cta
               ? `
@@ -175,7 +180,7 @@ const RegularFridayNslt = async ({
                       ? getCategoryLink(category.href)
                       : category.href;
                   const name =
-                    category.title.source === 'queries'
+                    category.title && category.title.source === 'queries'
                       ? queries.categories[idx]
                       : getCategoryTitle
                       ? getCategoryTitle(category.name)
@@ -215,7 +220,7 @@ const RegularFridayNslt = async ({
       ? `
 
       <tr>
-                <td style="background-color: #750000;" class="newsletterContainer">
+                <td style="background-color: ${background};" class="newsletterContainer">
                   ${Create2Columns_Grid({
                     shuffle: false,
                     iter: categories,
@@ -262,8 +267,8 @@ const RegularFridayNslt = async ({
           ? shopNow({
               href: links['ShopCTA'],
               cta: queries['shopall'][0],
-              textColor: '#FFFFFF',
-              backgorund: '#750000',
+              textColor: shopCTA?.color || color,
+              backgorund: shopCTA?.backgroundColor || background,
               space: '35',
             })
           : ''

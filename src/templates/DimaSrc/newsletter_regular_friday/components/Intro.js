@@ -6,6 +6,7 @@ const Intro = ({
   spaceTop = 'newsletterBottom35px',
   spaceBottom = 'newsletterBottom35px',
   paragraphAlign = 'center',
+  color = '#000000',
 }) => {
   if (String(text).trim() === '') {
     text = 'Translation not found';
@@ -19,6 +20,7 @@ const Intro = ({
       align: paragraphAlign,
       insideTable: true,
       tableContainer: true,
+      spanStyle: `color: ${color};`,
     })}</td></tr>
     
     ${Space({ className: spaceBottom, insideTr: true })}

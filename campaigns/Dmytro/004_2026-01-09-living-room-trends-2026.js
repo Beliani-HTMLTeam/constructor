@@ -1,3 +1,5 @@
+import { DimasTranslateImage } from '@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage';
+
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::09.01.26 - Living Room Trends 2026';
 
@@ -30,8 +32,8 @@ const tableQueries = [
 
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-01-09' }),
-  TopImageTitle_src: translateImage({ value: '20260109_01.png' }),
-  TopImage_src: getImageUrl('20260109topgif.gif', true),
+  TopImageTitle_src: DimasTranslateImage({ value: '20260109_01.png', folder: '20260109', placeholderPosition: '47' }),
+  TopImage_src: getImageUrl('20260109/20260109topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-01-09' }),
   Timer_href: translateLink({ value: 'content/lp26-01-05' }),
   Banner_1: translateLink({ value: 'content/lp26-01-01' }),
@@ -51,7 +53,7 @@ const categories = [
     name: 'Mid-century modern',
     background: '#FFE9CC',
     color: '#000000',
-    src: getImageUrl('20260109Category10.png', true),
+    src: getImageUrl('20260109/20260109Category10.png', true),
     href: 'https://www.beliani.ch/meet-beliani/meet-beliani-vintage-style/',
     type: 'grid',
     title: {
@@ -69,19 +71,19 @@ const categories = [
     products: [
       {
         id: '652251',
-        src: getImageUrl('20260109Category11.png', true),
+        src: getImageUrl('20260109/20260109Category11.png', true),
       },
       {
         id: '576830',
-        src: getImageUrl('20260109Category12.png', true),
+        src: getImageUrl('20260109/20260109Category12.png', true),
       },
       {
         id: '313934',
-        src: getImageUrl('20260109Category13.png', true),
+        src: getImageUrl('20260109/20260109Category13.png', true),
       },
       {
         id: '454986',
-        src: getImageUrl('20260109Category14.png', true),
+        src: getImageUrl('20260109/20260109Category14.png', true),
       },
     ],
   },
@@ -89,7 +91,7 @@ const categories = [
     name: 'Memphis design',
     background: '#FFE9CC',
     color: '#000000',
-    src: getImageUrl('20260109Category20.png', true),
+    src: getImageUrl('20260109/20260109Category20.png', true),
     href: 'https://www.beliani.ch/trends/memphis-design/', // change
     type: 'grid',
     title: {
@@ -107,19 +109,19 @@ const categories = [
     products: [
       {
         id: '633342',
-        src: getImageUrl('20260109Category21.png', true),
+        src: getImageUrl('20260109/20260109Category21.png', true),
       },
       {
         id: '526187',
-        src: getImageUrl('20260109Category22.png', true),
+        src: getImageUrl('20260109/20260109Category22.png', true),
       },
       {
         id: '651709',
-        src: getImageUrl('20260109Category23.png', true),
+        src: getImageUrl('20260109/20260109Category23.png', true),
       },
       {
         id: '455113',
-        src: getImageUrl('20260109Category24.png', true),
+        src: getImageUrl('20260109/20260109Category24.png', true),
       },
     ],
   },
@@ -127,7 +129,7 @@ const categories = [
     name: 'Organic shapes',
     background: '#FFE9CC',
     color: '#000000',
-    src: getImageUrl('20260109Category30.png', true),
+    src: getImageUrl('20260109/20260109Category30.png', true),
     href: 'https://www.beliani.ch/curved-furniture/', // change
     type: 'grid',
     title: {
@@ -145,19 +147,19 @@ const categories = [
     products: [
       {
         id: '636095',
-        src: getImageUrl('20260109Category31.png', true),
+        src: getImageUrl('20260109/20260109Category31.png', true),
       },
       {
         id: '675751',
-        src: getImageUrl('20260109Category32.png', true),
+        src: getImageUrl('20260109/20260109Category32.png', true),
       },
       {
         id: '647029',
-        src: getImageUrl('20260109Category33.png', true),
+        src: getImageUrl('20260109/20260109Category33.png', true),
       },
       {
         id: '588790',
-        src: getImageUrl('20260109Category34.png', true),
+        src: getImageUrl('20260109/20260109Category34.png', true),
       },
     ],
   },
@@ -168,7 +170,7 @@ const timer = {
   isWithTitles: true,
   background: '#FFCCB7',
   color: '#000000',
-  freebies: getImageUrl('20260109free.png', true),
+  freebies: getImageUrl('20260109/20260109free.png', true),
   image: {
     CHDE: 'https://gen.sendtric.com/countdown/mha14x7ll2',
     CHFR: 'https://gen.sendtric.com/countdown/6774om4ey6',
