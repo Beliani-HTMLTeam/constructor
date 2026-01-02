@@ -1,4 +1,5 @@
 import { mondayRegularNslt } from '@/templates/AlexSrc/template/mondayRegularNslt';
+import { DimasTranslateImage } from '@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage';
 import { PeakFreebieNslt } from '@/templates/PeakFreebieNslt';
 
 // Campaign generated from form
@@ -24,8 +25,8 @@ const tableQueries = [
 const links = {
   code_href: translateLink({ value: 'content/lp26-01-13' }),
   TopImageTitle_href: translateLink({ value: 'content/lp26-01-13' }),
-  TopImageTitle_src: translateImage({ value: '20260113_01.png' }),
-  TopImage_src: getImageUrl('20260113topgif.gif', true),
+  TopImageTitle_src: DimasTranslateImage({ value: '20260113_01.png', folder: '20260113', placeholderPosition: '47' }),
+  TopImage_src: getImageUrl('20260113/20260113topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-01-13' }),
   Banner_1: translateLink({ value: 'content/lp25-12-23' }),
   Banner_1_Image: translateImage({ value: '20251223b.png' }),
@@ -36,79 +37,79 @@ const links = {
 const TopImageTitle_data = {
   color: '#000000',
   backgroundColor: '#FD9000',
-  type: 'up_to',
+  type: 'standard',
 };
 
 const categories = [
   {
     name: 'Sofas',
-    src: translateImage({ value: '_cat_2__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_2__20260113.png' }),
     href: 'https://www.beliani.ch/sofas/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Beds',
-    src: translateImage({ value: '_cat_3__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_3__20260113.png' }),
     href: 'https://www.beliani.ch/beds/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Armchairs',
-    src: translateImage({ value: '_cat_4__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_4__20260113.png' }),
     href: 'https://www.beliani.ch/armchairs/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Chairs',
-    src: translateImage({ value: '_cat_5__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_5__20260113.png' }),
     href: 'https://www.beliani.ch/chairs/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Tables',
-    src: translateImage({ value: '_cat_6__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_6__20260113.png' }),
     href: 'https://www.beliani.ch/tables/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Storage',
-    src: translateImage({ value: '_cat_7__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_7__20260113.png' }),
     href: 'https://www.beliani.ch/storage/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Kids',
-    src: translateImage({ value: '_cat_8__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_8__20260113.png' }),
     href: 'https://www.beliani.ch/children-room/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Textiles',
-    src: translateImage({ value: '_cat_9__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_9__20260113.png' }),
     href: 'https://www.beliani.ch/textiles/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Lighting',
-    src: translateImage({ value: '_cat_10__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_10__20260113.png' }),
     href: 'https://www.beliani.ch/lighting/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Bathtubs',
-    src: translateImage({ value: '_cat_11__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_11__20260113.png' }),
     href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Desks',
-    src: translateImage({ value: '_cat_12__20260113.png' }),
+    src: DimasTranslateImage({ value: '_cat_12__20260113.png' }),
     href: 'https://www.beliani.ch/office-furniture/desks-eng/ ',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {
     name: 'Rugs',
-    src: translateImage({ value: '_cat_13__20260113.png', wrapperFolder: '20260113/' }),
+    src: translateImage({ value: '_cat_13__20260113.png' }),
     href: 'https://www.beliani.ch/rugs/ ',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
@@ -166,8 +167,8 @@ export default new entities.Campaign({
   },
   isArchive: false,
   // docelowo
-  // optimizeImg: true,
-  optimizeImg: false,
+  optimizeImg: true,
+  // optimizeImg: false,
   figmaUrl:
     'figma.com/design/nz4mr68AmIWmn11QpYuOFp/2026.01.13---Newsletter-Free-wall-decor--Copy-?m=auto&fuid=1328681953229888224',
   templates: [

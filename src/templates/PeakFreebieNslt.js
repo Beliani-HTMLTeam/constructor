@@ -7,6 +7,7 @@ import { getCodes } from '@/utils/getCodes';
 import { getState } from '@/main/state/appState';
 import { PeakOfferPartCode } from './PeakOfferPartCode';
 import { CampaignWrapper } from './DimaSrc/utils/UrlModificator';
+import { TopImageTitle } from './DimaSrc/newsletter_regular_friday/components/TopImageTitle';
 
 export function PeakFreebieNslt({
   links,
@@ -25,7 +26,7 @@ export function PeakFreebieNslt({
   categories,
   freebies,
   background,
-  tit,
+  TopImageTitle_data,
   offerPart,
   intro,
   inside,
@@ -65,9 +66,9 @@ export function PeakFreebieNslt({
   //   getCategoryLink
   // );
 
-  console.log(full_img_width, 'neeeeew');
+  console.log('TopImageTitle_data', TopImageTitle_data, type);
 
-  console.log('categories', categories);
+  console.log('queries', type, !queries.TopImageTitle, !single_image);
 
   return `
   ${Header(
@@ -121,7 +122,7 @@ export function PeakFreebieNslt({
               <tr>
                 <td align="center">
                   ${
-                    type === 'newsletter' || !queries.tit
+                    type === 'newsletter' || !queries.TopImageTitle
                       ? ImageWithLink({
                           href: links.TopImageTitle_href,
                           src: links.TopImageTitle_src,
@@ -130,10 +131,11 @@ export function PeakFreebieNslt({
                       : !single_image
                       ? TopImageTitle({
                           href: links.TopImageTitle_href,
-                          title1: queries.tit[0],
-                          title2: queries.tit[1],
-                          color: tit?.color || '#000',
-                          type: tit?.type || 'standart',
+                          title1: queries.TopImageTitle[0],
+                          title2: queries.TopImageTitle[1],
+                          color: TopImageTitle_data?.color || '#000',
+                          type: TopImageTitle_data?.type || 'standard',
+                          renderType: type,
                         })
                       : ``
                   }

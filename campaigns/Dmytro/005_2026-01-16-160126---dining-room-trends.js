@@ -208,7 +208,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: false,
+  optimizeImg: true,
   figmaUrl:
     'https://www.figma.com/design/Vsvj454af4Sb0tc45mLKdk/2026.01.16----Dining-room-trends-2026?node-id=11004-3902&t=Q24qzo4rNWGsa42J-1',
   templates: [
@@ -272,4 +272,5 @@ export default new entities.Campaign({
     },
   ],
 });
+
 
