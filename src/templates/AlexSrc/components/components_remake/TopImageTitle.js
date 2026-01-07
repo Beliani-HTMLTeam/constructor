@@ -3,9 +3,8 @@ import { Space } from '@components/Space.js';
 // import { getState } from '@utils/stateManager.js';
 // prettier-ignore
 
-export const TopImageTitle = isAllowToRender(
-  optimize(({ href, src, title1, title2, color, type, renderType }) => {
-    const keywords = ["retrò", "retró", "rétro", "%", "halloween", "retro"]
+export const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) => {
+    const keywords = ["retrò", "retró", "rétro", "%", "halloween", "retro"];
 
     function includesKeywords(title) {
       for (let keyword of keywords) {
@@ -71,5 +70,4 @@ export const TopImageTitle = isAllowToRender(
 				</td>
 			</tr>`;
   
-	})
-);
+};

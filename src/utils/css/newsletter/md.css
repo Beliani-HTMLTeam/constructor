@@ -315,6 +315,11 @@ padding-bottom: 70px;
 .br {
   display: block; 
 }
+
+.newsletterContainer60px {
+  padding-left: 60px;
+  padding-right: 60px;
+}
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
 
@@ -416,10 +421,6 @@ padding-bottom: 70px;
   }
 
   .newsletterProductTitleFreebie {
-    font-size: 18px;
-  }
-
-  .newsletterProductTitle {
     font-size: 18px;
   }
 
@@ -535,6 +536,31 @@ padding-bottom: 70px;
 }
 }
 
+@media screen and (max-width: 768px) {
+  
+  .newsletterProductTitle {
+    /* white-space: nowrap; */
+    /* font-size: clamp(14px, 4vw, 18px); */
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+  /* .newsletterProductImage img {
+    max-height: 120px;
+  } */
+  
+  .newsletterProductTitle {
+    white-space: normal;
+    -ms-word-break: break-all !important;
+    word-break: break-all !important;
+    line-break: anywhere !important;
+
+    /* font-size: clamp(14px, 4vw, 18px); */
+    font-size: 12px;
+  }
+}
  
 
 @media screen and (max-width: 570px) {
@@ -600,6 +626,7 @@ padding-bottom: 70px;
 
   .newsletterLeft10pxTESTPRODS .newsletterProductImage img, .newsletterRight10pxTESTPRODS .newsletterProductImage img {
     max-width: 70% !important;
+    max-height: 121px;
   }
 }
 
