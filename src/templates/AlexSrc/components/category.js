@@ -15,24 +15,24 @@ export const Category = isAllowToRender(
     len,
     desc,
     idx,
-    cta = "CTA",
-    type = "onlyImage",
+    cta = 'CTA',
+    type = 'onlyImage',
     align,
     size,
-    className = "newsletterContainer",
+    className = 'newsletterContainer',
     img_class,
     selectCampaign,
     categoryIntro,
     padding,
   }) => {
     if (!type) {
-      return "Please specify type category.";
+      return 'Please specify type category.';
     }
 
     let showPriceAndName;
     console.log(type);
 
-    if (type === "image&cta") {
+    if (type === 'image&cta') {
       if (idx === len) {
         return `
 <table class="newsletterContainer" border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -53,7 +53,7 @@ export const Category = isAllowToRender(
               ctaComponent
                 ? ctaComponent(href, cta)
                 : `
-                <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                   <span class="newsletterCta">${cta}</span>
                 </a>
               `
@@ -72,7 +72,7 @@ export const Category = isAllowToRender(
     `;
     }
 
-    if (type === "standard") {
+    if (type === 'standard') {
       if (idx === len) {
         return `
 <table class="newsletterContainer" border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -82,7 +82,7 @@ export const Category = isAllowToRender(
         </tr>
         <tr>
           <td>
-            ${Title({ title: name, align: "left", color: color })}
+            ${Title({ title: name, align: 'left', color: color })}
           </td>
         </tr>
         <tr>
@@ -104,7 +104,7 @@ export const Category = isAllowToRender(
               ctaComponent
                 ? ctaComponent(href, cta)
                 : `
-                <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                   <span class="newsletterCta">${cta}</span>
                 </a>
               `
@@ -128,7 +128,7 @@ export const Category = isAllowToRender(
     `;
     }
 
-    if (type === "no_products") {
+    if (type === 'no_products') {
       if (idx === len) {
         return `
     <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -158,7 +158,7 @@ export const Category = isAllowToRender(
               ctaComponent
                 ? ctaComponent(href, cta)
                 : `
-                <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                   <span class="newsletterCta">${cta}</span>
                 </a>
               `
@@ -166,11 +166,7 @@ export const Category = isAllowToRender(
           </td>
         </tr>
         <tr>
-         ${
-           selectCampaign.date === "2025.10.13"
-             ? `<td class="newsletterBottom80px"></td>`
-             : `<td class="newsletterBottom35px"></td>`
-         }
+          <td class="newsletterBottom35px"></td>
         </tr>
       </tbody>
     </table>
@@ -181,7 +177,7 @@ export const Category = isAllowToRender(
       <tbody>
         <tr>
           <td class="${className}">
-            ${Title({ title: name, align: "left", color: color })}
+            ${Title({ title: name, align: 'left', color: color })}
           </td>
         </tr>
         <tr>
@@ -203,7 +199,7 @@ export const Category = isAllowToRender(
               ctaComponent
                 ? ctaComponent(href, cta)
                 : `
-                <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                   <span class="newsletterCta">${cta}</span>
                 </a>
               `
@@ -211,11 +207,7 @@ export const Category = isAllowToRender(
           </td>
         </tr>
         <tr>
-          ${
-            selectCampaign.date === "2025.10.13"
-              ? `<td class="newsletterBottom80px"></td>`
-              : `<td class="newsletterBottom35px"></td>`
-          }
+          <td class="newsletterBottom80px"></td>
         </tr>
         <tr>
           <td class="${className}">
@@ -227,14 +219,14 @@ export const Category = isAllowToRender(
     `;
     }
 
-    if (type === "monday") {
+    if (type === 'monday') {
       if (idx === len) {
         return `
         <table border="0" cellspacing="0" cellpadding="0" width="100%">
           <thead>
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-                ${Title({ title: name, align: "left", color: color })}
+                ${Title({ title: name, align: 'left', color: color })}
               </td>
             </tr>
             <tr>
@@ -246,7 +238,7 @@ export const Category = isAllowToRender(
               </td>
             </tr>
             ${
-              selectCampaign.date === "2025.12.08"
+              selectCampaign.date === '2025.12.08'
                 ? `
               <tr>
                 <td class="newsletterBottom35px"></td>
@@ -258,8 +250,7 @@ export const Category = isAllowToRender(
                 <td class="newsletterBottom35px"></td>
               </tr>
               `
-              : 
-              `<tr>
+                : `<tr>
                 <td class="newsletterBottom35px"></td>
               </tr>
               `
@@ -276,11 +267,23 @@ export const Category = isAllowToRender(
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[0], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[0],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[1], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[1],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                         </tr>
                       </table>
@@ -293,11 +296,23 @@ export const Category = isAllowToRender(
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[2], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[2],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[3], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[3],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                         </tr>
                       </table>
@@ -320,7 +335,7 @@ export const Category = isAllowToRender(
                           ctaComponent
                             ? ctaComponent(href, cta)
                             : `
-                            <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                            <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                               <span class="newsletterCta">${cta}</span>
                             </a>
                           `
@@ -341,7 +356,7 @@ export const Category = isAllowToRender(
           <thead>
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-                ${Title({ title: name, align: "left", color: color })}
+                ${Title({ title: name, align: 'left', color: color })}
               </td>
             </tr>
             <tr>
@@ -353,7 +368,7 @@ export const Category = isAllowToRender(
               </td>
             </tr>
             ${
-              selectCampaign.date === "2025.12.08"
+              selectCampaign.date === '2025.12.08'
                 ? `
               <tr>
                 <td class="newsletterBottom35px"></td>
@@ -365,8 +380,7 @@ export const Category = isAllowToRender(
                 <td class="newsletterBottom35px"></td>
               </tr>
               `
-              : 
-              `
+                : `
               <tr>
                 <td class="newsletterBottom35px"></td>
               </tr>
@@ -385,11 +399,23 @@ export const Category = isAllowToRender(
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[0], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[0],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[1], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[1],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                         </tr>
                       </table>
@@ -402,11 +428,23 @@ export const Category = isAllowToRender(
                         <tr>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                            ${Product(products[2], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[2],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                           <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                            ${Product(products[3], "left", `color: ${color || "#000000"}`, (showPriceAndName = true), padding)}
+                            ${Product(
+                              products[3],
+                              'left',
+                              `color: ${color || '#000000'}`,
+                              (showPriceAndName = true),
+                              padding
+                            )}
                           </td>
                         </tr>
                       </table>
@@ -429,7 +467,7 @@ export const Category = isAllowToRender(
                           ctaComponent
                             ? ctaComponent(href, cta)
                             : `
-                            <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                            <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                               <span class="newsletterCta">${cta}</span>
                             </a>
                           `
@@ -448,7 +486,7 @@ export const Category = isAllowToRender(
   `;
     }
 
-    if (type === "mondaywithparagraph") {
+    if (type === 'mondaywithparagraph') {
       return `
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <thead>
@@ -457,7 +495,7 @@ export const Category = isAllowToRender(
       </tr>
       <tr>
         <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-          ${Title({ title: name, align: "center", color: color })}
+          ${Title({ title: name, align: 'center', color: color })}
         </td>
       </tr>
       <tr>
@@ -501,11 +539,11 @@ export const Category = isAllowToRender(
                   <tr>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                      ${Product(products[0], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                      ${Product(products[0], 'left', `color: ${color || '#000000'}`, (showPriceAndName = true))}
                     </td>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                      ${Product(products[1], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                      ${Product(products[1], 'left', `color: ${color || '#000000'}`, (showPriceAndName = true))}
                     </td>
                   </tr>
                 </table>
@@ -518,11 +556,11 @@ export const Category = isAllowToRender(
                   <tr>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-left: 0px; vertical-align: top; width: 50%" class="newsletterRight10px">
-                      ${Product(products[2], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                      ${Product(products[2], 'left', `color: ${color || '#000000'}`, (showPriceAndName = true))}
                     </td>
                     <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
                     <td style="padding-top: 0px; padding-right: 0px; vertical-align: top; width: 50%" class="newsletterLeft10px">
-                      ${Product(products[3], "left", `color: ${color || "#000000"}`, (showPriceAndName = true))}
+                      ${Product(products[3], 'left', `color: ${color || '#000000'}`, (showPriceAndName = true))}
                     </td>
                   </tr>
                 </table>
@@ -545,7 +583,7 @@ export const Category = isAllowToRender(
                     ctaComponent
                       ? ctaComponent(href, cta)
                       : `
-                      <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                      <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                         <span class="newsletterCta">${cta}</span>
                       </a>
                     `
@@ -560,7 +598,7 @@ export const Category = isAllowToRender(
   </table>
   `;
     }
-    if (type === "OnlyImage") {
+    if (type === 'OnlyImage') {
       if (idx === len) {
         return `
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -584,7 +622,7 @@ export const Category = isAllowToRender(
           </tr>
             <tr>
               <td>
-                ${Space({ className: "newsletterBottom80px" })}
+                ${Space({ className: 'newsletterBottom80px' })}
               </td>
             </tr>
         </thead>
@@ -592,7 +630,7 @@ export const Category = isAllowToRender(
       `;
     }
 
-    if (type === "image") {
+    if (type === 'image') {
       if (idx === len) {
         return `
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -604,7 +642,7 @@ export const Category = isAllowToRender(
             </tr>
             <tr>
               <td>
-                  ${Space({ className: "newsletterBottom20px" })}
+                  ${Space({ className: 'newsletterBottom20px' })}
               </td>
             </tr>
             <tr>
@@ -626,14 +664,14 @@ export const Category = isAllowToRender(
           </tr>
             <tr>
               <td>
-                ${Space({ className: "newsletterBottom20px" })}
+                ${Space({ className: 'newsletterBottom20px' })}
               </td>
             </tr>
         </thead>
       </table>
       `;
     }
-    if (type === "one_freebie") {
+    if (type === 'one_freebie') {
       if (idx === len) {
         return `
 <table class="newsletterContainer" border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -650,7 +688,7 @@ export const Category = isAllowToRender(
         </tr>
         <tr>
           <td align="${align}">
-            ${Title({ title: name, align, color: color, className: "newsletterProductTitle", type: "product", size })}
+            ${Title({ title: name, align, color: color, className: 'newsletterProductTitle', type: 'product', size })}
           </td>
         </tr>
         <tr>
@@ -665,14 +703,14 @@ export const Category = isAllowToRender(
     `;
     }
 
-    if (type === "productImg") {
+    if (type === 'productImg') {
       if (idx === len) {
         return `
         <table  border="0" cellspacing="0" cellpadding="0" width="100%">
           <tbody>
             <tr>
               <td align="center" class="${className}">
-                ${Title({ title: name, align: "center", color: color })}
+                ${Title({ title: name, align: 'center', color: color })}
               </td>
             </tr>
             <tr>
@@ -697,7 +735,7 @@ export const Category = isAllowToRender(
                 </td>
               </tr>
             `
-                : ""
+                : ''
             }
             <tr>
               <td class="newsletterBottom35px"></td>
@@ -708,7 +746,7 @@ export const Category = isAllowToRender(
                   ctaComponent
                     ? ctaComponent(href, cta)
                     : `
-                    <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                    <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                       <span class="newsletterCta">${cta}</span>
                     </a>
                   `
@@ -727,7 +765,7 @@ export const Category = isAllowToRender(
           <tbody>
             <tr>
               <td align="center" class="${className}">
-                ${Title({ title: name, align: "center", color: color })}
+                ${Title({ title: name, align: 'center', color: color })}
               </td>
             </tr>
             <tr>
@@ -752,7 +790,7 @@ export const Category = isAllowToRender(
                 </td>
               </tr>
             `
-                : ""
+                : ''
             }
             <tr>
               <td class="newsletterBottom35px"></td>
@@ -763,7 +801,7 @@ export const Category = isAllowToRender(
                   ctaComponent
                     ? ctaComponent(href, cta)
                     : `
-                    <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                    <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                       <span class="newsletterCta">${cta}</span>
                     </a>
                   `
@@ -781,13 +819,13 @@ export const Category = isAllowToRender(
       `;
     }
 
-    if (type === "only 2 products in category") {
+    if (type === 'only 2 products in category') {
       return `
         <table border="0" cellspacing="0" cellpadding="0" width="100%">
           <thead>
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-                ${Title({ title: name, align: "center", color: color })}
+                ${Title({ title: name, align: 'center', color: color })}
               </td>
             </tr>
             <tr>
@@ -870,7 +908,7 @@ export const Category = isAllowToRender(
                           ctaComponent
                             ? ctaComponent(href, cta)
                             : `
-                            <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                            <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                               <span class="newsletterCta">${cta}</span>
                             </a>
                           `
@@ -889,14 +927,14 @@ export const Category = isAllowToRender(
   `;
     }
 
-    if (type === "halloween") {
+    if (type === 'halloween') {
       if (idx === len) {
         return `
         <table border="0" cellspacing="0" cellpadding="0" width="100%">
           <thead>
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-                ${Title({ title: name, align: "center", color: color })}
+                ${Title({ title: name, align: 'center', color: color })}
               </td>
             </tr>
             <tr>
@@ -906,7 +944,7 @@ export const Category = isAllowToRender(
           <tbody>
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" ${
-                idx === 1 || idx === 3 ? `class="newsletterHalloween"` : ""
+                idx === 1 || idx === 3 ? `class="newsletterHalloween"` : ''
               }>
                 <table cellspacing="0" cellpadding="0" style="width: 100%; ">
                   <tr>
@@ -922,8 +960,8 @@ export const Category = isAllowToRender(
                                   <td>
                                        ${Product(
                                          products[0],
-                                         "left",
-                                         `color: ${color || "#000000"}`,
+                                         'left',
+                                         `color: ${color || '#000000'}`,
                                          (showPriceAndName = false)
                                        )}
                                   </td>
@@ -942,8 +980,8 @@ export const Category = isAllowToRender(
                                   <td>
                                        ${Product(
                                          products[1],
-                                         "left",
-                                         `color: ${color || "#000000"}`,
+                                         'left',
+                                         `color: ${color || '#000000'}`,
                                          (showPriceAndName = false)
                                        )}
                                   </td>
@@ -951,7 +989,7 @@ export const Category = isAllowToRender(
                               </tbody>
                             </table>
                           </td>`
-                              : ""
+                              : ''
                           } 
                           
                         </tr>
@@ -971,7 +1009,7 @@ export const Category = isAllowToRender(
                           ctaComponent
                             ? ctaComponent(href, cta)
                             : `
-                            <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                            <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                               <span class="newsletterCta">${cta}</span>
                             </a>
                           `
@@ -992,7 +1030,7 @@ export const Category = isAllowToRender(
           <thead>
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
-                ${Title({ title: name, align: "center", color: color })}
+                ${Title({ title: name, align: 'center', color: color })}
               </td>
             </tr>
             <tr>
@@ -1002,7 +1040,7 @@ export const Category = isAllowToRender(
           <tbody>
             <tr>
               <td style="padding-top: 0px; padding-bottom: 0px;" ${
-                idx === 1 || idx === 3 ? `class="newsletterHalloween"` : ""
+                idx === 1 || idx === 3 ? `class="newsletterHalloween"` : ''
               }>
                 <table cellspacing="0" cellpadding="0" style="width: 100%; ">
                   <tr>
@@ -1018,8 +1056,8 @@ export const Category = isAllowToRender(
                                   <td>
                                        ${Product(
                                          products[0],
-                                         "left",
-                                         `color: ${color || "#000000"}`,
+                                         'left',
+                                         `color: ${color || '#000000'}`,
                                          (showPriceAndName = false)
                                        )}
                                   </td>
@@ -1038,8 +1076,8 @@ export const Category = isAllowToRender(
                                   <td>
                                        ${Product(
                                          products[1],
-                                         "left",
-                                         `color: ${color || "#000000"}`,
+                                         'left',
+                                         `color: ${color || '#000000'}`,
                                          (showPriceAndName = false)
                                        )}
                                   </td>
@@ -1047,7 +1085,7 @@ export const Category = isAllowToRender(
                               </tbody>
                             </table>
                           </td>`
-                              : ""
+                              : ''
                           } 
                           
                         </tr>
@@ -1067,7 +1105,7 @@ export const Category = isAllowToRender(
                           ctaComponent
                             ? ctaComponent(href, cta)
                             : `
-                            <a href="${href}" style="color:${color || "#000"}; text-decoration: underline;">
+                            <a href="${href}" style="color:${color || '#000'}; text-decoration: underline;">
                               <span class="newsletterCta">${cta}</span>
                             </a>
                           `
