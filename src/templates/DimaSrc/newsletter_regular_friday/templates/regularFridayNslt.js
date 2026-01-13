@@ -132,6 +132,7 @@ const RegularFridayNslt = async ({
                 `
               : ''
           }
+              ${intro.additionalSpace ? Space({ insideTr: true, className: intro.additionalSpace }) : ''}
           `
       : '';
 
@@ -250,7 +251,7 @@ const RegularFridayNslt = async ({
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
       ${TopImageTitleElement}
 
-      ${timer.position === 'insideTopImageTitle' ? TimerElement : ''}
+      ${timer && timer.position === 'insideTopImageTitle' ? TimerElement : ''}
 
       ${TopImageElement}
 
@@ -258,7 +259,7 @@ const RegularFridayNslt = async ({
 
       ${OfferPartElement}
 
-      ${timer.position === 'outsideTopImageTitle' ? TimerElement : ''}
+      ${timer && timer.position === 'outsideTopImageTitle' ? TimerElement : ''}
       
       ${CategoriesElement}
               
