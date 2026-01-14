@@ -181,7 +181,7 @@ export function vproducts_lp() {
      }
      
      #newsletter .newsletterProductTitle {
-       font-size: 20px;
+      font-size: clamp(16px, 3vw, 20px);
        line-height: 1.20;
      }
      
@@ -393,10 +393,6 @@ export function vproducts_lp() {
        }
      
        #newsletter .newsletterProductTitleFreebie {
-         font-size: 18px;
-       }
-     
-       #newsletter .newsletterProductTitle {
          font-size: 18px;
        }
      

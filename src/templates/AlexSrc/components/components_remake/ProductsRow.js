@@ -2,7 +2,7 @@ import { ImageWithLink } from './ImageWithLink_new.js';
 import { Space } from './Space.js';
 import { Product } from './Product.js';
 
-function generateProduct({ product, align, style, width = '100', showName, showPrices = 'true' }) {
+function generateProduct({ product, align, style, width = '100', showPrices = 'true', showName = 'false'}) {
   return `
 	<td style="vertical-align: top; width: ${width}%">
         <table
@@ -14,7 +14,7 @@ function generateProduct({ product, align, style, width = '100', showName, showP
           <tbody>
             <tr>
               <td align="center">
-                ${Product(product, align, style, showPrices)}
+                ${Product(product, align, style, showPrices, showName)}
               </td>
             </tr>
           </tbody>
@@ -27,8 +27,8 @@ export function ProductsRow({
   products,
   align = 'center',
   style,
-  showName,
-  showPrices
+  showPrices = 'true',
+  showName = 'false',
 }) {
 
   console.log('ProductsRow - showPrices:', showPrices);
@@ -53,8 +53,8 @@ export function ProductsRow({
               style,
               width: 100 / productArray.length,
               // width: "33",
-              showName,
               showPrices: showPrices,
+              showName,
             }) +
             (index !== productArray.length - 1
               ? "<td class='newsletterProductSeparator'></td>"

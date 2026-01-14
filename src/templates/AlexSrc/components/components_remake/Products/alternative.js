@@ -38,7 +38,7 @@ export function AlternativeProduct(product, align = 'left', style, showPrices, s
           ${
             showName
               ? `
-            <table cellspacing="0" cellpadding="0" style="width: 100%; ">
+            <table cellspacing="0" cellpadding="0" class="table-layout: fixed;" style="width: 100%; ">
             <tbody>
               <tr>
                 <td align="${align}">
