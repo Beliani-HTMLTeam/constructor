@@ -128,12 +128,12 @@ const freebies = {
         {
           id: '358302',
           src: getImageUrl('20260113/20260113free1.png', true),
-          style: 'padding-right: 5px; padding-left: 103px;',
+          style: 'padding-right: 5px; padding-left: 10px;',
         },
         {
           id: '373375',
           src: getImageUrl('20260113/20260113free2.png', true),
-          style: 'padding-right: 103px; padding-left: 5px;',
+          style: 'padding-right: 10px; padding-left: 5px;',
         },
       ],
     }),
@@ -144,12 +144,12 @@ const freebies = {
         {
           id: '358267',
           src: getImageUrl('20260113/20260113free3.png', true),
-          style: 'padding-right: 5px; padding-left: 103px;',
+          style: 'padding-right: 5px; padding-left: 10px;',
         },
         {
           id: '353281',
           src: getImageUrl('20260113/20260113free4.png', true),
-          style: 'padding-right: 103px; padding-left: 5px;',
+          style: 'padding-right: 10px; padding-left: 5px;',
         },
       ],
     }),

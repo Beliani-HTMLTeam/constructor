@@ -21,7 +21,9 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true)
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       
       <tr>
-        <td class="newsletterProductTitle" style="${idx % 2 === 0 ? 'padding-left: 20px;' : ''}">${product.name}</td>
+        <td class="${idx % 2 === 0 ? 'newsletterProductTitleWithPaddingLeft' : 'newsletterProductTitle'}">${
+      product.name
+    }</td>
       </tr>
     `;
   }
@@ -29,7 +31,7 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true)
   if (showPrices && (product.lowPrice || product.highPrice)) {
     html += `
       <tr>
-        <td style="${idx % 2 === 0 ? 'padding-left: 20px;' : ''}">
+        <td class="${idx % 2 === 0 ? 'newsletterLeft20px' : ''}">
           ${Prices({
             high: product.highPrice || '',
             low: product.lowPrice || '',
