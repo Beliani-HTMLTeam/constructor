@@ -113,7 +113,7 @@ const categories = [
 
       // 3 products grid FAIRMONT
       {
-        id: '	676916',
+        id: '684186',
         src: getImageUrl('20260115_Pic04.png', true),
       },
       // BARTON
@@ -123,7 +123,7 @@ const categories = [
       },
       // CASTALLA
       {
-        id: '684186',
+        id: '676916',
         src: getImageUrl('20260115_Pic06.png', true),
       },
     ],
@@ -210,9 +210,9 @@ const categories = [
         id: '408879',
         src: getImageUrl('20260115_Pic25.png', true),
       },
-      // NOISETTE
+      // FRUITY BLOOM
       {
-        id: '664683',
+        id: '408572',
         src: getImageUrl('20260115_Pic26.png', true),
       },
     ],
