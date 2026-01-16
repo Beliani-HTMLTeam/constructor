@@ -29,6 +29,10 @@ export const templates = ({ color, title1, title2 }) => ({
       <h5 style="color:${color};" class="newsletterTitleH1">${title1}</h5>
       <h4 style="color:${color};" class="newsletterTitleH2">${title2}</h4>
     `,
+  standardBold: `
+      <h5 style="color:${color}; font-weight: 600;" class="newsletterTitleH1">${title1}</h5>
+      <h4 style="color:${color}; font-weight: 600;" class="newsletterTitleH2">${title2}</h4>
+    `,
   twoSameLines: `
       <h4 style="color:${color};" class="newsletterTitleH1">${title1}</h4>
       <h4 style="color:${color};" class="newsletterTitleH1">${title2}</h4>

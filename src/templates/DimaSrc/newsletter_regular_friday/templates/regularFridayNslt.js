@@ -140,9 +140,9 @@ const RegularFridayNslt = async ({
     Inside && Inside.type === 'timer'
       ? Timer({
           title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
-          // title: 'Translation not found',
+          // title: 'Free scatter cushions set',
           subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
-          // subtitle: 'Free mirrors',
+          // subtitle: 'deal ends in:',
           href: links.Timer_href,
           src: timer.image[country],
           color: Inside.color,
@@ -270,10 +270,12 @@ const RegularFridayNslt = async ({
               cta: queries['shopall'][0],
               textColor: shopCTA?.color || color,
               backgorund: shopCTA?.backgroundColor || background,
-              space: '35',
+              space: shopCTA?.space || '35',
             })
           : ''
       }
+
+      ${timer && timer.position === 'afterTilesCategories' ? TimerElement : ''}
     
     </table>
 
