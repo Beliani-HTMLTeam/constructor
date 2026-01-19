@@ -51,7 +51,7 @@ const NewsletterOfferPart = ({
     
     <tr>
       <td style="color: ${color}; text-align: center;">
-        ${Paragraph({ text: data ? data[5] : paragraph3, align: 'center' })}
+        ${Paragraph({ text: data ? data[4] : paragraph3, align: 'center' })}
       </td> 
     </tr>
   
@@ -123,7 +123,7 @@ const LandingOfferPart = ({
   
   <tr>
     <td style="color: ${color}; text-align: center;" >
-      ${Paragraph({ text: data ? data[5] : paragraph3, align: 'center' })}
+      ${Paragraph({ text: data ? data[4] : paragraph3, align: 'center' })}
     </td>
   </tr>
   

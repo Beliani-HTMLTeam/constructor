@@ -11,6 +11,7 @@ import { openManageProductsModal } from '@/main/ui/manageProducts.js';
 
 import { toast } from 'sonner';
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
+import { getState } from '../state/appState';
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;
