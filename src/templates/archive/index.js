@@ -42,6 +42,7 @@ import { BirthdayWhiteNL } from '@/templates/archive/BirthdayWhite.js';
 import { Side } from '@/templates/archive/Side.js';
 import { SideLP } from '@/templates/archive/SideLP.js';
 import { mondayRegularNslt } from '@/templates/archive/mondayRegularNslt.js';
+import { ThreeProductCategory } from '@/templates/archive/ThreeProductCategory.js';
 import { fridayDziwnyNsltr } from '@/templates/archive/fridayDziwnyNsltr.js';
 import { product_of_the_month } from '@/templates/archive/product_of_the_month.js';
 import { Blackweek } from '@/templates/Blackweek.js'
