@@ -89,6 +89,14 @@ img {
   padding-bottom: 10px;
 }
 
+.newsletterBottom15px {
+  padding-bottom: 15px;
+}
+
+.newsletterBottom45px {
+  padding-bottom: 45px;
+}
+
 .newsletterBottom20px {
   padding-bottom: 20px;
 }
@@ -515,6 +523,14 @@ img {
 
   .newsletterLeft5px {
     padding-left: 2px;
+  }
+
+  .newsletterBottom15px {
+    padding-bottom: 10px;
+  }
+
+  .newsletterBottom45px {
+    padding-bottom: 30px;
   }
 
   .newsletterBottom20px {
