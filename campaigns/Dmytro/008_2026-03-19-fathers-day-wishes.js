@@ -39,7 +39,7 @@ const links = {
     folder: 'FathersDayWishes',
     placeholderPosition: '55',
   }),
-  TopImage_href: translateLink({ value: 'content/lp26-03-19' }),
+  TopImage_href: translateLink({ value: 'content/lp26-06-20fd' }),
   // change it
   Banner_1: translateLink({ value: 'content/lp26-03-13' }),
   Banner_1_Image: translateImage({ value: '20260313b.png' }),
@@ -286,5 +286,6 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
     },
   ],
+
 
 });
