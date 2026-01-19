@@ -6,10 +6,11 @@ import {
   Intro,
   Line,
   TopImageTitle,
-  Timer,
   Space,
   Category,
 } from '@templates/AlexSrc/components/components_remake/_index.js';
+
+import { Timer } from '@/templates/Thursday/components/Timer';
 
 import { Footer } from '@components/footer.js';
 import { getTrackingUrl } from '@utils/getTrackingUrl.js';
@@ -18,10 +19,10 @@ export async function TIT_TopImage_Timer_Categories({
   TopImageTitle_data,
   intro,
   timer,
+  Inside,
   links,
   utm,
   getProductById,
-  getImageBySlug,
   getCategoryLink,
   getCategoryTitle,
   getPhrase,
@@ -86,6 +87,10 @@ export async function TIT_TopImage_Timer_Categories({
     { type }
   );
 
+  const seeMore = getPhrase('See more');
+  const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
+  const shopNow = getPhrase('Shop now');
+
   const nslt_styles = `background-color: ${background}; color: ${color}; max-width: 650px; width: 100%;`;
 
   const tit_data = {
@@ -104,26 +109,28 @@ export async function TIT_TopImage_Timer_Categories({
     insideRow: true,
   });
 
-  //   const timerElement = timer
-  //     ? Timer({
-  //         title: queries['Timer'][0] ?? 'timer title not found',
-  //         subtitle: queries['Timer'][1] ?? 'timer subtitle not found',
-  //         href: links['Timer'],
-  //         gif: timer.gif[country],
-  //         image: getImageBySlug(timer.image),
-  //         background: timer.background,
-  //         color: timer.color,
-  //         align: timer.align,
-  //         cta: getPhrase('Shop now'),
-  //       })
-  //     : '';
-
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => ({
       ...category,
       products: await Promise.all(category.products.map((p) => getProductById(p.id, p.src))),
     }))
   );
+
+  const TimerElement =
+    Inside && Inside.type === 'timer'
+      ? `${Timer({
+          title: queries.timer[0] ?? 'Translation not found',
+          subtitle: queries.timer[1] ?? 'Translation not found',
+          href: links.Timer_href,
+          src: timer.image[country],
+          color: Inside.color,
+          background: Inside.backgroundColor,
+          freebies: timer.freebies,
+          ctaText: shopNow,
+        })}
+      
+      ${Space({ className: 'newsletterBottom60px' })}`
+      : '';
 
   return `
 		${header}
@@ -156,7 +163,7 @@ export async function TIT_TopImage_Timer_Categories({
             : Space({})
         }
 
-
+        ${TimerElement}
 
         ${categoriesWithProducts
           .map((category, index) => {

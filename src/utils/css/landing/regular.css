@@ -261,6 +261,12 @@ table {
   color: #000000;
   font-size: 20px;
 }
+
+#newsletter .newsletterProductTitleWithPaddingLeft {
+  font-size: 20px;
+  line-height: 1.2;
+  padding-left: 20px;
+}
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
   #newsletter .newsletterFooterCategoryLEFTBottom {
@@ -425,12 +431,19 @@ table {
   #newsletter .newsletterSubtitleTimer {
     font-size: 20px !important;
   }
+<<<<<<< HEAD
 
   #newsletter .threeProduct {
     padding-left: 5px;
     padding-right: 5px;
   }
 
+=======
+  #newsletter .newsletterProductTitleWithPaddingLeft {
+    font-size: 18px;
+    padding-left: 10px;
+  }
+>>>>>>> 6b7c9119353d57526d32635bb0b6a3858d52aef6
 }
 
 @media screen and (max-width: 570px) {

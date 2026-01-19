@@ -1,34 +1,44 @@
+import { DimasTranslateImage } from '@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage';
+
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::23.01.26 - Office trends 2026';
+const campaignTranslationsSheet = '2026::23.01.26 - Office trends';
 
 const tableQueries = [
   {
-    "tableRange": "15:16",
-    "name": "TopImageTitle"
+    tableRange: '17:28',
+    name: 'TopImageTitle',
   },
   {
-    "tableRange": "18",
-    "name": "intro"
+    tableRange: '20',
+    name: 'intro',
   },
   {
-    "tableRange": "19:22",
-    "name": "paragraphs"
+    tableRange: '19:22',
+    name: 'paragraphs',
   },
   {
-    "tableRange": "23:24",
-    "name": "condition"
-  }
+    tableRange: '30:31',
+    name: 'condition',
+  },
+  {
+    tableRange: '21:23',
+    name: 'categories',
+  },
+  {
+    tableRange: '24:26',
+    name: 'paragraphs',
+  },
 ];
 
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-01-23' }),
-  TopImageTitle_src: translateImage({ value: '20260123_01.png' }),
-  TopImage_src: getImageUrl('20260123_Pic.png', true),
+  TopImageTitle_src: DimasTranslateImage({ value: '20260123_01.png', folder: '20260123', placeholderPosition: '47' }),
+  TopImage_src: getImageUrl('20260123/20260123topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-01-23' }),
-  Banner_1: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
-  Banner_1_Image: translateImage({ value: '{yyyymmdd}b.png' }),
-  Banner_2: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
-  Banner_2_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-01-16' }),
+  Banner_1_Image: translateImage({ value: '20260116b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-01-15' }),
+  Banner_2_Image: translateImage({ value: '20260115b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -37,97 +47,186 @@ const TopImageTitle_data = {
   type: 'twoSameLines',
 };
 
-const timer = {
-  freebies: getImageUrl('YYYYMMDD_Free.png', true),
-  // ! REMEMBER TO REPLACE THOSE URLS
-  image: {
-    CHDE: 'https://gen.sendtric.com/countdown/3x5402a5a5',
-    CHFR: 'https://gen.sendtric.com/countdown/7d3zl0s986',
-    FR: 'https://gen.sendtric.com/countdown/12rdr6dtgo',
-    DE: 'https://gen.sendtric.com/countdown/sv2q3k1x3y',
-    UK: 'https://gen.sendtric.com/countdown/c4cghowbf1',
-    AT: 'https://gen.sendtric.com/countdown/ypa0wk4eup',
-    ES: 'https://gen.sendtric.com/countdown/sehb5k3z7z',
-    PL: 'https://gen.sendtric.com/countdown/zlnhbu660w',
-    NL: 'https://gen.sendtric.com/countdown/mr9bn0q4c8',
-    PT: 'https://gen.sendtric.com/countdown/61n8wy3y4m',
-    IT: 'https://gen.sendtric.com/countdown/lxloewzogf',
-    SE: 'https://gen.sendtric.com/countdown/y2imagqwpt',
-    HU: 'https://gen.sendtric.com/countdown/udnrsqd4o8',
-    DK: 'https://gen.sendtric.com/countdown/uvfzgmkwr6',
-    CZ: 'https://gen.sendtric.com/countdown/ajq5qcnl44',
-    FI: 'https://gen.sendtric.com/countdown/hgh6virvh8',
-    NO: 'https://gen.sendtric.com/countdown/nfx8ncvozu',
-    SK: 'https://gen.sendtric.com/countdown/x8yr4llgxx',
-    BENL: 'https://gen.sendtric.com/countdown/442t1ogqur',
-    BEFR: 'https://gen.sendtric.com/countdown/kgyur9di1m',
-    RO: 'https://gen.sendtric.com/countdown/ke5m9a4zrx',
-  },
-};
-
 const categories = [
-  // TODO: Add categories here
+  {
+    name: 'Character-driven workspaces',
+    background: '#FFE9CC',
+    color: '#000000',
+    src: getImageUrl('20260123/20260123Category10.png', true),
+    href: 'https://www.beliani.co.uk/trends/character-driven-workspaces/',
+    type: 'grid',
+    title: {
+      show: true,
+      align: 'left',
+      spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
+    },
+    paragraph: {
+      spaceBefore: 'newsletterBottom35px',
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paddingTop: 35,
+    products: [
+      {
+        id: '684547',
+        src: getImageUrl('20260123/20260123Category11.png', true),
+      },
+      {
+        id: '259090',
+        src: getImageUrl('20260123/20260123Category12.png', true),
+      },
+      {
+        id: '645357',
+        src: getImageUrl('20260123/20260123Category13.png', true),
+      },
+      {
+        id: '678250',
+        src: getImageUrl('20260123/20260123Category14.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Multizonal workspaces',
+    background: '#FFE9CC',
+    color: '#000000',
+    src: getImageUrl('20260123/20260123Category20.png', true),
+    href: 'https://www.beliani.co.uk/trends/multizonal-workspaces/',
+    type: 'grid',
+    title: {
+      show: true,
+      align: 'left',
+      spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
+    },
+    paragraph: {
+      spaceBefore: 'newsletterBottom35px',
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paddingTop: 35,
+    products: [
+      {
+        id: '445734',
+        src: getImageUrl('20260123/20260123Category21.png', true),
+      },
+      {
+        id: '689559',
+        src: getImageUrl('20260123/20260123Category22.png', true),
+      },
+      {
+        id: '689159',
+        src: getImageUrl('20260123/20260123Category23.png', true),
+      },
+      {
+        id: '684032',
+        src: getImageUrl('20260123/20260123Category24.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Organic brutalism',
+    background: '#FFE9CC',
+    color: '#000000',
+    src: getImageUrl('20260123/20260123Category30.png', true),
+    href: 'https://www.beliani.co.uk/trends/organic-brutalism/',
+    type: 'grid',
+    title: {
+      show: true,
+      align: 'left',
+      spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
+    },
+    paragraph: {
+      spaceBefore: 'newsletterBottom35px',
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paddingTop: 35,
+    products: [
+      {
+        id: '639214',
+        src: getImageUrl('20260123/20260123Category31.png', true),
+      },
+      {
+        id: '445191',
+        src: getImageUrl('20260123/20260123Category32.png', true),
+      },
+      {
+        id: '115409',
+        src: getImageUrl('20260123/20260123Category33.png', true),
+      },
+      {
+        id: '684338',
+        src: getImageUrl('20260123/20260123Category34.png', true),
+      },
+    ],
+  },
 ];
 
 export default new entities.Campaign({
-  startId: "39916",
-  name: "Office trends 2026",
-  date: "23.01.2026",
-  issueCardId: "436908",
-  lpId: "28269",
+  startId: '39916',
+  name: 'Office trends 2026',
+  date: '23.01.2026',
+  issueCardId: '436908',
+  lpId: '28269',
   alarm: {
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: false,
-  figmaUrl: "https://www.figma.com/design/HZnJsGK8chYNCiUNBoqmaK/2026.01.23---Newsletter---Office-trends?node-id=10001-4082&t=GCnqQsK41Kn1fMRm-1",
+  optimizeImg: true,
+  figmaUrl:
+    'https://www.figma.com/design/HZnJsGK8chYNCiUNBoqmaK/2026.01.23---Newsletter---Office-trends?node-id=10001-4082&t=GCnqQsK41Kn1fMRm-1',
   templates: [
     {
-      name: "Newsletter",
+      name: 'Newsletter',
       type: types.NEWSLETTER,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: "#FFE9CC",
-      color: "#000000",
+      background: '#FFE9CC',
+      color: '#000000',
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      timer: timer,
+      categories_line: 'black',
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
       intro: {
-        color: "#000000",
-        backgroundColor: "#FFE9CC",
-        alignment: "left",
-        type: "paragraph",
+        color: '#000000',
+        backgroundColor: '#FFE9CC',
+        alignment: 'left',
+        type: 'paragraph',
+        additionalSpace: 'newsletterBottom10px',
       },
       links: links,
       tableQueries: tableQueries,
     },
     {
-      name: "Landing",
+      name: 'Landing',
       type: types.LANDINGPAGE,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.LP,
-      background: "#FFE9CC",
-      color: "#000000",
+      background: '#FFE9CC',
+      color: '#000000',
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      timer: timer,
+      categories_line: 'black',
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
       intro: {
-        color: "#000000",
-        backgroundColor: "#FFE9CC",
-        alignment: "left",
-        type: "paragraph",
+        color: '#000000',
+        backgroundColor: '#FFE9CC',
+        alignment: 'left',
+        type: 'paragraph',
+        additionalSpace: 'newsletterBottom10px',
       },
       links: links,
       tableQueries: tableQueries,
     },
   ],
 });
+

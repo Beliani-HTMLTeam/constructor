@@ -15,7 +15,7 @@ import {
 // import translateImage from '@helpers/translateImage.js';
 // import { Freebies } from '@freebies.js';
 
-export const Category = isAllowToRender(
+export const Category = 
   ({
     ctaElement = { show: true, spaceAfterClass: 'newsletterBottom80px' },
     showPrices = true,
@@ -167,7 +167,7 @@ export const Category = isAllowToRender(
           )}
 
 
-					${ProductsRow({ align: 'center', products: [products[3], products[4], products[5]], showPrices: false })}
+					${ProductsRow({ align: 'center', products: [products[3], products[4], products[5]], showPrices: false, showName: false })}
 
 					
 
@@ -896,5 +896,4 @@ export const Category = isAllowToRender(
       default:
         break;
     }
-  }
-);
+  };

@@ -39,6 +39,7 @@ export function PeakFreebieNslt({
   under_intro_line,
   category_2_columns,
   full_img_width,
+  folder,
 }) {
   const codes = getCodes(queries);
   const selectCampaign = getState('selectedCampaign');
@@ -50,7 +51,7 @@ export function PeakFreebieNslt({
 
   categories = categories.map((category) => ({
     ...category,
-    src: { src: CampaignWrapper(category.src.src, '20260113') },
+    src: { src: CampaignWrapper(category.src.src, folder ?? '20260113') },
   }));
 
   // const categoriesSectionHTML = generateCategoriesSection(
@@ -252,7 +253,10 @@ export function PeakFreebieNslt({
               
               <tr>
                 <td style="background-color: 
-                ${freebies.options.background || background}; color: ${freebies.options?.color || '#000'};">
+                ${freebies.options.background || background}; color: ${
+                      freebies.options?.color || '#000'
+                    }; padding-left:  10px;
+                padding-right: 10px;">
                   ${FreebiesGenerator({
                     background,
                     freebies: freebies.items || [],
@@ -265,7 +269,10 @@ export function PeakFreebieNslt({
               </tr>
               <tr>
                 <td style="background-color: 
-                ${freebies.options.background || background}; color: ${freebies.options?.color || '#000'};">
+                ${freebies.options.background || background}; color: ${
+                      freebies.options?.color || '#000'
+                    }; padding-left:  10px;
+                padding-right: 10px;">
                   ${FreebiesGenerator({
                     background,
                     freebies: freebies.items2 || [],

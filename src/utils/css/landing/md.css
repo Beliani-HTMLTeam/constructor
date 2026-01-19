@@ -1,7 +1,12 @@
 #newsletter .newsletterBottom15px {
     padding-bottom: 15px;
   }
-
+  
+  .newsletterContainer60px {
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
   .newsletterLeft20px {
     padding-left: 20px !important;
     padding-bottom: 20px !important;
@@ -177,7 +182,7 @@
      }
      
      #newsletter .newsletterProductTitle {
-       font-size: 20px;
+      font-size: clamp(16px, 3vw, 20px);
        line-height: 1.20;
      }
      
@@ -388,10 +393,6 @@
        }
      
        #newsletter .newsletterProductTitleFreebie {
-         font-size: 18px;
-       }
-     
-       #newsletter .newsletterProductTitle {
          font-size: 18px;
        }
      

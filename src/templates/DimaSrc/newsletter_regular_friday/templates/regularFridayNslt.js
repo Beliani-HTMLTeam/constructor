@@ -132,6 +132,7 @@ const RegularFridayNslt = async ({
                 `
               : ''
           }
+              ${intro.additionalSpace ? Space({ insideTr: true, className: intro.additionalSpace }) : ''}
           `
       : '';
 
@@ -139,9 +140,9 @@ const RegularFridayNslt = async ({
     Inside && Inside.type === 'timer'
       ? Timer({
           title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
-          // title: 'Translation not found',
+          // title: 'Free scatter cushions set',
           subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
-          // subtitle: 'Free mirrors',
+          // subtitle: 'deal ends in:',
           href: links.Timer_href,
           src: timer.image[country],
           color: Inside.color,
@@ -250,7 +251,7 @@ const RegularFridayNslt = async ({
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
       ${TopImageTitleElement}
 
-      ${timer.position === 'insideTopImageTitle' ? TimerElement : ''}
+      ${timer && timer.position === 'insideTopImageTitle' ? TimerElement : ''}
 
       ${TopImageElement}
 
@@ -258,7 +259,7 @@ const RegularFridayNslt = async ({
 
       ${OfferPartElement}
 
-      ${timer.position === 'outsideTopImageTitle' ? TimerElement : ''}
+      ${timer && timer.position === 'outsideTopImageTitle' ? TimerElement : ''}
       
       ${CategoriesElement}
               
@@ -269,10 +270,12 @@ const RegularFridayNslt = async ({
               cta: queries['shopall'][0],
               textColor: shopCTA?.color || color,
               backgorund: shopCTA?.backgroundColor || background,
-              space: '35',
+              space: shopCTA?.space || '35',
             })
           : ''
       }
+
+      ${timer && timer.position === 'afterTilesCategories' ? TimerElement : ''}
     
     </table>
 
