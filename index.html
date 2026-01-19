@@ -15,22 +15,29 @@
   </head>
 
   <body>
+    <!--                                                  -->
+    <!--               OPEN HAMBURGER MENU                -->
+    <!--                                                  -->
     <div class="hamburger-menu">
       <img src="/icons/hamburger.svg" class="svg-icon" />
     </div>
 
+    <!-- SLIGHTLY DARKEN BACKGROUND OVERLAY FOR HAMBURGER -->
     <div class="overlay"></div>
 
     <div class="container">
-      <!--
-        panel: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-      -->
       <div id="panel">
+        <!--                                                  -->
+        <!--                CLOSE MENU BUTTON                 -->
+        <!--                                                  -->
         <div class="menu-close">
           <img src="/icons/close.svg" class="svg-icon" />
         </div>
+
         <div class="upper_navigation">
-          <!--<button id="header_translations">Header Translations</button>-->
+          <!--                                                  -->
+          <!--               CAMPAIGN CREATOR TOOL              -->
+          <!--                                                  -->
           <div id="action_buttons" class="group">
             <button id="new_campaign">
               <img src="/icons/new-campaign.svg" class="svg-icon" />
@@ -39,6 +46,9 @@
             </button>
           </div>
 
+          <!--                                                  -->
+          <!--               SELECTS FOR RENDERING              -->
+          <!--                                                  -->
           <div class="group">
             <div class="select-wrapper">
               <select class="select-select" id="campaigns">
@@ -72,19 +82,20 @@
             </button> -->
           </div>
 
+          <!--                                                  -->
+          <!--            ADD PRODUCTS/CLEAR STORAGE            -->
+          <!--                                                  -->
+          <!-- Object.keys(localStorage).map(k => (localStorage.getItem(k) ?? '').length * 2 / 1024 / 1024).reduce((a, b) => a + b);        -->
           <div id="products_management" class="group">
-            <button id="new_products" style="display: none">
+            <button id="new_products">
               <img src="/icons/add-products.svg" class="svg-icon" />
-              Add Products JSON
-            </button>
-
-            <button class="clearStorage">
-              <img src="/icons/clear-storage.svg" class="svg-icon" />
-
-              Clear storage
+              Manage Products
             </button>
           </div>
 
+          <!--                                                  -->
+          <!--             OPEN NSLT/LP/ISSUE/FIGMA             -->
+          <!--                                                  -->
           <div id="campaign_links" class="group">
             <button style="display: none" class="openCampaign external">
               Open Newsletter
@@ -108,6 +119,9 @@
             </button>
           </div>
 
+          <!--                                                  -->
+          <!--                  COPY TEMPLATE                   -->
+          <!--                                                  -->
           <button style="display: none" class="copyTemplate">
             <img src="/icons/copy-template.svg" class="svg-icon" />
 
@@ -115,6 +129,9 @@
           </button>
         </div>
 
+        <!--                                                  -->
+        <!--                    PURGE TOOL                    -->
+        <!--                                                  -->
         <div class="group">
           <div class="select-wrapper">
             <select class="select-select" id="purge">
@@ -158,6 +175,19 @@
             form injection: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
           -->
         </div>
+      </div>
+    </div>
+
+    <div id="productsModal" class="modal-backdrop" style="display: none">
+      <div class="modal-content products-modal-content">
+        <div class="modal-header">
+          <div>
+            <h2>Manage products</h2>
+            <p class="products-modal-subtitle"></p>
+          </div>
+        </div>
+
+        <div class="form-content products-modal-body"></div>
       </div>
     </div>
 

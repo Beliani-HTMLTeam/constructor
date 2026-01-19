@@ -6,96 +6,17 @@ import {
   purgeDynamicSpreadsheetData,
 } from '@/main/events.js';
 import { generateLpLinks } from '@/helpers/generateLpLinks.js';
-import { normalizeProducts } from '@/utils/normalizeProducts.js';
-import { isQuotaExceededError } from '@/helpers/isQuotaExceededError.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
+import { openManageProductsModal } from '@/main/ui/manageProducts.js';
 
 import { toast } from 'sonner';
-import { getState } from '../state/appState';
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
 
 export function setupProductsHandler(elements, setState, getState) {
   const { newProducts } = elements;
 
   newProducts?.addEventListener('click', () => {
-    const products = prompt('Provide products');
-    if (!products)
-      return toast.error('Incorrect input! Please provide products JSON from extension.');
-
-    let newProductsData;
-    try {
-      newProductsData = JSON.parse(products);
-    } catch (error) {
-      console.log(error);
-      return toast.error('Products parse error. Check console for more details.');
-    }
-
-    const selectedCampaign = getState('selectedCampaign');
-    const prev = localStorage.getItem('products');
-
-    try {
-      const prevProducts = prev ? JSON.parse(prev) : [];
-      const areProductsSet = prevProducts.find(
-        (item) => item.campaign_id === selectedCampaign.startId
-      );
-
-      const normalizedProducts = normalizeProducts(newProductsData);
-
-      // If products already exists for selected campaign
-      if (areProductsSet) {
-        const updatedProducts = prevProducts.map((item) => {
-          if (item.campaign_id === selectedCampaign.startId) {
-            return {
-              ...item,
-              products: normalizedProducts,
-            };
-          }
-          return item;
-        });
-
-        try {
-          localStorage.setItem('products', JSON.stringify(updatedProducts));
-          toast.success('Products successfully updated.');
-          window.location.reload();
-        } catch (error) {
-          handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
-        }
-
-        // products not set yet for selected campaign
-      } else {
-        try {
-          localStorage.setItem(
-            'products',
-            JSON.stringify([
-              ...prevProducts,
-              {
-                campaign_id: selectedCampaign.startId,
-                products: normalizedProducts,
-              },
-            ])
-          );
-          toast.success('Products successfully saved.');
-          window.location.reload();
-        } catch (error) {
-          handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error('Error during saving products. Check console for more details.');
-    }
-  });
-}
-
-export function setupClearStorageHandler(elements) {
-  const { clearStorage } = elements;
-
-  clearStorage?.addEventListener('click', () => {
-    if (confirm('All data will be removed from localstorage! Are you sure?')) {
-      localStorage.clear();
-
-      return toast.success('Storage has been cleared.');
-    }
+    openManageProductsModal({ campaigns: getState('campaigns') ?? [] });
   });
 }
 
@@ -269,36 +190,4 @@ export function setupNewCampaignHandler(elements, campaigns) {
       return true; // success — allow modal to close
     });
   });
-}
-
-// Helper function to handle storage quota errors
-function handleStorageQuotaError(error, prevProducts, selectedCampaign, normalizedProducts) {
-  const quotaExceededError = isQuotaExceededError(error);
-
-  if (!quotaExceededError) throw error;
-
-  const ids = prevProducts.map((item) => item.campaign_id);
-  const deleteCampaignId = prompt(
-    'Memory exceeded, please enter startId to delete: ' + ids.join(',')
-  );
-
-  if (!deleteCampaignId) return;
-
-  if (!ids.includes(deleteCampaignId)) return toast.error('Invalid campaign ID!');
-
-  const prevCampaigns = prevProducts.filter((item) => item.campaign_id !== deleteCampaignId);
-
-  localStorage.setItem(
-    'products',
-    JSON.stringify([
-      ...prevCampaigns,
-      {
-        campaign_id: selectedCampaign.startId,
-        products: normalizedProducts,
-      },
-    ])
-  );
-
-  toast.success('Products successfully saved.');
-  window.location.reload();
 }

@@ -70,6 +70,7 @@ const Timer = ({
           ${
             isCtaVisible
               ? CTA({
+                  color: color,
                   href: href,
                   text: ctaText,
                   align: 'center',

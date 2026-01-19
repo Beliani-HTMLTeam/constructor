@@ -19,7 +19,6 @@ export function getDOMElements() {
     selectTemplatesWrapper: selectTemplates?.parentElement,
 
     newProducts: document.querySelector('#new_products'),
-    clearStorage: document.querySelector('.clearStorage'),
     newCampaign: document.querySelector('#new_campaign'),
     copyTemplate: document.querySelector('.copyTemplate'),
     openCampaign: document.querySelector('.openCampaign'),

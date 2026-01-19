@@ -25,29 +25,40 @@ export function normalizeProducts(products) {
   const normalized = [];
   const master_products = {};
 
+  // tldr; we need to normalize usernames to ensure consistent matching of sellers
+
+  // after adding compression we started persisting the raw pasted JSON (to compress it),
+  // so usernames now reach this step unmodified.
+  // Normalizing (e.g., stripping trailing dots/whitespace) keeps seller
+  // matching stable ("Beliani." vs "Beliani") and prevents dropping products.
+  const normalizeUsername = (value) => String(value ?? '').replaceAll('.', '').trim();
+
   for (const element of products) {
     if (!('saved_params' in element)) continue;
-    if (element.saved_params.username === 'Beliani') {
-      master_products[element.id] = element;
+    const username = normalizeUsername(element.saved_params.username);
+    if (username === 'Beliani') {
+      master_products[String(element.id)] = element;
     }
   }
 
   for (const element of products) {
     if (!('saved_params' in element)) continue;
 
-    if (element.saved_params.username === 'Beliani') {
-      normalized.push(new Product({ ...element, hrefs: element.ShopSAAlias }));
+    const username = normalizeUsername(element.saved_params.username);
+    const saved_params = { ...element.saved_params, username };
+
+    if (username === 'Beliani') {
+      normalized.push(new Product({ ...element, saved_params, hrefs: element.ShopSAAlias }));
     }
 
-    if (allowedSellers.includes(element.saved_params.username)) {
-      if (!(element.saved_params.master_sa in master_products)) continue;
+    if (allowedSellers.includes(username)) {
+      const masterKey = String(element.saved_params.master_sa ?? '');
+      const masterAlias = masterKey ? master_products[masterKey]?.ShopSAAlias : undefined;
+      const hrefs = masterAlias ?? element.ShopSAAlias;
+      
+      if (!hrefs) continue;
 
-      normalized.push(
-        new Product({
-          ...element,
-          hrefs: master_products[element.saved_params.master_sa]['ShopSAAlias'],
-        })
-      );
+      normalized.push(new Product({ ...element, saved_params, hrefs }));
     }
   }
 
