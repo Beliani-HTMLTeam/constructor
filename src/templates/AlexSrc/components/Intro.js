@@ -24,6 +24,8 @@ export const Intro = isAllowToRender(
       <span class="newsletterParagraph" style="color: ${color}">
         ${data ? data[0] : paragraph}
       </span>
+
+      ${selectCampaign.date === '26.01.2026' ? Space({ className: 'newsletterBottom35px' }) : ''}
     `,
 
       "title&paragraph": `

@@ -189,7 +189,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl:
     'https://www.figma.com/design/YMY0WzoVhsnaTSbstEcOMP/2025.12.29---Newsletter---Free-clock--Copy-?node-id=11001-3902&p=f&t=WX34wrPCRczY8E6A-0',
