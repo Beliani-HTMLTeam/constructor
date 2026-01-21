@@ -1,10 +1,4 @@
-import { addParams, getQueryLink } from "@/helpers/getQueryLink";
-import { getTrackingUrl } from "@/utils/getTrackingUrl";
-
-const wrapFooterUrl = (url) => {
-  const fullUrl = new URL(url);
-  return getQueryLink(fullUrl);
-}
+import { getTrackingUrl, wrapFooterUrl } from "@/utils/getTrackingUrl";
 
 const assembly = ({ getFooter, country }) => ({
   src: ['AT', 'PL', 'FR', 'UK'].includes(country)
