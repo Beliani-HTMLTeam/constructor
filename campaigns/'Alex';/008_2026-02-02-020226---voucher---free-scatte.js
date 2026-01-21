@@ -181,7 +181,7 @@ const categories = [
   },
 ];
 
-const freebies = {
+const freebies = (type) => ({
   options: {
     color: '#000',
     background: '#FFCCB7',
@@ -219,17 +219,19 @@ const freebies = {
         {
           id: '307734',
           src: getImageUrl('20260202Freebie4.png', true),
-          style: 'padding-right: 6px; padding-left: 6px;',
+          style:
+            type === 'nslt' ? 'padding-right: 6px; padding-left: 60px;' : 'padding-right: 6px; padding-left: 70px;',
         },
         {
           id: '307537',
           src: getImageUrl('20260202Freebie5.png', true),
-          style: 'padding-right: 6px; padding-left: 6px;',
+          style:
+            type === 'nslt' ? 'padding-right: 60px; padding-left: 6px;' : 'padding-right: 70px; padding-left: 6px;',
         },
       ],
     },
   ],
-};
+});
 
 export default new entities.Campaign({
   startId: '40396',
@@ -241,7 +243,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: true,
+  optimizeImg: false,
   figmaUrl:
     'https://www.figma.com/design/4wuhIy6XZS5viPVGkmmQxW/2026.02.02---Newsletter---Free-scatter-cushion-set--Copy-?node-id=12001-4025&p=f&t=eEC0TdCQFLZAGgc2-0',
   templates: [
@@ -265,7 +267,7 @@ export default new entities.Campaign({
         color: '#000',
         background: '#FFCCB7',
       },
-      freebies: freebies,
+      freebies: freebies('nslt'),
       // timer: timer,
       full_img_width: false,
       white_line: false,
@@ -292,7 +294,7 @@ export default new entities.Campaign({
         color: '#000',
         background: '#FFCCB7',
       },
-      freebies: freebies,
+      freebies: freebies('lp'),
       // timer: timer,
       full_img_width: false,
       white_line: false,
