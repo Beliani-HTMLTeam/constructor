@@ -1,3 +1,4 @@
+import { getState } from '@/main/state/appState';
 import { GetCode } from '../../getCode';
 import { Paragraph } from '../../Paragraph';
 import { Space } from '../../Space';
@@ -13,8 +14,10 @@ const NewsletterOfferPart = ({
   href,
   type,
   backgroundColor,
+  germanSeparatingLine = false
 }) => {
-  console.log('data in code', queries);
+  const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
+
   return `
       ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
     <tr>
@@ -29,6 +32,7 @@ const NewsletterOfferPart = ({
       ${Paragraph({ text: data ? data[1] : paragraph1, align: 'center' })}
       </td>
     </tr>
+    ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
     <tr>
       <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}
@@ -70,7 +74,10 @@ const LandingOfferPart = ({
   href,
   type,
   backgroundColor,
+  germanSeparatingLine = false
 }) => {
+  const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
+
   return `
     <tr>
     <td >
@@ -93,6 +100,7 @@ const LandingOfferPart = ({
      ${Paragraph({ text: data ? data[1] : paragraph2, align: 'center' })}
     </td>
   </tr>
+  ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
   <tr>
     <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}
