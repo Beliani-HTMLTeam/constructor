@@ -106,6 +106,7 @@ const RegularFridayNslt = async ({
             'Spend min. €300 on your purchase and we will give you a €100 cashback to use in your next order. Insert a code at the check out to receive a voucher with cashback.',
           paragraph3: 'This is a time limited offer. Valid until 04/01/2026',
           paragraphAlign: OfferPart.alignment,
+          germanSeparatingLine: OfferPart.germanSeparatingLine,
         })
       : '';
 

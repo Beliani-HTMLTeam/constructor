@@ -14,6 +14,7 @@ export function OfferPartCode({
   href,
   type,
   backgroundColor,
+  germanSeparatingLine
 }) {
   console.log('href:', href);
   const newsletter = NewsletterOfferPart({
@@ -27,6 +28,7 @@ export function OfferPartCode({
     href,
     type,
     backgroundColor,
+    germanSeparatingLine
   });
   const landing = LandingOfferPart({
     color,
@@ -39,6 +41,7 @@ export function OfferPartCode({
     href,
     type,
     backgroundColor,
+    germanSeparatingLine
   });
   return `
       <tr>
