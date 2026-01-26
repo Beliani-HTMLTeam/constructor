@@ -25,7 +25,7 @@ const tableQueries = [
 ];
 
 const links = {
-  code_href: translateLink({ value: 'content/lp26-02-06' }),
+  code_href: translateLink({ value: 'content/lp26-02-13' }),
   TopImageTitle_href: translateLink({ value: 'content/lp26-02-13' }),
   TopImageTitle_src: DimasTranslateImage({ value: '20260213_01.png', folder: '20260213', placeholderPosition: '47' }),
   TopImage_src: getImageUrl('20260213/20260213topgif.gif', true),
@@ -39,9 +39,10 @@ const links = {
 };
 
 const TopImageTitle_data = {
-  color: '#000000',
+  color: '#750000',
   backgroundColor: '#FFE6DB',
   type: 'standardBold',
+  className: 'newsletterBottom10px',
 };
 
 const timer = {
