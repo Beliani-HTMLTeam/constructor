@@ -2,7 +2,7 @@ import { includesKeywords } from '../utils/basic.js';
 import { Space } from './Space.js';
 import { templates as TopImageTitleTemplates } from './utils/topImageTitle/templates.js';
 
-const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) => {
+const TopImageTitle = ({ href, src, title1, title2, color, type, renderType, className }) => {
   const templates = TopImageTitleTemplates({ color, title1, title2 });
 
   if (renderType === 'landing') {
@@ -16,7 +16,7 @@ const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) =
         </td>
       </tr>
 
-      ${Space({ insideTr: true })}
+      ${className || className === '' ? Space({ insideTr: true, className }) : Space({ insideTr: true })}
     `;
   }
 

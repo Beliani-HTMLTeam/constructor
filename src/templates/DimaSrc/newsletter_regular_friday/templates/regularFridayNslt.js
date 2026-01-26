@@ -73,6 +73,7 @@ const RegularFridayNslt = async ({
           background: TopImageTitle_data.background,
           type: TopImageTitle_data.type,
           renderType: type,
+          className: TopImageTitle_data.className,
         })
       : '';
 
