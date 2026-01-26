@@ -1,14 +1,12 @@
 import { Footer as FooterComponent } from '@/components/footer.js';
+import { getTrackingUrl, wrapFooterUrl } from "@/utils/getTrackingUrl";
 
 const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id }) => {
-
   return FooterComponent(
     {
       id,
       assembly: {
-        src: ['AT', 'PL', 'FR', 'UK'].includes(country)
-          ? getFooter('Delivery src')
-          : getFooter('Asembly src'),
+        src: ['AT', 'PL', 'FR', 'UK'].includes(country) ? getFooter('Delivery src') : getFooter('Asembly src'),
         href: getFooter('Asembly href'),
         exclude: ['CHIT'].includes(country),
       },
@@ -18,47 +16,46 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
         href: getFooter('Job href'),
         exclude: !['PL'].includes(country),
       },
-      
       thousandsMore: {
         title: getFooter('Title'),
         firstCategory: {
           src: getFooter('Category src 1'),
-          href: getFooter("Category href 1"),
+          href: wrapFooterUrl(getFooter('Category href 1')),
           name: getCategoryTitle('Sofas'),
         },
         secondCategory: {
           src: getFooter('Category src 2'),
-          href: getFooter("Category href 2"),
+          href: wrapFooterUrl(getFooter('Category href 2')),
           name: getCategoryTitle('Beds'),
         },
         thirdCategory: {
           src: getFooter('Category src 3'),
-          href: getFooter("Category href 3"),
+          href: wrapFooterUrl(getFooter('Category href 3')),
           name: getCategoryTitle('Coffee Tables'),
         },
         foutrthCategory: {
           src: getFooter('Category src 4'),
-          href: getFooter("Category href 4"),
+          href: wrapFooterUrl(getFooter('Category href 4')),
           name: getCategoryTitle('Chairs'),
         },
         fifthCategory: {
           src: getFooter('Category src 5'),
-          href: getFooter("Category href 5"),
+          href: wrapFooterUrl(getFooter('Category href 5')),
           name: getCategoryTitle('Armchairs'),
         },
         sixthCategory: {
           src: getFooter('Category src 6'),
-          href: getFooter("Category href 6"),
+          href: wrapFooterUrl(getFooter('Category href 6')),
           name: getCategoryTitle('Storage'),
         },
         seventhCategory: {
           src: getFooter('Category src 7'),
-          href: getFooter("Category href 7"),
+          href: wrapFooterUrl(getFooter('Category href 7')),
           name: getCategoryTitle('Lighting'),
         },
         eigthCategory: {
           src: getFooter('Category src 8'),
-          href: getFooter("Category href 8"),
+          href: wrapFooterUrl(getFooter('Category href 8')),
           name: getCategoryTitle('Rugs'),
         },
       },

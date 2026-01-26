@@ -13,7 +13,6 @@ import {
 
 import {
   setupProductsHandler,
-  setupClearStorageHandler,
   setupCopyTemplateHandler,
   setupOpenCampaignHandler,
   setupOpenIssueHandler,
@@ -30,6 +29,7 @@ export function initApp({ campaigns, shops, config }) {
   const domElements = getDOMElements();
 
   setState('config', config);
+  setState('campaigns', campaigns);
   domElements.selectCampaigns.append(...initCampaigns(campaigns, config));
 
   // Setup all event listeners
@@ -54,7 +54,6 @@ function setupEventListeners(elements, campaigns, shops, jsConfetti) {
 
   // Setup button handlers
   setupProductsHandler(elements, setState, getState);
-  setupClearStorageHandler(elements);
   setupNewCampaignHandler(elements, campaigns);
   setupCopyTemplateHandler(elements, getState, jsConfetti);
   setupOpenCampaignHandler(elements, getState);

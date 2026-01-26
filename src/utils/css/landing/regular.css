@@ -113,6 +113,15 @@ table {
 #newsletter .newsletterBottom10px {
   padding-bottom: 10px;
 }
+
+#newsletter .newsletterBottom15px {
+  padding-bottom: 15px;
+}
+
+#newsletter .newsletterBottom45px {
+  padding-bottom: 45px;
+}
+
 #newsletter .newsletterBottom20px {
   padding-bottom: 20px;
 }
@@ -412,6 +421,14 @@ table {
 
   #newsletter .newsletterRight10px {
     padding-right: 5px;
+  }
+  
+  #newsletter .newsletterBottom15px {
+    padding-bottom: 10px;
+  }
+
+  #newsletter .newsletterBottom45px {
+    padding-bottom: 30px;
   }
 
   #newsletter .newsletterBottom20px {

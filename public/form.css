@@ -263,6 +263,245 @@ textarea {
   padding: 8px 12px;
   height: 134px;
 }
+
+/* Manage products modal */
+.products-modal-content {
+  width: 70vw;
+  height: 80vh;
+}
+
+.products-modal-body {
+  gap: 16px;
+}
+
+.products-modal-subtitle {
+  margin: 6px 0 0;
+}
+
+.products-modal-subtitle-warn {
+  color: #b00020;
+  font-weight: 600;
+}
+
+.products-modal-toolbar {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.products-modal-toolbar-left {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.products-modal-toolbar-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.products-modal-toolbar .cancel-btn,
+.products-modal-toolbar .submit-btn,
+.products-modal-toolbar .products-modal-select {
+  height: 40px;
+}
+
+.products-modal-sort {
+  width: auto !important;
+  height: 40px;
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.products-modal-sort {
+  padding-right: 34px;
+}
+
+@media (max-width: 720px) {
+  .products-modal-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .products-modal-sort {
+    max-width: none;
+    flex: 1 1 100%;
+  }
+
+  .products-modal-toolbar-left {
+    flex-wrap: wrap;
+  }
+}
+
+.products-modal-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.products-modal-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid rgba(143, 143, 143, 0.35);
+  border-radius: 8px;
+}
+
+.products-modal-row-missing {
+  border-color: rgba(176, 0, 32, 0.6);
+  background: rgba(176, 0, 32, 0.06);
+}
+
+.products-modal-row-missing .products-modal-summary {
+  color: #b00020;
+  font-weight: 600;
+}
+
+.products-modal-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 auto;
+}
+
+.products-modal-summary-main {
+  font-size: 13px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.products-modal-summary-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.products-modal-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.04);
+  font-size: 12px;
+  color: #222;
+}
+
+.products-modal-chip-mb {
+  font-weight: 700;
+}
+
+.products-modal-chip-secondary {
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.products-modal-row-missing .products-modal-chip {
+  border-color: rgba(176, 0, 32, 0.35);
+  background: rgba(176, 0, 32, 0.08);
+  color: #b00020;
+}
+
+.products-modal-existing-warning {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #b00020;
+  font-weight: 600;
+}
+
+.products-modal-toggle-row {
+  flex-direction: row !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 0;
+}
+
+.products-modal-toggle-label {
+  font-size: 12px;
+  color: #222;
+  user-select: none;
+}
+
+.products-modal-actions {
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.products-modal-empty {
+  padding: 12px;
+  color: #444;
+}
+
+.products-modal-danger {
+  border-color: #b00020;
+  color: #b00020;
+}
+
+.products-modal-editor-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.products-modal-h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.products-modal-campaign-row {
+  padding: 0;
+}
+
+.products-modal-select {
+  width: 100%;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.products-modal-info {
+  padding: 8px 12px;
+  border: 1px dashed rgba(143, 143, 143, 0.7);
+  border-radius: 4px;
+  color: #222;
+  min-height: 34px;
+}
+
+.products-modal-missing {
+  color: #b00020;
+  font-weight: 600;
+}
+
+.products-modal-textarea {
+  height: 44vh;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+}
+
+.products-modal-sizehint {
+  font-size: 12px;
+  color: #555;
+  margin-top: 6px;
+}
+
 .json-invalid {
   box-shadow: 4px 4px 0px red;
 }

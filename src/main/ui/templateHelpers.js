@@ -3,7 +3,7 @@ import { showElements, hideElements } from '@/utils/domUtils.js';
 import { toast } from 'sonner';
 
 export function createSetSelectedTemplate(elements, setState, getState) {
-  const { newProducts, openCampaign } = elements;
+  const { openCampaign } = elements;
 
   return function setSelectedTemplate(ev) {
     const selectedTemplates = getState('selectedTemplates');
@@ -12,9 +12,6 @@ export function createSetSelectedTemplate(elements, setState, getState) {
     );
 
     if (!selectedTemplate) return toast.error(`Template ${ev.target.value} not found.`);
-
-    // Show/hide elements based on template type
-    showElements(newProducts);
 
     if (selectedTemplate.type === 'banner') {
       hideElements(openCampaign);

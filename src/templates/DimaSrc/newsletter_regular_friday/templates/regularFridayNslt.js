@@ -118,6 +118,7 @@ const RegularFridayNslt = async ({
             text: queries.intro || 'Translation not found',
             paragraphAlign: intro.alignment,
             color: intro.color,
+            spaceBottom: intro.spaceBottom || 'newsletterBottom35px'
           })}
           ${
             intro.cta

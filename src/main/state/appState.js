@@ -10,6 +10,7 @@ const state = {
   selectedCampaign: {},
   selectedTemplates: [],
   shop: null,
+  campaigns: [],
 };
 
 export function setState(key, value) {
