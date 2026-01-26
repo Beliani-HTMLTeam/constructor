@@ -9,6 +9,7 @@ import { root } from '@/app.js';
 import { getState, setState } from '@/main/state/appState';
 
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
+import { inlineCss } from '@/helpers/inlineCss.js';
 
 import { toast } from 'sonner';
 import { decompress } from 'compress-json';
@@ -218,18 +219,19 @@ export async function renderTemplate(getState, setState) {
       : withStylesOrNo;
 
     const finalHtml = optimizeHtmlImages(wrappedHtml, getState);
+    const outputHtml = templateToRender.type === 'landing' ? finalHtml : inlineCss(finalHtml);
 
-    setState('html', finalHtml);
+    setState('html', outputHtml);
 
-    if (finalHtml.includes('undefined')) {
+    if (outputHtml.includes('undefined')) {
       if (confirm('Do you want to render template with undefined value?')) {
-        root.innerHTML = finalHtml;
+        root.innerHTML = outputHtml;
         return;
       } else {
         toast.error('Rendering cancelled. Check campaign file, template or products list for mistakes!');
       }
     } else {
-      root.innerHTML = finalHtml;
+      root.innerHTML = outputHtml;
     }
   } catch (error) {
     console.log(error);

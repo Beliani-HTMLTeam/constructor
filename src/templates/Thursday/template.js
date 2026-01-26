@@ -174,7 +174,7 @@ const Thursday = async ({
   return `
     ${HeaderElement}
 
-    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
+    <table cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
       ${TopImageTitleElement}
 
       ${TopImageElement}

@@ -32,12 +32,12 @@ export function Header(sections, options) {
     topImage: {
       [types.NEWSLETTER]: {
         value: (topImage) => `<table align="center" cellspacing="0" cellpadding="0" border="0"
-                    style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
+              style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; width: 100%; max-width: 650px;">
                     <tbody>
                         <tr>
                             <th>
                                 <a href="${topImage.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}">
-                                    <img src="${getImageUrl(topImage.src, true)}" border="0" alt="Beliani" style="display:block; max-width: 100%;" />
+                      <img src="${getImageUrl(topImage.src, true)}" border="0" alt="Beliani" width="650" style="display:block; width: 100%; height: auto; border: 0;" />
                                 </a>
                             </th>
                         </tr>
@@ -55,21 +55,21 @@ export function Header(sections, options) {
           secondCategory,
           thirdCategory,
         }) => `<table align="center" cellspacing="0" cellpadding="0" border="0"
-                    style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
+              style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; width: 100%; max-width: 650px;">
                     <tbody>
                         <tr>
-                            <th><a
-                                    href="${firstCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
-                                        src="${getImageUrl(firstCategory.src, true)}" border="0"
-                                        alt="M&ouml;bel" style="display:block; max-width: 100%;" /></a></th>
-                            <th><a
-                                    href="${secondCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
-                                        src="${getImageUrl(secondCategory.src, true)}" border="0"
-                                        alt="Accessoires" style="display:block; max-width: 100%;" /></a></th>
-                            <th><a
-                                    href="${thirdCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
-                                        src="${getImageUrl(thirdCategory.src, true)}" border="0"
-                                        alt="Garten" style="display:block; max-width: 100%;" /></a></th>
+                  <th><a
+                      href="${firstCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
+                        src="${getImageUrl(firstCategory.src, true)}" border="0"
+                        alt="M&ouml;bel" style="display:block; width: 100%; height: auto; border: 0;" /></a></th>
+                  <th><a
+                      href="${secondCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
+                        src="${getImageUrl(secondCategory.src, true)}" border="0"
+                        alt="Accessoires" style="display:block; width: 100%; height: auto; border: 0;" /></a></th>
+                  <th><a
+                      href="${thirdCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
+                        src="${getImageUrl(thirdCategory.src, true)}" border="0"
+                        alt="Garten" style="display:block; width: 100%; height: auto; border: 0;" /></a></th>
                         </tr>
                     </tbody>
                 </table>`,
@@ -82,12 +82,12 @@ export function Header(sections, options) {
       [types.NEWSLETTER]: {
         value: (
           assembly
-        ) => `<table align="center" cellspacing="0" cellpadding="0" border="0"  style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
+        ) => `<table align="center" cellspacing="0" cellpadding="0" border="0" width="650" style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; width: 100%; max-width: 650px;">
                     <tbody>
                         <tr>
                             <td>
                                 <a href="${assembly.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}">
-                                    <img src="${assembly.src}" border="0" alt="" style="display:block; max-width: 100%;" />
+                      <img src="${assembly.src}" border="0" alt="" width="650" style="display:block; width: 100%; max-width: 650px; height: auto; border: 0;" />
                                 </a>
                             </td>
                         </tr>

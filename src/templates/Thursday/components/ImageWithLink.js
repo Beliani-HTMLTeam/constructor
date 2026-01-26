@@ -14,7 +14,7 @@ const ImageWithLink = ({
 
   let html = '';
 
-  html += `<a href="${href}"><img src="${src}" alt="${alt}" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
+  html += `<a href="${href}"><img src="${src}" alt="${alt}" style="display: block; vertical-align: ${imgVAlign}; width: 100%; max-width: 100%; height: auto; border: 0;" loading="lazy" width="100%"></a>`;
 
   if (insideTr) {
     html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}>${html}</td></tr>`;

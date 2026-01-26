@@ -9,7 +9,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ src, href }) => {
           return `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="max-width: 650px; width: 100%; background-color: #ffffff;">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; max-width: 650px; width: 100%; background-color: #ffffff;">
             <tbody>
                 <tr>
                     <td class="newsletterBottom35px" >
@@ -34,7 +34,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ src, href }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td class="newsletterBottom35px" >
@@ -66,7 +66,7 @@ export function Footer(sections, options, name) {
       [types.LANDINGPAGE]: {
         value: ({ href, src }) => {
           return `
-                <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+                <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;" id="newsletter">
                     <tbody>
                         <tr>
                             <td class="newsletterBottom35px" >
@@ -104,7 +104,7 @@ export function Footer(sections, options, name) {
           eigthCategory,
         }) => {
           return `
-        <table cellspacing="0" class="newsletterContainer" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
+        <table cellspacing="0" class="newsletterContainer" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;">
             <tbody>
                 <tr>
                     <td>
@@ -223,7 +223,7 @@ export function Footer(sections, options, name) {
           seventhCategory,
           eigthCategory,
         }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td>
@@ -319,7 +319,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ href, src }) => {
           return `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;">
             <tbody>
                     <tr>
                         <td>${Line()}</td>
@@ -339,7 +339,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ href, src }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td>${Line()}</td>
@@ -361,7 +361,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ title, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => {
           return `
-            <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
+            <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;">
             <tbody>
                 <tr>
                     <td>
@@ -484,7 +484,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ title, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td>
@@ -603,7 +603,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
           return `
-        <table cellspacing="0" class="newsletterContainer" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" >
+        <table cellspacing="0" class="newsletterContainer" cellpadding="0" border="0" align="center" style="margin: 0 auto; background-color: #ffffff;" >
             <tbody>
                 <tr>
                     <td>
@@ -676,7 +676,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ conditionsTitle, conditionsText }) => {
           return `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='max-width: 650px; width: 100%; background-color: #ffffff;'>
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='margin: 0 auto; max-width: 650px; width: 100%; background-color: #ffffff;'>
             <tbody>
                 <tr>
                     <td>
@@ -701,7 +701,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ conditionsTitle, conditionsText }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='max-width: 650px; width: 100%' id="newsletter">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='margin: 0 auto; max-width: 650px; width: 100%' id="newsletter">
             <tbody>
                 <tr>
                     <td>
@@ -741,12 +741,12 @@ export function Footer(sections, options, name) {
           vat,
         }) => {
           return `
-        <table cellspacing="0" cellpadding="0" border="0" align="center" id="newsletter">
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" id="newsletter" style="margin: 0 auto; max-width: 650px; width: 100%; background: #ececec;">
             <tbody>
                 <tr>
-                    <td align="center" class="newsletterFooterCompanyDetails">
-                        <span style="color: #000000;text-align: center; font-size:11px;">
-                            <b><font style="font-size: 11px;">${title}</font></b>
+                    <td align="center" class="newsletterFooterCompanyDetails" width="100%">
+                        <span style="color: #000000; text-align: center; font-size: 11px;">
+                            <b>${title}</b>
                             <br />${address}<br />${mobileNumber} ${emailAddress}
                             <a href="${mailTo}">${email}</a>
                             <br />${commercialRegister}<br />${vat}
