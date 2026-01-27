@@ -63,12 +63,12 @@ const RegularFridayNslt = async ({
       ? TopImageTitle({
           href: links.TopImageTitle_href,
           src: links.TopImageTitle_src,
-          title1: queries.TopImageTitle[0] || 'Translation not found',
-          title2: queries.TopImageTitle[1] || 'Translation not found',
+          // title1: queries.TopImageTitle[0] || 'Translation not found',
+          // title2: queries.TopImageTitle[1] || 'Translation not found',
 
           // placeholder
-          // title1: 'Living-room trends 2026',
-          // title2: 'Comfort and style for every home',
+          title1: 'Hurry!',
+          title2: 'Spring Sale ends Sunday',
           color: TopImageTitle_data.color,
           background: TopImageTitle_data.background,
           type: TopImageTitle_data.type,
@@ -115,7 +115,8 @@ const RegularFridayNslt = async ({
     intro && intro.type === 'paragraph'
       ? `
           ${Intro({
-            text: queries.intro || 'Translation not found',
+            text: intro.text || queries.intro || 'Translation not found',
+            // text: queries.intro || 'Translation not found',
             paragraphAlign: intro.alignment,
             color: intro.color,
             spaceBottom: intro.spaceBottom || 'newsletterBottom35px'

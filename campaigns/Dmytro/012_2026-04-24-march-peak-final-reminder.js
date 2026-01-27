@@ -19,6 +19,10 @@ const tableQueries = [
   {
     "tableRange": "36:38",
     "name": "condition"
+  },
+  {
+    "tableRange": "34",
+    "name": "shopall"
   }
 ];
 
@@ -31,12 +35,14 @@ const links = {
   Banner_1_Image: translateImage({ value: '20260417b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-04-26' }),
   Banner_2_Image: translateImage({ value: '20260416b.png' }),
+  Timer_href: translateLink({ value: 'content/lp26-04-24' }),
+  ShopCTA: translateLink({ value: ' ' }),
 };
 
 const TopImageTitle_data = {
   color: '#FFFFFF',
   backgroundColor: '#FF2F00',
-  type: 'twoSameLines',
+  type: 'twoSameMediumLines',
   className: 'newsletterBottom20px',
 };
 
@@ -195,6 +201,7 @@ export default new entities.Campaign({
         backgroundColor: "#FF2F00",
         alignment: "center",
         type: "paragraph",
+        text: 'This is a time-limited offer. Valid only until the 26th of April.'
       },
       links: links,
       tableQueries: tableQueries,
@@ -224,6 +231,7 @@ export default new entities.Campaign({
         backgroundColor: "#FF2F00",
         alignment: "center",
         type: "paragraph",
+        text: 'This is a time-limited offer. Valid only until the 26th of April.'
       },
       links: links,
       tableQueries: tableQueries,
