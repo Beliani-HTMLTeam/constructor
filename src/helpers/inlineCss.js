@@ -6,9 +6,9 @@ export function inlineCss(html) {
   try {
     return juice(html, {
 			// if we don't remove <style></style> then some paddings will be doubled, how? idk
-      removeStyleTags: true,
-			preserveMediaQueries: true,
-      preserveImportant: true,
+      removeStyleTags: false,
+			preserveMediaQueries: false,
+      preserveImportant: false,
     });
   } catch (error) {
     console.warn('inlineCss failed:', error);

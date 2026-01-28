@@ -341,7 +341,7 @@ img {
   }
 
   .newsletterAditionalTitle {
-    font-size: 25px;
+    font-size: 25px !important;
   }
 
   .newsletterAdditionalCategoryTitle {
@@ -354,7 +354,7 @@ img {
   }
 
   .br {
-    display: contents;
+    display: contents !important;
   }
 
   .newsletterFooterCategoryLEFTBottom {
@@ -380,7 +380,7 @@ img {
   }
 
   .newsletterBottom40px {
-    padding-bottom: 25px;
+    padding-bottom: 25px !important;
   }
 
   .newsletterProductContainer70px {
@@ -396,7 +396,7 @@ img {
   }
 
   .newsletterProductTitleContainer {
-    padding-top: 15px;
+    padding-top: 15px !important;
   }
 
   .newsletterFooterCategoryLEFT {
@@ -419,49 +419,49 @@ img {
   }
 
   .newsletterFooterTitle {
-    font-size: 18px;
+    font-size: 18px !important;
   }
 
   .newsletterProductTitleFreebie {
-    font-size: 18px;
+    font-size: 18px !important;
   }
 
   .newsletterProductTitle {
-    font-size: 18px;
+    font-size: 18px !important;
   }
 
   .newsletterProductLowPrice {
-    font-size: 16px;
+    font-size: 16px !important;
   }
 
   .newsletterProductHighPrice {
-    display: block;
+    display: block !important;
   }
 
   .newsletterTitle {
-    font-size: 25px;
+    font-size: 25px !important;
   }
 
   .newsletterTitleAditional {
-    font-size: 25px;
+    font-size: 25px !important;
   }
 
   .newsletterIntroTitle {
-    font-size: 28px;
+    font-size: 28px !important;
   }
 
   .newsletterTitleOfferPart {
-    font-size: 25px;
+    font-size: 25px !important;
   }
 
   .newsletterContainer {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 
   .newsletterContainerFree {
-    padding-left: 62px;
-    padding-right: 62px;
+    padding-left: 62px !important;
+    padding-right: 62px !important;
   }
 
   .newsletterFreebieContainer {
@@ -470,90 +470,90 @@ img {
   }
 
   .newsletterBottom25px {
-    padding-bottom: 20px;
+    padding-bottom: 20px !important;
   }
 
   .newsletterBottom35px {
-    padding-bottom: 20px;
+    padding-bottom: 20px !important;
   }
 
   .newsletterBottom60px {
-    padding-bottom: 40px;
+    padding-bottom: 40px !important;
   }
 
   .newsletterBottom70px {
-    padding-bottom: 50px;
+    padding-bottom: 50px !important;
   }
 
   .newsletterParagraph {
-    font-size: 16px;
+    font-size: 16px !important;
   }
 
   .timerParagraph {
-    font-size: 27px;
+    font-size: 27px !important;
   }
 
   .newsletterLeft10px {
-    padding-left: 5px;
+    padding-left: 5px !important;
   }
 
   .newsletterLeft20px {
-    padding-left: 10px;
+    padding-left: 10px !important;
   }
 
   .newsletterRight20px {
-    padding-right: 10px;
+    padding-right: 10px !important;
   }
 
   .newsletterRight10px {
-    padding-right: 5px;
+    padding-right: 5px !important;
   }
 
   .newsletterRight02px {
-    padding-right: 10px;
+    padding-right: 10px !important;
   }
 
   .newsletterLeft02px {
-    padding-left: 10px;
+    padding-left: 10px !important;
   }
 
   .newsletterRight5px {
-    padding-right: 2px;
+    padding-right: 2px !important;
   }
 
   .newsletterLeft5px {
-    padding-left: 2px;
+    padding-left: 2px !important;
   }
 
   .newsletterBottom15px {
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
   }
 
   .newsletterBottom45px {
-    padding-bottom: 30px;
+    padding-bottom: 30px !important;
   }
 
   .newsletterBottom20px {
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
   }
 
   .newsletterBottom80px {
-    padding-bottom: 50px;
+    padding-bottom: 50px !important;
   }
   .newsletterMarkTitle {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   .newsletterMarkTitle {
-    font-size: 18px;
+    font-size: 18px !important;
   }
 
   .newsletterMarkTitleSpace {
-    padding-bottom: 18px;
+    padding-bottom: 18px !important;
   }
 
   .threeProduct {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
   }
 
   .newsletterProductTitleWithPaddingLeft {
@@ -564,18 +564,18 @@ img {
 
 @media screen and (max-width: 570px) {
   .newsletterProductTitleFreebie {
-    font-size: 16px;
+    font-size: 16px !important;
   }
 }
 
 @media screen and (max-width: 460px) {
   .newsletterProductTitleFreebie {
-    font-size: 14px;
+    font-size: 14px !important;
   }
 }
 
 @media screen and (max-width: 370px) {
   .newsletterProductTitleFreebie {
-    font-size: 12px;
+    font-size: 12px !important;
   }
 }

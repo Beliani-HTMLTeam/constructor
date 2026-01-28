@@ -8,7 +8,7 @@ export const render = (products, showPrices, showNames, queries, insideContainer
     productsInnerHtml += `
     <tr>
       <td ${insideContainer ? 'class="newsletterContainer"' : ''}>
-        <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+        <table cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; max-width: 650px; width: 100%;" width="100%">`;
 
     for (let i = 0; i < products.length; i += cols) {
       productsInnerHtml += '<tr>';
