@@ -63,12 +63,12 @@ const RegularFridayNslt = async ({
       ? TopImageTitle({
           href: links.TopImageTitle_href,
           src: links.TopImageTitle_src,
-          // title1: queries.TopImageTitle[0] || 'Translation not found',
-          // title2: queries.TopImageTitle[1] || 'Translation not found',
+          title1: queries.TopImageTitle[0] || 'Translation not found',
+          title2: queries.TopImageTitle[1] || 'Translation not found',
 
           // placeholder
-          title1: 'Hurry!',
-          title2: 'Spring Sale ends Sunday',
+          // title1: 'Hurry!',
+          // title2: 'Spring Sale ends Sunday',
           color: TopImageTitle_data.color,
           background: TopImageTitle_data.background,
           type: TopImageTitle_data.type,
