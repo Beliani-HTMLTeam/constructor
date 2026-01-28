@@ -1,7 +1,7 @@
 import { DimasTranslateImage } from '@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage';
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::02.05.26 - Lighting trends 2026';
+const campaignTranslationsSheet = '2026::05.02.26 - Lighting trends 2026';
 
 const tableQueries = [
   {
@@ -21,12 +21,12 @@ const tableQueries = [
     name: 'paragraphs',
   },
   {
-    tableRange: '24:25',
+    tableRange: '27:28',
     name: 'condition',
   },
-  { tableRange: '11:12', name: 'timer', tableName: '2026::02.02.26 - Voucher - Free scatter cushion set' },
+  { tableRange: '15:16', name: 'timer', tableName: '2026::02.02.26 - Voucher - Free scatter cushion set' },
   {
-    tableRange: '24:25',
+    tableRange: '24:25', // third link is normal, without filter
     name: 'categoryLinks',
   },
 ];
@@ -38,7 +38,7 @@ const links = {
   TopImage_src: getImageUrl('20260205_Gif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-02-05' }),
 
-  Timer_href: translateLink({ value: 'content/lp26-01-12' }),
+  Timer_href: translateLink({ value: 'content/lp26-02-02' }),
 
   Banner_1: translateLink({ value: 'content/lp26-01-23' }),
   Banner_1_Image: translateImage({ value: '20260123b.png' }),
@@ -56,31 +56,31 @@ const TopImageTitle_data = {
 const timer = {
   position: 'outsideTopImageTitle',
   isWithTitles: true,
-  background: '#FF2F00',
+  background: '#FFCCB7',
   color: '#000000',
   freebies: getImageUrl('20260205_Free.png', true),
   image: {
-    CHDE: 'https://gen.sendtric.com/countdown/seezvzv40x',
-    CHFR: 'https://gen.sendtric.com/countdown/n78bmi9l84',
-    FR: 'https://gen.sendtric.com/countdown/yk1xwsgo90',
-    DE: 'https://gen.sendtric.com/countdown/z9han6d5nb',
-    UK: 'https://gen.sendtric.com/countdown/yzag1kfy79',
-    AT: 'https://gen.sendtric.com/countdown/kuyk4or70d',
-    ES: 'https://gen.sendtric.com/countdown/3f5s4hoe69',
-    PL: 'https://gen.sendtric.com/countdown/nsajgvvty3',
-    NL: 'https://gen.sendtric.com/countdown/yzk9vru1xw',
-    PT: 'https://gen.sendtric.com/countdown/un7vka1yn7',
-    IT: 'https://gen.sendtric.com/countdown/6axda0q1k7',
-    SE: 'https://gen.sendtric.com/countdown/c8b5hm7yma',
-    HU: 'https://gen.sendtric.com/countdown/h6dlebcyqs',
-    DK: 'https://gen.sendtric.com/countdown/jo12dt83op',
-    CZ: 'https://gen.sendtric.com/countdown/ojqijafwvq',
-    FI: 'https://gen.sendtric.com/countdown/froalrbcx8',
-    NO: 'https://gen.sendtric.com/countdown/jbgnxfwj5r',
-    SK: 'https://gen.sendtric.com/countdown/xk7rmeh6tg',
-    BENL: 'https://gen.sendtric.com/countdown/drfa8hn7c7',
-    BEFR: 'https://gen.sendtric.com/countdown/ty8den4ws6',
-    RO: 'https://gen.sendtric.com/countdown/mvohllvi78',
+    CHDE: 'https://gen.sendtric.com/countdown/jcwnwpmcnu',
+    CHFR: 'https://gen.sendtric.com/countdown/rmtjs56z6y',
+    FR: 'https://gen.sendtric.com/countdown/6y6mbxs6wr',
+    DE: 'https://gen.sendtric.com/countdown/opkxilnw1j',
+    UK: 'https://gen.sendtric.com/countdown/wv80nprsa0',
+    AT: 'https://gen.sendtric.com/countdown/ady0vgz84k',
+    ES: 'https://gen.sendtric.com/countdown/8raetqw4u5',
+    PL: 'https://gen.sendtric.com/countdown/mg4wjir68x',
+    NL: 'https://gen.sendtric.com/countdown/29razr9xqw',
+    PT: 'https://gen.sendtric.com/countdown/cptg4nv4e6',
+    IT: 'https://gen.sendtric.com/countdown/skb58t850f',
+    SE: 'https://gen.sendtric.com/countdown/1xcq2gr1xa',
+    HU: 'https://gen.sendtric.com/countdown/46rpjy9w4d',
+    DK: 'https://gen.sendtric.com/countdown/q444e33ez9',
+    CZ: 'https://gen.sendtric.com/countdown/xty48p4bxx',
+    FI: 'https://gen.sendtric.com/countdown/rc064aq3ie',
+    NO: 'https://gen.sendtric.com/countdown/n22zepbjkz',
+    SK: 'https://gen.sendtric.com/countdown/j6v26o6g3s',
+    BENL: 'https://gen.sendtric.com/countdown/iqv4xhe6kw',
+    BEFR: 'https://gen.sendtric.com/countdown/e0ama1gpvd',
+    RO: 'https://gen.sendtric.com/countdown/tmnoip6lx6',
   },
   isCtaVisible: true,
 };
@@ -109,22 +109,22 @@ const categories = [
     products: [
       // BOMU
       {
-        id: '445317',
+        id: '211042',
         src: getImageUrl('20260205_Pic01.png', true),
       },
       // KIBI
       {
-        id: '164094',
+        id: '	494511',
         src: getImageUrl('20260205_Pic02.png', true),
       },
       // ALERO
       {
-        id: '499349',
+        id: '666118',
         src: getImageUrl('20260205_Pic03.png', true),
       },
       // ARAPEY
       {
-        id: '351455',
+        id: '585644',
         src: getImageUrl('20260205_Pic04.png', true),
       },
     ],
@@ -152,22 +152,22 @@ const categories = [
     products: [
       // MORUGA
       {
-        id: '10775',
+        id: '374534',
         src: getImageUrl('20260205_Pic11.png', true),
       },
       // ANADYR
       {
-        id: '624200',
+        id: '686043',
         src: getImageUrl('20260205_Pic12.png', true),
       },
       // PAALA
       {
-        id: '411621',
+        id: '623724',
         src: getImageUrl('20260205_Pic13.png', true),
       },
       // SENGWA
       {
-        id: '627664',
+        id: '676800',
         src: getImageUrl('20260205_Pic14.png', true),
       },
     ],
@@ -183,7 +183,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
-      // source: 'queries',
+      source: 'queries',
     },
     paragraph: {
       spaceBefore: 'newsletterBottom35px',
@@ -194,22 +194,22 @@ const categories = [
     products: [
       // SAVEGRE
       {
-        id: '581973',
+        id: '689463',
         src: getImageUrl('20260205_Pic21.png', true),
       },
       // MINOTOS
       {
-        id: '524920',
+        id: '	655052',
         src: getImageUrl('20260205_Pic22.png', true),
       },
       // CHARGES
       {
-        id: '658530',
+        id: '685534',
         src: getImageUrl('20260205_Pic23.png', true),
       },
       // LUENHA
       {
-        id: '380815',
+        id: '676917',
         src: getImageUrl('20260205_Pic24.png', true),
       },
     ],
@@ -244,7 +244,7 @@ export default new entities.Campaign({
       categories_line: 'black',
       Inside: {
         color: '#000000',
-        backgroundColor: '#FD9000',
+        backgroundColor: '#FFCCB7',
         type: 'timer',
         image: '20260205_Free.png',
         isWithTitles: true,
@@ -274,7 +274,7 @@ export default new entities.Campaign({
       categories_line: 'black',
       Inside: {
         color: '#000000',
-        backgroundColor: '#FD9000',
+        backgroundColor: '#FFCCB7',
         type: 'timer',
         image: '20260205_Free.png',
         isWithTitles: true,
