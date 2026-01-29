@@ -49,7 +49,7 @@ const links = {
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#FCF7F6',
+  backgroundColor: '#FFF5F1',
   type: 'twoSameLines',
 };
 
