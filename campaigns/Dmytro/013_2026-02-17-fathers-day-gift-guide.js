@@ -123,7 +123,7 @@ const categories = [
       },
       // CHILLY
       {
-        id: '686272',
+        id: '592419',
         src: [getImageUrl('FathersDayGiftGuide/FFGG_Pic12.png', true)
         ]
       },
