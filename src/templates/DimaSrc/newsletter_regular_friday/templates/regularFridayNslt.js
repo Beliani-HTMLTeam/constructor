@@ -45,6 +45,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
+  console.log('wszystko', links, queries)
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -126,8 +127,9 @@ const RegularFridayNslt = async ({
               ? `
               ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
               ${CTA({
-                href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
-                text: shopNow,
+                href: intro.cta.hrefSource === 'queries' ? add_utm(queries.introCTAhref) : links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+                text: queries.introCTA || shopNowPhrase,
+                // text: 'Lean more about outdoor trends',
                 color: '#000000',
                 align: 'center',
                 insideTr: true,
