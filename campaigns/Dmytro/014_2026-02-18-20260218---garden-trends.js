@@ -43,10 +43,10 @@ const links = {
   TopImageTitle_src: DimasTranslateImage({ value: '20260218_01.png', folder: '20260218', placeholderPosition: '47' }),
   TopImage_src: getImageUrl('20260218/20260218topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-02-18' }),
-  Banner_1: translateLink({ value: 'content/lp26-02-11' }),
-  Banner_1_Image: translateImage({ value: '20260211b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-02-09' }),
-  Banner_2_Image: translateImage({ value: '20260209b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-02-12' }),
+  Banner_1_Image: translateImage({ value: '20260212b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-02-11' }),
+  Banner_2_Image: translateImage({ value: '20260211b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -142,7 +142,7 @@ const categories = [
   },
   {
     name: 'Warm tones',
-    background: '#FFE9CC',
+    background: '#FFEFD9',
     color: '#000000',
     src: getImageUrl('20260218/20260218Category30.png', true),
     hrefSource: 'queries',

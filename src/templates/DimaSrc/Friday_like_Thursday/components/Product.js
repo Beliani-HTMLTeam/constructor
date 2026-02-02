@@ -21,15 +21,15 @@ const Product = (product, showPrices, showName, color) => {
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       
       <tr>
-        <td style="color: ${color}" class="newsletterProductTitle">${product.name}</td>
+        <td style="color: ${color}" class="${product.type === 'full_width' ? 'newsletterProductTitleWithPaddingLeft' : 'newsletterProductTitle'}">${product.name}</td>
       </tr>
     `;
   }
-
+// newsletterProductTitleWithPaddingLeft
   if (showPrices && (product.lowPrice || product.highPrice)) {
     html += `
       <tr>
-        <td>
+        <td class="${product.type === 'full_width' ? 'newsletterContainer' : ''}">
           ${Prices({
             high: product.highPrice || '',
             low: product.lowPrice || '',
