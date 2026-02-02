@@ -288,7 +288,7 @@ const FathersDayWishes = async ({
         links['ShopCTA']
           ? shopNow({
               href: links['ShopCTA'],
-              cta: queries['shopall'][0],
+              cta: queries['shopall'] ? queries['shopall'][0] : getPhrase('Shop All Categories'),
               textColor: shopCTA?.color || color,
               backgorund: shopCTA?.backgroundColor || background,
               space: '80',
