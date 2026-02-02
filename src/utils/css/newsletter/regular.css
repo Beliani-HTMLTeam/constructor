@@ -540,6 +540,11 @@ img {
     padding-right: 5px;
   }
 
+  .threeProductContainer {
+    padding-left: 20px;
+    padding-right: 10px;
+  }
+
   .newsletterProductTitleWithPaddingLeft {
     font-size: 18px;
     padding-left: 10px;

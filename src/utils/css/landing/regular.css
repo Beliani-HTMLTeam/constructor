@@ -402,6 +402,16 @@ table {
     padding-left: 5px;
   }
 
+  #newsletter .threeProduct {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  #newsletter .threeProductContainer {
+    padding-left: 20px;
+    padding-right: 10px;
+  }
+
   #newsletter .newsletterRight20px {
     padding-right: 10px;
   }

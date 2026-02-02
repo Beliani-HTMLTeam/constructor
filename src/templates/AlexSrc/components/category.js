@@ -1148,7 +1148,7 @@ export const Category = isAllowToRender(
           </thead>
           <tbody>
             <tr>
-              <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
+              <td style="padding-top: 0px; padding-bottom: 0px; padding-left: 20px; padding-right: 10px;">
                 <table cellspacing="0" cellpadding="0" style="width: 100%; ">
                   <tr>
                     <td>
@@ -1162,26 +1162,26 @@ export const Category = isAllowToRender(
                               'left',
                               `color: ${color || '#000000'}`,
                               (showPriceAndName = false),
-                              padding = false
+                              (padding = false)
                             )}
                           </td>
                           <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
-                          <td style="padding-top: 0px; padding-right: 10px; padding-left: 10px; vertical-align: top; width: width: 33.333333333333336%;" class="threeProduct">
-                            ${Product(
-                              products[1],
-                              'left',
-                              `color: ${color || '#000000'}`,
-                              (showPriceAndName = false),
-                              padding = false
-                            )}
-                          </td>
+                          <td style="padding-top: 0px; padding-left: 10px; vertical-align: top; width: width: 33.333333333333336%;" class="threeProduct">
+                          ${Product(
+                            products[1],
+                            'left',
+                            `color: ${color || '#000000'}`,
+                            (showPriceAndName = false),
+                            (padding = false)
+                          )}
+                        </td>
                           <td style="padding-top: 0px; padding-right: 0px; padding-left: 10px; vertical-align: top; width: width: 33.333333333333336%;" class="threeProduct">
                           ${Product(
                             products[2],
                             'left',
                             `color: ${color || '#000000'}`,
                             (showPriceAndName = false),
-                            padding = false
+                            (padding = false)
                           )}
                         </td>
                         </tr>
@@ -1243,7 +1243,7 @@ export const Category = isAllowToRender(
       </thead>
       <tbody>
         <tr>
-          <td style="padding-top: 0px; padding-bottom: 0px;" class="newsletterContainer">
+          <td style="padding-top: 0px; padding-bottom: 0px; padding-left: 20px; padding-right: 10px;">
             <table cellspacing="0" cellpadding="0" style="width: 100%; ">
               <tr>
                 <td>
@@ -1257,26 +1257,26 @@ export const Category = isAllowToRender(
                           'left',
                           `color: ${color || '#000000'}`,
                           (showPriceAndName = false),
-                          padding = false
+                          (padding = false)
                         )}
                       </td>
                       <!-- vertical align top added for reason when product have only 1 price on mobile product grid will differ for another one-->
-                      <td style="padding-top: 0px; padding-right: 10px; padding-left: 10px; vertical-align: top; width: width: 33.333333333333336%;" class="threeProduct">
+                      <td style="padding-top: 0px; vertical-align: top; width: width: 33.333333333333336%;" class="threeProduct">
                         ${Product(
                           products[1],
                           'left',
                           `color: ${color || '#000000'}`,
                           (showPriceAndName = false),
-                          padding = false
+                          (padding = false)
                         )}
                       </td>
-                      <td style="padding-top: 0px; padding-right: 0px; padding-left: 10px; vertical-align: top; width: width: 33.333333333333336%;" class="threeProduct">
+                      <td style="padding-top: 0px; padding-left: 10px; vertical-align: top; width: width: 33.333333333333336%;" class="threeProduct">
                       ${Product(
                         products[2],
                         'left',
                         `color: ${color || '#000000'}`,
                         (showPriceAndName = false),
-                        padding = false
+                        (padding = false)
                       )}
                     </td>
                     </tr>

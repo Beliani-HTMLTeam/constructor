@@ -234,7 +234,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl: "https://www.figma.com/design/IscnTTeCrR6LyoyjN6kinf/2026.01.26--3nd-peak--Copy-?node-id=0-1&p=f&t=kGu9iqkEcWw6sUuX-0",
   templates: [
