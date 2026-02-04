@@ -176,7 +176,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl:
     'https://www.figma.com/design/QOTwO4xoNpTFyojlKpa7A8/2026.01.19--2nd-peak--Copy-?node-id=0-1&p=f&t=zsiHiJY9jHq9XYmP-0',

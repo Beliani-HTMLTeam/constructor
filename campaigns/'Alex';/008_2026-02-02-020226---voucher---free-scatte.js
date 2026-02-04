@@ -242,7 +242,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl:
     'https://www.figma.com/design/4wuhIy6XZS5viPVGkmmQxW/2026.02.02---Newsletter---Free-scatter-cushion-set--Copy-?node-id=12001-4025&p=f&t=eEC0TdCQFLZAGgc2-0',
