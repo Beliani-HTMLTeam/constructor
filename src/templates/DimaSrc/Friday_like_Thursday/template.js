@@ -76,13 +76,15 @@ const FridayLikeThursday = async ({
   const IntroElement =
     intro && intro.type === 'paragraph'
       ? `
-      ${Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })}
+      ${Intro({
+        text: queries.intro || 'Translation not found',
+        paragraphAlign: intro.alignment })}
       ${
         intro.cta
           ? `
           ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
           ${CTA({
-            href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+            href: links.Intro_cta_href ? getCategoryLink(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
             text: shopNow,
             color: '#000000',
             align: 'center',

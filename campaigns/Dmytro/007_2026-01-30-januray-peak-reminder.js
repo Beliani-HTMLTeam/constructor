@@ -61,7 +61,7 @@ const timer = {
     UK: 'https://gen.sendtric.com/countdown/fjpxn27xw0',
     AT: 'https://gen.sendtric.com/countdown/31vag60ozr',
     ES: 'https://gen.sendtric.com/countdown/78b3tndfn6',
-    PL: 'https://gen.sendtric.com/countdown/s4wc7ip6af',
+    PL: 'https://pictureserver.net/static/2026/20260130timerPL.png',
     NL: 'https://gen.sendtric.com/countdown/k89mznvlq0',
     PT: 'https://gen.sendtric.com/countdown/3tovm2twfk',
     IT: 'https://gen.sendtric.com/countdown/tgqgddb5se',
