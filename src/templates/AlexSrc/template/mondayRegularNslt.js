@@ -133,7 +133,7 @@ function generateCategoriesSection(
                       ? 'newsletterBottom35px'
                       : 'newsletterBottom80px',
                 })
-              : Space({className: 'newsletterBottom80px'})
+              : Space()
           }
         </td>
       </tr>
