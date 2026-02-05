@@ -289,7 +289,7 @@ export default new entities.Campaign({
       under_intro_line: false,
       links: links,
       tableQueries: tableQueries,
-      soon_banners: true,
+      soon_banners: false,
     },
   ],
 });
