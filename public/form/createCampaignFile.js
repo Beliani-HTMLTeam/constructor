@@ -317,6 +317,7 @@ export default new entities.Campaign({
   templateComponents.push('full_img_width: false');
   templateComponents.push('white_line: false');
   templateComponents.push('under_intro_line: false');
+  templateComponents.push('soon_banners: true');
 
   // Add Inside component if enabled
   if (insideEnabled) {

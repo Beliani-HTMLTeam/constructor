@@ -1,3 +1,5 @@
+import { mondayRegularNslt } from "@/templates/AlexSrc/template/mondayRegularNslt";
+
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::02.03.26 - March Peak Start';
 
@@ -35,8 +37,8 @@ const links = {
 };
 
 const TopImageTitle_data = {
-  color: '#000000',
-  backgroundColor: '#FFCCB7',
+  color: '#fff',
+  backgroundColor: '#FF2F00',
   type: 'sin',
 };
 
@@ -69,15 +71,171 @@ const TopImageTitle_data = {
 // };
 
 const categories = [
-  // TODO: Add categories here
+  {
+    name: 'Outdoor',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat1.png', true),
+    },
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/',
+  },
+  {
+    name: 'Sofas',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat2.png', true),
+    },
+    href: 'https://www.beliani.ch/sofas/',
+  },
+  {
+    name: 'Beds',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat3.png', true),
+    },
+    href: 'https://www.beliani.ch/beds/',
+  },
+  {
+    name: 'Armchairs',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat4.png', true),
+    },
+    href: 'https://www.beliani.ch/armchairs/',
+  },
+  {
+    name: 'Chairs',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat5.png', true),
+    },
+    href: 'https://www.beliani.ch/chairs/',
+  },
+  {
+    name: 'Tables',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat6.png', true),
+    },
+    href: 'https://www.beliani.ch/tables/',
+  },
+  {
+    name: 'Storage',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat7.png', true),
+    },
+    href: 'https://www.beliani.ch/storage/',
+  },
+  {
+    name: 'Textiles',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat8.png', true),
+    },
+    href: 'https://www.beliani.ch/textiles/',
+  },
+  {
+    name: 'Lightning',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat9.png', true),
+    },
+    href: 'https://www.beliani.ch/lighting/',
+  },
+  {
+    name: 'Bathtubs',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat10.png', true),
+    },
+    href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
+  },
+  {
+    name: 'Desks',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat11.png', true),
+    },
+    href: 'https://www.beliani.ch/office-furniture/desks-eng/',
+  },
+  {
+    name: 'Rugs',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat12.png', true),
+    },
+    href: 'https://www.beliani.ch/rugs/',
+  },
+  {
+    name: 'Accessories',
+    background: '#FF2F00',
+    color: '#fff',
+    src: {
+      type: 'relation',
+      relyOn: 'slug',
+      placeholderPosition: '38',
+      value: getImageUrl('20260302Cat13.png', true),
+    },
+    href: 'https://www.beliani.ch/home-accessories/accessories-decor/',
+  },
 ];
 
+
 export default new entities.Campaign({
-  startId: "00001",
+  startId: "40941",
   name: "02.03.26 - March Peak Start",
   date: "02.03.2026",
   issueCardId: "446471",
-  lpId: "0001",
+  lpId: "28767",
   alarm: {
     isActive: false,
   },
@@ -88,17 +246,23 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.Thursday, // User should change this
+      template: mondayRegularNslt, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: "#FFCCB7",
-      color: "#000000",
+      background: "#FF2F00",
+      color: "#fff",
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
+      intro: {
+        color: '#fff',
+        backgroundColor: '#FF2F00',
+        alignment: 'center',
+        type: '',
+      },
       // timer: timer,
       full_img_width: false,
-      white_line: false,
+      white_line: true,
       under_intro_line: false,
       links: links,
       tableQueries: tableQueries,
@@ -106,16 +270,22 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.Thursday, // User should change this
+      template: mondayRegularNslt, // User should change this
       css: types.CSS.LP,
-      background: "#FFCCB7",
-      color: "#000000",
+      background: "#FF2F00",
+      color: "#fff",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
+      intro: {
+        color: '#fff',
+        backgroundColor: '#FF2F00',
+        alignment: 'center',
+        type: '',
+      },
       // timer: timer,
       full_img_width: false,
-      white_line: false,
+      white_line: true,
       under_intro_line: false,
       links: links,
       tableQueries: tableQueries,
