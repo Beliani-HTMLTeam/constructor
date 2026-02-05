@@ -121,7 +121,7 @@ function generateCategoriesSection(
     // Dla pierwszego elementu typu "monday" (z produktami) użyj newsletterBottom60px
     // Dla pozostałych pierwszy element bez klasy
 
-    //padding under inro, where first category title
+    //!padding under inro, where first category title
     categoriesHTML += `
       <tr>
         <td style="background-color: ${category?.background || background};">
@@ -133,7 +133,7 @@ function generateCategoriesSection(
                       ? 'newsletterBottom35px'
                       : 'newsletterBottom80px',
                 })
-              : Space()
+              : Space({className: 'newsletterBottom80px'})
           }
         </td>
       </tr>

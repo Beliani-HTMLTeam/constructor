@@ -207,7 +207,7 @@ export const Category = isAllowToRender(
           </td>
         </tr>
         <tr>
-          <td class="newsletterBottom80px"></td>
+            ${selectCampaign.date === '23.03.2026' ? '<td class="newsletterBottom35px"></td>' : '<td class="newsletterBottom80px"></td>'}
         </tr>
         <tr>
           <td class="${className}">
