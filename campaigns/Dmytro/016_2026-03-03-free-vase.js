@@ -194,7 +194,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: false,
+  optimizeImg: true,
   figmaUrl: "https://www.figma.com/design/dKotuMIXM1RYuY5Gacbinr/2026.03.03---Newsletter---Free-vase?node-id=11001-3875&p=f&t=HavVMQjv01cwWPLa-0",
   templates: [
     {

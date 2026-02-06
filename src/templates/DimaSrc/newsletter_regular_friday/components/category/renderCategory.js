@@ -87,7 +87,8 @@ export const renderCategory = async (
           category.showName || true,
           queries,
           category.type,
-          id
+          id, 
+          category.insideContainer || false,
         )
       : await renderProducts(
           category.products,
@@ -95,7 +96,8 @@ export const renderCategory = async (
           category.showName || true,
           queries,
           category.type,
-          id
+          id,
+          category.insideContainer || false,
         )
     : '';
 
@@ -139,7 +141,7 @@ export const renderCategory = async (
   
    
       ${
-        id < categoriesLength - 1
+        category.line && !category.line?.show ? '' : (id < categoriesLength - 1
           ? `
           ${Line({
             insideTr: true,
@@ -147,7 +149,7 @@ export const renderCategory = async (
             insideContainer: true,
           })}
     `
-          : ''
+          : '')
       }
     `;
 };
