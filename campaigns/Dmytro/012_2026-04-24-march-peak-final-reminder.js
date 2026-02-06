@@ -17,7 +17,7 @@ const tableQueries = [
     "name": "paragraphs"
   },
   {
-    "tableRange": "36:38",
+    "tableRange": "37:38",
     "name": "condition"
   },
   {
@@ -41,7 +41,7 @@ const links = {
 
 const TopImageTitle_data = {
   color: '#FFFFFF',
-  background: '#750000',
+  backgroundColor: '#750000',
   type: 'twoSameMediumLines',
   className: 'newsletterBottom20px',
 };
