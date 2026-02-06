@@ -45,7 +45,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', links, queries)
+  console.log('wszystko',TopImageTitle_data)
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -71,7 +71,7 @@ const RegularFridayNslt = async ({
           // title1: 'Hurry!',
           // title2: 'Spring Sale ends Sunday',
           color: TopImageTitle_data.color,
-          background: TopImageTitle_data.background,
+          backgroundColor: TopImageTitle_data.backgroundColor,
           type: TopImageTitle_data.type,
           renderType: type,
           className: TopImageTitle_data.className,
@@ -157,6 +157,7 @@ const RegularFridayNslt = async ({
           isCtaVisible: timer.isCtaVisible,
           ctaText: shopNowPhrase,
           spaceAfter: Inside.spaceAfter,
+          spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
         })
       : '';
   const categoriesWithProducts = await Promise.all(
