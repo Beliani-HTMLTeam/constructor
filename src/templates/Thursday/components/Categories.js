@@ -36,17 +36,19 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
   const TitleElement = category?.title?.show
     ? `
+    ${category.title.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore }) : ''}
+   
     <tr>
       <td>
         ${Paragraph({
           text: category.name,
           color: color,
           background: background,
-          align: 'left',
+          align: category.title.align ?? 'left',
           insideTable: true,
           spanStyle: `color: ${color};`,
           tableContainer: true,
-          className: 'newsletterTitle',
+          className: category.title.className ?? 'newsletterTitle',
         })}
       </td>
     </tr>
@@ -85,18 +87,21 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     `
     : Space({ insideTr: true, className: category.paragraph.spaceAfter ?? 'newsletterBottom35px' });
 
-  const ProductsElement = category.products
-    ? await renderProducts(
-        category.products,
-        category.showPrices ?? true,
-        category.showNames ?? true,
+  const ProductsElement = category.products || category.tiles
+    ? await renderBody({
+        products: category.products,
+        tiles: category.tiles,
+        showPrices: category.showPrices ?? true,
+        showNames: category.showNames ?? true,
         queries,
-        category.type,
-        category.insideContainer ?? true,
-        category.color ?? '#000000',
+        categoryType: category.type,
+        insideContainer: category.insideContainer ?? true,
+        color: category.color ?? '#000000',
         id,
-        category.imageSide
-      )
+        imageSide: category.imageSide,
+        getCategoryLink,
+        getCategoryTitle,
+      })
     : '';
 
   const CTAElement = category.cta
@@ -123,9 +128,11 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             : ''
         }
 
-        ${TitleElement}
+        ${!category.title?.position || category.title?.position === 'beforeImg' ? TitleElement : ''}
 
         ${ImageElement}
+
+        ${category.title?.position === 'afterImg' ? TitleElement : ''}
 
         ${ParagraphElement}
 
@@ -133,7 +140,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${CTAElement}
 
-        ${Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom80px' })}
+        ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom80px' })}
 
         ${
           category?.line?.show
@@ -151,8 +158,9 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   `;
 };
 
-const renderProducts = async (
+const renderBody = async ({
   products,
+  tiles,
   showPrices,
   showNames,
   queries,
@@ -160,8 +168,10 @@ const renderProducts = async (
   insideContainer,
   color,
   id,
-  imageSide
-) => {
+  imageSide,
+  getCategoryLink,
+  getCategoryTitle,
+}) => {
   // console.log('produkty ', products);
 
   const type = categoryType ? categoryType.toLowerCase() : 'default';
@@ -169,14 +179,35 @@ const renderProducts = async (
   try {
     const module = await import(`./category/${type}.js`);
 
-    return module.render(products, showPrices, showNames, queries, insideContainer, color, id, imageSide);
+    return module.render({
+      products,
+      tiles,
+      showPrices,
+      showNames,
+      queries,
+      insideContainer,
+      color,
+      id,
+      imageSide,
+      getCategoryLink,
+      getCategoryTitle,
+    });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);
     console.error(e.message);
 
     const defaultModule = await import('./category/default.js');
 
-    return defaultModule.render(products, showPrices, showNames, queries, insideContainer, color, id, imageSide);
+    return defaultModule.render({
+      products,
+      showPrices,
+      showNames,
+      queries,
+      insideContainer,
+      color,
+      id,
+      imageSide,
+    });
   }
 };
 

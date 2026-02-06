@@ -255,7 +255,7 @@ const FathersDayWishes = async ({
     background: '#FFEDE6',
     isCtaVisible: true,
     ctaText: queries.GiftCard[2] || 'Translation not found',
-    spaceAfter: 'newsletterBottom80px',
+    spaceAfter: GiftCard_data.spaceAfter || 'newsletterBottom80px',
   })
 
   const GiftCardLine = `

@@ -52,6 +52,7 @@ const TopImageTitle_data = {
 const GiftCard_data = {
   src: getImageUrl('20260207_giftcard.png'),
   href: 'https://www.beliani.ch/gift-cards/',
+  spaceAfter: 'newsletterBottom70px',
 };
 
 const categories = [
@@ -198,11 +199,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: '40012',
+  startId: '38856',
   name: "Mother's Day Wishes",
   date: '07.02.2026',
-  issueCardId: '426360',
-  lpId: '28307',
+  issueCardId: '426252',
+  lpId: '27731',
   alarm: {
     isActive: false,
   },
