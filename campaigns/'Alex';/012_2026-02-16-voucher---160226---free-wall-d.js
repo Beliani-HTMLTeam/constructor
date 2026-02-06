@@ -38,8 +38,8 @@ const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-02-16' }),
   TopImageTitle_src: translateImage({ value: '20260216_01.png' }),
   TopImage_src: getImageUrl('20260216_gif.gif', true),
-  Banner_1: translateLink({ value: 'content/lp26-02-06' }),
-  Banner_1_Image: translateImage({ value: '20260206b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-02-11' }),
+  Banner_1_Image: translateImage({ value: '20260211b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-02-05' }),
   Banner_2_Image: translateImage({ value: '20260205b.png' }),
 };
