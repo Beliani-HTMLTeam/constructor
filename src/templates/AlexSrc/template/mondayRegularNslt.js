@@ -36,15 +36,7 @@ function generateCategoriesSection(
 
   // Sprawdź czy mamy tablicę queries.filters i określ jej długość
   const filtersLength = queries?.filters?.length || 0;
-  let usedFiltersCount = 0; // Licznik użytych filtrów
-
-  function getArr (arr) {
-
-  }
-
-  getArr([1,[2,[3, [7] ]6]])
-
-  
+  let usedFiltersCount = 0; // Licznik użytych filtrów  
 
   // Iteruj przez kategorie i generuj odpowiednie sekcje
   categories.forEach((category, index) => {
