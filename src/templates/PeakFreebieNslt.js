@@ -40,6 +40,7 @@ export function PeakFreebieNslt({
   category_2_columns,
   full_img_width,
   folder,
+  categoriesAdditionalSpacing
 }) {
   const codes = getCodes(queries);
   const selectCampaign = getState('selectedCampaign');
@@ -49,10 +50,10 @@ export function PeakFreebieNslt({
 
   console.log(full_img_width, 'tyt');
 
-  categories = categories.map((category) => ({
-    ...category,
-    src: { src: CampaignWrapper(category.src.src, folder ?? '20260113') },
-  }));
+  // categories = categories.map((category) => ({
+  //   ...category,
+  //   src: { src: CampaignWrapper(category.src.src, folder ?? '20260113') },
+  // }));
 
   // const categoriesSectionHTML = generateCategoriesSection(
   //   categories,
@@ -137,6 +138,7 @@ export function PeakFreebieNslt({
                           color: TopImageTitle_data?.color || '#000',
                           type: TopImageTitle_data?.type || 'standard',
                           renderType: type,
+                          backgroundColor: TopImageTitle_data?.backgroundColor || background,
                         })
                       : ``
                   }
@@ -286,6 +288,7 @@ export function PeakFreebieNslt({
               <tr>
                 <td>
               ${Space({ className: 'newsletterBottom80px' })}
+              ${categoriesAdditionalSpacing.top ? Space({ className: categoriesAdditionalSpacing.top }) : ''}
               </td>
               </tr>
               <tr>
@@ -335,6 +338,7 @@ export function PeakFreebieNslt({
                   <td style="background-color: ${freebies.options.background || background}; color: ${
                       freebies.options?.color || '#000'
                     };">
+                   
                     ${
                       intro
                         ? Space({ className: 'newsletterBottom60px' })
@@ -351,6 +355,7 @@ export function PeakFreebieNslt({
                             <span class="newsletterCta">${getPhrase('Shop all categories')}</span>
                           </a>
                           ${Space({ className: 'newsletterBottom35px' })}
+                          ${categoriesAdditionalSpacing.bottom ? Space({ className: categoriesAdditionalSpacing.bottom }) : ''}
                         </td>
                       </tr>`
                     : ''

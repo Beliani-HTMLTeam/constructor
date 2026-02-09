@@ -7,6 +7,7 @@ export const renderProducts = async (
   queries,
   categoryType,
   categoryIndex,
+  insideContainer = false,
   color = '#000000'
 ) => {
   const type = categoryType ? categoryType.toLowerCase() : 'default';
@@ -19,7 +20,7 @@ export const renderProducts = async (
     if (type === 'unique') {
       return module.render(products, showPrices, showName, queries, categoryIndex);
     } else if (type === 'grid') {
-      return module.render(products, showPrices, showName, queries, false, color);
+      return module.render(products, showPrices, showName, queries, insideContainer, color);
     }
 
     return module.render(products, showPrices, showName, queries);

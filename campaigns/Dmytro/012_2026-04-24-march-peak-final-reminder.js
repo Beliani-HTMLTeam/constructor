@@ -17,7 +17,7 @@ const tableQueries = [
     "name": "paragraphs"
   },
   {
-    "tableRange": "36:38",
+    "tableRange": "37:38",
     "name": "condition"
   },
   {
@@ -33,7 +33,7 @@ const links = {
   TopImage_href: translateLink({ value: 'content/lp26-04-24' }),
   Banner_1: translateLink({ value: 'content/lp26-04-17' }),
   Banner_1_Image: translateImage({ value: '20260417b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-04-26' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-16' }),
   Banner_2_Image: translateImage({ value: '20260416b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-04-24' }),
   ShopCTA: translateLink({ value: ' ' }),
@@ -41,37 +41,37 @@ const links = {
 
 const TopImageTitle_data = {
   color: '#FFFFFF',
-  backgroundColor: '#FF2F00',
+  backgroundColor: '#750000',
   type: 'twoSameMediumLines',
   className: 'newsletterBottom20px',
 };
 
 const timer = {
   position: "insideTopImageTitle",
-  background: "#FF2F00",
+  background: "#750000",
   color: "#FFFFFF",
   image: {
-    "CHDE": "https://gen.sendtric.com/countdown/8bk2pyk4ly",
-    "CHFR": "https://gen.sendtric.com/countdown/93kw6vtw1y",
-    "FR": "https://gen.sendtric.com/countdown/5ks245id4i",
-    "DE": "https://gen.sendtric.com/countdown/5ok0kmw1ip",
-    "UK": "https://gen.sendtric.com/countdown/98ez7dsxcn",
-    "AT": "https://gen.sendtric.com/countdown/9d744in487",
-    "ES": "https://gen.sendtric.com/countdown/819yjope22",
-    "PL": "https://gen.sendtric.com/countdown/2hj1uykzjn",
-    "NL": "https://gen.sendtric.com/countdown/2lx4mrlz02",
-    "PT": "https://gen.sendtric.com/countdown/qexwbnunka",
-    "IT": "https://gen.sendtric.com/countdown/c4u11b9tyj",
-    "SE": "https://gen.sendtric.com/countdown/sy09n4f1zu",
-    "HU": "https://gen.sendtric.com/countdown/465gaddbtn",
-    "DK": "https://gen.sendtric.com/countdown/gspr8zafmf",
-    "CZ": "https://gen.sendtric.com/countdown/e1r6whjnzb",
-    "FI": "https://gen.sendtric.com/countdown/bhd66hbm8e",
-    "NO": "https://gen.sendtric.com/countdown/l2zalslh5h",
-    "SK": "https://gen.sendtric.com/countdown/pe2tjvbi2p",
-    "BENL": "https://gen.sendtric.com/countdown/o7a8qtpmr9",
-    "BEFR": "https://gen.sendtric.com/countdown/62bg5324tl",
-    "RO": "https://gen.sendtric.com/countdown/ynxv0uy19n"
+    "CHDE": "https://gen.sendtric.com/countdown/zv3hym7lt2",
+    "CHFR": "https://gen.sendtric.com/countdown/ei1rw4rk4f",
+    "FR": "https://gen.sendtric.com/countdown/os8acxyx6n",
+    "DE": "https://gen.sendtric.com/countdown/v9g80j7sp1",
+    "UK": "https://gen.sendtric.com/countdown/y4pzqnwo2u",
+    "AT": "https://gen.sendtric.com/countdown/sm6fzik6bk",
+    "ES": "https://gen.sendtric.com/countdown/i5188u5ydl",
+    "PL": "https://gen.sendtric.com/countdown/uwa9nencd2",
+    "NL": "https://gen.sendtric.com/countdown/yc1n751lmk",
+    "PT": "https://gen.sendtric.com/countdown/f213zryq7e",
+    "IT": "https://gen.sendtric.com/countdown/f74cxmr1fy",
+    "SE": "https://gen.sendtric.com/countdown/5gkb8zed8e",
+    "HU": "https://gen.sendtric.com/countdown/175moy1271",
+    "DK": "https://gen.sendtric.com/countdown/790njwa5p1",
+    "CZ": "https://gen.sendtric.com/countdown/6num6uzqmb",
+    "FI": "https://gen.sendtric.com/countdown/jj5lp29o36",
+    "NO": "https://gen.sendtric.com/countdown/t97tdlagp9",
+    "SK": "https://gen.sendtric.com/countdown/jeuv4iktms",
+    "BENL": "https://gen.sendtric.com/countdown/k1mac7vynm",
+    "BEFR": "https://gen.sendtric.com/countdown/a5mcj0qh4z",
+    "RO": "https://gen.sendtric.com/countdown/tq4me41420"
   },
 };
 
@@ -193,15 +193,15 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#FFFFFF",
-        backgroundColor: "#FF2F00",
+        backgroundColor: "#750000",
         type: "timer",
+        spaceWithoutCTA: "newsletterBottom20px",
       },
       intro: {
         color: "#FFFFFF",
         backgroundColor: "#FF2F00",
         alignment: "center",
-        type: "paragraph",
-        text: 'This is a time-limited offer. Valid only until the 26th of April.'
+        type: "paragraph"
       },
       links: links,
       tableQueries: tableQueries,
@@ -223,15 +223,15 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#FFFFFF",
-        backgroundColor: "#FF2F00",
+        backgroundColor: "#750000",
         type: "timer",
+        spaceWithoutCTA: "newsletterBottom20px",
       },
       intro: {
         color: "#FFFFFF",
         backgroundColor: "#FF2F00",
         alignment: "center",
-        type: "paragraph",
-        text: 'This is a time-limited offer. Valid only until the 26th of April.'
+        type: "paragraph"
       },
       links: links,
       tableQueries: tableQueries,
