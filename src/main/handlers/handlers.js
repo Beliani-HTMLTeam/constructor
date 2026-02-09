@@ -123,6 +123,7 @@ export class TemplateHandlers {
     const title = translationsArray[slugIndex];
 
     if (title === '' || title == null) {
+      toast.error(`CATEGORY TITLE Tłumaczenie dla ${slug} ${column} jest puste!`);
       return undefined;
     }
 
@@ -276,6 +277,10 @@ export class TemplateHandlers {
     const footer = staticTranslations.footer[actualKey][slugIndex];
 
     if (footer === '' || footer == null) {
+      // allow empty translation for job links except for PL
+      if (slug !== "pl" && ["Job src", "Job href"].includes(column)) return undefined;
+      
+      console.warn(`FOOTER Tłumaczenie dla ${slug} ${column} jest puste!`);
       return undefined;
     }
 
