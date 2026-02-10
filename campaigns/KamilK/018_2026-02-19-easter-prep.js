@@ -51,7 +51,7 @@ const categories = [
   {
     name: 'Dining room',
     src: getImageUrl('20260219_Cat00.png', true),
-    href: 'https://www.beliani.ch/tables/dining-tables/',
+    href: 'https://www.beliani.ch/dining-room-furniture/',
     background: '#FFE9CC',
     color: '#000000',
     type: 'grid',
