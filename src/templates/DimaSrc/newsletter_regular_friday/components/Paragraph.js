@@ -1,5 +1,7 @@
 const Paragraph = ({
   text = 'Translation not found',
+  color = '#000000',
+  background,
   insideTr = false,
   insideTable = false,
   tableContainer = false,
@@ -15,7 +17,7 @@ const Paragraph = ({
 
   let html = '';
 
-  html += `<span class="${className}" style="text-align: ${align}; ${
+  html += `<span class="${className}" style="text-align: ${align}; ${color ? `color: ${color};` : ''} ${background ? `background-color: ${background};` : ''} ${
     spanStyle ?? ''
   }">${text}</span>`;
 

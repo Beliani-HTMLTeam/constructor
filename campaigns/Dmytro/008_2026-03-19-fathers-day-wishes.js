@@ -35,11 +35,11 @@ const links = {
   // TopImageTitle_href: translateLink({ value: 'content/lp26-03-19' }),
   // TopImageTitle_src: translateImage({ value: '20260319_01.png' }),
   TopImage_src: DimasTranslateImage({
-    value: '_fathersday_topimage.png',
+    value: '20260319_Pic.png',
     folder: 'FathersDayWishes',
     placeholderPosition: '55',
   }),
-  TopImage_href: translateLink({ value: 'content/lp26-06-20fd' }),
+  TopImage_href: translateLink({ value: 'content/lp26-03-19fd' }),
   // change it
   Banner_1: translateLink({ value: 'content/lp26-03-13' }),
   Banner_1_Image: translateImage({ value: '20260313b.png' }),

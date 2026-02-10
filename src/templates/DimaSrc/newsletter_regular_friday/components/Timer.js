@@ -76,6 +76,7 @@ const Timer = ({
                   text: ctaText,
                   align: 'center',
                   insideTr: true,
+                  background: background,
                 })
               : ''
           }

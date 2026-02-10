@@ -120,25 +120,27 @@ const RegularFridayNslt = async ({
             // text: queries.intro || 'Translation not found',
             paragraphAlign: intro.alignment,
             color: intro.color,
-            spaceBottom: intro.spaceBottom || 'newsletterBottom35px'
+            spaceBottom: intro.spaceBottom || 'newsletterBottom35px',
+            backgroundColor: intro.backgroundColor,
           })}
           ${
             intro.cta
               ? `
-              ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
+              ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore, backgroundColor: intro.backgroundColor }) : ''}
               ${CTA({
                 href: intro.cta.hrefSource === 'queries' ? add_utm(queries.introCTAhref) : links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
                 text: queries.introCTA || shopNowPhrase,
                 // text: 'Lean more about outdoor trends',
+                background: intro.backgroundColor,
                 color: '#000000',
                 align: 'center',
                 insideTr: true,
               })}
-              ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
+              ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter, backgroundColor: intro.backgroundColor }) : ''}
                 `
               : ''
           }
-              ${intro.additionalSpace ? Space({ insideTr: true, className: intro.additionalSpace }) : ''}
+              ${intro.additionalSpace ? Space({ insideTr: true, className: intro.additionalSpace, backgroundColor: intro.backgroundColor }) : ''}
           `
       : '';
 
@@ -255,7 +257,7 @@ const RegularFridayNslt = async ({
   return `
     ${HeaderElement}
 
-    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; color: #000; background-color: ${background};" id="newsletter">
       ${TopImageTitleElement}
 
       ${timer && timer.position === 'insideTopImageTitle' ? TimerElement : ''}

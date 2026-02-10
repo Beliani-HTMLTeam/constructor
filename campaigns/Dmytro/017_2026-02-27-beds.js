@@ -242,12 +242,12 @@ const categories = [
       },
       // DUKE II
       {
-        id: '625720',
+        id: '625852',
         src: getImageUrl('20260227/20260227Category43.png', true),
       },
       // DUKE II
       {
-        id: '625852',
+        id: '625720',
         src: getImageUrl('20260227/20260227Category44.png', true),
       },
     ],
