@@ -111,6 +111,18 @@ const FridayLikeThursday = async ({
         })
       : '';
 
+  const InsideGifElement = 
+    Inside && Inside.type === 'running_line_gif' ?
+   `
+   ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+
+   ${ImageWithLink({
+      href: links.Inside_href,
+      src: links.Inside_src,
+      insideTr: true,
+    })}` : '';
+
+
   // be defensive: ensure `categories` is an array
   const safeCategories = Array.isArray(categories) ? categories : [];
 
@@ -180,6 +192,8 @@ const FridayLikeThursday = async ({
       ${TopImageTitleElement}
 
       ${TopImageElement}
+
+      ${InsideGifElement}
 
       ${IntroElement}
 
