@@ -8,6 +8,7 @@ export const render = ({
   tiles,
   showPrices,
   showNames,
+  align = 'left',
   queries,
   insideContainer = true,
   color,
@@ -65,7 +66,7 @@ export const render = ({
 
             productsInnerHtml += `</table>`;
           } else {
-            productsInnerHtml += Product(item, showPrices, showNames, color);
+            productsInnerHtml += Product(item, showPrices, showNames, color, align);
           }
         }
 
