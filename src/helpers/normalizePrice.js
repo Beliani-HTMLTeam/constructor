@@ -463,10 +463,17 @@ const formatPrice = {
       }
     }
 
+    price = price.replace('.00', ',00');
+    price = price.replace('.99', ',99');
+
     return price;
   },
 };
 
 export function normalize(price, country, options) {
+
+  console.log(price.length, country, options);
+
   return formatPrice[country](price, options);
 }
+
