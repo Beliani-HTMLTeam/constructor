@@ -23,11 +23,11 @@ const links = {
   // TopImage_src: getImageUrl('20260225_Pic.png', true),
   // TopImage_href: translateLink({ value: 'content/lp26-02-25' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-02-18' }),
-  Banner_1_Image: translateImage({ value: '20260218b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-02-19' }),
+  Banner_1_Image: translateImage({ value: '20260219b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-02-13' }),
-  Banner_2_Image: translateImage({ value: '20260213b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-02-18' }),
+  Banner_2_Image: translateImage({ value: '20260218b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -60,6 +60,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     product: {
+      align: 'center',
       prices: true,
       name: true,
     },
@@ -109,6 +110,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     product: {
+      align: 'center',
       prices: true,
       name: true,
     },
@@ -158,6 +160,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     product: {
+      align: 'center',
       prices: true,
       name: true,
     },
@@ -208,6 +211,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     product: {
+      align: 'center',
       prices: true,
       name: true,
     },
@@ -255,6 +259,9 @@ const categories = [
       align: 'center',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      align: 'center',
     },
     tiles: [
       {
