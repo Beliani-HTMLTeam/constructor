@@ -245,7 +245,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl:
     'https://www.figma.com/design/EEKMnOdPA9w59mRN65Mmqu/2026.02.09---Free-lamps--Copy-?node-id=0-1&p=f&t=5UMPuP67psnKGKWW-0',
