@@ -87,22 +87,24 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     `
     : Space({ insideTr: true, className: category.paragraph.spaceAfter ?? 'newsletterBottom35px' });
 
-  const ProductsElement = category.products || category.tiles
-    ? await renderBody({
-        products: category.products,
-        tiles: category.tiles,
-        showPrices: category.showPrices ?? true,
-        showNames: category.showNames ?? true,
-        queries,
-        categoryType: category.type,
-        insideContainer: category.insideContainer ?? true,
-        color: category.color ?? '#000000',
-        id,
-        imageSide: category.imageSide,
-        getCategoryLink,
-        getCategoryTitle,
-      })
-    : '';
+  const ProductsElement =
+    category.products || category.tiles
+      ? await renderBody({
+          products: category.products,
+          tiles: category.tiles,
+          showPrices: category.showPrices ?? category.product?.prices ?? true,
+          showNames: category.showNames ?? category.product?.name ?? true,
+          align: category.product?.align ?? 'left',
+          queries,
+          categoryType: category.type,
+          insideContainer: category.insideContainer ?? true,
+          color: category.color ?? '#000000',
+          id,
+          imageSide: category.imageSide,
+          getCategoryLink,
+          getCategoryTitle,
+        })
+      : '';
 
   const CTAElement = category.cta
     ? CTA({
@@ -163,6 +165,7 @@ const renderBody = async ({
   tiles,
   showPrices,
   showNames,
+  align = 'left',
   queries,
   categoryType,
   insideContainer,
@@ -184,6 +187,7 @@ const renderBody = async ({
       tiles,
       showPrices,
       showNames,
+      align,
       queries,
       insideContainer,
       color,
@@ -202,6 +206,7 @@ const renderBody = async ({
       products,
       showPrices,
       showNames,
+      align,
       queries,
       insideContainer,
       color,
