@@ -14,6 +14,7 @@ const Timer = ({
   isCtaVisible,
   ctaText,
   spaceAfter = '',
+  spaceWithoutCTA = 'newsletterBottom35px'
 }) => {
   // console.log("Timer Component:", { title, subtitle, href, src, color, background, freebies, ctaText });
 
@@ -65,15 +66,17 @@ const Timer = ({
             tdClass: 'newsletterContainer60px',
           })}
 
-          ${Space({ insideTr: true, className: isCtaVisible ? 'newsletterBottom20px' : 'newsletterBottom35px' })}
+          ${Space({ insideTr: true, className: isCtaVisible ? 'newsletterBottom20px' : spaceWithoutCTA })}
 
           ${
             isCtaVisible
               ? CTA({
+                  color: color,
                   href: href,
                   text: ctaText,
                   align: 'center',
                   insideTr: true,
+                  background: background,
                 })
               : ''
           }

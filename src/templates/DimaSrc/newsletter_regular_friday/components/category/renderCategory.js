@@ -20,10 +20,12 @@ export const renderCategory = async (
   add_utm,
   lineType = 'white'
 ) => {
+  console.log('background: ', category);
+  
   const background = category.background || 'white';
   const color = category.color || '#000000';
 
-  const styles = `background: ${background}; color: ${color}; ${category.styles || ''};`;
+  const styles = `background: ${background}; color: ${color}; ${category.styles || ''}${category.styles ? ';' : ''}`;
 
   const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : '';
   const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
@@ -31,7 +33,7 @@ export const renderCategory = async (
   const TitleElement = category?.title?.show
     ? `
       <tr>
-        <td class="newsletterContainer">
+        <td style="${styles}" class="newsletterContainer">
           ${Paragraph({
             text: category.name,
             color: color,
@@ -43,7 +45,7 @@ export const renderCategory = async (
         </td>
       </tr>
   
-      ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter }) : ''}
+      ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter , backgroundColor: background }) : ''}
       `
     : '';
 
@@ -52,15 +54,16 @@ export const renderCategory = async (
         href: ctaHref,
         src: category.src,
         insideTr: true,
+        background: background,
       })
     : '';
 
   const ParagraphElement = category?.paragraph?.show
     ? `
-        ${category.paragraph.spaceBefore ? Space({ insideTr: true, className: category.paragraph.spaceBefore }) : ''}
+        ${category.paragraph.spaceBefore ? Space({ insideTr: true, className: category.paragraph.spaceBefore, backgroundColor: background }) : ''}
   
         <tr>
-          <td class="newsletterContainer">
+          <td style="${styles}" class="newsletterContainer">
             ${Paragraph({
               text: queries.paragraphs[id] || 'Translation not found',
               align: category.paragraph.align,
@@ -70,32 +73,35 @@ export const renderCategory = async (
         </tr>
   
         
-        ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
+        ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : ''}
       `
-    : Space({ insideTr: true });
+    : Space({ insideTr: true, backgroundColor: background });
 
   const ProductsElement = category.products
     ? category.type === 'unique'
       ? await renderProducts(
-          [
+         { products: [
             ...category.products,
             { href: ctaHref, src: category.src1 },
             { href: ctaHref, src: category.src2 },
             { href: ctaHref, src: category.src3 },
           ],
-          category.showPrices || true,
-          category.showName || true,
+          showPrices: category.showPrices || true,
+          showName: category.showName || true,
           queries,
-          category.type,
-          id
+          categoryType: category.type,
+          categoryIndex: id, 
+          insideContainer: category.insideContainer || false,}
         )
-      : await renderProducts(
-          category.products,
-          category.showPrices || true,
-          category.showName || true,
+        : await renderProducts(
+          { products: category.products,
+          showPrices: category.showPrices || true,
+          showName: category.showName || true,
           queries,
-          category.type,
-          id
+          categoryType: category.type,
+          categoryIndex: id,
+          insideContainer: category.insideContainer || false,
+          background}
         )
     : '';
 
@@ -108,6 +114,7 @@ export const renderCategory = async (
               ? Space({
                   insideTr: true,
                   className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 80 : 35)}px`,
+                  backgroundColor: background,
                 })
               : ''
           }
@@ -120,7 +127,7 @@ export const renderCategory = async (
   
           ${ProductsElement}
           
-          ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+          ${Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background })}
   
           ${CTA({
             href: ctaHref,
@@ -128,9 +135,10 @@ export const renderCategory = async (
             insideTr: true,
             tdClass: 'newsletterContainer',
             color: color,
+            background: background,
           })}
   
-          ${Space({ insideTr: true, className: 'newsletterBottom80px' })}
+          ${Space({ insideTr: true, className: 'newsletterBottom80px', backgroundColor: background  })}
   
          
         </table>
@@ -139,7 +147,7 @@ export const renderCategory = async (
   
    
       ${
-        id < categoriesLength - 1
+        category.line && !category.line?.show ? '' : (id < categoriesLength - 1
           ? `
           ${Line({
             insideTr: true,
@@ -147,7 +155,7 @@ export const renderCategory = async (
             insideContainer: true,
           })}
     `
-          : ''
+          : '')
       }
     `;
 };

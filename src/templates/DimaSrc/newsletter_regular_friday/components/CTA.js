@@ -2,6 +2,7 @@ const CTA = ({
   href,
   text,
   color = '#000000',
+  background,
   align = 'center',
   insideTr = false,
   tdClass,
@@ -16,7 +17,7 @@ const CTA = ({
   html += `<a style="color: ${color}; text-decoration: underline;" href="${href}"><span class="newsletterCta">${text}</span></a>`;
 
   if (insideTr) {
-    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align}>${html}</td></tr>`;
+    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} style="background-color: ${background};">${html}</td></tr>`;
   }
 
   if (insideTable) {
@@ -27,7 +28,7 @@ const CTA = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes}><tr><td ${tableContainer ? ' class="newsletterContainer"' : ''} style="background-color: ${background};">${html}</td></tr></table>`;
   }
 
   return html;

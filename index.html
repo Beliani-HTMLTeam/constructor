@@ -11,30 +11,44 @@
     <title>Constructor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   </head>
 
   <body>
+    <!--                                                  -->
+    <!--               OPEN HAMBURGER MENU                -->
+    <!--                                                  -->
     <div class="hamburger-menu">
       <img src="/icons/hamburger.svg" class="svg-icon" />
     </div>
 
+    <!-- SLIGHTLY DARKEN BACKGROUND OVERLAY FOR HAMBURGER -->
     <div class="overlay"></div>
 
     <div class="container">
-      <!--
-        panel: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-      -->
       <div id="panel">
+        <!--                                                  -->
+        <!--                CLOSE MENU BUTTON                 -->
+        <!--                                                  -->
         <div class="menu-close">
           <img src="/icons/close.svg" class="svg-icon" />
         </div>
-        <div class="upper_navigation">
-          <!--<button id="header_translations">Header Translations</button>-->
 
+        <div class="upper_navigation">
+          <!--                                                  -->
+          <!--               CAMPAIGN CREATOR TOOL              -->
+          <!--                                                  -->
+          <div id="action_buttons" class="group">
+            <button id="new_campaign">
+              <img src="/icons/new-campaign.svg" class="svg-icon" />
+
+              New Campaign
+            </button>
+          </div>
+
+          <!--                                                  -->
+          <!--               SELECTS FOR RENDERING              -->
+          <!--                                                  -->
           <div class="group">
             <div class="select-wrapper">
               <select class="select-select" id="campaigns">
@@ -61,27 +75,27 @@
               </select>
               <span class="select-arrow"></span>
             </div>
+
+            <!-- <button id="render_template">
+              <span style="width: 25px; height: 24px; line-height: 24px; text-align: center">👷🏿</span>
+              Render Template
+            </button> -->
           </div>
 
-          <button class="figmaCard" style="display: none">
-            <img src="/icons/figma.svg" class="svg-icon" />
-
-            Figma Template
-          </button>
-
+          <!--                                                  -->
+          <!--            ADD PRODUCTS/CLEAR STORAGE            -->
+          <!--                                                  -->
+          <!-- Object.keys(localStorage).map(k => (localStorage.getItem(k) ?? '').length * 2 / 1024 / 1024).reduce((a, b) => a + b);        -->
           <div id="products_management" class="group">
-            <button id="new_products" style="display: none">
+            <button id="new_products">
               <img src="/icons/add-products.svg" class="svg-icon" />
-              Add Products JSON
-            </button>
-
-            <button class="clearStorage">
-              <img src="/icons/clear-storage.svg" class="svg-icon" />
-
-              Clear storage
+              Manage Products
             </button>
           </div>
 
+          <!--                                                  -->
+          <!--             OPEN NSLT/LP/ISSUE/FIGMA             -->
+          <!--                                                  -->
           <div id="campaign_links" class="group">
             <button style="display: none" class="openCampaign external">
               Open Newsletter
@@ -97,8 +111,17 @@
               Open Issue Card
               <img src="/icons/external-link.svg" class="svg-icon" />
             </button>
+
+            <button class="figmaCard" style="display: none">
+              <img src="/icons/figma.svg" class="svg-icon" />
+
+              Figma Template
+            </button>
           </div>
 
+          <!--                                                  -->
+          <!--                  COPY TEMPLATE                   -->
+          <!--                                                  -->
           <button style="display: none" class="copyTemplate">
             <img src="/icons/copy-template.svg" class="svg-icon" />
 
@@ -106,6 +129,9 @@
           </button>
         </div>
 
+        <!--                                                  -->
+        <!--                    PURGE TOOL                    -->
+        <!--                                                  -->
         <div class="group">
           <div class="select-wrapper">
             <select class="select-select" id="purge">
@@ -123,24 +149,6 @@
             <span style="width: 100%">Purge dynamic spreadsheet</span>
             <img src="/icons/external-link.svg" class="svg-icon" />
           </button>
-        </div>
-
-        <div id="action_buttons" class="group">
-          <button id="render_template">
-            <span style="width: 25px; height: 24px; line-height: 24px; text-align: center">👷🏿</span>
-            Render Template
-          </button>
-
-          <button id="new_campaign">
-            <img src="/icons/new-campaign.svg" class="svg-icon" />
-
-            New Campaign
-          </button>
-
-          <!--<button id="login">
-            <img src="/icons/refresh-google.svg" class="svg-icon" />
-            Refresh Google Token
-          </button>-->
         </div>
       </div>
 
@@ -167,6 +175,19 @@
             form injection: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
           -->
         </div>
+      </div>
+    </div>
+
+    <div id="productsModal" class="modal-backdrop" style="display: none">
+      <div class="modal-content products-modal-content">
+        <div class="modal-header">
+          <div>
+            <h2>Manage products</h2>
+            <p class="products-modal-subtitle"></p>
+          </div>
+        </div>
+
+        <div class="form-content products-modal-body"></div>
       </div>
     </div>
 

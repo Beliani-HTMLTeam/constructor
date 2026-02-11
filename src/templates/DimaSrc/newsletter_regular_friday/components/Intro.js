@@ -7,15 +7,16 @@ const Intro = ({
   spaceBottom = 'newsletterBottom35px',
   paragraphAlign = 'center',
   color = '#000000',
+  backgroundColor = '#FFFFFF',
 }) => {
   if (String(text).trim() === '') {
     text = 'Translation not found';
   }
 
   return `
-    ${Space({ className: spaceTop, insideTr: true })}
+    ${Space({ className: spaceTop, insideTr: true, backgroundColor: backgroundColor })}
             
-    <tr><td>${Paragraph({
+    <tr><td style="background-color: ${backgroundColor};">${Paragraph({
       text,
       align: paragraphAlign,
       insideTable: true,
@@ -23,7 +24,7 @@ const Intro = ({
       spanStyle: `color: ${color};`,
     })}</td></tr>
     
-    ${Space({ className: spaceBottom, insideTr: true })}
+    ${Space({ className: spaceBottom, insideTr: true, backgroundColor: backgroundColor })}
   `;
 };
 

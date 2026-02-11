@@ -11,6 +11,8 @@ import { getState, setState } from '@/main/state/appState';
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
 
 import { toast } from 'sonner';
+import { decompress } from 'compress-json';
+import { COMPRESSED_PRODUCTS_MARKER } from '@main/ui/manageProducts/constants.js';
 import { staticTranslations, setQueries, getQueries } from '@/api/translations';
 
 export async function renderTemplate(getState, setState) {
@@ -101,12 +103,57 @@ export async function renderTemplate(getState, setState) {
   // Process links and products
   const links = addParams({ links: templateToRender.links });
   const ids = getState('ids');
-  const localProducts = getState('selectedCampaign').products;
-  const LSProducts = localProducts || localStorage.getItem('products');
-  const parsedProducts = localProducts ? normalizeProducts(localProducts) : LSProducts ? JSON.parse(LSProducts) : [];
-  const campaignProducts = localProducts
-    ? parsedProducts
-    : parsedProducts.find((item) => item.campaign_id === getState('selectedCampaign').startId);
+
+  const isCompressedProducts = (value) =>
+    value &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    value[COMPRESSED_PRODUCTS_MARKER] === true &&
+    Array.isArray(value.payload);
+
+  const decompressIfNeeded = (value) => {
+    if (!value) return value;
+    
+    if (!isCompressedProducts(value)) return value;
+    
+    try {
+      return decompress(value.payload);
+    } catch {
+      return [];
+    }
+  };
+
+  const ensureNormalizedProducts = (value) => {
+    const arr = Array.isArray(value) ? value : [];
+
+    // check if normalization is needed
+    const needsNormalize = arr.some((p) => p && typeof p === 'object' && 'saved_params' in p);
+    
+    return needsNormalize ? normalizeProducts(arr) : arr;
+  };
+
+  const localProducts = getState('selectedCampaign')?.products;
+  let productsForTemplate = [];
+
+  if (localProducts) {
+    productsForTemplate = ensureNormalizedProducts(decompressIfNeeded(localProducts));
+  } else {
+    let parsedIndex = [];
+
+    try {
+      const rawIndex = localStorage.getItem('products');
+    
+      parsedIndex = rawIndex ? JSON.parse(rawIndex) : [];
+    } catch {
+      parsedIndex = [];
+    }
+
+    const campaignEntry = Array.isArray(parsedIndex)
+      ? parsedIndex.find((item) => item?.campaign_id === getState('selectedCampaign').startId)
+      : null;
+
+    productsForTemplate = ensureNormalizedProducts(decompressIfNeeded(campaignEntry?.products));
+  }
 
   // Create template handlers
   const handlers = new TemplateHandlers({
@@ -115,7 +162,7 @@ export async function renderTemplate(getState, setState) {
     // footer: getState('queries').footer,
     // categoriesLinks: getState('queries').categoriesLinks,
     // categoriesTitles: getState('queries').categoriesTitles,
-    products: localProducts ? parsedProducts : campaignProducts?.products,
+    products: productsForTemplate,
   });
 
   try {

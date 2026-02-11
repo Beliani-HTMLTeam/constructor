@@ -1,6 +1,6 @@
 import { Product } from '../Product.js';
 
-export const render = (products, showPrices, showNames, queries, insideContainer = true, color, id, imageSide) => {
+export const render = ({ products, showPrices, showNames, queries, insideContainer = true, color, id, imageSide }) => {
 
   console.log(`renderowanie kategorii ${id}, ${showPrices}, ${showNames}`);
 

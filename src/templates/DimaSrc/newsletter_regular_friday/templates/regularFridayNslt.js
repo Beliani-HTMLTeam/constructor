@@ -45,6 +45,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
+  console.log('wszystko',TopImageTitle_data)
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -67,12 +68,13 @@ const RegularFridayNslt = async ({
           title2: queries.TopImageTitle[1] || 'Translation not found',
 
           // placeholder
-          // title1: 'Living-room trends 2026',
-          // title2: 'Comfort and style for every home',
+          // title1: 'Hurry!',
+          // title2: 'Spring Sale ends Sunday',
           color: TopImageTitle_data.color,
-          background: TopImageTitle_data.background,
+          backgroundColor: TopImageTitle_data.backgroundColor,
           type: TopImageTitle_data.type,
           renderType: type,
+          className: TopImageTitle_data.className,
         })
       : '';
 
@@ -106,6 +108,7 @@ const RegularFridayNslt = async ({
             'Spend min. €300 on your purchase and we will give you a €100 cashback to use in your next order. Insert a code at the check out to receive a voucher with cashback.',
           paragraph3: 'This is a time limited offer. Valid until 04/01/2026',
           paragraphAlign: OfferPart.alignment,
+          germanSeparatingLine: OfferPart.germanSeparatingLine,
         })
       : '';
 
@@ -113,26 +116,31 @@ const RegularFridayNslt = async ({
     intro && intro.type === 'paragraph'
       ? `
           ${Intro({
-            text: queries.intro || 'Translation not found',
+            text: intro.text || queries.intro || 'Translation not found',
+            // text: queries.intro || 'Translation not found',
             paragraphAlign: intro.alignment,
             color: intro.color,
+            spaceBottom: intro.spaceBottom || 'newsletterBottom35px',
+            backgroundColor: intro.backgroundColor,
           })}
           ${
             intro.cta
               ? `
-              ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
+              ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore, backgroundColor: intro.backgroundColor }) : ''}
               ${CTA({
-                href: links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
-                text: shopNow,
+                href: intro.cta.hrefSource === 'queries' ? add_utm(queries.introCTAhref) : links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+                text: queries.introCTA || shopNowPhrase,
+                // text: 'Lean more about outdoor trends',
+                background: intro.backgroundColor,
                 color: '#000000',
                 align: 'center',
                 insideTr: true,
               })}
-              ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
+              ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter, backgroundColor: intro.backgroundColor }) : ''}
                 `
               : ''
           }
-              ${intro.additionalSpace ? Space({ insideTr: true, className: intro.additionalSpace }) : ''}
+              ${intro.additionalSpace ? Space({ insideTr: true, className: intro.additionalSpace, backgroundColor: intro.backgroundColor }) : ''}
           `
       : '';
 
@@ -151,6 +159,7 @@ const RegularFridayNslt = async ({
           isCtaVisible: timer.isCtaVisible,
           ctaText: shopNowPhrase,
           spaceAfter: Inside.spaceAfter,
+          spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
         })
       : '';
   const categoriesWithProducts = await Promise.all(
@@ -248,7 +257,7 @@ const RegularFridayNslt = async ({
   return `
     ${HeaderElement}
 
-    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; color: #000; background-color: ${background};" id="newsletter">
       ${TopImageTitleElement}
 
       ${timer && timer.position === 'insideTopImageTitle' ? TimerElement : ''}
