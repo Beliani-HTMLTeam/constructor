@@ -17,7 +17,7 @@ const tableQueries = [
     name: 'code',
   },
   {
-    tableRange: '30',
+    tableRange: '29',
     name: 'codeCTA',
   },
   {
