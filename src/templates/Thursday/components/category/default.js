@@ -1,8 +1,18 @@
 // served as a debug purpose, planned in future: 1 product = 1 row
 
-import { Product } from "../Product";
+import { Product } from '../Product';
 
-export const render = ({ products, showPrices, showNames, queries, insideContainer = true, color, id, imageSide }) => {
+export const render = ({
+  products,
+  showPrices,
+  showNames,
+  queries,
+  insideContainer = true,
+  color,
+  id,
+  imageSide,
+  align = 'left',
+}) => {
   let productsInnerHtml = '';
 
   if (Array.isArray(products)) {
@@ -11,7 +21,7 @@ export const render = ({ products, showPrices, showNames, queries, insideContain
       productsInnerHtml += `
         <tr>
           <td>
-            ${Product(product, false, false, '#000')}  
+            ${Product(product, false, false, '#000', align)}  
           </td>
         </tr>
       `;

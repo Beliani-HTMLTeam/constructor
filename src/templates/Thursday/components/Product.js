@@ -2,7 +2,7 @@ import { ImageWithLink } from './ImageWithLink.js';
 import { Prices } from './Prices.js';
 import { Space } from './Space.js';
 
-const Product = (product, showPrices, showName, color) => {
+const Product = (product, showPrices, showName, color, align = 'left') => {
   if (!product || typeof product !== 'object') return '';
 
   let html = `
@@ -21,7 +21,7 @@ const Product = (product, showPrices, showName, color) => {
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       
       <tr>
-        <td style="color: ${color}" class="newsletterProductTitle">${product.name}</td>
+        <td align="${align}" style="text-align: ${align}; color: ${color}" class="newsletterProductTitle">${product.name}</td>
       </tr>
     `;
   }
@@ -35,6 +35,7 @@ const Product = (product, showPrices, showName, color) => {
             low: product.lowPrice || '',
             insideTr: true,
             color: color,
+            align,
           })}
         </td>
       </tr>

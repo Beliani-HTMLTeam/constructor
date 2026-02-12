@@ -1,6 +1,16 @@
 import { Product } from '../Product.js';
 
-export const render = ({ products, showPrices, showNames, queries, insideContainer = true, color, id, imageSide }) => {
+export const render = ({
+  products,
+  showPrices,
+  showNames,
+  align = 'left',
+  queries,
+  insideContainer = true,
+  color,
+  id,
+  imageSide,
+}) => {
   let productsInnerHtml = '';
 
   if (Array.isArray(products)) {
@@ -19,7 +29,7 @@ export const render = ({ products, showPrices, showNames, queries, insideContain
         productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${(c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color);
+          productsInnerHtml += Product(product, showPrices, showNames, color, align);
         }
 
         productsInnerHtml += '</td>';
