@@ -187,15 +187,15 @@ const freebies = {
 
 export default new entities.Campaign({
   startId: "39660",
-  name: "Voucher - 05.01.26 - Free duvet cover",
+  name: "copy code TEST",
   date: "05.01.2026",
   issueCardId: "432995",
   lpId: "28135",
   alarm: {
     isActive: false,
   },
-  isArchive: true,
-  optimizeImg: true,
+  isArchive: false,
+  optimizeImg: false,
   figmaUrl: "https://www.figma.com/design/KWvBW4N3zJWPECBRTtsTim/2025.01.05---Newsletter---Free-duvet-cover--Copy-?node-id=0-1&p=f&t=FnKAgxPS3f6P0xPN-0",
   templates: [
     {
