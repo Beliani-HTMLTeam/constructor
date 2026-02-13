@@ -14,6 +14,10 @@ const tableQueries = [
   },
   {
     tableRange: '19:26',
+    name: 'categories',
+  },
+  {
+    tableRange: '19:26',
     name: 'paragraphs',
   },
   {
