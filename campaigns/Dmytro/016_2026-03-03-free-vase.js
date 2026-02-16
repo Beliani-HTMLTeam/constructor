@@ -33,10 +33,10 @@ const links = {
   TopImageTitle_src:  DimasTranslateImage({ value: '20260303_01.png', folder: '20260303', placeholderPosition: '47' }),
   TopImage_src: getImageUrl('20260303/20260303topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-03-03' }),
-  Banner_1: translateLink({ value: 'content/lp26-02-18' }),
-  Banner_1_Image: translateImage({ value: '20260218b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-02-12' }),
-  Banner_2_Image: translateImage({ value: '20260212b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-02-12' }),
+  Banner_1_Image: translateImage({ value: '20260212b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-02-18' }),
+  Banner_2_Image: translateImage({ value: '20260218b.png' }),
 };
 
 const TopImageTitle_data = {
