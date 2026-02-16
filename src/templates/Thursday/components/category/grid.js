@@ -4,6 +4,7 @@ export const render = ({
   products,
   showPrices,
   showNames,
+  gapBetweenVertical = true,
   align = 'left',
   queries,
   insideContainer = true,
@@ -29,7 +30,7 @@ export const render = ({
         productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${(c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, align);
+          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical);
         }
 
         productsInnerHtml += '</td>';
