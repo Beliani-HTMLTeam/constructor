@@ -8,6 +8,7 @@ export const render = ({
   tiles,
   showPrices,
   showNames,
+  gapBetweenVertical = true,
   align = 'left',
   queries,
   insideContainer = true,
@@ -66,7 +67,7 @@ export const render = ({
 
             productsInnerHtml += `</table>`;
           } else {
-            productsInnerHtml += Product(item, showPrices, showNames, color, align);
+            productsInnerHtml += Product(item, showPrices, showNames, color, align, gapBetweenVertical);
           }
         }
 

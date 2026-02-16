@@ -119,11 +119,14 @@ const Thursday = async ({
         productEntries.map(async (p) => {
           try {
             if (!p) return null;
+            const normalizedHref =
+              p.href && typeof getCategoryLink === 'function' ? getCategoryLink(p.href) : p.href;
             if (typeof getProductById === 'function') {
               const fetchedProduct = await getProductById(p.id, p.src);
-              return fetchedProduct ? { ...p, ...fetchedProduct } : null;
+              if (!fetchedProduct) return null;
+              return normalizedHref ? { ...p, ...fetchedProduct, href: normalizedHref } : { ...p, ...fetchedProduct };
             }
-            return null;
+            return normalizedHref ? { ...p, href: normalizedHref } : p;
           } catch (err) {
             console.error('getProductById error for', p, err);
             return null;
@@ -171,6 +174,11 @@ const Thursday = async ({
     });
   }
 
+  const timerPosition = Inside?.position ?? 'beforeCategories';
+  const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
+  const TimerAfterCategories =
+    timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
+
   return `
     ${HeaderElement}
 
@@ -181,9 +189,11 @@ const Thursday = async ({
 
       ${IntroElement}
 
-      ${TimerElement}
+      ${TimerBeforeCategories}
 
       ${CategoriesElement}
+
+      ${TimerAfterCategories}
     </table>
 
 

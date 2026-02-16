@@ -87,6 +87,21 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     `
     : Space({ insideTr: true, className: category.paragraph.spaceAfter ?? 'newsletterBottom35px' });
 
+  const paragraphPositionRaw = category?.paragraph?.position ?? 'beforeProducts';
+  const paragraphPosition =
+    paragraphPositionRaw === 'underProducts'
+      ? 'afterProducts'
+      : paragraphPositionRaw === 'underCategoryImage' || paragraphPositionRaw === 'afterCategoryImage'
+        ? 'afterImg'
+        : paragraphPositionRaw === 'above'
+          ? 'beforeImg'
+          : paragraphPositionRaw;
+
+  const ParagraphBeforeImg = paragraphPosition === 'beforeImg' ? ParagraphElement : '';
+  const ParagraphAfterImg = paragraphPosition === 'afterImg' ? ParagraphElement : '';
+  const ParagraphBeforeProducts = paragraphPosition === 'beforeProducts' ? ParagraphElement : '';
+  const ParagraphAfterProducts = paragraphPosition === 'afterProducts' ? ParagraphElement : '';
+
   const ProductsElement =
     category.products || category.tiles
       ? await renderBody({
@@ -94,6 +109,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
           showNames: category.showNames ?? category.product?.name ?? true,
+          gapBetweenHorizontal: category.gapBetweenHorizontal ?? true,
+          gapBetweenVertical: category.product?.gapBetweenVertical ?? true,
           align: category.product?.align ?? 'left',
           queries,
           categoryType: category.type,
@@ -132,13 +149,19 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${!category.title?.position || category.title?.position === 'beforeImg' ? TitleElement : ''}
 
+        ${ParagraphBeforeImg}
+
         ${ImageElement}
+
+        ${ParagraphAfterImg}
 
         ${category.title?.position === 'afterImg' ? TitleElement : ''}
 
-        ${ParagraphElement}
+        ${ParagraphBeforeProducts}
 
         ${ProductsElement}
+
+        ${ParagraphAfterProducts}
 
         ${CTAElement}
 
@@ -165,6 +188,8 @@ const renderBody = async ({
   tiles,
   showPrices,
   showNames,
+  gapBetweenHorizontal,
+  gapBetweenVertical,
   align = 'left',
   queries,
   categoryType,
@@ -187,6 +212,8 @@ const renderBody = async ({
       tiles,
       showPrices,
       showNames,
+      gapBetweenHorizontal,
+      gapBetweenVertical,
       align,
       queries,
       insideContainer,
@@ -206,6 +233,8 @@ const renderBody = async ({
       products,
       showPrices,
       showNames,
+      gapBetweenHorizontal,
+      gapBetweenVertical,
       align,
       queries,
       insideContainer,
