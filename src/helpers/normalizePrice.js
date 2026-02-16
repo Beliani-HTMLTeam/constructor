@@ -438,19 +438,25 @@ const formatPrice = {
     return price;
   },
   RO: (price, options) => {
-    if (price.length === 7) {
-      price = price.replace('.00', '');
-      price = price.split('').toSpliced(1, 0, '.').join('');
+    const isThousands = price.length >= 7;
+
+    if (price.endsWith('.00')) {
+      price = isThousands ? price.replace('.00', '') : price.replace('.00', ',00');
     }
 
-    if (price.length === 6) {
+    if (price.endsWith('.99')) {
       price = price.replace('.99', ',99');
-      price = price;
     }
 
-    if (price.length === 5) {
-      price = price.replace('.99', ',99');
-      price = price;
+    if (isThousands) {
+      const parts = price.split(',');
+      let integer = parts[0].replace('.', '');
+
+      if (integer.length === 4) {
+        integer = `${integer.slice(0, 1)}.${integer.slice(1)}`;
+      }
+
+      price = parts.length > 1 ? `${integer},${parts[1]}` : integer;
     }
 
     if (options && 'decimals' in options && options.decimals) {
