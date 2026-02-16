@@ -246,7 +246,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl: "https://www.figma.com/design/udDJQ2qpUASJyZvJmzSjvi/2026.02.16---Newsletter---Free-wall-decor--Copy-?node-id=9031-3902&p=f&t=zRIBvhyMWtgS0T6y-0",
   templates: [
