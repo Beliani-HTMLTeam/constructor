@@ -276,6 +276,20 @@ table {
   line-height: 1.2;
   padding-left: 20px;
 }
+
+#newsletter .newsletterTitleH1Bold {
+  font-weight: 600;
+  font-size: 45px;
+  line-height: 53px;
+  margin:0;
+ }
+
+  #newsletter .newsletterTitleH2BoldBigger {
+    font-weight: 600;
+    font-size: 65px;
+    line-height: 66px;
+    margin:0;
+  }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
   #newsletter .newsletterFooterCategoryLEFTBottom {
@@ -462,6 +476,23 @@ table {
     font-size: 18px;
     padding-left: 10px;
   }
+<<<<<<< HEAD
+=======
+
+  #newsletter .newsletterTitleH1Bold {
+    font-weight: 600;
+    font-size: 29px;
+    line-height: 35px;
+   }
+
+   #newsletter .newsletterTitleH2BoldBigger {
+    font-weight: 600;
+    font-size: 43px;
+    line-height: 44px;
+  }
+ 
+
+>>>>>>> 8ab07e7722a518b231290339c1fe3b6d978b42a9
 }
 
 @media screen and (max-width: 570px) {

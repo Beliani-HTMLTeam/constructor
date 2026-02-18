@@ -159,9 +159,11 @@ const FridayLikeThursday = async ({
     const source = categoriesWithProducts.length > 0 ? categoriesWithProducts : safeCategories;
     const categoriesForRender = source.map((category, ind) => {
       const href =
-        category && category.href && typeof getCategoryLink === 'function'
-          ? getCategoryLink(category.href)
-          : (category && category.href) || '';
+                    category.hrefSource && category.hrefSource === 'queries'
+                      ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[ind] : queries.categoryLinks[0])
+                      : category.href
+                      ? getCategoryLink(category.href)
+                      : category.href;
       const name = queries?.categories
         ? queries.categories[ind]
         : typeof getCategoryTitle === 'function'

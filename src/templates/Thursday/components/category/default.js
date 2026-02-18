@@ -12,6 +12,7 @@ export const render = ({
   id,
   imageSide,
   align = 'left',
+  gapBetweenVertical = true,
 }) => {
   let productsInnerHtml = '';
 
@@ -21,7 +22,7 @@ export const render = ({
       productsInnerHtml += `
         <tr>
           <td>
-            ${Product(product, false, false, '#000', align)}  
+            ${Product(product, showPrices, showNames, color ?? '#000', align, gapBetweenVertical)}  
           </td>
         </tr>
       `;

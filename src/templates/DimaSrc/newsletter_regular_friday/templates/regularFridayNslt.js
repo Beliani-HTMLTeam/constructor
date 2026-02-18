@@ -185,7 +185,7 @@ const RegularFridayNslt = async ({
               ? categoriesWithProducts.map((category, idx) => {
                   const href =
                     category.hrefSource && category.hrefSource === 'queries'
-                      ? add_utm(queries.categoryLinks[idx])
+                      ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
                       : category.href
                       ? getCategoryLink(category.href)
                       : category.href;
@@ -205,7 +205,7 @@ const RegularFridayNslt = async ({
               : categories.map((category, idx) => {
                   const href =
                     category.hrefSource && category.hrefSource === 'queries'
-                      ? add_utm(queries.categoryLinks[idx])
+                      ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
                       : category.href
                       ? getCategoryLink(category.href)
                       : category.href;

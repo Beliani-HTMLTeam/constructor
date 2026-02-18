@@ -250,6 +250,7 @@ const categories = [
     spaceAfter: 0,
     title: {
       className: 'newsletterAditionalTitle',
+      align: 'center',
       show: true,
       spaceBefore: 'newsletterBottom40px',
       // spaceAfter: 'newsletterBottom35px',

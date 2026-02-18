@@ -17,12 +17,16 @@ const tableQueries = [
     "name": "categories"
   },
   {
-    "tableRange": "30:31",
+    "tableRange": "31:32",
     "name": "condition"
   },
   {
-    "tableRange": "27",
+    "tableRange": "28",
     "name": "CTA"
+  },
+  {
+    "tableRange": "27",
+    "name": "categoryLinks" // !!!!!
   }
 ];
 
@@ -33,16 +37,16 @@ const links = {
   Inside_src: DimasTranslateImage({ value: '20260304inside.gif', folder: '20260304', placeholderPosition: '47' }),
   Inside_href: translateLink({ value: 'content/lp26-03-02' }),
   TopImage_href: translateLink({ value: 'content/lp26-03-04' }),
-  Banner_1: translateLink({ value: 'content/lp26-02-25' }),
-  Banner_1_Image: translateImage({ value: '20260225b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-02-18' }),
-  Banner_2_Image: translateImage({ value: '20260218b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-02-18' }),
+  Banner_1_Image: translateImage({ value: '20260218b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-02-25' }),
+  Banner_2_Image: translateImage({ value: '20260225b.png' }),
 };
 
 const TopImageTitle_data = {
-  color: '#000000',
+  color: '#750000',
   backgroundColor: '#FFEFD9',
-  type: 'up_to',
+  type: 'line2bigger',
 };
 
 const categories = [
@@ -256,7 +260,7 @@ const categories = [
     name: 'Storage',
     background: '#FFEFD9',
     color: '#000000',
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-storage/',
+    hrefSource: 'queries',
     type: 'big-grid_line',
     title: {
       show: true,
