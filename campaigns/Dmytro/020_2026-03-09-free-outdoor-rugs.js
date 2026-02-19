@@ -22,7 +22,7 @@ const tableQueries = [
     "name": "code"
   },
   {
-    "tableRange": "34:35",
+    "tableRange": "33:34",
     "name": "intro"
   },
   {
@@ -261,9 +261,7 @@ export default new entities.Campaign({
       under_intro_line: false,
       intro: {
         color: "#000000",
-        backgroundColor: "#FFCCB7",
-        alignment: "left",
-        type: "paragraph",
+        background: "#FFCCB7",
       },
       offerPart: {
         color: "#FFFFFF",
@@ -271,6 +269,7 @@ export default new entities.Campaign({
         alignment: "center",
         type: "code",
       },
+      soon_banners: true,
       links: links,
       tableQueries: tableQueries,
       freebies: freebies,
@@ -290,9 +289,7 @@ export default new entities.Campaign({
       under_intro_line: false,
       intro: {
         color: "#000000",
-        backgroundColor: "#FFCCB7",
-        alignment: "left",
-        type: "paragraph",
+        background: "#FFCCB7",
       },
       offerPart: {
         color: "#FFFFFF",
@@ -300,6 +297,7 @@ export default new entities.Campaign({
         alignment: "center",
         type: "code",
       },
+      soon_banners: true,
       links: links,
       tableQueries: tableQueries,
       freebies: freebies,
