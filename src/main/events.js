@@ -1,6 +1,7 @@
 import { getIframe } from '@/helpers/getIframe';
 import { incrementId } from '@/helpers/incrementId.js';
 import { getState, setState } from '@/main/state/appState';
+import { appConfig as config } from '@/utils/config';
 
 import { toast } from 'sonner';
 
@@ -33,7 +34,7 @@ function figmaCardHandler(url) {
 }
 
 async function purgeDynamicSpreadsheetData(year, tabName) {
-  const url = `https://fed2n8e59dpq.share.zrok.io/dynamic/${year}/${tabName}/force-refresh`;
+  const url = `${config.external_api_url}dynamic/${year}/${tabName}/force-refresh`;
 
   try {
     toast(`🔄 Purging dynamic spreadsheet...\nYear: ${year}\nTab: ${tabName}`);

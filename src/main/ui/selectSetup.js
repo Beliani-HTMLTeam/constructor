@@ -4,6 +4,7 @@ import { populateSelect, createSelectOption, showElements, hideElements } from '
 import { root } from '@/app.js';
 import { getIframe } from '@/helpers/getIframe';
 import { toast } from 'sonner';
+import { appConfig as config } from '@/utils/config';
 
 export function setupSelectCampaigns(elements, campaigns, setState, getState, render, setSelectedTemplate) {
   const { selectCampaigns, selectTemplates, selectTemplatesWrapper, openIssue, openFigma, purgeDynamicSpreadsheet } =
@@ -106,15 +107,7 @@ export function setupSelectPurge(elements) {
 
     const prettierTabName = ev.target.value.replace('_', ' ');
 
-    const purgeMap = {
-      header: 'https://fed2n8e59dpq.share.zrok.io/static/header/force-refresh',
-      footer: 'https://fed2n8e59dpq.share.zrok.io/static/footer/force-refresh',
-      templates: 'https://fed2n8e59dpq.share.zrok.io/static/templates/force-refresh',
-      category_links: 'https://fed2n8e59dpq.share.zrok.io/static/category_links/force-refresh',
-      category_titles: 'https://fed2n8e59dpq.share.zrok.io/static/category_titles/force-refresh',
-    };
-
-    const url = purgeMap[ev.target.value];
+    const url = `${config.external_api_url}static/${ev.target.value}/force-refresh`;
     if (!url) return;
 
     try {
