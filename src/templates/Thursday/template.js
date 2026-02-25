@@ -147,20 +147,51 @@ const Thursday = async ({
   if (safeCategories.length > 0) {
     const source = categoriesWithProducts.length > 0 ? categoriesWithProducts : safeCategories;
     const categoriesForRender = source.map((category, ind) => {
-      const href =
-        category && category.href && typeof getCategoryLink === 'function'
-          ? getCategoryLink(category.href)
-          : (category && category.href) || '';
-      const name = queries?.categories
-        ? queries.categories[ind]
-        : typeof getCategoryTitle === 'function'
-        ? getCategoryTitle(category && category.name) || (category && category.name) || ''
-        : (category && category.name) || '';
+      let oldData = { name: category?.name, href: category?.href, src: category?.src };
+
+      let name;
+      if (queries?.categories && queries.categories[ind]) {
+        name = queries.categories[ind];
+      } else {
+        if (category?.name) {
+          name = getCategoryTitle(category.name);
+        } else {
+          name = category?.name;
+        }
+      }
+
+      let href;
+      if (queries.categories_links && queries.categories_links[ind]) {
+        // link from translations spreadsheet, eg. link with filter
+        href = add_utm(queries.categories_links[ind]);
+      } else if (category?.href) {
+        if (typeof category?.href === 'string') {
+          // normal category
+          href = getCategoryLink(category.href);
+        } else {
+          // link is translated (eg. we link to landing page)
+          href = add_utm(category.href?.href);
+        }
+      }
+
+      let src;
+      if (category?.src) {
+        src = category?.src;
+        if (typeof src === 'object') {
+          src = src.src;
+        }
+      }
+      // console.log(name, href, src);
+
+      let newData = { name, href, src };
+
+      // console.log(oldData, newData);
 
       return {
         ...category,
         href,
         name,
+        src,
       };
     });
 
