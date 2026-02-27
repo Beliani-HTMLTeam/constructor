@@ -110,7 +110,7 @@ export class TemplateHandlers {
     const actualKey = normalizedKeys[column.toLowerCase()];
 
     if (!actualKey) {
-      toast.error(`Nie znaleziono tłumaczenia dla ${column} (sprawdź wielkość liter)`);
+      toast.error(`Nie znaleziono tłumaczenia dla cat-title ${column} (sprawdź wielkość liter)`);
       return undefined;
     }
 
