@@ -91,7 +91,7 @@ export const renderCategory = async (
           queries,
           categoryType: category.type,
           categoryIndex: id, 
-          insideContainer: category.insideContainer || false,}
+          insideContainer: category.insideContainer || false}
         )
         : await renderProducts(
           { products: category.products,
@@ -101,7 +101,8 @@ export const renderCategory = async (
           categoryType: category.type,
           categoryIndex: id,
           insideContainer: category.insideContainer || false,
-          background}
+          background,
+          color: category.color || '#000000'}
         )
     : '';
 
@@ -127,16 +128,16 @@ export const renderCategory = async (
   
           ${ProductsElement}
           
-          ${Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background })}
+          ${category.cta?.show ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
   
-          ${CTA({
+          ${category.cta?.show ? CTA({
             href: ctaHref,
             text: getPhrase('shop now'),
             insideTr: true,
             tdClass: 'newsletterContainer',
             color: color,
             background: background,
-          })}
+          }) : ''}
   
           ${Space({ insideTr: true, className: 'newsletterBottom80px', backgroundColor: background  })}
   

@@ -4,6 +4,7 @@ import { GetCode } from '@/components/getCode.js';
 import { LandingOfferPart, NewsletterOfferPart } from './utils/offerPart/components';
 
 export function OfferPartCode({
+  isMonday = false,
   color,
   data,
   getPhrase,
@@ -16,8 +17,9 @@ export function OfferPartCode({
   backgroundColor,
   germanSeparatingLine
 }) {
-  console.log('href:', href);
+  console.log('href:', href, data, isMonday);
   const newsletter = NewsletterOfferPart({
+    isMonday,
     color,
     data,
     getPhrase,
@@ -31,6 +33,7 @@ export function OfferPartCode({
     germanSeparatingLine
   });
   const landing = LandingOfferPart({
+    isMonday,
     color,
     data,
     getPhrase,

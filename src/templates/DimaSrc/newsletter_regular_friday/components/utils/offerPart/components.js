@@ -2,8 +2,10 @@ import { getState } from '@/main/state/appState';
 import { GetCode } from '../../getCode';
 import { Paragraph } from '../../Paragraph';
 import { Space } from '../../Space';
+import FreebiesGenerator from '@/components/FreebiesGenerator';
 
 const NewsletterOfferPart = ({
+  isMonday = false,
   color,
   data,
   getPhrase,
@@ -18,24 +20,70 @@ const NewsletterOfferPart = ({
 }) => {
   const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
 
-  return `
+  const offerPartContent = 
+  isMonday ? `
+  ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+<tr>
+  <td style="color: ${color}; text-align: center;">
+  ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center', color})}
+  </td>
+</tr>
+${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+
+<tr>
+  <td style="color: ${color}; text-align: center;">
+  ${Paragraph({ text: data ? data[1] : paragraph1, align: 'center', color })}
+  </td>
+</tr>
+${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+
+<tr>
+  <td >
+    ${GetCode({
+      color: color,
+      code: queries?.codeCTA || 'Code tableQuery not found.',
+      link: href,
+      type,
+    })}
+  </td>
+</tr>
+
+${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+
+<tr>
+  <td style="color: ${color}; text-align: center;">
+    ${Paragraph({ text: data ? data[3] : paragraph3, align: 'center', color })}
+  </td> 
+</tr>
+
+${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+
+<tr>
+  <td style="color: ${color}; text-align: center;">
+    ${Paragraph({ text: data ? data[6] : paragraph3, align: 'center', color })}
+  </td> 
+</tr>
+
+${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+`
+ :`
       ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
     <tr>
       <td style="color: ${color}; text-align: center;">
-      ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center' })}
+      ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center', color })}
       </td>
     </tr>
     ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
   
     <tr>
       <td style="color: ${color}; text-align: center;">
-      ${Paragraph({ text: data ? data[1] : paragraph1, align: 'center' })}
+      ${Paragraph({ text: data ? data[1] : paragraph1, align: 'center', color })}
       </td>
     </tr>
     ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
     <tr>
       <td style="color: ${color}; text-align: center;">
-      ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}
+      ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center', color })}
       </td>
     </tr>
     ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
@@ -55,15 +103,18 @@ const NewsletterOfferPart = ({
     
     <tr>
       <td style="color: ${color}; text-align: center;">
-        ${Paragraph({ text: data ? data[4] : paragraph3, align: 'center' })}
+        ${Paragraph({ text: data ? data[4] : paragraph3, align: 'center', color })}
       </td> 
     </tr>
   
     ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
   `;
+
+  return offerPartContent
 };
 
 const LandingOfferPart = ({
+  isMonday = false,
   color,
   data,
   getPhrase,
@@ -78,7 +129,77 @@ const LandingOfferPart = ({
 }) => {
   const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
 
-  return `
+  const offerPartContent = 
+  isMonday ? `
+  <tr>
+  <td >
+  ${Space({ className: 'newsletterBottom35px' })}
+  </td>
+</tr>
+<tr>
+  <td  style="color: ${color}; text-align: center;">
+  ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center', color })}
+  </td>
+</tr>
+<tr>
+  <td >
+    ${Space({ className: 'newsletterBottom35px' })}
+  </td>
+</tr>
+
+<tr>
+  <td style="color: ${color}; text-align: center;">
+   ${Paragraph({ text: data ? data[1] : paragraph2, align: 'center', color })}
+  </td>
+</tr>
+<tr>
+  <td style="color: ${color}; text-align: center;">
+    ${Space({ className: 'newsletterBottom35px' })}
+  </td>
+</tr>
+
+<tr>
+  <td >
+    ${GetCode({
+      color: color,
+      code: queries?.code || 'Code tableQuery not found.',
+      link: href,
+      type,
+    })}
+  </td>
+</tr>
+
+<tr>
+  <td >
+    ${Space({ className: 'newsletterBottom35px' })}
+  </td>
+</tr>
+
+<tr>
+  <td style="color: ${color}; text-align: center;" >
+    ${Paragraph({ text: data ? data[3] : paragraph3, align: 'center', color })}
+  </td>
+</tr>
+
+<tr>
+  <td >
+    ${Space({ className: 'newsletterBottom35px' })}
+  </td>
+</tr>
+<tr>
+  <td style="color: ${color}; text-align: center;" >
+    ${Paragraph({ text: data ? data[6] : paragraph3, align: 'center', color })}
+  </td>
+</tr>
+
+<tr>
+  <td >
+    ${Space({ className: 'newsletterBottom35px' })}
+  </td>
+</tr>
+  `
+  :
+  `
     <tr>
     <td >
     ${Space({ className: 'newsletterBottom35px' })}
@@ -86,7 +207,7 @@ const LandingOfferPart = ({
   </tr>
   <tr>
     <td  style="color: ${color}; text-align: center;">
-    ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center' })}
+    ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center', color })}
     </td>
   </tr>
   <tr>
@@ -97,13 +218,13 @@ const LandingOfferPart = ({
   
   <tr>
     <td style="color: ${color}; text-align: center;">
-     ${Paragraph({ text: data ? data[1] : paragraph2, align: 'center' })}
+     ${Paragraph({ text: data ? data[1] : paragraph2, align: 'center', color })}
     </td>
   </tr>
   ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
   <tr>
     <td style="color: ${color}; text-align: center;">
-      ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center' })}
+      ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center', color })}
     </td>
   </tr>
   <tr>
@@ -131,7 +252,7 @@ const LandingOfferPart = ({
   
   <tr>
     <td style="color: ${color}; text-align: center;" >
-      ${Paragraph({ text: data ? data[4] : paragraph3, align: 'center' })}
+      ${Paragraph({ text: data ? data[4] : paragraph3, align: 'center', color })}
     </td>
   </tr>
   
@@ -141,5 +262,7 @@ const LandingOfferPart = ({
     </td>
   </tr>
     `;
+
+  return offerPartContent
 };
 export { NewsletterOfferPart, LandingOfferPart };

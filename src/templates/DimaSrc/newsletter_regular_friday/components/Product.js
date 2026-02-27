@@ -2,7 +2,7 @@ import { ImageWithLink } from './ImageWithLink.js';
 import { Prices } from '../../components/components/Prices.js';
 import { Space } from './Space.js';
 
-const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true) => {
+const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true, priceAdditionalPadding = true) => {
   if (!product || typeof product !== 'object') return '';
 
   let html = `
@@ -21,7 +21,7 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true)
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       
       <tr>
-        <td class="${idx % 2 === 0 ? 'newsletterProductTitleWithPaddingLeft' : 'newsletterProductTitle'}">${
+        <td class="${idx % 2 === 0 && priceAdditionalPadding ? 'newsletterProductTitleWithPaddingLeft' : 'newsletterProductTitle'}">${
       product.name
     }</td>
       </tr>
@@ -31,7 +31,7 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true)
   if (showPrices && (product.lowPrice || product.highPrice)) {
     html += `
       <tr>
-        <td class="${idx % 2 === 0 ? 'newsletterLeft20px' : ''}">
+        <td class="${idx % 2 === 0 && priceAdditionalPadding ? 'newsletterLeft20px' : ''}">
           ${Prices({
             high: product.highPrice || '',
             low: product.lowPrice || '',

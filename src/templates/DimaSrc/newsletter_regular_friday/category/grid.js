@@ -26,7 +26,7 @@ export const render = (products, showPrices, showNames, queries, insideContainer
         productsInnerHtml += `<td style="color: ${color}; background: ${background}; width:50%;vertical-align:top;" width="50%" ${(col + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, productIndex, !isLastRow);
+          productsInnerHtml += Product(product, showPrices, showNames, color, productIndex, !isLastRow, !insideContainer);
         }
 
         productsInnerHtml += '</td>';

@@ -34,7 +34,7 @@ const tableQueries = [
     "name": "filters"
   },
   {
-    "tableRange": "47:48",
+    "tableRange": "47:49",
     "name": "condition"
   }
 ];

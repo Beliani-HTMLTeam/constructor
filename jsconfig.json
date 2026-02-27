@@ -21,5 +21,5 @@
     }
   },
   "exclude": ["node_modules", "dist"],
-  "include": ["auto-imports.d.ts", "**/*.js"]
+  "include": ["auto-imports.d.ts", "**/*.js", "campaigns/Dmytro/.archive/001_2025-12-12-12122025---eols.js", "campaigns/Dmytro/.archive/001_2025-12-19-first-day-od-winter.js", "campaigns/Dmytro/.archive/002_2025-12-26-boxing-day.js", "campaigns/Dmytro/.archive/002_2026-01-13-free-wall-decor.js", "campaigns/Dmytro/.archive/003_2026-01-02-cashback-reminder.js", "campaigns/Dmytro/.archive/004_2026-01-09-living-room-trends-2026.js", "campaigns/Dmytro/.archive/005_2026-01-16-160126---dining-room-trends.js", "campaigns/Dmytro/.archive/006_2026-01-23-office-trends-2026.js", "campaigns/Dmytro/.archive/007_2026-01-30-januray-peak-reminder.js", "campaigns/Dmytro/.archive/008_2026-03-19-fathers-day-wishes.js", "campaigns/Dmytro/.archive/009_2026-01-20-voucher---200126---free-mirror.js", "campaigns/Dmytro/.archive/010_2026-02-06-voucher---feb-cashback.js", "campaigns/Dmytro/.archive/011_2026-02-13-voucher---cashback-reminder.js"]
 }

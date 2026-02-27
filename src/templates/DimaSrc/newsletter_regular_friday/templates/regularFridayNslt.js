@@ -14,6 +14,7 @@ import { Create2Columns_Grid } from '../components/Create2Columns_Grid';
 import { render as category2Columns_Grid } from '../category/category2Columns_Grid';
 import { Intro } from '../components/Intro';
 import { CTA } from '../components/CTA';
+import FreebiesGenerator from '@/components/FreebiesGenerator';
 
 const RegularFridayNslt = async ({
   links,
@@ -27,6 +28,7 @@ const RegularFridayNslt = async ({
   categories_line,
   background,
   color,
+  freebies = null,
 
   // campaign elements
   Inside,
@@ -45,7 +47,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko',TopImageTitle_data)
+  console.log('wszystko', TopImageTitle_data);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -93,6 +95,7 @@ const RegularFridayNslt = async ({
   const OfferPartElement =
     OfferPart && OfferPart.type === 'code'
       ? OfferPartCode({
+          isMonday: OfferPart.isMonday || false,
           color: OfferPart.color,
           data: queries.offerPart,
           href: links.code_href,
@@ -112,6 +115,44 @@ const RegularFridayNslt = async ({
         })
       : '';
 
+  const freebiesElement = freebies
+    ? `
+    <tr>
+                <td style="background-color: 
+                ${freebies.options.background || background}; color: ${freebies.options?.color || '#000'};">
+                  ${FreebiesGenerator({
+                    background,
+                    freebies: freebies.items || [],
+                    getProductById,
+                    color: freebies.options.color,
+                    intro,
+                    selectCampaign: selectCampaign,
+                  })}
+                  </td>
+              </tr>
+              <tr>
+                <td style="background-color: 
+                ${freebies.options.background || background}; color: ${freebies.options?.color || '#000'};">
+                  ${FreebiesGenerator({
+                    background,
+                    freebies: freebies.items2 || [],
+                    getProductById,
+                    color: freebies.options.color,
+                    intro,
+                    selectCampaign: selectCampaign,
+                  })}
+                  </td>
+              </tr>
+              <tr>
+                  <td style="background-color: ${
+                    freebies.options.background || background
+                  }; color: ${freebies.options?.color || '#000'};">
+                    ${Space({ className: `${freebies.options?.space || 'newsletterBottom35px'}` })}
+                  </td>
+              </tr>
+            `
+    : '';
+
   const IntroElement =
     intro && intro.type === 'paragraph'
       ? `
@@ -128,7 +169,12 @@ const RegularFridayNslt = async ({
               ? `
               ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore, backgroundColor: intro.backgroundColor }) : ''}
               ${CTA({
-                href: intro.cta.hrefSource === 'queries' ? add_utm(queries.introCTAhref) : links.Intro_cta_href ? add_utm(links.Intro_cta_href) : getCategoryLink(categories[0]?.href),
+                href:
+                  intro.cta.hrefSource === 'queries'
+                    ? add_utm(queries.introCTAhref)
+                    : links.Intro_cta_href
+                      ? add_utm(links.Intro_cta_href)
+                      : getCategoryLink(categories[0]?.href),
                 text: queries.introCTA || shopNowPhrase,
                 // text: 'Lean more about outdoor trends',
                 background: intro.backgroundColor,
@@ -185,16 +231,18 @@ const RegularFridayNslt = async ({
               ? categoriesWithProducts.map((category, idx) => {
                   const href =
                     category.hrefSource && category.hrefSource === 'queries'
-                      ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
+                      ? add_utm(
+                          queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0]
+                        )
                       : category.href
-                      ? getCategoryLink(category.href)
-                      : category.href;
+                        ? getCategoryLink(category.href)
+                        : category.href;
                   const name =
                     category.title && category.title.source === 'queries'
                       ? queries.categories[idx]
                       : getCategoryTitle
-                      ? getCategoryTitle(category.name)
-                      : category.name;
+                        ? getCategoryTitle(category.name)
+                        : category.name;
 
                   return {
                     ...category,
@@ -205,16 +253,18 @@ const RegularFridayNslt = async ({
               : categories.map((category, idx) => {
                   const href =
                     category.hrefSource && category.hrefSource === 'queries'
-                      ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
+                      ? add_utm(
+                          queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0]
+                        )
                       : category.href
-                      ? getCategoryLink(category.href)
-                      : category.href;
+                        ? getCategoryLink(category.href)
+                        : category.href;
                   const name =
                     category.title.source === 'queries'
                       ? queries.categories[idx]
                       : getCategoryTitle
-                      ? getCategoryTitle(category.name)
-                      : category.name;
+                        ? getCategoryTitle(category.name)
+                        : category.name;
 
                   return {
                     ...category,
@@ -227,7 +277,7 @@ const RegularFridayNslt = async ({
           add_utm,
         })
       : categories && categories_type === 'twoColumnsGrid'
-      ? `
+        ? `
 
       <tr>
                 <td style="background-color: ${background};" class="newsletterContainer">
@@ -252,7 +302,7 @@ const RegularFridayNslt = async ({
                 </td>
               </tr>
               `
-      : '';
+        : '';
 
   return `
     ${HeaderElement}
@@ -267,6 +317,8 @@ const RegularFridayNslt = async ({
       ${IntroElement}
 
       ${OfferPartElement}
+
+      ${freebiesElement}
 
       ${timer && timer.position === 'outsideTopImageTitle' ? TimerElement : ''}
       
