@@ -8,6 +8,7 @@ import { getState } from '@/main/state/appState';
 import { PeakOfferPartCode } from './PeakOfferPartCode';
 import { CampaignWrapper } from './DimaSrc/utils/UrlModificator';
 import { TopImageTitle } from './DimaSrc/newsletter_regular_friday/components/TopImageTitle';
+import { wrapFooterUrl } from '@/utils/getTrackingUrl';
 
 export function PeakFreebieNslt({
   links,
@@ -466,42 +467,42 @@ export function PeakFreebieNslt({
             title: getFooter('Title'),
             firstCategory: {
               src: getFooter('Category src 1'),
-              href: getCategoryLink('https://www.beliani.co.uk/sofas/all+products'),
+              href: wrapFooterUrl(getFooter("Category href 1")),
               name: getCategoryTitle('Sofas'), //href: getFooter("Category href 1"),
             },
             secondCategory: {
               src: getFooter('Category src 2'),
-              href: getCategoryLink('https://www.beliani.co.uk/beds/all+products'),
+              href: wrapFooterUrl(getFooter("Category href 2")),
               name: getCategoryTitle('Beds'), //href: getFooter("Category href 2"),
             },
             thirdCategory: {
               src: getFooter('Category src 3'),
-              href: getCategoryLink('https://www.beliani.co.uk/tables/coffee-tables'),
+              href: wrapFooterUrl(getFooter("Category href 3")),
               name: getCategoryTitle('Coffee Tables'), //href: getFooter("Category href 3"),
             },
             foutrthCategory: {
               src: getFooter('Category src 4'),
-              href: getCategoryLink('https://www.beliani.co.uk/chairs/all+products'),
+              href: wrapFooterUrl(getFooter("Category href 4")),
               name: getCategoryTitle('Chairs'), //href: getFooter("Category href 4"),
             },
             fifthCategory: {
               src: getFooter('Category src 5'),
-              href: getCategoryLink('https://www.beliani.co.uk/armchairs/all+products'),
+              href: wrapFooterUrl(getFooter("Category href 5")),
               name: getCategoryTitle('Armchairs'), //href: getFooter("Category href 5"),
             },
             sixthCategory: {
               src: getFooter('Category src 6'),
-              href: getCategoryLink('https://www.beliani.co.uk/storage/sideboards'),
+              href: wrapFooterUrl(getFooter("Category href 6")),
               name: getCategoryTitle('Storage'), //href: getFooter("Category href 6"),
             },
             seventhCategory: {
               src: getFooter('Category src 7'),
-              href: getCategoryLink('https://www.beliani.co.uk/lighting/all+products'),
+              href: wrapFooterUrl(getFooter("Category href 7")),
               name: getCategoryTitle('Lighting'), //href: getFooter("Category href 7"),
             },
             eigthCategory: {
               src: getFooter('Category src 8'),
-              href: getCategoryLink('https://www.beliani.co.uk/rugs/all+products'),
+              href: wrapFooterUrl(getFooter("Category href 8")),
               name: getCategoryTitle('Rugs'), //href: getFooter("Category href 8"),
             },
           },
