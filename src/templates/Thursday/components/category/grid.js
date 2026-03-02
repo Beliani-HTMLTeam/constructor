@@ -5,6 +5,7 @@ export const render = ({
   showPrices,
   showNames,
   gapBetweenVertical = true,
+  gapBetweenHorizontal = true,
   align = 'left',
   queries,
   insideContainer = true,
@@ -26,8 +27,11 @@ export const render = ({
 
       for (let c = 0; c < cols; c++) {
         const product = products[i + c];
+
+        let horizontalGapValue = gapBetweenHorizontal ? ((c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"') : '';
+        
         // prettier-ignore
-        productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${(c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
+        productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${horizontalGapValue}>`;
 
         if (product) {
           productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical);
