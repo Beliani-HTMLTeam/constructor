@@ -20,6 +20,7 @@ import {
   setupOpenLPHandler,
   setupNewCampaignHandler,
   setupPurgeDynamicSpreadsheetHandler,
+  setupRedirectCheckHandler,
 } from '@/main/ui/buttonHandlers.js';
 import { createSetSelectedTemplate } from '@/main/ui/templateHelpers.js';
 import { handleSlugChange } from '@/main/events.js';
@@ -61,6 +62,7 @@ function setupEventListeners(elements, campaigns, shops, jsConfetti) {
   setupOpenFigmaHandler(elements, getState);
   setupOpenLPHandler(elements, getState);
   setupPurgeDynamicSpreadsheetHandler(elements);
+  setupRedirectCheckHandler(elements);
 
   // Setup purge elements handlers
   setupSelectPurge(elements);

@@ -4,6 +4,7 @@ import {
   figmaCardHandler,
   openLpHandler,
   purgeDynamicSpreadsheetData,
+  runRedirectCheck
 } from '@/main/events.js';
 import { generateLpLinks } from '@/helpers/generateLpLinks.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
@@ -85,6 +86,14 @@ export function setupPurgeDynamicSpreadsheetHandler(elements) {
     }
     const [autoYear, autoTabName] = spreadsheetData;
     purgeDynamicSpreadsheetData(autoYear, autoTabName);
+  });
+}
+
+export function setupRedirectCheckHandler(elements) {
+  const { redirectCheck } = elements;
+
+  redirectCheck?.addEventListener('click', () => {
+    runRedirectCheck();
   });
 }
 
