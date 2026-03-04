@@ -118,6 +118,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           color: category.color ?? '#000000',
           id,
           imageSide: category.imageSide,
+          categoryHref: ctaHref,
           getCategoryLink,
           getCategoryTitle,
         })
@@ -197,6 +198,7 @@ const renderBody = async ({
   color,
   id,
   imageSide,
+  categoryHref,
   getCategoryLink,
   getCategoryTitle,
 }) => {
@@ -220,6 +222,7 @@ const renderBody = async ({
       color,
       id,
       imageSide,
+      categoryHref,
       getCategoryLink,
       getCategoryTitle,
     });

@@ -2,7 +2,7 @@ import { ImageWithLink } from './ImageWithLink.js';
 import { Prices } from './Prices.js';
 import { Space } from './Space.js';
 
-const Product = (product, showPrices, showName, color, align = 'left', gapBetweenVertical = true) => {
+const Product = (product, showPrices, showName, color, align = 'left', gapBetweenVertical = true, useCategoryLink = false) => {
   if (!product || typeof product !== 'object') return '';
 
   const resolveGapClass = (gap, fallback) => {
@@ -22,8 +22,8 @@ const Product = (product, showPrices, showName, color, align = 'left', gapBetwee
 
   if (product.src && product.href) {
     html += ImageWithLink({
-      href: product.href,
-      src: product.src,
+      href: useCategoryLink ? product?.categoryLink : product.href,
+      src: typeof product.src === 'object' ? product.src.src : product.src,
       insideTr: true,
     });
   }

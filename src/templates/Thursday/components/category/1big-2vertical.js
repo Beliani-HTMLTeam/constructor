@@ -12,6 +12,7 @@ export const render = ({
   color,
   id,
   imageSide,
+  categoryHref,
 }) => {
   console.log(`renderowanie kategorii ${id}, ${showPrices}, ${showNames}`);
 
@@ -33,31 +34,40 @@ export const render = ({
   let productsInnerHtml = '';
 
   if (Array.isArray(products)) {
-    productsInnerHtml += `<tr><td><table cellspacing="0" cellpadding="0" style="max-width: 650px; width: 100%;" ${
-      insideContainer ? 'class="newsletterContainer"' : ''
-    }><tr>`;
+    let currentSide = imgSide;
 
-    // Big image on the left
-    if (imgSide === 'left') {
-      productsInnerHtml += `<td>${Product(products[0], showPrices, showNames, '#000', align, gapBetweenVertical)}</td>`;
+    for (let i = 0; i + 2 < products.length; i += 3) {
+      productsInnerHtml += `<tr><td ${
+        insideContainer ? 'class="newsletterContainer"' : ''
+      }><table cellspacing="0" cellpadding="0" style="max-width: 650px; width: 100%;"><tr>`;
 
-      productsInnerHtml += renderGapTd('left');
+      const bigProduct = (p) => {
+        const withCategoryLink = p?.useCategoryLink ? { ...p, categoryLink: categoryHref } : p;
+        return Product(withCategoryLink, showPrices, showNames, '#000', align, gapBetweenVertical, p?.useCategoryLink);
+      };
+
+      // Big image on the left
+      if (currentSide === 'left') {
+        productsInnerHtml += `<td>${bigProduct(products[i])}</td>`;
+        productsInnerHtml += renderGapTd('left');
+      }
+
+      productsInnerHtml += `<td><table cellspacing="0" cellpadding="0" style="width: 100%;">`;
+      productsInnerHtml += `<tr><td>${Product(products[i + 1], showPrices, showNames, color, align, gapBetweenVertical, products[i + 1]?.useCategoryLink)}</td></tr>`;
+      productsInnerHtml += `<tr><td>${Product(products[i + 2], showPrices, showNames, color, align, gapBetweenVertical, products[i + 2]?.useCategoryLink)}</td></tr>`;
+      productsInnerHtml += `</table></td>`;
+
+      // Big image on the right
+      if (currentSide === 'right') {
+        productsInnerHtml += renderGapTd('right');
+        productsInnerHtml += `<td>${bigProduct(products[i])}</td>`;
+      }
+
+      productsInnerHtml += '</tr></table></td></tr>';
+
+      // Flip side for next group
+      currentSide = currentSide === 'left' ? 'right' : 'left';
     }
-
-    productsInnerHtml += `<td><table cellspacing="0" cellpadding="0" style="width: 100%;">`;
-
-    productsInnerHtml += `<tr><td>${Product(products[1], showPrices, showNames, color, align, gapBetweenVertical)}</td></tr>`;
-    productsInnerHtml += `<tr><td>${Product(products[2], showPrices, showNames, color, align, gapBetweenVertical)}</td></tr>`;
-
-    productsInnerHtml += `</table></td>`;
-
-    // Big image on the right
-    if (imgSide === 'right') {
-      productsInnerHtml += renderGapTd('right');
-
-      productsInnerHtml += `<td>${Product(products[0], showPrices, showNames, '#000', align, gapBetweenVertical)}</td>`;
-    }
-    productsInnerHtml += '</td></tr></table>';
   }
 
   return productsInnerHtml;
