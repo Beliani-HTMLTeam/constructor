@@ -161,9 +161,9 @@ const Thursday = async ({
       }
 
       let href;
-      if (queries.categories_links && queries.categories_links[ind]) {
+      if (queries.categoryLinks && queries.categoryLinks[ind]) {
         // link from translations spreadsheet, eg. link with filter
-        href = add_utm(queries.categories_links[ind]);
+        href = add_utm(queries.categoryLinks[ind]);
       } else if (category?.href) {
         if (typeof category?.href === 'string') {
           // normal category
