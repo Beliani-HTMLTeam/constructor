@@ -68,6 +68,7 @@ const RegularFridayNslt = async ({
           src: links.TopImageTitle_src,
           title1: queries.TopImageTitle[0] || 'Translation not found',
           title2: queries.TopImageTitle[1] || 'Translation not found',
+          title3: queries.TopImageTitle[2] || null,
 
           // placeholder
           // title1: 'Hurry!',

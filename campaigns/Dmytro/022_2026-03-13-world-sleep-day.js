@@ -99,6 +99,9 @@ const categories = [
     line: {
       show: false
     },
+    cta: {
+      show: true,
+    },
     paddingTop: 60,
     insideContainer: true,
     products: [
@@ -142,6 +145,9 @@ const categories = [
     },
     line: {
       show: false
+    },
+    cta: {
+      show: true,
     },
     paddingTop: 35,
     insideContainer: true,
@@ -187,6 +193,9 @@ const categories = [
     line: {
       show: false
     },
+    cta: {
+      show: true,
+    },
     paddingTop: 35,
     insideContainer: true,
     products: [
@@ -230,6 +239,9 @@ const categories = [
     },
     line: {
       show: false
+    },
+    cta: {
+      show: true,
     },
     paddingTop: 35,
     insideContainer: true,

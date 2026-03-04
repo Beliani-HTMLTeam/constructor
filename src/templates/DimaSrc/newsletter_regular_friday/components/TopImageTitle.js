@@ -2,8 +2,8 @@ import { includesKeywords } from '../utils/basic.js';
 import { Space } from './Space.js';
 import { templates as TopImageTitleTemplates } from './utils/topImageTitle/templates.js';
 
-const TopImageTitle = ({ href, src, title1, title2, color, type, renderType, className, backgroundColor }) => {
-  const templates = TopImageTitleTemplates({ color, title1, title2 });
+const TopImageTitle = ({ href, src, title1, title2, title3, color, type, renderType, className, backgroundColor }) => {
+  const templates = TopImageTitleTemplates({ color, title1, title2, title3 });
 
   if (renderType === 'landing') {
     return `
