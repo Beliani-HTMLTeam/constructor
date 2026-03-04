@@ -26,6 +26,7 @@ export function getDOMElements() {
     openFigma: document.querySelector('.figmaCard'),
     openLP: document.querySelector('.openLP'),
     purgeDynamicSpreadsheet: document.querySelector('.purgeDynamicSpreadsheet'),
+    redirectCheck: document.querySelector('.redirectCheck'),
 
     tabName: document.querySelector('#tabName'),
     year: document.querySelector('#year'),

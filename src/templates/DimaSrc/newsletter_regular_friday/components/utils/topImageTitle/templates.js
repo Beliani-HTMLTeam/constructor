@@ -1,29 +1,38 @@
 import { includesKeywords } from '../../../utils/basic';
 
-export const templates = ({ color, title1, title2 }) => ({
+export const templates = ({ color, title1, title2, title3 = null }) => ({
   up_to: `
       <h4 style="color:${color};" class="${
-    includesKeywords(title1) ? 'newsletterTitleH1' : 'newsletterTitleH2'
-  }">${title1}</h4>
+        includesKeywords(title1) ? 'newsletterTitleH1' : 'newsletterTitleH2'
+      }">${title1}</h4>
       <h5 style="color:${color};" class="${includesKeywords(title2) ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${
-    title2 ?? ''
-  }</h5>
+        title2 ?? ''
+      }</h5>
+    `,
+  up_to_three_lines: `
+      <h4 style="color:${color};" class="${
+        includesKeywords(title1) ? 'newsletterTitleH1' : 'newsletterTitleH2'
+      }">${title1}</h4>
+      <h4 style="color:${color};" class="${includesKeywords(title2) ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${
+        title2 ?? ''
+      }</h4>
+      <h4 style="color:${color};" class="${includesKeywords(title3) ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title3 ?? ''}</h4>
     `,
   up_to_bigger: `
       <h4 style="color:${color};" class="${
-    includesKeywords(title1) ? 'newsletterTitleH1Bigger' : 'newsletterTitleH1Bold'
-  }">${title1}</h4>
+        includesKeywords(title1) ? 'newsletterTitleH1Bigger' : 'newsletterTitleH1Bold'
+      }">${title1}</h4>
       <h5 style="color:${color};" class="${
-    includesKeywords(title2) ? 'newsletterTitleH1Bigger' : 'newsletterTitleH1Bold'
-  }">${title2 ?? ''}</h5>
+        includesKeywords(title2) ? 'newsletterTitleH1Bigger' : 'newsletterTitleH1Bold'
+      }">${title2 ?? ''}</h5>
     `,
   line2bigger: `
       <h4 style="color:${color};" class="${
-    includesKeywords(title1) ? 'newsletterTitleH2BoldBigger' : 'newsletterTitleH1Bold'
-  }">${title1}</h4>
+        includesKeywords(title1) ? 'newsletterTitleH2BoldBigger' : 'newsletterTitleH1Bold'
+      }">${title1}</h4>
       <h4 style="color:${color};" class="${
-    includesKeywords(title2) ? 'newsletterTitleH2BoldBigger' : 'newsletterTitleH1Bold'
-  }">${title2}</h4>
+        includesKeywords(title2) ? 'newsletterTitleH2BoldBigger' : 'newsletterTitleH1Bold'
+      }">${title2}</h4>
     `,
   standard: `
       <h5 style="color:${color};" class="newsletterTitleH1">${title1}</h5>
@@ -50,10 +59,10 @@ export const templates = ({ color, title1, title2 }) => ({
     `,
   halloween: `
       <h4 style="color:${color};" class="${
-    String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'
-  }">${title1}</h4>
+        String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'
+      }">${title1}</h4>
       <h4 style="color:${color};" class="${
-    String(title2).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'
-  }">${title2}</h4>
+        String(title2).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'
+      }">${title2}</h4>
     `,
 });

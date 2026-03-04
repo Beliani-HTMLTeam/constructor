@@ -68,14 +68,14 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
 }
 
 export function setupSelectLanguage(elements, setState, getState, render, handleSlugChange) {
-  const { selectLanguage, selectShop, selectShopWrapper, openLP, openCampaign } = elements;
+  const { selectLanguage, selectShop, selectShopWrapper, openLP, openCampaign, redirectCheck } = elements;
 
   selectLanguage.addEventListener('change', (ev) => {
     if (ev.target.value === 'default') {
       return;
     }
 
-    showElements(selectShop, selectShopWrapper, openLP, openCampaign);
+    showElements(selectShop, selectShopWrapper, openLP, openCampaign, redirectCheck);
 
     handleSlugChange(ev);
     render();
