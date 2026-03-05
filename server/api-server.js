@@ -221,11 +221,26 @@ app.post('/api/local/check-redirects', async (req, res) => {
   const normalizeForComparison = (url) => {
     try {
       const u = new URL(url);
-      if(u.pathname.endsWith('/') && u.pathname !== '/') {
-        u.pathname = u.pathname.slice(0, -1);
+      let pathname = u.pathname;
+
+      if(pathname.endsWith('/') && pathname !== '/') {
+        pathname = pathname.slice(0, -1);
       }
 
-      return u.toString()
+      // Removing all utm params
+      const params = new URLSearchParams(u.search);
+      const nonUtmParams = new URLSearchParams()
+
+      for (const [key, value] of params) {
+        if (!key.toLowerCase().startsWith('utm_')) {
+          nonUtmParams.append(key, value);
+        }
+      }
+
+      const cleanedSearch = nonUtmParams.toString() ? `?${nonUtmParams.toString()}` : '';
+
+      const normalized = u.origin + pathname + cleanedSearch + u.hash
+      return normalized
     }
     catch (error) {
       return url.toLowerCase();
@@ -240,6 +255,8 @@ app.post('/api/local/check-redirects', async (req, res) => {
         validateStatus: () => true
       });
 
+      console.log('response.request?.res', response.request?.res.responseUrl)
+
       const finalUrl = response.request?.res?.responseUrl || url;
 
       const normalizedOriginal = normalizeForComparison(url);
@@ -247,7 +264,7 @@ app.post('/api/local/check-redirects', async (req, res) => {
 
       const isTrailingSlashOnly = normalizedFinal === normalizedOriginal
 
-      const redirected = !isTrailingSlashOnly && (finalUrl !== url);
+      const redirected = !isTrailingSlashOnly;
       const redirectCount = response.request?._redirectable?._redirectCount || 0;
 
       results[url] = {
