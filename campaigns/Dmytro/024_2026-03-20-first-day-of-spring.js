@@ -167,7 +167,7 @@ const categories = [
       },
       // SILCHAR 
       {
-        id: '349731',
+        id: '349767',
         src: getImageUrl('20260320/20260320Category22.png', true),
       },
       // LEONA
