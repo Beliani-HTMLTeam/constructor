@@ -117,8 +117,8 @@ async function runRedirectCheck() {
 }
 
 function showRedirectResults(results) {
-  const redirectedCount = Object.values(results).filter(r => r.redirected).length;
-  const redirectedLinks = Object.fromEntries(Object.entries(results).filter(([_, info]) => info.redirected));
+  const redirectedCount = Object.values(results).filter(r => r.hasRedirect).length;
+  const redirectedLinks = Object.fromEntries(Object.entries(results).filter(([_, info]) => info.hasRedirect));
   console.log('redirected', redirectedLinks)
 
   const total = Object.keys(results).length;
@@ -164,8 +164,8 @@ function showRedirectResults(results) {
 
     Object.entries(redirectedLinks).forEach(([original, info]) => {
       const rowBg = 'background:#fff3cd;';
-      const finalLink = info.final && info.final !== original 
-        ? `<a href="${info.final}" target="_blank" style="color:#28a745; text-decoration:none;">${info.final}</a>` 
+      const finalLink = info.finalUrl && info.finalUrl !== original 
+        ? `<a href="${info.finalUrl}" target="_blank" style="color:#28a745; text-decoration:none;">${info.final}</a>` 
         : '—';
 
       tableHtml += `
