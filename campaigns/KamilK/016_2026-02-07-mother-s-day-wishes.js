@@ -32,13 +32,13 @@ const links = {
   // TopImageTitle_href: translateLink({ value: 'content/lp26-03-19' }),
   // TopImageTitle_src: translateImage({ value: '20260319_01.png' }),
   TopImage_src: translateImage({ value: '20260207_Pic.png' }),
-  TopImage_href: translateLink({ value: 'content/lp26-02-07' }),
+  TopImage_href: translateLink({ value: 'content/lp26-03-14' }),
   // change it
-  Banner_1: translateLink({ value: 'content/lp26-01-23' }),
-  Banner_1_Image: translateImage({ value: '20260123b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-03-05' }),
+  Banner_1_Image: translateImage({ value: '20260305b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-01-16' }),
-  Banner_2_Image: translateImage({ value: '20260116b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-03-04' }),
+  Banner_2_Image: translateImage({ value: '20260304b.png' }),
   
   ShopCTA: translateLink({ value: ' ' }),
 };
@@ -201,7 +201,7 @@ const categories = [
 export default new entities.Campaign({
   startId: '38856',
   name: "Mother's Day Wishes",
-  date: '07.02.2026',
+  date: '14.03.2026',
   issueCardId: '426252',
   lpId: '27731',
   alarm: {
@@ -210,7 +210,7 @@ export default new entities.Campaign({
   isArchive: false,
   optimizeImg: true,
   figmaUrl:
-    'https://www.figma.com/design/dadYJFx6Xnjb5dCtgpgEo3/Father---Mother-Days--Copy-?node-id=11003-4567&t=v0FXRaubRQtw5STX-1',
+    'https://www.figma.com/design/qIOmmCoIsijKLGkeQavHaN/',
   templates: [
     {
       name: 'Newsletter',
