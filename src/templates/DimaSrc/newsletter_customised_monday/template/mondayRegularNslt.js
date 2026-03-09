@@ -4,7 +4,7 @@ import { Header } from '@/components/header.js';
 import { getState } from '@/main/state/appState';
 import { Category } from '@/templates/AlexSrc/components/category.js';
 import { Intro } from '@/templates/AlexSrc/components/Intro.js';
-import { Line, ImageWithLink, Space, OfferPartCodes, TopImageTitle } from '@/components/index.js';
+import { Line, ImageWithLink, Space, OfferPartCodes, TopImageTitle } from '../components/components_remake';
 import { OfferPartCode } from '@/components/OfferPartCode.js';
 import { getCodes } from '@/utils/getCodes.js';
 import { Create2Columns_Grid } from '@/components/index.js';
