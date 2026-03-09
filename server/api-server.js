@@ -4,6 +4,7 @@ import { createWarmUpStatic } from './api/google/fetchTranslations.js';
 import { fetchSheetData } from './api/google/fetchSheetData.js';
 import { getStaticTranslation, getDynamicTranslation, getAllStaticTranslations } from './api/local/getTranslations.js';
 import axios from 'axios';
+import pLimit from 'p-limit';
 
 const app = express();
 const PORT = process.env.API_PORT;
@@ -213,67 +214,79 @@ app.post('/api/local/check-redirects', async (req, res) => {
 
   const results = {};
 
-  function randomDelay(minMs = 400, maxMs = 800) {
-    const delay = Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs
-    return new Promise(resolve => setTimeout(resolve, delay));
-  }
+  // Concurrency settings
+  const CONCURRENCY = 8
+  const DELAY_MS = 200
+  const limit = pLimit(CONCURRENCY)
+
+
+  const randomDelay = (min = DELAY_MS * 0.6, max = DELAY_MS * 1.4) =>
+    new Promise(r => setTimeout(r, Math.floor(Math.random() * (max - min + 1)) + min))
 
   const normalizeForComparison = (url) => {
     try {
       const u = new URL(url);
-      if(u.pathname.endsWith('/') && u.pathname !== '/') {
-        u.pathname = u.pathname.slice(0, -1);
+      let pathname = u.pathname;
+
+      if(pathname.endsWith('/') && pathname !== '/') {
+        pathname = pathname.slice(0, -1);
       }
 
-      return u.toString()
+     
+      const normalized = u.origin + pathname
+      return normalized.toLowerCase()
     }
     catch (error) {
       return url.toLowerCase();
     }
   }
 
-  for (const url of urls) {
-    try {
-      const response = await axios.head(url, {
-        maxRedirects: 10,
-        timeout: 5000,
-        validateStatus: () => true
-      });
+  const tasks = urls.map(url => 
+    limit(async () => {
+      await randomDelay()
 
-      const finalUrl = response.request?.res?.responseUrl || url;
-
-      const normalizedOriginal = normalizeForComparison(url);
-      const normalizedFinal = normalizeForComparison(finalUrl);
-
-      const isTrailingSlashOnly = normalizedFinal === normalizedOriginal
-
-      const redirected = !isTrailingSlashOnly && (finalUrl !== url);
-      const redirectCount = response.request?._redirectable?._redirectCount || 0;
-
-      results[url] = {
-        original: url,
-        final: finalUrl,
-        redirected,
-        redirectCount,
-        status: response.status,
-        statusText: response.statusText,
-        note: isTrailingSlashOnly ? 'trailing slash only (ignored)' : undefined
-      };
-    } catch (error) {
-      results[url] = {
-        original: url,
-        error: error.message || 'Request failed',
-        status: error.response?.status || null
+      try {
+        const response = await axios.head(url, {
+          maxRedirects: 0,
+          timeout: 5000,
+          validateStatus: () => true
+        });
+    
+        const finalUrl = response.request?.res?.responseUrl || url;
+  
+        const normalizedOriginal = normalizeForComparison(url);
+        const normalizedFinal = normalizeForComparison(finalUrl);
+  
+        const isTrailingSlashOnly = normalizedFinal === normalizedOriginal
+  
+        const redirected = !isTrailingSlashOnly;
+        const redirectCount = response.request?._redirectable?._redirectCount || 0;
+  
+        results[url] = {
+          original: url,
+          final: finalUrl,
+          redirected,
+          redirectCount,
+          status: response.status,
+          statusText: response.statusText,
+          note: isTrailingSlashOnly ? 'trailing slash only (ignored)' : undefined
+        };
+      } catch (error) {
+        results[url] = {
+          original: url,
+          error: error.message || 'Request failed',
+          status: error.response?.status || null
+          }
         }
-      }
+    })
+  )
 
-      await randomDelay(400, 800);
-    }
+  await Promise.allSettled(tasks)
 
     res.json({
       code: 200,
       data: results,
-      message: `Checked ${Object.keys(results).length} URLs`,
+      message: `Checked ${Object.keys(results).length} URLs (concurrency: ${CONCURRENCY}, delay: ~${DELAY_MS}ms)`,
     })
 })
 

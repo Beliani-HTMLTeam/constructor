@@ -117,7 +117,10 @@ async function runRedirectCheck() {
 }
 
 function showRedirectResults(results) {
-  const redirectedCount = Object.values(results).filter(r => r.redirected).length;
+  const redirectedCount = Object.values(results).filter(r => r.hasRedirect).length;
+  const redirectedLinks = Object.fromEntries(Object.entries(results).filter(([_, info]) => info.hasRedirect));
+  console.log('redirected', redirectedLinks)
+
   const total = Object.keys(results).length;
 
   if (redirectedCount === 0) {
@@ -129,7 +132,7 @@ function showRedirectResults(results) {
           Checked <strong>${total}</strong> links — no redirects found.<br>
           Everything looks perfect!
         </p>
-        <img src="https://media1.tenor.com/m/zv2HT2Dcv54AAAAd/trump-point.gif" 
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnJueGNqd2czbzFhdXQxaHFpMGVzb2cxenRld2JzdXZrcGZoY2Q2NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SABpzb2ivrS0g4Hgbb/giphy.gif" 
              alt="Success - no redirects" 
              style="max-width: 320px; border-radius: 12px; margin: 16px auto; display: block;">
       `,
@@ -159,10 +162,10 @@ function showRedirectResults(results) {
           <tbody>
     `;
 
-    Object.entries(results).forEach(([original, info]) => {
-      const rowBg = info.redirected ? 'background:#fff3cd;' : 'background:#f8fff8;';
-      const finalLink = info.final && info.final !== original 
-        ? `<a href="${info.final}" target="_blank" style="color:#28a745; text-decoration:none;">${info.final}</a>` 
+    Object.entries(redirectedLinks).forEach(([original, info]) => {
+      const rowBg = 'background:#fff3cd;';
+      const finalLink = info.finalUrl && info.finalUrl !== original 
+        ? `<a href="${info.finalUrl}" target="_blank" style="color:#28a745; text-decoration:none;">${info.final}</a>` 
         : '—';
 
       tableHtml += `
@@ -173,8 +176,8 @@ function showRedirectResults(results) {
           <td style="padding:10px; border-bottom:1px solid #eee; word-break:break-all;">
             ${finalLink}
           </td>
-          <td style="padding:10px; border-bottom:1px solid #eee; text-align:center; font-weight:${info.redirected ? 'bold' : 'normal'};">
-            ${info.redirected ? 'Yes' : 'No'}
+          <td style="padding:10px; border-bottom:1px solid #eee; text-align:center; font-weight:bold;">
+            Yes
           </td>
           <td style="padding:10px; border-bottom:1px solid #eee; text-align:center;">
             ${info.status || (info.error ? 'Error' : '—')}

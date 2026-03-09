@@ -1,7 +1,7 @@
 import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::25.03.2026 Bedroom';
+const campaignTranslationsSheet = '2026::08.04.26 - Textiles';
 
 const tableQueries = [
   {
@@ -19,27 +19,27 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-03-25' }),
-  TopImageTitle_src:  DimasTranslateImage({ value: '20260325_01.png', folder: '20260325', placeholderPosition: '47' }),
-  // TopImage_src: getImageUrl('20260325_Pic.png', true),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-04-08' }),
+  TopImageTitle_src:  DimasTranslateImage({ value: '20260408_01.png', folder: '20260408', placeholderPosition: '47' }),
+  // TopImage_src: getImageUrl('20260408_Pic.png', true),
   // TopImage_href: translateLink({ value: 'content/lp26-03-25' }),
-  Banner_1: translateLink({ value: 'content/lp26-03-18' }),
-  Banner_1_Image: translateImage({ value: '20260318b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-03-13' }),
-  Banner_2_Image: translateImage({ value: '20260313b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-04-01' }),
+  Banner_1_Image: translateImage({ value: '20260401b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-03-27' }),
+  Banner_2_Image: translateImage({ value: '20260327b.png' }),
 };
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#F6E7E6',
-  type: 'up_to',
+  backgroundColor: '#FFE8DE',
+  type: 'twoSameLines',
 };
 
 const categories = [
   {
-    src: getImageUrl('20260325/20260325Category10.png', true),
-    href: 'https://www.beliani.ch/bedroom-furniture/beds/',
-    background: '#F6E7E6',
+    src: getImageUrl('20260408/20260408Category10.png', true),
+    href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
+    background: '#FFE8DE',
     color: '#000000',
     paddingTop: 0,
     spaceAfter: '0',
@@ -47,9 +47,9 @@ const categories = [
     paragraph: { show: false, spaceBefore: '0', spaceAfter: '0' },
   },
   {
-    src: DimasTranslateImage({ value: '20260325inside.gif', folder: '20260325', placeholderPosition: '47' }),
+    src: DimasTranslateImage({ value: '20260408inside.gif', folder: '20260408', placeholderPosition: '47' }),
     href: translateLink({ value: 'content/lp26-03-02' }),
-    background: '#F6E7E6',
+    background: '#FFE8DE',
     color: '#000000',
     paddingTop: 35,
     spaceAfter: '0',
@@ -57,10 +57,10 @@ const categories = [
     paragraph: { show: false, spaceBefore: '0', spaceAfter: '0' },
   },
   {
-    name: 'Beds',
+    name: 'Blankets',
     // src: translateImage({ value: '20260311_Pic.gif' }),
-    href: 'https://www.beliani.ch/bedroom-furniture/beds/',
-    background: '#F6E7E6',
+    href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
+    background: '#FFE8DE',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -84,33 +84,33 @@ const categories = [
       name: true,
     },
     products: [
-      // BASTON
+      // PALHI
       {
-        id: '638261',
-        src: getImageUrl('20260325/20260325Category11.png', true),
+        id: '338525',
+        src: getImageUrl('20260408/20260408Category11.png', true),
       },
-      // LUNAN
+      // VELLA
       {
-        id: '258481',
-        src: getImageUrl('20260325/20260325Category12.png', true),
+        id: '697408',
+        src: getImageUrl('20260408/20260408Category12.png', true),
       },
-      // HOUNOUX
+      // SALKA
       {
-        id: '704329',
-        src: getImageUrl('20260325/20260325Category13.png', true),
+        id: '501571',
+        src: getImageUrl('20260408/20260408Category13.png', true),
       },
-      // BREUILLET
+      // BARTAR
       {
-        id: '686785',
-        src: getImageUrl('20260325/20260325Category14.png', true),
+        id: '338326',
+        src: getImageUrl('20260408/20260408Category14.png', true),
       },
     ],
   },
   {
-    name: 'Bedside tables',
-    src: getImageUrl('20260325/20260325Category20.png', true),
-    href: 'https://www.beliani.ch/storage/bedside-tables/',
-    background: '#FFCCB7',
+    name: 'Scatter cushions',
+    src: getImageUrl('20260408/20260408Category20.png', true),
+    href: 'https://www.beliani.ch/textiles/scatter-cushions/',
+    background: '#FFA18C',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -134,33 +134,33 @@ const categories = [
       name: true,
     },
     products: [
-      // LEFROY
+      // GOLDENROD
       {
-        id: '609363',
-        src: getImageUrl('20260325/20260325Category21.png', true),
+        id: '382627',
+        src: getImageUrl('20260408/20260408Category21.png', true),
       },
-      // RONGE
+      // YUZURI
       {
-        id: '697713',
-        src: getImageUrl('20260325/20260325Category22.png', true),
+        id: '387626',
+        src: getImageUrl('20260408/20260408Category22.png', true),
       },
-      // GLASTONBURY
+      // MARANTA
       {
-        id: '607537',
-        src: getImageUrl('20260325/20260325Category23.png', true),
+        id: '697561',
+        src: getImageUrl('20260408/20260408Category23.png', true),
       },
-      //  MALAVI
+      // MADHUCA
       {
-        id: '359307',
-        src: getImageUrl('20260325/20260325Category24.png', true),
+        id: '693546',
+        src: getImageUrl('20260408/20260408Category24.png', true),
       },
     ],
   },
   {
-    name: 'Armchairs',
-    src: getImageUrl('20260325/20260325Category30.png', true),
-    href: 'https://www.beliani.ch/bedroom-furniture/armchairs/',
-    background: '#F6E7E6',
+    name: 'Outdoor cushions',
+    src: getImageUrl('20260408/20260408Category30.png', true),
+    href: 'https://www.beliani.ch/textiles/outdoor-cushions/',
+    background: '#FFE8DE',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -184,33 +184,33 @@ const categories = [
       name: true,
     },
     products: [
-      // MALMOS
+      // SWAY
       {
-        id: '521367',
-        src: getImageUrl('20260325/20260325Category31.png', true),
+        id: '613111',
+        src: getImageUrl('20260408/20260408Category31.png', true),
       },
-      // BUREA
+      // SEASIDE
       {
-        id: '656530',
-        src: getImageUrl('20260325/20260325Category32.png', true),
+        id: '613715',
+        src: getImageUrl('20260408/20260408Category32.png', true),
       },
-      // SKEI
+      // MIRAGE
       {
-        id: '678879',
-        src: getImageUrl('20260325/20260325Category33.png', true),
+        id: '613526',
+        src: getImageUrl('20260408/20260408Category33.png', true),
       },
-      // KAGE
+      // MEADOW
       {
-        id: '656549',
-        src: getImageUrl('20260325/20260325Category34.png', true),
+        id: '613185',
+        src: getImageUrl('20260408/20260408Category34.png', true),
       },
     ],
   },
   {
-    name: 'Lighting',
-    src: getImageUrl('20260325/20260325Category40.png', true),
-    href: 'https://www.beliani.ch/bedroom-furniture/lighting/',
-    background: '#FFCCB7',
+    name: 'Kids cushions',
+    src: getImageUrl('20260408/20260408Category40.png', true),
+    href: 'https://www.beliani.ch/textiles/cushions-for-kids/',
+    background: '#FFA18C',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -235,25 +235,25 @@ const categories = [
       name: true,
     },
     products: [
-      // CELESTE
+      // WALLFLOWER
       {
-        id: '370610',
-        src: getImageUrl('20260325/20260325Category41.png', true),
+        id: '458260',
+        src: getImageUrl('20260408/20260408Category41.png', true),
       },
-      // PORTERO
+      // TALOKAN
       {
-        id: '689579',
-        src: getImageUrl('20260325/20260325Category42.png', true),
+        id: '457242',
+        src: getImageUrl('20260408/20260408Category42.png', true),
       },
-      // VALLASAN
+      // GAMBIR
       {
-        id: '691932',
-        src: getImageUrl('20260325/20260325Category43.png', true),
+        id: '457062',
+        src: getImageUrl('20260408/20260408Category43.png', true),
       },
-      // TYRIA
+      // SORREL
       {
-        id: '336915',
-        src: getImageUrl('20260325/20260325Category44.png', true),
+        id: '458071',
+        src: getImageUrl('20260408/20260408Category44.png', true),
       },
     ],
   },
@@ -285,44 +285,44 @@ const categories = [
     },
     tiles: [
       {
-        name: 'Mattresses',
-        src: getImageUrl('20260325/20260325Additional1.png', true),
-        href: 'https://www.beliani.ch/bedroom-furniture/mattresses/',
+        name: 'Sofas',
+        src: getImageUrl('20260408/20260408Additional1.png', true),
+        href: 'https://www.beliani.ch/sofas/',
       },
       {
-        name: 'Blankets',
-        src: getImageUrl('20260325/20260325Additional2.png', true),
-        href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
+        name: 'Beds',
+        src: getImageUrl('20260408/20260408Additional2.png', true),
+        href: 'https://www.beliani.ch/beds/',
       },
       {
-        name: 'Mirrors',
-        src: getImageUrl('20260325/20260325Additional3.png', true),
-        href: 'https://www.beliani.ch/bedroom-furniture/mirrors/',
+        name: 'Coffee tables',
+        src: getImageUrl('20260408/20260408Additional3.png', true),
+        href: 'https://www.beliani.ch/tables/coffee-tables/',
       },
       {
-        name: 'Sideboards',
-        src: getImageUrl('20260325/20260325Additional4.png', true),
-        href: 'https://www.beliani.ch/storage/sideboards/',
+        name: 'Armchairs',
+        src: getImageUrl('20260408/20260408Additional4.png', true),
+        href: 'https://www.beliani.ch/armchairs/',
       },
     ],
   },
 ];
 
 export default new entities.Campaign({
-  startId: "41805",
-  name: "Bedroom",
-  date: "25.03.2026",
-  issueCardId: "459320",
-  lpId: "29190",
+  startId: "41965",
+  name: "Textiles",
+  date: "08.04.2026",
+  issueCardId: "460901",
+  lpId: "29266",
   alarm: {
     isActive: false,
   },
   isArchive: false,
   optimizeImg: true,
-  figmaUrl: "https://www.figma.com/design/bxKjNosAVmaqAg29vmKZgV/Newsletter-Bedroom---Wednesday-2026.03.25?node-id=0-1&t=8Uwrmpi2eavyQDkX-1",
+  figmaUrl: "https://www.figma.com/design/v2R3Mj2GiDnvthE24a8Yvb/2026.04.08---Newsletter---Textiles?node-id=0-1&t=Oppk45wgEH0X7hVI-1",
   templates: [
     {
-      background: '#F6E7E6',
+      background: '#FFE8DE',
       color: '#000000',
       template: templates.Thursday, // User should change this
 
@@ -337,7 +337,7 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
     },
     {
-      background: '#F6E7E6',
+      background: '#FFE8DE',
       color: '#000000',
       template: templates.Thursday, // User should change this
 
