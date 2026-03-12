@@ -1,4 +1,4 @@
-import { getImageUrl } from '@utils/ImageManager.js';
+import { getImageUrl } from '../../../../utils/ImageManager.js';
 
 const toSlug = (name) =>
   name
@@ -22,6 +22,7 @@ const renderTileCard = ({ item, tiles, color, getCategoryLink, getCategoryTitle,
   const src = item.src ?? buildTileSrc({ tiles, itemName: item.name, country });
   // const tileClass = side === 'left' ? 'smallCategoryTilesLEFT' : 'smallCategoryTilesRIGHT';
   // const tileClass = `smallCategoryTiles${side === 'left' ? 'LEFT' : 'RIGHT'}`;
+  let tileClass;
   const tileStyle = `${side === 'left' ? 'padding-right: 4px;' : 'padding-left: 4px;'}`;
 
   return `
@@ -29,7 +30,7 @@ const renderTileCard = ({ item, tiles, color, getCategoryLink, getCategoryTitle,
       <table cellspacing="0" cellpadding="0" border="0" width="100%">
         <tbody>
           <tr>
-            <td class="${tileClass}" style="${tileStyle}">
+            <td class="${tileClass ?? ''}" style="${tileStyle}">
               <a href="${href}">
                 <img alt="${item.name}" src="${src}" style="width:100%; max-width: 100%; display:block;" loading="lazy">
               </a>
