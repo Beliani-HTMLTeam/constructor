@@ -505,3 +505,21 @@ table {
     font-size: 12px;
   }
 }
+
+.smallCategoryTilesLEFT {
+  padding-right: 6px;
+}
+
+.smallCategoryTilesRIGHT {
+  padding-left: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  .smallCategoryTilesLEFT {
+    padding-right: 3px;
+  }
+
+  .smallCategoryTilesRIGHT {
+    padding-left: 3px;
+  }
+}
