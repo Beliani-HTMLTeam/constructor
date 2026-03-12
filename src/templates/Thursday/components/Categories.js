@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
-const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm }) => {
+const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country }) => {
   let html = '';
 
   if (Array.isArray(categories)) {
@@ -17,7 +17,10 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
         getPhrase,
         getCategoryLink,
         getCategoryTitle,
-        add_utm
+        add_utm,
+        links,
+        type,
+        country
       );
     }
   }
@@ -25,7 +28,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
   return html;
 };
 
-const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm) => {
+const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country) => {
   const background = category.background ?? 'white';
   const color = category.color ?? '#000000';
 
@@ -85,7 +88,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       
       ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
     `
-    : Space({ insideTr: true, className: category.paragraph.spaceAfter ?? 'newsletterBottom35px' });
+    : Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' });
 
   const paragraphPositionRaw = category?.paragraph?.position ?? 'beforeProducts';
   const paragraphPosition =
@@ -121,6 +124,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           categoryHref: ctaHref,
           getCategoryLink,
           getCategoryTitle,
+          links,
+          getPhrase,
+          type,
+          country,
         })
       : '';
 
@@ -128,7 +135,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? CTA({
         color: category.color ?? '#000000',
         href: ctaHref,
-        text: getPhrase('shop now'),
+        text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
         insideTr: true,
         tdClass: 'newsletterContainer',
       })
@@ -201,13 +208,17 @@ const renderBody = async ({
   categoryHref,
   getCategoryLink,
   getCategoryTitle,
+  links,
+  getPhrase,
+  type,
+  country,
 }) => {
   // console.log('produkty ', products);
 
-  const type = categoryType ? categoryType.toLowerCase() : 'default';
+  const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
 
   try {
-    const module = await import(`./category/${type}.js`);
+    const module = await import(`./category/${categoryTypeStr}.js`);
 
     return module.render({
       products,
@@ -225,6 +236,10 @@ const renderBody = async ({
       categoryHref,
       getCategoryLink,
       getCategoryTitle,
+      links,
+      getPhrase,
+      renderType: type,
+      country,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);
@@ -244,6 +259,9 @@ const renderBody = async ({
       color,
       id,
       imageSide,
+      links,
+      getPhrase,
+      renderType: type,
     });
   }
 };

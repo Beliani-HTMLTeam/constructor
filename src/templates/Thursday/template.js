@@ -76,7 +76,7 @@ const Thursday = async ({
   let introCta_href;
   if (links.Intro_cta_href) introCta_href = add_utm(links.Intro_cta_href);
   else if (queries.categoryLinks?.[0]) introCta_href = add_utm(queries.categoryLinks[0]);
-  else introCta_href = getCategoryLink(categories[0]?.href);
+  else if (categories[0]?.href) introCta_href = getCategoryLink(categories[0]?.href);
 
   const IntroElement =
     intro && intro.type === 'paragraph'
@@ -207,6 +207,9 @@ const Thursday = async ({
       categories: categoriesForRender,
       queries,
       add_utm,
+      links,
+      type,
+      country,
     });
   }
 
