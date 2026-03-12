@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::18.03.2026_Easter inspirations';
+const campaignTranslationsSheet = '2026::18.03.26 - Easter inspirations';
 
 const tableQueries = [
   {

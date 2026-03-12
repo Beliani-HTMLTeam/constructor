@@ -25,7 +25,7 @@ const tableQueries = [
   {
     tableRange: '15:16',
     name: 'timer',
-    tableName: '2026::16.03.2026 - Free Gift',
+    tableName: '2026::16.03.26 - Free Gift',
   },
 ];
 
