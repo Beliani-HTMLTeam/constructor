@@ -1,7 +1,7 @@
 import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::20.03.2026 - First Day of Spring';
+const campaignTranslationsSheet = '2026::20.03.26 - First Day of Spring';
 
 const tableQueries = [
   {
