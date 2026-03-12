@@ -4,10 +4,11 @@ import { Header } from '@/components/header.js';
 import { getState } from '@/main/state/appState';
 import { Category } from '@/templates/AlexSrc/components/category.js';
 import { Intro } from '@/templates/AlexSrc/components/Intro.js';
-import { Line, ImageWithLink, Space, OfferPartCodes, TopImageTitle } from '@/components/index.js';
+import { Line, ImageWithLink, Space, OfferPartCodes } from '@/components/index.js';
 import { OfferPartCode } from '@/components/OfferPartCode.js';
 import { getCodes } from '@/utils/getCodes.js';
 import { Create2Columns_Grid } from '@/components/index.js';
+import { TopImageTitle } from '../components/components_remake/TopImageTitle';
 
 /**
  * Funkcja generująca sekcje kategorii dla newslettera/landing page
@@ -351,6 +352,7 @@ export async function customisedMondayRegularNSLT({
                           title2: queries.tit[1],
                           color: TopImageTitle_data?.color || '#000',
                           type: TopImageTitle_data?.type || 'standard',
+                          renderType: type
                         })
                       : ``
                   }
