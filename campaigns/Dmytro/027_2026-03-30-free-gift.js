@@ -271,6 +271,7 @@ export default new entities.Campaign({
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
+      soon_banners: true,
       intro: {
         color: "#000000",
         background: "#F6E7E6",
