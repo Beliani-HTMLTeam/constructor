@@ -104,6 +104,9 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const ParagraphAfterImg = paragraphPosition === 'afterImg' ? ParagraphElement : '';
   const ParagraphBeforeProducts = paragraphPosition === 'beforeProducts' ? ParagraphElement : '';
   const ParagraphAfterProducts = paragraphPosition === 'afterProducts' ? ParagraphElement : '';
+  const SpaceBeforeProducts = category?.spaceBeforeProducts
+    ? Space({ insideTr: true, className: category.spaceBeforeProducts })
+    : '';
 
   const ProductsElement =
     category.products || category.tiles
@@ -166,6 +169,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         ${category.title?.position === 'afterImg' ? TitleElement : ''}
 
         ${ParagraphBeforeProducts}
+
+        ${SpaceBeforeProducts}
 
         ${ProductsElement}
 
