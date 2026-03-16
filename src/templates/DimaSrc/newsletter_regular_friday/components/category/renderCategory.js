@@ -5,6 +5,7 @@ import { Paragraph } from '../Paragraph';
 import { Space } from '../Space';
 import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
+import { category4Tiles_Grid } from '../../category/grid4tiles';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -21,7 +22,7 @@ export const renderCategory = async (
   lineType = 'white'
 ) => {
   console.log('background: ', category);
-  
+
   const background = category.background || 'white';
   const color = category.color || '#000000';
 
@@ -33,7 +34,7 @@ export const renderCategory = async (
   const TitleElement = category?.title?.show
     ? `
       <tr>
-        <td style="${styles}" class="newsletterContainer">
+        <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
           ${Paragraph({
             text: category.name,
             color: color,
@@ -45,7 +46,7 @@ export const renderCategory = async (
         </td>
       </tr>
   
-      ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter , backgroundColor: background }) : ''}
+      ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter, backgroundColor: background }) : ''}
       `
     : '';
 
@@ -79,8 +80,8 @@ export const renderCategory = async (
 
   const ProductsElement = category.products
     ? category.type === 'unique'
-      ? await renderProducts(
-         { products: [
+      ? await renderProducts({
+          products: [
             ...category.products,
             { href: ctaHref, src: category.src1 },
             { href: ctaHref, src: category.src2 },
@@ -90,21 +91,30 @@ export const renderCategory = async (
           showName: category.showName || true,
           queries,
           categoryType: category.type,
-          categoryIndex: id, 
-          insideContainer: category.insideContainer || false}
-        )
-        : await renderProducts(
-          { products: category.products,
-          showPrices: category.showPrices || true,
-          showName: category.showName || true,
-          queries,
-          categoryType: category.type,
           categoryIndex: id,
           insideContainer: category.insideContainer || false,
-          background,
-          color: category.color || '#000000'}
-        )
-    : '';
+        })
+      : category.type === 'grid4tiles'
+        ? category4Tiles_Grid({
+            getCategoryLink,
+            getCategoryTitle,
+            products: category.products,
+            insideContainer: true,
+            color,
+            background,
+          })
+        : await renderProducts({
+            products: category.products,
+            showPrices: category.showPrices || true,
+            showName: category.showName || true,
+            queries,
+            categoryType: category.type,
+            categoryIndex: id,
+            insideContainer: category.insideContainer || false,
+            background,
+            color: category.color || '#000000',
+          })
+    : null;
 
   return `
     <tr>
@@ -130,16 +140,20 @@ export const renderCategory = async (
           
           ${category.cta?.show ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
   
-          ${category.cta?.show ? CTA({
-            href: ctaHref,
-            text: getPhrase('shop now'),
-            insideTr: true,
-            tdClass: 'newsletterContainer',
-            color: color,
-            background: background,
-          }) : ''}
+          ${
+            category.cta?.show
+              ? CTA({
+                  href: ctaHref,
+                  text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
+                  insideTr: true,
+                  tdClass: 'newsletterContainer',
+                  color: color,
+                  background: background,
+                })
+              : ''
+          }
   
-          ${Space({ insideTr: true, className: 'newsletterBottom80px', backgroundColor: background  })}
+          ${Space({ insideTr: true, className: 'newsletterBottom80px', backgroundColor: background })}
   
          
         </table>
@@ -148,15 +162,17 @@ export const renderCategory = async (
   
    
       ${
-        category.line && !category.line?.show ? '' : (id < categoriesLength - 1
-          ? `
+        category.line && !category.line?.show
+          ? ''
+          : id < categoriesLength - 1
+            ? `
           ${Line({
             insideTr: true,
             src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
             insideContainer: true,
           })}
     `
-          : '')
+            : ''
       }
     `;
 };

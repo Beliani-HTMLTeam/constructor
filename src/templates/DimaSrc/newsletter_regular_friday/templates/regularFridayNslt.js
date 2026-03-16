@@ -15,6 +15,8 @@ import { render as category2Columns_Grid } from '../category/category2Columns_Gr
 import { Intro } from '../components/Intro';
 import { CTA } from '../components/CTA';
 import FreebiesGenerator from '@/components/FreebiesGenerator';
+import { category4Tiles_Grid } from '../category/grid4tiles';
+import { VideoLPWithLink } from '../components/VideoLP';
 
 const RegularFridayNslt = async ({
   links,
@@ -47,7 +49,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', TopImageTitle_data);
+  console.log('wszystko', TopImageTitle_data, type);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -81,16 +83,24 @@ const RegularFridayNslt = async ({
         })
       : '';
 
-  const TopImageElement =
-    // are both href and src available?
+  let TopImageElement =
     links?.TopImage_href && links?.TopImage_src
-      ? ImageWithLink({
-          href: links.TopImage_href,
-          src: links.TopImage_src,
-          insideTr: true,
-          alt: 'Top Image',
-        })
-      : '';
+        ? ImageWithLink({
+            href: links.TopImage_href,
+            src: links.TopImage_src,
+            insideTr: true,
+            alt: 'Top Image',
+          })
+        : ''
+
+  if (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) {
+    TopImageElement = VideoLPWithLink({
+            href: links.TopImageVideo_href,
+            src: links.TopImageVideo_src,
+            alt: 'Landing Page Video',
+            insideTr: true,
+          })
+  }
 
   console.log('links in template', links);
   const OfferPartElement =
@@ -211,7 +221,7 @@ const RegularFridayNslt = async ({
       : '';
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => {
-      if (category.type !== 'tilesWithoutProducts') {
+      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles') {
         return {
           ...category,
           products: await Promise.all(category.products.map((p) => getProductById(p.id, p.src))),
