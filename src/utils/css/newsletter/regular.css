@@ -597,3 +597,31 @@ img {
     padding-left: 3px;
   }
 }
+
+.newsletter3ProductsLeft {
+  padding-left: 20px;
+}
+
+.newsletter3ProductsCenter {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.newsletter3ProductsRight {
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .newsletter3ProductsLeft {
+    padding-left: 10px;
+  }
+
+  .newsletter3ProductsCenter {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .newsletter3ProductsRight {
+    padding-right: 10px;
+  }
+}
