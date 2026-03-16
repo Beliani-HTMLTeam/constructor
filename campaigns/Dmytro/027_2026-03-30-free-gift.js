@@ -2,7 +2,7 @@ import { customisedMondayRegularNSLT } from "@/templates/DimaSrc/newsletter_cust
 import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::30.03.2026 - Free Gift';
+const campaignTranslationsSheet = '2026::30.03.26 - Free Gift';
 
 const tableQueries = [
   {
@@ -271,6 +271,7 @@ export default new entities.Campaign({
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
+      soon_banners: true,
       intro: {
         color: "#000000",
         background: "#F6E7E6",

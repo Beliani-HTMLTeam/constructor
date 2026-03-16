@@ -1,7 +1,7 @@
 import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::13.03.2026 - World sleep day';
+const campaignTranslationsSheet = '2026::13.03.26 - World sleep day';
 
 const tableQueries = [
   {
