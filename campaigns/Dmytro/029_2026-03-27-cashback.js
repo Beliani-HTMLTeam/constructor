@@ -166,17 +166,17 @@ const categories = [
       },
       {
         name: 'Armchairs',
-        src: DimasTranslateImage({ value: '_dining_sets.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
+        src: DimasTranslateImage({ value: '_armchairs.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
         href: 'https://www.beliani.ch/living-room-furniture/armchairs/',
       },
       {
         name: 'Coffee Tables',
-        src: DimasTranslateImage({ value: '_balcony_furniture.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
+        src: DimasTranslateImage({ value: '_coffee_tables.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
         href: 'https://www.beliani.ch/tables/coffee-tables/',
       },
       {
         name: 'Rugs',
-        src: DimasTranslateImage({ value: '_storage.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
+        src: DimasTranslateImage({ value: '_rugs.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
         href: 'https://www.beliani.ch/living-room-furniture/rugs/',
       },
     ],
