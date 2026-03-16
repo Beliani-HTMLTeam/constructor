@@ -31,6 +31,10 @@ const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) =
       <h5 style="color:${color};" class="newsletterTitleH1">${title1}</h5>
       <h4 style="color:${color};" class="newsletterTitleH2">${title2}</h4>
     `,
+    standard_inverted: `
+      <h5 style="color:${color};" class="newsletterTitleH2">${title1}</h5>
+      <h4 style="color:${color};" class="newsletterTitleH1">${title2}</h4>
+    `,
     twoSameLines: `
       <h4 style="color:${color};" class="newsletterTitleH1">${title1}</h4>
       <h4 style="color:${color};" class="newsletterTitleH1">${title2}</h4>
