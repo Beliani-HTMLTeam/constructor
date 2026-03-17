@@ -6,7 +6,7 @@ let reverseMapCache = null;
 
 export const buildReverseMaps = () => {
   if (reverseMapCache !== null) {
-    console.log('Returning cached reverse maps');
+    // console.log('Returning cached reverse maps');
     return reverseMapCache;
   }
 
@@ -36,7 +36,7 @@ export const buildReverseMaps = () => {
     reverseMapCache[sourceSlug.toLowerCase()] = map;
   });
 
-  console.log('✅ Reverse maps built for slugs:', Object.keys(reverseMapCache));
+  // console.log('✅ Reverse maps built for slugs:', Object.keys(reverseMapCache));
   return reverseMapCache;
 };
 
@@ -112,7 +112,7 @@ export const getCategoryLinkForTargetShop = (input, targetShop) => {
       const domainKey = Object.keys(domainMap).find((key) => domain.includes(key));
       if (domainKey) {
         sourceSlug = domainMap[domainKey];
-        console.log(`[Source Slug] Guessed from domain+path: ${sourceSlug}`);
+        // console.log(`[Source Slug] Guessed from domain+path: ${sourceSlug}`);
       }
     } catch (e) {
       console.warn('Could not detect source slug from URL: ', e);
@@ -165,8 +165,9 @@ export const getCategoryLinkForTargetShop = (input, targetShop) => {
 
   // Build final URL
   const finalPath = translatedParts.join('/');
-  const finalUrl = new URL(targetShop.origin);
-  finalUrl.pathname = finalPath ? '/' + finalPath : '/';
+  const originClean = targetShop.origin.replace(/\/+$/, '');
+  const finalUrl = new URL(originClean);
+  finalUrl.pathname = finalPath ? '/' + finalPath.replace(/^\/+/, '') : '/';
 
   const result = getQueryLink(finalUrl);
   console.log(`[Result for ${targetSlug.toUpperCase()}] ${result}`);
@@ -195,7 +196,7 @@ export const checkRealRedirects = (data, urlToOriginalAndShop) => {
       try {
         const finalUrl = new URL(info.final).pathname.toLowerCase();
         if (viewSuffixes.some((suffix) => finalUrl.endsWith(suffix))) {
-          console.log(`Ignoring view-suffix redirect: ${info.original} → ${info.final}`);
+          // console.log(`Ignoring view-suffix redirect: ${info.original} → ${info.final}`);
           return false;
         }
       } catch {}
@@ -203,11 +204,14 @@ export const checkRealRedirects = (data, urlToOriginalAndShop) => {
       return true;
     })
     .map(([originalUrl, info]) => {
-      const meta = urlToOriginalAndShop.get(originalUrl) || {
+      console.log('urlToOriginalAndShop', urlToOriginalAndShop)
+      let normalizedKey = originalUrl.replace(/\/+$/, '') || `${new URL(originalUrl).origin}/`;
+      const meta = urlToOriginalAndShop.get(normalizedKey) || {
         original: originalUrl,
-        shopSlug: '???',
+      baseOriginal: originalUrl,
+        shop: 'unknown'
       };
-      return { ...info, baseOriginal: meta.original, shop: meta.shopSlug };
+      return { ...info, original: originalUrl, baseOriginal: meta.baseOriginal || originalUrl, shop: meta.shop};
     });
 
   return realRedirects;

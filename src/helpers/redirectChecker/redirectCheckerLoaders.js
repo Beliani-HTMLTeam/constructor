@@ -17,7 +17,7 @@ export const redirectCheckerLoader = () => {
     allowOutsideClick: false,
     allowEscapeKey: false,
     showConfirmButton: false,
-    allowEnterKey: false,
+    preConfirm: () => false,
     backdrop: true,
     didOpen: () => {
       Swal.showLoading();

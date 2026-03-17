@@ -156,14 +156,18 @@ async function runRedirectCheck() {
       allShops.forEach((shop) => {
         try {
           // console.log('shop', shop);
-          const localized = getCategoryLinkForTargetShop(cleanCategory, shop);
+          const localized = getCategoryLinkForTargetShop(cleanCategory, shop).href ? getCategoryLinkForTargetShop(cleanCategory, shop).href: getCategoryLinkForTargetShop(cleanCategory, shop)
+
+          console.log('localized',localized)
+
+          let key = localized.replace(/\/+$/, '') || `${new URL(localized).origin}/`;
 
           if (localized === cleanCategory && shop.slug !== new URL(baseFullUrl).host.split('.')[1].toUpperCase()) {
             return;
           }
 
-          allLocalizedUrls.push(localized);
-          urlToOriginalAndShop.set(localized, { original: baseFullUrl, baseOriginal: cleanCategory, shop: shop.slug });
+          allLocalizedUrls.push(key);
+          urlToOriginalAndShop.set(key, { original: baseFullUrl, baseOriginal: cleanCategory, shop: shop.slug });
         } catch (error) {
           console.warn(`Failed to localize ${cleanCategory} for shop ${shop.slug}:`, error);
         }
