@@ -42,7 +42,7 @@ export const buildReverseMaps = () => {
 
 export const getCategoryLinkForTargetShop = (input, targetShop) => {
   const targetSlug = String(targetShop.slug).toLowerCase();
-  console.log(`[Translate] Target: ${targetSlug} | Input: ${input}`);
+  // console.log(`[Translate] Target: ${targetSlug} | Input: ${input}`);
 
   const data = staticTranslations.category_links;
   if (!data || !Array.isArray(data.slug)) {
@@ -78,7 +78,6 @@ export const getCategoryLinkForTargetShop = (input, targetShop) => {
   const currentCountry = getState('country')?.toLowerCase();
   if (currentCountry) {
     sourceSlug = currentCountry;
-    console.log(`[Source Slug] Using app state: ${sourceSlug}`);
   } else {
     try {
       const url = new URL(
@@ -170,7 +169,7 @@ export const getCategoryLinkForTargetShop = (input, targetShop) => {
   finalUrl.pathname = finalPath ? '/' + finalPath.replace(/^\/+/, '') : '/';
 
   const result = getQueryLink(finalUrl);
-  console.log(`[Result for ${targetSlug.toUpperCase()}] ${result}`);
+  // console.log(`[Result for ${targetSlug.toUpperCase()}] ${result}`);
   return result;
 };
 
@@ -204,7 +203,6 @@ export const checkRealRedirects = (data, urlToOriginalAndShop) => {
       return true;
     })
     .map(([originalUrl, info]) => {
-      console.log('urlToOriginalAndShop', urlToOriginalAndShop)
       let normalizedKey = originalUrl.replace(/\/+$/, '') || `${new URL(originalUrl).origin}/`;
       const meta = urlToOriginalAndShop.get(normalizedKey) || {
         original: originalUrl,

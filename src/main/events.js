@@ -158,8 +158,6 @@ async function runRedirectCheck() {
           // console.log('shop', shop);
           const localized = getCategoryLinkForTargetShop(cleanCategory, shop).href ? getCategoryLinkForTargetShop(cleanCategory, shop).href: getCategoryLinkForTargetShop(cleanCategory, shop)
 
-          console.log('localized',localized)
-
           let key = localized.replace(/\/+$/, '') || `${new URL(localized).origin}/`;
 
           if (localized === cleanCategory && shop.slug !== new URL(baseFullUrl).host.split('.')[1].toUpperCase()) {
@@ -201,7 +199,7 @@ async function runRedirectCheck() {
     const result = await response.json();
     const checkData = result.data || {};
 
-    console.log('Redirect check results:', checkData);
+    // console.log('Redirect check results:', checkData);
 
     loadingSwal.close();
 
