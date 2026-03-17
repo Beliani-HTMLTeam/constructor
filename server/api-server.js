@@ -247,7 +247,7 @@ app.post('/api/local/check-redirects', async (req, res) => {
 
       try {
         const response = await axios.head(url, {
-          maxRedirects: 0,
+          maxRedirects: 10,
           timeout: 5000,
           validateStatus: () => true
         });
@@ -256,6 +256,9 @@ app.post('/api/local/check-redirects', async (req, res) => {
   
         const normalizedOriginal = normalizeForComparison(url);
         const normalizedFinal = normalizeForComparison(finalUrl);
+
+        // console.log('normalizedOriginal:', normalizedOriginal);
+        // console.log('normalizedFinal:', normalizedFinal);
   
         const isTrailingSlashOnly = normalizedFinal === normalizedOriginal
   

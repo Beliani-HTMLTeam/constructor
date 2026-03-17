@@ -32,6 +32,7 @@ export function setupSelectCampaigns(elements, campaigns, setState, getState, re
 
 export function setupSelectShop(elements, shops, setState, getState, render) {
   const { selectShop, selectLanguage, selectLanguageWrapper, copyTemplate } = elements;
+  setState('shops', shops);
 
   // Populate shop options
   const shopItems = shops.map((shop) => ({

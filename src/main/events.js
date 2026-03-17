@@ -4,6 +4,16 @@ import { getState, setState } from '@/main/state/appState';
 import { appConfig as config } from '@/utils/config';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
+import { TemplateHandlers } from './handlers/handlers';
+import { staticTranslations } from '@/api/translations';
+import { getQueryLink } from '@/helpers/getQueryLink';
+import {
+  foundRedirectsSwal,
+  noRedirectsFoundSwal,
+  redirectCheckerLoader,
+} from '@/helpers/redirectChecker/redirectCheckerLoaders';
+import { showMultiShopRedirectPopup } from '@/helpers/redirectChecker/resultPopup';
+import { buildReverseMaps, checkRealRedirects, getCategoryLinkForTargetShop } from '@/helpers/redirectChecker/utils';
 
 function openCampaignHandler(id) {
   const config = getState('config');
@@ -65,22 +75,109 @@ async function purgeDynamicSpreadsheetData(year, tabName) {
 }
 
 async function runRedirectCheck() {
-  const shopLinks = Array.from(
-    document.querySelectorAll('#app a[href*="https://www.beliani"]')
-  ).map((link) => link.href);
-  
-  const uniqueShopLinks = [...new Set(shopLinks)];
-  // const uniqueShopLinks = ['https://www.beliani.ro/mobilier-de-gradina/saloane', 'https://www.beliani.it/arredo-giardino/dondoli-da-giardino', 'https://www.beliani.cz/zahradni-nabytek/zahradni-doplnky/']
-
-
-  if (uniqueShopLinks.length === 0) {
-    return toast.error('No Beliani shop links found in the current view.')
-  }
-
-  console.log('Running redirect check for links:', uniqueShopLinks);
+  // loading modal
+  const loadingSwal = redirectCheckerLoader();
 
   try {
-    toast('🔍 Checking redirects...')
+    const shopLinks = Array.from(document.querySelectorAll('#app a[href*="https://www.beliani"]')).map(
+      (link) => link.href
+    );
+
+    // filter out products links (containing .html) + normalize + deduplicate
+    const baseCategoryLinks = [
+      ...new Set(
+        shopLinks.filter((href) => {
+          try {
+            const url = new URL(href);
+            const pathnameLower = url.pathname.toLowerCase();
+
+            const isProduct = pathnameLower.includes('.html');
+            const isContentPage = pathnameLower.includes('/content/');
+            const isPhp = pathnameLower.includes('.php');
+            // skip if ends with .html or has .html before query string
+            return !isProduct && !isContentPage && !isPhp;
+          } catch {
+            return false;
+          }
+        })
+      ),
+    ];
+
+    if (baseCategoryLinks.length === 0) {
+      loadingSwal.close();
+      return toast.error('No category/content Beliani links found (products excluded).');
+    }
+
+    // console.log('Detected base category/content links:', baseCategoryLinks);
+
+    const allShops = getState('shops') || [];
+
+    if (allShops.length === 0) {
+      loadingSwal.close();
+      return toast.error('Shops configuration not available.');
+    }
+
+    // generate all localized versions of each base link for every shop
+    const allLocalizedUrls = [];
+    const urlToOriginalAndShop = new Map();
+
+    baseCategoryLinks.forEach((baseFullUrl) => {
+      let cleanCategory;
+
+      try {
+        const urlObj = new URL(baseFullUrl);
+        let path = urlObj.pathname;
+
+        if (path !== '/' && path.endsWith('/')) {
+          path = path.slice(0, -1);
+        }
+
+        const nonStructuralEnds = [
+          '/looks',
+          '/vsechny+produkty',
+          '/vsechny+produkty',
+          '/wszystkie+produkty',
+          '/alle+produkte',
+          '/todos+los+productos',
+          '/tutti+i+prodotti',
+        ];
+
+        if (nonStructuralEnds.some((suffix) => path.endsWith(suffix))) {
+          path = path.substring(0, path.lastIndexOf('/'));
+          if (path === '') path = '/';
+        }
+
+        cleanCategory = urlObj.origin + path;
+      } catch (error) {
+        console.warn('Invalid URL, skipping localization:', baseFullUrl, error);
+        return;
+      }
+
+      allShops.forEach((shop) => {
+        try {
+          // console.log('shop', shop);
+          const localized = getCategoryLinkForTargetShop(cleanCategory, shop);
+
+          if (localized === cleanCategory && shop.slug !== new URL(baseFullUrl).host.split('.')[1].toUpperCase()) {
+            return;
+          }
+
+          allLocalizedUrls.push(localized);
+          urlToOriginalAndShop.set(localized, { original: baseFullUrl, baseOriginal: cleanCategory, shop: shop.slug });
+        } catch (error) {
+          console.warn(`Failed to localize ${cleanCategory} for shop ${shop.slug}:`, error);
+        }
+      });
+    });
+
+    if (allLocalizedUrls.length === 0) {
+      loadingSwal.close();
+      return toast.error('Could not generate any translated category links.');
+    }
+
+    console.log(
+      `Checking ${allLocalizedUrls.length} localized links (${baseCategoryLinks.length} base x ${allShops.length} shops)`
+    );
 
     const apiUrl = `${config.api_url}check-redirects`;
 
@@ -90,131 +187,36 @@ async function runRedirectCheck() {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-      body: JSON.stringify({ urls: uniqueShopLinks }),
-    })
+      body: JSON.stringify({ urls: allLocalizedUrls }),
+    });
 
     if (!response.ok) {
       throw new Error(`API responded with ${response.status}`);
     }
 
-    const result = await response.json()
+    const result = await response.json();
+    const checkData = result.data || {};
 
-    console.log('Redirect check results:', result.data)
+    console.log('Redirect check results:', checkData);
 
-    const redirectedCount = Object.values(result.data).filter(r => r.redirected).length
-    toast.success(`Checked ${uniqueShopLinks.length} links - ${redirectedCount} redirected.`)
+    loadingSwal.close();
 
-    const redirected = Object.values(result.data).filter(r => r.redirected)
-    const total = uniqueShopLinks.length
-    const summary = `${redirected.length} of ${total} links redirected`;
+    const realRedirects = checkRealRedirects(checkData, urlToOriginalAndShop);
 
-    showRedirectResults(result.data);
-  }
-    catch (error) {
-      console.error('Redirect check failed: ', error)
-      toast.error(`Redirect check failed: ${error.message}`)
+    const totalChecked = allLocalizedUrls.length;
+    const redirectedCount = realRedirects.length;
+
+    toast.success(`Checked ${totalChecked} links → ${redirectedCount} real redirects found`);
+
+    if (redirectedCount > 0) {
+      showMultiShopRedirectPopup(realRedirects, totalChecked);
+    } else {
+      noRedirectsFoundSwal({ totalChecked });
     }
-}
-
-function showRedirectResults(results) {
-  const redirectedCount = Object.values(results).filter(r => r.hasRedirect).length;
-  const redirectedLinks = Object.fromEntries(Object.entries(results).filter(([_, info]) => info.hasRedirect));
-  console.log('redirected', redirectedLinks)
-
-  const total = Object.keys(results).length;
-
-  if (redirectedCount === 0) {
-    // No redirects → success popup with GIF
-    Swal.fire({
-      title: 'All links are direct! 🎉',
-      html: `
-        <p style="font-size: 1.1em; color: #555; margin: 16px 0;">
-          Checked <strong>${total}</strong> links — no redirects found.<br>
-          Everything looks perfect!
-        </p>
-        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnJueGNqd2czbzFhdXQxaHFpMGVzb2cxenRld2JzdXZrcGZoY2Q2NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SABpzb2ivrS0g4Hgbb/giphy.gif" 
-             alt="Success - no redirects" 
-             style="max-width: 320px; border-radius: 12px; margin: 16px auto; display: block;">
-      `,
-      icon: 'success',                // built-in green check icon
-      confirmButtonText: 'Great!',
-      confirmButtonColor: '#28a745',
-      allowOutsideClick: true,
-      allowEscapeKey: true,
-      showCloseButton: true,
-      customClass: {
-        popup: 'no-redirect-popup'    // optional: for extra styling if needed
-      }
-    });
-  } else {
-    // At least one redirect → table in custom HTML content
-    let tableHtml = `
-      <div style="max-height: 60vh; overflow-y: auto; margin: 16px 0; border: 1px solid #ddd; border-radius: 8px;">
-        <table style="width:100%; border-collapse: collapse; font-size: 0.95em;">
-          <thead style="background:#f1f1f1; position: sticky; top: 0;">
-            <tr>
-              <th style="padding:10px; text-align:left; border-bottom:2px solid #ddd;">Original</th>
-              <th style="padding:10px; text-align:left; border-bottom:2px solid #ddd;">Final</th>
-              <th style="padding:10px; text-align:center; border-bottom:2px solid #ddd;">Redirected</th>
-              <th style="padding:10px; text-align:center; border-bottom:2px solid #ddd;">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-    `;
-
-    Object.entries(redirectedLinks).forEach(([original, info]) => {
-      const rowBg = 'background:#fff3cd;';
-      const finalLink = info.finalUrl && info.finalUrl !== original 
-        ? `<a href="${info.finalUrl}" target="_blank" style="color:#28a745; text-decoration:none;">${info.final}</a>` 
-        : '—';
-
-      tableHtml += `
-        <tr style="${rowBg}">
-          <td style="padding:10px; border-bottom:1px solid #eee; word-break:break-all;">
-            <a href="${original}" target="_blank" style="color:#0066cc; text-decoration:none;">${original}</a>
-          </td>
-          <td style="padding:10px; border-bottom:1px solid #eee; word-break:break-all;">
-            ${finalLink}
-          </td>
-          <td style="padding:10px; border-bottom:1px solid #eee; text-align:center; font-weight:bold;">
-            Yes
-          </td>
-          <td style="padding:10px; border-bottom:1px solid #eee; text-align:center;">
-            ${info.status || (info.error ? 'Error' : '—')}
-          </td>
-        </tr>
-      `;
-    });
-
-    tableHtml += `
-          </tbody>
-        </table>
-      </div>
-    `;
-
-    Swal.fire({
-      title: 'Redirect Check Results',
-      html: `
-        <p style="margin: 0 0 16px; color:#666; font-size:0.95em;">
-          ${total} links checked • ${redirectedCount} redirected • ${new Date().toLocaleTimeString()}
-        </p>
-        ${tableHtml}
-      `,
-      icon: 'info',
-      confirmButtonText: 'Close',
-      confirmButtonColor: '#6c757d',
-      showCloseButton: true,
-      allowOutsideClick: true,
-      allowEscapeKey: true,
-      width: '90%',                     // wider for table
-      customClass: {
-        popup: 'redirect-table-popup'   // optional class for custom styling
-      },
-      didOpen: () => {
-        // Optional: focus on confirm button or add extra behavior
-        Swal.getConfirmButton().focus();
-      }
-    });
+  } catch (error) {
+    loadingSwal.close();
+    console.error('Redirect check failed: ', error);
+    toast.error(`Redirect check failed: ${error.message}`);
   }
 }
 
@@ -268,5 +270,5 @@ export {
   openIssueHandler,
   figmaCardHandler,
   purgeDynamicSpreadsheetData,
-  runRedirectCheck
+  runRedirectCheck,
 };
