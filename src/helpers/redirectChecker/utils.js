@@ -64,7 +64,6 @@ export const getCategoryLinkForTargetShop = (input, targetShop) => {
     const currentLang = getState('country')?.toLowerCase() || 'chde';
 
     effectiveTargetSlug = currentLang.includes('fr') || currentLang === 'chfr' ? 'chfr' : 'chde';
-    console.log(`[CH special] Mapped to ${effectiveTargetSlug}`);
   }
 
   const slugIndex = data.slug.findIndex((s) => String(s).toLowerCase() === effectiveTargetSlug);
