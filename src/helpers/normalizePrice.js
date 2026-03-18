@@ -450,11 +450,9 @@ const formatPrice = {
 
     if (isThousands) {
       const parts = price.split(',');
-      let integer = parts[0].replace('.', '');
+      let integer = parts[0].replace(/\./g, '');
 
-      if (integer.length === 4) {
-        integer = `${integer.slice(0, 1)}.${integer.slice(1)}`;
-      }
+      integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
       price = parts.length > 1 ? `${integer},${parts[1]}` : integer;
     }
