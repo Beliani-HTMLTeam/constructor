@@ -44,7 +44,7 @@ const categories = [
   // top image
   {
     src: getImageUrl('20260401_Top.png', true),
-    href: 'https://www.beliani.ch/dining-room-furniture/',
+    // href: 'https://www.beliani.ch/dining-room-furniture/',
     background: '#FEB24D',
     color: '#000000',
     paddingTop: 0,
