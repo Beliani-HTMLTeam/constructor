@@ -8,7 +8,7 @@ export async function getStaticTranslation(sheet) {
   try {
     // First try external API (ZROK)
     const externalUrl = `${api_url}static/${sheet}/`;
-    console.log(`Trying external API: ${externalUrl}`);
+    // console.log(`Trying external API: ${externalUrl}`);
 
     const externalResponse = await fetch(externalUrl, {
       method: 'GET',
@@ -21,7 +21,7 @@ export async function getStaticTranslation(sheet) {
     if (externalResponse.ok) {
       const externalData = await externalResponse.json();
       if (externalData.code === 200 && externalData.data) {
-        console.log(`External API success for ${sheet}`);
+        console.log(`${sheet} warmed up`);
         return {
           code: 200,
           data: externalData.data,
@@ -31,7 +31,7 @@ export async function getStaticTranslation(sheet) {
       }
     }
 
-    console.log(`External API failed for ${sheet} (${externalResponse.status}), trying Google Sheets fallback`);
+    console.error(`External API failed for ${sheet} (${externalResponse.status}), trying Google Sheets fallback`);
 
     // Fallback to Google Sheets API
     const response = await fetchSheetData('STATIC', sheet.toUpperCase());
@@ -54,7 +54,7 @@ export async function getStaticTranslation(sheet) {
     };
   } catch (error) {
     console.error(`External API connection failed for '${sheet}':`, error.message);
-    console.log(`Trying Google Sheets fallback due to connection error`);
+    console.error(`Trying Google Sheets fallback due to connection error`);
 
     try {
       // Fallback to Google Sheets API when external API connection fails
@@ -77,7 +77,7 @@ export async function getStaticTranslation(sheet) {
         source: 'error',
       };
     } catch (fallbackError) {
-      console.error(`Fallback also failed for '${sheet}':`, fallbackError);
+      console.error(`! Fallback also failed for '${sheet}':`, fallbackError);
       return {
         code: 500,
         data: {},
@@ -103,7 +103,7 @@ export async function getDynamicTranslation(year, tab, range) {
       externalUrl = `${api_url}dynamic/${year}/${encodedTab}`;
     }
 
-    console.log(`Trying external API: ${externalUrl}`);
+    // console.log(`Trying external API: ${externalUrl}`);
 
     const externalResponse = await fetch(externalUrl, {
       method: 'GET',
@@ -116,7 +116,7 @@ export async function getDynamicTranslation(year, tab, range) {
     if (externalResponse.ok) {
       const externalData = await externalResponse.json();
       if (externalData.code === 200 && externalData.data) {
-        console.log(`External API success for ${year}-${tab}${range ? `-${range}` : ''}`);
+        // console.log(`External API success for ${year}-${tab}${range ? `-${range}` : ''}`);
         return {
           code: 200,
           data: externalData.data,
@@ -126,7 +126,7 @@ export async function getDynamicTranslation(year, tab, range) {
       }
     }
 
-    console.log(
+    console.error(
       `External API failed for ${year}-${tab}${range ? `-${range}` : ''} (${
         externalResponse.status
       }), trying Google Sheets fallback`
@@ -153,7 +153,7 @@ export async function getDynamicTranslation(year, tab, range) {
     };
   } catch (error) {
     console.error(`External API connection failed for ${year}-${tab}${range ? `-${range}` : ''}:`, error.message);
-    console.log(`Trying Google Sheets fallback due to connection error`);
+    console.error(`Trying Google Sheets fallback due to connection error`);
 
     try {
       // Fallback to Google Sheets API when external API connection fails

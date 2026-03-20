@@ -293,4 +293,6 @@ app.post('/api/local/check-redirects', async (req, res) => {
     })
 })
 
-app.listen(PORT);
+app.listen(PORT).on('listening', () => {
+  console.log(`\n\n+ Backend ready on port ${PORT}\n\n`);
+});
