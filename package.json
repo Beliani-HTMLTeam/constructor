@@ -10,23 +10,24 @@
     "frontend": "vite --port 5000"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^5.1.2",
+    "@vitejs/plugin-react": "^5.2.0",
     "axios": "^1.13.6",
     "compress-json": "^3.4.0",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "google-auth-library": "^10.5.0",
-    "google-spreadsheet": "^5.0.2",
+    "google-auth-library": "^10.6.2",
+    "google-spreadsheet": "^5.2.0",
     "js-confetti": "^0.12.0",
     "p-limit": "^7.3.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "sonner": "^2.0.7",
-    "sweetalert2": "^11.26.21",
+    "sweetalert2": "^11.26.24",
     "vite": "^7.3.1"
   },
   "devDependencies": {
+    "baseline-browser-mapping": "^2.10.9",
     "concurrently": "^9.2.1",
     "unplugin-auto-import": "^19.3.0",
     "vite-plugin-vanilla": "^2.1.1"
