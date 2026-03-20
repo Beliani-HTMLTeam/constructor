@@ -123,6 +123,8 @@ const RegularFridayNslt = async ({
           paragraph3: 'This is a time limited offer. Valid until 04/01/2026',
           paragraphAlign: OfferPart.alignment,
           germanSeparatingLine: OfferPart.germanSeparatingLine,
+          spaceClass: OfferPart?.spaceClass,
+          isSpaceBetweenAllParts: OfferPart?.isSpaceBetweenAllParts
         })
       : '';
 
@@ -172,6 +174,7 @@ const RegularFridayNslt = async ({
             // text: queries.intro || 'Translation not found',
             paragraphAlign: intro.alignment,
             color: intro.color,
+            spaceTop: intro.spaceTop || 'newsletterBottom35px',
             spaceBottom: intro.spaceBottom || 'newsletterBottom35px',
             backgroundColor: intro.backgroundColor,
           })}
@@ -339,7 +342,7 @@ const RegularFridayNslt = async ({
         links['ShopCTA']
           ? shopNow({
               href: links['ShopCTA'],
-              cta: queries['shopall'][0],
+              cta: getPhrase('Shop All Categories'),
               textColor: shopCTA?.color || color,
               backgorund: shopCTA?.backgroundColor || background,
               space: shopCTA?.space || '35',
