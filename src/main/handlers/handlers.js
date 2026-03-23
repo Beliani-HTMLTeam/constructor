@@ -110,7 +110,9 @@ export class TemplateHandlers {
     const actualKey = normalizedKeys[column.toLowerCase()];
 
     if (!actualKey) {
-      toast.error(`Nie znaleziono tłumaczenia dla cat-title ${column} (sprawdź wielkość liter)`);
+      let message = `Nie znaleziono headera (klucza) dla ${column} w category title (sprawdź wielkość liter)`;
+      console.warn(message);
+      toast.error(message);
       return undefined;
     }
 
@@ -122,7 +124,7 @@ export class TemplateHandlers {
 
     const title = translationsArray[slugIndex];
 
-    if (title === '' || title == null) {
+    if (title === '' || String(title).trim() === '' || title == null) {
       toast.error(`CATEGORY TITLE Tłumaczenie dla ${slug} ${column} jest puste!`);
       return undefined;
     }
@@ -278,8 +280,8 @@ export class TemplateHandlers {
 
     if (footer === '' || footer == null) {
       // allow empty translation for job links except for PL
-      if (slug !== "pl" && ["Job src", "Job href"].includes(column)) return undefined;
-      
+      if (slug !== 'pl' && ['Job src', 'Job href'].includes(column)) return undefined;
+
       console.warn(`FOOTER Tłumaczenie dla ${slug} ${column} jest puste!`);
       return undefined;
     }

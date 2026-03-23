@@ -1,14 +1,14 @@
 import { Footer } from './Footer.js';
 import { Header } from './Header.js';
-import { Space } from './components/Space.js';
-import { SoonEndingBanner } from './components/SoonEndingBanner.js';
-import { Intro } from './components/Intro.js';
-import { Timer } from './components/Timer.js';
-import { TopImageTitle } from './components/TopImageTitle.js';
-import { ImageWithLink } from './components/ImageWithLink.js';
-import { Line } from './components/Line.js';
-import { Categories } from './components/Categories.js';
-import { CTA } from './components/CTA.js';
+
+// handlers:
+import { TopImageTitleHandler } from './handlers/_TopImageTitle.js';
+import { TopImageHandler } from './handlers/_TopImage.js';
+import { IntroHandler } from './handlers/_Intro.js';
+import { TimerHandler } from './handlers/_Timer.js';
+import { CategoriesHandler } from './handlers/_Categories.js';
+import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
+import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 
 const Thursday = async ({
   links,
@@ -36,182 +36,67 @@ const Thursday = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log(categories);
+  // console.log(categories);
 
-  // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
-  // prettier-ignore
   const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNow = getPhrase('Shop now');
 
-  const TopImageTitleElement =
-    // are both href and src available?
-    links?.TopImageTitle_href && links?.TopImageTitle_src
-      ? TopImageTitle({
-          href: links.TopImageTitle_href,
-          src: links.TopImageTitle_src,
-          title1: queries.TopImageTitle[0] ?? 'Translation not found',
-          title2: queries.TopImageTitle[1] ?? 'Translation not found',
-          color: TopImageTitle_data.color,
-          background: TopImageTitle_data.background,
-          type: TopImageTitle_data.type,
-          renderType: type,
-        })
-      : '';
+  const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
+  const TopImageElement = TopImageHandler({ links });
 
-  const TopImageElement =
-    // are both href and src available?
-    links?.TopImage_href && links?.TopImage_src
-      ? ImageWithLink({
-          href: links.TopImage_href,
-          src: links.TopImage_src,
-          insideTr: true,
-          alt: 'Top Image',
-        })
-      : '';
+  const introCta_href = getIntroCtaHref({
+    links,
+    queries,
+    categories,
+    add_utm,
+    getCategoryLink,
+  });
 
-  let introCta_href;
-  if (links.Intro_cta_href) introCta_href = add_utm(links.Intro_cta_href);
-  else if (queries.categoryLinks?.[0]) introCta_href = add_utm(queries.categoryLinks[0]);
-  else if (categories[0]?.href) introCta_href = getCategoryLink(categories[0]?.href);
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
+  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country });
+  const introPosition = intro?.position ?? 'afterTopImage';
 
-  const IntroElement =
-    intro && intro.type === 'paragraph'
-      ? `
-      ${Intro({ text: queries.intro || 'Translation not found', paragraphAlign: intro.alignment })}
-      ${
-        intro.cta
-          ? `
-          ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
-          ${CTA({
-            href: introCta_href,
-            text: shopNow,
-            color: '#000000',
-            align: 'center',
-            insideTr: true,
-          })}
-          ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
-            `
-          : ''
-      }
-      `
-      : '';
-
-  const TimerElement =
-    Inside && Inside.type === 'timer'
-      ? Timer({
-          title: queries.timer[0] ?? 'Translation not found',
-          subtitle: queries.timer[1] ?? 'Translation not found',
-          href: links.Timer_href,
-          src: timer.image[country],
-          color: Inside.color,
-          background: Inside.backgroundColor,
-          freebies: timer.freebies,
-          ctaText: shopNow,
-        })
-      : '';
-
-  // be defensive: ensure `categories` is an array
   const safeCategories = Array.isArray(categories) ? categories : [];
+  const freebiesIndex = safeCategories.findIndex((category) => String(category?.type).toLowerCase() === 'freebies');
 
-  const categoriesWithProducts = await Promise.all(
-    safeCategories.map(async (category) => {
-      const productEntries = Array.isArray(category && category.products) ? category.products : [];
-      const products = await Promise.all(
-        productEntries.map(async (p) => {
-          try {
-            if (!p) return null;
-            const normalizedHref =
-              p.href && typeof getCategoryLink === 'function' ? getCategoryLink(p.href) : p.href;
-            if (typeof getProductById === 'function') {
-              const fetchedProduct = await getProductById(p.id, p.src);
-              if (!fetchedProduct) return null;
-              return normalizedHref ? { ...p, ...fetchedProduct, href: normalizedHref } : { ...p, ...fetchedProduct };
-            }
-            return normalizedHref ? { ...p, href: normalizedHref } : p;
-          } catch (err) {
-            console.error('getProductById error for', p, err);
-            return null;
-          }
-        })
-      );
+  const categoriesBeforeIntro =
+    introPosition === 'afterFreebies' && freebiesIndex >= 0
+      ? safeCategories.slice(0, freebiesIndex + 1)
+      : safeCategories;
+  const categoriesAfterIntro =
+    introPosition === 'afterFreebies' && freebiesIndex >= 0 ? safeCategories.slice(freebiesIndex + 1) : [];
 
-      return {
-        ...category,
-        // filter out failed/undefined product lookups
-        products: products.filter(Boolean),
-      };
-    })
-  );
+  const CategoriesBeforeIntroElement = await CategoriesHandler({
+    categories: categoriesBeforeIntro,
+    getProductById,
+    getCategoryLink,
+    getCategoryTitle,
+    queries,
+    add_utm,
+    links,
+    type,
+    country,
+    getPhrase,
+  });
+  const CategoriesAfterIntroElement = await CategoriesHandler({
+    categories: categoriesAfterIntro,
+    getProductById,
+    getCategoryLink,
+    getCategoryTitle,
+    queries,
+    add_utm,
+    links,
+    type,
+    country,
+    getPhrase,
+  });
 
-  // build categories for rendering safely; if there are no categories, skip rendering
-  let CategoriesElement = '';
-  if (safeCategories.length > 0) {
-    const source = categoriesWithProducts.length > 0 ? categoriesWithProducts : safeCategories;
-    const categoriesForRender = source.map((category, ind) => {
-      let oldData = { name: category?.name, href: category?.href, src: category?.src };
-
-      let name;
-      if (queries?.categories && queries.categories[ind]) {
-        name = queries.categories[ind];
-      } else {
-        if (category?.name) {
-          name = getCategoryTitle(category.name);
-        } else {
-          name = category?.name;
-        }
-      }
-
-      let href;
-      if (queries.categoryLinks && queries.categoryLinks[ind]) {
-        // link from translations spreadsheet, eg. link with filter
-        href = add_utm(queries.categoryLinks[ind]);
-      } else if (category?.href) {
-        if (typeof category?.href === 'string') {
-          // normal category
-          href = getCategoryLink(category.href);
-        } else {
-          // link is translated (eg. we link to landing page)
-          href = add_utm(category.href?.href);
-        }
-      }
-
-      let src;
-      if (category?.src) {
-        src = category?.src;
-        if (typeof src === 'object') {
-          src = src.src;
-        }
-      }
-      // console.log(name, href, src);
-
-      let newData = { name, href, src };
-
-      // console.log(oldData, newData);
-
-      return {
-        ...category,
-        href,
-        name,
-        src,
-      };
-    });
-
-    CategoriesElement = await Categories({
-      getPhrase,
-      getCategoryLink,
-      getCategoryTitle,
-      categories: categoriesForRender,
-      queries,
-      add_utm,
-      links,
-      type,
-      country,
-    });
-  }
+  const IntroAfterTopImageElement = introPosition === 'afterFreebies' ? '' : IntroElement;
+  const IntroAfterFreebiesElement = introPosition === 'afterFreebies' ? IntroElement : '';
 
   const timerPosition = Inside?.position ?? 'beforeCategories';
   const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
@@ -226,46 +111,21 @@ const Thursday = async ({
 
       ${TopImageElement}
 
-      ${IntroElement}
+      ${IntroAfterTopImageElement}
 
       ${TimerBeforeCategories}
 
-      ${CategoriesElement}
+      ${CategoriesBeforeIntroElement}
+
+      ${IntroAfterFreebiesElement}
+
+      ${CategoriesAfterIntroElement}
 
       ${TimerAfterCategories}
     </table>
 
 
-    <!-- 🎈 Soon Ending Banners -->
-    <table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
-      ${Line({ insideTr: true })}
-      
-      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
-
-      <tr>
-        <td align="left">
-          <span class="newsletterFooterTitle">${shopLimitedTimeDeals}</span>
-        </td>
-      </tr>
-      
-      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
-      
-      ${SoonEndingBanner({
-        href: links.Banner_1,
-        src: links.Banner_1_Image,
-        orderingId: '1',
-      })}
-
-      ${Space({ className: 'newsletterBottom20px', insideTr: true })}
-
-      ${SoonEndingBanner({
-        href: links.Banner_2,
-        src: links.Banner_2_Image,
-        orderingId: '2',
-      })}
-
-      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
-    </table>
+    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals })}
       
     ${FooterElement}
   `;
