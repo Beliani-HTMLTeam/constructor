@@ -175,7 +175,7 @@ const categories = [
     showParagraph: false,
     showPrices: false,
     products: [
-      // DARK ELEGANCE 
+      // DARK ELEGANCE
       {
         id: '409000',
         src: [getImageUrl('20260114_Cat3-Desktop.png', true), getImageUrl('20260114_Cat3-Mobile.png', true)],
@@ -230,9 +230,9 @@ const categories = [
         id: '	554542',
         src: getImageUrl('20260114_Cat41.png', true),
       },
-      // PURSLANE
+      // PENTACE
       {
-        id: '385563',
+        id: '693223',
         src: getImageUrl('20260114_Cat42.png', true),
       },
 
@@ -246,7 +246,7 @@ const categories = [
         id: '524840',
         src: getImageUrl('20260114_Cat44.png', true),
       },
-      // YERBENT 
+      // YERBENT
       {
         id: '502869',
         src: getImageUrl('20260114_Cat45.png', true),
@@ -272,6 +272,8 @@ export default new entities.Campaign({
   startId: '40044',
   name: "Mother's Day Gift Guide",
   date: '10.10.2025',
+  lpId: '28326',
+  issueCardId: '426222',
   alarm: {
     isActive: false,
   },
