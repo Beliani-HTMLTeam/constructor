@@ -16,7 +16,9 @@ const NewsletterOfferPart = ({
   href,
   type,
   backgroundColor,
-  germanSeparatingLine = false
+  germanSeparatingLine = false,
+  spaceClass = 'newsletterBottom35px',
+  isSpaceBetweenAllParts = false
 }) => {
   const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
 
@@ -67,13 +69,13 @@ ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
 ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
 `
  :`
-      ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+      ${Space({ insideTr: true, className: spaceClass })}
     <tr>
       <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[0] : paragraph1, align: 'center', color })}
       </td>
     </tr>
-    ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+    ${Space({ insideTr: true, className: spaceClass })}
   
     <tr>
       <td style="color: ${color}; text-align: center;">
@@ -81,6 +83,7 @@ ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
       </td>
     </tr>
     ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
+    ${ isSpaceBetweenAllParts ? Space({ insideTr: true, className: 'newsletterBottom25px' }) : ''}
     <tr>
       <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center', color })}
@@ -125,7 +128,9 @@ const LandingOfferPart = ({
   href,
   type,
   backgroundColor,
-  germanSeparatingLine = false
+  germanSeparatingLine = false,
+  spaceClass = 'newsletterBottom35px',
+  isSpaceBetweenAllParts = false
 }) => {
   const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
 
@@ -202,7 +207,7 @@ const LandingOfferPart = ({
   `
     <tr>
     <td >
-    ${Space({ className: 'newsletterBottom35px' })}
+    ${Space({ className: spaceClass })}
     </td>
   </tr>
   <tr>
@@ -212,7 +217,7 @@ const LandingOfferPart = ({
   </tr>
   <tr>
     <td >
-      ${Space({ className: 'newsletterBottom35px' })}
+      ${Space({ className: spaceClass })}
     </td>
   </tr>
   
@@ -222,6 +227,7 @@ const LandingOfferPart = ({
     </td>
   </tr>
   ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
+  ${ isSpaceBetweenAllParts ? Space({ insideTr: true, className: 'newsletterBottom25px' }) : ''}
   <tr>
     <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center', color })}

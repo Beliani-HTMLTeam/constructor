@@ -14,7 +14,7 @@ const Intro = ({
   }
 
   return `
-    ${Space({ className: spaceTop, insideTr: true, backgroundColor: backgroundColor })}
+    ${spaceTop !== "0" ? Space({ className: spaceTop, insideTr: true, backgroundColor: backgroundColor }) : ''}
             
     <tr><td style="background-color: ${backgroundColor};">${Paragraph({
       text,
@@ -24,7 +24,7 @@ const Intro = ({
       spanStyle: `color: ${color};`,
     })}</td></tr>
     
-    ${Space({ className: spaceBottom, insideTr: true, backgroundColor: backgroundColor })}
+    ${ spaceBottom !== "0" ? Space({ className: spaceBottom, insideTr: true, backgroundColor: backgroundColor }) : '' }
   `;
 };
 

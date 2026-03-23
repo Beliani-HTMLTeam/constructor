@@ -15,7 +15,9 @@ export function OfferPartCode({
   href,
   type,
   backgroundColor,
-  germanSeparatingLine
+  germanSeparatingLine,
+  spaceClass,
+  isSpaceBetweenAllParts
 }) {
   console.log('href:', href, data, isMonday);
   const newsletter = NewsletterOfferPart({
@@ -30,7 +32,9 @@ export function OfferPartCode({
     href,
     type,
     backgroundColor,
-    germanSeparatingLine
+    germanSeparatingLine,
+    spaceClass,
+    isSpaceBetweenAllParts
   });
   const landing = LandingOfferPart({
     isMonday,
@@ -44,7 +48,9 @@ export function OfferPartCode({
     href,
     type,
     backgroundColor,
-    germanSeparatingLine
+    germanSeparatingLine,
+    spaceClass,
+    isSpaceBetweenAllParts
   });
   return `
       <tr>
