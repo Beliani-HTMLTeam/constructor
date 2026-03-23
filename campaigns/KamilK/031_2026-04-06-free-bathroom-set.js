@@ -31,11 +31,11 @@ const links = {
   TopImage_src: getImageUrl('20260406_Gif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-04-06' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-04-03' }),
-  Banner_1_Image: translateImage({ value: '20260403b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-03-26' }),
+  Banner_1_Image: translateImage({ value: '20260326b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-04-02' }),
-  Banner_2_Image: translateImage({ value: '20260402b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-03-25' }),
+  Banner_2_Image: translateImage({ value: '20260325b.png' }),
 };
 
 const TopImageTitle_data = {
