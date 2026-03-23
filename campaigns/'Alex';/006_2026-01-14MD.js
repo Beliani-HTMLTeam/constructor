@@ -27,8 +27,8 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-01-14' }),
-  TopImageTitle_src: translateImage({ value: '20260114_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-04-07' }),
+  TopImageTitle_src: translateImage({ value: '20260407_01.png' }),
 
   TopImage: getImageUrl('20260114_gif.gif', true),
 
@@ -85,38 +85,36 @@ const categories = [
     showParagraph: false,
     showPrices: false,
     products: [
+      // EPANNES
       {
-        id: '394733',
-        src: [
-          getImageUrl('category1Desktop.png', true),
-          getImageUrl('category1Mobile.png', true),
-         ],
+        id: '668893',
+        src: [getImageUrl('20260114_Cat1-Desktop.png', true), getImageUrl('20260114_Cat1-Mobile.png', true)],
       },
-      // SESAME
+      // LOKY
       {
-        id: '394733',
-        src: getImageUrl('category11.png', true),
+        id: '675195',
+        src: getImageUrl('20260114_Cat11.png', true),
       },
-      // FUSILLI
+      // PERIGNY
       {
-        id: '452445',
-        src: getImageUrl('category12.png', true),
+        id: '668854',
+        src: getImageUrl('20260114_Cat12.png', true),
       },
 
-      // 3 products grid
+      // 3 products grid DYSPROSIUM
       {
-        id: '469028',
-        src: getImageUrl('category13.png', true),
+        id: '649879',
+        src: getImageUrl('20260114_Cat13.png', true),
       },
-      // QUARTZ
+      // KOMOTINI
       {
-        id: '469028',
-        src: getImageUrl('category14.png', true),
+        id: '363736',
+        src: getImageUrl('20260114_Cat14.png', true),
       },
-      // IOANNINA
+      // ACONCHI
       {
-        id: '464301',
-        src: getImageUrl('category15.png', true),
+        id: '368838',
+        src: getImageUrl('20260114_Cat15.png', true),
       },
     ],
   },
@@ -135,37 +133,34 @@ const categories = [
     showPrices: false,
     products: [
       {
-        id: '394733',
-        src: [
-          getImageUrl('category2Desktop.png', true),
-          getImageUrl('category2Mobile.png', true),
-         ],
+        id: '467859',
+        src: [getImageUrl('20260114_Cat2-Desktop.png', true), getImageUrl('20260114_Cat2-Mobile.png', true)],
       },
-      // SESAME
+      // JUNIPER
       {
-        id: '394733',
-        src: getImageUrl('category21.png', true),
+        id: '394925',
+        src: getImageUrl('20260114_Cat21.png', true),
       },
-      // FUSILLI
+      // LACTUCA
       {
-        id: '452445',
-        src: getImageUrl('category22.png', true),
+        id: '622735',
+        src: getImageUrl('20260114_Cat22.png', true),
       },
 
-      // 3 products grid
+      // 3 products grid DIOPSIDE
       {
-        id: '469028',
-        src: getImageUrl('category23.png', true),
+        id: '468924',
+        src: getImageUrl('20260114_Cat23.png', true),
       },
-      // QUARTZ
+      // KASHIWA
       {
-        id: '469028',
-        src: getImageUrl('category24.png', true),
+        id: '671684',
+        src: getImageUrl('20260114_Cat24.png', true),
       },
-      // IOANNINA
+      // ELITE PRO
       {
-        id: '464301',
-        src: getImageUrl('category25.png', true),
+        id: '610702',
+        src: getImageUrl('20260114_Cat25.png', true),
       },
     ],
   },
@@ -180,35 +175,36 @@ const categories = [
     showParagraph: false,
     showPrices: false,
     products: [
+      // DARK ELEGANCE 
       {
-        id: '394733',
-        src: [getImageUrl('category3Desktop.png', true), getImageUrl('category3Mobile.png', true)],
+        id: '409000',
+        src: [getImageUrl('20260114_Cat3-Desktop.png', true), getImageUrl('20260114_Cat3-Mobile.png', true)],
       },
-      // SESAME
+      // ABSOLUTE ALCHEMY
       {
-        id: '394733',
-        src: getImageUrl('category31.png', true),
+        id: '409210',
+        src: getImageUrl('20260114_Cat31.png', true),
       },
-      // FUSILLI
+      // VODNO
       {
-        id: '452445',
-        src: getImageUrl('category32.png', true),
+        id: '658626',
+        src: getImageUrl('20260114_Cat32.png', true),
       },
 
-      // 3 products grid
+      // 3 products grid RAMADA
       {
-        id: '469028',
-        src: getImageUrl('category33.png', true),
+        id: '600448',
+        src: getImageUrl('20260114_Cat33.png', true),
       },
-      // QUARTZ
+      // CLASSY TINT
       {
-        id: '469028',
-        src: getImageUrl('category34.png', true),
+        id: '408810',
+        src: getImageUrl('20260114_Cat34.png', true),
       },
-      // IOANNINA
+      // BRAISE
       {
-        id: '464301',
-        src: getImageUrl('category35.png', true),
+        id: '664741',
+        src: getImageUrl('20260114_Cat35.png', true),
       },
     ],
   },
@@ -224,38 +220,36 @@ const categories = [
     showParagraph: false,
     showPrices: false,
     products: [
+      // BELESSA
       {
-        id: '394733',
-        src: [
-          getImageUrl('category4Desktop.png', true),
-          getImageUrl('category4Mobile.png', true),
-         ],
+        id: '664546',
+        src: [getImageUrl('20260114_Cat4-Desktop.png', true), getImageUrl('20260114_Cat4-Mobile.png', true)],
       },
-      // SESAME
+      // AREORA
       {
-        id: '394733',
-        src: getImageUrl('category41.png', true),
+        id: '	554542',
+        src: getImageUrl('20260114_Cat41.png', true),
       },
-      // FUSILLI
+      // PURSLANE
       {
-        id: '452445',
-        src: getImageUrl('category42.png', true),
+        id: '385563',
+        src: getImageUrl('20260114_Cat42.png', true),
       },
 
-      // 3 products grid
+      // 3 products grid EUFAULA
       {
-        id: '469028',
-        src: getImageUrl('category43.png', true),
+        id: '658969',
+        src: getImageUrl('20260114_Cat43.png', true),
       },
-      // QUARTZ
+      // FRAGARIA
       {
-        id: '469028',
-        src: getImageUrl('category44.png', true),
+        id: '524840',
+        src: getImageUrl('20260114_Cat44.png', true),
       },
-      // IOANNINA
+      // YERBENT 
       {
-        id: '464301',
-        src: getImageUrl('category45.png', true),
+        id: '502869',
+        src: getImageUrl('20260114_Cat45.png', true),
       },
     ],
   },
@@ -275,13 +269,13 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: '0000',
-  name: 'Test ',
+  startId: '40044',
+  name: "Mother's Day Gift Guide",
   date: '10.10.2025',
   alarm: {
     isActive: false,
   },
-  isArchive: true,
+  isArchive: false,
   optimizeImg: false,
   templates: [
     {
