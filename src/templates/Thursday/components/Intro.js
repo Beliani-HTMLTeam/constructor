@@ -24,7 +24,9 @@ const Intro = ({
       ? normalizeText(text[0])
       : normalizeText(text);
 
-  const sectionStyle = `${backgroundColor ? `background-color: ${backgroundColor};` : ''} color: ${color};`;
+  // outlook random white line fixes
+  const sectionStyle = `${backgroundColor ? `background-color: ${backgroundColor};` : ''} color: ${color}; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;`;
+  const wrapperCellStyle = `padding: 0; margin: 0; font-size: 0; line-height: 0; mso-line-height-rule: exactly; ${backgroundColor ? `background-color: ${backgroundColor};` : ''}`;
 
   const IntroTitleElement = hasTitleAndParagraph
     ? `
@@ -43,7 +45,7 @@ const Intro = ({
 
   return `
     <tr>
-      <td>
+      <td style="${wrapperCellStyle}">
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="${sectionStyle}">
           ${Space({ className: spaceTop, insideTr: true })}
 
