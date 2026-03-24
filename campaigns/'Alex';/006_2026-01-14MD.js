@@ -32,11 +32,11 @@ const links = {
 
   TopImage: getImageUrl('20260114_gif.gif', true),
 
-  Banner_1: translateLink({ value: 'content/lp25-12-23' }),
-  Banner_1_Image: translateImage({ value: '20251223b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-03-26' }),
+  Banner_1_Image: translateImage({ value: '20260326b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-01-08' }),
-  Banner_2_Image: translateImage({ value: '20260108b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-03-25' }),
+  Banner_2_Image: translateImage({ value: '20260325b.png' }),
 };
 
 const TopImageTitle_data = {
