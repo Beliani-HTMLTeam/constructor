@@ -332,6 +332,12 @@ img {
 .br {
   display: block;
 }
+
+.newsletterContainerWithPaddingBottom20px {
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
   .stack-column {
@@ -455,6 +461,12 @@ img {
   }
 
   .newsletterContainer {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .newsletterContainerWithPaddingBottom20px {
+    padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
   }

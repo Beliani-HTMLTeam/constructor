@@ -290,6 +290,12 @@ table {
     line-height: 66px;
     margin:0;
   }
+
+  #newsletter .newsletterContainerWithPaddingBottom20px {
+    padding-bottom: 20px;
+    padding-left: 20px;
+  padding-right: 20px;
+  }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
   #newsletter .newsletterFooterCategoryLEFTBottom {
@@ -393,6 +399,12 @@ table {
   #newsletter .newsletterContainer {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  #newsletter .newsletterContainerWithPaddingBottom20px {
+    padding-bottom: 10px;
+    padding-left: 10px;
+  padding-right: 10px;
   }
 
   #newsletter.newsletterContainer {

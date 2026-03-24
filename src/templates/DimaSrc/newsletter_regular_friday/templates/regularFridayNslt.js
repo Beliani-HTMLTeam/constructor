@@ -17,6 +17,8 @@ import { CTA } from '../components/CTA';
 import FreebiesGenerator from '@/components/FreebiesGenerator';
 import { category4Tiles_Grid } from '../category/grid4tiles';
 import { VideoLPWithLink } from '../components/VideoLP';
+import { OfferPartCodes } from '../components/OfferPartCodes';
+import { FullWidthTiles } from '../category/fullWidthTiles';
 
 const RegularFridayNslt = async ({
   links,
@@ -49,7 +51,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', TopImageTitle_data, type);
+  console.log('wszystko', TopImageTitle_data, type, queries);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -85,48 +87,64 @@ const RegularFridayNslt = async ({
 
   let TopImageElement =
     links?.TopImage_href && links?.TopImage_src
-        ? ImageWithLink({
-            href: links.TopImage_href,
-            src: links.TopImage_src,
-            insideTr: true,
-            alt: 'Top Image',
-          })
-        : ''
+      ? ImageWithLink({
+          href: links.TopImage_href,
+          src: links.TopImage_src,
+          insideTr: true,
+          alt: 'Top Image',
+        })
+      : '';
 
   if (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) {
     TopImageElement = VideoLPWithLink({
-            href: links.TopImageVideo_href,
-            src: links.TopImageVideo_src,
-            alt: 'Landing Page Video',
-            insideTr: true,
-          })
+      href: links.TopImageVideo_href,
+      src: links.TopImageVideo_src,
+      alt: 'Landing Page Video',
+      insideTr: true,
+    });
   }
 
   console.log('links in template', links);
-  const OfferPartElement =
-    OfferPart && OfferPart.type === 'code'
-      ? OfferPartCode({
-          isMonday: OfferPart.isMonday || false,
-          color: OfferPart.color,
-          data: queries.offerPart,
-          href: links.code_href,
-          getPhrase,
-          type,
-          queries,
-          selectCampaign: selectCampaign,
-          add_utm,
-          shop,
-          backgroundColor: OfferPart.backgroundColor,
-          paragraph1: 'Enjoy €100 cashback for your next order.',
-          paragraph2:
-            'Spend min. €300 on your purchase and we will give you a €100 cashback to use in your next order. Insert a code at the check out to receive a voucher with cashback.',
-          paragraph3: 'This is a time limited offer. Valid until 04/01/2026',
-          paragraphAlign: OfferPart.alignment,
-          germanSeparatingLine: OfferPart.germanSeparatingLine,
-          spaceClass: OfferPart?.spaceClass,
-          isSpaceBetweenAllParts: OfferPart?.isSpaceBetweenAllParts
-        })
-      : '';
+
+  let OfferPartElement = '';
+
+  if (OfferPart && OfferPart.type === 'code') {
+    OfferPartElement = OfferPartCode({
+      isMonday: OfferPart.isMonday || false,
+      color: OfferPart.color,
+      data: queries.offerPart,
+      href: links.code_href,
+      getPhrase,
+      type,
+      queries,
+      selectCampaign: selectCampaign,
+      add_utm,
+      shop,
+      backgroundColor: OfferPart.backgroundColor,
+      paragraph1: 'Enjoy €100 cashback for your next order.',
+      paragraph2:
+        'Spend min. €300 on your purchase and we will give you a €100 cashback to use in your next order. Insert a code at the check out to receive a voucher with cashback.',
+      paragraph3: 'This is a time limited offer. Valid until 04/01/2026',
+      paragraphAlign: OfferPart.alignment,
+      germanSeparatingLine: OfferPart.germanSeparatingLine,
+      spaceClass: OfferPart?.spaceClass,
+      isSpaceBetweenAllParts: OfferPart?.isSpaceBetweenAllParts,
+    });
+  } else if (OfferPart && OfferPart.type === 'codes') {
+    OfferPartElement = `<tr>
+            <td class="newsletterContainer" style="background-color: ${OfferPart.backgroundColor}">
+              ${OfferPartCodes({
+                color: OfferPart.color,
+                data: queries['offerPart'],
+                data2: queries['codes'],
+                href: links.code_href,
+                getPhrase,
+                type,
+                queries,
+              })}
+            </td>
+          </tr>`;
+  }
 
   const freebiesElement = freebies
     ? `
@@ -234,90 +252,102 @@ const RegularFridayNslt = async ({
     })
   );
 
-  const CategoriesElement =
-    categories && categories_type !== 'twoColumnsGrid'
-      ? await Categories({
-          getPhrase: getPhrase,
-          getCategoryLink: getCategoryLink,
-          getCategoryTitle: getCategoryTitle,
-          categories:
-            categoriesWithProducts.length > 0
-              ? categoriesWithProducts.map((category, idx) => {
-                  const href =
-                    category.hrefSource && category.hrefSource === 'queries'
-                      ? add_utm(
-                          queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0]
-                        )
-                      : category.href
-                        ? getCategoryLink(category.href)
-                        : category.href;
-                  const name =
-                    category.title && category.title.source === 'queries'
-                      ? queries.categories[idx]
-                      : getCategoryTitle
-                        ? getCategoryTitle(category.name)
-                        : category.name;
+  let CategoriesElement = '';
 
-                  return {
-                    ...category,
-                    href,
-                    name,
-                  };
-                })
-              : categories.map((category, idx) => {
-                  const href =
-                    category.hrefSource && category.hrefSource === 'queries'
-                      ? add_utm(
-                          queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0]
-                        )
-                      : category.href
-                        ? getCategoryLink(category.href)
-                        : category.href;
-                  const name =
-                    category.title.source === 'queries'
-                      ? queries.categories[idx]
-                      : getCategoryTitle
-                        ? getCategoryTitle(category.name)
-                        : category.name;
+  if (categories && categories_type !== 'twoColumnsGrid' && categories_type !== 'fullWidthTiles') {
+    CategoriesElement = await Categories({
+      getPhrase: getPhrase,
+      getCategoryLink: getCategoryLink,
+      getCategoryTitle: getCategoryTitle,
+      categories:
+        categoriesWithProducts.length > 0
+          ? categoriesWithProducts.map((category, idx) => {
+              const href =
+                category.hrefSource && category.hrefSource === 'queries'
+                  ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
+                  : category.href
+                    ? getCategoryLink(category.href)
+                    : category.href;
+              const name =
+                category.title && category.title.source === 'queries'
+                  ? queries.categories[idx]
+                  : getCategoryTitle
+                    ? getCategoryTitle(category.name)
+                    : category.name;
 
-                  return {
-                    ...category,
-                    href,
-                    name,
-                  };
-                }),
-          categories_line,
-          queries,
-          add_utm,
-        })
-      : categories && categories_type === 'twoColumnsGrid'
-        ? `
+              return {
+                ...category,
+                href,
+                name,
+              };
+            })
+          : categories.map((category, idx) => {
+              const href =
+                category.hrefSource && category.hrefSource === 'queries'
+                  ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
+                  : category.href
+                    ? getCategoryLink(category.href)
+                    : category.href;
+              const name =
+                category.title.source === 'queries'
+                  ? queries.categories[idx]
+                  : getCategoryTitle
+                    ? getCategoryTitle(category.name)
+                    : category.name;
 
-      <tr>
-                <td style="background-color: ${background};" class="newsletterContainer">
-                  ${Create2Columns_Grid({
-                    shuffle: false,
-                    iter: categories,
-                    left: (categories) =>
-                      category2Columns_Grid({
-                        getCategoryLink,
-                        getCategoryTitle,
-                        categories,
-                        paddingStyle: 'padding-right:6px',
-                      }),
-                    right: (categories) =>
-                      category2Columns_Grid({
-                        getCategoryLink,
-                        getCategoryTitle,
-                        categories,
-                        paddingStyle: 'padding-left:6px',
-                      }),
-                  })}
-                </td>
-              </tr>
-              `
-        : '';
+              return {
+                ...category,
+                href,
+                name,
+              };
+            }),
+      categories_line,
+      queries,
+      add_utm,
+    });
+  } else if (categories && categories_type === 'twoColumnsGrid') {
+    CategoriesElement = `
 
+    <tr>
+              <td style="background-color: ${background};" class="newsletterContainer">
+                ${Create2Columns_Grid({
+                  shuffle: false,
+                  iter: categories,
+                  left: (categories) =>
+                    category2Columns_Grid({
+                      getCategoryLink,
+                      getCategoryTitle,
+                      categories,
+                      paddingStyle: 'padding-right:6px',
+                    }),
+                  right: (categories) =>
+                    category2Columns_Grid({
+                      getCategoryLink,
+                      getCategoryTitle,
+                      categories,
+                      paddingStyle: 'padding-left:6px',
+                    }),
+                })}
+              </td>
+            </tr>
+            `;
+  } else if (categories && categories_type === 'fullWidthTiles') {
+    CategoriesElement = `
+    <tr>
+              <td style="background-color: ${background};" class="newsletterContainer">
+            ${FullWidthTiles({
+              tiles: categories,
+              getCategoryLink,
+              getCategoryTitle,
+            })}
+            ${Space({ className: 'newsletterBottom80px' })}
+              </td>
+            </tr>
+    `;
+  }
+  else {
+    CategoriesElement = '';
+  }
   return `
     ${HeaderElement}
 
