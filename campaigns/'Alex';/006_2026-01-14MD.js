@@ -21,7 +21,7 @@ const tableQueries = [
     name: 'gift',
   },
   {
-    tableRange: '31:32',
+    tableRange: '30:31',
     name: 'condition',
   },
 ];
