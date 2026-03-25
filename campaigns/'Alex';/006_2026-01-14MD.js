@@ -104,7 +104,7 @@ const categories = [
       // 3 products grid DYSPROSIUM
       {
         id: '649879',
-        src: getImageUrl('20260114_Cat13.png', true),
+        src: getImageUrl('20260114_Cat15.png', true),
       },
       // KOMOTINI
       {
@@ -114,7 +114,7 @@ const categories = [
       // ACONCHI
       {
         id: '368838',
-        src: getImageUrl('20260114_Cat15.png', true),
+        src: getImageUrl('20260114_Cat13.png', true),
       },
     ],
   },
@@ -194,7 +194,7 @@ const categories = [
       // 3 products grid RAMADA
       {
         id: '600448',
-        src: getImageUrl('20260114_Cat33.png', true),
+        src: getImageUrl('20260114_Cat35.png', true),
       },
       // CLASSY TINT
       {
@@ -204,7 +204,7 @@ const categories = [
       // BRAISE
       {
         id: '664741',
-        src: getImageUrl('20260114_Cat35.png', true),
+        src: getImageUrl('20260114_Cat33.png', true),
       },
     ],
   },
