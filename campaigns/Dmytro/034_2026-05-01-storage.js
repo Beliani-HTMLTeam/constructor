@@ -1,34 +1,37 @@
+import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
+
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::01.05.26 - Storage';
 
 const tableQueries = [
   {
-    "tableRange": "15:16",
+    "tableRange": "17:18",
     "name": "TopImageTitle"
   },
   {
-    "tableRange": "18",
+    "tableRange": "20",
     "name": "intro"
   },
   {
-    "tableRange": "19:22",
-    "name": "paragraphs"
+    "tableRange": "22:23",
+    "name": "condition"
   },
   {
-    "tableRange": "23:24",
-    "name": "condition"
+    "tableRange": "29:30",
+    "name": "timer"
   }
 ];
 
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-05-01' }),
-  TopImageTitle_src: translateImage({ value: '20260501_01.png' }),
-  TopImage_src: getImageUrl('20260501_Pic.png', true),
+  TopImageTitle_src: DimasTranslateImage({ value: '20260501_01.png', folder: '20260501', placeholderPosition: '47' }),
+  TopImage_src: getImageUrl('20260501/20260501topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-05-01' }),
-  Banner_1: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
-  Banner_1_Image: translateImage({ value: '{yyyymmdd}b.png' }),
-  Banner_2: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
-  Banner_2_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-04-23' }),
+  Banner_1_Image: translateImage({ value: '20260423b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-22' }),
+  Banner_2_Image: translateImage({ value: '20260422b.png' }),
+  Timer_href: translateLink({ value: 'content/lp26-04-27' }),
 };
 
 const TopImageTitle_data = {
@@ -38,35 +41,221 @@ const TopImageTitle_data = {
 };
 
 const timer = {
-  freebies: getImageUrl('YYYYMMDD_Free.png', true),
-  // ! REMEMBER TO REPLACE THOSE URLS
+  position: 'outsideTopImageTitle',
+  freebies: getImageUrl('20260501/20260501free.png', true),
+  background: '#F6E7E6',
+  color: '#000000',
+  isCtaVisible: true,
   image: {
-    CHDE: 'https://gen.sendtric.com/countdown/3x5402a5a5',
-    CHFR: 'https://gen.sendtric.com/countdown/7d3zl0s986',
-    FR: 'https://gen.sendtric.com/countdown/12rdr6dtgo',
-    DE: 'https://gen.sendtric.com/countdown/sv2q3k1x3y',
-    UK: 'https://gen.sendtric.com/countdown/c4cghowbf1',
-    AT: 'https://gen.sendtric.com/countdown/ypa0wk4eup',
-    ES: 'https://gen.sendtric.com/countdown/sehb5k3z7z',
-    PL: 'https://gen.sendtric.com/countdown/zlnhbu660w',
-    NL: 'https://gen.sendtric.com/countdown/mr9bn0q4c8',
-    PT: 'https://gen.sendtric.com/countdown/61n8wy3y4m',
-    IT: 'https://gen.sendtric.com/countdown/lxloewzogf',
-    SE: 'https://gen.sendtric.com/countdown/y2imagqwpt',
-    HU: 'https://gen.sendtric.com/countdown/udnrsqd4o8',
-    DK: 'https://gen.sendtric.com/countdown/uvfzgmkwr6',
-    CZ: 'https://gen.sendtric.com/countdown/ajq5qcnl44',
-    FI: 'https://gen.sendtric.com/countdown/hgh6virvh8',
-    NO: 'https://gen.sendtric.com/countdown/nfx8ncvozu',
-    SK: 'https://gen.sendtric.com/countdown/x8yr4llgxx',
-    BENL: 'https://gen.sendtric.com/countdown/442t1ogqur',
-    BEFR: 'https://gen.sendtric.com/countdown/kgyur9di1m',
-    RO: 'https://gen.sendtric.com/countdown/ke5m9a4zrx',
-  },
+    "CHDE": "https://gen.sendtric.com/countdown/e2hwgkfdl0",
+    "CHFR": "https://gen.sendtric.com/countdown/qigqewmboc",
+    "FR": "https://gen.sendtric.com/countdown/boqrs1tydg",
+    "DE": "https://gen.sendtric.com/countdown/iwvbkzkkvt",
+    "UK": "https://gen.sendtric.com/countdown/jbz4epz34p",
+    "AT": "https://gen.sendtric.com/countdown/rr1l012l0q",
+    "ES": "https://gen.sendtric.com/countdown/4fwrn8yq8o",
+    "PL": "https://gen.sendtric.com/countdown/1u0sngysqm",
+    "NL": "https://gen.sendtric.com/countdown/olmearuxsp",
+    "PT": "https://gen.sendtric.com/countdown/m6rsw3u1d0",
+    "IT": "https://gen.sendtric.com/countdown/nhxr8gwej1",
+    "SE": "https://gen.sendtric.com/countdown/0b3kguglwo",
+    "HU": "https://gen.sendtric.com/countdown/wl7g0bzw44",
+    "DK": "https://gen.sendtric.com/countdown/evf9kvrd2j",
+    "CZ": "https://gen.sendtric.com/countdown/0pazdzaga5",
+    "FI": "https://gen.sendtric.com/countdown/uddeviq324",
+    "NO": "https://gen.sendtric.com/countdown/qzlw2rdaqm",
+    "SK": "https://gen.sendtric.com/countdown/umrzae2xw1",
+    "BENL": "https://gen.sendtric.com/countdown/tg5c1w8218",
+    "BEFR": "https://gen.sendtric.com/countdown/a2v4y11u98",
+    "RO": "https://gen.sendtric.com/countdown/wvawswpxae"
+  }
 };
 
 const categories = [
-  // TODO: Add categories here
+  {
+    name: 'Sideboards',
+    background: '#FD9000',
+    color: '#000000',
+    src: getImageUrl('20260501/20260501Category10.png', true),
+    href: 'https://www.beliani.ch/storage/sideboards/',
+    type: 'grid',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'left',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 60,
+    line: {
+      show: false
+    },
+    cta: {
+      show: true
+    },
+    products: [
+      // CLUNES
+      {
+        id: '692706',
+        src: getImageUrl('20260501/20260501Category11.png', true),
+      },
+      // KEITH
+      {
+        id: '692046',
+        src: getImageUrl('20260501/20260501Category12.png', true),
+      },
+      // LEDUC
+      {
+        id: '675501',
+        src: getImageUrl('20260501/20260501Category13.png', true),
+      },
+      // PAGET
+      {
+        id: '574205',
+        src: getImageUrl('20260501/20260501Category14.png', true),
+      },
+    ],
+  },
+  {
+    name: 'TV stands',
+    background: '#750000',
+    color: '#ffffff',
+    src: getImageUrl('20260501/20260501Category20.png', true),
+    href: 'https://www.beliani.ch/storage/tv-stands/',
+    type: 'grid',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'left',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 35,
+    line: {
+      show: false
+    },
+    cta: {
+      show: true
+    },
+    products: [
+      // GLADSTONE
+      {
+        id: '607954',
+        src: getImageUrl('20260501/20260501Category21.png', true),
+      },
+      // LANCELIN
+      {
+        id: '714182',
+        src: getImageUrl('20260501/20260501Category22.png', true),
+      },
+      // PASCO
+      {
+        id: '673577',
+        src: getImageUrl('20260501/20260501Category23.png', true),
+      },
+      // GLASTONBURY
+      {
+        id: '607574',
+        src: getImageUrl('20260501/20260501Category24.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Bookcases & shelving units',
+    background: '#FD9000',
+    color: '#000000',
+    src: getImageUrl('20260501/20260501Category30.png', true),
+    href: 'https://www.beliani.ch/storage/bookcases-and-shelves/',
+    type: 'grid',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'left',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 35,
+    line: {
+      show: false
+    },
+    cta: {
+      show: true
+    },
+    products: [
+      // FONTAS
+      {
+        id: '645962',
+        src: getImageUrl('20260501/20260501Category31.png', true),
+      },
+      // ZEHNA
+      {
+        id: '677752',
+        src: getImageUrl('20260501/20260501Category32.png', true),
+      },
+      // ALMA
+      {
+        id: '584465',
+        src: getImageUrl('20260501/20260501Category33.png', true),
+      },
+      // TIFTON
+      {
+        id: '170647',
+        src: getImageUrl('20260501/20260501Category34.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Garden storage',
+    background: '#750000',
+    color: '#ffffff',
+    src: getImageUrl('20260501/20260501Category40.png', true),
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-storage/',
+    type: 'grid',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'left',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 35,
+    line: {
+      show: false
+    },
+    cta: {
+      show: true
+    },
+    products: [
+      // FIUGGI
+      {
+        id: '657502',
+        src: getImageUrl('20260501/20260501Category41.png', true),
+      },
+      // XITTA
+      {
+        id: '611704',
+        src: getImageUrl('20260501/20260501Category42.png', true),
+      },
+      // MEDELLIN
+      {
+        id: '711539',
+        src: getImageUrl('20260501/20260501Category43.png', true),
+      },
+      // MILIES
+      {
+        id: '660775',
+        src: getImageUrl('20260501/20260501Category44.png', true),
+      },
+    ],
+  },
 ];
 
 export default new entities.Campaign({
@@ -85,7 +274,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#FD9000",
@@ -102,6 +291,7 @@ export default new entities.Campaign({
         backgroundColor: "#F6E7E6",
         type: "timer",
         image: "20260501free.png",
+        isWithTitles: true,
       },
       intro: {
         color: "#000000",
@@ -115,7 +305,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.LP,
       background: "#FD9000",
       color: "#000000",
@@ -131,6 +321,7 @@ export default new entities.Campaign({
         backgroundColor: "#F6E7E6",
         type: "timer",
         image: "20260501free.png",
+        isWithTitles: true,
       },
       intro: {
         color: "#000000",
