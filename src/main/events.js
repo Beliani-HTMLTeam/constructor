@@ -110,12 +110,42 @@ async function runRedirectCheck() {
 
     // console.log('Detected base category/content links:', baseCategoryLinks);
 
-    const allShops = getState('shops') || [];
+    let allShops = getState('shops') || [];
 
     if (allShops.length === 0) {
       loadingSwal.close();
       return toast.error('Shops configuration not available.');
     }
+
+    const expandedShop = [];
+
+    allShops.forEach((shop) => {
+      const slug = shop.slug.toLowerCase();
+
+      if (slug === 'be') {
+        expandedShop.push({
+          ...shop,
+          slug: 'BENL',
+        });
+        expandedShop.push({
+          ...shop,
+          slug: 'BEFR',
+        });
+      } else if (slug === 'ch' || slug === 'chde') {
+        expandedShop.push({
+          ...shop,
+          slug: 'CHDE',
+        });
+        expandedShop.push({
+          ...shop,
+          slug: 'CHFR',
+        });
+      } else {
+        expandedShop.push(shop);
+      }
+    });
+
+    allShops = expandedShop;
 
     // generate all localized versions of each base link for every shop
     const allLocalizedUrls = [];
@@ -155,19 +185,18 @@ async function runRedirectCheck() {
 
       allShops.forEach((shop) => {
         try {
-          // console.log('shop', shop);
-          const localized = getCategoryLinkForTargetShop(cleanCategory, shop).href ? getCategoryLinkForTargetShop(cleanCategory, shop).href: getCategoryLinkForTargetShop(cleanCategory, shop)
+          const localized = getCategoryLinkForTargetShop(cleanCategory, shop).href
+            ? getCategoryLinkForTargetShop(cleanCategory, shop).href
+            : getCategoryLinkForTargetShop(cleanCategory, shop);
 
-          let key = localized.replace(/\/+$/, '') || `${new URL(localized).origin}/`;
-
-          if (localized === cleanCategory && shop.slug !== new URL(baseFullUrl).host.split('.')[1].toUpperCase()) {
-            return;
-          }
-
-          allLocalizedUrls.push(key);
-          urlToOriginalAndShop.set(key, { original: baseFullUrl, baseOriginal: cleanCategory, shop: shop.slug });
+          allLocalizedUrls.push(localized);
+          urlToOriginalAndShop.set(localized, {
+            original: baseFullUrl,
+            baseOriginal: cleanCategory,
+            shop: shop.slug.toUpperCase(),
+          });
         } catch (error) {
-          console.warn(`Failed to localize ${cleanCategory} for shop ${shop.slug}:`, error);
+          console.warn(`Failed to localize ${cleanCategory} for ${shop.slug}:`, error);
         }
       });
     });
