@@ -77,7 +77,12 @@ body {
 .container #app {
   font-family: sans-serif;
   width: 100%;
+  position: relative;
   overflow-y: scroll;
+}
+
+.container #app-content {
+  min-height: 100%;
 }
 
 .select-wrapper {
@@ -125,4 +130,22 @@ body {
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+#loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility .2s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#loader.loader-visible {
+  opacity: 1;
+  visibility: visible;
 }
