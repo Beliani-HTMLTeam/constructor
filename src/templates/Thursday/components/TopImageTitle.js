@@ -1,7 +1,7 @@
 import { Space } from './Space.js';
 
-const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) => {
-  const keywords = ["retrò", "retró", "rétro", "%", "halloween", "retro"]
+const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type, renderType }) => {
+  const keywords = ['retrò', 'retró', 'rétro', '%', 'halloween', 'retro'];
 
   function includesKeywords(title) {
     for (let keyword of keywords) {
@@ -12,7 +12,6 @@ const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) =
 
     return false;
   }
-
 
   const templates = {
     up_to: `
@@ -45,11 +44,12 @@ const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) =
     halloween: `
       <h4 style="color:${color};" class="${String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title1}</h4>
       <h4 style="color:${color};" class="${String(title2).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title2}</h4>
-    `
+    `,
   };
 
-  if (renderType === "landing") {
+  if (renderType === 'landing') {
     return `
+    <tr><td><table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: ${backgroundColor}; color: ${color};">
       ${Space({ insideTr: true })}
       
       <tr>
@@ -61,6 +61,8 @@ const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) =
       </tr>
 
       ${Space({ insideTr: true })}
+
+    </table></td></tr>
     `;
   }
 
@@ -72,7 +74,6 @@ const TopImageTitle = ({ href, src, title1, title2, color, type, renderType }) =
         </a>
       </td>
     </tr>`;
-
-}
+};
 
 export { TopImageTitle };

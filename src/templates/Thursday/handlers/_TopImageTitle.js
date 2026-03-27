@@ -8,7 +8,7 @@ export const TopImageTitleHandler = ({ links, queries, TopImageTitle_data, type 
         title1: queries?.TopImageTitle?.[0] ?? 'Translation not found',
         title2: queries?.TopImageTitle?.[1] ?? 'Translation not found',
         color: TopImageTitle_data?.color,
-        background: TopImageTitle_data?.background,
+        backgroundColor: TopImageTitle_data?.backgroundColor,
         type: TopImageTitle_data?.type,
         renderType: type,
       })
