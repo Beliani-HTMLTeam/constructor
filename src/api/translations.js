@@ -1,3 +1,8 @@
+
+// todo: split into separate files: staticTranslations.js, dynamicTranslations.js, translationCache.js, etc.
+
+// todo: static translations should be backend-cached and only fetched once per session, dynamic translations are fetched on demand and cached in frontend memory
+
 import { appConfig as c } from '@utils/config.js';
 import { toast } from 'sonner';
 import {
