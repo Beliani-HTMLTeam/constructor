@@ -9,6 +9,8 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow }) => {
   return intro && introType === 'paragraph'
     ? `
   ${Intro({
+    spaceTop: intro?.spaceTop,
+    spaceBottom: intro?.spaceBottom,
     text: queries.intro || 'Translation not found',
     paragraphAlign: intro?.alignment,
     color: introColor,
