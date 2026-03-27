@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 
 import SHOPS from '@config/shops.js';
 
-export const root = document.querySelector('#app');
+export const root = document.querySelector('#app-content');
 
 async function initializeApp() {
   try {

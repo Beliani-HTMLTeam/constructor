@@ -1,6 +1,3 @@
-import { root } from '@/app.js';
-import { SpinnerInit } from '@/helpers/spinner/spinerOptions.js';
-
 const state = {
   queries: {},
   country: '',
@@ -13,16 +10,32 @@ const state = {
   campaigns: [],
 };
 
+function getRoot() {
+  return document.querySelector('#app-content');
+}
+
+function getLoader() {
+  return document.querySelector('#loader');
+}
+
 export function setState(key, value) {
   state[key] = value;
 
-  if (key === 'loading' && value === true) {
-    root.innerHTML = '';
-    SpinnerInit.spin(root);
-  }
+  if (key !== 'loading') return;
 
-  if (key === 'loading' && value === false) {
-    SpinnerInit.stop(root);
+  const root = getRoot();
+  const loader = getLoader();
+
+  if (!loader) return;
+
+  // cast to type jik
+  if (Boolean(value)) {
+    if (root) {
+      root.innerHTML = '';
+    }
+    loader.classList.add('loader-visible');
+  } else {
+    loader.classList.remove('loader-visible');
   }
 }
 
