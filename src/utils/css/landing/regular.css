@@ -108,6 +108,12 @@ table {
   line-height: 1.2;
 }
 
+#newsletter .newsletterSemiBoldCode {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.20;
+}
+
 /* ============================ newsletterBottom ================================*/
 
 #newsletter .newsletterBottom10px {
@@ -294,8 +300,14 @@ table {
   #newsletter .newsletterContainerWithPaddingBottom20px {
     padding-bottom: 20px;
     padding-left: 20px;
-  padding-right: 20px;
+    padding-right: 20px;
   }
+
+  #newsletter .newsletterParagraph b {
+    font-size: 18px !important;
+    font-weight:600 !important;
+  }
+
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
   #newsletter .newsletterFooterCategoryLEFTBottom {
@@ -496,8 +508,11 @@ table {
     font-size: 43px;
     line-height: 44px;
   }
- 
 
+  #newsletter .newsletterParagraph b {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
 }
 
 @media screen and (max-width: 570px) {

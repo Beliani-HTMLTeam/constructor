@@ -3,7 +3,7 @@ import { Paragraph } from './Paragraph.js';
 import { Space } from './Space.js';
 
 // Helper do renderowania pojedynczego bloku (paragraf + odstęp)
-function renderBlock({ content, spaceAfter, isTitle, color }) {
+function renderBlock({ content, spaceAfter, isTitle, color, className }) {
   console.log('renderBlock', content)
   // Jeśli nie ma treści, nie renderuj nic
   if (!content) return '';
@@ -15,7 +15,8 @@ function renderBlock({ content, spaceAfter, isTitle, color }) {
    { text: content,
     align: 'center',
     insideTr: true,
-    color} );
+    color,
+    className } );
 
   const spaceHtml = Space({ className: `newsletterBottom${spaceAfter}` });
 
@@ -41,12 +42,12 @@ export function OfferPartCodes({ color, data, data2, queries, href, type }) {
 
   // Definiujemy strukturę jako tablicę konfiguracji
   const layoutConfig = [
-    { content: paragraphs[0], spaceAfter: type === 'newsletter' ? '20px' : '20px' },
-    { type: 'code', content: codes[0], spaceAfter: '35px', for: 'landing' },
-    { content: paragraphs[1], spaceAfter: type === 'newsletter' ? '20px' : '20px' },
-    { type: 'code', content: codes[1], spaceAfter: '35px', for: 'landing' },
-    { content: paragraphs[2], spaceAfter: type === 'newsletter' ? '20px' : '20px' },
-    { type: 'code', content: codes[2], spaceAfter: '35px', for: 'landing' },
+    { content: paragraphs[0], spaceAfter: type === 'newsletter' ? '25px' : '20px' },
+    { type: 'code', content: codes[0], spaceAfter: '35px', class: "newsletterSemiBoldCode", for: 'landing' },
+    { content: paragraphs[1], spaceAfter: type === 'newsletter' ? '25px' : '20px' },
+    { type: 'code', content: codes[1], spaceAfter: '35px', class: "newsletterSemiBoldCode", for: 'landing' },
+    { content: paragraphs[2], spaceAfter: type === 'newsletter' ? '25px' : '20px' },
+    { type: 'code', content: codes[2], spaceAfter: '35px', class: "newsletterSemiBoldCode", for: 'landing' },
   ];
 
   // console.log(layoutConfig);
@@ -56,7 +57,7 @@ export function OfferPartCodes({ color, data, data2, queries, href, type }) {
     .map((block) => {
       // Renderowanie specjalnych bloków
       if (block.type === 'code') {
-        return renderBlock({ ...block, content: block.content, color });
+        return renderBlock({ ...block, content: block.content, color, className: block.class });
       }
       // Renderowanie domyślnych bloków
       return renderBlock({ ...block, color });

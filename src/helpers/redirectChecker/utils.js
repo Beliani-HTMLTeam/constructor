@@ -50,21 +50,19 @@ export const getCategoryLinkForTargetShop = (input, targetShop) => {
     return input;
   }
 
-  // for BE shop
+  // Determine effective target slug for multi-language shops (BE and CH)
   let effectiveTargetSlug = targetSlug;
+
   if (targetSlug === 'be') {
-    const currentLang = getState('country')?.toLowerCase() || getState('language')?.toLowerCase() || 'befr';
-
-    if (currentLang.includes('nl') || currentLang === 'benl') {
-      effectiveTargetSlug = 'benl';
-    } else {
-      effectiveTargetSlug = 'befr';
-    }
-  } else if (targetSlug === 'ch' || targetSlug === 'chfr' || targetSlug === 'chde') {
-    const currentLang = getState('country')?.toLowerCase() || 'chde';
-
-    effectiveTargetSlug = currentLang.includes('fr') || currentLang === 'chfr' ? 'chfr' : 'chde';
+    // For BE shop we already created two variants (benl and befr), so trust the passed slug
+    effectiveTargetSlug = targetSlug;   // benl or befr
+  } 
+  else if (['ch', 'chde', 'chfr'].includes(targetSlug)) {
+    // For CH we already created two variants (chde and chfr), so trust the passed slug
+    effectiveTargetSlug = targetSlug;   // chde or chfr
   }
+
+  // console.log(`[Target Slug] ${targetSlug} → effective: ${effectiveTargetSlug}`);
 
   const slugIndex = data.slug.findIndex((s) => String(s).toLowerCase() === effectiveTargetSlug);
   if (slugIndex === -1) {
@@ -208,6 +206,7 @@ export const checkRealRedirects = (data, urlToOriginalAndShop) => {
       baseOriginal: originalUrl,
         shop: 'unknown'
       };
+      console.log('urlToOriginalAndShop.get(normalizedKey) ', urlToOriginalAndShop )
       return { ...info, original: originalUrl, baseOriginal: meta.baseOriginal || originalUrl, shop: meta.shop};
     });
 
