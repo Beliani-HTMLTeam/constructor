@@ -59,6 +59,12 @@ const Thursday = async ({
   const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
   const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country });
   const introPosition = intro?.position ?? 'afterTopImage';
+  const timerPosition = Inside?.position ?? 'beforeCategories';
+
+  const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
+  const TimerAfterCategories =
+    timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
+  const hasTimer = Boolean(TimerElement);
 
   const safeCategories = Array.isArray(categories) ? categories : [];
   const freebiesIndex = safeCategories.findIndex((category) => String(category?.type).toLowerCase() === 'freebies');
@@ -70,8 +76,7 @@ const Thursday = async ({
   const categoriesAfterIntro =
     introPosition === 'afterFreebies' && freebiesIndex >= 0 ? safeCategories.slice(freebiesIndex + 1) : [];
 
-  const CategoriesBeforeIntroElement = await CategoriesHandler({
-    categories: categoriesBeforeIntro,
+  const categoriesSharedProps = {
     getProductById,
     getCategoryLink,
     getCategoryTitle,
@@ -81,27 +86,25 @@ const Thursday = async ({
     type,
     country,
     getPhrase,
+  };
+
+  const CategoriesBeforeIntroElement = await CategoriesHandler({
+    categories: categoriesBeforeIntro,
+    ...categoriesSharedProps,
   });
   const CategoriesAfterIntroElement = await CategoriesHandler({
     categories: categoriesAfterIntro,
-    getProductById,
-    getCategoryLink,
-    getCategoryTitle,
-    queries,
-    add_utm,
-    links,
-    type,
-    country,
-    getPhrase,
+    ...categoriesSharedProps,
   });
 
-  const IntroAfterTopImageElement = introPosition === 'afterFreebies' ? '' : IntroElement;
+  const isAfterFreebies = introPosition === 'afterFreebies';
+  const isAfterTimer = introPosition === 'afterTimer' && hasTimer;
+  const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer ? '' : IntroElement;
   const IntroAfterFreebiesElement = introPosition === 'afterFreebies' ? IntroElement : '';
-
-  const timerPosition = Inside?.position ?? 'beforeCategories';
-  const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
-  const TimerAfterCategories =
-    timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
+  const IntroAfterTimerBeforeCategoriesElement =
+    isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
+  const IntroAfterTimerAfterCategoriesElement =
+    isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
 
   return `
     ${HeaderElement}
@@ -115,6 +118,8 @@ const Thursday = async ({
 
       ${TimerBeforeCategories}
 
+      ${IntroAfterTimerBeforeCategoriesElement}
+
       ${CategoriesBeforeIntroElement}
 
       ${IntroAfterFreebiesElement}
@@ -122,6 +127,8 @@ const Thursday = async ({
       ${CategoriesAfterIntroElement}
 
       ${TimerAfterCategories}
+
+      ${IntroAfterTimerAfterCategoriesElement}
     </table>
 
 
