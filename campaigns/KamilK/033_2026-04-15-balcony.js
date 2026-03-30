@@ -162,9 +162,9 @@ const categories = [
     ],
   },
   {
-    name: 'Rugs',
+    name: 'Outdoor rugs',
     src: getImageUrl('20260415_Cat20.png', true),
-    href: 'https://www.beliani.ch/rugs/',
+    href: 'https://www.beliani.ch/garden-furniture/garden-rugs/',
     background: '#FFE9CC',
     color: '#000000',
     type: 'grid',
