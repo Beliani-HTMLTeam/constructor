@@ -27,11 +27,11 @@ const links = {
   // TopImage_src: getImageUrl('20260311_Top.png', true),
   // TopImage_href: 'https://www.beliani.ch/rugs/low-pile-rugs/',
 
-  Banner_1: translateLink({ value: 'content/lp26-04-08' }),
-  Banner_1_Image: translateImage({ value: '20260408b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-04-09' }),
+  Banner_1_Image: translateImage({ value: '20260409b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-04-03' }),
-  Banner_2_Image: translateImage({ value: '20260403b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-08' }),
+  Banner_2_Image: translateImage({ value: '20260408b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -162,9 +162,9 @@ const categories = [
     ],
   },
   {
-    name: 'Rugs',
+    name: 'Outdoor rugs',
     src: getImageUrl('20260415_Cat20.png', true),
-    href: 'https://www.beliani.ch/rugs/',
+    href: 'https://www.beliani.ch/garden-furniture/garden-rugs/',
     background: '#FFE9CC',
     color: '#000000',
     type: 'grid',
