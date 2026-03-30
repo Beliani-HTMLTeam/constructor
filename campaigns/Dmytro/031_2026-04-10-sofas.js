@@ -193,9 +193,9 @@ const categories = [
         id: '711007',
         src: getImageUrl('20260410/20260410Category31.png', true),
       },
-      // ABERDEEN
+      // UNSTAD
       {
-        id: '694502',
+        id: '437213',
         src: getImageUrl('20260410/20260410Category32.png', true),
       },
       // ARDAL
