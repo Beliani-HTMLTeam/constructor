@@ -193,14 +193,9 @@ export class TemplateHandlers {
         }
       } else {
         partsTranslations.push(item);
-        toast.error(`Nie znaleziono tłumaczenia dla '${item}' kategorii!\nSprawdź szczegóły w konsoli.`);
-        console.log('Ta część kategorii nie została znaleziona w tłumaczeniach:');
-        console.log(
-          'https://docs.google.com/spreadsheets/d/1Y9blxN4paEV05s6AvdWmH5fBELTUvDz3ax5skmgVrsQ/edit?gid=0#gid=0'
-        );
-        console.log(
-          'Dodaj ją do zakładki category_links. "Statyczne" tłumaczenia są cache\'owane i może być trzeba poczekać chwilę.'
-        );
+        let message = `Nie znaleziono headera (klucza) dla ${item} w category links (sprawdź wielkość liter)`;
+        console.warn(message);
+        toast.error(message);
       }
     });
 
