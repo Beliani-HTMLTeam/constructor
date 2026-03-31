@@ -239,7 +239,7 @@ const categories = [
 ];
 
 const timer = {
-  // freebies: getImageUrl('20260305free.png', true),
+  freebies: getImageUrl('20260416free.png', true),
   image: {
     CHDE: 'https://gen.sendtric.com/countdown/moari4f8zy',
     CHFR: 'https://gen.sendtric.com/countdown/lsqewsz7db',
