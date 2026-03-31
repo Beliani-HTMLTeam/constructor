@@ -252,7 +252,8 @@ async function runRedirectCheck() {
 }
 
 function selectCampaignHandler(ev, campaigns) {
-  const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
+  // casting fixes error below
+  const selectedCampaign = campaigns.find((campaign) => Number(campaign.startId) === Number(ev.target.value));
   // console.log('selected Campaign', selectedCampaign);
 
   if (!selectedCampaign) return toast.error(`Campaign startId ${ev.target.value} not found.`);
