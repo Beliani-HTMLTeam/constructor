@@ -27,16 +27,16 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-04-07' }),
-  TopImageTitle_src: translateImage({ value: '20260407_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-04-14' }),
+  TopImageTitle_src: translateImage({ value: '20260414_01.png' }),
 
   TopImage: getImageUrl('20260114_gif.gif', true),
 
-  Banner_1: translateLink({ value: 'content/lp26-03-26' }),
-  Banner_1_Image: translateImage({ value: '20260326b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-04-02' }),
+  Banner_1_Image: translateImage({ value: '20260402b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-03-25' }),
-  Banner_2_Image: translateImage({ value: '20260325b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-01' }),
+  Banner_2_Image: translateImage({ value: '20260401b.png' }),
 };
 
 const TopImageTitle_data = {
