@@ -54,7 +54,7 @@ const timer = {
     "UK": "https://gen.sendtric.com/countdown/bvodnrg5pr",
     "AT": "https://gen.sendtric.com/countdown/zh5umxhy2d",
     "ES": "https://gen.sendtric.com/countdown/g3ng24xh3e",
-    "PL": "https://gen.sendtric.com/countdown/5a5qkw92hz",
+    "PL": "https://gen.sendtric.com/countdown/3t4gnuxpe6",
     "NL": "https://gen.sendtric.com/countdown/t1oj7bvy7d",
     "PT": "https://gen.sendtric.com/countdown/0vp9we4r3r",
     "IT": "https://gen.sendtric.com/countdown/mdef1m78yl",

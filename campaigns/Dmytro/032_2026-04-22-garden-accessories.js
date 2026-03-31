@@ -194,9 +194,9 @@ const categories = [
         id: '558771',
         src: getImageUrl('20260422/20260422Category32.png', true),
       },
-      // SUNLINE
+      // JEZZA
       {
-        id: '590523',
+        id: '638772',
         src: getImageUrl('20260422/20260422Category33.png', true),
       },
       // PEACOCK
