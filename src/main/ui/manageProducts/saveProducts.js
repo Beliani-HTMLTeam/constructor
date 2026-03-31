@@ -13,7 +13,8 @@ import {
 
 export function createSaveHandler({ mode, campaignId, select, textarea, backToList }) {
   return () => {
-    const targetCampaignId = mode === 'edit' ? campaignId : select.value;
+    const normalizeCampaignId = (value) => String(value ?? '');
+    const targetCampaignId = normalizeCampaignId(mode === 'edit' ? campaignId : select.value);
     if (!targetCampaignId || targetCampaignId === 'default') {
       return toast.error('Please select a campaign first!');
     }
@@ -41,7 +42,9 @@ export function createSaveHandler({ mode, campaignId, select, textarea, backToLi
     }
 
     const productsIndex = readProductsIndex();
-    const existingEntry = productsIndex.find((entry) => entry?.campaign_id === targetCampaignId);
+    const existingEntry = productsIndex.find(
+      (entry) => normalizeCampaignId(entry?.campaign_id) === targetCampaignId
+    );
     if (mode === 'add' && existingEntry) {
       const ok = confirm(`Products for ${targetCampaignId} already exist. Overwrite?`);
       if (!ok) return;
@@ -58,7 +61,9 @@ export function createSaveHandler({ mode, campaignId, select, textarea, backToLi
 
     const updatedIndex = existingEntry
       ? productsIndex.map((entry) =>
-          entry?.campaign_id === targetCampaignId ? { ...entry, products: storedProductsPayload, meta } : entry
+          normalizeCampaignId(entry?.campaign_id) === targetCampaignId
+            ? { ...entry, campaign_id: targetCampaignId, products: storedProductsPayload, meta }
+            : entry
         )
       : [...productsIndex, { campaign_id: targetCampaignId, products: storedProductsPayload, meta }];
 
