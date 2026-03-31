@@ -299,8 +299,8 @@ export default new entities.Campaign({
         type: 'paragraph',
       },
       Inside: {
-        color: '#ffffff',
-        backgroundColor: '#FF2F00',
+        color: '#000000',
+        backgroundColor: '#FFCCB7',
         type: 'timer',
       },
     },
@@ -324,8 +324,8 @@ export default new entities.Campaign({
         type: 'paragraph',
       },
       Inside: {
-        color: '#ffffff',
-        backgroundColor: '#FF2F00',
+        color: '#000000',
+        backgroundColor: '#FFCCB7',
         type: 'timer',
       },
     },
