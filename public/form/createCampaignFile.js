@@ -99,7 +99,7 @@ function generateCampaignContent(formData, campaignNumber) {
     alarmEnabled = false,
     alarmDescription = '',
     isArchive = false,
-    optimizeImages = false,
+    optimizeImages = true,
     figmaURL = '',
     familyVersion = 0, // 0 = NEW (default), 1 = OLD
     background = '#750000',

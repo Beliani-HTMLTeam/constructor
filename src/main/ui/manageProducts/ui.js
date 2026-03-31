@@ -16,7 +16,8 @@ export function createButton(text, className, onClick) {
 }
 
 export function findCampaignLabel(campaigns, campaignId) {
-  const campaign = campaigns?.find?.((campaign) => campaign?.startId === campaignId);
+  const targetCampaignId = String(campaignId ?? '');
+  const campaign = campaigns?.find?.((campaign) => String(campaign?.startId ?? '') === targetCampaignId);
 
   if (!campaign) return { label: '[MISSING]', campaign: null };
 

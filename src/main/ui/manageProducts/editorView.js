@@ -9,7 +9,11 @@ export function renderEditorView({ body, subtitle, campaigns, mode, campaignId, 
   updateUsageLine(subtitle);
 
   const index = readProductsIndex();
-  const existingIds = new Set(index.map((x) => x?.campaign_id).filter(Boolean));
+  const existingIds = new Set(
+    index
+      .map((x) => String(x?.campaign_id ?? ''))
+      .filter((id) => Boolean(id) && id !== 'default')
+  );
 
   const editorHeader = document.createElement('div');
   editorHeader.className = 'products-modal-editor-header';

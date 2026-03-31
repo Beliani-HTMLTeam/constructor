@@ -3,6 +3,8 @@ import { createButton, findCampaignLabel } from './ui.js';
 import { getEntryProducts } from './storage.js';
 
 export function buildCampaignSection({ body, campaigns, mode, campaignId, index, existingIds, textarea, refreshSizeHint }) {
+  const normalizeCampaignId = (value) => String(value ?? '');
+
   const row = document.createElement('div');
   row.className = 'modal-row products-modal-campaign-row';
 
@@ -22,11 +24,11 @@ export function buildCampaignSection({ body, campaigns, mode, campaignId, index,
 
     for (const campaign of campaigns ?? []) {
       if (!campaign || campaign.isArchive) continue;
-      if (!includeExisting && existingIds.has(campaign.startId)) continue;
+      if (!includeExisting && existingIds.has(normalizeCampaignId(campaign.startId))) continue;
      
       const opt = document.createElement('option');
      
-      opt.value = campaign.startId;
+      opt.value = normalizeCampaignId(campaign.startId);
       opt.textContent = `${campaign.name}${campaign.date ? ` - ${campaign.date}` : ''}`;
       select.appendChild(opt);
     }
@@ -34,7 +36,7 @@ export function buildCampaignSection({ body, campaigns, mode, campaignId, index,
 
   populate(false);
   if (mode === 'edit') {
-    select.value = campaignId;
+    select.value = normalizeCampaignId(campaignId);
     select.disabled = true;
   }
 
@@ -49,12 +51,13 @@ export function buildCampaignSection({ body, campaigns, mode, campaignId, index,
   info.className = 'products-modal-info';
   
   const warning = document.createElement('div');
-  warning.className = 'products-modal-existing-warning hidden';
+  warning.className = 'products-modal-existing-warning';
+  warning.style.display = 'none';
   warning.textContent = 'This campaign already has products saved.';
 
   const loadBtn = createButton('Load existing products', 'cancel-btn', () => {
-    const selectedCampaignId = select.value;
-    const existingEntry = index.find((entry) => entry?.campaign_id === selectedCampaignId);
+    const selectedCampaignId = normalizeCampaignId(select.value);
+    const existingEntry = index.find((entry) => normalizeCampaignId(entry?.campaign_id) === selectedCampaignId);
   
     if (!existingEntry) return;
   
@@ -68,32 +71,44 @@ export function buildCampaignSection({ body, campaigns, mode, campaignId, index,
     }
   });
   
-  loadBtn.classList.add('hidden');
+  loadBtn.style.display = 'none';
 
   const setInfo = (selectedCampaignId) => {
-    if (!selectedCampaignId || selectedCampaignId === 'default') {
+    const normalizedSelectedCampaignId = normalizeCampaignId(selectedCampaignId);
+
+    if (!normalizedSelectedCampaignId || normalizedSelectedCampaignId === 'default') {
       info.textContent = 'Pick campaign to attach products to.';
       info.classList.remove('products-modal-missing');
   
-      warning.classList.add('hidden');
+      warning.style.display = 'none';
   
-      loadBtn.classList.add('hidden');
+      loadBtn.style.display = 'none';
   
       return;
     }
   
-    const { label } = findCampaignLabel(campaigns, selectedCampaignId);
+    const { label } = findCampaignLabel(campaigns, normalizedSelectedCampaignId);
   
     info.textContent = label;
     info.classList.toggle('products-modal-missing', label === '[MISSING]');
   
-    const showExisting = mode === 'add' && existingIds.has(selectedCampaignId);
+    const hasRealSelection =
+      normalizedSelectedCampaignId !== 'default' &&
+      campaigns?.some?.((campaign) => normalizeCampaignId(campaign?.startId) === normalizedSelectedCampaignId);
+    const hasExistingProducts = index.some(
+      (entry) => normalizeCampaignId(entry?.campaign_id) === normalizedSelectedCampaignId
+    );
+    const showExisting =
+      mode === 'add' &&
+      hasRealSelection &&
+      existingIds.has(normalizedSelectedCampaignId) &&
+      hasExistingProducts;
   
-    warning.classList.toggle('hidden', !showExisting);
-    loadBtn.classList.toggle('hidden', !showExisting);
+    warning.style.display = showExisting ? '' : 'none';
+    loadBtn.style.display = showExisting ? '' : 'none';
   };
 
-  setInfo(mode === 'edit' ? campaignId : 'default');
+  setInfo(mode === 'edit' ? normalizeCampaignId(campaignId) : 'default');
   select.addEventListener('change', () => setInfo(select.value));
 
   if (mode === 'add') {

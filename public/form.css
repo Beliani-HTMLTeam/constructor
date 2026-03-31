@@ -326,6 +326,20 @@ textarea {
   padding-right: 34px;
 }
 
+.products-modal-icon-btn {
+  width: 40px;
+  min-width: 40px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.products-modal-icon-btn-active {
+  border-color: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.08);
+}
+
 @media (max-width: 720px) {
   .products-modal-toolbar {
     flex-wrap: wrap;

@@ -11,7 +11,15 @@ import {
   writeProductsIndex,
 } from './storage.js';
 
-export function buildListToolbar({ body, subtitle, campaigns, openEditorView, renderListView, sortSelect }) {
+export function buildListToolbar({
+  body,
+  subtitle,
+  campaigns,
+  openEditorView,
+  renderListView,
+  sortSelect,
+  visibilityBtn,
+}) {
   const toolbar = document.createElement('div');
   toolbar.className = 'products-modal-toolbar';
 
@@ -77,6 +85,7 @@ export function buildListToolbar({ body, subtitle, campaigns, openEditorView, re
 
   const right = document.createElement('div');
   right.className = 'products-modal-toolbar-right';
+  if (visibilityBtn) right.appendChild(visibilityBtn);
   right.appendChild(sortSelect);
 
   toolbar.appendChild(left);

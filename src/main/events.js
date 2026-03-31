@@ -252,32 +252,26 @@ async function runRedirectCheck() {
 }
 
 function selectCampaignHandler(ev, campaigns) {
-  const selectedCampaign = campaigns.find((campaign) => campaign.startId === ev.target.value);
+  // casting fixes error below
+  const selectedCampaign = campaigns.find((campaign) => Number(campaign.startId) === Number(ev.target.value));
   // console.log('selected Campaign', selectedCampaign);
 
   if (!selectedCampaign) return toast.error(`Campaign startId ${ev.target.value} not found.`);
 
-  // Dla pewności pokaż całą kampanię w konsoli (do debugowania)
-  // console.log('selectedCampaign z campaigns:', selectedCampaign);
-
-  // Ustawienie mapy inkrementowanych ID (do "Open campaign")
   setState('ids', incrementId(selectedCampaign.startId, selectedCampaign.version || 'new'));
 
-  // Ustawienie wybranej kampanii z najważniejszymi polami
   setState('selectedCampaign', {
     startId: selectedCampaign.startId,
     name: selectedCampaign.name,
     templates: selectedCampaign.templates,
     lpId: selectedCampaign.lpId,
     specialLpIds: selectedCampaign.specialLpIds,
-    date: selectedCampaign.date, // <-- Dodaj, jeśli chcesz
-    issueCardId: selectedCampaign.issueCardId, // <-- Dodaj, jeśli chcesz
-    figmaUrl: selectedCampaign.figmaUrl, // <-- Dodaj, jeśli chcesz
+    date: selectedCampaign.date,
+    issueCardId: selectedCampaign.issueCardId,
+    figmaUrl: selectedCampaign.figmaUrl,
     version: selectedCampaign.version || 'new',
-    // Dodaj tutaj inne pola, których potrzebujesz!
   });
 
-  // Zwróć całą kampanię i listę templatek
   return { selectedCampaign, templates: selectedCampaign.templates };
 }
 

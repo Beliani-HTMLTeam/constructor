@@ -148,8 +148,10 @@ export async function renderTemplate(getState, setState) {
       parsedIndex = [];
     }
 
+
+    // cast to string to avoid type issues
     const campaignEntry = Array.isArray(parsedIndex)
-      ? parsedIndex.find((item) => item?.campaign_id === getState('selectedCampaign').startId)
+      ? parsedIndex.find((item) => String(item?.campaign_id) === String(getState('selectedCampaign').startId))
       : null;
 
     productsForTemplate = ensureNormalizedProducts(decompressIfNeeded(campaignEntry?.products));
