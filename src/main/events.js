@@ -33,7 +33,7 @@ function figmaCardHandler(url) {
 }
 
 async function purgeDynamicSpreadsheetData(year, tabName) {
-  const url = `https://fed2n8e59dpq.share.zrok.io/dynamic/${year}/${tabName}/force-refresh`;
+  const url = `https://plgost2ibovu.share.zrok.io/dynamic/${year}/${tabName}/force-refresh`;
 
   try {
     toast(`🔄 Purging dynamic spreadsheet...\nYear: ${year}\nTab: ${tabName}`);

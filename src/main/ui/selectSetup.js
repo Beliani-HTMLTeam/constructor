@@ -107,11 +107,11 @@ export function setupSelectPurge(elements) {
     const prettierTabName = ev.target.value.replace('_', ' ');
 
     const purgeMap = {
-      header: 'https://fed2n8e59dpq.share.zrok.io/static/header/force-refresh',
-      footer: 'https://fed2n8e59dpq.share.zrok.io/static/footer/force-refresh',
-      templates: 'https://fed2n8e59dpq.share.zrok.io/static/templates/force-refresh',
-      category_links: 'https://fed2n8e59dpq.share.zrok.io/static/category_links/force-refresh',
-      category_titles: 'https://fed2n8e59dpq.share.zrok.io/static/category_titles/force-refresh',
+      header: 'https://plgost2ibovu.share.zrok.io/static/header/force-refresh',
+      footer: 'https://plgost2ibovu.share.zrok.io/static/footer/force-refresh',
+      templates: 'https://plgost2ibovu.share.zrok.io/static/templates/force-refresh',
+      category_links: 'https://plgost2ibovu.share.zrok.io/static/category_links/force-refresh',
+      category_titles: 'https://plgost2ibovu.share.zrok.io/static/category_titles/force-refresh',
     };
 
     const url = purgeMap[ev.target.value];

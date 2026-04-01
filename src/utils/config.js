@@ -1,6 +1,6 @@
 export const appConfig = {
   api_url: 'http://localhost:5111/api/local/',
-  external_api_url: 'https://fed2n8e59dpq.share.zrok.io/',
+  external_api_url: 'https://plgost2ibovu.share.zrok.io/',
   server_url: 'https://pictureserver.net/static/2024/',
   // override_year: 2025,
   campaign_url: 'https://www.prologistics.info/news_email.php?id=',
