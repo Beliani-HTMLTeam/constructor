@@ -194,9 +194,9 @@ const categories = [
         id: 424921,
         src: getImageUrl('20260415_Pic21.png', true),
       },
-      // THANE
+      // SAUGOR
       {
-        id: 504185,
+        id: 553444,
         src: getImageUrl('20260415_Pic22.png', true),
       },
       // NELLORE
