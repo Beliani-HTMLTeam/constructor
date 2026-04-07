@@ -84,7 +84,7 @@ export function OfferPartCodes({ color, data, data2, queries, href, type }) {
   // console.log("CTA: ", newsletterCta);
 
   const finalParagraph = renderBlock({
-    content: paragraphs[4],
+    content: paragraphs[3],
     spaceAfter: '0px', // Bez dodatkowego odstępu na końcu
     color,
   });
