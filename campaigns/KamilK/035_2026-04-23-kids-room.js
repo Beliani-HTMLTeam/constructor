@@ -36,11 +36,11 @@ const links = {
   TopImage_src: getImageUrl('20260423_Pic.png', true),
   TopImage_href: translateLink({ value: 'content/lp26-04-23' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-04-17' }),
-  Banner_1_Image: translateImage({ value: '20260417b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-04-16' }),
+  Banner_1_Image: translateImage({ value: '20260416b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-04-16' }),
-  Banner_2_Image: translateImage({ value: '20260416b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-15' }),
+  Banner_2_Image: translateImage({ value: '20260415b.png' }),
 
   Timer_href: translateLink({ value: 'content/lp26-04-24' }),
 };
