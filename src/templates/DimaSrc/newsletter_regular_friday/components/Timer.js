@@ -25,7 +25,7 @@ const Timer = ({
           ${title && subtitle && Space({ insideTr: true, className: 'newsletterBottom10px' })}
           
           <tr>
-            <td align="center">
+            <td align="center" class="newsletterContainer">
               ${
                 title
                   ? Paragraph({
@@ -42,7 +42,7 @@ const Timer = ({
           
           
           <tr>
-            <td align="center">
+            <td align="center" class="newsletterContainer">
               ${
                 subtitle
                   ? Paragraph({
