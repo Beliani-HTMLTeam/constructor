@@ -1,35 +1,49 @@
 import { Categories } from '../components/Categories.js';
 
+const enrichProductEntry = async ({ product, getProductById, getCategoryLink }) => {
+  try {
+    if (!product) return null;
+
+    const normalizedHref =
+      product.href && typeof getCategoryLink === 'function' ? getCategoryLink(product.href) : product.href;
+
+    if (typeof getProductById !== 'function') {
+      return normalizedHref ? { ...product, href: normalizedHref } : product;
+    }
+
+    const fetchedProduct = await getProductById(product.id, product.src);
+    if (!fetchedProduct) return null;
+
+    return normalizedHref ? { ...product, ...fetchedProduct, href: normalizedHref } : { ...product, ...fetchedProduct };
+  } catch (err) {
+    console.error('getProductById error for', product, err);
+    return null;
+  }
+};
+
 const enrichCategoryProducts = async ({ category, getProductById, getCategoryLink }) => {
   const productEntries = Array.isArray(category?.products) ? category.products : [];
   const products = await Promise.all(
-    productEntries.map(async (product) => {
-      try {
-        if (!product) return null;
+    productEntries.map((product) => enrichProductEntry({ product, getProductById, getCategoryLink }))
+  );
 
-        const normalizedHref =
-          product.href && typeof getCategoryLink === 'function' ? getCategoryLink(product.href) : product.href;
+  const freebiesRows = Array.isArray(category?.freebies)
+    ? category.freebies
+    : Array.isArray(category?.freebies?.rows)
+      ? category.freebies.rows
+      : [];
+  const enrichedFreebiesRows = await Promise.all(
+    freebiesRows.map(async (row) => {
+      if (!Array.isArray(row)) return [];
 
-        if (typeof getProductById !== 'function') {
-          return normalizedHref ? { ...product, href: normalizedHref } : product;
-        }
-
-        const fetchedProduct = await getProductById(product.id, product.src);
-        if (!fetchedProduct) return null;
-
-        return normalizedHref
-          ? { ...product, ...fetchedProduct, href: normalizedHref }
-          : { ...product, ...fetchedProduct };
-      } catch (err) {
-        console.error('getProductById error for', product, err);
-        return null;
-      }
+      return Promise.all(row.map((product) => enrichProductEntry({ product, getProductById, getCategoryLink })));
     })
   );
 
   return {
     ...category,
     products: products.filter(Boolean),
+    freebies: category?.freebies ? enrichedFreebiesRows : category?.freebies,
   };
 };
 

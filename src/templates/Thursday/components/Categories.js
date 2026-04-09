@@ -109,9 +109,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     : '';
 
   const ProductsElement =
-    category.products || category.tiles
+    category.products || category.tiles || category.freebies
       ? await renderBody({
           products: category.products,
+          freebies: category.freebies,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
           showNames: category.showNames ?? category.product?.name ?? true,
@@ -198,6 +199,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
 const renderBody = async ({
   products,
+  freebies,
   tiles,
   showPrices,
   showNames,
@@ -210,6 +212,7 @@ const renderBody = async ({
   color,
   id,
   imageSide,
+  freebiesPerRow,
   categoryHref,
   getCategoryLink,
   getCategoryTitle,
@@ -227,6 +230,7 @@ const renderBody = async ({
 
     return module.render({
       products,
+      freebies,
       tiles,
       showPrices,
       showNames,
@@ -238,6 +242,7 @@ const renderBody = async ({
       color,
       id,
       imageSide,
+      freebiesPerRow,
       categoryHref,
       getCategoryLink,
       getCategoryTitle,
@@ -254,6 +259,7 @@ const renderBody = async ({
 
     return defaultModule.render({
       products,
+      freebies,
       showPrices,
       showNames,
       gapBetweenHorizontal,
@@ -264,6 +270,7 @@ const renderBody = async ({
       color,
       id,
       imageSide,
+      freebiesPerRow,
       links,
       getPhrase,
       renderType: type,
