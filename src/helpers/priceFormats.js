@@ -9,7 +9,7 @@ const currencies = {
   danishKrona: 'kr.',
   czechKrona: 'Kč',
   norwegianKrone: ',-',
-  polandZloty: ',-',
+  polandZloty: '',
   romanianLeu: 'lei',
 };
 const relativePriceFormat = {

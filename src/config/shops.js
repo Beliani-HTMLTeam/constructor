@@ -171,7 +171,7 @@ export default [
       },
     ],
     price_format: {
-      currency: ',-',
+      currency: '',
       delimiters: {
         hundred: ' ',
         thousand: '',

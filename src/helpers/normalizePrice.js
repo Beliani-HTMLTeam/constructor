@@ -1,4 +1,11 @@
 const formatPrice = {
+  toCommaDecimalWithSpaces: (price) => {
+    const [integerPartRaw, decimalPartRaw = '00'] = String(price).split('.');
+    const integerPart = integerPartRaw.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    const decimalPart = decimalPartRaw.padEnd(2, '0').slice(0, 2);
+
+    return `${integerPart},${decimalPart}`;
+  },
   DE: (price, options) => {
     price = price.replace('.00', ',00');
     price = price.replace('.99', ',99');
@@ -200,18 +207,7 @@ const formatPrice = {
     return price;
   },
   PL: (price, options) => {
-    price = price.replace('.00', '');
-    price = price.replace('.99', '');
-
-    if (price.length === 5) {
-      price = price.split('').toSpliced(2, 0, ' ').join('');
-    }
-
-    if (price.length === 4) {
-      price = price.split('').toSpliced(1, 0, ' ').join('');
-    }
-
-    return price;
+    return formatPrice.toCommaDecimalWithSpaces(price);
   },
   HU: (price, options) => {
     price = price.replace('.00', '');
@@ -316,31 +312,7 @@ const formatPrice = {
     return price;
   },
   CZ: (price, options) => {
-    price = price.replace('.00', '');
-
-    if (price.length === 6) {
-      price = price.split('').toSpliced(3, 0, ' ').join('');
-    }
-
-    if (price.length === 5) {
-      price = price.split('').toSpliced(2, 0, ' ').join('');
-    }
-
-    if (price.length === 4) {
-      price = price.split('').toSpliced(1, 0, ' ').join('');
-    }
-
-    if (options && 'decimals' in options && options.decimals) {
-      if (price.includes('.')) {
-        const splitted = price.split('.');
-      }
-
-      if (price.includes(',')) {
-        const splitted = price.split(',');
-      }
-    }
-
-    return price;
+    return formatPrice.toCommaDecimalWithSpaces(price);
   },
   FI: (price, options) => {
     price = price.replace('.00', ',00');
