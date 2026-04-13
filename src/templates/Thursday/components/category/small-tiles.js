@@ -19,7 +19,10 @@ const renderTileCard = ({ item, tiles, color, getCategoryLink, getCategoryTitle,
   if (!item) return '<td width="50%"></td>';
 
   const href = item.href ? getCategoryLink(item.href) : '#';
-  const src = item.src ?? buildTileSrc({ tiles, itemName: item.name, country });
+  let src = item.src ?? buildTileSrc({ tiles, itemName: item.name, country });
+
+  if (typeof src === 'object') { src = src.src }
+
   // const tileClass = side === 'left' ? 'smallCategoryTilesLEFT' : 'smallCategoryTilesRIGHT';
   // const tileClass = `smallCategoryTiles${side === 'left' ? 'LEFT' : 'RIGHT'}`;
   let tileClass;
