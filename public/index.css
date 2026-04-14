@@ -132,6 +132,10 @@ body {
   align-items: center;
 }
 
+.urgent-redirect-table-popup {
+  font-family: 'Poppins', sans-serif;
+}
+
 #loader {
   position: absolute;
   inset: 0;

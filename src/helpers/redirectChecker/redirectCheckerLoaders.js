@@ -2,7 +2,9 @@ import Swal from 'sweetalert2';
 
 export const redirectCheckerLoader = () => {
   return Swal.fire({
-    title: 'Checking redirects...',
+    title: `
+      <span style="font-size: 1em; font-weight: bold; font-family: Poppins, sans-serif; text-align: center;">Checking for Redirects...</span>
+    `,
     html: `
   <div style="margin: 20px 0; font-family: Poppins, sans-serif; text-align: center;">
         <p style="font-size: 1.1em; color: #555;">
@@ -27,7 +29,9 @@ export const redirectCheckerLoader = () => {
 
 export const noRedirectsFoundSwal = ({totalChecked}) => {
   return Swal.fire({
-    title: 'All links are direct! 🎉',
+    title:  `
+    <span style="font-size: 1em; font-weight: bold; font-family: Poppins, sans-serif; text-align: center;">All links are direct! 🎉</span>
+  `,
     html: `
           <p style="font-size: 1.1em; color: #555; margin: 16px 0; font-family: Poppins, sans-serif;">
             Checked <strong>${totalChecked}</strong> links — no redirects found.<br>
@@ -52,27 +56,28 @@ export const noRedirectsFoundSwal = ({totalChecked}) => {
 
 export const foundRedirectsSwal = ({ redirectedCount, totalChecked, tableHtml }) => {
   return Swal.fire({
-      title: '🚨 REDIRECTS DETECTED – ACTION REQUIRED 🚨',
+    title: `
+      <span style="font-size: 1.25em; font-weight: bold; font-family: Poppins, sans-serif; text-align: center; color: #dc3545;">
+      🚨 REDIRECTS DETECTED – ACTION REQUIRED 🚨
+      </span>
+    `,
       html: `
-        <div style="color:#dc3545; font-size:1.25em; font-weight:bold; margin:12px 0 20px; text-align:center;">
+        <div style="color:#dc3545; font-size:1.25em; font-weight:bold; margin:12px 0 20px;  font-family: Poppins, sans-serif; text-align:center;">
           ${redirectedCount} dangerous redirect${redirectedCount !== 1 ? 's' : ''} found
         </div>
   
-        <p style="text-align:center; color:#2c3e50; margin-bottom:16px;">
+        <p style="text-align:center; color:#2c3e50; margin-bottom:16px; font-family: Poppins, sans-serif; ">
           Checked <strong>${totalChecked}</strong> category/content links across all shops
         </p>
   
         ${tableHtml}
   
-        <p style="color:#6c757d; font-size:0.9em; text-align:center; margin-top:16px;">
+        <p style="color:#6c757d; font-size:0.9em; text-align:center; margin-top:16px; font-family: Poppins, sans-serif; ">
           Detected at ${new Date().toLocaleTimeString()}
         </p>
       `,
-      icon: 'error',
-      iconColor: '#ff0000',
-      confirmButtonText: 'ACKNOWLEDGE & INVESTIGATE NOW',
-      confirmButtonColor: '#ff0000',
-      showCloseButton: false,
+      showCloseButton: true,
+      showConfirmButton: false,
       allowOutsideClick: false,
       allowEscapeKey: false,
       backdrop: 'rgba(220,53,69,0.45)',
