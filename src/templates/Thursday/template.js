@@ -67,7 +67,7 @@ const Thursday = async ({
   const hasTimer = Boolean(TimerElement);
 
   const safeCategories = Array.isArray(categories) ? categories : [];
-  const freebiesIndex = safeCategories.findIndex((category) => String(category?.type).toLowerCase() === 'freebies');
+  const freebiesIndex = safeCategories.findIndex((category) => String(category?.type).toLowerCase() === 'deal');
 
   const categoriesBeforeIntro =
     introPosition === 'afterFreebies' && freebiesIndex >= 0
