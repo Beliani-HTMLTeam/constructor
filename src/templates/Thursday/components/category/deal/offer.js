@@ -74,7 +74,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
 
   html += CTA({
     href: links?.TopImageTitle_href,
-    text: t('Get code'),
+    text: t('Get codes'),
     color: '#000000',
     align: 'center',
     insideTr: true,
@@ -91,7 +91,7 @@ const renderCodeElement = ({ renderType, queries, links, t }) => {
     if (renderType === 'newsletter') {
       return CTA({
         href: links?.TopImageTitle_href,
-        text: t('Get code'),
+        text: t('Get codes'),
         color: '#000000',
         align: 'center',
         insideTr: true,
