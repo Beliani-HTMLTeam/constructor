@@ -205,7 +205,7 @@ const RegularFridayNslt = async ({
                   intro.cta.hrefSource === 'queries'
                     ? add_utm(queries.introCTAhref)
                     : links.Intro_cta_href
-                      ? add_utm(links.Intro_cta_href)
+                      ? getCategoryLink(links.Intro_cta_href)
                       : getCategoryLink(categories[0]?.href),
                 text: queries.introCTA || shopNowPhrase,
                 // text: 'Lean more about outdoor trends',
