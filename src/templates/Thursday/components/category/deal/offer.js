@@ -111,7 +111,7 @@ const renderCodeElement = ({ renderType, queries, links, t }) => {
     });
   }
 
-  return renderOfferRow(offerItems[2] ?? 'Code: xxxxx', 'newsletterSemiBoldCode');
+  return renderOfferRow(offerItems[2] ?? 'Code: xxxxx');
 };
 
 export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true }) => {
