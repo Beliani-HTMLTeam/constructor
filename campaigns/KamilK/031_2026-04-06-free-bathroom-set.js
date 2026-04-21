@@ -51,7 +51,7 @@ const categories = [
       spaceAfter: '',
     },
     paddingTop: '0',
-    type: 'freebies',
+    type: 'deal',
     background: '#FFE3D8',
     color: '#000000',
     spaceAfter: "newsletterBottom45px",
