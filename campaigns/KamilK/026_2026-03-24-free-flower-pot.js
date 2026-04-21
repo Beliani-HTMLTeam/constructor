@@ -53,7 +53,7 @@ const categories = [
       spaceAfter: '',
     },
     paddingTop: '0',
-    type: 'freebies',
+    type: 'deal',
     background: '#F6E7E6',
     color: '#000000',
     products: [
