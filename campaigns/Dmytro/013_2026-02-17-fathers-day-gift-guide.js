@@ -33,7 +33,7 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-04-14fd' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-04-18fd' }),
   TopImageTitle_src:  DimasTranslateImage({ value: '_fathersday_topimage_01.png', folder: 'FathersDayGiftGuide', placeholderPosition: '58' }),
   TopImage: getImageUrl('FathersDayGiftGuide/fathersday_giftguide_topgif.gif', true),
   Banner_1: translateLink({ value: 'content/lp26-04-02' }),
@@ -74,7 +74,7 @@ const categories = [
       },
       // VICTORY
       {
-        id: '178936',
+        id: '375918',
         src: [getImageUrl('FathersDayGiftGuide/FFGG_Pic02.png', true)
         ]
       },
