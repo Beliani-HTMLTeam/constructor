@@ -266,17 +266,17 @@ const timer = {
 };
 
 export default new entities.Campaign({
-  startId: 42733,
-  name: 'Kitchenware & tableware',
-  date: '16.04.2026',
-  issueCardId: 461408,
-  lpId: 29650,
+  startId: 43630,
+  name: 'Dopamina Reshoot',
+  date: '14.05.2026',
+  issueCardId: 468170,
+  lpId: 30109,
   alarm: {
     isActive: false,
   },
   isArchive: false,
   optimizeImg: true,
-  figmaUrl: 'https://www.figma.com/design/vAxPSLOJqvhtXecR3g8LaC/',
+  figmaUrl: '',
   templates: [
     {
       name: 'Newsletter',

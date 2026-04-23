@@ -34,7 +34,7 @@ const links = {
   TopImageTitle_src: translateImage({ value: '20260507_01.png' }),
 
   TopImage_src: getImageUrl('20260507_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-04-30' }),
+  TopImage_href: translateLink({ value: 'content/lp26-05-07' }),
 
   Intro_cta_href: 'https://www.beliani.ch/dining-room-furniture/',
 
