@@ -38,7 +38,7 @@ const links = {
 
   Intro_cta_href: 'https://www.beliani.ch/dining-room-furniture/',
 
-  Timer_href: translateLink({ value: 'content/lp26-04-29' }),
+  Timer_href: translateLink({ value: 'content/lp26-05-08' }),
 
   Banner_1: translateLink({ value: 'content/lp26-05-01' }),
   Banner_1_Image: translateImage({ value: '20260501b.png' }),
@@ -309,7 +309,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: false,
+  optimizeImg: true,
   figmaUrl: 'https://www.figma.com/design/vowo8ZZ6bBTxwe53Inty0U/',
   templates: [
     {
