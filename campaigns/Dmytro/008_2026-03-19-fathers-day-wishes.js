@@ -35,16 +35,16 @@ const links = {
   // TopImageTitle_href: translateLink({ value: 'content/lp26-03-19' }),
   // TopImageTitle_src: translateImage({ value: '20260319_01.png' }),
   TopImage_src: DimasTranslateImage({
-    value: '20260319_Pic.png',
+    value: '_father_day_wishes_ti.png',
     folder: 'FathersDayWishes',
     placeholderPosition: '55',
   }),
-  TopImage_href: translateLink({ value: 'content/lp26-03-19fd' }),
+  TopImage_href: translateLink({ value: 'content/lp26-05-09' }),
   // change it
-  Banner_1: translateLink({ value: 'content/lp26-03-13' }),
-  Banner_1_Image: translateImage({ value: '20260313b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-03-12' }),
-  Banner_2_Image: translateImage({ value: '20260312b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-01' }),
+  Banner_1_Image: translateImage({ value: '20260501b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-30' }),
+  Banner_2_Image: translateImage({ value: '20260430b.png' }),
   ShopCTA: translateLink({ value: ' ' }),
 };
 
