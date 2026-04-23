@@ -41,6 +41,9 @@ const createInput = (field, hidden) => {
   if (field.required) input.required = true;
   if (field.disabled) input.disabled = true;
   if (field.value) input.value = field.value;
+  if (field.type === 'checkbox' && field.defaultValue !== undefined) {
+    input.checked = !!field.defaultValue;
+  }
   if (field.type === 'colorhex') {
     input.type = 'text';
     input.pattern = '#[0-9A-Fa-f]{6}';

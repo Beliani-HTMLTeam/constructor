@@ -123,6 +123,7 @@ const schema = [
             id: 'optimizeImages',
             type: 'checkbox',
             label: 'Optimize Images?',
+            defaultValue: true,
           },
           {
             name: 'familyVersion',
