@@ -29,7 +29,7 @@ const tableQueries = [
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-05-22' }),
   TopImageTitle_src: DimasTranslateImage({ value: '20260522_01.png', folder: '20260522', placeholderPosition: '47' }),
-  TopImage_src: getImageUrl('20260522/20260522topimage.png', true),
+  TopImage_src: getImageUrl('20260522/20260522topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-05-22' }),
   Banner_1: translateLink({ value: 'content/lp26-05-15' }),
   Banner_1_Image: translateImage({ value: '20260515b.png' }),
