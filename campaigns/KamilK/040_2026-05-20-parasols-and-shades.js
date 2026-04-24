@@ -42,7 +42,7 @@ const TopImageTitle_data = {
 
 const categories = [
   {
-    src: getImageUrl('20260520_Pic.png', true),
+    src: getImageUrl('20260520_Pic.jpg', true),
     href: 'https://www.beliani.ch/garden-furniture/parasols/cantilever-parasols/',
     background: '#750000',
     color: '#ffffff',
@@ -113,7 +113,7 @@ const categories = [
   },
   {
     name: 'Market Parasols',
-    src: getImageUrl('20260520_Cat10.png', true),
+    src: getImageUrl('20260520_Cat10.jpg', true),
     href: 'https://www.beliani.ch/garden-furniture/parasols/market-parasols/',
     background: '#FFCCB7',
     color: '#000000',
@@ -163,7 +163,7 @@ const categories = [
   },
   {
     name: 'Parasol bases',
-    src: getImageUrl('20260520_Cat20.png', true),
+    src: getImageUrl('20260520_Cat20.jpg', true),
     href: 'https://www.beliani.ch/garden-furniture/parasols/accessories-bases/',
     background: '#750000',
     color: '#ffffff',
@@ -213,7 +213,7 @@ const categories = [
   },
   {
     name: 'Gazebos & Pergolas',
-    src: getImageUrl('20260520_Cat30.png', true),
+    src: getImageUrl('20260520_Cat30.jpg', true),
     href: 'https://www.beliani.ch/garden-furniture/parasols/gazebos-parasols/',
     background: '#FFCCB7',
     color: '#000000',
@@ -291,22 +291,22 @@ const categories = [
     tiles: [
       {
         name: 'Outdoor Lighting',
-        src: getImageUrl('20260520_Pic41.png', true),
+        src: getImageUrl('20260520_Pic41.jpg', true),
         href: 'https://www.beliani.ch/garden-furniture/garden-lighting/',
       },
       {
         name: 'Outdoor Textiles',
-        src: getImageUrl('20260520_Pic42.png', true),
+        src: getImageUrl('20260520_Pic42.jpg', true),
         href: 'https://www.beliani.ch/garden-furniture/outdoor-textiles/',
       },
       {
         name: 'Sun Loungers',
-        src: getImageUrl('20260520_Pic43.png', true),
+        src: getImageUrl('20260520_Pic43.jpg', true),
         href: 'https://www.beliani.ch/outdoor-furniture/sun-loungers/',
       },
       {
         name: 'Lounge Sets',
-        src: getImageUrl('20260520_Pic44.png', true),
+        src: getImageUrl('20260520_Pic44.jpg', true),
         href: 'https://www.beliani.ch/outdoor-furniture/lounge-sets/looks/',
       },
     ],
