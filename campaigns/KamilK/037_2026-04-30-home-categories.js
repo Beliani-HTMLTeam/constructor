@@ -299,7 +299,7 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
-  optimizeImg: false,
+  optimizeImg: true,
   figmaUrl: 'https://www.figma.com/design/DePTW9XDetHWncxTCxPwye/',
   templates: [
     {

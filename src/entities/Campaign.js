@@ -70,7 +70,7 @@ export class Campaign {
       description: alarm?.description || 'Remember about: ',
     };
     this.data = data || null;
-    this.optimizeImg = optimizeImg || false;
+    this.optimizeImg = optimizeImg || true;
     this.isArchive = isArchive || false;
     this.products = products || null;
     this.figmaUrl = figmaUrl || null;
