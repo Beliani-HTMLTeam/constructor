@@ -5,7 +5,7 @@ export const CTA = ({ align = 'center', spaceBefore, spaceAfter, text, href, col
   const space_2 = spaceAfter ? Space({ className: spaceAfter?.class }) : '';
 
   const ctaInner = `
-		<td width="100%" style="text-align: center; color: ${color}; text-decoration: underline;">
+		<td width="100%" style="text-align: center; color: ${color}; text-decoration: underline;" class="newsletterContainer">
 			<a href="${href}" style="color: ${color}; text-decoration: underline;">
 				<span class="newsletterCta">${text}</span>
 			</a>

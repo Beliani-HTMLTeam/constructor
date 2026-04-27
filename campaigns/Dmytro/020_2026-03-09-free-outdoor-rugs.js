@@ -44,10 +44,10 @@ const links = {
   TopImageTitle_src: DimasTranslateImage({ value: '20260309_01.png', folder: '20260309', placeholderPosition: '47' }),
   TopImage_src: getImageUrl('20260309/20260309topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-03-09' }),
-  Banner_1: translateLink({ value: 'content/lp26-02-27' }),
-  Banner_1_Image: translateImage({ value: '20260227b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-03-02' }),
-  Banner_2_Image: translateImage({ value: '20260302b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-04-17' }),
+  Banner_1_Image: translateImage({ value: '20260417b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-16' }),
+  Banner_2_Image: translateImage({ value: '20260416b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -183,15 +183,15 @@ const freebies = {
         col: 3,
       },
       products: [
-        // BALOTRA
+        // TUMKUR
         {
-          id: '228567',
+          id: '185969',
           src: getImageUrl('20260309/20260309free1.png', true),
           style: 'padding-right: 6px; padding-left: 6px;',
         },
         // BIDAR
         {
-          id: '97582',
+          id: '97583',
           src: getImageUrl('20260309/20260309free2.png', true),
           style: 'padding-right: 6px; padding-left: 6px;',
         },
@@ -215,15 +215,15 @@ const freebies = {
           src:  getImageUrl('20260309/20260309free4.png', true),
           style: 'padding-right: 6px; padding-left: 6px;',
         },
-        // NAGPUR
+        // BALLARI
         {
-          id: '186196',
+          id: '186262',
           src: getImageUrl('20260309/20260309free5.png', true),
           style: 'padding-right: 6px; padding-left: 6px;',
         },
-        // ALWAR
+        // LATUR
         {
-          id: '97568',
+          id: '185849',
           src: getImageUrl('20260309/20260309free6.png', true),
           style: 'padding-right: 6px; padding-left: 6px;',
         },
