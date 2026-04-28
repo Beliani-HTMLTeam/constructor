@@ -19,6 +19,10 @@ const tableQueries = [
   {
     "tableRange": "28:29",
     "name": "timer"
+  },
+  {
+    "tableRange": "30",
+    "name": "introCTA"
   }
 ];
 
