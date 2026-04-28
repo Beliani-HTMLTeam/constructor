@@ -39,12 +39,12 @@ const links = {
     folder: 'FathersDayWishes',
     placeholderPosition: '55',
   }),
-  TopImage_href: translateLink({ value: 'content/lp26-05-09' }),
+  TopImage_href: translateLink({ value: 'content/lp26-05-14fd' }),
   // change it
-  Banner_1: translateLink({ value: 'content/lp26-05-01' }),
-  Banner_1_Image: translateImage({ value: '20260501b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-04-30' }),
-  Banner_2_Image: translateImage({ value: '20260430b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-07' }),
+  Banner_1_Image: translateImage({ value: '20260507b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-06' }),
+  Banner_2_Image: translateImage({ value: '20260506b.png' }),
   ShopCTA: translateLink({ value: ' ' }),
 };
 
@@ -157,7 +157,7 @@ const categories = [
       folder: 'FathersDayWishes',
       placeholderPosition: '55',
     }),
-    href: 'https://www.beliani.ch/lighting/',
+    href: 'https://www.beliani.ch/lighting/all+products/',
     type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
   },
   {

@@ -33,13 +33,13 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-04-18fd' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-05-12' }),
   TopImageTitle_src:  DimasTranslateImage({ value: '_fathersday_topimage_01.png', folder: 'FathersDayGiftGuide', placeholderPosition: '58' }),
   TopImage: getImageUrl('FathersDayGiftGuide/fathersday_giftguide_topgif.gif', true),
-  Banner_1: translateLink({ value: 'content/lp26-04-02' }),
-  Banner_1_Image: translateImage({ value: '20260402b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-04-01' }),
-  Banner_2_Image: translateImage({ value: '20260401b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-01' }),
+  Banner_1_Image: translateImage({ value: '20260501b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-30' }),
+  Banner_2_Image: translateImage({ value: '20260430b.png' }),
 };
 
 const TopImageTitle_data = {

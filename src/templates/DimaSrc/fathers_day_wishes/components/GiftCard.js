@@ -68,6 +68,7 @@ const GiftCard = ({
                   text: ctaText,
                   align: 'center',
                   insideTr: true,
+                  tdClass: 'newsletterContainer',
                 })
               : ''
           }

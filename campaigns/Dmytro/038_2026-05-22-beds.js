@@ -35,7 +35,7 @@ const links = {
   Banner_1_Image: translateImage({ value: '20260515b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-05-14' }),
   Banner_2_Image: translateImage({ value: '20260514b.png' }),
-  Timer_href: translateLink({ value: 'content/lp26-05-17' }),
+  Timer_href: translateLink({ value: 'content/lp26-05-18' }),
   Intro_cta_href:  "https://www.beliani.ch/bedroom-furniture/beds/"
 };
 
@@ -93,7 +93,7 @@ const categories = [
     paragraph: {
      show: false,
     },
-    paddingTop: 35,
+    paddingTop: 60,
     line: {
       show: false
     },
