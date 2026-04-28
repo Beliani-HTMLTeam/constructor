@@ -30,11 +30,11 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-04-16' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-05-14' }),
   TopImageTitle_src: translateImage({ value: '20260514_01.png' }),
 
   TopImage_src: getImageUrl('20260514_Pic.jpg', true),
-  TopImage_href: translateLink({ value: 'content/lp26-04-16' }),
+  TopImage_href: translateLink({ value: 'content/lp26-05-14' }),
 
   Banner_1: translateLink({ value: 'content/lp26-05-07' }),
   Banner_1_Image: translateImage({ value: '20260507b.png' }),
@@ -42,7 +42,7 @@ const links = {
   Banner_2: translateLink({ value: 'content/lp26-05-06' }),
   Banner_2_Image: translateImage({ value: '20260506b.png' }),
 
-  Timer_href: translateLink({ value: 'content/lp26-04-13' }),
+  Timer_href: translateLink({ value: 'content/lp26-05-11' }),
 };
 
 const TopImageTitle_data = {
