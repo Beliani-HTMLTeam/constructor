@@ -1,0 +1,29 @@
+{
+  "CHDE": {
+    "TopImageTitle": [
+      "Placeholder Image Title 1",
+      "Placeholder Image Title 2"
+    ],
+    "offer": [
+      "Placeholder Offer Part 1.",
+      "Placeholder Offer Part 2.",
+      "Code: xxx"
+    ],
+    "offer_date": [
+      "The offer is valid until the [[voucher_available_to_xxx]]."
+    ],
+    "intro": [
+      "Placeholder Intro title",
+      "Placeholder intro text"
+    ],
+    "code": [
+      "Code: xxx"
+    ],
+    "condition": [
+      "Placeholder Conditions (Monday)"
+    ],
+    "paragraphs": [
+      "Placeholder Paragraph Text 1"
+    ]
+  }
+}

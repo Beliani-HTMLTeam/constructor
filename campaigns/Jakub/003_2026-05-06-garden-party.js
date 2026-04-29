@@ -11,7 +11,7 @@ const tableQueries = [
     name: 'paragraphs',
   },
   {
-    tableRange: '26',
+    tableRange: '26:27',
     name: 'condition',
   },
 ];
@@ -26,20 +26,20 @@ const links = {
   Banner_1: translateLink({ value: 'content/lp26-04-29' }),
   Banner_1_Image: translateImage({ value: '20260429b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-04-24' }),
-  Banner_2_Image: translateImage({ value: '20260424b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-23' }),
+  Banner_2_Image: translateImage({ value: '20260423b.png' }),
 };
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#FEE3BF',
+  backgroundColor: '#FECD8C',
   type: 'twoSameLines',
 };
 
 const categories = [
   {
     src: getImageUrl('20260506_Top.png', true),
-    href: 'https://www.beliani.ch/dining-room-furniture/',
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/',
     background: '#FECD8C',
     color: '#000000',
     paddingTop: 0,
@@ -50,7 +50,7 @@ const categories = [
   {
     name: 'Lounge sets',
     // src: translateImage({ value: '20260506_Pic.gif' }),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/looks/',
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/',
     background: '#FECD8C',
     color: '#000000',
     type: 'grid',
@@ -99,7 +99,7 @@ const categories = [
   },
   {
     name: 'Dining sets',
-    src: getImageUrl('20260506_Cat10.png', true),
+    src: getImageUrl('20260506_Cat30.png', true),
     href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/garden-dining-sets/',
     background: '#FFCCB7',
     color: '#000000',
@@ -199,7 +199,7 @@ const categories = [
   },
   {
     name: 'Parasols',
-    src: getImageUrl('20260506_Cat30.png', true),
+    src: getImageUrl('20260506_Cat10.png', true),
     href: 'https://www.beliani.ch/garden-furniture/parasols/',
     background: '#FFCCB7',
     color: '#000000',
@@ -300,11 +300,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: '43073',
-  name: 'Garden Party',
+  startId: '43053',
+  name: 'WED Garden Party',
   date: '06.05.2026',
   issueCardId: '467024',
-  lpId: '29805',
+  lpId: '29804',
   alarm: {
     isActive: false,
   },
@@ -313,9 +313,9 @@ export default new entities.Campaign({
   figmaUrl: 'https://www.figma.com/design/JuE72umpIbTaDrjscpaVg1/Newsletter-Garden-party-picnic---Wednesday-2026.05.06--Copy-?node-id=0-1&t=gAmLZuSZMueIQNwx-1',
   templates: [
     {
-      background: '#FEE3BF',
+      background: '#FECD8C',
       color: '#000000',
-      template: templates.Thursday, // User should change this
+      template: templates.Monday, // User should change this
 
       css: types.CSS.NS,
       name: 'Newsletter',
@@ -328,9 +328,9 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
     },
     {
-      background: '#FEE3BF',
+      background: '#FECD8C',
       color: '#000000',
-      template: templates.Thursday, // User should change this
+      template: templates.Monday, // User should change this
 
       css: types.CSS.LP,
       name: 'Landing',
