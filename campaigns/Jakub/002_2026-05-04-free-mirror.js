@@ -49,13 +49,13 @@ const TopImageTitle_data = {
 };
 
 const categories = [
-  // freebiesy
+  // offer
   {
     paragraph: {
       spaceAfter: '',
     },
     paddingTop: '0',
-    type: 'freebies',
+    type: 'deal',
     background: '#FFE8DE',
     color: '#000000',
     spaceAfter: "newsletterBottom45px",
@@ -93,7 +93,7 @@ const categories = [
     ]],
   },
 
-  // klasyczki
+  // main
   {
     name: 'Sofas',
     src: getImageUrl('20260504_Cat10.png', true),
@@ -189,7 +189,7 @@ const categories = [
   {
     name: 'Chairs',
     src: getImageUrl('20260504_Cat30.png', true),
-    href: 'https://www.beliani.ch/dining-room-furniture/chairs/',
+    href: 'https://www.beliani.ch/chairs/',
     background: '#fecd8c',
     color: '#000000',
     type: 'grid',
@@ -282,7 +282,7 @@ const categories = [
 
 export default new entities.Campaign({
   startId: '42957',
-  name: 'Free mirror',
+  name: 'MON Free mirror',
   date: '04.05.2026',
   issueCardId: '470531',
   lpId: '29765',
@@ -290,14 +290,14 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
+  accent: '#d4f5e9',
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/fT3GFKWV5vDEuWXhtnyd5t/https://www.figma.com/design/c2nfd2iNss24wW7t4CaYh6/2026.05.04---Newsletter---Free-Mirror--Copy-?node-id=0-1&t=gGhMlKu26q8ES8Pg-1-Free-garden-chair---Monday-2026.04.27--Copy-?node-id=0-1&t=9f5UpsZ8IQZEknCx-1',
   templates: [
     {
       background: '#F6E7E6',
       color: '#000000',
-      template: templates.Thursday, // User should change this
-
+      template: templates.Monday, // User should change this
       intro: {
         color: '#000000', // unused
         backgroundColor: '#fecd8c', // unused
@@ -317,8 +317,7 @@ export default new entities.Campaign({
     {
       background: '#F6E7E6',
       color: '#000000',
-      template: templates.Thursday, // User should change this
-
+      template: templates.Monday, // User should change this
       intro: {
         color: '#000000', // unused
         backgroundColor: '#fecd8c', // unused
