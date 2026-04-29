@@ -212,10 +212,10 @@ const categories = [
     ],
   },
   {
-    name: 'Metal Chairs',
+    name: 'Bar Chairs and Stools',
     background: '#FFE3D8',
     color: '#000000',
-    src: getImageUrl('20260529/20260529Category30.png', true),
+    src: getImageUrl('20260529/20260529Category40.png', true),
     href: 'https://www.beliani.ch/dining-room-furniture/chairs/bar-chairs/',
     type: 'grid',
     insideContainer: true,
