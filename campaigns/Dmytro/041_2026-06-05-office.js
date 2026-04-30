@@ -97,24 +97,24 @@ const categories = [
       show: true
     },
     products: [
-      // 
+      // JOHNSON
       {
-        id: '',
+        id: '234488',
         src: getImageUrl('20260605/20260605Category11.png', true),
       },
-      // 
+      // DESTINES 
       {
-        id: '',
+        id: '444594',
         src: getImageUrl('20260605/20260605Category12.png', true),
       },
-      // 
+      // VIDA 
       {
-        id: '',
+        id: '319075',
         src: getImageUrl('20260605/20260605Category13.png', true),
       },
-      // 
+      // SOGNE 
       {
-        id: '',
+        id: '712788',
         src: getImageUrl('20260605/20260605Category14.png', true),
       },
     ],
@@ -143,24 +143,24 @@ const categories = [
       show: true
     },
     products: [
-      // 
+      // TUCSON 
       {
-        id: '',
+        id: '638375',
         src: getImageUrl('20260605/20260605Category21.png', true),
       },
-      // 
+      // GRANBY 
       {
-        id: '',
+        id: '648262',
         src: getImageUrl('20260605/20260605Category22.png', true),
       },
-      // 
+      // DELIGHT 
       {
-        id: '',
+        id: '453792',
         src: getImageUrl('20260605/20260605Category23.png', true),
       },
-      // 
+      // ORIVO 
       {
-        id: '',
+        id: '725936',
         src: getImageUrl('20260605/20260605Category24.png', true),
       },
     ],
@@ -189,30 +189,30 @@ const categories = [
       show: true
     },
     products: [
-      // 
+      // CARDIFF 
       {
-        id: '',
+        id: '330109',
         src: getImageUrl('20260605/20260605Category31.png', true),
       },
-      // 
+      // CAMI 
       {
-        id: '',
+        id: '224839',
         src: getImageUrl('20260605/20260605Category32.png', true),
       },
-      // 
+      // NEWPORT 
       {
-        id: '',
+        id: '587388',
         src: getImageUrl('20260605/20260605Category33.png', true),
       },
-      // 
+      // ZEHNA 
       {
-        id: '',
+        id: '686444',
         src: getImageUrl('20260605/20260605Category34.png', true),
       },
     ],
   },
   {
-    name: 'Lightning',
+    name: 'Lighting',
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260605/20260605Category40.png', true),
@@ -235,24 +235,24 @@ const categories = [
       show: true
     },
     products: [
-      // 
+      // CHAMAELEON
       {
-        id: '',
+        id: '379635',
         src: getImageUrl('20260605/20260605Category41.png', true),
       },
-      // 
+      // RIMAVA 
       {
-        id: '',
+        id: '728614',
         src: getImageUrl('20260605/20260605Category42.png', true),
       },
-      // 
+      // HYDRA 
       {
-        id: '',
+        id: '663652',
         src: getImageUrl('20260605/20260605Category43.png', true),
       },
-      // 
+      // DENEB 
       {
-        id: '',
+        id: '668608',
         src: getImageUrl('20260605/20260605Category44.png', true),
       },
     ],
@@ -275,7 +275,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#913333",
@@ -292,12 +292,16 @@ export default new entities.Campaign({
         backgroundColor: "#F6E7E6",
         type: "timer",
         image: "20260605free.png",
+        isWithTitles: true,
       },
       intro: {
         color: "#FFFFFF",
         backgroundColor: "#913333",
         alignment: "left",
         type: "paragraph",
+        cta: {
+          spaceAfter: 'newsletterBottom35px',
+        }
       },
       links: links,
       tableQueries: tableQueries,
@@ -305,7 +309,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.LP,
       background: "#913333",
       color: "#FFFFFF",
@@ -321,12 +325,16 @@ export default new entities.Campaign({
         backgroundColor: "#F6E7E6",
         type: "timer",
         image: "20260605free.png",
+        isWithTitles: true,
       },
       intro: {
         color: "#FFFFFF",
         backgroundColor: "#913333",
         alignment: "left",
         type: "paragraph",
+        cta: {
+          spaceAfter: 'newsletterBottom35px',
+        }
       },
       links: links,
       tableQueries: tableQueries,

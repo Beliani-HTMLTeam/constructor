@@ -210,7 +210,7 @@ const RegularFridayNslt = async ({
                 text: queries.introCTA || shopNowPhrase,
                 // text: 'Lean more about outdoor trends',
                 background: intro.backgroundColor,
-                color: '#000000',
+                color: intro.color,
                 align: 'center',
                 insideTr: true,
               })}
