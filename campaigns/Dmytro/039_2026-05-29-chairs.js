@@ -32,7 +32,7 @@ const links = {
   Banner_2: translateLink({ value: 'content/lp26-05-21' }),
   Banner_2_Image: translateImage({ value: '20260521b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-05-25' }),
-  Intro_cta_href:  "https://www.beliani.ch/dining-room-furniture/chairs/"
+  Intro_cta_href:  "https://www.beliani.ch/dining-room-furniture/chairs/all+products/"
 };
 
 const TopImageTitle_data = {
@@ -196,7 +196,7 @@ const categories = [
       },
       // CORNELL
       {
-        id: '602513',
+        id: '430836',
         src: getImageUrl('20260529/20260529Category32.png', true),
       },
       // RIGBY
@@ -206,7 +206,7 @@ const categories = [
       },
       // CORNELL
       {
-        id: '430836',
+        id: '602513',
         src: getImageUrl('20260529/20260529Category34.png', true),
       },
     ],

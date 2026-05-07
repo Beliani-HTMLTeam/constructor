@@ -49,13 +49,13 @@ const TopImageTitle_data = {
 };
 
 const categories = [
-  // freebiesy
+  // offer
   {
     paragraph: {
       spaceAfter: '',
     },
     paddingTop: '0',
-    type: 'freebies',
+    type: 'deal',
     background: '#F6E7E6',
     color: '#000000',
     spaceAfter: "newsletterBottom45px",
@@ -78,7 +78,7 @@ const categories = [
     ]],
   },
 
-  // klasyczki
+  // main
   {
     name: 'Dining sets',
     src: getImageUrl('20260427_Cat10.png', true),
@@ -267,14 +267,14 @@ const categories = [
 
 export default new entities.Campaign({
   startId: '42893',
-  name: 'Free garden chair',
+  name: 'MON Free garden chair',
   date: '27.04.2026',
   issueCardId: '463732',
   lpId: '29727',
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/fT3GFKWV5vDEuWXhtnyd5t/Newsletter-Free-garden-chair---Monday-2026.04.27--Copy-?node-id=0-1&t=9f5UpsZ8IQZEknCx-1',
   templates: [
