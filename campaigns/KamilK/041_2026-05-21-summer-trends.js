@@ -58,7 +58,7 @@ const timer = {
   isWithTitles: true,
   background: '#FF2F00',
   color: '#ffffff',
-  freebies: getImageUrl('20260521free.jpg', true),
+  freebies: getImageUrl('20260521free.png', true),
   image: {
     "CHDE": "https://gen.sendtric.com/countdown/1sv2y39bqt",
     "CHFR": "https://gen.sendtric.com/countdown/ag5yi82nph",
