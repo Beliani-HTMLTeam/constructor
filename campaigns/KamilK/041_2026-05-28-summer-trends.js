@@ -1,7 +1,7 @@
 import { DimasTranslateImage } from '@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage';
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::21.05.26 - Summer Trends';
+const campaignTranslationsSheet = '2026::28.05.26 - Summer Trends';
 
 const tableQueries = [
   {
@@ -24,7 +24,7 @@ const tableQueries = [
     tableRange: '29:30',
     name: 'condition',
   },
-  { tableRange: '15:16', name: 'timer', tableName: '2026::Voucher - 18.05.26 - Free table lamp' }, // translations from 06.02 but link to 13.02
+  { tableRange: '15:16', name: 'timer', tableName: '2026::Voucher - 25.05.26 - Outdoor rug' }, // translations from 06.02 but link to 13.02
   // {
   //   tableRange: '27:29', // 2nd link is normal, without filter
   //   name: 'categoryLinks',
@@ -32,19 +32,19 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-05-21' }),
-  TopImageTitle_src: translateImage({ value: '20260521_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-05-28' }),
+  TopImageTitle_src: translateImage({ value: '20260528_01.png' }),
 
-  TopImage_src: getImageUrl('20260521_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-05-21' }),
+  TopImage_src: getImageUrl('20260528_Gif.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp26-05-28' }),
 
-  Timer_href: translateLink({ value: 'content/lp26-05-18' }),
+  Timer_href: translateLink({ value: 'content/lp26-05-25' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-05-14' }),
-  Banner_1_Image: translateImage({ value: '20260514b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-21' }), // ! change
+  Banner_1_Image: translateImage({ value: '20260521b.png' }), // ! change
 
-  Banner_2: translateLink({ value: 'content/lp26-05-13' }),
-  Banner_2_Image: translateImage({ value: '20260513b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-20' }), // ! change
+  Banner_2_Image: translateImage({ value: '20260520b.png' }), // ! change
 };
 
 const TopImageTitle_data = {
@@ -58,29 +58,29 @@ const timer = {
   isWithTitles: true,
   background: '#FF2F00',
   color: '#ffffff',
-  freebies: getImageUrl('20260521free.png', true),
+  freebies: getImageUrl('20260528free.png', true),
   image: {
-    "CHDE": "https://gen.sendtric.com/countdown/1sv2y39bqt",
-    "CHFR": "https://gen.sendtric.com/countdown/ag5yi82nph",
-    "FR": "https://gen.sendtric.com/countdown/6gaobuv4ox",
-    "DE": "https://gen.sendtric.com/countdown/4qrml6pqnb",
-    "UK": "https://gen.sendtric.com/countdown/cwex5bnr2m",
-    "AT": "https://gen.sendtric.com/countdown/vgjot86e9a",
-    "ES": "https://gen.sendtric.com/countdown/1lbvjmrspm",
-    "PL": "https://gen.sendtric.com/countdown/midu5ltm6s",
-    "NL": "https://gen.sendtric.com/countdown/bxgvt6gdm3",
-    "PT": "https://gen.sendtric.com/countdown/pjeovuqouz",
-    "IT": "https://gen.sendtric.com/countdown/p02zm5u18r",
-    "SE": "https://gen.sendtric.com/countdown/gmzdtgahlt",
-    "HU": "https://gen.sendtric.com/countdown/d2msvigjxp",
-    "DK": "https://gen.sendtric.com/countdown/7rq8d5bvh3",
-    "CZ": "https://gen.sendtric.com/countdown/wmfdt98qr1",
-    "FI": "https://gen.sendtric.com/countdown/08mppp2fpt",
-    "NO": "https://gen.sendtric.com/countdown/a9l3haa9kw",
-    "SK": "https://gen.sendtric.com/countdown/n2wns38dh3",
-    "BENL": "https://gen.sendtric.com/countdown/qed79mqlug",
-    "BEFR": "https://gen.sendtric.com/countdown/y75e8k951i",
-    "RO": "https://gen.sendtric.com/countdown/34v785z6df"
+    "CHDE": "https://gen.sendtric.com/countdown/2g5l9vf7fa",
+    "CHFR": "https://gen.sendtric.com/countdown/h4q487p0d7",
+    "FR": "https://gen.sendtric.com/countdown/5mziwjez8w",
+    "DE": "https://gen.sendtric.com/countdown/ao5flw4tdm",
+    "UK": "https://gen.sendtric.com/countdown/d43ultl7xd",
+    "AT": "https://gen.sendtric.com/countdown/7t8l29t47u",
+    "ES": "https://gen.sendtric.com/countdown/f17ep2i0lj",
+    "PL": "https://gen.sendtric.com/countdown/k2o278n9d3",
+    "NL": "https://gen.sendtric.com/countdown/gm4zk9axpf",
+    "PT": "https://gen.sendtric.com/countdown/c6y4z53458",
+    "IT": "https://gen.sendtric.com/countdown/bpx549g98a",
+    "SE": "https://gen.sendtric.com/countdown/0mvf00r1my",
+    "HU": "https://gen.sendtric.com/countdown/eoq21jkexs",
+    "DK": "https://gen.sendtric.com/countdown/fnkgki7g3t",
+    "CZ": "https://gen.sendtric.com/countdown/v11yo51cnv",
+    "FI": "https://gen.sendtric.com/countdown/fxmu12z2jw",
+    "NO": "https://gen.sendtric.com/countdown/62btd0ldlr",
+    "SK": "https://gen.sendtric.com/countdown/7qrz9ixme7",
+    "BENL": "https://gen.sendtric.com/countdown/73eetvb09b",
+    "BEFR": "https://gen.sendtric.com/countdown/fklarsogpd",
+    "RO": "https://gen.sendtric.com/countdown/ng2e76iq8e"
   },
   isCtaVisible: true,
 };
@@ -90,7 +90,7 @@ const categories = [
     name: 'Warm Neutrals',
     background: '#FFF4E6',
     color: '#000000',
-    src: getImageUrl('20260521_Cat00.jpg', true),
+    src: getImageUrl('20260528_Cat00.jpg', true),
     href: "https://www.beliani.ch/trends/cosy-neutral/",
     // hrefSource: 'queries',
     type: 'grid',
@@ -113,22 +113,22 @@ const categories = [
       // CAINE
       {
         id: 315442,
-        src: getImageUrl('20260521_Pic01.jpg', true),
+        src: getImageUrl('20260528_Pic01.png', true),
       },
       // SKOVDE
       {
         id: 515888,
-        src: getImageUrl('20260521_Pic02.jpg', true),
+        src: getImageUrl('20260528_Pic02.png', true),
       },
       // KOZANI
       {
         id: 363119,
-        src: getImageUrl('20260521_Pic03.jpg', true),
+        src: getImageUrl('20260528_Pic03.png', true),
       },
       // AMMON
       {
         id: 622070,
-        src: getImageUrl('20260521_Pic04.jpg', true),
+        src: getImageUrl('20260528_Pic04.png', true),
       },
     ],
   },
@@ -136,7 +136,7 @@ const categories = [
     name: 'Cocoon Bedroom',
     background: '#FFF4E6',
     color: '#000000',
-    src: getImageUrl('20260521_Cat10.jpg', true),
+    src: getImageUrl('20260528_Cat10.jpg', true),
     href: 'https://www.beliani.ch/trends/snug-and-stylish/',
     // href: 'https://www.beliani.ch/trends/woodcore/',
     // hrefSource: 'queries',
@@ -160,22 +160,22 @@ const categories = [
       // BIOLLET
       {
         id: 497915,
-        src: getImageUrl('20260521_Pic11.jpg', true),
+        src: getImageUrl('20260528_Pic11.png', true),
       },
       // HUMUYA
       {
         id: 685347,
-        src: getImageUrl('20260521_Pic12.jpg', true),
+        src: getImageUrl('20260528_Pic12.png', true),
       },
       // VAUCLUSE
       {
         id: 579002,
-        src: getImageUrl('20260521_Pic13.jpg', true),
+        src: getImageUrl('20260528_Pic13.png', true),
       },
       // AVONDALE
       {
         id: 299615,
-        src: getImageUrl('20260521_Pic14.jpg', true),
+        src: getImageUrl('20260528_Pic14.png', true),
       },
     ],
   },
@@ -183,7 +183,7 @@ const categories = [
     name: 'Organic Shapes',
     background: '#FFF4E6',
     color: '#000000',
-    src: getImageUrl('20260521_Cat20.jpg', true),
+    src: getImageUrl('20260528_Cat20.jpg', true),
     // hrefSource: 'queries',
     href: 'https://www.beliani.ch/trends/artful-silhouettes/',
     type: 'grid',
@@ -206,22 +206,22 @@ const categories = [
       // BUREA
       {
         id: 656474,
-        src: getImageUrl('20260521_Pic21.jpg', true),
+        src: getImageUrl('20260528_Pic21.png', true),
       },
       // KRIOS
       {
         id: 442761,
-        src: getImageUrl('20260521_Pic22.jpg', true),
+        src: getImageUrl('20260528_Pic22.png', true),
       },
       // VELTADA
       {
         id: 680133,
-        src: getImageUrl('20260521_Pic23.jpg', true),
+        src: getImageUrl('20260528_Pic23.png', true),
       },
       // LAMBINA
       {
         id: 708177,
-        src: getImageUrl('20260521_Pic24.jpg', true),
+        src: getImageUrl('20260528_Pic24.png', true),
       },
     ],
   },
@@ -229,7 +229,7 @@ const categories = [
     name: 'Mid Century Dining Room',
     background: '#FFF4E6',
     color: '#000000',
-    src: getImageUrl('20260521_Cat30.jpg', true),
+    src: getImageUrl('20260528_Cat30.jpg', true),
     // hrefSource: 'queries',
     href: 'https://www.beliani.ch/dining-room-furniture/',
     type: 'grid',
@@ -252,22 +252,22 @@ const categories = [
       // CORDOVA
       {
         id: 424428,
-        src: getImageUrl('20260521_Pic31.jpg', true),
+        src: getImageUrl('20260528_Pic31.png', true),
       },
       // HOPS
       {
         id: 721933,
-        src: getImageUrl('20260521_Pic32.jpg', true),
+        src: getImageUrl('20260528_Pic32.png', true),
       },
       // ORIN
       {
         id: 398757,
-        src: getImageUrl('20260521_Pic33.jpg', true),
+        src: getImageUrl('20260528_Pic33.png', true),
       },
       // VERUGAL
       {
         id: 644166,
-        src: getImageUrl('20260521_Pic34.jpg', true),
+        src: getImageUrl('20260528_Pic34.png', true),
       },
     ],
   },
@@ -276,7 +276,7 @@ const categories = [
 export default new entities.Campaign({
   startId: 43694,
   name: 'Summer Trends',
-  date: '21.05.2026',
+  date: '28.05.2026',
   issueCardId: 468800,
   lpId: 30128,
   alarm: {
@@ -299,10 +299,10 @@ export default new entities.Campaign({
       categories: categories,
       categories_line: 'black',
       Inside: {
-        color: '#ffffff',
-        backgroundColor: '#FF2F00',
+        color: '#000000',
+        backgroundColor: '#FFCCB7',
         type: 'timer',
-        // image: '20260521_Free.png',
+        // image: '20260528_Free.png',
         isWithTitles: true,
         spaceAfter: 'newsletterBottom25px',
       },
@@ -329,10 +329,10 @@ export default new entities.Campaign({
       categories: categories,
       categories_line: 'black',
       Inside: {
-        color: '#ffffff',
-        backgroundColor: '#FF2F00',
+        color: '#000000',
+        backgroundColor: '#FFCCB7',
         type: 'timer',
-        // image: '20260521_Free.png',
+        // image: '20260528_Free.png',
         isWithTitles: true,
       },
       intro: {
