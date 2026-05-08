@@ -23,6 +23,10 @@ const tableQueries = [
   {
     "tableRange": "28:29",
     "name": "timer"
+  },
+  {
+    "tableRange": "30",
+    "name": "introCTA"
   }
 ];
 
@@ -129,6 +133,7 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260522/20260522Category20.png', true),
     href: 'https://www.beliani.ch/beds/single-beds/',
+    hrefDACH: 'https://www.beliani.ch/bedroom-furniture/beds/single-beds/looks/', 
     type: 'grid',
     insideContainer: true,
     title: {
@@ -221,6 +226,7 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260522/20260522Category40.png', true),
     href: 'https://www.beliani.ch/bedroom-furniture/beds/waterbeds/',
+    hrefDACH: 'https://www.beliani.ch/bedroom-furniture/beds/waterbeds/looks/',
     type: 'grid',
     insideContainer: true,
     title: {

@@ -9,19 +9,19 @@ const tableQueries = [
     "name": "TopImageTitle"
   },
   {
-    "tableRange": "23:31",
+    "tableRange": "23:32",
     "name": "offerPart"
   },
   {
-    "tableRange": "34:36",
+    "tableRange": "35:37",
     "name": "condition"
   },
   {
-    "tableRange": "28",
+    "tableRange": "29",
     "name": "codeCTA",
   },
   {
-    "tableRange": "29:31",
+    "tableRange": "30:32",
     "name": "codes",
   }
 ];
