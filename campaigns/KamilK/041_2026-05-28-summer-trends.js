@@ -40,11 +40,11 @@ const links = {
 
   Timer_href: translateLink({ value: 'content/lp26-05-25' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-05-21' }), // ! change
-  Banner_1_Image: translateImage({ value: '20260521b.png' }), // ! change
+  Banner_1: translateLink({ value: 'content/lp26-05-14' }),
+  Banner_1_Image: translateImage({ value: '20260514b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-05-20' }), // ! change
-  Banner_2_Image: translateImage({ value: '20260520b.png' }), // ! change
+  Banner_2: translateLink({ value: 'content/lp26-05-13' }),
+  Banner_2_Image: translateImage({ value: '20260513b.png' }),
 };
 
 const TopImageTitle_data = {
