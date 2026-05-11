@@ -27,10 +27,10 @@ const links = {
   TopImageTitle_src: DimasTranslateImage({ value: '20260529_01.png', folder: '20260529', placeholderPosition: '47' }),
   TopImage_src: getImageUrl('20260529/20260529topimage.png', true),
   TopImage_href: translateLink({ value: 'content/lp26-05-29' }),
-  Banner_1: translateLink({ value: 'content/lp26-05-22' }),
-  Banner_1_Image: translateImage({ value: '20260522b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-05-21' }),
-  Banner_2_Image: translateImage({ value: '20260521b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-20' }),
+  Banner_1_Image: translateImage({ value: '20260520b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-14' }),
+  Banner_2_Image: translateImage({ value: '20260514b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-05-25' }),
   Intro_cta_href:  "https://www.beliani.ch/dining-room-furniture/chairs/all+products/"
 };
