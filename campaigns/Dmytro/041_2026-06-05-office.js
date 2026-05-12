@@ -29,8 +29,8 @@ const links = {
   TopImage_href: translateLink({ value: 'content/lp26-06-05' }),
   Banner_1: translateLink({ value: 'content/lp26-05-27' }),
   Banner_1_Image: translateImage({ value: '20260527b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-05-21' }),
-  Banner_2_Image: translateImage({ value: '20260521b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-28' }),
+  Banner_2_Image: translateImage({ value: '20260528b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-06-02' }),
   Intro_cta_href:  "https://www.beliani.ch/office-furniture/"
 };

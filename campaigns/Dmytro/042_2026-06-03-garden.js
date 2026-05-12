@@ -23,8 +23,8 @@ const links = {
   TopImageTitle_src:  DimasTranslateImage({ value: '20260603_01.png', folder: '20260603', placeholderPosition: '47' }),
   // TopImage_src: getImageUrl('20260408_Pic.png', true),
   // TopImage_href: translateLink({ value: 'content/lp26-03-25' }),
-  Banner_1: translateLink({ value: 'content/lp26-05-21' }),
-  Banner_1_Image: translateImage({ value: '20260521b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-28' }),
+  Banner_1_Image: translateImage({ value: '20260528b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-05-07' }),
   Banner_2_Image: translateImage({ value: '20260507b.png' }),
 };
