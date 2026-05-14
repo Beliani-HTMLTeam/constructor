@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '06.05.2026 - Garden party/picnic';
+const campaignTranslationsSheet = '27.05.26 - Bedroom';
 
 const tableQueries = [
   {
@@ -11,36 +11,36 @@ const tableQueries = [
     name: 'paragraphs',
   },
   {
-    tableRange: '26:27',
+    tableRange: '25:26',
     name: 'condition',
   },
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-05-06' }),
-  TopImageTitle_src: translateImage({ value: '20260506_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-05-27' }),
+  TopImageTitle_src: translateImage({ value: '20260527_01.png' }),
 
   // TopImage_src: getImageUrl('20260311_Top.png', true),
   // TopImage_href: 'https://www.beliani.ch/rugs/low-pile-rugs/',
 
-  Banner_1: translateLink({ value: 'content/lp26-04-29' }),
-  Banner_1_Image: translateImage({ value: '20260429b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-20' }),
+  Banner_1_Image: translateImage({ value: '20260520b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-04-23' }),
-  Banner_2_Image: translateImage({ value: '20260423b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-14' }),
+  Banner_2_Image: translateImage({ value: '20260514b.png' }),
 };
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#FECD8C',
+  backgroundColor: '#FEE3BF',
   type: 'twoSameLines',
 };
 
 const categories = [
   {
-    src: getImageUrl('20260506_Top.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/',
-    background: '#FECD8C',
+    src: getImageUrl('20260527_Top.png', true),
+    href: 'https://www.beliani.ch/bedroom-furniture/beds/',
+    background: '#FEE3BF',
     color: '#000000',
     paddingTop: 0,
     spaceAfter: '0',
@@ -48,10 +48,10 @@ const categories = [
     paragraph: { show: false, spaceBefore: '0', spaceAfter: '0' },
   },
   {
-    name: 'Lounge sets',
-    // src: translateImage({ value: '20260506_Pic.gif' }),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/',
-    background: '#FECD8C',
+    name: 'Beds',
+    // src: translateImage({ value: '20260527_Pic.gif' }),
+    href: 'https://www.beliani.ch/bedroom-furniture/beds/',
+    background: '#FEE3BF',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -75,33 +75,84 @@ const categories = [
       name: true,
     },
     products: [
-      // ALESSANO
+      // SEZANNE
       {
-        id: '517828',
-        src: getImageUrl('20260506_Pic04.png', true),
+        id: '253177',
+        src: getImageUrl('20260527_Pic01.png', true),
       },
-      // TIMOR
+      // VINAY 
       {
-        id: '345347',
-        src: getImageUrl('20260506_Pic03.png', true),
+        id: '416829',
+        src: getImageUrl('20260527_Pic02.png', true),
       },
-      // CORATO
+      // ANTLIA 
       {
-        id: '100799',
-        src: getImageUrl('20260506_Pic02.png', true),
+        id: '53137',
+        src: getImageUrl('20260527_Pic03.png', true),
       },
-      // ARNELLA
+      // MONPAZIER
       {
-        id: '517212',
-        src: getImageUrl('20260506_Pic01.png', true),
+        id: '395227',
+        src: getImageUrl('20260527_Pic04.png', true),
       },
     ],
   },
   {
-    name: 'Dining sets',
-    src: getImageUrl('20260506_Cat30.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/garden-dining-sets/',
-    background: '#FFCCB7',
+    name: 'Bedside tables',
+    src: getImageUrl('20260527_Cat20.png', true),
+    href: 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/',
+    background: '#750000',
+    color: '#FFFFFF',
+    type: 'grid',
+    cta: true,
+    paddingTop: 0,
+    title: {
+      position: 'afterImg',
+      show: true,
+      align: 'center',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: true,
+      align: 'center',
+      // spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      align: 'center',
+      prices: true,
+      name: true,
+    },
+    products: [
+      // SELAH 
+      {
+        id: '553786',
+        src: getImageUrl('20260527_Pic11.png', true),
+      },
+      // SHILLINGTON 
+      {
+        id: '565793',
+        src: getImageUrl('20260527_Pic12.png', true),
+      },
+      // ALMO
+      {
+        id: '363397',
+        src: getImageUrl('20260527_Pic13.png', true),
+      },
+      // WALPOLE 
+      {
+        id: '575724',
+        src: getImageUrl('20260527_Pic14.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Sideboards and chest of drawers',
+    src: getImageUrl('20260527_Cat30.png', true),
+    href: 'https://www.beliani.ch/storage/sideboards/',
+    nameOverrides: { fi: 'Senkit ja lipastot'}, 
+    background: '#FEE3BF',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -125,84 +176,34 @@ const categories = [
       name: true,
     },
     products: [
-      // BELLANO
+      // PASCO
       {
-        id: '508877',
-        src: getImageUrl('20260506_Pic14.png', true),
+        id: '260571',
+        src: getImageUrl('20260527_Pic21.png', true),
       },
-      // ANCONA
+      // BRADLEY
       {
-        id: '177734',
-        src: getImageUrl('20260506_Pic13.png', true),
+        id: '448791',
+        src: getImageUrl('20260527_Pic22.png', true),
       },
-      // VISSO
+      // COVENTRY 
       {
-        id: '703408',
-        src: getImageUrl('20260506_Pic12.png', true),
+        id: '570095',
+        src: getImageUrl('20260527_Pic23.png', true),
       },
-      // SASSARI II
+      // KORVO 
       {
-        id: '511819',
-        src: getImageUrl('20260506_Pic11.png', true),
-      },
-    ],
-  },
-  {
-    name: 'Outdoor Kitchen',
-    src: getImageUrl('20260506_Cat20.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/outdoor-kitchen/',
-    background: '#FECD8C',
-    color: '#000000',
-    type: 'grid',
-    cta: true,
-    paddingTop: 0,
-    title: {
-      position: 'afterImg',
-      show: true,
-      align: 'center',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
-    },
-    paragraph: {
-      show: true,
-      align: 'center',
-      // spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
-    },
-    product: {
-      align: 'center',
-      prices: true,
-      name: true,
-    },
-    products: [
-      // IVREA
-      {
-        id: '622906',
-        src: getImageUrl('20260506_Pic24.png', true),
-      },
-      // MAENZA 
-      {
-        id: '616188',
-        src: getImageUrl('20260506_Pic23.png', true),
-      },
-      // VILAMA
-      {
-        id: '603587',
-        src: getImageUrl('20260506_Pic22.png', true),
-      },
-      // VENOSA
-      {
-        id: '618268',
-        src: getImageUrl('20260506_Pic21.png', true),
+        id: '721075',
+        src: getImageUrl('20260527_Pic24.png', true),
       },
     ],
   },
   {
-    name: 'Parasols',
-    src: getImageUrl('20260506_Cat10.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/parasols/',
-    background: '#FFCCB7',
-    color: '#000000',
+    name: 'Mirrors',
+    src: getImageUrl('20260527_Cat40.png', true),
+    href: 'https://www.beliani.ch/bedroom-furniture/mirrors/',
+    background: '#750000',
+    color: '#FFFFFF',
     type: 'grid',
     cta: true,
     paddingTop: 0,
@@ -226,31 +227,31 @@ const categories = [
       name: true,
     },
     products: [
-      // MONDELLO
+      // LARCHE 
       {
-        id: '368940',
-        src: getImageUrl('20260506_Pic34.png', true),
+        id: '498112',
+        src: getImageUrl('20260527_Pic31.png', true),
       },
-      // MINOA
+      // INDRE 
       {
-        id: '522780',
-        src: getImageUrl('20260506_Pic33.png', true),
+        id: '368063',
+        src: getImageUrl('20260527_Pic32.png', true),
       },
-      // SIBILLA
+      // BUSSY 
       {
-        id: '57677',
-        src: getImageUrl('20260506_Pic32.png', true),
+        id: '448522',
+        src: getImageUrl('20260527_Pic33.png', true),
       },
-      // SESTRIERE
+      // CASSIS 
       {
-        id: '669196',
-        src: getImageUrl('20260506_Pic31.png', true),
+        id: '53889',
+        src: getImageUrl('20260527_Pic34.png', true),
       },
     ],
   },
   {
     name: 'This may also interest you',
-    // src: getImageUrl('20260506_Cat30.png', true),
+    // src: getImageUrl('20260527_Cat30.png', true),
     // href: 'https://www.beliani.ch/home-accessories/kitchenware-tableware/',
     background: '#FFFFFF',
     color: '#000000',
@@ -276,44 +277,45 @@ const categories = [
     },
     tiles: [
       {
-        name: 'Picnic Baskets',
-        src: getImageUrl('20260506_Pic44.png', true),
-        href: 'https://www.beliani.ch/garden-accessories/lunch-baskets/',
+        name: 'Lighting',
+        src: getImageUrl('20260527_Pic41.png', true),
+        href: 'https://www.beliani.ch/bedroom-furniture/lighting/',
       },
       {
-        name: 'Blankets',
-        src: getImageUrl('20260506_Pic43.png', true),
-        href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
+        name: 'Armchairs',
+        src: getImageUrl('20260527_Pic42.png', true),
+        href: 'https://www.beliani.ch/bedroom-furniture/armchairs/',
       },
       {
-        name: 'Plant Pots',
-        src: getImageUrl('20260506_Pic42.png', true),
-        href: 'https://www.beliani.ch/garden-accessories/pots-and-planters/',
+        name: 'Textiles',
+        src: getImageUrl('20260527_Pic43.png', true),
+        href: 'https://www.beliani.ch/bedroom-furniture/textiles/',
       },
       {
-        name: 'Storage',
-        src: getImageUrl('20260506_Pic41.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/outdoor-storage/',
+        name: 'Rugs',
+        src: getImageUrl('20260527_Pic44.png', true),
+        href: 'https://www.beliani.ch/bedroom-furniture/rugs/',
+        hrefOverrides: { cz: 'https://www.beliani.cz/koberce/' },
       },
     ],
   },
 ];
 
 export default new entities.Campaign({
-  startId: '43053',
-  name: 'WED Garden Party',
-  date: '06.05.2026',
-  issueCardId: '467024',
-  lpId: '29804',
+  startId: '43886',
+  name: 'WED Bedroom Furniture',
+  date: '27.05.2026',
+  issueCardId: '481254',
+  lpId: '30259',
   alarm: {
     isActive: false,
   },
   isArchive: false,
   optimizeImg: false,
-  figmaUrl: 'https://www.figma.com/design/JuE72umpIbTaDrjscpaVg1/Newsletter-Garden-party-picnic---Wednesday-2026.05.06--Copy-?node-id=0-1&t=gAmLZuSZMueIQNwx-1',
+  figmaUrl: 'https://www.figma.com/design/rxrv03byJJWMv7EGlUItE3/Bedroom---Wednesday-2026.05.27-FINAL--Copy-?node-id=0-1&t=okTjefqhEp0GybVA-1',
   templates: [
     {
-      background: '#FECD8C',
+      background: '#FEE3BF',
       color: '#000000',
       template: templates.Monday, // User should change this
 
@@ -328,7 +330,7 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
     },
     {
-      background: '#FECD8C',
+      background: '#FEE3BF',
       color: '#000000',
       template: templates.Monday, // User should change this
 

@@ -52,8 +52,9 @@ const categories = [
     // ─── THE DEAL ─────────────────────────────────────────────────
     //  Omit this whole entry if the campaign has no freebies/promo.
   {
-    type      : 'deal',
-    copyCode  : true,
+    type        : 'deal',
+    copyCode    : true,   // tooltip above the icon
+    copyCodeWeb : false,   // fixed notification on the right side of the screen (takes priority)
     background: '#FFCBBF',
     color     : '#000000',
     paddingTop: '0',
@@ -108,11 +109,11 @@ const data = Object.fromEntries(COUNTRIES.map((c) => [c, {}]));
 
   // ─── Export ────────────────────────────────────────────────────────
 export default new entities.Campaign({
-  startId    : '99999',
+  startId    : '43982',
   name       : 'PLACEHOLDER Monday',
   date       : '01.01.2000',
-  issueCardId: '000000',
-  lpId       : '00000',
+  issueCardId: '427849',
+  lpId       : '30298',
   alarm      : { isArchive: false, isActive: false },
   isArchive  : false,
   accent     : '#f5ba87',

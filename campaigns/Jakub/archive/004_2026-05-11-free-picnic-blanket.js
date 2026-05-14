@@ -219,7 +219,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   accent: '#d4f5e9',
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/PPNCfBkisaidawBHimF0wA/Banner-Free-picnic-blanket---Monday-2026.05.11-FINAL--Copy-?node-id=0-1&t=7pxcJjq6tQqILm7K-1',
