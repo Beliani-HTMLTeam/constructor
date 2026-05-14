@@ -1,4 +1,3 @@
-// Campaign generated from form
 const campaignTranslationsSheet = '27.05.26 - Bedroom';
 
 const tableQueries = [
@@ -317,7 +316,7 @@ export default new entities.Campaign({
     {
       background: '#FEE3BF',
       color: '#000000',
-      template: templates.Monday, // User should change this
+      template: templates.Monday,
 
       css: types.CSS.NS,
       name: 'Newsletter',
@@ -332,7 +331,7 @@ export default new entities.Campaign({
     {
       background: '#FEE3BF',
       color: '#000000',
-      template: templates.Monday, // User should change this
+      template: templates.Monday,
 
       css: types.CSS.LP,
       name: 'Landing',

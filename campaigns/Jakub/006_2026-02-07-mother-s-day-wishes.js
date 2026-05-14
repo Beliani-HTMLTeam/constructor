@@ -1,7 +1,6 @@
 import { DimasTranslateImage } from "@/templates/DimaSrc/fathers_day_wishes/components/utils/images/translateImage";
 import { FathersDayWishes } from "@/templates/DimaSrc/fathers_day_wishes/templates/fathersDayWishes";
 
-// Campaign generated from form
 const campaignTranslationsSheet = '2026::Mother\'s Day Wishes'
 
 const tableQueries = [
@@ -32,14 +31,9 @@ const links = {
   // TopImageTitle_href: translateLink({ value: 'content/lp26-03-19' }),
   // TopImageTitle_src: translateImage({ value: '20260319_01.png' }),
   TopImage_src: translateImage({ value: '20260526_pic.png' }),
-  TopImage_href: translateLink({ value: 'content/lp26-05-26' }), // ! jakub - remember to change this
-  // change it
-  Banner_1: translateLink({ value: 'content/lp26-05-15' }), // ! jakub - remember to change this
-  Banner_1_Image: translateImage({ value: '20260515b.png' }), // ! jakub - remember to change this
-
-  Banner_2: translateLink({ value: 'content/lp26-05-14' }), // ! jakub - remember to change this
-  Banner_2_Image: translateImage({ value: '20260514b.png' }), // ! jakub - remember to change this
-  
+  TopImage_href: translateLink({ value: 'content/lp26-05-26' }),  // change it
+  Banner_1: translateLink({ value: 'content/lp26-05-15' }),  Banner_1_Image: translateImage({ value: '20260515b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-14' }),  Banner_2_Image: translateImage({ value: '20260514b.png' }),  
   ShopCTA: translateLink({ value: ' ' }),
 };
 
@@ -202,8 +196,7 @@ const categories = [
 export default new entities.Campaign({
   startId: '38856',
   name: "Mother's Day Wishes",
-  date: '26.05.2026', // ! jakub - remember to change this
-  issueCardId: '426252',
+  date: '26.05.2026',  issueCardId: '426252',
   lpId: '27731',
   alarm: {
     isActive: false,
@@ -216,7 +209,7 @@ export default new entities.Campaign({
     {
       name: 'Newsletter',
       type: types.NEWSLETTER,
-      template: FathersDayWishes, // User should change this
+      template: FathersDayWishes,
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: '#FFEDE6',
@@ -251,7 +244,7 @@ export default new entities.Campaign({
     {
       name: 'Landing',
       type: types.LANDINGPAGE,
-      template: FathersDayWishes, // User should change this
+      template: FathersDayWishes,
       css: types.CSS.LP,
       background: '#FFEDE6',
       color: '#000000',

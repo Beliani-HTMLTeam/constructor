@@ -1,4 +1,3 @@
-// Campaign generated from form
 const campaignTranslationsSheet = 'Voucher - 25.05.26 - Outdoor rug';
 
 const tableQueries = [
@@ -305,7 +304,7 @@ export default new entities.Campaign({
     {
       background: '#FFEFD9',
       color: '#000000',
-      template: templates.Monday, // User should change this
+      template: templates.Monday,
       intro: {
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
@@ -326,7 +325,7 @@ export default new entities.Campaign({
     {
       background: '#FFEFD9',
       color: '#000000',
-      template: templates.Monday, // User should change this
+      template: templates.Monday,
       intro: {
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
