@@ -89,12 +89,19 @@ export function OfferPartCodes({ color, data, data2, queries, href, type }) {
     color,
   });
 
+  const additionalConditions = renderBlock({
+    content: paragraphs[4],
+    spaceAfter: '0px',
+    color,
+  });
+
   return `
     <table cellspacing="0" cellpadding="0" border="0" width="100%">
     ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
       ${contentHtml}
       ${type === 'newsletter' ? newsletterCta : ''}
       ${finalParagraph}
+      ${additionalConditions}
       ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
     </table>
   `;

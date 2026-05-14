@@ -266,7 +266,7 @@ const RegularFridayNslt = async ({
                 category.hrefSource && category.hrefSource === 'queries'
                   ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
                   : category.href
-                    ? getCategoryLink(category.href)
+                    ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
                     : category.href;
               const name =
                 category.title && category.title.source === 'queries'
@@ -286,7 +286,7 @@ const RegularFridayNslt = async ({
                 category.hrefSource && category.hrefSource === 'queries'
                   ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
                   : category.href
-                    ? getCategoryLink(category.href)
+                    ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
                     : category.href;
               const name =
                 category.title.source === 'queries'
