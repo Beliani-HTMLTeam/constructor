@@ -47,12 +47,15 @@ const enrichCategoryProducts = async ({ category, getProductById, getCategoryLin
   };
 };
 
-const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm }) => {
+const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm, country }) => {
+  const countrySlug = String(country ?? '').toLowerCase();
   const name = queries?.categories?.[index]
     ? queries.categories[index]
-    : category?.name
-      ? getCategoryTitle(category.name)
-      : category?.name;
+    : category?.nameOverrides?.[countrySlug]
+      ? category.nameOverrides[countrySlug]
+      : category?.name
+        ? getCategoryTitle(category.name)
+        : category?.name;
 
   let href = '';
   if (queries?.categoryLinks?.[index]) {
@@ -66,11 +69,22 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
     src = src.src;
   }
 
+  const paragraphText = category?.paragraph?.textOverrides?.[countrySlug] ?? null;
+
+  const tilesOverride = Array.isArray(category?.tiles)
+    ? category.tiles.map((tile) => {
+        const hrefOverride = tile?.hrefOverrides?.[countrySlug];
+        return hrefOverride ? { ...tile, resolvedHref: add_utm(hrefOverride) } : tile;
+      })
+    : null;
+
   return {
     ...category,
     href,
     name,
     src,
+    ...(tilesOverride !== null && { tiles: tilesOverride }),
+    ...(paragraphText !== null && { paragraphText }),
   };
 };
 
@@ -104,6 +118,7 @@ export const CategoriesHandler = async ({
       getCategoryTitle,
       getCategoryLink,
       add_utm,
+      country,
     })
   );
 

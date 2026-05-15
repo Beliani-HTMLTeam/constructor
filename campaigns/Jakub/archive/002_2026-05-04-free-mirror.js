@@ -287,7 +287,7 @@ export default new entities.Campaign({
   issueCardId: '470531',
   lpId: '29765',
   alarm: {
-    isActive: false,
+    isActive: true,
   },
   isArchive: false,
   accent: '#d4f5e9',

@@ -39,7 +39,7 @@ export const render = ({
 
         if (item) {
           if (tiles) {
-            const href = getCategoryLink ? getCategoryLink(item.href) : item.href;
+            const href = item.resolvedHref ?? (getCategoryLink ? getCategoryLink(item.href) : item.href);
             const name = getCategoryTitle ? getCategoryTitle(item.name) : item.name;
 
             productsInnerHtml += `<table width="100%" border="0" cellpadding="0" cellspacing="0">`;

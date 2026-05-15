@@ -1,4 +1,3 @@
-// Campaign generated from form
 const campaignTranslationsSheet = 'Voucher - 25.05.26 - Outdoor rug';
 
 const tableQueries = [
@@ -38,8 +37,8 @@ const links = {
   Banner_1: translateLink({ value: 'content/lp26-05-15' }),
   Banner_1_Image: translateImage({ value: '20260515b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-05-13' }),
-  Banner_2_Image: translateImage({ value: '20260513b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-14' }),
+  Banner_2_Image: translateImage({ value: '20260514b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -54,7 +53,13 @@ const categories = [
     paragraph: {
       spaceAfter: '',
     },
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/',
+    offerTextOverrides: {
+      hu: { lp: [
+        undefined,
+        'Ahhoz, hogy megkapd az AJÁNDÉK <br> kültéri szőnyeget, vásárolj legalább <br> 40 000 Ft értékben, és használd a kódot a fizetésnél.',
+      ] },
+    },
+    href: 'https://www.beliani.ch/outdoor-furniture/',
     paddingTop: '0',
     type: 'deal',
     background: '#FFE6DB',
@@ -98,7 +103,7 @@ const categories = [
   {
     name: 'Dining Sets',
     src: getImageUrl('20260525_Cat10.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/garden-dining-sets/',
+    href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
     background: '#FFEFD9', 
     color: '#000000',
     type: 'grid',
@@ -144,7 +149,7 @@ const categories = [
   {
     name: 'Garden Tables',
     src: getImageUrl('20260525_Cat20.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/garden-tables/',
+    href: 'https://www.beliani.ch/outdoor-furniture/garden-tables/',
     background: '#FFE6DB',
     color: '#000000',
     type: 'grid',
@@ -190,7 +195,7 @@ const categories = [
   {
     name: 'Garden Chairs',
     src: getImageUrl('20260525_Cat30.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/garden-chairs/',
+    href: 'https://www.beliani.ch/outdoor-furniture/garden-chairs/',
     background: '#FFEFD9',
     color: '#000000',
     type: 'grid',
@@ -216,9 +221,9 @@ const categories = [
         id: '511747',
         src: getImageUrl('20260525_Pic31.png', true),
       },
-      // OLBIA 
+        // SUSUA II
       {
-        id: '195095',
+        id: '524064',
         src: getImageUrl('20260525_Pic32.png', true),
       },
       // CINE 
@@ -226,9 +231,9 @@ const categories = [
         id: '288028',
         src: getImageUrl('20260525_Pic33.png', true),
       },
-      // CESANA 
+      // OLBIA SET
       {
-        id: '71526',
+        id: '195288',
         src: getImageUrl('20260525_Pic34.png', true),
       },
     ],
@@ -236,7 +241,8 @@ const categories = [
   {
     name: 'Balcony furniture',
     src: getImageUrl('20260525_Cat40.png', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/balcony-furniture/',
+    nameOverrides: { pt: 'Móveis de varanda' },
+    href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
     background: '#FFE6DB',
     color: '#000000',
     type: 'grid',
@@ -298,12 +304,12 @@ export default new entities.Campaign({
     {
       background: '#FFEFD9',
       color: '#000000',
-      template: templates.Monday, // User should change this
+      template: templates.Monday,
       intro: {
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
         alignment: 'left',
-        cta: true,
+        cta: { textOverrides: { fi: 'Katso kaikki ulkokalusteet' } },
         position: 'afterFreebies',
       },
       css: types.CSS.NS,
@@ -319,12 +325,12 @@ export default new entities.Campaign({
     {
       background: '#FFEFD9',
       color: '#000000',
-      template: templates.Monday, // User should change this
+      template: templates.Monday,
       intro: {
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
         alignment: 'left',
-        cta: true,
+        cta: { textOverrides: { fi: 'Katso kaikki ulkokalusteet' } },
         position: 'afterFreebies',
       },
       css: types.CSS.LP,

@@ -308,7 +308,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/JuE72umpIbTaDrjscpaVg1/Newsletter-Garden-party-picnic---Wednesday-2026.05.06--Copy-?node-id=0-1&t=gAmLZuSZMueIQNwx-1',
   templates: [

@@ -34,7 +34,8 @@ const Monday = async ({
   const HeaderElement = Header({ getHeader, country, background, type, id });
   const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
-  const shopNow = getPhrase('Shop now');
+  const countrySlug = String(country ?? '').toLowerCase();
+  const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
