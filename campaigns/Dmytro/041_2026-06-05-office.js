@@ -20,6 +20,14 @@ const tableQueries = [
     "tableRange": "27:28",
     "name": "timer"
   },
+  {
+    "tableRange": "29",
+    "name": "introCTA"
+  },
+  {
+    "tableRange": "30:33",
+    "name": "categories"
+  }
 ];
 
 const links = {
@@ -223,6 +231,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
      show: false,
