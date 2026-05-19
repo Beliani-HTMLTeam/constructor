@@ -185,6 +185,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
      show: false,
