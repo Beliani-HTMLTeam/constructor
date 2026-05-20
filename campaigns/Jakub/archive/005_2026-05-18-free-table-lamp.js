@@ -277,9 +277,9 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   accent: '#d4f5e9',
-  optimizeImg: false,
+  optimizeImg: true,
   figmaUrl: 'https://www.figma.com/design/newqOligrlULyRWa7QPjDW/2026.05.18---Newsletter---Free-table-lamp--Copy-?node-id=0-1&t=iBhUDC8PyMywTQYn-1',
   templates: [
     {
@@ -287,11 +287,13 @@ export default new entities.Campaign({
       color: '#000000',
       template: templates.Monday, 
       intro: {
-        color: '#000000', 
-        backgroundColor: '#FFD8A6', 
+        color: '#000000',
+        backgroundColor: '#FFD8A6',
         alignment: 'left',
-        cta: true,
-       //href: 'https://www.beliani.ch/living-room-furniture/tables',
+        cta: {
+          textOverrides: { fi: 'Katso kaikki pöydät' },
+          hrefOverrides: { fi: 'https://www.beliani.fi/poydat/' },
+        },
         position: 'afterFreebies',
       },
       css: types.CSS.NS,
@@ -310,9 +312,12 @@ export default new entities.Campaign({
       template: templates.Monday, 
       intro: {
         color: '#000000',
-        backgroundColor: '#FFD8A6', 
+        backgroundColor: '#FFD8A6',
         alignment: 'left',
-        cta: true,
+        cta: {
+          textOverrides: { fi: 'Katso kaikki pöydät' },
+          hrefOverrides: { fi: 'https://www.beliani.fi/poydat/' },
+        },
         position: 'afterFreebies',
       },
       css: types.CSS.LP,

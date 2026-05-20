@@ -79,7 +79,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       <tr>
         <td>
           ${Paragraph({
-            text: queries.paragraphs[id] ?? 'Translation not found',
+            text: category.paragraphText ?? queries.paragraphs[id] ?? 'Translation not found',
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
@@ -88,7 +88,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         </td>
       </tr>
 
-      
+
       ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
     `
     : Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' });
@@ -136,6 +136,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           type,
           country,
           copyCode: category.copyCode,
+          copyCodeWeb: category.copyCodeWeb,
+          offerTextOverrides: category.offerTextOverrides,
         })
       : '';
 
@@ -225,6 +227,8 @@ const renderBody = async ({
   type,
   country,
   copyCode,
+  copyCodeWeb,
+  offerTextOverrides,
 }) => {
   // console.log('produkty ', products);
 
@@ -255,7 +259,9 @@ const renderBody = async ({
       getPhrase,
       renderType: type,
       country,
+      offerTextOverrides,
       copyCode,
+      copyCodeWeb,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

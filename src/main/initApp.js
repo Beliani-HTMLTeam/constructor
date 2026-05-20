@@ -14,6 +14,7 @@ import {
 import {
   setupProductsHandler,
   setupCopyTemplateHandler,
+  setupCopyAllTemplatesHandler,
   setupOpenCampaignHandler,
   setupOpenIssueHandler,
   setupOpenFigmaHandler,
@@ -33,30 +34,30 @@ export function initApp({ campaigns, shops, config }) {
   setState('campaigns', campaigns);
   domElements.selectCampaigns.append(...initCampaigns(campaigns, config));
 
-  // Setup all event listeners
   setupEventListeners(domElements, campaigns, shops, jsConfetti);
+
+  window.__openEditCurrentCampaign = () => {
+    const campaign = getState('selectedCampaign');
+    if (!campaign?.name) return;
+    window.__formControl?.applyEditMode(campaign);
+    document.getElementById('formModal').style.display = 'flex';
+  };
 }
 
 function setupEventListeners(elements, campaigns, shops, jsConfetti) {
-  // Login button
-  // elements.login?.addEventListener('click', GoogleAuth.login);
-
-  // Render function with state access
   const render = () => renderTemplate(getState, setState);
 
-  // Create setSelectedTemplate function with proper dependencies
   const setSelectedTemplate = createSetSelectedTemplate(elements, setState, getState);
 
-  // Setup select elements
   setupSelectCampaigns(elements, campaigns, setState, getState, render, setSelectedTemplate);
   setupSelectShop(elements, shops, setState, getState, render);
   setupSelectLanguage(elements, setState, getState, render, handleSlugChange);
   setupSelectTemplate(elements, setState, getState, render, setSelectedTemplate);
 
-  // Setup button handlers
   setupProductsHandler(elements, setState, getState);
-  setupNewCampaignHandler(elements, campaigns);
+  setupNewCampaignHandler(elements, campaigns, getState);
   setupCopyTemplateHandler(elements, getState, jsConfetti);
+  setupCopyAllTemplatesHandler(elements, getState, setState);
   setupOpenCampaignHandler(elements, getState);
   setupOpenIssueHandler(elements, getState);
   setupOpenFigmaHandler(elements, getState);
@@ -64,6 +65,5 @@ function setupEventListeners(elements, campaigns, shops, jsConfetti) {
   setupPurgeDynamicSpreadsheetHandler(elements);
   setupRedirectCheckHandler(elements);
 
-  // Setup purge elements handlers
   setupSelectPurge(elements);
 }

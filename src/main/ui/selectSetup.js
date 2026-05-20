@@ -5,6 +5,29 @@ import { root } from '@/app.js';
 import { getIframe } from '@/helpers/getIframe';
 import { toast } from 'sonner';
 import { appConfig as config } from '@/utils/config';
+import { getCountriesWithOverrides } from '@/helpers/getCountriesWithOverrides.js';
+
+function getOrCreateOverrideBadge(wrapper) {
+  let badge = wrapper.querySelector('.shop-override-badge');
+  if (!badge) {
+    badge = document.createElement('img');
+    badge.src = '/icons/modified.svg';
+    badge.className = 'shop-override-badge';
+    badge.alt = '';
+    wrapper.appendChild(badge);
+  }
+  return badge;
+}
+
+function updateOverrideBadge(wrapper, shop, overrideSlugs) {
+  const badge = getOrCreateOverrideBadge(wrapper);
+  const hasOverride = overrideSlugs.has('*') || (shop && shop.languages?.some(({ language }) =>
+    overrideSlugs.has(language?.slug?.toLowerCase())
+  ));
+  badge.style.display = hasOverride ? 'block' : 'none';
+  const selectEl = wrapper.querySelector('select');
+  if (selectEl) selectEl.title = hasOverride ? 'Has name or text overrides' : '';
+}
 
 export function setupSelectCampaigns(elements, campaigns, setState, getState, render, setSelectedTemplate) {
   const { selectCampaigns, selectTemplates, selectTemplatesWrapper, openIssue, openFigma, purgeDynamicSpreadsheet } =
@@ -12,10 +35,10 @@ export function setupSelectCampaigns(elements, campaigns, setState, getState, re
 
   selectCampaigns.addEventListener('change', (ev) => {
     if (ev.target.value === 'default') {
+      setState('selectedCampaign', null);
       return;
     }
 
-    // Show select templates after selecting campaign
     showElements(selectTemplates, selectTemplatesWrapper, openIssue, openFigma, purgeDynamicSpreadsheet);
 
     const { selectedCampaign, templates } = selectCampaignHandler(ev, campaigns);
@@ -31,10 +54,9 @@ export function setupSelectCampaigns(elements, campaigns, setState, getState, re
 }
 
 export function setupSelectShop(elements, shops, setState, getState, render) {
-  const { selectShop, selectLanguage, selectLanguageWrapper, copyTemplate } = elements;
+  const { selectShop, selectShopWrapper, selectLanguage, selectLanguageWrapper, copyTemplate } = elements;
   setState('shops', shops);
 
-  // Populate shop options
   const shopItems = shops.map((shop) => ({
     value: shop.shopId,
     text: shop.seller,
@@ -49,7 +71,6 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
     handleShopChange(ev, shops);
     const shop = getState('shop');
 
-    // Setup language options based on selected shop
     const languageItems = shop.languages.map(({ language }) => ({
       value: `${language.slug}-${language.name}`,
       text: language.name,
@@ -57,7 +78,6 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
 
     populateSelect(selectLanguage, languageItems, 'Select language');
 
-    // Style language options
     Array.from(selectLanguage.options).forEach((option) => {
       if (option.value !== 'default') {
         option.style.textTransform = 'capitalize';
@@ -65,6 +85,9 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
     });
 
     showElements(selectLanguage, selectLanguageWrapper, copyTemplate);
+
+    const overrideSlugs = getCountriesWithOverrides(getState('template'));
+    updateOverrideBadge(selectShopWrapper, shop, overrideSlugs);
   });
 }
 
@@ -95,6 +118,12 @@ export function setupSelectTemplate(elements, setState, getState, render, setSel
 
     setSelectedTemplate(ev);
     render();
+
+    const shop = getState('shop');
+    if (shop) {
+      const overrideSlugs = getCountriesWithOverrides(getState('template'));
+      updateOverrideBadge(selectShopWrapper, shop, overrideSlugs);
+    }
   });
 }
 

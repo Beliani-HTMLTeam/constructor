@@ -309,6 +309,7 @@ export default new entities.Campaign({
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
         alignment: 'left',
+        titleOverrides: { pl: 'Meble ogrodowe <br> gotowe na wszystko' },
         cta: { textOverrides: { fi: 'Katso kaikki ulkokalusteet' } },
         position: 'afterFreebies',
       },
@@ -330,6 +331,7 @@ export default new entities.Campaign({
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
         alignment: 'left',
+        titleOverrides: { pl: 'Meble ogrodowe <br> gotowe na wszystko' },
         cta: { textOverrides: { fi: 'Katso kaikki ulkokalusteet' } },
         position: 'afterFreebies',
       },

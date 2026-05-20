@@ -1,93 +1,613 @@
-/**
- * Creates a campaign file from form inputs (Browser version)
- * @param {Object} formData - Form data object with all the inputs
- * @param {string} userScope - User scope (e.g., "KamilK") from environment
- * @returns {Promise<{filename: string, content: string}>}
- */
+export function lookupProductName(startId, productId) {
+  return window.__lookupProductName?.(startId, productId) ?? null;
+}
+
 export async function createCampaignFile(formData, userScope = null) {
-  // Get user scope from environment if not provided
   if (!userScope) {
     userScope = __SCOPE__ || import.meta.env?.VITE_SCOPE;
-    console.log('createCampaignFile.js - userScope:', userScope); // Debug log
-
     if (!userScope) {
       throw new Error('User scope (VITE_SCOPE) is not configured. Please check your .env file.');
     }
   }
 
-  // Helper function to get next campaign number
   const getNextCampaignNumber = async (userScope) => {
     try {
-      console.log(`Fetching campaigns for scope: ${userScope}`);
-      // Use the new API endpoint to get campaign files
       const response = await fetch(`/api/campaigns?scope=${userScope}`);
-      console.log('API response status:', response.status, response.ok);
-
       if (response.ok) {
         const data = await response.json();
-        console.log('Campaign files from API:', data.files);
-
         const numbers = data.files
-          .filter((filename) => filename.match(/^\d{3}_/)) // Files starting with 3 digits and underscore
+          .filter((filename) => filename.match(/^\d{3}_/))
           .map((filename) => {
             const match = filename.match(/^(\d{3})_/);
-            const number = match ? parseInt(match[1]) : null;
-            console.log(`Extracting number from: ${filename} -> ${number}`);
-            return number;
+            return match ? parseInt(match[1]) : null;
           })
-          .filter((num) => num !== null && !isNaN(num)) // Remove invalid numbers
-          .sort((a, b) => b - a); // Sort descending
-
-        console.log(`Found campaign numbers in ${userScope}:`, numbers);
-
+          .filter((num) => num !== null && !isNaN(num))
+          .sort((a, b) => b - a);
         const nextNum = numbers.length > 0 ? numbers[0] + 1 : 1;
-        console.log(`Next campaign number will be: ${nextNum}`);
         return String(nextNum).padStart(3, '0');
-      } else {
-        console.warn('API response not ok:', await response.text());
       }
     } catch (error) {
-      console.warn('Could not fetch existing campaigns via API, using fallback', error);
+      // fallthrough to default
     }
-
-    // Fallback: start from 001
     return '001';
   };
 
-  // Helper function to format campaign name for filename
-  const formatNameForFilename = (name) => {
-    return name
+  const formatNameForFilename = (name) =>
+    name
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
-      .substring(0, 30); // Limit length
-  };
+      .substring(0, 30);
 
-  // Helper function to format date for filename (YYYY-MM-DD)
-  const formatDateForFilename = (dateString) => {
-    const date = new Date(dateString);
-    return date.toISOString().split('T')[0];
-  };
+  const formatDateForFilename = (dateString) => new Date(dateString).toISOString().split('T')[0];
 
-  // Generate filename
   const campaignNumber = await getNextCampaignNumber(userScope);
   const formattedDate = formatDateForFilename(formData.campaignDate);
   const formattedName = formatNameForFilename(formData.campaignName);
   const filename = `${campaignNumber}_${formattedDate}-${formattedName}.js`;
 
-  // Generate campaign content
   const content = generateCampaignContent(formData, campaignNumber);
 
   return { filename, content, userScope };
 }
 
-/**
- * Generates the campaign file content
- * @param {Object} formData - Form data object
- * @param {string} campaignNumber - Campaign number (e.g., "007")
- * @returns {string} - Campaign file content
- */
+const PLACEHOLDER_PRODUCTS = [
+  ['442870', '231617', '214089', '101669'],
+  ['515945', '597308', '618024', '403367'],
+  ['575666', '424428', '569273', '575229'],
+  ['428207', '512750', '101143', '171419'],
+];
+
+function buildGridCategory(_yyyymmdd, color, cat, index) {
+  const bg = index % 2 === 0 ? '#fecd8c' : '#F6E7E6';
+  const padding = index === 0 ? '45' : '35';
+  const catNum = (index + 1) * 10;
+  const fallback = PLACEHOLDER_PRODUCTS[index % PLACEHOLDER_PRODUCTS.length];
+  const catProducts = Array.isArray(cat.products) && cat.products.length === 4
+    ? cat.products
+    : fallback.map((id) => ({ id, name: null }));
+  const name = cat.name || 'Category Name';
+  const href = cat.href || 'https://www.beliani.ch/';
+
+  const productLines = catProducts.map((p, pi) => {
+    const id = p.id || fallback[pi] || '';
+    const comment = p.name ? `      // ${p.name}\n` : '';
+    return `${comment}      {\n        id: '${id}',\n        src: getImageUrl('${_yyyymmdd}_Pic${catNum + pi + 1}.png', true), // TODO\n      }`;
+  }).join(',\n');
+
+  return `  {
+    name: '${name}',
+    src: getImageUrl('${_yyyymmdd}_Cat${catNum}.png', true), // TODO
+    href: '${href}',
+    background: '${bg}',
+    color: '${color}',
+    type: 'grid',
+    cta: ${cat.cta !== false},
+    paddingTop: '${padding}',
+    title: {
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: false,
+      align: 'left',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      prices: true,
+      name: true,
+    },
+    products: [
+${productLines},
+    ],
+  }`;
+}
+
+function generateMondayCampaignContent(formData) {
+  const {
+    campaignName = 'Untitled Campaign',
+    campaignDate = new Date().toISOString().split('T')[0],
+    newsletterId = '',
+    lpId = '',
+    issueCardId = '',
+    alarmEnabled = false,
+    alarmDescription = '',
+    isArchive = false,
+    optimizeImages = false,
+    soonBanners = false,
+    figmaURL = '',
+    background = '#FFFFFF',
+    color = '#000000',
+  } = formData;
+
+  const formattedDate = new Date(campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
+  const shortDate = new Date(campaignDate)
+    .toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })
+    .replace(/\//g, '.');
+
+  const [_yyyy, _mm, _dd] = (campaignDate || '').split('-');
+  const _yy = (_yyyy || '').length === 4 ? _yyyy.slice(2) : (_yyyy || '');
+  const _yyyymmdd = `${_yyyy || ''}${_mm || ''}${_dd || ''}`;
+
+  const sheetName = formData.translationsSheet || `2026::${shortDate} - ${campaignName}`;
+  const cssType   = formData.familyVersion === 0 ? 'types.CSS.NS' : 'types.CSS.NS_OLD';
+  const cssTypeLP = formData.familyVersion === 0 ? 'types.CSS.LP' : 'types.CSS.LP_OLD';
+
+  const userCats = Array.isArray(formData.categories) && formData.categories.length > 0
+    ? formData.categories
+    : [
+        { name: 'Category Name', href: 'https://www.beliani.ch/' },
+        { name: 'Category Name', href: 'https://www.beliani.ch/' },
+        { name: 'Category Name', href: 'https://www.beliani.ch/' },
+        { name: 'Category Name', href: 'https://www.beliani.ch/' },
+      ];
+
+  const gridCatsStr = userCats.map((cat, i) => buildGridCategory(_yyyymmdd, color, cat, i)).join(',\n');
+
+  const userFreebies = Array.isArray(formData.freebies) && formData.freebies.length > 0
+    ? formData.freebies
+    : null;
+  const freebiesStr = userFreebies
+    ? userFreebies.map((f, i) => {
+        const comment = f.name ? `      // ${f.name}\n` : '';
+        const picNum = String(i + 1).padStart(2, '0');
+        return `${comment}      {\n        id: '${f.id}',\n        src: getImageUrl('${_yyyymmdd}_pic${picNum}.png', true),\n      }`;
+      }).join(',\n')
+    : `      { id: '324994', src: getImageUrl('${_yyyymmdd}_pic01.png', true) },
+      { id: '314370', src: getImageUrl('${_yyyymmdd}_pic02.png', true) },
+      { id: '369238', src: getImageUrl('${_yyyymmdd}_pic03.png', true) },
+      { id: '345545', src: getImageUrl('${_yyyymmdd}_pic04.png', true) },
+      { id: '325032', src: getImageUrl('${_yyyymmdd}_pic05.png', true) },
+      { id: '314272', src: getImageUrl('${_yyyymmdd}_pic06.png', true) }`;
+
+  let content = `const campaignTranslationsSheet = '${sheetName}';
+
+const tableQueries = [
+  {
+    name: 'TopImageTitle',
+    tableRange: '21:22',
+  },
+  {
+    name: 'offer',
+    tableRange: '24:26',
+  },
+  {
+    name: 'offer_date',
+    tableRange: '28',
+  },
+  {
+    name: 'intro',
+    tableRange: '29:30',
+  },
+  {
+    name: 'condition',
+    tableRange: '34:35',
+  },
+  {
+    name: 'paragraphs',
+    tableRange: '35:38',
+  },
+];
+
+const links = {
+  TopImageTitle_href: translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' }),
+  TopImageTitle_src: translateImage({ value: '${_yyyymmdd}_01.png' }),
+
+  TopImage_src: getImageUrl('${_yyyymmdd}_Gif.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' }),
+
+  Banner_1: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
+  Banner_1_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+
+  Banner_2: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
+  Banner_2_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+};
+
+const TopImageTitle_data = {
+  color: '${color}',
+  backgroundColor: '${background}',
+  type: 'standard',
+};
+
+const categories = [
+  // offer
+  {
+    paragraph: {
+      spaceAfter: '',
+    },
+    paddingTop: '0',
+    type: 'deal',
+    background: '${background}',
+    color: '${color}',
+    spaceAfter: 'newsletterBottom45px',
+    freebies: [[
+${freebiesStr},
+    ]],
+  },
+
+  // main
+${gridCatsStr}
+];
+
+export default new entities.Campaign({
+  startId: '${newsletterId}',
+  name: '${campaignName}',
+  date: '${formattedDate}',`;
+
+  if (issueCardId) content += `\n  issueCardId: '${issueCardId}',`;
+  if (lpId)        content += `\n  lpId: '${lpId}',`;
+
+  content += `\n  alarm: {\n    isActive: ${alarmEnabled},`;
+  if (alarmEnabled && alarmDescription) content += `\n    description: '${alarmDescription}',`;
+  content += `\n  },`;
+
+  content += `\n  isArchive: ${isArchive},\n  optimizeImg: ${optimizeImages},`;
+  if (soonBanners) content += `\n  soon_banners: true,`;
+
+  if (figmaURL)        content += `\n  figmaUrl: '${figmaURL}',`;
+  if (formData.accent) content += `\n  accent: '${formData.accent}',`;
+
+  content += `
+  templates: [
+    {
+      background: '${background}',
+      color: '${color}',
+      template: templates.Monday,
+      intro: {
+        color: '${color}',
+        backgroundColor: '#fecd8c',
+        alignment: 'left',
+        position: 'afterFreebies',
+      },
+      css: ${cssType},
+      name: 'Newsletter',
+      type: types.NEWSLETTER,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      wrapper: types.WRAPPER,
+      TopImageTitle_data: TopImageTitle_data,
+      categories: categories,
+      links: links,
+      tableQueries: tableQueries,
+    },
+    {
+      background: '${background}',
+      color: '${color}',
+      template: templates.Monday,
+      intro: {
+        color: '${color}',
+        backgroundColor: '#fecd8c',
+        alignment: 'left',
+        position: 'afterFreebies',
+      },
+      css: ${cssTypeLP},
+      name: 'Landing',
+      type: types.LANDINGPAGE,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      TopImageTitle_data: TopImageTitle_data,
+      categories: categories,
+      links: links,
+      tableQueries: tableQueries,
+    },
+  ],
+});`;
+
+  return content;
+}
+
+function generateFridayCampaignContent(formData) {
+  const {
+    campaignName = 'Untitled Campaign',
+    campaignDate = new Date().toISOString().split('T')[0],
+    newsletterId = '',
+    lpId = '',
+    issueCardId = '',
+    alarmEnabled = false,
+    alarmDescription = '',
+    isArchive = false,
+    optimizeImages = true,
+    figmaURL = '',
+    background = '#FFFFFF',
+    color = '#000000',
+  } = formData;
+
+  const formattedDate = new Date(campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
+  const shortDate = new Date(campaignDate)
+    .toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })
+    .replace(/\//g, '.');
+
+  const [_yyyy, _mm, _dd] = (campaignDate || '').split('-');
+  const _yy = (_yyyy || '').length === 4 ? _yyyy.slice(2) : (_yyyy || '');
+  const _yyyymmdd = `${_yyyy || ''}${_mm || ''}${_dd || ''}`;
+
+  const sheetName = formData.translationsSheet || `2026::${shortDate} - ${campaignName}`;
+  const cssType   = formData.familyVersion === 0 ? 'types.CSS.NS' : 'types.CSS.NS_OLD';
+  const cssTypeLP = formData.familyVersion === 0 ? 'types.CSS.LP' : 'types.CSS.LP_OLD';
+
+  const fridayCats = Array.isArray(formData.categories) && formData.categories.length > 0
+    ? formData.categories.map((cat, i) => buildGridCategory(_yyyymmdd, color, cat, i)).join(',\n')
+    : null;
+
+  let content = `const campaignTranslationsSheet = '${sheetName}';
+
+const tableQueries = [
+  { name: 'TopImageTitle', tableRange: '17:18' },
+  { name: 'paragraphs',    tableRange: '20:23' },
+  { name: 'condition',     tableRange: '25:26' },
+];
+
+const links = {
+  TopImageTitle_href: translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' }),
+  TopImageTitle_src : translateImage({ value: '${_yyyymmdd}_01.png' }),
+
+  Banner_1      : translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
+  Banner_1_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+  Banner_2      : translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
+  Banner_2_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+};
+
+const TopImageTitle_data = {
+  color          : '${color}',
+  backgroundColor: '${background}',
+  type           : 'twoSameLines',
+};
+
+const categories = [
+${fridayCats ?? '  // TODO: Add categories here'}
+];
+
+export default new entities.Campaign({
+  startId    : "${newsletterId}",
+  name       : "${campaignName}",
+  date       : "${formattedDate}",`;
+
+  if (issueCardId) content += `\n  issueCardId: "${issueCardId}",`;
+  if (lpId)        content += `\n  lpId: "${lpId}",`;
+
+  content += `\n  alarm: {\n    isActive: ${alarmEnabled},`;
+  if (alarmEnabled && alarmDescription) content += `\n    description: "${alarmDescription}",`;
+  content += `\n  },`;
+
+  content += `\n  isArchive: ${isArchive},\n  optimizeImg: ${optimizeImages},`;
+
+  if (figmaURL) content += `\n  figmaUrl: "${figmaURL}",`;
+
+  content += `
+  templates: [
+    {
+      background             : "${background}",
+      color                  : "${color}",
+      template               : templates.RegularFridayNslt,
+      css                    : ${cssType},
+      name                   : "Newsletter",
+      type                   : types.NEWSLETTER,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      wrapper                : types.WRAPPER,
+      TopImageTitle_data,
+      categories,
+      links,
+      tableQueries,
+    },
+    {
+      background             : "${background}",
+      color                  : "${color}",
+      template               : templates.RegularFridayNslt,
+      css                    : ${cssTypeLP},
+      name                   : "Landing",
+      type                   : types.LANDINGPAGE,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      TopImageTitle_data,
+      categories,
+      links,
+      tableQueries,
+    },
+  ],
+});`;
+
+  return content;
+}
+
+function generateFathersDayWishesCampaignContent(formData) {
+  const {
+    campaignName = 'Untitled Campaign',
+    campaignDate = new Date().toISOString().split('T')[0],
+    newsletterId = '',
+    lpId = '',
+    issueCardId = '',
+    alarmEnabled = false,
+    alarmDescription = '',
+    isArchive = false,
+    optimizeImages = true,
+    figmaURL = '',
+    background = '#FFEDE6',
+    color = '#000000',
+  } = formData;
+
+  const formattedDate = new Date(campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
+  const shortDate = new Date(campaignDate)
+    .toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })
+    .replace(/\//g, '.');
+
+  const [_yyyy, _mm, _dd] = (campaignDate || '').split('-');
+  const _yy = (_yyyy || '').length === 4 ? _yyyy.slice(2) : (_yyyy || '');
+  const _yyyymmdd = `${_yyyy || ''}${_mm || ''}${_dd || ''}`;
+
+  const sheetName = formData.translationsSheet || `2026::${shortDate} - ${campaignName}`;
+  const cssType   = formData.familyVersion === 0 ? 'types.CSS.NS' : 'types.CSS.NS_OLD';
+  const cssTypeLP = formData.familyVersion === 0 ? 'types.CSS.LP' : 'types.CSS.LP_OLD';
+
+  const fdwCats = Array.isArray(formData.categories) && formData.categories.length > 0
+    ? formData.categories.map((cat, i) => buildGridCategory(_yyyymmdd, color, cat, i)).join(',\n')
+    : null;
+
+  let content = `const campaignTranslationsSheet = '${sheetName}';
+
+const tableQueries = [
+  { name: 'TopImageTitle', tableRange: '14:15' },
+  { name: 'intro',         tableRange: '17'    },
+  { name: 'categories',    tableRange: '18:31' },
+  { name: 'condition',     tableRange: '21:22' },
+  { name: 'GiftCard',      tableRange: '18:20' },
+];
+
+const links = {
+  TopImage_src : getImageUrl('${_yyyymmdd}_pic.png'),
+  TopImage_href: translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' }),
+
+  Banner_1      : translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
+  Banner_1_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+  Banner_2      : translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
+  Banner_2_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+
+  ShopCTA: translateLink({ value: ' ' }),
+};
+
+const TopImageTitle_data = {
+  color          : '${color}',
+  backgroundColor: 'transparent',
+  type           : 'twoSameLines',
+};
+
+const GiftCard_data = {
+  src       : getImageUrl('${_yyyymmdd}_giftcard.png'),
+  href      : 'https://www.beliani.ch/gift-cards/',
+  spaceAfter: 'newsletterBottom70px',
+};
+
+const categories = [
+${fdwCats ?? '  // TODO: Add categories here'}
+];
+
+export default new entities.Campaign({
+  startId    : "${newsletterId}",
+  name       : "${campaignName}",
+  date       : "${formattedDate}",`;
+
+  if (issueCardId) content += `\n  issueCardId: "${issueCardId}",`;
+  if (lpId)        content += `\n  lpId: "${lpId}",`;
+
+  content += `\n  alarm: {\n    isActive: ${alarmEnabled},`;
+  if (alarmEnabled && alarmDescription) content += `\n    description: "${alarmDescription}",`;
+  content += `\n  },`;
+
+  content += `\n  isArchive: ${isArchive},\n  optimizeImg: ${optimizeImages},`;
+
+  if (figmaURL) content += `\n  figmaUrl: "${figmaURL}",`;
+
+  content += `
+  templates: [
+    {
+      background             : "${background}",
+      color                  : "${color}",
+      template               : templates.FathersDayWishes,
+      css                    : ${cssType},
+      name                   : "Newsletter",
+      type                   : types.NEWSLETTER,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      wrapper                : types.WRAPPER,
+      TopImageTitle_data,
+      GiftCard_data,
+      categories,
+      categories_type        : 'twoColumnsGrid',
+      intro: {
+        color          : "${color}",
+        backgroundColor: "${background}",
+        alignment      : 'center',
+        type           : 'paragraph',
+      },
+      OfferPart: {
+        color          : "${color}",
+        backgroundColor: "${background}",
+        alignment      : 'center',
+        type           : 'giftcard',
+      },
+      shopCTA: {
+        color          : "${color}",
+        backgroundColor: "${background}",
+      },
+      links,
+      tableQueries,
+    },
+    {
+      background             : "${background}",
+      color                  : "${color}",
+      template               : templates.FathersDayWishes,
+      css                    : ${cssTypeLP},
+      name                   : "Landing",
+      type                   : types.LANDINGPAGE,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      TopImageTitle_data,
+      GiftCard_data,
+      categories,
+      categories_type        : 'twoColumnsGrid',
+      intro: {
+        color          : "${color}",
+        backgroundColor: "${background}",
+        alignment      : 'center',
+        type           : 'paragraph',
+      },
+      OfferPart: {
+        color          : "${color}",
+        backgroundColor: "${background}",
+        alignment      : 'center',
+        type           : 'giftcard',
+      },
+      shopCTA: {
+        color          : "${color}",
+        backgroundColor: "${background}",
+      },
+      links,
+      tableQueries,
+    },
+  ],
+});`;
+
+  return content;
+}
+
+function generateBlankCampaignContent(formData) {
+  const {
+    campaignName = 'Untitled Campaign',
+    campaignDate = new Date().toISOString().split('T')[0],
+    newsletterId = '',
+    lpId = '',
+    issueCardId = '',
+    alarmEnabled = false,
+    alarmDescription = '',
+    isArchive = false,
+    optimizeImages = true,
+    figmaURL = '',
+  } = formData;
+
+  const formattedDate = new Date(campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
+
+  let content = `export default new entities.Campaign({
+  startId    : "${newsletterId}",
+  name       : "${campaignName}",
+  date       : "${formattedDate}",`;
+
+  if (issueCardId) content += `\n  issueCardId: "${issueCardId}",`;
+  if (lpId)        content += `\n  lpId: "${lpId}",`;
+
+  content += `\n  alarm: {\n    isActive: ${alarmEnabled},`;
+  if (alarmEnabled && alarmDescription) content += `\n    description: "${alarmDescription}",`;
+  content += `\n  },`;
+
+  content += `\n  isArchive: ${isArchive},\n  optimizeImg: ${optimizeImages},`;
+
+  if (figmaURL) content += `\n  figmaUrl: "${figmaURL}",`;
+
+  content += `\n  templates: [],\n});`;
+
+  return content;
+}
+
 function generateCampaignContent(formData, campaignNumber) {
+  if (formData.templateKey === 'Monday') return generateMondayCampaignContent(formData);
+  if (formData.templateKey === 'Friday') return generateFridayCampaignContent(formData);
+  if (formData.templateKey === 'FathersDayWishes') return generateFathersDayWishesCampaignContent(formData);
+  if (formData.templateKey === 'Blank') return generateBlankCampaignContent(formData);
+
   const {
     campaignName = 'Untitled Campaign',
     campaignDate = new Date().toISOString().split('T')[0],
@@ -101,7 +621,7 @@ function generateCampaignContent(formData, campaignNumber) {
     isArchive = false,
     optimizeImages = true,
     figmaURL = '',
-    familyVersion = 0, // 0 = NEW (default), 1 = OLD
+    familyVersion = 0,
     background = '#750000',
     color = '#000000',
     insideEnabled = false,
@@ -122,28 +642,20 @@ function generateCampaignContent(formData, campaignNumber) {
     offerPartType = 'paragraph',
   } = formData;
 
-  // Parse special LP IDs if provided
   let parsedSpecialLPs = null;
   if (specialLPToggle && specialLPIds) {
     try {
       parsedSpecialLPs = JSON.parse(specialLPIds);
     } catch (e) {
-      console.warn('Invalid JSON in specialLPIds, skipping');
+      // skip invalid JSON
     }
   }
 
-  // Format date for campaign object and translation sheet
   const formattedDate = new Date(campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
   const shortDate = new Date(campaignDate)
-    .toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-    })
+    .toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })
     .replace(/\//g, '.');
 
-  // Generate automatic links structure
-  // derive date parts from campaignDate (expected format YYYY-MM-DD)
   const _dateParts = (campaignDate || '').split('-');
   const _yyyy = _dateParts[0] || '';
   const _mm = _dateParts[1] || '';
@@ -152,66 +664,41 @@ function generateCampaignContent(formData, campaignNumber) {
   const _yyyymmdd = `${_yyyy}${_mm}${_dd}`;
 
   const defaultLinks = {
-    // hrefs should use lpYY-MM-DD format
     TopImageTitle_href: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
-    // image src should use YYYYMMDD*_*.png pattern
     TopImageTitle_src: `translateImage({ value: '${_yyyymmdd}_01.png' })`,
-
-    // prettier-ignore
     TopImage_src: `getImageUrl('${_yyyymmdd}_Pic.png', true)`,
-    // prettier-ignore
     TopImage_href: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
-
     Banner_1: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,
-    // Banner images intentionally left as placeholders — they are often created on other dates
     Banner_1_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
-
     Banner_2: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,
     Banner_2_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
   };
 
-  // Generate automatic tableQueries structure
   const defaultTableQueries = [
-    {
-      tableRange: '15:16',
-      name: 'TopImageTitle',
-    },
-    {
-      tableRange: '18',
-      name: 'intro',
-    },
-    {
-      tableRange: '19:22',
-      name: 'paragraphs',
-    },
-    {
-      tableRange: '23:24',
-      name: 'condition',
-    },
+    { tableRange: '15:16', name: 'TopImageTitle' },
+    { tableRange: '18', name: 'intro' },
+    { tableRange: '19:22', name: 'paragraphs' },
+    { tableRange: '23:24', name: 'condition' },
   ];
 
-  // Generate the campaign content with constants at the top
-  let campaignContent = `// Campaign generated from form
-const campaignTranslationsSheet = '2026::${shortDate} - ${campaignName}';
+  const sheetName = formData.translationsSheet || `2026::${shortDate} - ${campaignName}`;
+
+  let campaignContent = `const campaignTranslationsSheet = '${sheetName}';
 
 const tableQueries = ${JSON.stringify(defaultTableQueries, null, 2)};
 
 const links = {`;
 
-  // Add links object properties
-  Object.entries(defaultLinks).forEach(([key, value], index, arr) => {
-    const isLastItem = index === arr.length - 1;
+  Object.entries(defaultLinks).forEach(([key, value]) => {
     if (
       typeof value === 'string' &&
       (value.startsWith('translateLink') ||
         value.startsWith('translateImage') ||
         value.startsWith('getImageUrl'))
     ) {
-      campaignContent += `
-  ${key}: ${value},`;
+      campaignContent += `\n  ${key}: ${value},`;
     } else {
-      campaignContent += `
-  ${key}: '${value}',`;
+      campaignContent += `\n  ${key}: '${value}',`;
     }
   });
 
@@ -261,83 +748,60 @@ export default new entities.Campaign({
   name: "${campaignName}",
   date: "${formattedDate}",`;
 
-  // Add issue card ID if provided
   if (issueCardId) {
-    campaignContent += `
-  issueCardId: "${issueCardId}",`;
+    campaignContent += `\n  issueCardId: "${issueCardId}",`;
   }
 
-  // Add content page ID if provided
   if (lpId) {
-    campaignContent += `
-  lpId: "${lpId}",`;
+    campaignContent += `\n  lpId: "${lpId}",`;
   }
 
-  // Add special LP IDs if enabled
   if (specialLPToggle && parsedSpecialLPs) {
-    campaignContent += `
-  specialLPIds: ${JSON.stringify(parsedSpecialLPs, null, 4).replace(/^/gm, '  ')},`;
+    campaignContent += `\n  specialLPIds: ${JSON.stringify(parsedSpecialLPs, null, 4).replace(/^/gm, '  ')},`;
   }
 
-  // Add alarm configuration
-  campaignContent += `
-  alarm: {
-    isActive: ${alarmEnabled},`;
+  campaignContent += `\n  alarm: {\n    isActive: ${alarmEnabled},`;
 
   if (alarmEnabled && alarmDescription) {
-    campaignContent += `
-    description: "${alarmDescription}",`;
+    campaignContent += `\n    description: "${alarmDescription}",`;
   }
 
-  campaignContent += `
-  },`;
+  campaignContent += `\n  },`;
 
-  // Add other settings
-  campaignContent += `
-  isArchive: ${isArchive},
-  optimizeImg: ${optimizeImages},`;
+  campaignContent += `\n  isArchive: ${isArchive},\n  optimizeImg: ${optimizeImages},`;
 
-  // Add figma URL if provided
   if (figmaURL) {
-    campaignContent += `
-  figmaUrl: "${figmaURL}",`;
+    campaignContent += `\n  figmaUrl: "${figmaURL}",`;
   }
 
-  // Determine CSS type based on family version
-  const cssType = familyVersion === 0 ? 'types.CSS.NS' : 'types.CSS.NS_OLD'; // NEW = 0, OLD = 1
+  if (formData.accent) {
+    campaignContent += `\n  accent: "${formData.accent}",`;
+  }
+
+  const cssType = familyVersion === 0 ? 'types.CSS.NS' : 'types.CSS.NS_OLD';
   const cssTypeLP = familyVersion === 0 ? 'types.CSS.LP' : 'types.CSS.LP_OLD';
 
-  // Build template components array
-  let templateComponents = [];
+  let templateComponents = [
+    'TopImageTitle_data: TopImageTitle_data',
+    'categories: categories',
+    'timer: timer',
+    'full_img_width: false',
+    'white_line: false',
+    'under_intro_line: false',
+  ];
 
-  // Always include TopImageTitle and categories
-  templateComponents.push('TopImageTitle_data: TopImageTitle_data');
-  templateComponents.push('categories: categories');
-  templateComponents.push('timer: timer');
-  templateComponents.push('full_img_width: false');
-  templateComponents.push('white_line: false');
-  templateComponents.push('under_intro_line: false');
-
-  // Add Inside component if enabled
   if (insideEnabled) {
     templateComponents.push(`Inside: {
         color: "${insideColor}",
         backgroundColor: "${insideBackground}",
         type: "${insideType}",${
           insideImage
-            ? `
-        image: "${insideImage}",${
-          insideTranslateImage
-            ? `
-        translateImage: true,`
-            : ''
-        }`
+            ? `\n        image: "${insideImage}",${insideTranslateImage ? '\n        translateImage: true,' : ''}`
             : ''
         }
       }`);
   }
 
-  // Add Intro component if enabled
   if (introEnabled) {
     templateComponents.push(`intro: {
         color: "${introColor}",
@@ -347,7 +811,6 @@ export default new entities.Campaign({
       }`);
   }
 
-  // Add OfferPart component if enabled
   if (offerPartEnabled) {
     templateComponents.push(`OfferPart: {
         color: "${offerPartColor}",
@@ -357,13 +820,12 @@ export default new entities.Campaign({
       }`);
   }
 
-  // Start templates array with the new structure
   campaignContent += `
   templates: [
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.Thursday, // User should change this
+      template: templates.Thursday,
       css: ${cssType},
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "${background}",
@@ -376,7 +838,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.Thursday, // User should change this
+      template: templates.Thursday,
       css: ${cssTypeLP},
       background: "${background}",
       color: "${color}",
@@ -391,40 +853,19 @@ export default new entities.Campaign({
   return campaignContent;
 }
 
-/**
- * Saves the campaign file to the campaigns directory via API
- * @param {string} filename - The filename
- * @param {string} content - The file content
- * @param {string} userScope - User scope for directory
- * @returns {Promise<string>} - Save path or error message
- */
 export async function saveCampaignFile(filename, content, userScope) {
   try {
     const response = await fetch('/api/save-campaign', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        filename,
-        content,
-        userScope,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename, content, userScope }),
     });
 
     const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.error || 'Failed to save campaign file');
-    }
-
-    console.log('Campaign file saved:', result.path);
+    if (!response.ok) throw new Error(result.error || 'Failed to save campaign file');
     return result.path;
   } catch (error) {
-    console.error('Error saving campaign file:', error);
-
-    // Fallback to browser download if API fails
-    console.log('Falling back to browser download...');
+    // Fallback: browser download
     const blob = new Blob([content], { type: 'application/javascript' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -434,24 +875,112 @@ export async function saveCampaignFile(filename, content, userScope) {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-
     return `Downloaded: ${filename}`;
   }
 }
 
-/**
- * Complete function to create and save campaign file
- * @param {Object} formData - Form data object
- * @param {string} userScope - User scope (will use VITE_SCOPE if not provided)
- * @returns {Promise<{filename: string, path: string}>}
- */
 export async function createAndSaveCampaignFile(formData, userScope = null) {
-  const {
-    filename,
-    content,
-    userScope: resolvedUserScope,
-  } = await createCampaignFile(formData, userScope);
+  const { filename, content, userScope: resolvedUserScope } = await createCampaignFile(formData, userScope);
   const savePath = await saveCampaignFile(filename, content, resolvedUserScope);
-
   return { filename, path: savePath };
+}
+
+export async function updateCampaignMetadata(formData, filename, originalCampaign = null) {
+  const userScope = __SCOPE__ || import.meta.env?.VITE_SCOPE;
+  if (!userScope) throw new Error('User scope (VITE_SCOPE) is not configured.');
+
+  const readResponse = await fetch(
+    `/api/read-campaign?scope=${encodeURIComponent(userScope)}&filename=${encodeURIComponent(filename)}`
+  );
+  if (!readResponse.ok) throw new Error('Could not read campaign file.');
+
+  const { content } = await readResponse.json();
+
+  const formattedDate = new Date(formData.campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
+
+  // Replace only inside the Campaign constructor arguments (before `templates:`)
+  const startMarker = 'new entities.Campaign({';
+  const endMarker = 'templates:';
+  const startIdx = content.indexOf(startMarker);
+  const endIdx = startIdx !== -1 ? content.indexOf(endMarker, startIdx) : -1;
+
+  let updated = content;
+
+  if (startIdx !== -1 && endIdx !== -1) {
+    const before = content.slice(0, startIdx);
+    let middle = content.slice(startIdx, endIdx);
+    const after = content.slice(endIdx);
+
+    const replaceStr = (src, key, newVal) =>
+      src.replace(new RegExp(`(\\b${key}\\s*:\\s*)(['"])[^'"]*\\2`), `$1$2${newVal}$2`);
+
+    middle = replaceStr(middle, 'name', formData.campaignName.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"'));
+    middle = replaceStr(middle, 'date', formattedDate);
+    middle = replaceStr(middle, 'startId', formData.newsletterId);
+    if (formData.issueCardId) middle = replaceStr(middle, 'issueCardId', formData.issueCardId);
+    if (formData.lpId) middle = replaceStr(middle, 'lpId', formData.lpId);
+    if (formData.figmaURL) middle = replaceStr(middle, 'figmaUrl', formData.figmaURL);
+
+    middle = middle.replace(/(\bisArchive\s*:\s*)(true|false)/, `$1${!!formData.isArchive}`);
+    middle = middle.replace(/(\boptimizeImg\s*:\s*)(true|false)/, `$1${!!formData.optimizeImages}`);
+
+    if (/\bsoon_banners\s*:/.test(middle)) {
+      middle = middle.replace(/(\bsoon_banners\s*:\s*)(true|false)/, `$1${!!formData.soonBanners}`);
+    } else if (formData.soonBanners) {
+      middle = middle.replace(/(\boptimizeImg\s*:[^\n]+)/, `$1\n  soon_banners: true,`);
+    }
+
+    if (formData.accent) {
+      if (/\baccent\s*:/.test(middle)) {
+        middle = replaceStr(middle, 'accent', formData.accent);
+      } else {
+        // Insert after optimizeImg line
+        middle = middle.replace(
+          /(\boptimizeImg\s*:[^\n]+)/,
+          `$1\n  accent: "${formData.accent}",`
+        );
+      }
+    }
+
+    // alarm.isActive is nested — use full-content replacement bounded to alarm block
+    updated = (before + middle + after).replace(
+      /(alarm\s*:\s*\{[\s\S]*?isActive\s*:\s*)(true|false)/,
+      `$1${!!formData.alarmEnabled}`
+    );
+  }
+
+  // Replace translation sheet name (anywhere in the file)
+  if (formData.translationsSheet) {
+    updated = updated.replace(
+      /(const campaignTranslationsSheet\s*=\s*)(['"])[^'"]*\2/,
+      `$1$2${formData.translationsSheet.replace(/'/g, "\\'").replace(/"/g, '\\"')}$2`
+    );
+  }
+
+  // Replace date-derived patterns throughout the entire file when date changed
+  if (originalCampaign?.date && formData.campaignDate) {
+    const oldParts = originalCampaign.date.split('.');
+    if (oldParts.length === 3) {
+      const [oldDD, oldMM, oldYYYY] = oldParts;
+      const oldYY = oldYYYY.slice(2);
+      const [newYYYY, newMM, newDD] = formData.campaignDate.split('-');
+      const newYY = newYYYY.slice(2);
+
+      const oldYYYYMMDD = `${oldYYYY}${oldMM}${oldDD}`;
+      const newYYYYMMDD = `${newYYYY}${newMM}${newDD}`;
+      const oldLpDate = `${oldYY}-${oldMM}-${oldDD}`;
+      const newLpDate = `${newYY}-${newMM}-${newDD}`;
+      const oldShortDate = `${oldDD}.${oldMM}.${oldYY}`;
+      const newShortDate = `${newDD}.${newMM}.${newYY}`;
+
+      if (oldYYYYMMDD !== newYYYYMMDD) {
+        updated = updated.split(oldYYYYMMDD).join(newYYYYMMDD);
+        updated = updated.split(oldLpDate).join(newLpDate);
+        updated = updated.split(oldShortDate).join(newShortDate);
+      }
+    }
+  }
+
+  await saveCampaignFile(filename, updated, userScope);
+  return filename;
 }

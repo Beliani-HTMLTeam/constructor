@@ -42,7 +42,7 @@ const Monday = async ({
   const TopImageElement = TopImageHandler({ links });
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug });
 
   const introPosition = intro?.position ?? 'afterTopImage';
   const safeCategories = Array.isArray(categories) ? categories : [];
@@ -101,7 +101,7 @@ const Monday = async ({
 
     </table>
 
-    ${soonEndingBanner ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals }) : ''}
+    ${soonEndingBanner ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
 
     ${FooterElement}
   `;

@@ -153,3 +153,55 @@ body {
   opacity: 1;
   visibility: visible;
 }
+
+.shop-override-badge {
+  position: absolute;
+  top: 50%;
+  right: 38px;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  opacity: 0.35;
+  pointer-events: none;
+  display: none;
+}
+
+[data-theme="dark"] .shop-override-badge {
+  filter: invert(1) opacity(0.85);
+  opacity: 1;
+}
+
+[data-theme="dark"] {
+  background: #13131f;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .container #panel button,
+[data-theme="dark"] .container #panel select,
+[data-theme="dark"] .select-select {
+  background: #1e1e32;
+  color: rgba(220, 220, 220, 0.9);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 36px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .select-arrow {
+  border-top-color: #999;
+}
+
+[data-theme="dark"] .svg-icon {
+  filter: invert(1) opacity(0.85);
+}
+
+[data-theme="dark"] #app {
+  background: #ffffff;
+}
+
+@keyframes theme-icon-in {
+  from { opacity: 0; transform: rotate(-30deg) scale(0.5); }
+  to   { opacity: 1; transform: rotate(0deg)   scale(1);   }
+}
+
+#dark-mode-toggle .svg-icon.icon-animate {
+  animation: theme-icon-in 0.25s ease-out forwards;
+}

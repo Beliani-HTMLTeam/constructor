@@ -16,6 +16,7 @@ export class Campaign {
   white_line;
   under_intro_line;
   soon_banners;
+  accent;
   constructor({
     date,
     data,
@@ -35,6 +36,7 @@ export class Campaign {
     under_intro_line,
     soon_banners,
     version = 'new',
+    accent = null,
   }) {
     if (!Array.isArray(templates)) {
       throw new Error('templates property should be array');
@@ -70,7 +72,7 @@ export class Campaign {
       description: alarm?.description || 'Remember about: ',
     };
     this.data = data || null;
-    this.optimizeImg = optimizeImg || true;
+    this.optimizeImg = optimizeImg ?? true;
     this.isArchive = isArchive || false;
     this.products = products || null;
     this.figmaUrl = figmaUrl || null;
@@ -79,5 +81,6 @@ export class Campaign {
     this.white_line = white_line || false;
     this.under_intro_line = under_intro_line || false;
     this.soon_banners = soon_banners || false;
+    this.accent = accent || null;
   }
 }

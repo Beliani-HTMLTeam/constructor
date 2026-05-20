@@ -1,8 +1,4 @@
 
-// todo: split into separate files: staticTranslations.js, dynamicTranslations.js, translationCache.js, etc.
-
-// todo: static translations should be backend-cached and only fetched once per session, dynamic translations are fetched on demand and cached in frontend memory
-
 import { appConfig as c } from '@utils/config.js';
 import { toast } from 'sonner';
 import {
@@ -32,14 +28,7 @@ export default async function initStaticTranslations({ force = false } = {}) {
   // Check if static translations are already loaded
   const isAlreadyLoaded = Object.values(staticTranslations).some((sheet) => Object.keys(sheet).length > 0);
 
-  console.log('Checking if static translations are loaded:', isAlreadyLoaded);
-  console.log(
-    'Current staticTranslations state:',
-    Object.keys(staticTranslations).map((key) => ({ key, length: Object.keys(staticTranslations[key]).length }))
-  );
-
   if (isAlreadyLoaded && !force) {
-    console.log('Static translations already loaded, skipping initialization');
     return;
   }
 
@@ -47,8 +36,6 @@ export default async function initStaticTranslations({ force = false } = {}) {
     // clear existing translations before forcing a reload
     clearStatic();
   }
-
-  console.log('Initializing static translations...');
 
   const loadPromise = Promise.all(
     Object.keys(staticTranslations).map(async (key, index) => {
@@ -65,18 +52,15 @@ export default async function initStaticTranslations({ force = false } = {}) {
   // Add minimum delay to show loading toast
   const delayedPromise = Promise.all([loadPromise, new Promise((resolve) => setTimeout(resolve, 1000))]);
 
-  await toast.promise(delayedPromise, {
+  toast.promise(delayedPromise, {
     loading: 'Initializing translations...',
     success: () => {
-      console.log('Static translations initialized.');
-      console.log('Complete staticTranslations object:', staticTranslations);
       return 'Translations successfully loaded';
     },
     error: 'Failed to load translations',
   });
 
-  // check if translations are present:
-  // console.log(staticTranslations);
+  await delayedPromise;
 }
 
 // Register this module's loader in cache so external callers can trigger refresh
@@ -84,6 +68,8 @@ registerStaticLoader(async () => await initStaticTranslations({ force: true }));
 
 // Immediately warm up static translations on module load (non-forced)
 await initStaticTranslations();
+window.__appTranslationsReady = true;
+document.dispatchEvent(new CustomEvent('app:translations-ready'));
 
 // Helpers to manage frontend in-memory cache for static translations
 export function isStaticTranslationsLoaded() {
@@ -97,8 +83,6 @@ export function clearStaticTranslations() {
 export async function refreshStaticTranslations() {
   await cacheRefreshStatic();
 }
-
-// todo: make alternative functions to get translations directly from Google Sheets API
 
 async function getStaticTranslation({ sheet }) {
   const url = `${c.api_url}static/${sheet}/`;

@@ -17,15 +17,13 @@ export function optimizeHtmlImages(inputHtml, getState) {
   imgs.forEach((img) => {
     const src = img.getAttribute('src');
 
-    // ! this prevents .gif files from being converted
-    if (/\.gif(\?|$)/i.test(src)) return;
+    if (img.hasAttribute('data-no-webp')) return;
 
     const newSrc = swapImage({ format: '.webp', src });
     if (newSrc && newSrc !== src) img.setAttribute('src', newSrc);
   });
 
-    const result = container.innerHTML;
+  const result = container.innerHTML;
   container.innerHTML = '';
-  
   return result;
 }

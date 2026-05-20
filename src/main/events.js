@@ -270,6 +270,12 @@ function selectCampaignHandler(ev, campaigns) {
     issueCardId: selectedCampaign.issueCardId,
     figmaUrl: selectedCampaign.figmaUrl,
     version: selectedCampaign.version || 'new',
+    isArchive: selectedCampaign.isArchive,
+    optimizeImg: selectedCampaign.optimizeImg,
+    alarm: selectedCampaign.alarm,
+    accent: selectedCampaign.accent,
+    soon_banners: selectedCampaign.soon_banners,
+    _filename: selectedCampaign._filename,
   });
 
   return { selectedCampaign, templates: selectedCampaign.templates };

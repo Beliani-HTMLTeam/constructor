@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/index.css" />
     <link rel="stylesheet" href="/responsive.css" />
     <link rel="stylesheet" href="/form.css" />
+    <script>
+      /* applied before first paint to avoid flash of wrong theme */
+      if (localStorage.getItem('constructor-theme') === 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark');
+    </script>
     <title>Constructor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,8 +45,7 @@
           <div id="action_buttons" class="group">
             <button id="new_campaign">
               <img src="/icons/new-campaign.svg" class="svg-icon" />
-
-              New Campaign
+              <span>New Campaign</span>
             </button>
           </div>
 
@@ -79,6 +83,7 @@
               <span style="width: 25px; height: 24px; line-height: 24px; text-align: center">👷🏿</span>
               Render Template
             </button> -->
+
           </div>
 
           <!--                                                  -->
@@ -126,6 +131,7 @@
 
             Copy Template
           </button>
+
         </div>
 
         <!--                                                  -->
@@ -152,6 +158,11 @@
           <button class="redirectCheck" style="width: 100%; display: none">
             <span style="width: 100%">Run redirect check</span>
             <img src="/icons/redirect.svg" class="svg-icon" />
+          </button>
+
+          <button id="dark-mode-toggle">
+            <img src="/icons/darkmode.svg" class="svg-icon" />
+            <span>Dark Mode</span>
           </button>
         </div>
       </div>
@@ -204,6 +215,8 @@
 
     <script type="module" src="src/app.js"></script>
     <script src="/hamburger.js"></script>
+    <script src="/dark-mode.js"></script>
+    <script src="/shortcuts.js"></script>
     <script type="module" src="/form/prepareCreatorForm.js"></script>
   </body>
 </html>

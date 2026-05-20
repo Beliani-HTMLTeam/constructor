@@ -1,5 +1,5 @@
 import { SoonEndingBanner } from "@/templates/Thursday/components/SoonEndingBanner";
-const campaignTranslationsSheet = '01.06.26 - Beliani Birthday Start';
+const campaignTranslationsSheet = '15.06.26 - Beliani Birthday Third';
 
 const tableQueries = [
   {
@@ -8,14 +8,14 @@ const tableQueries = [
   },
   {
     name: 'offer_date',
-    tableRange: '21',
+    tableRange: '16',
   },
   {
     name: 'intro',
-    tableRange: '21',
+    tableRange: '16',
   },
   {
-    tableRange: '21',
+    tableRange: '16',
     name: 'paragraphs',
   },
   {
@@ -25,41 +25,37 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-06-01' }),
-  TopImageTitle_src: translateImage({ value: '20260601_01.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-06-05' }),
+  Banner_1_Image: translateImage({ value: '20260605b.png' }),
+  Banner_1_overrides: { dk: translateLink({ value: 'content/lp26-06-04' }) },
+  Banner_1_Image_overrides: { dk: translateImage({ value: '20260604b.png' }) },
 
-  Banner_1: translateLink({ value: 'content/lp26-05-21' }),
-  Banner_1_Image: translateImage({ value: '20260521b.png' }),
-
-  Banner_2: translateLink({ value: 'content/lp26-05-20' }),
-  Banner_2_Image: translateImage({ value: '20260520b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-06-04' }),
+  Banner_2_Image: translateImage({ value: '20260604b.png' }),
+  Banner_2_overrides: { dk: translateLink({ value: 'content/lp26-06-03' }) },
+  Banner_2_Image_overrides: { dk: translateImage({ value: '20260603b.png' }) },
 };
 
 const TopImageTitle_data = {
-  color: '#fff',
-  backgroundColor: '#750000',
+  color: '#000000',
+  backgroundColor: '#FFCCB7',
   type: 'singleLineBold',
 };
 
 const categories = [
   {
-    src:  translateImage({ value: '20260601_gif.gif' }),
-    href: translateLink({ value: 'content/lp26-06-01' }),
+    src:  translateImage({ value: '20260615_gif.gif' }),
+    href: translateLink({ value: 'content/lp26-06-15' }),
     paddingTop: 0,
-    color: '#fff',
+    color: '#000000',
     paragraph: {
       show: true,
       align: 'center',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
-      textOverrides: {
-        de:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
-        at:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
-        chde: 'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
-      },
     },
     cta: { href: 'https://www.beliani.ch/' },
-    background: '#750000',
+    background: '#FFCCB7',
     spaceAfter: '0',
     title: {
       show: false
@@ -68,12 +64,11 @@ const categories = [
 
   // main
   {
-    name: 'Outdoor Furniture',
-    nameOverrides: { fi: 'Ulkokalusteet', nl: 'Tuinmeubels', benl: 'Tuinmeubels', uk: 'Outdoor', ro: 'Exterior', pl: 'Meble ogrodowe' },
-    src:  translateImage({ value: '20260601_Cat01.png' }),
-    href: 'https://www.beliani.ch/outdoor-furniture/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Lounge Sets',
+    src:  translateImage({ value: '20260615_Cat01.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/lounge-sets/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '45',
@@ -81,7 +76,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -95,11 +90,11 @@ const categories = [
     },
   },
   {
-    name: 'Sofas',
-    src:  translateImage({ value: '20260601_Cat02.png' }),
-    href: 'https://www.beliani.ch/sofas/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Dining Sets',
+    src:  translateImage({ value: '20260615_Cat02.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -107,7 +102,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -121,11 +116,11 @@ const categories = [
     },
   },
   {
-    name: 'Beds',
-    src:  translateImage({ value: '20260601_Cat03.png' }),
-    href: 'https://www.beliani.ch/beds/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Balcony Furniture',
+    src:  translateImage({ value: '20260615_Cat03.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -133,7 +128,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -147,11 +142,11 @@ const categories = [
     },
   },
   {
-    name: 'Armchairs',
-    src:  translateImage({ value: '20260601_Cat04.png' }),
-    href: 'https://www.beliani.ch/armchairs/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Sun Loungers',
+    src:  translateImage({ value: '20260615_Cat04.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/sun-loungers',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -159,7 +154,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -173,11 +168,11 @@ const categories = [
     },
   },
   {
-    name: 'Chairs',
-    src:  translateImage({ value: '20260601_Cat05.png' }),
-    href: 'https://www.beliani.ch/chairs/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Benches',
+    src:  translateImage({ value: '20260615_Cat05.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/garden-benches',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -185,7 +180,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -199,11 +194,11 @@ const categories = [
     },
   },
   {
-    name: 'Tables',
-    src:  translateImage({ value: '20260601_Cat06.png' }),
-    href: 'https://www.beliani.ch/tables/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Swings',
+    src:  translateImage({ value: '20260615_Cat06.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/swings/ ',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -211,7 +206,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -225,12 +220,11 @@ const categories = [
     },
   },
   {
-    name: 'Storage',
-    nameOverrides: { fi: 'Säilytys', pt: 'Arrumação' },
-    src:  translateImage({ value: '20260601_Cat07.png' }),
-    href: 'https://www.beliani.ch/storage/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Outdoor Kitchen',
+    src:  translateImage({ value: '20260615_Cat07.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -238,7 +232,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -252,12 +246,11 @@ const categories = [
     },
   },
   {
-    name: 'Kids',
-    nameOverrides: { pt: 'Quarto de crianças', se: 'Barnrum' },
-    src:  translateImage({ value: '20260601_Cat08.png' }),
-    href: 'https://www.beliani.ch/children-room/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Storage',
+    src:  translateImage({ value: '20260615_Cat08.png' }),
+    href: 'https://www.beliani.ch/outdoor-furniture/storage-boxes/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -265,7 +258,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -279,11 +272,11 @@ const categories = [
     },
   },
   {
-    name: 'Textiles',
-    src:  translateImage({ value: '20260601_Cat09.png' }),
-    href: 'https://www.beliani.ch/textiles/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Parasols',
+    src:  translateImage({ value: '20260615_Cat09.png' }),
+    href: 'https://www.beliani.ch/garden-furniture/parasols/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -291,7 +284,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -305,11 +298,11 @@ const categories = [
     },
   },
   {
-    name: 'Lighting',
-    src:  translateImage({ value: '20260601_Cat10.png' }),
-    href: 'https://www.beliani.ch/lighting/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Plant Pots',
+    src:  translateImage({ value: '20260615_Cat10.png' }),
+    href: 'https://www.beliani.ch/garden-accessories/pots-and-planters/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -317,7 +310,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -331,12 +324,12 @@ const categories = [
     },
   },
   {
-    name: 'Bathtubs',
+    name: 'Fire Pits',
     nameOverrides: { hu: 'Kádak és pezsgőfürdők', pt: 'Banheiras e hidromassagem' },
-    src:  translateImage({ value: '20260601_Cat11.png' }),
-    href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-    background: '#750000',
-    color: '#fff',
+    src:  translateImage({ value: '20260615_Cat11.png' }),
+    href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -344,34 +337,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
-    },
-    title: {
-      show: true,
-      spaceAfter: 'newsletterBottom35px',
-    },
-    paragraph: {
-      show: false,
-      align: 'left',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
-    },
-  },
-  {
-    name: 'Desks',
-    nameOverrides: { hu: 'Irodai asztalok' },
-    src:  translateImage({ value: '20260601_Cat12.png' }),
-    href: 'https://www.beliani.ch/desks-eng/',
-    background: '#750000',
-    color: '#fff',
-    type: 'grid',
-    cta: true,
-    paddingTop: '35',
-    spaceAfter: 'newsletterBottom35px',
-    line: {
-      show: true,
-      insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -386,10 +352,10 @@ const categories = [
   },
   {
     name: 'Rugs',
-    src:  translateImage({ value: '20260601_Cat13.png' }),
-    href: 'https://www.beliani.ch/rugs/',
-    background: '#750000',
-    color: '#fff',
+    src:  translateImage({ value: '20260615_Cat12.png' }),
+    href: 'https://www.beliani.ch/garden-furniture/garden-rugs/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -397,7 +363,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -411,12 +377,37 @@ const categories = [
     },
   },
   {
-    name: 'Accessories',
-    nameOverrides: { hu: 'Kiegészítők' },
-    src:  translateImage({ value: '20260601_Cat14.png' }),
-    href: 'https://www.beliani.ch/home-accessories/',
-    background: '#750000',
-    color: '#fff',
+    name: 'Textiles',
+    src:  translateImage({ value: '20260615_Cat13.png' }),
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-textiles/',
+    background: '#FFCCB7',
+    color: '#000000',
+    type: 'grid',
+    cta: true,
+    paddingTop: '35',
+    spaceAfter: 'newsletterBottom35px',
+    line: {
+      show: true,
+      insideContainer: true,
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
+    },
+    title: {
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: false,
+      align: 'left',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+  },
+  {
+    name: 'Patio Heaters',
+    src:  translateImage({ value: '20260615_Cat14.png' }),
+    href: 'https://www.beliani.ch/garden-accessories/patio-heaters/',
+    background: '#FFCCB7',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -435,22 +426,22 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: '43758',
-  name: 'PEAK Birthday start',
-  date: '01.06.2026',
-  issueCardId: '482698',
-  lpId: '30173',
+  startId: '44240',
+  name: 'PEAK Birthday third',
+  date: '15.06.2026',
+  issueCardId: '482734',
+  lpId: '30432',
   alarm: {
     isActive: false,
   },
   isArchive: false,
-  accent: '#ff4242',
+  accent: '#f5b2b2',
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/fxr4hBIlBDwZfzmCM4l8GI/Newsletter-Beliani-Birthday-Start---Monday-2026.06.01--Copy-?node-id=0-1&t=KWEIe4G753K8HxiT-1',
   templates: [
     {
-      background: '#750000',
-      color: '#fff',
+      background: '#FFCCB7',
+      color: '#000000',
       template: templates.Monday, 
       css: types.CSS.NS,
       name: 'Newsletter',
@@ -465,8 +456,8 @@ export default new entities.Campaign({
       soonEndingBanner: true,
     },
     {
-      background: '#750000',
-      color: '#fff',
+      background: '#FFCCB7',
+      color: '#000000',
       template: templates.Monday,
       css: types.CSS.LP,
       name: 'Landing',

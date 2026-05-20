@@ -7,8 +7,11 @@ import {
   runRedirectCheck
 } from '@/main/events.js';
 import { generateLpLinks } from '@/helpers/generateLpLinks.js';
-import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
+import { openCreateCampaignModal, openEditCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts.js';
+import { fetchTranslations } from '@/api/fetchTranslations.js';
+import { setQueries, getQueries } from '@/api/translations.js';
+import { renderTemplateHtmlForCountry } from '@/main/rendering/templateRenderer.js';
 
 import { toast } from 'sonner';
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
@@ -180,24 +183,84 @@ export function setupOpenLPHandler(elements, getState) {
   });
 }
 
-// Setup new campaign creation handler
-export function setupNewCampaignHandler(elements, campaigns) {
-  const { newCampaign, selectCampaigns } = elements;
+export function setupCopyAllTemplatesHandler(elements, getState, setState) {
+  const { copyAllTemplates } = elements;
+
+  copyAllTemplates?.addEventListener('click', async () => {
+    const templateToRender = getState('template');
+    const selectedCampaign = getState('selectedCampaign');
+    const ids = getState('ids');
+
+    if (!templateToRender) return toast.error('No template selected.');
+    if (!selectedCampaign) return toast.error('No campaign selected.');
+    if (!ids || Object.keys(ids).length === 0) return toast.error('No IDs found.');
+
+    const countries = Object.keys(ids);
+    const savedCountry = getState('country');
+
+    const result = {
+      type: templateToRender.type,
+      campaign: selectedCampaign.name,
+      date: selectedCampaign.date,
+      templates: {},
+    };
+
+    const toastId = toast.loading(`Rendering 0 / ${countries.length} templates...`);
+
+    for (let i = 0; i < countries.length; i++) {
+      const country = countries[i];
+      toast.loading(`Rendering ${i + 1} / ${countries.length}: ${country}...`, { id: toastId });
+
+      setState('country', country);
+
+      try {
+        const campaignId = selectedCampaign.startId;
+        const existingQueries = getQueries(campaignId, country);
+        let queries;
+
+        if (Object.keys(existingQueries).length > 0) {
+          queries = existingQueries;
+        } else if (templateToRender.tableQueries?.length > 0) {
+          if (selectedCampaign.data) {
+            queries = {};
+            for (const q of templateToRender.tableQueries) {
+              queries[q.name] = q.fallback;
+            }
+          } else {
+            const translationsResult = await fetchTranslations({
+              tableQueries: templateToRender.tableQueries,
+              tableName: templateToRender.translationsSpreadsheet,
+            });
+            queries = {};
+            for (const t of translationsResult) {
+              queries[t.name] = t.data;
+            }
+          }
+          setQueries(campaignId, country, queries);
+        } else {
+          queries = {};
+        }
+
+        const html = await renderTemplateHtmlForCountry({ templateToRender, selectedCampaign, ids, queries });
+        result.templates[country] = optimizeHtmlImages(html, getState);
+      } catch (e) {
+        console.error(`Error rendering ${country}:`, e);
+        result.templates[country] = `<!-- Error rendering ${country}: ${e.message} -->`;
+      }
+    }
+
+    setState('country', savedCountry);
+
+    await navigator.clipboard.writeText(JSON.stringify(result));
+    toast.success(`All ${countries.length} ${templateToRender.type} templates copied!`, { id: toastId });
+  });
+}
+
+export function setupNewCampaignHandler(elements, campaigns, getState) {
+  const { newCampaign } = elements;
 
   newCampaign?.addEventListener('click', () => {
-    openCreateCampaignModal((campaign) => {
-      // Basic validation
-      if (!campaign.startId) {
-        toast.error('Campaign missing newsletter ID!');
-        return false;
-      }
-
-      if (!campaign.name) {
-        toast.error('Campaign missing name!');
-        return false;
-      }
-
-      return true; // success — allow modal to close
-    });
+    const selectedCampaign = getState('selectedCampaign');
+    openCreateCampaignModal(selectedCampaign?.name ? selectedCampaign : null);
   });
 }

@@ -48,6 +48,47 @@ const createInput = (field, hidden) => {
     input.type = 'text';
     input.pattern = '#[0-9A-Fa-f]{6}';
     input.maxLength = 7;
+
+    const swatch = document.createElement('input');
+    swatch.type = 'color';
+    swatch.tabIndex = -1;
+    swatch.style.cssText =
+      'width:30px;height:30px;padding:2px;border:1px solid #ccc;border-radius:4px;cursor:pointer;flex-shrink:0;';
+    if (field.disabled) {
+      swatch.disabled = true;
+      swatch.style.opacity = '0.4';
+      swatch.style.cursor = 'default';
+    }
+    if (field.placeholder && /^#[0-9A-Fa-f]{6}$/.test(field.placeholder)) {
+      swatch.value = field.placeholder;
+    }
+
+    swatch.addEventListener('input', () => {
+      input.value = swatch.value.toUpperCase();
+    });
+    input.addEventListener('input', () => {
+      if (/^#[0-9A-Fa-f]{6}$/i.test(input.value)) swatch.value = input.value;
+    });
+
+    // Mirror .disabled assignments (from pairToggles) onto the swatch
+    const proto = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'disabled');
+    Object.defineProperty(input, 'disabled', {
+      get: () => proto.get.call(input),
+      set: (val) => {
+        proto.set.call(input, val);
+        swatch.disabled = val;
+        swatch.style.opacity = val ? '0.4' : '';
+        swatch.style.cursor = val ? 'default' : 'pointer';
+      },
+    });
+
+    input.style.cssText = 'width:90px;';
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;flex-direction:row;align-items:center;gap:6px;';
+    wrapper.appendChild(swatch);
+    wrapper.appendChild(input);
+    return wrapper;
   }
   return input;
 };

@@ -46,7 +46,7 @@ const categories = [
   {
     type        : 'deal',
     copyCode    : true,   // tooltip above the icon
-    copyCodeWeb : false,   // fixed notification on the right side of the screen (takes priority)
+    copyCodeWeb : true,   // fixed notification on the right side of the screen (takes priority)
     background: '#FFCBBF',
     color     : '#000000',
     paddingTop: '0',

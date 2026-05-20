@@ -6,6 +6,9 @@ import './toast.jsx'; // Initialize React and Toaster
 import { toast } from 'sonner';
 
 import SHOPS from '@config/shops.js';
+import { lookupProductName } from '@/helpers/productLookup.js';
+
+window.__lookupProductName = lookupProductName;
 
 export const root = document.querySelector('#app-content');
 

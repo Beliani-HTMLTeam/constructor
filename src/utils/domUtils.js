@@ -21,6 +21,7 @@ export function getDOMElements() {
     newProducts: document.querySelector('#new_products'),
     newCampaign: document.querySelector('#new_campaign'),
     copyTemplate: document.querySelector('.copyTemplate'),
+    copyAllTemplates: document.querySelector('.copyAllTemplates'),
     openCampaign: document.querySelector('.openCampaign'),
     openIssue: document.querySelector('.openIssue'),
     openFigma: document.querySelector('.figmaCard'),
@@ -33,8 +34,6 @@ export function getDOMElements() {
 
     selectPurge,
     selectPurgeWrapper: selectPurge?.parentElement,
-    // Login button is handled separately in setupEventListeners
-    // login: document.querySelector('#login'),
   };
 }
 
@@ -51,11 +50,9 @@ export function createSelectOption(value, text, isDefault = false) {
 export function populateSelect(selectElement, items, defaultText = 'Select option') {
   selectElement.innerHTML = '';
 
-  // Add default option
   const defaultOption = createSelectOption('default', defaultText, true);
   selectElement.appendChild(defaultOption);
 
-  // Add items
   items.forEach((item) => {
     const option = createSelectOption(item.value, item.text);
     selectElement.appendChild(option);

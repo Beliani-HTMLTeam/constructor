@@ -1,15 +1,32 @@
+function accentForTheme(hex, dark) {
+  if (!dark) return hex;
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+  const l = (max + min) / 2;
+  const s = d === 0 ? 0 : d / (l > 0.5 ? 2 - max - min : max + min);
+  let h = 0;
+  if (d !== 0) {
+    if (max === r) h = ((g - b) / d % 6) / 6;
+    else if (max === g) h = ((b - r) / d + 2) / 6;
+    else h = ((r - g) / d + 4) / 6;
+  }
+  if (h < 0) h += 1;
+  return `hsl(${Math.round(h * 360)},${Math.round(s * 60)}%,25%)`;
+}
+
 export function initCampaigns(campaigns, config) {
   const now = new Date();
   const campaigns_nodes = [];
   const campaigns_to_alarm = [];
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
 
   for (const campaign of campaigns) {
-    // Handle campaign archive
     if (campaign.isArchive) {
       continue;
     }
 
-    // Handle campaign to alarm
     if ('date' in campaign) {
       const date = new Date(campaign.date);
       const difference = date - now;
@@ -24,6 +41,11 @@ export function initCampaigns(campaigns, config) {
     const option = document.createElement('option');
     option.value = campaign.startId;
     option.textContent = campaign.name + ' - ' + campaign.date;
+    if (campaign.accent) {
+      option.dataset.accent = campaign.accent;
+      option.style.backgroundColor = accentForTheme(campaign.accent, dark);
+      option.style.color = dark ? 'rgba(220,220,220,0.9)' : '';
+    }
     campaigns_nodes.push(option);
   }
 

@@ -46,7 +46,17 @@ export function addParams({ links }) {
   if (links && typeof links === 'object') {
     const result = {};
     for (const [key, value] of Object.entries(links)) {
-      if (typeof value === 'string') {
+      if (key.endsWith('_overrides') && value && typeof value === 'object' && !('src' in value) && !('href' in value) && !('query' in value)) {
+        const overrideResult = {};
+        for (const [countryKey, countryVal] of Object.entries(value)) {
+          if (typeof countryVal === 'string') {
+            overrideResult[countryKey] = processLink({ href: countryVal });
+          } else if (countryVal && typeof countryVal === 'object') {
+            overrideResult[countryKey] = processLink(countryVal);
+          }
+        }
+        result[key] = overrideResult;
+      } else if (typeof value === 'string') {
         result[key] = processLink({ href: value });
       } else if (value && typeof value === 'object') {
         result[key] = processLink(value);

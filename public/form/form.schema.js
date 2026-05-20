@@ -23,6 +23,15 @@ const schema = [
             required: true,
           },
         ],
+        [
+          {
+            name: 'translationsSheet',
+            id: 'translationsSheet',
+            type: 'text',
+            label: 'Translations Sheet',
+            placeholder: '2026::18.05.26 - Campaign Name',
+          },
+        ],
       ],
     },
 
@@ -126,6 +135,12 @@ const schema = [
             defaultValue: true,
           },
           {
+            name: 'soonBanners',
+            id: 'soonBanners',
+            type: 'checkbox',
+            label: 'Soon Banners?',
+          },
+          {
             name: 'familyVersion',
             id: 'familyVersion',
             type: 'toggle',
@@ -142,6 +157,15 @@ const schema = [
             type: 'text',
             label: 'Figma URL',
             placeholder: 'https://www.figma.com/design...',
+          },
+        ],
+        [
+          {
+            name: 'accent',
+            id: 'accent',
+            type: 'colorhex',
+            label: 'Accent Color',
+            placeholder: '#f5ba87',
           },
         ],
       ],
@@ -280,17 +304,17 @@ const schema = [
       ],
     },
 
-    // Offer Part Settings
+    // Offer Block Settings
     {
       type: 'group',
-      title: 'Offer Part',
+      title: 'Offer Block',
       rows: [
         [
           {
             name: 'offerPartEnabled',
             id: 'offerPartEnabled',
             type: 'checkbox',
-            label: 'OfferPart Enabled?',
+            label: 'Offer Block Enabled?',
           },
           {
             name: 'offerPartColor',
