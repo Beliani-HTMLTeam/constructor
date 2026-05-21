@@ -31,6 +31,10 @@ export const render = ({
   const copyCodeColor = typeof copyCode === 'object' ? copyCode.color : undefined;
   const copyCodeWebColor = typeof copyCodeWeb === 'object' ? copyCodeWeb.color : undefined;
 
+  const useBubbleForCountry = countrySlug === 'chfr';
+  const effectiveCopyCode = useBubbleForCountry && copyCodeWeb ? copyCodeWeb : copyCode;
+  const effectiveCopyCodeWeb = useBubbleForCountry ? false : copyCodeWeb;
+
   let html = '';
 
   html += renderOfferSection({
@@ -39,8 +43,8 @@ export const render = ({
     links,
     getPhrase,
     showChooseFrom: hasDealProducts,
-    showCopyCode: !!copyCode,
-    showCopyCodeWeb: !!copyCodeWeb,
+    showCopyCode: !!effectiveCopyCode,
+    showCopyCodeWeb: !!effectiveCopyCodeWeb,
     copyCodeColor: copyCodeWebColor ?? copyCodeColor,
     offerTexts,
   });
