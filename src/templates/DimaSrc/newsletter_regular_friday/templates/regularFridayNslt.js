@@ -22,6 +22,8 @@ import { FullWidthTiles } from '../category/fullWidthTiles';
 import { IntroLiquidator } from '../components/IntroLiquidator';
 import { liquidatorConditions } from '../category/liquidatorConditions';
 import { liquidatorItems } from '../category/liquidatorItems';
+import { liquidatorContact } from '../category/liquidatorContact';
+import { FooterLiquidator } from '../components/Footer_Liquidator';
 
 const RegularFridayNslt = async ({
   links,
@@ -62,7 +64,9 @@ const RegularFridayNslt = async ({
   // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
   // prettier-ignore
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
+  const FooterElement = categories_type === 'liquidator'
+    ? FooterLiquidator({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id })
+    : Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
@@ -256,7 +260,7 @@ const RegularFridayNslt = async ({
       : '';
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => {
-      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && category.type !== 'liquidatorItems') {
+      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && categories_type !== 'liquidator') {
         return {
           ...category,
           products: await Promise.all(category.products.map((p) => getProductById(p.id, p.src))),
@@ -380,6 +384,16 @@ const RegularFridayNslt = async ({
             color,
             // insideContainer: true,   // you can enable/disable if needed
           });
+        }
+
+        if (category.type === 'liquidatorContact') {
+          return liquidatorContact({
+            category,
+            buttonHref: category.buttonHref,
+            buttonText: queries.CTA || 'Translation not found',
+            background,
+            color,
+          })
         }
   
         // Fallback for unknown types

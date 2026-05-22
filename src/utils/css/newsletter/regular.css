@@ -38,6 +38,13 @@ img {
   font-family: "Poppins", sans-serif;
 }
 
+.newsletterLiquidatorContactBold {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+}
+
 /* ============================================================ NEWSLETTER START ============================================================*/
 .newsletterMarkTitle {
   font-size: 25px;
@@ -471,6 +478,10 @@ img {
   .newsletterLiquidatorBold {
     font-size: 21px;
     line-height: 33px;
+  }
+
+  .newsletterLiquidatorContactBold {
+    font-size: 14px;
   }
 
   .newsletterTitleOfferPart {

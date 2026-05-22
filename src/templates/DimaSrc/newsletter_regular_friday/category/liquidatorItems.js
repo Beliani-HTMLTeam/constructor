@@ -22,7 +22,7 @@ export const liquidatorItems = ({
 
       // Image TD
       productsInnerHtml += `
-        <td style="width: 25%; vertical-align: top;" width="25%">
+        <td >
           ${item ? `
             <img 
               alt="Item" 
@@ -32,14 +32,6 @@ export const liquidatorItems = ({
             >
           ` : ''}
         </td>`;
-
-      // Add spacer TD (except after the last image)
-      if (i < items.length - 1) {
-        productsInnerHtml += `
-          <td style="width: 10px;" width="10">
-            &nbsp;&nbsp;
-          </td>`;
-      }
     }
 
     productsInnerHtml += `

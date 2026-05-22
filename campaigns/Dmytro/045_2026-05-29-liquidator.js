@@ -17,16 +17,16 @@ const tableQueries = [
     "name": "introParagraph"
   },
   {
-    "tableRange": "22:23",
-    "name": "condition"
-  }
+    "tableRange": "21",
+    "name": "CTA"
+  },
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-05-29' }),
+  TopImageTitle_href: translateLink({ value: ' ' }),
   TopImageTitle_src:  DimasTranslateImage({ value: 'liquidator_01.png', folder: 'liquidator', placeholderPosition: '49' }),
   TopImage_src: getImageUrl('liquidator/TopImage.png', true),
-  TopImage_href: 'https://drive.google.com/drive/folders/1DGaAS71aZM1K6m61Uzla0oRp_ntV6wna'
+  TopImage_href: translateLink({ value: ' ' })
 };
 
 const TopImageTitle_data = {
@@ -58,6 +58,20 @@ const categories = [
      {src: getImageUrl('liquidator/item3.png', true)},
      {src: getImageUrl('liquidator/item4.png', true)},
     ],
+  },
+  {
+    type: 'liquidatorContact',
+    background: '#F6E7E6',
+    color: '#000000',
+    spaceBetween: 'newsletterBottom20px',
+    spaceAfter: 'newsletterBottom80px',
+    interested: [
+      {src: DimasTranslateImage({ value: 'interested_1.png', folder: 'liquidator', placeholderPosition: '49' })},
+      {src: DimasTranslateImage({ value: 'interested_2.png', folder: 'liquidator', placeholderPosition: '49' })},
+      {src: DimasTranslateImage({ value: 'interested_3.png', folder: 'liquidator', placeholderPosition: '49' })},
+    ],
+    buttonSrc: DimasTranslateImage({ value: 'CTA.png', folder: 'liquidator', placeholderPosition: '49' }),
+    buttonHref: 'https://drive.google.com/drive/folders/1DGaAS71aZM1K6m61Uzla0oRp_ntV6wna'
   },
 ];
 
