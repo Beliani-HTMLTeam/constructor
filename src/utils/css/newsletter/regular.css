@@ -31,6 +31,13 @@ img {
   margin-top: 10px;
 }
 
+.newsletterLiquidatorBold {
+  font-size: 28px;
+  line-height: 45px;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+}
+
 /* ============================================================ NEWSLETTER START ============================================================*/
 .newsletterMarkTitle {
   font-size: 25px;
@@ -159,6 +166,11 @@ img {
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
+}
+
+.newsletterMiniContainer {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .timerParagraph {
@@ -456,6 +468,11 @@ img {
     font-size: 28px;
   }
 
+  .newsletterLiquidatorBold {
+    font-size: 21px;
+    line-height: 33px;
+  }
+
   .newsletterTitleOfferPart {
     font-size: 25px;
   }
@@ -463,6 +480,11 @@ img {
   .newsletterContainer {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .newsletterMiniContainer {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .newsletterContainerWithPaddingBottom20px {
