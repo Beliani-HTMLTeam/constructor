@@ -42,7 +42,7 @@ const links = {
 const TopImageTitle_data = {
   color: '#000000',
   backgroundColor: '#FFE6DB',
-  type: 'standard',
+  type: 'up_to',
 };
 
 const timer = {
