@@ -61,15 +61,15 @@ export function Header(sections, options) {
                             <th><a
                                     href="${firstCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
                                         src="${getImageUrl(firstCategory.src, true)}" border="0"
-                                        alt="M&ouml;bel" style="display:block; max-width: 100%;" /></a></th>
+                                        alt="${firstCategory.alt}" style="display:block; max-width: 100%;" /></a></th>
                             <th><a
                                     href="${secondCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
                                         src="${getImageUrl(secondCategory.src, true)}" border="0"
-                                        alt="Accessoires" style="display:block; max-width: 100%;" /></a></th>
+                                        alt="${secondCategory.alt}" style="display:block; max-width: 100%;" /></a></th>
                             <th><a
                                     href="${thirdCategory.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}"><img
                                         src="${getImageUrl(thirdCategory.src, true)}" border="0"
-                                        alt="Garten" style="display:block; max-width: 100%;" /></a></th>
+                                        alt="${thirdCategory.alt}" style="display:block; max-width: 100%;" /></a></th>
                         </tr>
                     </tbody>
                 </table>`,
