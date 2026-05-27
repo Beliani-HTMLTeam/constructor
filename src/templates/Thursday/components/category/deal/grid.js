@@ -149,6 +149,7 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
                                 href: productHref,
                                 src: productSrc,
                                 alt: productName || 'Freebie product',
+                                targetBlank: true,
                               })}
                             </td>
                           </tr>

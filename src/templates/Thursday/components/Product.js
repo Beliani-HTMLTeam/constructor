@@ -35,6 +35,7 @@ const Product = (
       src: typeof product.src === 'object' ? product.src.src : product.src,
       insideTr: true,
       align: imageAlign,
+      targetBlank: true,
     });
   }
 
