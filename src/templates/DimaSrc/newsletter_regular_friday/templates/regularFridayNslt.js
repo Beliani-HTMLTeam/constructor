@@ -24,6 +24,8 @@ import { liquidatorConditions } from '../category/liquidatorConditions';
 import { liquidatorItems } from '../category/liquidatorItems';
 import { liquidatorContact } from '../category/liquidatorContact';
 import { FooterLiquidator } from '../components/Footer_Liquidator';
+import { ImageWithoutLink } from '../components/ImageWithoutLink';
+import { TopImageTitleWithoutLink } from '../components/TopImageTitleWithoutLink';
 
 const RegularFridayNslt = async ({
   links,
@@ -72,9 +74,25 @@ const RegularFridayNslt = async ({
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNowPhrase = getPhrase('Shop now');
 
-  const TopImageTitleElement =
-    // are both href and src available?
-    links?.TopImageTitle_href && links?.TopImageTitle_src
+  let TopImageTitleElement = ''
+
+  if (categories_type === 'liquidator') {
+    TopImageTitleElement = links?.TopImageTitle_src
+      ? TopImageTitleWithoutLink({
+        src: links.TopImageTitle_src,
+        title1: queries.TopImageTitle[0] || 'Translation not found',
+        title2: queries.TopImageTitle[1] || 'Translation not found',
+        title3: queries.TopImageTitle[2] || null,
+        color: TopImageTitle_data.color,
+        backgroundColor: TopImageTitle_data.backgroundColor,
+        type: TopImageTitle_data.type,
+        renderType: type,
+        className: TopImageTitle_data.className,
+      })
+      : ''
+  }
+  else {
+    TopImageTitleElement = links?.TopImageTitle_href && links?.TopImageTitle_src
       ? TopImageTitle({
         href: links.TopImageTitle_href,
         src: links.TopImageTitle_src,
@@ -91,17 +109,29 @@ const RegularFridayNslt = async ({
         renderType: type,
         className: TopImageTitle_data.className,
       })
-      : '';
+      : ''
+  }
 
-  let TopImageElement =
-    links?.TopImage_href && links?.TopImage_src
+  let TopImageElement = ''
+
+  if (categories_type === 'liquidator') {
+    TopImageElement = links?.TopImage_src
+      ? ImageWithoutLink({
+        src: links.TopImage_src,
+        insideTr: true,
+        alt: 'Top Image',
+      })
+      : ''
+  } else {
+    TopImageElement = links?.TopImage_href && links?.TopImage_src
       ? ImageWithLink({
         href: links.TopImage_href,
         src: links.TopImage_src,
         insideTr: true,
         alt: 'Top Image',
       })
-      : '';
+      : ''
+  }
 
   if (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) {
     TopImageElement = VideoLPWithLink({
@@ -366,7 +396,7 @@ const RegularFridayNslt = async ({
             </tr>
     `;
   } else if (categories && categories_type === 'liquidator') {
-  
+
     CategoriesElement = categories
       .map(category => {
         if (category.type === 'liquidatorConditions') {
@@ -375,8 +405,8 @@ const RegularFridayNslt = async ({
             background,
             color
           });
-        } 
-        
+        }
+
         if (category.type === 'liquidatorItems') {
           return liquidatorItems({
             category,
@@ -395,7 +425,7 @@ const RegularFridayNslt = async ({
             color,
           })
         }
-  
+
         // Fallback for unknown types
         return '';
       })

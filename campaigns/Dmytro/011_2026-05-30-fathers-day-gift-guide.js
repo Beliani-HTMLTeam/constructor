@@ -33,13 +33,13 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-05-30' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-06-06' }),
   TopImageTitle_src:  DimasTranslateImage({ value: '_fathersday_topimage_01.png', folder: 'FathersDayGiftGuide', placeholderPosition: '58' }),
   TopImage: getImageUrl('FathersDayGiftGuide/fathersday_giftguide_topgif.gif', true),
-  Banner_1: translateLink({ value: 'content/lp26-05-20' }),
-  Banner_1_Image: translateImage({ value: '20260520b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-05-14' }),
-  Banner_2_Image: translateImage({ value: '20260514b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-29' }),
+  Banner_1_Image: translateImage({ value: '20260529b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-05-28' }),
+  Banner_2_Image: translateImage({ value: '20260528b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -263,7 +263,7 @@ const categories = [
 export default new entities.Campaign({
   startId: "40749",
   name: "PL Father's Day Gift Guide",
-  date: "30.05.2026",
+  date: "06.06.2026",
   issueCardId: "426351",
   lpId: "28672",
   alarm: {
