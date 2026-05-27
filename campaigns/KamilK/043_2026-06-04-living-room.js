@@ -42,6 +42,8 @@ const links = {
   Banner_2: translateLink({ value: 'content/lp26-05-27' }),
   Banner_2_Image: translateImage({ value: '20260527b.png' }),
 
+  Intro_cta_href: "https://www.beliani.ch/living-room-furniture/",
+
   Timer_href: translateLink({ value: 'content/lp26-06-02' }),
 };
 
