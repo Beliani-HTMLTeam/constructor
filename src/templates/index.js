@@ -9,11 +9,13 @@ import { Friday } from '@/templates//DimaSrc/newsletter_26122025/templates/templ
 import { RegularFridayNslt } from '@/templates//DimaSrc/newsletter_regular_friday/templates/regularFridayNslt';
 import { FridayLikeThursday } from './DimaSrc/Friday_like_Thursday/template';
 import { Monday } from '@/templates/JakubSrc/monday_newsletter/template.js';
+import { Thursday as Thursday_ProloTimer } from './Thursday/template_timer_prolo.js';
 
 export const templates = {
   Blackweek,
   AdventCalendar,
   Thursday,
+  Thursday_ProloTimer,
   FridayEolProducts,
   ThreeCategoriesUnder,
   ThreeCategoriesUnderLP,
