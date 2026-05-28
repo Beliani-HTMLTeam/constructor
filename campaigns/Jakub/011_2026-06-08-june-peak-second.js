@@ -55,8 +55,13 @@ const categories = [
       align: 'center',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
+      textOverrides: {
+        de:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+        at:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+        chde: 'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+      },
     },
-    cta: { href: 'https://www.beliani.ch/' },
+    cta: { href: 'https://www.beliani.ch/', textOverrides: { fi: 'Tutustu valikoimaan' } },
     background: '#FF2F00',
     spaceAfter: '0',
     title: {
@@ -67,9 +72,10 @@ const categories = [
   // main
   {
     name: 'Outdoor',
+    nameOverrides: { fi: 'Puutarha ja parveke', hu: 'Kültéri bútorok' },
     src: getImageUrl('20260608_Cat01.png', true),
     href: 'https://www.beliani.ch/outdoor-furniture',
-    hrefOverrides: { no: 'https://www.beliani.no/hagemoebler/' },
+    hrefOverrides: { no: 'https://www.beliani.no/hagemoebler/', fi: 'https://www.beliani.fi/puutarhakalusteet/', nl: 'https://www.beliani.nl/tuinmeubelen/', benl: 'https://www.beliani.nl/tuinmeubelen/' },
     background: '#FF2F00',
     color: '#000000',
     type: 'grid',
@@ -270,6 +276,7 @@ const categories = [
   },
   {
     name: 'Office',
+    nameOverrides: { nl: 'Thuiswerkplek', benl: 'Thuiswerkplek', hu: 'Otthoni iroda' },
     src:  translateImage({ value: '20260608_Cat06.png' }),
     src: getImageUrl('20260608_Cat06.png', true),
     href: 'https://www.beliani.ch/office-furniture/',
@@ -369,7 +376,7 @@ export default new entities.Campaign({
     {
       background: '#FF2F00',
       color: '#000000',
-      template: templates.Monday, 
+      template: templates.Monday,
       css: types.CSS.NS,
       name: 'Newsletter',
       type: types.NEWSLETTER,

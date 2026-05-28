@@ -28,8 +28,8 @@ const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-06-01' }),
   TopImageTitle_src: translateImage({ value: '20260601_01.png' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-05-21' }),
-  Banner_1_Image: translateImage({ value: '20260521b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-28' }),
+  Banner_1_Image: translateImage({ value: '20260528b.png' }),
 
   Banner_2: translateLink({ value: 'content/lp26-05-20' }),
   Banner_2_Image: translateImage({ value: '20260520b.png' }),
@@ -39,6 +39,9 @@ const TopImageTitle_data = {
   color: '#fff',
   backgroundColor: '#750000',
   type: 'singleLineBold',
+  textOverrides: {
+    chde: ['Geburtstags-Sale'],
+  },
 };
 
 const categories = [
@@ -306,6 +309,7 @@ const categories = [
   },
   {
     name: 'Lighting',
+    nameOverrides: { de: 'Beleuchtung', at: 'Beleuchtung', chde: 'Beleuchtung' },
     src:  translateImage({ value: '20260601_Cat10.png' }),
     href: 'https://www.beliani.ch/lighting/',
     background: '#750000',
@@ -332,7 +336,7 @@ const categories = [
   },
   {
     name: 'Bathtubs',
-    nameOverrides: { hu: 'Kádak és pezsgőfürdők', pt: 'Banheiras e hidromassagem' },
+    nameOverrides: { hu: 'Kádak és pezsgőfürdők', pt: 'Banheiras e hidromassagem', chde: 'Badwannen' },
     src:  translateImage({ value: '20260601_Cat11.png' }),
     href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
     background: '#750000',
@@ -458,6 +462,12 @@ export default new entities.Campaign({
       translationsSpreadsheet: campaignTranslationsSheet,
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
+      conditionOverrides: {
+        chde: [
+          'Alle Artikel unterliegen der Verfügbarkeit. Alle Preise können ohne Vorankündigung geändert werden.',
+          'Um unseren Newsletter abzubestellen, klicke einfach auf <a href="[[newsunassignurl]]"style="text-decoration:none;color:#000000;">Abbestellen</a>.',
+        ],
+      },
       categories: categories,
       links: links,
       tableQueries: tableQueries,
@@ -473,6 +483,12 @@ export default new entities.Campaign({
       type: types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
+      conditionOverrides: {
+        chde: [
+          'Alle Artikel unterliegen der Verfügbarkeit. Alle Preise können ohne Vorankündigung geändert werden.',
+          'Um unseren Newsletter abzubestellen, klicke einfach auf <a href="[[newsunassignurl]]"style="text-decoration:none;color:#000000;">Abbestellen</a>.',
+        ],
+      },
       categories: categories,
       links: links,
       tableQueries: tableQueries,

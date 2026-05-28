@@ -19,7 +19,7 @@ const tableQueries = [
     name: 'paragraphs',
   },
   {
-    tableRange: '22:23',
+    tableRange: '17',
     name: 'condition',
   },
 ];
@@ -248,7 +248,7 @@ const categories = [
   {
     name: 'Storage',
     src:  translateImage({ value: '20260615_Cat08.png' }),
-    href: 'https://www.beliani.ch/outdoor-furniture/storage-boxes/',
+    href: 'https://www.beliani.co.uk/outdoor-storage/',
     background: '#FFCCB7',
     color: '#000000',
     type: 'grid',
