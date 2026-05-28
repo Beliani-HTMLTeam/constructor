@@ -23,25 +23,26 @@ const renderOfferRows = (offerItems) => {
   return html;
 };
 
-const resolveOfferRows = ({ queries, renderType }) => {
+const resolveOfferRows = ({ queries, renderType, offerTexts }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
+  const item = (i, fallback) => offerTexts?.[i] ?? offerItems[i] ?? fallback;
 
   if (offerItems.length === 6) {
     if (renderType === 'newsletter') {
-      return [offerItems[0] ?? 'Offer Part 1', offerItems[1] ?? 'Offer Part 2', offerItems[2] ?? 'Offer Part 3'];
+      return [item(0, 'Offer Part 1'), item(1, 'Offer Part 2'), item(2, 'Offer Part 3')];
     }
 
     return [
-      offerItems[0] ?? 'Offer Part 1',
+      item(0, 'Offer Part 1'),
       offerItems[3] ?? 'Code: xxxxx',
-      offerItems[1] ?? 'Offer Part 2',
+      item(1, 'Offer Part 2'),
       offerItems[4] ?? 'Code: xxxxx',
-      offerItems[2] ?? 'Offer Part 3',
+      item(2, 'Offer Part 3'),
       offerItems[5] ?? 'Code: xxxxx',
     ];
   }
 
-  return [offerItems[0] ?? 'Offer Part 1', offerItems[1] ?? 'Offer Part 2'];
+  return [item(0, 'Offer Part 1'), item(1, 'Offer Part 2')];
 };
 
 const isSixOffers = (queries) => Array.isArray(queries?.offer) && queries.offer.length === 6;
@@ -114,10 +115,10 @@ const renderCodeElement = ({ renderType, queries, links, t }) => {
   return renderOfferRow(offerItems[2] ?? 'Code: xxxxx');
 };
 
-export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true }) => {
+export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, offerTexts }) => {
   const t = getPhrase;
   const hasSixOffers = isSixOffers(queries);
-  const offerItems = resolveOfferRows({ queries, renderType });
+  const offerItems = resolveOfferRows({ queries, renderType, offerTexts });
   let html = '';
 
   html += Space({ insideTr: true, className: 'newsletterBottom35px' });
