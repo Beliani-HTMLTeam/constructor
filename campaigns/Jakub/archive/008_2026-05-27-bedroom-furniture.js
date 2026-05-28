@@ -309,8 +309,8 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
-  optimizeImg: false,
+  isArchive: true,
+  optimizeImg: true,
   figmaUrl: 'https://www.figma.com/design/rxrv03byJJWMv7EGlUItE3/Bedroom---Wednesday-2026.05.27-FINAL--Copy-?node-id=0-1&t=okTjefqhEp0GybVA-1',
   templates: [
     {

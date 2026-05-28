@@ -27,8 +27,8 @@ const links = {
   TopImage_src: getImageUrl('20260602_Gif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-06-02' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-05-21' }),
-  Banner_1_Image: translateImage({ value: '20260521b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-05-28' }),
+  Banner_1_Image: translateImage({ value: '20260528b.png' }),
 
   Banner_2: translateLink({ value: 'content/lp26-05-20' }),
   Banner_2_Image: translateImage({ value: '20260520b.png' }),
@@ -56,6 +56,12 @@ const categories = [
     type: 'deal',
     background: '#F6E7E6',
     color: '#000000',
+    offerTextOverrides: {
+      hu: {
+        ns: [undefined, 'Ahhoz, hogy megkapd az AJÁNDÉK vázát, vásárolj legalább<br>60 000 Ft értékben, és használd a kódot a fizetésnél.'],
+        lp: [undefined, 'Ahhoz, hogy megkapd az AJÁNDÉK vázát, vásárolj legalább<br>60 000 Ft értékben, és használd a kódot a fizetésnél.'],
+      },
+    },
     freebies: [[
       // THETIDIO 
       {
