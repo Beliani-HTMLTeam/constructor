@@ -53,7 +53,7 @@ const FathersDayWishes = async ({
   // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
   // prettier-ignore
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, getPhrase });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');

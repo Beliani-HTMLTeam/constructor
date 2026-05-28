@@ -145,7 +145,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? CTA({
         color: category.color ?? '#000000',
         href: ctaButtonHref,
-        text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
+        text: category.ctaText ?? (category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now')),
         insideTr: true,
         tdClass: 'newsletterContainer',
       })

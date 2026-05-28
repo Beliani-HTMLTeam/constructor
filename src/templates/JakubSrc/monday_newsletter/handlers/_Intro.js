@@ -1,5 +1,4 @@
 import { Intro } from '../components/Intro';
-import { Space } from '../components/Space';
 import { CTA } from '../components/CTA';
 
 export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySlug }) => {
@@ -26,15 +25,16 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
   ${
     intro.cta
       ? `
-      ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
-      ${CTA({
-        href: introCta_href,
-        text: shopNow,
-        color: introColor,
-        align: 'center',
-        insideTr: true,
-      })}
-      ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
+      ${intro.cta.spaceBefore ? `<tr style="background-color: ${intro.backgroundColor ?? ''};"><td class="${intro.cta.spaceBefore}"></td></tr>` : ''}
+      <tr style="background-color: ${intro.backgroundColor ?? ''};"><td align="center">
+        ${CTA({
+          href: introCta_href,
+          text: shopNow,
+          color: introColor,
+          align: 'center',
+        })}
+      </td></tr>
+      ${intro.cta.spaceAfter ? `<tr style="background-color: ${intro.backgroundColor ?? ''};"><td class="${intro.cta.spaceAfter}"></td></tr>` : ''}
         `
       : ''
   }

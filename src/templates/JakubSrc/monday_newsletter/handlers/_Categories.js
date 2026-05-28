@@ -51,15 +51,19 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
   const countrySlug = String(country ?? '').toLowerCase();
   const name = queries?.categories?.[index]
     ? queries.categories[index]
-    : category?.nameOverrides?.[countrySlug]
-      ? category.nameOverrides[countrySlug]
-      : category?.name
-        ? getCategoryTitle(category.name)
-        : category?.name;
+    : category?.nameOverride
+      ? category.nameOverride
+      : category?.nameOverrides?.[countrySlug]
+        ? category.nameOverrides[countrySlug]
+        : category?.name
+          ? getCategoryTitle(category.name)
+          : category?.name;
 
   let href = '';
   if (queries?.categoryLinks?.[index]) {
     href = add_utm(queries.categoryLinks[index]);
+  } else if (category?.hrefOverrides?.[countrySlug]) {
+    href = add_utm(category.hrefOverrides[countrySlug]);
   } else if (category?.href) {
     href = typeof category.href === 'string' ? getCategoryLink(category.href) : add_utm(category.href?.href);
   }
@@ -70,6 +74,7 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
   }
 
   const paragraphText = category?.paragraph?.textOverrides?.[countrySlug] ?? null;
+  const ctaText = category?.cta?.textOverrides?.[countrySlug] ?? null;
 
   const tilesOverride = Array.isArray(category?.tiles)
     ? category.tiles.map((tile) => {
@@ -85,6 +90,7 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
     src,
     ...(tilesOverride !== null && { tiles: tilesOverride }),
     ...(paragraphText !== null && { paragraphText }),
+    ...(ctaText !== null && { ctaText }),
   };
 };
 

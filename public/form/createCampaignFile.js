@@ -118,8 +118,9 @@ function generateMondayCampaignContent(formData) {
     soonBanners = false,
     figmaURL = '',
     background = '#FFFFFF',
-    color = '#000000',
+    color: _color = '#000000',
   } = formData;
+  const color = _color || '#000000';
 
   const formattedDate = new Date(campaignDate).toLocaleDateString('en-GB').replace(/\//g, '.');
   const shortDate = new Date(campaignDate)
