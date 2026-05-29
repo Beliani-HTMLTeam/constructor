@@ -32,13 +32,13 @@ const links = {
   // TopImageTitle_href: translateLink({ value: 'content/lp26-03-19' }),
   // TopImageTitle_src: translateImage({ value: '20260319_01.png' }),
   TopImage_src: translateImage({ value: '20260207_Pic.png' }),
-  TopImage_href: translateLink({ value: 'content/lp26-03-14' }),
+  TopImage_href: translateLink({ value: 'content/lp26-05-02' }), // ! jakub - remember to change this
   // change it
-  Banner_1: translateLink({ value: 'content/lp26-03-05' }),
-  Banner_1_Image: translateImage({ value: '20260305b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-04-23' }), // ! jakub - remember to change this
+  Banner_1_Image: translateImage({ value: '20260423b.png' }), // ! jakub - remember to change this
 
-  Banner_2: translateLink({ value: 'content/lp26-03-04' }),
-  Banner_2_Image: translateImage({ value: '20260304b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-04-22' }), // ! jakub - remember to change this
+  Banner_2_Image: translateImage({ value: '20260422b.png' }), // ! jakub - remember to change this
   
   ShopCTA: translateLink({ value: ' ' }),
 };
@@ -201,7 +201,7 @@ const categories = [
 export default new entities.Campaign({
   startId: '38856',
   name: "Mother's Day Wishes",
-  date: '14.03.2026',
+  date: '14.03.2026', // ! jakub - remember to change this
   issueCardId: '426252',
   lpId: '27731',
   alarm: {
