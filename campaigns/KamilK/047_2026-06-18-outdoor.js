@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::11.06.26 - Bedroom';
+const campaignTranslationsSheet = '2026::18.06.26 - Outdoor';
 
 const tableQueries = [
   {
@@ -23,42 +23,44 @@ const tableQueries = [
     name: 'condition',
   },
   {
-    tableRange: '15:16',
+    tableRange: '11:12',
     name: 'timer',
-    tableName: '2026::Voucher - 09.06.26 - Free outdoor cushion',
+    tableName: '2026::01.06.26 - Beliani Birthday Start	',
   },
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-06-11' }),
-  TopImageTitle_src: translateImage({ value: '20260611_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-06-18' }),
+  TopImageTitle_src: translateImage({ value: '20260618_01.png' }),
 
-  TopImage_src: getImageUrl('20260611_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-06-11' }),
+  TopImage_src_1: getImageUrl('20260618_Pic.jpg', true),
+  TopImage_src_2: getImageUrl('20260618_Gif.gif', true),
+  
+  TopImage_href: translateLink({ value: 'content/lp26-06-18' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-06-04' }),
-  Banner_1_Image: translateImage({ value: '20260604b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-06-11' }),
+  Banner_1_Image: translateImage({ value: '20260611b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-06-03' }),
-  Banner_2_Image: translateImage({ value: '20260603b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-06-10' }),
+  Banner_2_Image: translateImage({ value: '20260610b.png' }),
 
-  Timer_href: translateLink({ value: 'content/lp26-06-09' }),
+  Timer_href: translateLink({ value: 'content/lp26-06-19' }),
 
-  Intro_cta_href: "https://www.beliani.ch/bedroom-furniture/",
+  Intro_cta_href: "https://www.beliani.ch/garden-furniture/outdoor-furniture/",
 };
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#FECD8C',
+  backgroundColor: '#FEE3BF',
   type: 'twoSameLines',
 };
 
 const categories = [
   {
-    name: 'Beds',
-    src: getImageUrl('20260611_Cat00.jpg', true),
-    href: 'https://www.beliani.ch/bedroom-furniture/beds/',
-    background: '#FECD8C',
+    name: 'Lounge Sets',
+    src: getImageUrl('20260618_Cat00.jpg', true),
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/',
+    background: '#FEE3BF',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -78,79 +80,33 @@ const categories = [
       name: true,
     },
     products: [
-      // BOUSSE
+      // NOLA
       {
-        id: 614680,
-        src: getImageUrl('20260611_Pic01.png', true),
+        id: 639172,
+        src: getImageUrl('20260618_Pic01.png', true),
       },
-      // BOISSET
+      // CALASCIO
       {
-        id: 447301,
-        src: getImageUrl('20260611_Pic02.png', true),
+        id: 734183,
+        src: getImageUrl('20260618_Pic02.png', true),
       },
-      // ROCHEFORT
+      // MOLVENO
       {
-        id: 386927,
-        src: getImageUrl('20260611_Pic03.png', true),
+        id: 733421,
+        src: getImageUrl('20260618_Pic03.png', true),
       },
-      // CUSSET
+      // FIAMES
       {
-        id: 136597,
-        src: getImageUrl('20260611_Pic04.png', true),
-      },
-    ],
-  },
-  {
-    name: 'Mattresses',
-    src: getImageUrl('20260611_Cat10.jpg', true),
-    href: 'https://www.beliani.ch/bedroom-furniture/mattresses/',
-    background: '#892626',
-    color: '#ffffff',
-    type: 'grid',
-    cta: true,
-    paddingTop: '35',
-    title: {
-      show: true,
-      spaceAfter: 'newsletterBottom35px',
-    },
-    paragraph: {
-      show: true,
-      align: 'left',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
-    },
-    product: {
-      prices: true,
-      name: true,
-    },
-    products: [
-      // MISTY
-      {
-        id: 501032,
-        src: getImageUrl('20260611_Pic11.png', true),
-      },
-      // LUXUS
-      {
-        id: 207912,
-        src: getImageUrl('20260611_Pic12.png', true),
-      },
-      // DUO
-      {
-        id: 5875,
-        src: getImageUrl('20260611_Pic13.png', true),
-      },
-      // DRIFT
-      {
-        id: 499457,
-        src: getImageUrl('20260611_Pic14.png', true),
+        id: 704291,
+        src: getImageUrl('20260618_Pic04.png', true),
       },
     ],
   },
   {
-    name: 'Bedside Tables',
-    src: getImageUrl('20260611_Cat20.jpg', true),
-    href: 'https://www.beliani.ch/bedroom-furniture/tables/bedside-table/',
-    background: '#FECD8C',
+    name: 'Garden Tables',
+    src: getImageUrl('20260618_Cat10.jpg', true),
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/garden-tables/',
+    background: '#FFCBBF',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -170,34 +126,34 @@ const categories = [
       name: true,
     },
     products: [
-      // TIMMINS
+      // BINASCO
       {
-        id: 556217,
-        src: getImageUrl('20260611_Pic21.png', true),
+        id: 702265,
+        src: getImageUrl('20260618_Pic11.png', true),
       },
-      // BRADLEY
+      // BARATTI
       {
-        id: 644068,
-        src: getImageUrl('20260611_Pic22.png', true),
+        id: 399873,
+        src: getImageUrl('20260618_Pic12.png', true),
       },
-      // BUTTE
+      // BELLANO
       {
-        id: 609457,
-        src: getImageUrl('20260611_Pic23.png', true),
+        id: 508192,
+        src: getImageUrl('20260618_Pic13.png', true),
       },
-      // FLAYAT
+      // ORIA
       {
-        id: 420840,
-        src: getImageUrl('20260611_Pic24.png', true),
+        id: 246345,
+        src: getImageUrl('20260618_Pic14.png', true),
       },
     ],
   },
   {
-    name: 'Textiles',
-    src: getImageUrl('20260611_Cat30.jpg', true),
-    href: 'https://www.beliani.ch/bedroom-furniture/textiles/',
-    background: '#892626',
-    color: '#ffffff',
+    name: 'Garden Chairs',
+    src: getImageUrl('20260618_Cat20.jpg', true),
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/garden-chairs/',
+    background: '#FEE3BF',
+    color: '#000000',
     type: 'grid',
     cta: true,
     paddingTop: '35',
@@ -216,69 +172,115 @@ const categories = [
       name: true,
     },
     products: [
-      // EVERGREEN
+      // SASSARI
       {
-        id: 299835,
-        src: getImageUrl('20260611_Pic31.png', true),
+        id: 733214,
+        src: getImageUrl('20260618_Pic21.png', true),
       },
-      // KRIVAN
+      // NARINO
       {
-        id: 673691,
-        src: getImageUrl('20260611_Pic32.png', true),
+        id: 732928,
+        src: getImageUrl('20260618_Pic22.png', true),
       },
-      // TEIDE
+      // CIVATE
       {
-        id: 673330,
-        src: getImageUrl('20260611_Pic33.png', true),
+        id: 726426,
+        src: getImageUrl('20260618_Pic23.png', true),
       },
-      // DELICE
+      // RIFREDDO
       {
-        id: 266956,
-        src: getImageUrl('20260611_Pic34.png', true),
+        id: 723509,
+        src: getImageUrl('20260618_Pic24.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Sun Loungers',
+    src: getImageUrl('20260618_Cat30.jpg', true),
+    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/sun-loungers/',
+    background: '#FFCBBF',
+    color: '#000000',
+    type: 'grid',
+    cta: true,
+    paddingTop: '35',
+    title: {
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: true,
+      align: 'left',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      prices: true,
+      name: true,
+    },
+    products: [
+      // CESANA
+      {
+        id: 731047,
+        src: getImageUrl('20260618_Pic31.png', true),
+      },
+      // ZERI
+      {
+        id: 714661,
+        src: getImageUrl('20260618_Pic32.png', true),
+      },
+      // VOLTERRA
+      {
+        id: 688949,
+        src: getImageUrl('20260618_Pic33.png', true),
+      },
+      // OSSIMO
+      {
+        id: 685197,
+        src: getImageUrl('20260618_Pic34.png', true),
       },
     ],
   },
 ];
 
 const timer = {
-  freebies: getImageUrl('20260611free.png', true),
+  // freebies: getImageUrl('20260611free.png', true),
   image: {
-    "CHDE": "https://gen.sendtric.com/countdown/x5rjbrwb4z",
-    "CHFR": "https://gen.sendtric.com/countdown/h1aon4zk8c",
-    "FR": "https://gen.sendtric.com/countdown/nmv3ao84d0",
-    "DE": "https://gen.sendtric.com/countdown/czuk026w65",
-    "UK": "https://gen.sendtric.com/countdown/elc9do8a81",
-    "AT": "https://gen.sendtric.com/countdown/k7yxq9bn5e",
-    "ES": "https://gen.sendtric.com/countdown/62wqnirfmu",
-    "PL": "https://gen.sendtric.com/countdown/2npaodiexd",
-    "NL": "https://gen.sendtric.com/countdown/29xtrq64cx",
-    "PT": "https://gen.sendtric.com/countdown/iyri34r2ck",
-    "IT": "https://gen.sendtric.com/countdown/a6mskux1bu",
-    "SE": "https://gen.sendtric.com/countdown/woyg1a7135",
-    "HU": "https://gen.sendtric.com/countdown/npiwjrl03u",
-    "DK": "https://gen.sendtric.com/countdown/qzn4w9zr49",
-    "CZ": "https://gen.sendtric.com/countdown/2jwb9r3i0t",
-    "FI": "https://gen.sendtric.com/countdown/lpk11wehv3",
-    "NO": "https://gen.sendtric.com/countdown/6gfkv9b4tq",
-    "SK": "https://gen.sendtric.com/countdown/g94vqqnf0s",
-    "BENL": "https://gen.sendtric.com/countdown/f71z3ir0ev",
-    "BEFR": "https://gen.sendtric.com/countdown/ceqjyph23r",
-    "RO": "https://gen.sendtric.com/countdown/tvk8erhm1a"
+    "CHDE": "https://gen.sendtric.com/countdown/rs62j73q87",
+    "CHFR": "https://gen.sendtric.com/countdown/5tec14og2n",
+    "FR": "https://gen.sendtric.com/countdown/ue9awznj5f",
+    "DE": "https://gen.sendtric.com/countdown/2b2ryrv4ao",
+    "UK": "https://gen.sendtric.com/countdown/o43jq28qm8",
+    "AT": "https://gen.sendtric.com/countdown/p506t9ml5a",
+    "ES": "https://gen.sendtric.com/countdown/yzjyw4wuet",
+    "PL": "https://gen.sendtric.com/countdown/e7otekvplp",
+    "NL": "https://gen.sendtric.com/countdown/1w4306wj5m",
+    "PT": "https://gen.sendtric.com/countdown/06mhlljial",
+    "IT": "https://gen.sendtric.com/countdown/1eedbmpyiz",
+    "SE": "https://gen.sendtric.com/countdown/vnhqh1h0iw",
+    "HU": "https://gen.sendtric.com/countdown/c26pwb5mw7",
+    "DK": "https://gen.sendtric.com/countdown/p5391jgpir",
+    "CZ": "https://gen.sendtric.com/countdown/hlc3hxgx04",
+    "FI": "https://gen.sendtric.com/countdown/r411ru79ke",
+    "NO": "https://gen.sendtric.com/countdown/flzzx8v8xp",
+    "SK": "https://gen.sendtric.com/countdown/ib4v461bmi",
+    "BENL": "https://gen.sendtric.com/countdown/vyfwqa8x3m",
+    "BEFR": "https://gen.sendtric.com/countdown/211v45q7s4",
+    "RO": "https://gen.sendtric.com/countdown/vfabyxbely"
   }
 };
 
 export default new entities.Campaign({
-  startId: 44529,
-  name: 'Bedroom',
-  date: '11.06.2026',
-  issueCardId: 489222,
-  lpId: 30546,
+  startId: 44561,
+  name: 'Outdoor',
+  date: '18.06.2026',
+  issueCardId: 492565,
+  lpId: 30565,
   alarm: {
     isActive: false,
   },
   isArchive: false,
   optimizeImg: true,
-  figmaUrl: 'https://www.figma.com/design/jfyWXHhytF5XdHRERjL1w9/COPY-%7C-2026.06.11---Newsletter---Bedroom--Copy-?node-id=9032-1215&t=lqty2ZJch99s6F3D-1',
+  figmaUrl: 'https://www.figma.com/design/MwTz6sx5UwVbKpeHrsbzEO/COPY-%7C-2026.06.18---Newsletter---Outdoor--Copy-?node-id=15001-258&t=WKqJIlwWhsgtrjOm-1',
   templates: [
     {
       name: 'Newsletter',
@@ -286,7 +288,7 @@ export default new entities.Campaign({
       template: templates.Thursday, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: '#FECD8C',
+      background: '#FEE3BF',
       color: '#000000',
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
@@ -296,7 +298,7 @@ export default new entities.Campaign({
       timer: timer,
       intro: {
         color: '#000000', // unused
-        backgroundColor: '#FECD8C', // unused
+        backgroundColor: '#FEE3BF', // unused
         alignment: 'left',
         type: 'paragraph',
         cta: {
@@ -305,8 +307,8 @@ export default new entities.Campaign({
         }
       },
       Inside: {
-        color: '#000000',
-        backgroundColor: '#FFCCB7',
+        color: '#ffffff',
+        backgroundColor: '#FF2F00',
         type: 'timer',
       },
     },
@@ -315,7 +317,7 @@ export default new entities.Campaign({
       type: types.LANDINGPAGE,
       template: templates.Thursday, // User should change this
       css: types.CSS.LP,
-      background: '#FECD8C',
+      background: '#FEE3BF',
       color: '#000000',
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
@@ -325,7 +327,7 @@ export default new entities.Campaign({
       timer: timer,
       intro: {
         color: '#000000', // unused
-        backgroundColor: '#FECD8C', // unused
+        backgroundColor: '#FEE3BF', // unused
         alignment: 'left',
         type: 'paragraph',
         cta: {
@@ -334,8 +336,8 @@ export default new entities.Campaign({
         }
       },
       Inside: {
-        color: '#000000',
-        backgroundColor: '#FFCCB7',
+        color: '#ffffff',
+        backgroundColor: '#FF2F00',
         type: 'timer',
       },
     },
