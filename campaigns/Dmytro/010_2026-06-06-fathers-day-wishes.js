@@ -2,7 +2,7 @@ import { DimasTranslateImage } from "@/templates/DimaSrc/fathers_day_wishes/comp
 import { FathersDayWishes } from "@/templates/DimaSrc/fathers_day_wishes/templates/fathersDayWishes";
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::Father\'s Day Wishes'
+const campaignTranslationsSheet = '2026::Fathers Day Wishes'
 
 const tableQueries = [
   {
