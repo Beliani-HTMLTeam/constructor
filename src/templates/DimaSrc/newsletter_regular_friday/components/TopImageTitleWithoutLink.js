@@ -21,7 +21,7 @@ const TopImageTitleWithoutLink = ({ src, title1, title2, title3, color, type, re
   return `
     <tr>
       <td style="line-height: 0; font-size: 0; padding: 0;">
-          <img alt="Top Image Title" src="${src}" style="display: block; width: 100%; max-width: 100%; height: auto; border: 0; line-height: 0;" loading="lazy">
+          <a href="#"><img alt="Top Image Title" src="${src}" style="display: block; width: 100%; max-width: 100%; height: auto; border: 0; line-height: 0;" loading="lazy"></a>
       </td>
     </tr>`;
 };

@@ -20,6 +20,10 @@ const tableQueries = [
     "tableRange": "21",
     "name": "CTA"
   },
+  {
+    "tableRange": "22",
+    "name": "condition"
+  }
 ];
 
 const links = {
