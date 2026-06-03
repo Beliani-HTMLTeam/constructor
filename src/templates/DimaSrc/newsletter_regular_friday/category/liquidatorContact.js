@@ -19,12 +19,13 @@ export const liquidatorContact = ({
         <tr>
           <!-- LEFT: tall image (spans both rows via rowspan) -->
           <td valign="top" rowspan="2">
-            <img 
+           <a href="#"> <img 
               src="${category.interested[0].src.src || category.interested[0].src}"
               alt="Interested" 
               width="100%"
               style="display: block; width: 100%; height: auto;"
             >
+            </a>
           </td>
           <!-- TOP RIGHT: image 2 -->
           <td valign="top">

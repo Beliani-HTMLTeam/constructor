@@ -1,32 +1,34 @@
 import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
 
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::Liquidator';
+const campaignTranslationsSheet = '2026::2026.05.30 - Liquidations Return';
 
 const tableQueries = [
   {
-    "tableRange": "17",
+    "tableRange": "11",
     "name": "TopImageTitle"
   },
   {
-    "tableRange": "19",
+    "tableRange": "13",
     "name": "introTitle"
   },
   {
-    "tableRange": "20",
+    "tableRange": "14",
     "name": "introParagraph"
   },
   {
     "tableRange": "21",
     "name": "CTA"
   },
+  {
+    "tableRange": "22",
+    "name": "condition"
+  }
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: ' ' }),
   TopImageTitle_src:  DimasTranslateImage({ value: 'liquidator_01.png', folder: 'liquidator', placeholderPosition: '49' }),
   TopImage_src: getImageUrl('liquidator/TopImage.png', true),
-  TopImage_href: translateLink({ value: ' ' })
 };
 
 const TopImageTitle_data = {
@@ -78,7 +80,7 @@ const categories = [
 export default new entities.Campaign({
   startId: "44465",
   name: "Liquidator",
-  date: "29.05.2026",
+  date: "30.05.2026",
   alarm: {
     isActive: false,
   },

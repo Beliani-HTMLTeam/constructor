@@ -23,6 +23,10 @@ const tableQueries = [
   {
     "tableRange": "29",
     "name": "introCTA"
+  },
+  {
+    "tableRange": "30:33",
+    "name": "categories"
   }
 ];
 
@@ -89,6 +93,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
      show: false,
@@ -135,6 +140,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
      show: false,
@@ -181,6 +187,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
      show: false,
@@ -227,6 +234,7 @@ const categories = [
       show: true,
       align: 'left',
       spaceAfter: 'newsletterBottom35px',
+      source: 'queries',
     },
     paragraph: {
      show: false,

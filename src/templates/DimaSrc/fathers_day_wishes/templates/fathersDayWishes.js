@@ -47,6 +47,35 @@ const FathersDayWishes = async ({
   getProductById,
   add_utm,
 }) => {
+  console.log('all: ',  links,
+    queries,
+    shop,
+    country,
+    type,
+    id,
+    categories,
+    categories_type,
+    categories_line,
+    background,
+    color,
+  
+    // campaign elements
+    Inside,
+    OfferPart,
+    intro,
+    timer,
+    TopImageTitle_data,
+    GiftCard_data,
+    shopCTA,
+  
+    // functions passed:
+    getHeader,
+    getFooter,
+    getCategoryLink,
+    getCategoryTitle,
+    getPhrase,
+    getProductById,
+    add_utm,)
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 

@@ -1,4 +1,4 @@
-const ICON_DEFAULT = 'https://pictureserver.net/static/2026/copy-icon-black.svg';
+﻿const ICON_DEFAULT = 'https://pictureserver.net/static/2026/copy-icon-black.svg';
 const ICON_OK = 'https://pictureserver.net/static/2026/copy-icon-ok.svg';
 
 const CopyCodeCTA = ({ text, codeValue, color = '#750000' }) => `

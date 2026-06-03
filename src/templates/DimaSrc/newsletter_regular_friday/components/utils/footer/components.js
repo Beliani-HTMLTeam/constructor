@@ -118,6 +118,13 @@ const conditions = ({ getFooter, queries }) => ({
     'all items are subject to availability. All prices are subject to change without notification',
 });
 
+const conditionsLiquidator = ({ getFooter, queries }) => ({
+  conditionsTitle: '',
+  conditionsText:
+    queries.condition ||
+    'all items are subject to availability. All prices are subject to change without notification',
+});
+
 const companyDetails = ({ getFooter }) => ({
   title: getFooter('Company Details'),
   address: getFooter('Address'),
@@ -136,5 +143,6 @@ export {
   socials,
   advantages,
   conditions,
+  conditionsLiquidator,
   companyDetails,
 };

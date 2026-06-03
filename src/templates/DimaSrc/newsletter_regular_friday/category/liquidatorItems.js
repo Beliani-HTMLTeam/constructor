@@ -22,14 +22,14 @@ export const liquidatorItems = ({
 
       // Image TD
       productsInnerHtml += `
-        <td >
+        <td>
           ${item ? `
-            <img 
+          <a href="#"><img 
               alt="Item" 
               src="${item.src.src || item.src}" 
               style="width:100%; max-width: 100%; display:block;" 
               loading="lazy"
-            >
+            ></a>
           ` : ''}
         </td>`;
     }

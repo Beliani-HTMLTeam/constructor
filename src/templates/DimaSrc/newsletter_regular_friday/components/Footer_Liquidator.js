@@ -4,6 +4,7 @@ import {
   assembly,
   companyDetails,
   conditions,
+  conditionsLiquidator,
   klarna,
   socials,
   thousandsMore,
@@ -25,6 +26,8 @@ const FooterLiquidator = ({ getFooter, getCategoryLink, getCategoryTitle, querie
       socials: socials({ getFooter }),
 
       advantages: advantages({ getFooter }),
+
+      conditions: conditionsLiquidator({ getFooter, queries }),
 
       companyDetails: companyDetails({ getFooter }),
     },
