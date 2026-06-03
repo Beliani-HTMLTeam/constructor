@@ -1,34 +1,41 @@
+import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
+
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::24.06.26 - Cashback Midsommar';
+const campaignTranslationsSheet = '2026::Voucher - 24.06.26 - Cashback Midsommar';
 
 const tableQueries = [
   {
-    "tableRange": "15:16",
+    "tableRange": "22:23",
     "name": "TopImageTitle"
   },
   {
-    "tableRange": "18",
-    "name": "intro"
+    "tableRange": "25:30",
+    "name": "offerPart"
   },
   {
-    "tableRange": "19:22",
-    "name": "paragraphs"
-  },
-  {
-    "tableRange": "23:24",
+    "tableRange": "32:34",
     "name": "condition"
+  },
+  {
+    "tableRange": "30",
+    "name": "codeCTA",
+  },
+  {
+    "tableRange": "28",
+    "name": "code",
   }
 ];
 
 const links = {
+  code_href: translateLink({ value: 'content/lp26-06-24' }),
   TopImageTitle_href: translateLink({ value: 'content/lp26-06-24' }),
-  TopImageTitle_src: translateImage({ value: '20260624_01.png' }),
-  TopImage_src: getImageUrl('20260624_Pic.png', true),
+  TopImageTitle_src: DimasTranslateImage({ value: '20260624_01.png', folder: '20260624', placeholderPosition: '47' }),
+  TopImage_src: getImageUrl('20260624/20260624topgif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-06-24' }),
-  Banner_1: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
-  Banner_1_Image: translateImage({ value: '{yyyymmdd}b.png' }),
-  Banner_2: translateLink({ value: 'content/lp{yy}-{mm}-{dd}' }),
-  Banner_2_Image: translateImage({ value: '{yyyymmdd}b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-06-04' }),
+  Banner_1_Image: translateImage({ value: '20260604b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-06-10' }),
+  Banner_2_Image: translateImage({ value: '20260610b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -37,37 +44,197 @@ const TopImageTitle_data = {
   type: 'twoSameLines',
 };
 
-const timer = {
-  freebies: getImageUrl('YYYYMMDD_Free.png', true),
-  // ! REMEMBER TO REPLACE THOSE URLS
-  image: {
-    CHDE: 'https://gen.sendtric.com/countdown/3x5402a5a5',
-    CHFR: 'https://gen.sendtric.com/countdown/7d3zl0s986',
-    FR: 'https://gen.sendtric.com/countdown/12rdr6dtgo',
-    DE: 'https://gen.sendtric.com/countdown/sv2q3k1x3y',
-    UK: 'https://gen.sendtric.com/countdown/c4cghowbf1',
-    AT: 'https://gen.sendtric.com/countdown/ypa0wk4eup',
-    ES: 'https://gen.sendtric.com/countdown/sehb5k3z7z',
-    PL: 'https://gen.sendtric.com/countdown/zlnhbu660w',
-    NL: 'https://gen.sendtric.com/countdown/mr9bn0q4c8',
-    PT: 'https://gen.sendtric.com/countdown/61n8wy3y4m',
-    IT: 'https://gen.sendtric.com/countdown/lxloewzogf',
-    SE: 'https://gen.sendtric.com/countdown/y2imagqwpt',
-    HU: 'https://gen.sendtric.com/countdown/udnrsqd4o8',
-    DK: 'https://gen.sendtric.com/countdown/uvfzgmkwr6',
-    CZ: 'https://gen.sendtric.com/countdown/ajq5qcnl44',
-    FI: 'https://gen.sendtric.com/countdown/hgh6virvh8',
-    NO: 'https://gen.sendtric.com/countdown/nfx8ncvozu',
-    SK: 'https://gen.sendtric.com/countdown/x8yr4llgxx',
-    BENL: 'https://gen.sendtric.com/countdown/442t1ogqur',
-    BEFR: 'https://gen.sendtric.com/countdown/kgyur9di1m',
-    RO: 'https://gen.sendtric.com/countdown/ke5m9a4zrx',
-  },
-};
-
 const categories = [
-  // TODO: Add categories here
+  {
+    name: 'Outdoor Furniture',
+    background: '#FFDEB3',
+    color: '#000000',
+    src: getImageUrl('20260624/20260624Category1.jpg', true),
+    href: 'https://www.beliani.ch/garden-furniture/',
+    type: 'grid4tiles',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'center',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 45,
+    line: {
+      show: true
+    },
+    cta: {
+      show: true,
+      type: 'shopAll',
+    },
+    products: [
+      {
+        name: 'Lounge Sets',
+        src: DimasTranslateImage({ value: '_lounge_sets.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/lounge-sets/',
+      },
+      {
+        name: 'Dining Sets',
+        src: DimasTranslateImage({ value: '_dining_sets.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
+      },
+      {
+        name: 'Balcony Furniture',
+        src: DimasTranslateImage({ value: '_balcony_furniture.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
+      },
+      {
+        name: 'Sun loungers',
+        src: DimasTranslateImage({ value: '_sun_loungers.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/outdoor-furniture/sun-loungers/',
+      },
+    ],
+  },
+  {
+    name: 'Living Room',
+    background: '#FFDEB3',
+    color: '#000000',
+    src: getImageUrl('20260624/20260624Category2.jpg', true),
+    href: 'https://www.beliani.ch/living-room-furniture/',
+    type: 'grid4tiles',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'center',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 35,
+    line: {
+      show: true,
+    },
+    cta: {
+      show: true,
+      type: 'shopAll',
+    },
+    products: [
+      {
+        name: 'Sofas',
+        src: DimasTranslateImage({ value: '_sofas.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/living-room-furniture/sofas/',
+      },
+      {
+        name: 'Armchairs',
+        src: DimasTranslateImage({ value: '_armchairs.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/living-room-furniture/armchairs/',
+      },
+      {
+        name: 'Coffee Tables',
+        src: DimasTranslateImage({ value: '_coffee_tables.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/living-room-furniture/tables/coffee-tables/',
+      },
+      {
+        name: 'Rugs',
+        src: DimasTranslateImage({ value: '_rugs.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/living-room-furniture/rugs/',
+      },
+    ],
+  },
+  {
+    name: 'Dining Room',
+    background: '#FFDEB3',
+    color: '#000000',
+    src: getImageUrl('20260624/20260624Category3.jpg', true),
+    href: 'https://www.beliani.ch/dining-room-furniture/',
+    type: 'grid4tiles',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'center',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 35,
+    line: {
+      show: true,
+    },
+    cta: {
+      show: true,
+      type: 'shopAll',
+    },
+    products: [
+      {
+        name: 'Tables',
+        src: DimasTranslateImage({ value: '_tables.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/dining-room-furniture/tables/dining-tables/',
+      },
+      {
+        name: 'Chairs',
+        src: DimasTranslateImage({ value: '_chairs.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/dining-room-furniture/chairs/',
+      },
+      {
+        name: 'Tableware',
+        src: DimasTranslateImage({ value: '_tableware.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/dining-room-furniture/kitchenware-tableware/',
+      },
+      {
+        name: 'Lighting',
+        src: DimasTranslateImage({ value: '_lighting.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/dining-room-furniture/lighting/',
+      },
+    ],
+  },
+  {
+    name: 'Bedroom',
+    background: '#FFDEB3',
+    color: '#000000',
+    src: getImageUrl('20260624/20260624Category4.jpg', true),
+    href: 'https://www.beliani.ch/bedroom-furniture/',
+    type: 'grid4tiles',
+    insideContainer: true,
+    title: {
+      show: true,
+      align: 'center',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+     show: false,
+    },
+    paddingTop: 35,
+    line: {
+      show: true,
+    },
+    cta: {
+      show: true,
+      type: 'shopAll',
+    },
+    products: [
+      {
+        name: 'Beds',
+        src: DimasTranslateImage({ value: '_beds.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/bedroom-furniture/beds/',
+      },
+      {
+        name: 'Mattresses',
+        src: DimasTranslateImage({ value: '_mattresses.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/bedroom-furniture/mattresses/',
+      },
+      {
+        name: 'Storage',
+        src: DimasTranslateImage({ value: '_storage.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/bedroom-furniture/storage/',
+      },
+      {
+        name: 'Lighting',
+        src: DimasTranslateImage({ value: '_lighting.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        href: 'https://www.beliani.ch/bedroom-furniture/textiles/',
+      },
+    ],
+  }
 ];
+
 
 export default new entities.Campaign({
   startId: "44368",
@@ -85,7 +252,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#FFDEB3",
@@ -93,7 +260,8 @@ export default new entities.Campaign({
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      timer: timer,
+      categories_type: 'grid4tiles',
+      categories_line: 'black',
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
@@ -102,6 +270,7 @@ export default new entities.Campaign({
         backgroundColor: "#FFDEB3",
         alignment: "center",
         type: "code",
+        spanStyle: 'text-decoration: underline;',
       },
       links: links,
       tableQueries: tableQueries,
@@ -109,14 +278,15 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.Thursday, // User should change this
+      template: templates.RegularFridayNslt, // User should change this
       css: types.CSS.LP,
       background: "#FFDEB3",
       color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      timer: timer,
+      categories_type: 'grid4tiles',
+      categories_line: 'black',
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
@@ -125,6 +295,7 @@ export default new entities.Campaign({
         backgroundColor: "#FFDEB3",
         alignment: "center",
         type: "code",
+        spanStyle: 'text-decoration: underline;'
       },
       links: links,
       tableQueries: tableQueries,
