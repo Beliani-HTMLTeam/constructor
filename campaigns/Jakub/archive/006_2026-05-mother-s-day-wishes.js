@@ -202,7 +202,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: true,
   figmaUrl:
     'https://www.figma.com/design/qIOmmCoIsijKLGkeQavHaN/',

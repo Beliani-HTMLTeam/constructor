@@ -19,7 +19,7 @@ const tableQueries = [
     name: 'paragraphs',
   },
   {
-    tableRange: '17',
+    tableRange: '18:19',
     name: 'condition',
   },
 ];
@@ -54,7 +54,7 @@ const categories = [
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
     },
-    cta: { href: 'https://www.beliani.ch/' },
+    cta: { href: 'https://www.beliani.ch/', textOverrides: { fi: 'Tutustu valikoimaan' } },
     background: '#FFCCB7',
     spaceAfter: '0',
     title: {
@@ -92,6 +92,7 @@ const categories = [
   {
     name: 'Dining Sets',
     src:  translateImage({ value: '20260615_Cat02.png' }),
+    nameOverrides: { cz: 'Zahradní jídelní sady' },
     href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
     background: '#FFCCB7',
     color: '#000000',
@@ -246,7 +247,7 @@ const categories = [
     },
   },
   {
-    name: 'Storage',
+    name: 'Garden Storage',
     src:  translateImage({ value: '20260615_Cat08.png' }),
     href: 'https://www.beliani.co.uk/outdoor-storage/',
     background: '#FFCCB7',
@@ -274,6 +275,7 @@ const categories = [
   {
     name: 'Parasols',
     src:  translateImage({ value: '20260615_Cat09.png' }),
+    nameOverrides: { pt: 'Guarda-sóis e gazebos' },
     href: 'https://www.beliani.ch/garden-furniture/parasols/',
     background: '#FFCCB7',
     color: '#000000',
@@ -299,6 +301,7 @@ const categories = [
   },
   {
     name: 'Plant Pots',
+    nameOverrides: { fi: 'Ulkoruukut' },
     src:  translateImage({ value: '20260615_Cat10.png' }),
     href: 'https://www.beliani.ch/garden-accessories/pots-and-planters/',
     background: '#FFCCB7',
@@ -324,8 +327,8 @@ const categories = [
     },
   },
   {
-    name: 'Fire Pits',
-    nameOverrides: { hu: 'Kádak és pezsgőfürdők', pt: 'Banheiras e hidromassagem' },
+    name: 'Fire pits',
+    nameOverrides: { hu: 'Kádak és pezsgőfürdők', pt: 'Lareiras e grelhadores' },
     src:  translateImage({ value: '20260615_Cat11.png' }),
     href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
     background: '#FFCCB7',
@@ -351,7 +354,7 @@ const categories = [
     },
   },
   {
-    name: 'Rugs',
+    name: 'Outdoor rugs',
     src:  translateImage({ value: '20260615_Cat12.png' }),
     href: 'https://www.beliani.ch/garden-furniture/garden-rugs/',
     background: '#FFCCB7',
@@ -377,7 +380,7 @@ const categories = [
     },
   },
   {
-    name: 'Textiles',
+    name: 'Outdoor textiles',
     src:  translateImage({ value: '20260615_Cat13.png' }),
     href: 'https://www.beliani.ch/garden-furniture/outdoor-textiles/',
     background: '#FFCCB7',
@@ -453,6 +456,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       white_line: true,
+      categoryImageTdClass: 'newsletterContainer',
       soonEndingBanner: true,
     },
     {
@@ -468,7 +472,8 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       white_line: true,
-      soonEndingBanner: false,
+      categoryImageTdClass: 'newsletterContainer',
+      soonEndingBanner: true,
     },
   ],
 });
