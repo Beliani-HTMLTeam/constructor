@@ -15,44 +15,44 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-05-11' }),
-  TopImageTitle_src : translateImage({ value: 'placeholder2026xxxx_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-06-01' }),
+  TopImageTitle_src:  getImageUrl('placeholder2026xxxx_01.png', true),
 
-  TopImage_src : getImageUrl('placeholder2026xxxx_Gif.png', true),   //often a gif
+  TopImage_src:  getImageUrl('placeholder2026xxxx_Gif.png', true),
   TopImage_href: translateLink({ value: 'content/lp26-06-01' }),
 
   code_href: translateLink({ value: 'content/lp26-06-01' }),
 
-  Banner_1      : translateLink({ value: 'content/lp26-05-27' }),
-  Banner_1_Image: translateImage({ value: '20260527b.png' }),
-  Banner_2      : translateLink({ value: 'content/lp26-05-20' }),
-  Banner_2_Image: translateImage({ value: '20260520b.png' }),
+  Banner_1:       translateLink({ value: 'content/lp26-05-27' }),
+  Banner_1_Image: getImageUrl('20260527b.png', true),
+  Banner_2:       translateLink({ value: 'content/lp26-05-20' }),
+  Banner_2_Image: getImageUrl('20260520b.png', true),
 };
 
 const TopImageTitle_data = {
-  color          : '#000000',
+  color:           '#000000',
   backgroundColor: '#FFCBBF',
-  type           : 'standard',
+  type:            'standard',
 };
 
 const intro = {
-  alignment      : 'left',
-  position       : 'afterFreebies',   // or 'afterTopImage'
-  color          : '#000000',
+  alignment:       'left',
+  position:        'afterFreebies',
+  color:           '#000000',
   backgroundColor: '#fecd8c',
 };
 
 const categories = [
   {
-    type        : 'deal',
-    copyCode    : true,   // tooltip above the icon
-    copyCodeWeb : false,   // fixed notification on the right side of the screen (takes priority)
+    type:       'deal',
+    copyCode:   true,
+    copyCodeWeb: true,
     background: '#FFCBBF',
-    color     : '#000000',
+    color:      '#000000',
     paddingTop: '0',
     spaceAfter: 'newsletterBottom45px',
-    paragraph : { spaceAfter: '' },
-    freebies  : [
+    paragraph:  { spaceAfter: '' },
+    freebies: [
       [
         { id: '324994', src: getImageUrl('placeholder2026xxxx_Pic01.png', true) },
         { id: '314370', src: getImageUrl('placeholder2026xxxx_Pic02.png', true) },
@@ -67,18 +67,18 @@ const categories = [
   },
 
   {
-    name      : 'Sofas',
-    src       : getImageUrl('placeholder2026xxxx_Cat10.png', true),
-    href      : 'https://www.beliani.ch/living-room-furniture/sofas/',
+    name:       'Sofas',
+    src:        getImageUrl('placeholder2026xxxx_Cat10.png', true),
+    href:       'https://www.beliani.ch/living-room-furniture/sofas/',
     background: '#fecd8c',
-    color     : '#000000',
-    type      : 'grid',
-    cta       : true,
+    color:      '#000000',
+    type:       'grid',
+    cta:        true,
     paddingTop: '45',
-    title     : { show: true, spaceAfter: 'newsletterBottom35px' },
-    paragraph : { show: false },
-    product   : { prices: true, name: true },
-    products  : [
+    title:      { show: true, spaceAfter: 'newsletterBottom35px' },
+    paragraph:  { show: false },
+    product:    { prices: true, name: true },
+    products:   [
       { id: '700038', src: getImageUrl('placeholder2026xxxx_Pic11.png', true) },
       { id: '502654', src: getImageUrl('placeholder2026xxxx_Pic12.png', true) },
       { id: '621129', src: getImageUrl('placeholder2026xxxx_Pic13.png', true) },
@@ -93,29 +93,27 @@ const COUNTRIES = ['UK', 'PL', 'DE', 'AT', 'CHDE', 'CHIT', 'CHFR',
 const data = Object.fromEntries(COUNTRIES.map((c) => [c, {}]));
 
 export default new entities.Campaign({
-  startId    : '43982',
-  name       : 'PLACEHOLDER Monday',
-  date       : '01.01.2000',
+  startId:     '43982',
+  name:        'PLACEHOLDER Monday',
+  date:        '01.01.2000',
   issueCardId: '427849',
-  lpId       : '30298',
-  alarm      : { isArchive: false, isActive: false },
-  isArchive  : false,
-  accent     : '#f5ba87',
+  lpId:        '30298',
+  alarm:       { isArchive: false, isActive: false },
+  isArchive:   false,
+  accent:      '#f5ba87',
   optimizeImg: false,
-  figmaUrl   : 'https://www.figma.com/design/PLACEHOLDER/',
+  figmaUrl:    'https://www.figma.com/design/PLACEHOLDER/',
   data,
   templates: [
     {
       background: '#FFCBBF',
-      color     : '#000000',
-      template  : templates.Monday,
-
-      css                    : types.CSS.NS,
-      name                   : 'Newsletter',
-      type                   : types.NEWSLETTER,
+      color:      '#000000',
+      template:   templates.Monday,
+      css:        types.CSS.NS,
+      name:       'Newsletter',
+      type:       types.NEWSLETTER,
       translationsSpreadsheet: campaignTranslationsSheet,
-      wrapper                : types.WRAPPER,
-
+      wrapper:    types.WRAPPER,
       TopImageTitle_data,
       intro,
       categories,
@@ -124,16 +122,13 @@ export default new entities.Campaign({
     },
     {
       background: '#FFCBBF',
-      color     : '#000000',
-      template  : templates.Monday,
-
-      css                    : types.CSS.LP,
-      name                   : 'Landing',
-      type                   : types.LANDINGPAGE,
+      color:      '#000000',
+      template:   templates.Monday,
+      css:        types.CSS.LP,
+      name:       'Landing',
+      type:       types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,
-      
-      copyCode: { code: 'TEST1234' },
-
+      copyCode:   { code: 'TEST1234' },
       TopImageTitle_data,
       intro,
       categories,

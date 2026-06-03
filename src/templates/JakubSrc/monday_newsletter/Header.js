@@ -27,14 +27,17 @@ const Header = ({ getHeader, country, background, type, id }) => {
         firstCategory: {
           src: getHeader('Header Category 1 src'),
           href: getHeader('Header Category 1 href'),
+          alt: getHeader('Header Category 1 alt'),
         },
         secondCategory: {
           src: getHeader('Header Category 2 src'),
           href: getHeader('Header Category 2 href'),
+          alt: getHeader('Header Category 2 alt'),
         },
         thirdCategory: {
           src: getHeader('Header Category 3 src'),
           href: getHeader('Header Category 3 href'),
+          alt: getHeader('Header Category 3 alt'),
         },
       },
       

@@ -132,6 +132,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           getPhrase,
           type,
           country,
+          offerTextOverrides: category.offerTextOverrides,
         })
       : '';
 
@@ -220,6 +221,7 @@ const renderBody = async ({
   getPhrase,
   type,
   country,
+  offerTextOverrides,
 }) => {
   // console.log('produkty ', products);
 
@@ -250,6 +252,7 @@ const renderBody = async ({
       getPhrase,
       renderType: type,
       country,
+      offerTextOverrides,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

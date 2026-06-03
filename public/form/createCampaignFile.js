@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Creates a campaign file from form inputs (Browser version)
  * @param {Object} formData - Form data object with all the inputs
  * @param {string} userScope - User scope (e.g., "KamilK") from environment
@@ -80,6 +80,7 @@ export async function createCampaignFile(formData, userScope = null) {
 
   return { filename, content, userScope };
 }
+
 
 /**
  * Generates the campaign file content
@@ -163,7 +164,7 @@ function generateCampaignContent(formData, campaignNumber) {
     TopImage_href: `translateLink({ value: 'content/lp${_yy}-${_mm}-${_dd}' })`,
 
     Banner_1: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,
-    // Banner images intentionally left as placeholders — they are often created on other dates
+    // Banner images intentionally left as placeholders â€” they are often created on other dates
     Banner_1_Image: `translateImage({ value: '{yyyymmdd}b.png' })`,
 
     Banner_2: `translateLink({ value: 'content/lp{yy}-{mm}-{dd}' })`,

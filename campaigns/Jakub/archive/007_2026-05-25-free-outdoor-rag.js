@@ -296,7 +296,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   accent: '#d4f5e9',
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/zSECb8cWxl0i2tKvUT5Tdj/Newsletter-Outdoor-rug---Monday-2026.05.25-FINAL--Copy-?node-id=0-1&t=mKMDBmNDrgZIB671-1',
@@ -309,6 +309,7 @@ export default new entities.Campaign({
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
         alignment: 'left',
+        titleOverrides: { pl: 'Meble ogrodowe <br> gotowe na wszystko' },
         cta: { textOverrides: { fi: 'Katso kaikki ulkokalusteet' } },
         position: 'afterFreebies',
       },
@@ -330,6 +331,7 @@ export default new entities.Campaign({
         color: '#000000', // unused
         backgroundColor: '#FFEFD9', // unused
         alignment: 'left',
+        titleOverrides: { pl: 'Meble ogrodowe <br> gotowe na wszystko' },
         cta: { textOverrides: { fi: 'Katso kaikki ulkokalusteet' } },
         position: 'afterFreebies',
       },

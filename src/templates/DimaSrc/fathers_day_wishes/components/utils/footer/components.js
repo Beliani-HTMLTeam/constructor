@@ -109,12 +109,23 @@ const advantages = ({ getFooter }) => ({
   },
 });
 
-const conditions = ({ getFooter, queries }) => ({
-  conditionsTitle: getFooter('Conditions title'),
-  conditionsText:
-    queries.condition ||
-    'all items are subject to availability. All prices are subject to change without notification',
-});
+const conditions = ({ getFooter, queries, country, type, getPhrase }) => {
+  if (['PL'].includes(country)) {
+    if (type === 'newsletter') {
+      return {
+        conditionsTitle: '',
+        conditionsText: getPhrase('Unsubscribe message'),
+      };
+    }
+    return { exclude: true };
+  }
+  return {
+    conditionsTitle: getFooter('Conditions title'),
+    conditionsText:
+      queries.condition ||
+      'all items are subject to availability. All prices are subject to change without notification',
+  };
+};
 
 const companyDetails = ({ getFooter }) => ({
   title: getFooter('Company Details'),
