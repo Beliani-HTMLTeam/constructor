@@ -256,7 +256,7 @@ const categories = [
   },
   {
     name: 'Kids',
-    nameOverrides: { pt: 'Quarto de crianças' },
+    nameOverrides: { pt: 'Quarto de crianças', se: 'Barnrum' },
     src:  translateImage({ value: '20260601_Cat08.png' }),
     href: 'https://www.beliani.ch/children-room/',
     background: '#750000',
@@ -447,7 +447,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   accent: '#ff4242',
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/fxr4hBIlBDwZfzmCM4l8GI/Newsletter-Beliani-Birthday-Start---Monday-2026.06.01--Copy-?node-id=0-1&t=KWEIe4G753K8HxiT-1',
@@ -472,6 +472,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       white_line: true,
+      categoryImageTdClass: 'newsletterContainer',
       soonEndingBanner: true,
     },
     {
@@ -493,6 +494,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       white_line: true,
+      categoryImageTdClass: 'newsletterContainer',
       soonEndingBanner: false,
     },
   ],

@@ -189,7 +189,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: true,
   figmaUrl: 'https://www.figma.com/design/9Q9ul76wtOL4FffJLY8wrg/2026.06.02---Free-Vase-FINAL--Copy-?m=auto&t=niO7678774YZN4xK-6',
   templates: [
