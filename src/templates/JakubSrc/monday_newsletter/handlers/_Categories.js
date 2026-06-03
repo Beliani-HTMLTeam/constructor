@@ -65,7 +65,13 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
   } else if (category?.hrefOverrides?.[countrySlug]) {
     href = add_utm(category.hrefOverrides[countrySlug]);
   } else if (category?.href) {
-    href = typeof category.href === 'string' ? getCategoryLink(category.href) : add_utm(category.href?.href);
+    if (category?.skipLinkTranslation) {
+      href = typeof category.href === 'string'
+        ? getCategoryLink(category.href, { suppressWarning: true })
+        : add_utm(category.href?.href);
+    } else {
+      href = typeof category.href === 'string' ? getCategoryLink(category.href) : add_utm(category.href?.href);
+    }
   }
 
   let src = category?.src;
@@ -105,6 +111,7 @@ export const CategoriesHandler = async ({
   type,
   country,
   getPhrase,
+  categoryImageTdClass,
 }) => {
   const safeCategories = Array.isArray(categories) ? categories : [];
   if (safeCategories.length === 0) {
@@ -138,5 +145,6 @@ export const CategoriesHandler = async ({
     links,
     type,
     country,
+    categoryImageTdClass,
   });
 };

@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
-const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country }) => {
+const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass }) => {
   let html = '';
 
   if (Array.isArray(categories)) {
@@ -20,7 +20,8 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
         add_utm,
         links,
         type,
-        country
+        country,
+        categoryImageTdClass
       );
     }
   }
@@ -28,7 +29,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
   return html;
 };
 
-const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country) => {
+const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass) => {
   const background = category.background ?? 'white';
   const color = category.color ?? '#000000';
 
@@ -68,7 +69,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         href: ctaHref,
         src: category.src,
         insideTr: true,
-        tdClass: category.tdClass,
+        tdClass: category.tdClass ?? categoryImageTdClass,
       })
     : '';
 

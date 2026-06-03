@@ -189,13 +189,15 @@ export class TemplateHandlers {
           partsTranslations.push(translation);
         } else {
           partsTranslations.push(item);
-          toast.error(`Brak tłumaczenia dla '${item}' w języku ${slug}`);
+          if (!options?.suppressWarning) toast.error(`Brak tłumaczenia dla '${item}' w języku ${slug}`);
         }
       } else {
         partsTranslations.push(item);
-        let message = `Nie znaleziono headera (klucza) dla ${item} w category links (sprawdź wielkość liter)`;
-        console.warn(message);
-        toast.error(message);
+        if (!options?.suppressWarning) {
+          let message = `Nie znaleziono headera (klucza) dla ${item} w category links (sprawdź wielkość liter)`;
+          console.warn(message);
+          toast.error(message);
+        }
       }
     });
 

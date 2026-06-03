@@ -24,6 +24,10 @@ export function getQueries(campaignId, slug) {
   return queries[campaignId]?.[slug] || {};
 }
 
+export function clearQueries() {
+  queries = {};
+}
+
 export default async function initStaticTranslations({ force = false } = {}) {
   // Check if static translations are already loaded
   const isAlreadyLoaded = Object.values(staticTranslations).some((sheet) => Object.keys(sheet).length > 0);

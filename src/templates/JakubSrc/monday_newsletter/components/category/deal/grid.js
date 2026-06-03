@@ -124,6 +124,7 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
   }
 
   const productName = product.name ?? '';
+  const productSize = product.size ?? '';
   const productHref = product.href ?? fallbackHref ?? '#';
   const productSrc = getProductSrc(product);
   const oldPrice = product.lowPrice ?? product.highPrice ?? '';
@@ -172,6 +173,11 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
                               <span class="newsletterProductTitleFreebie">${productName}</span>
                             </td>
                           </tr>
+                          ${productSize ? `<tr>
+                            <td align="center" style="color: ${color}">
+                              <span class="newsletterProductTitleFreebie">${productSize}</span>
+                            </td>
+                          </tr>` : ''}
                           <tr>
                             <td align="center" style="color: ${color}">
                               <span class="newsletterProductLowPrice">${freeText} </span>

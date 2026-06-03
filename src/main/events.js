@@ -3,6 +3,8 @@ import { incrementId } from '@/helpers/incrementId.js';
 import { getState, setState } from '@/main/state/appState';
 import { appConfig as config } from '@/utils/config';
 import { toast } from 'sonner';
+import { clearSheets } from '@/api/cache.js';
+import { clearQueries } from '@/api/translations.js';
 import Swal from 'sweetalert2';
 import { TemplateHandlers } from './handlers/handlers';
 import { staticTranslations } from '@/api/translations';
@@ -63,6 +65,9 @@ async function purgeDynamicSpreadsheetData(year, tabName) {
 
     if (response.ok) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      clearSheets();
+      clearQueries();
 
       toast.success(`Successfully purged dynamic spreadsheet!\nYear: ${year}\nTab: ${tabName}`);
     } else {

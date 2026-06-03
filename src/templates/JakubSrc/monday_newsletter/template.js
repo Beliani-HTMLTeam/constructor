@@ -31,6 +31,7 @@ const Monday = async ({
   getProductById,
   add_utm,
   soonEndingBanner = true,
+  categoryImageTdClass,
 }) => {
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
@@ -69,6 +70,7 @@ const Monday = async ({
     type,
     country,
     getPhrase,
+    categoryImageTdClass,
   };
 
   const CategoriesBeforeIntroElement = await CategoriesHandler({

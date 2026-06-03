@@ -75,19 +75,27 @@ export function setupPurgeDynamicSpreadsheetHandler(elements) {
     if (!selectedCampaign || !selectedCampaign.startId) {
       return toast.error('Please select a campaign first!');
     }
-    const selectedTemplates = getState('selectedTemplates');
-    if (!selectedTemplates || selectedTemplates.length === 0) {
+    const template = getState('template');
+    if (!template) {
       return toast.error('Please select a template first!');
     }
-    const template = selectedTemplates[0];
     if (!template.translationsSpreadsheet) {
       return toast.error('Selected template does not have translations spreadsheet data!');
     }
-    const spreadsheetData = template.translationsSpreadsheet.split('::');
-    if (spreadsheetData.length !== 2) {
+    const currentYear = String(new Date().getFullYear());
+    const spreadsheetRaw = template.translationsSpreadsheet.trim();
+    let autoYear, autoTabName;
+    if (spreadsheetRaw.includes('::')) {
+      const [y, t] = spreadsheetRaw.split('::');
+      autoYear = y.trim() || currentYear;
+      autoTabName = t.trim();
+    } else {
+      autoYear = currentYear;
+      autoTabName = spreadsheetRaw;
+    }
+    if (!autoTabName) {
       return toast.error('Invalid translations spreadsheet format!');
     }
-    const [autoYear, autoTabName] = spreadsheetData;
     purgeDynamicSpreadsheetData(autoYear, autoTabName);
   });
 }

@@ -48,7 +48,7 @@ const resolveOfferRows = ({ queries, renderType, offerTexts }) => {
 
 const isSixOffers = (queries) => Array.isArray(queries?.offer) && queries.offer.length === 6;
 
-const renderSixOfferLanding = ({ queries, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor }) => {
+const renderSixOfferLanding = ({ queries, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
   const offers = [offerItems[0] ?? 'Offer Part 1', offerItems[1] ?? 'Offer Part 2', offerItems[2] ?? 'Offer Part 3'];
   const codes = [offerItems[3] ?? 'Code: xxxxx', offerItems[4] ?? 'Code: xxxxx', offerItems[5] ?? 'Code: xxxxx'];
@@ -59,10 +59,10 @@ const renderSixOfferLanding = ({ queries, showCopyCode = false, showCopyCodeWeb 
     html += Space({ insideTr: true, className: 'newsletterBottom20px' });
     if (showCopyCodeWeb) {
       const codeValue = codes[i].split(/:\s+/).slice(1).join(': ').trim() || codes[i];
-      html += CopyCodeWebNotification({ text: codes[i], codeValue, color: copyCodeColor });
+      html += CopyCodeWebNotification({ text: codes[i], codeValue, color: copyCodeColor, label: copyCodeLabel });
     } else if (showCopyCode) {
       const codeValue = codes[i].split(/:\s+/).slice(1).join(': ').trim() || codes[i];
-      html += CopyCodeCTA({ text: codes[i], codeValue, color: copyCodeColor });
+      html += CopyCodeCTA({ text: codes[i], codeValue, color: copyCodeColor, label: copyCodeLabel });
     } else {
       html += renderOfferRow(codes[i]);
     }
@@ -94,7 +94,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
   return html;
 };
 
-const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor }) => {
+const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
 
   if (offerItems.length === 6) {
@@ -124,29 +124,30 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
   const codeText = offerItems[2] ?? 'Code: xxxxx';
   if (showCopyCodeWeb) {
     const codeValue = codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText;
-    return CopyCodeWebNotification({ text: codeText, codeValue, color: copyCodeColor });
+    return CopyCodeWebNotification({ text: codeText, codeValue, color: copyCodeColor, label: copyCodeLabel });
   }
   if (showCopyCode) {
     const codeValue = codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText;
-    return CopyCodeCTA({ text: codeText, codeValue, color: copyCodeColor });
+    return CopyCodeCTA({ text: codeText, codeValue, color: copyCodeColor, label: copyCodeLabel });
   }
   return renderOfferRow(codeText);
 };
 
 export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, offerTexts }) => {
   const t = getPhrase;
+  const copyCodeLabel = getPhrase?.('Copy code') || 'Code copied';
   const hasSixOffers = isSixOffers(queries);
   const offerItems = resolveOfferRows({ queries, renderType, offerTexts });
   let html = '';
 
   html += Space({ insideTr: true, className: 'newsletterBottom35px' });
   if (hasSixOffers && renderType === 'landing') {
-    html += renderSixOfferLanding({ queries, showCopyCode, showCopyCodeWeb, copyCodeColor });
+    html += renderSixOfferLanding({ queries, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel });
   } else if (hasSixOffers && renderType === 'newsletter') {
     html += renderSixOfferNewsletter({ queries, links, t });
   } else {
     html += renderOfferRows(offerItems);
-    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor });
+    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel });
     html += Space({ insideTr: true, className: 'newsletterBottom35px' });
   }
 
