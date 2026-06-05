@@ -53,6 +53,11 @@ const categories = [
       align: 'center',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
+      textOverrides: {
+        de:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+        at:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+        chde: 'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+      },
     },
     cta: { href: 'https://www.beliani.ch/', textOverrides: { fi: 'Tutustu valikoimaan' } },
     background: '#FFCCB7',
@@ -171,6 +176,7 @@ const categories = [
   {
     name: 'Benches',
     src:  translateImage({ value: '20260615_Cat05.png' }),
+    nameOverrides: { hu: 'Kerti padok'},
     href: 'https://www.beliani.ch/outdoor-furniture/garden-benches',
     background: '#FFCCB7',
     color: '#000000',
@@ -301,7 +307,7 @@ const categories = [
   },
   {
     name: 'Plant Pots',
-    nameOverrides: { fi: 'Ulkoruukut' },
+    nameOverrides: { fi: 'Ulkoruukut', hu:'Kültéri Virágtartók' },
     src:  translateImage({ value: '20260615_Cat10.png' }),
     href: 'https://www.beliani.ch/garden-accessories/pots-and-planters/',
     background: '#FFCCB7',
@@ -328,7 +334,7 @@ const categories = [
   },
   {
     name: 'Fire pits',
-    nameOverrides: { hu: 'Kádak és pezsgőfürdők', pt: 'Lareiras e grelhadores' },
+    nameOverrides: { pt: 'Lareiras e grelhadores', hu: 'Tűzrakóhelyek és grillezők', it: 'Focolari & Barbeque' },
     src:  translateImage({ value: '20260615_Cat11.png' }),
     href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
     background: '#FFCCB7',

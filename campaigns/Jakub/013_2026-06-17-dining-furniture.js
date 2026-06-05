@@ -99,7 +99,7 @@ const categories = [
   },
   {
     name: 'Chairs',
-    nameOverrides: { pt: 'Cadeiras de jantar' },
+    nameOverrides: { pt: 'Cadeiras de jantar', hu:'Étkezőszékek' },
     src: getImageUrl('20260617_Cat20.png', true),
     href: 'https://www.beliani.ch/dining-room-furniture/chairs/dining-chairs/',
     background: '#DCBFBF',
