@@ -12,6 +12,7 @@ export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country 
 
   return `
     <!-- Soon Ending Banners -->
+    <!--[if mso]><table align="center" border="0" cellspacing="0" cellpadding="0" width="650"><tr><td><![endif]-->
     <table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
       ${Line({ insideTr: true })}
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
@@ -40,5 +41,6 @@ export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country 
 
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
     </table>
+    <!--[if mso]></td></tr></table><![endif]-->
   `;
 };
