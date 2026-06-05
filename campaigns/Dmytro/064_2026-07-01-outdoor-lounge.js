@@ -39,7 +39,7 @@ const categories = [
   {
     name: 'Lounge Sets',
     src: getImageUrl('20260701/20260701Category10.jpg', true),
-    href: '',
+    href: 'https://www.beliani.ch/outdoor-furniture/lounge-sets/',
     background: '#FFD6C5',
     color: '#000000',
     type: 'grid',
@@ -89,7 +89,7 @@ const categories = [
   {
     name: 'Sun Loungers',
     src: getImageUrl('20260701/20260701Category20.jpg', true),
-    href: 'https://www.beliani.ch/garden-furniture/garden-rugs/',
+    href: 'https://www.beliani.ch/outdoor-furniture/sun-loungers/',
     background: '#FFDEB3',
     color: '#000000',
     type: 'grid',
@@ -139,7 +139,7 @@ const categories = [
   {
     name: 'Swings',
     src: getImageUrl('20260701/20260701Category30.jpg', true),
-    href: 'https://www.beliani.ch/rugs/jute-rugs/',
+    href: 'https://www.beliani.ch/outdoor-furniture/swings/',
     background: '#FFD6C5',
     color: '#000000',
     type: 'grid',
@@ -189,7 +189,7 @@ const categories = [
   {
     name: 'Benches',
     src: getImageUrl('20260701/20260701Category40.jpg', true),
-    href: 'https://www.beliani.ch/rugs/childrens-rugs/',
+    href: 'https://www.beliani.ch/outdoor-furniture/garden-benches/',
     background: '#FFDEB3',
     color: '#000000',
     type: 'grid',
@@ -266,22 +266,22 @@ const categories = [
       {
         name: 'Patio daybeds',
         src: getImageUrl('20260701/20260701Additional1.png', true),
-        href: 'https://www.beliani.ch/lighting/floor-lamps/',
+        href: 'https://www.beliani.ch/outdoor-furniture/patio-daybeds/',
       },
       {
         name: 'Hammocks',
         src: getImageUrl('20260701/20260701Additional2.png', true),
-        href: 'https://www.beliani.ch/living-room-furniture/stools/',
+        href: 'https://www.beliani.ch/outdoor-furniture/hammock/',
       },
       {
         name: 'Outdoor Pouffes',
         src: getImageUrl('20260701/20260701Additional3.png', true),
-        href: 'https://www.beliani.ch/storage/baskets-containers/',
+        href: 'https://www.beliani.ch/outdoor-furniture/outdoor-pouffes/',
       },
       {
         name: 'Hanging chairs',
         src: getImageUrl('20260701/20260701Additional4.png', true),
-        href: 'https://www.beliani.ch/textiles/',
+        href: 'https://www.beliani.ch/outdoor-furniture/garden-hanging-chairs/',
       },
     ],
   },
