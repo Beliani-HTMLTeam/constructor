@@ -227,8 +227,8 @@ const categories = [
         href: 'https://www.beliani.ch/bedroom-furniture/storage/',
       },
       {
-        name: 'Lighting',
-        src: DimasTranslateImage({ value: '_lighting.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
+        name: 'Textiles',
+        src: DimasTranslateImage({ value: '_textiles.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
         href: 'https://www.beliani.ch/bedroom-furniture/textiles/',
       },
     ],

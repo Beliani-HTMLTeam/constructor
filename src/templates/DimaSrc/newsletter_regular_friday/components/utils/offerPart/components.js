@@ -172,6 +172,7 @@ const LandingOfferPart = ({
       code: queries?.code || 'Code tableQuery not found.',
       link: href,
       type,
+      showCopyCode: true,
     })}
   </td>
 </tr>
@@ -248,6 +249,7 @@ const LandingOfferPart = ({
         code: queries?.code || 'Code tableQuery not found.',
         link: href,
         type,
+        showCopyCode: true,
       })}
     </td>
   </tr>

@@ -1,5 +1,17 @@
-export function GetCode({ type, code, link, color }) {
+import { CopyCodeCTA } from "./CopyCodeCTA";
+
+export function GetCode({ type, code = '', link, color, showCopyCode = false }) {
   console.log('getCode', code);
+
+  const codeString = typeof code === 'string' ? code : String(code || '');
+
+  let copyCodeHtml = '';
+  if (showCopyCode && type === 'landing') {
+    const codeValue = codeString.split(/:\s+/).slice(1).join(': ').trim() || codeString;
+    copyCodeHtml = CopyCodeCTA({ text: codeString, codeValue });
+  } else {
+    copyCodeHtml = codeString
+  }
   return `
   ${
     type === 'newsletter'
@@ -24,7 +36,7 @@ export function GetCode({ type, code, link, color }) {
             <tr>
                 <td align="center">
                     <span class="newsletterCode" style="color: ${color || '#000'}">
-                        ${code}
+                        ${copyCodeHtml}
                     </span>
                 </td>
             </tr>

@@ -56,7 +56,8 @@ const timer = {
   color: '#000000',
   isCtaVisible: true,
   image: {
-    PL: "https://gen.sendtric.com/countdown/tnmyv1dru3"
+    PL: "https://gen.sendtric.com/countdown/tnmyv1dru3",
+    FR: "https://gen.sendtric.com/countdown/7quqv4l8av"
   },
 };
 
