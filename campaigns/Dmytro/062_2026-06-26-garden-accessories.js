@@ -57,7 +57,27 @@ const timer = {
   isCtaVisible: true,
   image: {
     PL: "https://gen.sendtric.com/countdown/tnmyv1dru3",
-    FR: "https://gen.sendtric.com/countdown/7quqv4l8av"
+    FR: "https://gen.sendtric.com/countdown/7quqv4l8av",
+    UK: "https://gen.sendtric.com/countdown/vc6ddpbewv",
+    DE: "https://gen.sendtric.com/countdown/q8cyku1vup",
+    CZ: "https://gen.sendtric.com/countdown/pzq5trp1n9",
+    SK: "https://gen.sendtric.com/countdown/iqhxsrcnu5",
+    HU: "https://gen.sendtric.com/countdown/cg5ckn3oz2",
+    IT: "https://gen.sendtric.com/countdown/830ddtdk4q",
+    ES: "https://gen.sendtric.com/countdown/2lj0o000i6",
+    PT: "https://gen.sendtric.com/countdown/ztnb17k032",
+    NO: "https://gen.sendtric.com/countdown/q6lhx5s9rs",
+    SE: "https://gen.sendtric.com/countdown/4xq5gyqdng",
+    FI: "https://gen.sendtric.com/countdown/m2kd161fqo",
+    DK: "https://gen.sendtric.com/countdown/3fw48i0eel",
+    CHDE: "https://gen.sendtric.com/countdown/3f2dq9gvje",
+    CHFR: "https://gen.sendtric.com/countdown/54mf8i79kj",
+    BEFR: "https://gen.sendtric.com/countdown/hqyhv8ol1s",
+    BENL: "https://gen.sendtric.com/countdown/8jgu194xyj",
+    NL: "https://gen.sendtric.com/countdown/rgdyz93xjy",
+    AT: "https://gen.sendtric.com/countdown/xa09rxxlyp",
+    RO: "https://gen.sendtric.com/countdown/s73f97df9s",
+
   },
 };
 

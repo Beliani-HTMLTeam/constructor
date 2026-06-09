@@ -133,6 +133,8 @@ const LandingOfferPart = ({
   spaceClass = 'newsletterBottom35px',
   isSpaceBetweenAllParts = false,
   spanStyle = '',
+  copyCodeColor,
+  copyCodeLabel = '',
 }) => {
   const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
 
@@ -250,6 +252,8 @@ const LandingOfferPart = ({
         link: href,
         type,
         showCopyCode: true,
+        copyCodeColor,
+        copyCodeLabel,
       })}
     </td>
   </tr>

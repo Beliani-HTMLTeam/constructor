@@ -18,7 +18,9 @@ export function OfferPartCode({
   germanSeparatingLine,
   spaceClass,
   isSpaceBetweenAllParts,
-  spanStyle
+  spanStyle,
+  copyCodeColor,
+  copyCodeLabel,
 }) {
   console.log('href:', href, data, isMonday);
   const newsletter = NewsletterOfferPart({
@@ -53,7 +55,9 @@ export function OfferPartCode({
     germanSeparatingLine,
     spaceClass,
     isSpaceBetweenAllParts,
-    spanStyle
+    spanStyle,
+    copyCodeColor,
+    copyCodeLabel,
   });
   return `
       <tr>

@@ -271,6 +271,7 @@ export default new entities.Campaign({
         alignment: "center",
         type: "code",
         spanStyle: 'text-decoration: underline;',
+        // germanSeparatingLine: true,
       },
       links: links,
       tableQueries: tableQueries,
@@ -295,7 +296,8 @@ export default new entities.Campaign({
         backgroundColor: "#FFDEB3",
         alignment: "center",
         type: "code",
-        spanStyle: 'text-decoration: underline;'
+        spanStyle: 'text-decoration: underline;',
+        // germanSeparatingLine: true,
       },
       links: links,
       tableQueries: tableQueries,

@@ -167,7 +167,9 @@ const RegularFridayNslt = async ({
       germanSeparatingLine: OfferPart.germanSeparatingLine,
       spaceClass: OfferPart?.spaceClass,
       isSpaceBetweenAllParts: OfferPart?.isSpaceBetweenAllParts,
-      spanStyle: OfferPart?.spanStyle
+      spanStyle: OfferPart?.spanStyle,
+      copyCodeColor: OfferPart?.copyCodeColor,
+      copyCodeLabel: getPhrase('Copy code'),
     });
   } else if (OfferPart && OfferPart.type === 'codes') {
     OfferPartElement = `<tr>

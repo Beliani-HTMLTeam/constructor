@@ -1,6 +1,6 @@
-import { CopyCodeCTA } from "./CopyCodeCTA";
+import { CopyCodeCTA, CopyCodeWebNotification } from "./CopyCodeCTA";
 
-export function GetCode({ type, code = '', link, color, showCopyCode = false }) {
+export function GetCode({ type, code = '', link, color, showCopyCode = false,  copyCodeColor, copyCodeLabel }) {
   console.log('getCode', code);
 
   const codeString = typeof code === 'string' ? code : String(code || '');
@@ -8,7 +8,7 @@ export function GetCode({ type, code = '', link, color, showCopyCode = false }) 
   let copyCodeHtml = '';
   if (showCopyCode && type === 'landing') {
     const codeValue = codeString.split(/:\s+/).slice(1).join(': ').trim() || codeString;
-    copyCodeHtml = CopyCodeCTA({ text: codeString, codeValue });
+    copyCodeHtml = CopyCodeWebNotification({ text: codeString, codeValue, color: copyCodeColor, label: copyCodeLabel });
   } else {
     copyCodeHtml = codeString
   }
