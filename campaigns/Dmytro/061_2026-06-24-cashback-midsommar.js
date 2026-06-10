@@ -44,9 +44,32 @@ const TopImageTitle_data = {
   type: 'twoSameLines',
 };
 
+const OfferPart_data = {
+  color: "#000000",
+  backgroundColor: "#FFDEB3",
+  alignment: "center",
+  type: "code",
+  spanStyle: 'text-decoration: underline;',
+  overrides: {
+    DE: {
+      offerPart1: "Hol den Sommer ins Haus und sichere dir <br/>100 € auf die nächste Bestellung."
+    },
+    AT: {
+      offerPart1: "Hol den Sommer ins Haus und sichere dir <br/>100 € auf die nächste Bestellung."
+    },
+    CHDE: {
+      offerPart1: "Hol den Sommer ins Haus und sichere dir <br/>100 Fr. auf die nächste Bestellung."
+    }
+  },
+}
+
 const categories = [
   {
     name: 'Outdoor Furniture',
+    overrides: {
+      FI: "Puutarha ja parveke",
+      PT: "Jardim e varanda"
+    },
     background: '#FFDEB3',
     color: '#000000',
     src: getImageUrl('20260624/20260624Category1.jpg', true),
@@ -59,7 +82,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 45,
     line: {
@@ -106,7 +129,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 35,
     line: {
@@ -153,7 +176,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 35,
     line: {
@@ -200,7 +223,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 35,
     line: {
@@ -265,14 +288,7 @@ export default new entities.Campaign({
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
-      OfferPart: {
-        color: "#000000",
-        backgroundColor: "#FFDEB3",
-        alignment: "center",
-        type: "code",
-        spanStyle: 'text-decoration: underline;',
-        // germanSeparatingLine: true,
-      },
+      OfferPart: OfferPart_data,
       links: links,
       tableQueries: tableQueries,
     },
@@ -291,14 +307,7 @@ export default new entities.Campaign({
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
-      OfferPart: {
-        color: "#000000",
-        backgroundColor: "#FFDEB3",
-        alignment: "center",
-        type: "code",
-        spanStyle: 'text-decoration: underline;',
-        // germanSeparatingLine: true,
-      },
+      OfferPart: OfferPart_data,
       links: links,
       tableQueries: tableQueries,
     },

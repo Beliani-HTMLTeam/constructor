@@ -26,6 +26,7 @@ import { liquidatorContact } from '../category/liquidatorContact';
 import { FooterLiquidator } from '../components/Footer_Liquidator';
 import { ImageWithoutLink } from '../components/ImageWithoutLink';
 import { TopImageTitleWithoutLink } from '../components/TopImageTitleWithoutLink';
+import { getCategoryName } from '../utils/categories';
 
 const RegularFridayNslt = async ({
   links,
@@ -59,7 +60,8 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', TopImageTitle_data, type, queries);
+  console.log('wszystko', TopImageTitle_data, type, queries,   shop,
+    country,);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -99,10 +101,6 @@ const RegularFridayNslt = async ({
         title1: queries.TopImageTitle[0] || 'Translation not found',
         title2: queries.TopImageTitle[1] || 'Translation not found',
         title3: queries.TopImageTitle[2] || null,
-
-        // placeholder
-        // title1: 'Hurry!',
-        // title2: 'Spring Sale ends Sunday',
         color: TopImageTitle_data.color,
         backgroundColor: TopImageTitle_data.backgroundColor,
         type: TopImageTitle_data.type,
@@ -148,6 +146,7 @@ const RegularFridayNslt = async ({
 
   if (OfferPart && OfferPart.type === 'code') {
     OfferPartElement = OfferPartCode({
+      country,
       isMonday: OfferPart.isMonday || false,
       color: OfferPart.color,
       data: queries.offerPart,
@@ -158,11 +157,8 @@ const RegularFridayNslt = async ({
       selectCampaign: selectCampaign,
       add_utm,
       shop,
+      overrides: OfferPart.overrides,
       backgroundColor: OfferPart.backgroundColor,
-      paragraph1: 'Enjoy €100 cashback for your next order.',
-      paragraph2:
-        'Spend min. €300 on your purchase and we will give you a €100 cashback to use in your next order. Insert a code at the check out to receive a voucher with cashback.',
-      paragraph3: 'This is a time limited offer. Valid until 04/01/2026',
       paragraphAlign: OfferPart.alignment,
       germanSeparatingLine: OfferPart.germanSeparatingLine,
       spaceClass: OfferPart?.spaceClass,
@@ -322,12 +318,7 @@ const RegularFridayNslt = async ({
                 : category.href
                   ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
                   : category.href;
-            const name =
-              category.title && category.title.source === 'queries'
-                ? queries.categories[idx]
-                : getCategoryTitle
-                  ? getCategoryTitle(category.name)
-                  : category.name;
+            const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
 
             return {
               ...category,
@@ -342,12 +333,7 @@ const RegularFridayNslt = async ({
                 : category.href
                   ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
                   : category.href;
-            const name =
-              category.title.source === 'queries'
-                ? queries.categories[idx]
-                : getCategoryTitle
-                  ? getCategoryTitle(category.name)
-                  : category.name;
+            const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
 
             return {
               ...category,

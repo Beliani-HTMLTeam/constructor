@@ -1,11 +1,7 @@
 import { SoonEndingBanner } from "@/templates/Thursday/components/SoonEndingBanner";
-const campaignTranslationsSheet = '01.06.26 - Beliani Birthday Start';
+const campaignTranslationsSheet = '03.08.26 - August Peak Start';
 
 const tableQueries = [
-  {
-    tableRange: '6',
-    name: 'TopImageTitle',
-  },
   {
     name: 'offer_date',
     tableRange: '21',
@@ -25,29 +21,17 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-06-01' }),
-  TopImageTitle_src: translateImage({ value: '20260601_01.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-07-24' }),
+  Banner_1_Image: translateImage({ value: '20260724b.png' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-05-28' }),
-  Banner_1_Image: translateImage({ value: '20260528b.png' }),
-
-  Banner_2: translateLink({ value: 'content/lp26-05-20' }),
-  Banner_2_Image: translateImage({ value: '20260520b.png' }),
-};
-
-const TopImageTitle_data = {
-  color: '#fff',
-  backgroundColor: '#750000',
-  type: 'singleLineBold',
-  textOverrides: {
-    chde: ['Geburtstags-Sale'],
-  },
+  Banner_2: translateLink({ value: 'content/lp26-07-23' }),
+  Banner_2_Image: translateImage({ value: '20260723b.png' }),
 };
 
 const categories = [
   {
-    src:  translateImage({ value: '20260601_gif.gif' }),
-    href: translateLink({ value: 'content/lp26-06-01' }),
+    src:  translateImage({ value: '20260803_gif.gif' }),
+    href: translateLink({ value: 'content/lp26-08-03' }),
     paddingTop: 0,
     color: '#fff',
     paragraph: {
@@ -55,11 +39,11 @@ const categories = [
       align: 'center',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
-      textOverrides: {
-        de:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
-        at:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
-        chde: 'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
-      },
+      // textOverrides: {
+      //   de:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+      //   at:   'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+      //   chde: 'Nur für kurze Zeit.<br>Das Angebot gilt bis zum 21. Juni.',
+      // },
     },
     cta: { href: 'https://www.beliani.ch/' },
     background: '#750000',
@@ -73,9 +57,9 @@ const categories = [
   {
     name: 'Outdoor Furniture',
     nameOverrides: { fi: 'Ulkokalusteet', nl: 'Tuinmeubels', benl: 'Tuinmeubels', uk: 'Outdoor', ro: 'Exterior', pl: 'Meble ogrodowe' },
-    src:  translateImage({ value: '20260601_Cat01.png' }),
+    src:  translateImage({ value: '20260803_Cat01.png' }),
     href: 'https://www.beliani.ch/outdoor-furniture/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -84,7 +68,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -99,9 +83,9 @@ const categories = [
   },
   {
     name: 'Sofas',
-    src:  translateImage({ value: '20260601_Cat02.png' }),
+    src:  translateImage({ value: '20260803_Cat02.png' }),
     href: 'https://www.beliani.ch/sofas/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -110,7 +94,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -125,9 +109,9 @@ const categories = [
   },
   {
     name: 'Beds',
-    src:  translateImage({ value: '20260601_Cat03.png' }),
+    src:  translateImage({ value: '20260803_Cat03.png' }),
     href: 'https://www.beliani.ch/beds/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -136,7 +120,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -151,9 +135,9 @@ const categories = [
   },
   {
     name: 'Armchairs',
-    src:  translateImage({ value: '20260601_Cat04.png' }),
+    src:  translateImage({ value: '20260803_Cat04.png' }),
     href: 'https://www.beliani.ch/armchairs/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -162,7 +146,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -177,9 +161,9 @@ const categories = [
   },
   {
     name: 'Chairs',
-    src:  translateImage({ value: '20260601_Cat05.png' }),
+    src:  translateImage({ value: '20260803_Cat05.png' }),
     href: 'https://www.beliani.ch/chairs/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -188,7 +172,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -203,9 +187,9 @@ const categories = [
   },
   {
     name: 'Tables',
-    src:  translateImage({ value: '20260601_Cat06.png' }),
+    src:  translateImage({ value: '20260803_Cat06.png' }),
     href: 'https://www.beliani.ch/tables/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -214,7 +198,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -230,9 +214,9 @@ const categories = [
   {
     name: 'Storage',
     nameOverrides: { fi: 'Säilytys', pt: 'Arrumação' },
-    src:  translateImage({ value: '20260601_Cat07.png' }),
+    src:  translateImage({ value: '20260803_Cat07.png' }),
     href: 'https://www.beliani.ch/storage/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -241,7 +225,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -254,38 +238,12 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
   },
-  {
-    name: 'Kids',
-    nameOverrides: { pt: 'Quarto de crianças', se: 'Barnrum' },
-    src:  translateImage({ value: '20260601_Cat08.png' }),
-    href: 'https://www.beliani.ch/children-room/',
-    background: '#750000',
-    color: '#fff',
-    type: 'grid',
-    cta: true,
-    paddingTop: '35',
-    spaceAfter: 'newsletterBottom35px',
-    line: {
-      show: true,
-      insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
-    },
-    title: {
-      show: true,
-      spaceAfter: 'newsletterBottom35px',
-    },
-    paragraph: {
-      show: false,
-      align: 'left',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
-    },
-  },
+
   {
     name: 'Textiles',
-    src:  translateImage({ value: '20260601_Cat09.png' }),
+    src:  translateImage({ value: '20260803_Cat09.png' }),
     href: 'https://www.beliani.ch/textiles/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -294,7 +252,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -310,9 +268,9 @@ const categories = [
   {
     name: 'Lighting',
     nameOverrides: { de: 'Beleuchtung', at: 'Beleuchtung', chde: 'Beleuchtung' },
-    src:  translateImage({ value: '20260601_Cat10.png' }),
+    src:  translateImage({ value: '20260803_Cat10.png' }),
     href: 'https://www.beliani.ch/lighting/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -321,7 +279,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -337,9 +295,9 @@ const categories = [
   {
     name: 'Bathtubs',
     nameOverrides: { hu: 'Kádak és pezsgőfürdők', pt: 'Banheiras e hidromassagem', chde: 'Badwannen' },
-    src:  translateImage({ value: '20260601_Cat11.png' }),
+    src:  translateImage({ value: '20260803_Cat11.png' }),
     href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -348,7 +306,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -364,9 +322,9 @@ const categories = [
   {
     name: 'Desks',
     nameOverrides: { hu: 'Irodai asztalok' },
-    src:  translateImage({ value: '20260601_Cat12.png' }),
+    src:  translateImage({ value: '20260803_Cat12.png' }),
     href: 'https://www.beliani.ch/desks-eng/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -375,7 +333,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -390,9 +348,9 @@ const categories = [
   },
   {
     name: 'Rugs',
-    src:  translateImage({ value: '20260601_Cat13.png' }),
+    src:  translateImage({ value: '20260803_Cat13.png' }),
     href: 'https://www.beliani.ch/rugs/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -401,7 +359,7 @@ const categories = [
     line: {
       show: true,
       insideContainer: true,
-      src:  'https://pictureserver.net/static/2026/footer/white_line.jpg',
+      src:  'https://pictureserver.net/static/2026/footer/line.jpg',
     },
     title: {
       show: true,
@@ -417,9 +375,9 @@ const categories = [
   {
     name: 'Accessories',
     nameOverrides: { hu: 'Kiegészítők' },
-    src:  translateImage({ value: '20260601_Cat14.png' }),
+    src:  translateImage({ value: '20260803_Cat14.png' }),
     href: 'https://www.beliani.ch/home-accessories/',
-    background: '#750000',
+    background: '#FFE9CC',
     color: '#fff',
     type: 'grid',
     cta: true,
@@ -439,21 +397,21 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: '43758',
-  name: 'PEAK Birthday start',
-  date: '01.06.2026',
-  issueCardId: '482698',
-  lpId: '30173',
+  startId: '44923',
+  name: 'PEAK August start',
+  date: '03.08.2026',
+  issueCardId: '500866',
+  lpId: '30757',
   alarm: {
     isActive: false,
   },
   isArchive: true,
-  accent: '#ff4242',
+  accent: '#FFE9CC',
   optimizeImg: false,
   figmaUrl: 'https://www.figma.com/design/fxr4hBIlBDwZfzmCM4l8GI/Newsletter-Beliani-Birthday-Start---Monday-2026.06.01--Copy-?node-id=0-1&t=KWEIe4G753K8HxiT-1',
   templates: [
     {
-      background: '#750000',
+      background: '#FFE9CC',
       color: '#fff',
       template: templates.Monday, 
       css: types.CSS.NS,
@@ -461,7 +419,6 @@ export default new entities.Campaign({
       type: types.NEWSLETTER,
       translationsSpreadsheet: campaignTranslationsSheet,
       wrapper: types.WRAPPER,
-      TopImageTitle_data: TopImageTitle_data,
       conditionOverrides: {
         chde: [
           'Alle Artikel unterliegen der Verfügbarkeit. Alle Preise können ohne Vorankündigung geändert werden.',
@@ -476,14 +433,13 @@ export default new entities.Campaign({
       soonEndingBanner: true,
     },
     {
-      background: '#750000',
+      background: '#FFE9CC',
       color: '#fff',
       template: templates.Monday,
       css: types.CSS.LP,
       name: 'Landing',
       type: types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,
-      TopImageTitle_data: TopImageTitle_data,
       conditionOverrides: {
         chde: [
           'Alle Artikel unterliegen der Verfügbarkeit. Alle Preise können ohne Vorankündigung geändert werden.',
