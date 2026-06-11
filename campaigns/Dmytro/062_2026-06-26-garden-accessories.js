@@ -179,7 +179,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260626/20260626Category30.jpg', true),
-    href: 'https://www.beliani.ch/home-accessories/accessories-decor/lanterns/',
+    href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',
     type: 'grid',
     insideContainer: true,
     title: {

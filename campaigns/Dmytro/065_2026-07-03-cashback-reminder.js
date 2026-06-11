@@ -48,8 +48,10 @@ const TopImageTitle_data = {
 
 const timer = {
   position: "insideTopImageTitle",
+
   image: {
-    UK: "https://gen.sendtric.com/countdown/a51vgq707l"
+    UK: "https://gen.sendtric.com/countdown/a51vgq707l",
+    CHDE: "https://gen.sendtric.com/countdown/zp3gl4v7v4"
   },
 };
 
@@ -173,6 +175,7 @@ export default new entities.Campaign({
         color: "#000000",
         backgroundColor: "#FFDEB3",
         type: "timer",
+        spaceWithoutCTA: "newsletterBottom20px"
       },
       OfferPart: {
         color: "#000000",
@@ -207,6 +210,7 @@ export default new entities.Campaign({
         color: "#000000",
         backgroundColor: "#FFDEB3",
         type: "timer",
+        spaceWithoutCTA: "newsletterBottom20px"
       },
       OfferPart: {
         color: "#000000",

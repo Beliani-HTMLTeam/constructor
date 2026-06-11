@@ -92,7 +92,7 @@ ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
       </td>
     </tr>
     ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
-    ${ isSpaceBetweenAllParts ? Space({ insideTr: true, className: 'newsletterBottom25px' }) : ''}
+    ${ isSpaceBetweenAllParts ? Space({ insideTr: true, className: spaceClass }) : ''}
     <tr>
       <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center', color })}
@@ -248,7 +248,7 @@ const LandingOfferPart = ({
     </td>
   </tr>
   ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
-  ${ isSpaceBetweenAllParts ? Space({ insideTr: true, className: 'newsletterBottom25px' }) : ''}
+  ${ isSpaceBetweenAllParts ? Space({ insideTr: true, className: spaceClass }) : ''}
   <tr>
     <td style="color: ${color}; text-align: center;">
       ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center', color })}

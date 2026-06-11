@@ -242,7 +242,7 @@ const categories = [
       {
         name: 'Mattresses',
         src: DimasTranslateImage({ value: '_mattresses.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
-        href: 'https://www.beliani.ch/bedroom-furniture/mattresses/',
+        href: 'https://www.beliani.ch/bedroom-furniture/mattresses/all+products/',
       },
       {
         name: 'Storage',
