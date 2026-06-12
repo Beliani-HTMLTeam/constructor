@@ -242,7 +242,7 @@ const RegularFridayNslt = async ({
               : links.Intro_cta_href
                 ? getCategoryLink(links.Intro_cta_href)
                 : getCategoryLink(categories[0]?.href),
-          text: queries.introCTA || shopNowPhrase,
+          text: intro.cta.overrides?.[country] || queries.introCTA || shopNowPhrase,
           // text: 'Lean more about outdoor trends',
           background: intro.backgroundColor,
           color: intro.color,
