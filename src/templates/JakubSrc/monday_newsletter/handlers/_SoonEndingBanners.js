@@ -1,5 +1,6 @@
 import { Space } from '../components/Space.js';
 import { SoonEndingBanner } from '../components/SoonEndingBanner.js';
+import { Line } from '../components/Line.js';
 
 export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country }) => {
   const countrySlug = String(country ?? '').toLowerCase();
@@ -13,6 +14,7 @@ export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country 
     <!-- Soon Ending Banners -->
     <!--[if mso]><table align="center" border="0" cellspacing="0" cellpadding="0" width="650"><tr><td><![endif]-->
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
+    ${Line({ insideTr: true })}
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
 
       <tr>
@@ -24,18 +26,18 @@ export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country 
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
 
       ${SoonEndingBanner({
-        href: banner1Href,
-        src: banner1Src,
-        orderingId: '1',
-      })}
+    href: banner1Href,
+    src: banner1Src,
+    orderingId: '1',
+  })}
 
       ${Space({ className: 'newsletterBottom20px', insideTr: true })}
 
       ${SoonEndingBanner({
-        href: banner2Href,
-        src: banner2Src,
-        orderingId: '2',
-      })}
+    href: banner2Href,
+    src: banner2Src,
+    orderingId: '2',
+  })}
 
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
     </table>
