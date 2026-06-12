@@ -60,7 +60,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', TopImageTitle_data, type, queries,   shop,
+  console.log('wszystko', TopImageTitle_data, type, queries, shop,
     country,);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
@@ -68,79 +68,98 @@ const RegularFridayNslt = async ({
   // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
   // prettier-ignore
-  const FooterElement = categories_type === 'liquidator'
-    ? FooterLiquidator({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id })
-    : Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
+  // const FooterElement = categories_type === 'liquidator'
+  //   ? FooterLiquidator({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id })
+  //   : Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
+
+  const FooterElement =  Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNowPhrase = getPhrase('Shop now');
 
-  let TopImageTitleElement = ''
+  const {
+    TopImageTitle: [title1, title2, title3], intro, offerPart, timer
+  } = queries;
 
-  if (categories_type === 'liquidator') {
-    TopImageTitleElement = links?.TopImageTitle_src
-      ? TopImageTitleWithoutLink({
-        src: links.TopImageTitle_src,
-        title1: queries.TopImageTitle[0] || 'Translation not found',
-        title2: queries.TopImageTitle[1] || 'Translation not found',
-        title3: queries.TopImageTitle[2] || null,
-        color: TopImageTitle_data.color,
-        backgroundColor: TopImageTitle_data.backgroundColor,
-        type: TopImageTitle_data.type,
-        renderType: type,
-        className: TopImageTitle_data.className,
-      })
-      : ''
-  }
-  else {
-    TopImageTitleElement = links?.TopImageTitle_href && links?.TopImageTitle_src
-      ? TopImageTitle({
-        href: links.TopImageTitle_href,
-        src: links.TopImageTitle_src,
-        title1: queries.TopImageTitle[0] || 'Translation not found',
-        title2: queries.TopImageTitle[1] || 'Translation not found',
-        title3: queries.TopImageTitle[2] || null,
-        color: TopImageTitle_data.color,
-        backgroundColor: TopImageTitle_data.backgroundColor,
-        type: TopImageTitle_data.type,
-        renderType: type,
-        className: TopImageTitle_data.className,
-      })
-      : ''
-  }
+  const {
+    TopImageTitle_href, TopImageTitle_src, TopImage_src, TopImage_href, Timer_href, Banner_1, Banner_1_Image, Banner_2, Banner_2_Image, code_href, ShopCTA
+  } = links;
 
-  let TopImageElement = ''
+  const { color: TiT_color, backgroundColor: TiT_bg, type: TiT_type, className: TiT_className } = TopImageTitle_data
 
-  if (categories_type === 'liquidator') {
-    TopImageElement = links?.TopImage_src
-      ? ImageWithoutLink({
-        src: links.TopImage_src,
-        insideTr: true,
-        alt: 'Top Image',
-      })
-      : ''
-  } else {
-    TopImageElement = links?.TopImage_href && links?.TopImage_src
-      ? ImageWithLink({
-        href: links.TopImage_href,
-        src: links.TopImage_src,
-        insideTr: true,
-        alt: 'Top Image',
-      })
-      : ''
-  }
+  let TopImageTitleElement = TopImageTitle({
+    href: TopImageTitle_href,
+    src: TopImageTitle_src,
+    title1,
+    title2,
+    title3,
+    color: TiT_color,
+    backgroundColor: TiT_bg,
+    type: TiT_type,
+    renderType: type,
+    className: TiT_className,
+  })
 
-  if (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) {
-    TopImageElement = VideoLPWithLink({
-      href: links.TopImageVideo_href,
-      src: links.TopImageVideo_src,
-      alt: 'Landing Page Video',
-      insideTr: true,
-    });
-  }
+  // if (categories_type === 'liquidator') {
+  //   TopImageTitleElement = links?.TopImageTitle_src
+  //     ? TopImageTitleWithoutLink({
+  //       src: links.TopImageTitle_src,
+  //       title1: queriesTiT[0] || 'Translation not found',
+  //       title2: queriesTiT[1] || 'Translation not found',
+  //       title3: queriesTiT[2] || null,
+  //       color: TopImageTitle_data.color,
+  //       backgroundColor: TopImageTitle_data.backgroundColor,
+  //       type: TopImageTitle_data.type,
+  //       renderType: type,
+  //       className: TopImageTitle_data.className,
+  //     })
+  //     : ''
+  // }
 
-  console.log('links in template', links);
+
+  let TopImageElement = ImageWithLink({
+    href: links.TopImage_href,
+    src: links.TopImage_src,
+    insideTr: true,
+    alt: 'Top Image',
+  })
+
+  // if (categories_type === 'liquidator') {
+  //   TopImageElement = links?.TopImage_src
+  //     ? ImageWithoutLink({
+  //       src: links.TopImage_src,
+  //       insideTr: true,
+  //       alt: 'Top Image',
+  //     })
+  //     : ''
+  // } else {
+  //   TopImageElement = links?.TopImage_href && links?.TopImage_src
+  //     ? ImageWithLink({
+  //       href: links.TopImage_href,
+  //       src: links.TopImage_src,
+  //       insideTr: true,
+  //       alt: 'Top Image',
+  //     })
+  //     : ''
+  // }
+
+  let TopImageVideoElement = (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) ? VideoLPWithLink({
+    href: links.TopImageVideo_href,
+    src: links.TopImageVideo_src,
+    alt: 'Landing Page Video',
+    insideTr: true,
+  }) : '';
+
+  // if (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) {
+  //   TopImageElement = VideoLPWithLink({
+  //     href: links.TopImageVideo_href,
+  //     src: links.TopImageVideo_src,
+  //     alt: 'Landing Page Video',
+  //     insideTr: true,
+  //   });
+  // }
+
 
   let OfferPartElement = '';
 
@@ -384,43 +403,7 @@ const RegularFridayNslt = async ({
               </td>
             </tr>
     `;
-  } else if (categories && categories_type === 'liquidator') {
-
-    CategoriesElement = categories
-      .map(category => {
-        if (category.type === 'liquidatorConditions') {
-          return liquidatorConditions({
-            category,
-            background,
-            color
-          });
-        }
-
-        if (category.type === 'liquidatorItems') {
-          return liquidatorItems({
-            category,
-            background,
-            color,
-            // insideContainer: true,   // you can enable/disable if needed
-          });
-        }
-
-        if (category.type === 'liquidatorContact') {
-          return liquidatorContact({
-            category,
-            buttonHref: category.buttonHref,
-            buttonText: queries.CTA || 'Translation not found',
-            background,
-            color,
-          })
-        }
-
-        // Fallback for unknown types
-        return '';
-      })
-      .join('');
-  }
-  else {
+  }   else {
     CategoriesElement = '';
   }
 
