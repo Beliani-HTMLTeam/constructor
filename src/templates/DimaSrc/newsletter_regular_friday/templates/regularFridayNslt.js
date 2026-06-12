@@ -474,7 +474,7 @@ const RegularFridayNslt = async ({
   return `
     ${HeaderElement}
 
-    <table cellspacing="0" cellpadding="0" border="0" align="center" width="650" style="max-width: 650px; width: 100%; color: #000; background-color: ${background};" id="newsletter">
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; color: #000; background-color: ${background};" id="newsletter">
       ${TopImageTitleElement}
 
       ${timer && timer.position === 'insideTopImageTitle' ? TimerElement : ''}
