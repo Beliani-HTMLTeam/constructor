@@ -21,11 +21,11 @@ const tableQueries = [
 ];
 
 const links = {
-  Banner_1: translateLink({ value: 'content/lp26-07-24' }),
-  Banner_1_Image: translateImage({ value: '20260724b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-07-15' }),
+  Banner_1_Image: translateImage({ value: '20260715b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-07-23' }),
-  Banner_2_Image: translateImage({ value: '20260723b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-07-16' }),
+  Banner_2_Image: translateImage({ value: '20260716b.png' }),
 };
 
 const categories = [
