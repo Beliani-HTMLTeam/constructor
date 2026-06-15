@@ -68,7 +68,9 @@ const categories = [
     name: 'Outdoor Furniture',
     overrides: {
       FI: "Puutarha ja parveke",
-      PT: "Jardim e varanda"
+      PT: "Jardim e varanda",
+      NL: "Tuin en balkon",
+      BENL: "Tuin en balkon"
     },
     background: '#FFDEB3',
     color: '#000000',
