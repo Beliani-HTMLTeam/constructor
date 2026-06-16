@@ -36,6 +36,7 @@ export const render = ({
     getPhrase,
     showChooseFrom: hasDealProducts,
     offerTexts,
+    color,
   });
 
   if (hasDealProducts) {
