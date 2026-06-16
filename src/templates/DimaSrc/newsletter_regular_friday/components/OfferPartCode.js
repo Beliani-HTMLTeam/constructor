@@ -4,14 +4,12 @@ import { GetCode } from '@/components/getCode.js';
 import { LandingOfferPart, NewsletterOfferPart } from './utils/offerPart/components';
 
 export function OfferPartCode({
+  country,
   isMonday = false,
   color,
   data,
   getPhrase,
   queries,
-  paragraph1,
-  paragraph2,
-  paragraph3,
   href,
   type,
   backgroundColor,
@@ -21,34 +19,32 @@ export function OfferPartCode({
   spanStyle,
   copyCodeColor,
   copyCodeLabel,
+  overrides,
 }) {
   console.log('href:', href, data, isMonday);
   const newsletter = NewsletterOfferPart({
+    country,
     isMonday,
     color,
     data,
     getPhrase,
     queries,
-    paragraph1,
-    paragraph2,
-    paragraph3,
     href,
     type,
     backgroundColor,
     germanSeparatingLine,
     spaceClass,
     isSpaceBetweenAllParts,
-    spanStyle
+    spanStyle,
+    overrides,
   });
   const landing = LandingOfferPart({
+    country,
     isMonday,
     color,
     data,
     getPhrase,
     queries,
-    paragraph1,
-    paragraph2,
-    paragraph3,
     href,
     type,
     backgroundColor,
@@ -57,7 +53,7 @@ export function OfferPartCode({
     isSpaceBetweenAllParts,
     spanStyle,
     copyCodeColor,
-    copyCodeLabel,
+    copyCodeLabel, overrides,
   });
   return `
       <tr>

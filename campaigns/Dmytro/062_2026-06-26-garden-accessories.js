@@ -32,7 +32,7 @@ const tableQueries = [
 
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-06-26' }),
-  TopImageTitle_src:  DimasTranslateImage({ value: '20260626_01.png', folder: '20260626', placeholderPosition: '47' }),
+  TopImageTitle_src: DimasTranslateImage({ value: '20260626_01.png', folder: '20260626', placeholderPosition: '47' }),
   TopImage_src: getImageUrl('20260626/20260626topimage.jpg', true),
   TopImage_href: translateLink({ value: 'content/lp26-06-26' }),
   Banner_1: translateLink({ value: 'content/lp26-06-17' }),
@@ -40,7 +40,7 @@ const links = {
   Banner_2: translateLink({ value: 'content/lp26-06-18' }),
   Banner_2_Image: translateImage({ value: '20260618b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-06-22' }),
-  Intro_cta_href:  "https://www.beliani.ch/garden-furniture/garden-accessories/",
+  Intro_cta_href: "https://www.beliani.ch/garden-furniture/garden-accessories/",
 };
 
 const TopImageTitle_data = {
@@ -48,6 +48,19 @@ const TopImageTitle_data = {
   backgroundColor: '#F6E7E6',
   type: 'twoSameLines',
 };
+
+const intro_data = {
+  color: "#000000",
+  backgroundColor: "#F6E7E6",
+  alignment: "left",
+  type: "paragraph",
+  cta: {
+    overrides: {
+      FI: "Tutustu valikoimaan"
+    },
+    spaceAfter: 'newsletterBottom35px',
+  }
+}
 
 const timer = {
   position: 'outsideTopImageTitle',
@@ -96,7 +109,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 60,
     line: {
@@ -130,6 +143,9 @@ const categories = [
   },
   {
     name: 'Plant pots',
+    overrides: {
+      FI: "Ulkoruukut"
+    },
     background: '#FFDED0',
     color: '#000000',
     src: getImageUrl('20260626/20260626Category20.jpg', true),
@@ -142,7 +158,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 35,
     line: {
@@ -179,7 +195,7 @@ const categories = [
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260626/20260626Category30.jpg', true),
-    href: 'https://www.beliani.ch/home-accessories/accessories-decor/lanterns/',
+    href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',
     type: 'grid',
     insideContainer: true,
     title: {
@@ -188,7 +204,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 35,
     line: {
@@ -234,7 +250,7 @@ const categories = [
       spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-     show: false,
+      show: false,
     },
     paddingTop: 35,
     line: {
@@ -303,15 +319,7 @@ export default new entities.Campaign({
         image: "20260626free.png",
         isWithTitles: true,
       },
-      intro: {
-        color: "#000000",
-        backgroundColor: "#F6E7E6",
-        alignment: "left",
-        type: "paragraph",
-        cta: {
-          spaceAfter: 'newsletterBottom35px',
-        }
-      },
+      intro: intro_data,
       links: links,
       tableQueries: tableQueries,
     },
@@ -336,15 +344,7 @@ export default new entities.Campaign({
         image: "20260626free.png",
         isWithTitles: true,
       },
-      intro: {
-        color: "#000000",
-        backgroundColor: "#F6E7E6",
-        alignment: "left",
-        type: "paragraph",
-        cta: {
-          spaceAfter: 'newsletterBottom35px',
-        }
-      },
+      intro:intro_data,
       links: links,
       tableQueries: tableQueries,
     },
