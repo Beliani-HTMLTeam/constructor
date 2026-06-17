@@ -48,10 +48,28 @@ const TopImageTitle_data = {
 
 const timer = {
   position: "insideTopImageTitle",
-
   image: {
     UK: "https://gen.sendtric.com/countdown/a51vgq707l",
-    CHDE: "https://gen.sendtric.com/countdown/zp3gl4v7v4"
+    CHDE: "https://gen.sendtric.com/countdown/zp3gl4v7v4",
+    CZ: "https://gen.sendtric.com/countdown/xkzhx4dwlz",
+    DK:"https://gen.sendtric.com/countdown/g3rt5mia8i",
+    DE:"https://gen.sendtric.com/countdown/oow6s3jzjb",
+    NL:"https://gen.sendtric.com/countdown/5osdtw6hdx",
+    FI:"https://gen.sendtric.com/countdown/78rq33ycgz",
+    NO:"https://gen.sendtric.com/countdown/6mb1l2qsq4",
+    SE:"https://gen.sendtric.com/countdown/ab5kx7rx5z",
+    PL:"https://gen.sendtric.com/countdown/jj6raoo8qm",
+    PT:"https://gen.sendtric.com/countdown/ieoedf0n17",
+    SK:"https://gen.sendtric.com/countdown/ru0c46okn4",
+    ES:"https://gen.sendtric.com/countdown/zy9c2p0zna",
+    FR:"https://gen.sendtric.com/countdown/kgehl003a8",
+    HU:"https://gen.sendtric.com/countdown/8tkcegxv6p",
+    IT:"https://gen.sendtric.com/countdown/7cvpulq7c1",
+    BENL:"https://gen.sendtric.com/countdown/bokbx2hpv9",
+    BEFR:"https://gen.sendtric.com/countdown/u44ursrnzc",
+    CHFR:"https://gen.sendtric.com/countdown/5em6hpvmn0",
+    AT:"https://gen.sendtric.com/countdown/9sniel8qo7",
+    RO:"https://gen.sendtric.com/countdown/oazgmhksx3"
   },
 };
 
