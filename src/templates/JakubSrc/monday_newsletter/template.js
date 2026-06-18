@@ -89,7 +89,6 @@ const Monday = async ({
   return `
     ${HeaderElement}
 
-    <!--[if mso]><table align="center" border="0" cellspacing="0" cellpadding="0" width="650"><tr><td><![endif]-->
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
 
       ${TopImageTitleElement}
@@ -105,7 +104,6 @@ const Monday = async ({
       ${CategoriesAfterIntroElement}
 
     </table>
-    <!--[if mso]></td></tr></table><![endif]-->
 
     ${soonEndingBanner ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
 
