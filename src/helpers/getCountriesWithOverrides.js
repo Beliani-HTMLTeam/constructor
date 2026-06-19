@@ -17,6 +17,7 @@ export function getCountriesWithOverrides(template) {
     if (category?.hrefOverrides) {
       Object.keys(category.hrefOverrides).forEach((s) => slugs.add(s));
     }
+    if(!category?.tiles?.[Symbol.iterator]) continue;
     for (const tile of category?.tiles ?? []) {
       if (tile?.hrefOverrides) {
         Object.keys(tile.hrefOverrides).forEach((s) => slugs.add(s));
