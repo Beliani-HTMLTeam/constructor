@@ -36,7 +36,7 @@ const links = {
 	TopImage_src: getImageUrl('20260702topgif.gif', true),
 	TopImage_href: translateLink({ value: 'content/lp26-07-02' }),
 
-	Timer_href: translateLink({ value: 'content/lp26-06-24' }),
+	Timer_href: translateLink({ value: 'content/lp26-07-03' }),
 
 
 	Banner_1: translateLink({ value: 'content/lp26-06-25' }),
