@@ -23,7 +23,7 @@ const tableQueries = [
     name: 'categoryLinks',
   },
   {
-    tableRange: '25:26',
+    tableRange: '31:32',
     name: 'condition',
   },
   {
