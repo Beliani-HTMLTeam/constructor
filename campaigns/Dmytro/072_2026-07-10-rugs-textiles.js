@@ -25,10 +25,10 @@ const links = {
   TopImageTitle_src: translateImage({ value: '20260710_01.png' }),
   TopImage_src: getImageUrl('20260710gif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-07-10' }),
-  Banner_1: translateLink({ value: 'content/lp26-07-03' }),
-  Banner_1_Image: translateImage({ value: '20260703b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-07-02' }),
-  Banner_2_Image: translateImage({ value: '20260702b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-07-02' }),
+  Banner_1_Image: translateImage({ value: '20260702b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-07-01' }),
+  Banner_2_Image: translateImage({ value: '20260701b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-07-06' }),
   Intro_cta_href:  "https://www.beliani.ch/textiles/"
 };
