@@ -290,7 +290,7 @@ const RegularFridayNslt = async ({
       : '';
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => {
-      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && categories_type !== 'liquidator') {
+      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && category.view !== 'newsletterOnly' && categories_type !== 'liquidator') {
         return {
           ...category,
           products: await Promise.all(category.products.map((p) => getProductById(p.id, p.src))),
