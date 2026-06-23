@@ -19,7 +19,8 @@ export const renderCategory = async (
   getCategoryLink,
   getCategoryTitle,
   add_utm,
-  lineType = 'white'
+  lineType = 'white',
+  country
 ) => {
   console.log('background: ', category);
 
@@ -102,6 +103,8 @@ export const renderCategory = async (
             insideContainer: true,
             color,
             background,
+            add_utm,
+            country
           })
         : await renderProducts({
             products: category.products,

@@ -161,6 +161,9 @@ const categories = [
         name: 'Rugs',
         src: DimasTranslateImage({ value: '_rugs.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
         href: 'https://www.beliani.ch/living-room-furniture/rugs/',
+        hrefOverride: {
+          IT: "https://www.beliani.it/tappeti/",
+        }
       },
     ],
   },
@@ -198,6 +201,9 @@ const categories = [
         name: 'Chairs',
         src: DimasTranslateImage({ value: '_chairs.png', folder: 'category_tiles/750000/ffffff/295x80', placeholderPosition: '74' }),
         href: 'https://www.beliani.ch/dining-room-furniture/chairs/',
+        hrefOverride: {
+          IT: "https://www.beliani.it/sedie/",
+        }
       },
       {
         name: 'Tableware',

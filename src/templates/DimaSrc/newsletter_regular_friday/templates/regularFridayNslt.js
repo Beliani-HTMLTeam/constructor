@@ -26,7 +26,8 @@ import { liquidatorContact } from '../category/liquidatorContact';
 import { FooterLiquidator } from '../components/Footer_Liquidator';
 import { ImageWithoutLink } from '../components/ImageWithoutLink';
 import { TopImageTitleWithoutLink } from '../components/TopImageTitleWithoutLink';
-import { getCategoryName } from '../utils/categories';
+import { getCategoryName, getHrefWithOverride } from '../utils/categories';
+import { getProductHrefWithOverride } from '../utils/products';
 
 const RegularFridayNslt = async ({
   links,
@@ -312,14 +313,23 @@ const RegularFridayNslt = async ({
       categories:
         categoriesWithProducts.length > 0
           ? categoriesWithProducts.map((category, idx) => {
-            const href =
-              category.hrefSource && category.hrefSource === 'queries'
-                ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
-                : category.href
-                  ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
-                  : category.href;
+            const href = getHrefWithOverride(
+              category, 
+              country, 
+              category.href, 
+              queries, 
+              idx, 
+              add_utm, 
+              getCategoryLink
+            );
             const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
-
+            // Also handle product href overrides
+            if (category.products && Array.isArray(category.products)) {
+              category.products = category.products.map(product => ({
+                ...product,
+                href: getProductHrefWithOverride(product, country, product.href)
+              }));
+            }
             return {
               ...category,
               href,
@@ -327,14 +337,23 @@ const RegularFridayNslt = async ({
             };
           })
           : categories.map((category, idx) => {
-            const href =
-              category.hrefSource && category.hrefSource === 'queries'
-                ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
-                : category.href
-                  ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
-                  : category.href;
+            const href = getHrefWithOverride(
+              category, 
+              country, 
+              category.href, 
+              queries, 
+              idx, 
+              add_utm, 
+              getCategoryLink
+            );
             const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
-
+            // Also handle product href overrides
+            if (category.products && Array.isArray(category.products)) {
+              category.products = category.products.map(product => ({
+                ...product,
+                href: getProductHrefWithOverride(product, country, product.href)
+              }));
+            }
             return {
               ...category,
               href,
@@ -344,6 +363,7 @@ const RegularFridayNslt = async ({
       categories_line,
       queries,
       add_utm,
+      country
     });
   } else if (categories && categories_type === 'twoColumnsGrid') {
     CategoriesElement = `
