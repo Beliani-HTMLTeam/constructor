@@ -4,6 +4,7 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
+import { VideoLPWithLink } from './VideoLP.js';
 
 const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass }) => {
   let html = '';
@@ -72,6 +73,13 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         tdClass: category.tdClass ?? categoryImageTdClass,
       })
     : '';
+
+    const VideoElement = category.src_video ? VideoLPWithLink({
+        href: ctaHref,
+        src: category.src_video.src ?? category.src_video,
+        alt: 'Landing Page Video',
+        insideTr: true,
+      }) : '';
 
   const ParagraphElement = category?.paragraph?.show
     ? `
@@ -170,7 +178,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${ParagraphBeforeImg}
 
-        ${ImageElement}
+        ${VideoElement && type === 'landing' ? VideoElement : ImageElement}
 
         ${ParagraphAfterImg}
 

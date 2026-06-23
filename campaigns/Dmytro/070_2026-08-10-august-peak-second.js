@@ -23,6 +23,7 @@ const links = {
 const categories = [
   {
     src:  translateImage({ value: '20260810_gif.gif' }),
+    src_video:  translateImage({ value: '20260810_video.mp4' }),
     href: translateLink({ value: 'content/lp26-08-10' }),
     paddingTop: 0,
     color: '#000000',
