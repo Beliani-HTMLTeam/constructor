@@ -1,4 +1,3 @@
-import { Line } from '@/templates/Thursday/components/Line';
 import { CTA } from '../CTA';
 import { ImageWithLink } from '../ImageWithLink';
 import { Paragraph } from '../Paragraph';
@@ -6,6 +5,8 @@ import { Space } from '../Space';
 import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
+import { newKitchenGrid } from '../../category/newKitchenGrind';
+import { Line } from '@/templates/DimaSrc/components/components/Line';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -20,7 +21,8 @@ export const renderCategory = async (
   getCategoryTitle,
   add_utm,
   lineType = 'white',
-  country
+  country,
+  type
 ) => {
   console.log('background: ', category);
 
@@ -106,6 +108,14 @@ export const renderCategory = async (
             add_utm,
             country
           })
+          : category.type === 'kitchenGrid' && type === 'landing'
+    ? newKitchenGrid({
+        products: category.products,
+        categoryKey: category.name.toLowerCase().replace(/\s+/g, ''),
+        showPrices: category.showPrices ?? true,
+        showNames: category.showNames ?? true,
+        color: color,
+      })
         : await renderProducts({
             products: category.products,
             showPrices: category.showPrices || true,
@@ -172,7 +182,7 @@ export const renderCategory = async (
           ${Line({
             insideTr: true,
             src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
-            insideContainer: true,
+            tableContainer: true,
           })}
     `
             : ''

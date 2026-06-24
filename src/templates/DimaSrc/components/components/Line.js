@@ -8,10 +8,10 @@ const Line = ({
 
   let html = '';
 
-  html += `<img src=${src} style="display:block" width="100%" alt="Line separator" />`;
+  html += `<img src=${src} style="display:block; height: 1px;" width="100%" alt="Line separator" />`;
 
   if (insideTr) {
-    html = `<tr><td>${html}</td></tr>`;
+    html = `<tr><td ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr>`;
   }
 
   if (insideTable) {

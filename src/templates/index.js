@@ -9,6 +9,7 @@ import { Friday } from '@/templates//DimaSrc/newsletter_26122025/templates/templ
 import { RegularFridayNslt } from '@/templates//DimaSrc/newsletter_regular_friday/templates/regularFridayNslt';
 import { FridayLikeThursday } from './DimaSrc/Friday_like_Thursday/template';
 import { Monday } from '@/templates/JakubSrc/monday_newsletter/template.js';
+import { NewKitchenCategory } from './DimaSrc/newsletter_regular_friday/templates/newKitchenCategory';
 
 export const templates = {
   Blackweek,
@@ -21,5 +22,6 @@ export const templates = {
   Friday,
   RegularFridayNslt,
   FridayLikeThursday,
-  Monday
+  Monday,
+  NewKitchenCategory
 };

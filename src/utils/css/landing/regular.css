@@ -578,3 +578,101 @@ table {
     padding-right: 10px !important;
   }
 }
+
+#newsletter .products-grid {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* ==================== DESKTOP (5 columns - 2 rows) ==================== */
+@media screen and (min-width: 769px) {
+  #newsletter .products-grid td {
+    width: 20% !important;
+    vertical-align: top !important;
+    display: table-cell !important;
+    padding: 2px !important; /* 4px gap between products */
+  }
+
+  /* Remove padding from the outer wrapper */
+  #newsletter > table > tbody > tr > td:has(.products-grid) {
+    padding: 0 !important;
+  }
+
+  #newsletter .product-item {
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+/* ==================== MOBILE (3 columns + Reordering) ==================== */
+@media screen and (max-width: 768px) {
+  /* Make the table a grid */
+  #newsletter .products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important; /* Use gap instead of cellspacing */
+    width: 100% !important;
+  }
+
+  /* Remove tbody and tr from the layout */
+  #newsletter .products-grid tbody,
+  #newsletter .products-grid tr {
+    display: contents !important;
+  }
+
+  /* Style the product items */
+  #newsletter .products-grid .product-item {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    order: 99; /* reset all */
+  }
+
+  /* ==================== TABLEWARE ==================== */
+  #newsletter .tableware-section .item-1 { order: 1; }
+  #newsletter .tableware-section .item-2 { order: 2; }
+  #newsletter .tableware-section .item-3 { order: 3; }
+  #newsletter .tableware-section .item-4 { order: 4; }
+  #newsletter .tableware-section .item-5 { order: 5; }
+  #newsletter .tableware-section .item-6 { order: 6; }
+  #newsletter .tableware-section .item-8 { order: 7; }
+  #newsletter .tableware-section .item-10 { order: 8; }
+  #newsletter .tableware-section .item-9 { order: 9; }
+  #newsletter .tableware-section .item-7 { display: none !important; }
+
+  /* ==================== STORAGE ==================== */
+  #newsletter .kitchenstorage-section .item-1 { order: 1; }
+  #newsletter .kitchenstorage-section .item-2 { order: 2; }
+  #newsletter .kitchenstorage-section .item-3 { order: 3; }
+  #newsletter .kitchenstorage-section .item-4 { order: 4; }
+  #newsletter .kitchenstorage-section .item-5 { order: 5; }
+  #newsletter .kitchenstorage-section .item-6 { order: 6; }
+  #newsletter .kitchenstorage-section .item-7 { order: 7; }
+  #newsletter .kitchenstorage-section .item-8 { order: 8; }
+  #newsletter .kitchenstorage-section .item-9 { order: 9; }
+  #newsletter .kitchenstorage-section .item-10 { display: none !important; }
+
+  /* ==================== OUTDOOR ==================== */
+  #newsletter .outdoorkitchen-section .item-1 { order: 1; }
+  #newsletter .outdoorkitchen-section .item-2 { order: 2; }
+  #newsletter .outdoorkitchen-section .item-3 { order: 3; }
+  #newsletter .outdoorkitchen-section .item-4 { order: 4; }
+  #newsletter .outdoorkitchen-section .item-5 { order: 5; }
+  #newsletter .outdoorkitchen-section .item-7 { order: 6; }
+  #newsletter .outdoorkitchen-section .item-9 { order: 7; }
+  #newsletter .outdoorkitchen-section .item-10 { order: 8; }
+  #newsletter .outdoorkitchen-section .item-8 { order: 9; }
+  #newsletter .outdoorkitchen-section .item-6 { display: none !important; }
+
+  /* ==================== LIGHTING ==================== */
+  #newsletter .lighting-section .item-1 { order: 1; }
+  #newsletter .lighting-section .item-3 { order: 2; }
+  #newsletter .lighting-section .item-4 { order: 3; }
+  #newsletter .lighting-section .item-6 { order: 4; }
+  #newsletter .lighting-section .item-8 { order: 5; }
+  #newsletter .lighting-section .item-7 { order: 6; }
+  #newsletter .lighting-section .item-2 { order: 7; }
+  #newsletter .lighting-section .item-9 { order: 8; }
+  #newsletter .lighting-section .item-10 { order: 9; }
+  #newsletter .lighting-section .item-5 { display: none !important; }
+}

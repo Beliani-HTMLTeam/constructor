@@ -16,7 +16,8 @@ const Categories = async ({
   categories_line,
   queries,
   add_utm,
-  country
+  country,
+  type
 }) => {
   let html = '';
 
@@ -32,7 +33,8 @@ const Categories = async ({
         getCategoryTitle,
         add_utm,
         categories_line,
-        country
+        country, 
+        type
       );
     }
   }

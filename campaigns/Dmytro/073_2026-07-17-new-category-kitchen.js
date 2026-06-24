@@ -28,6 +28,7 @@ const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-07-17' }),
   TopImageTitle_src: translateImage({ value: '20260717_01.png' }),
   TopImage_src: getImageUrl('20260717topgif.gif', true),
+  TopImage_lp_src: getImageUrl('20260717TopImage_lp.png', true),
   TopImage_href: translateLink({ value: 'content/lp26-07-17' }),
   Banner_1: translateLink({ value: 'content/lp26-07-10' }),
   Banner_1_Image: translateImage({ value: '20260710b.png' }),
@@ -39,7 +40,7 @@ const links = {
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#F6E7E6',
+  backgroundColor: '#DCE0E2',
   type: 'twoSameLines',
 };
 
@@ -85,12 +86,15 @@ const intro_data =  {
     },
     spaceAfter: 'newsletterBottom35px',
   },
+  line: {
+    show: true
+  }
 
 }
 
-const categories = [
+const categories_nslt = [
   {
-    name: '',
+    name: 'Kitchen',
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category_nslt.png', true),
@@ -112,20 +116,24 @@ const categories = [
       show: true
     },
   },
+];
+
+const categories = [
   {
     name: 'Tableware',
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category10.png', true),
     href: 'https://www.beliani.ch/kitchen/kitchenware-tableware/',
-    type: 'grid',
+    type: 'kitchenGrid',
     insideContainer: true,
     view: 'landingPageOnly',
     title: {
       show: true,
-      align: 'left',
+      align: 'center',
       spaceAfter: 'newsletterBottom35px',
     },
+    styles: 'text-align: center;',
     paragraph: {
       show: true,
       spaceBefore: 'newsletterBottom35px',
@@ -137,7 +145,8 @@ const categories = [
     },
     cta: {
       show: true
-    },
+    },    showPrices: false,
+    showNames: false,
     products: [
       // 
       {
@@ -198,14 +207,15 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260717Category20.png', true),
     href: 'https://www.beliani.ch/kitchen/kitchen-organization/',
-    type: 'grid',
+    type: 'kitchenGrid',
     insideContainer: true,
     view: 'landingPageOnly',
     title: {
       show: true,
-      align: 'left',
+      align: 'center',
       spaceAfter: 'newsletterBottom35px',
     },
+    styles: 'text-align: center;',
     paragraph: {
       show: true,
       spaceBefore: 'newsletterBottom35px',
@@ -217,7 +227,8 @@ const categories = [
     },
     cta: {
       show: true
-    },
+    },    showPrices: false,
+    showNames: false,
     products: [
       // 
       {
@@ -278,14 +289,15 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260717Category30.png', true),
     href: 'https://www.beliani.ch/kitchen/outdoor-kitchens/',
-    type: 'grid',
+    type: 'kitchenGrid',
     insideContainer: true,
     view: 'landingPageOnly',
     title: {
       show: true,
-      align: 'left',
+      align: 'center',
       spaceAfter: 'newsletterBottom35px',
     },
+    styles: 'text-align: center;',
     paragraph: {
       show: true,
       spaceBefore: 'newsletterBottom35px',
@@ -297,7 +309,8 @@ const categories = [
     },
     cta: {
       show: true
-    },
+    },    showPrices: false,
+    showNames: false,
     products: [
       // 
       {
@@ -358,14 +371,15 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260717Category40.png', true),
     href: 'https://www.beliani.ch/kitchen/lighting/',
-    type: 'grid',
+    type: 'kitchenGrid',
     insideContainer: true,
     view: 'landingPageOnly',
     title: {
       show: true,
-      align: 'left',
+      align: 'center',
       spaceAfter: 'newsletterBottom35px',
     },
+    styles: 'text-align: center;',
     paragraph: {
       show: true,
       spaceBefore: 'newsletterBottom35px',
@@ -378,6 +392,8 @@ const categories = [
     cta: {
       show: true
     },
+    showPrices: false,
+    showNames: false,
     products: [
       // 
       {
@@ -462,7 +478,7 @@ export default new entities.Campaign({
       color: "#000000",
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
-      categories: categories,
+      categories: categories_nslt,
       timer: timer,
       full_img_width: false,
       categories_line: "black",
@@ -481,7 +497,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.NewKitchenCategory, // User should change this
       css: types.CSS.LP,
       background: "#F6E7E6",
       color: "#000000",
@@ -495,6 +511,7 @@ export default new entities.Campaign({
       intro: intro_data,
       links: links,
       tableQueries: tableQueries,
+      soonEndingBanners: false
     },
   ],
 });
