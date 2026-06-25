@@ -595,7 +595,7 @@ table {
 }
 
 /* ==================== DESKTOP (5 columns - 2 rows) ==================== */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 651px) {
   #newsletter .products-grid td {
     width: 20% !important;
     vertical-align: top !important;
@@ -615,7 +615,7 @@ table {
 }
 
 /* ==================== MOBILE (3 columns + Reordering) ==================== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 650px) {
   /* Make the table a grid */
   #newsletter .products-grid {
     display: grid !important;
@@ -636,6 +636,13 @@ table {
     width: 100% !important;
     padding: 0 !important;
     order: 99; /* reset all */
+  }
+
+  #newsletter .products-grid td {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   /* ==================== TABLEWARE ==================== */
