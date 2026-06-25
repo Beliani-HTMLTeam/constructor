@@ -727,6 +727,8 @@ export function Footer(sections, options, name) {
         </table>
         `,
       },
+
+      
     },
     companyDetails: {
       [types.NEWSLETTER]: {

@@ -212,6 +212,11 @@ const NewKitchenCategory = async ({
     </table>
     ` : '';
 
+    const conditionsTitle = getFooter('Conditions title')
+    const conditionsText = 
+      queries.condition ||
+      'all items are subject to availability. All prices are subject to change without notification'
+
   return `
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 1056px; background-color: ${background};" id="newsletter">
     ${TopImageTitleElement}
@@ -221,9 +226,34 @@ const NewKitchenCategory = async ({
       ${CategoriesHTML}
     </table>
 
-    ${soonEndingBannersElement}
-
-    ${Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type: 'landing' })}
+         <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width="1056" style="max-width: 1056px; width: 100%" id="newsletter">
+             <tbody>
+                 <tr>
+                     <td>
+                     ${Line({
+                      insideTr: false,
+                      src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
+                      tableContainer: true,
+                    })}
+                     </td>
+                 </tr>
+                 <tr>
+                     <td class="newsletterTopBottomContainer" align="left">
+                         <span class="newsletterConditions" style="color: #000000;">${conditionsTitle} ${
+           conditionsText.length === 5
+             ? conditionsText[4] + ' ' + conditionsText[1]
+             : conditionsText.length === 4
+             ? conditionsText[3] + ' ' + conditionsText[1]
+             : conditionsText.length === 3
+             ? conditionsText[0] + ' ' + conditionsText[1]
+             : conditionsText.length === 2
+             ? conditionsText[0]
+             : conditionsText[0]
+         }</span>
+                     </td>
+                 </tr>
+             </tbody>
+         </table>
   `;
 };
 
