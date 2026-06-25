@@ -291,10 +291,30 @@ const RegularFridayNslt = async ({
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => {
       if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && category.view !== 'newsletterOnly' && categories_type !== 'liquidator') {
+        
         return {
           ...category,
-          products: await Promise.all(category.products.map((p) => getProductById(p.id, p.src))),
+          products: await Promise.all(category.products.map(async (p) => {
+            // Get the product data
+            const productData = await getProductById(p.id, p.src);
+            
+            // Check if there's an hrefOverride for the current country
+            const href = p.hrefOverride?.[country] 
+              ? add_utm(p.hrefOverride[country]) 
+              : productData?.href || p.href;
+
+              console.log('category',href, p.hrefOverride, productData?.href, p.href);
+            
+            return {
+              ...productData,
+              ...p, // Keep any overrides from the original product
+              href, // Use the overridden href if available
+              // Keep the hrefOverride in case it's needed elsewhere
+              hrefOverride: p.hrefOverride,
+            };
+          })),
         };
+      
       }
       return { ...category };
     })
@@ -323,13 +343,7 @@ const RegularFridayNslt = async ({
               getCategoryLink
             );
             const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
-            // Also handle product href overrides
-            if (category.products && Array.isArray(category.products)) {
-              category.products = category.products.map(product => ({
-                ...product,
-                href: getProductHrefWithOverride(product, country, product.href)
-              }));
-            }
+            
             return {
               ...category,
               href,

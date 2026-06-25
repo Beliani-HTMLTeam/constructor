@@ -186,6 +186,9 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260710Category30.jpg', true),
     href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
+    hrefOverride: {
+      CZ: 'https://www.beliani.cz/textilne-doplnky/deky-a-prehozy/'
+    },
     type: 'grid',
     insideContainer: true,
     title: {

@@ -116,6 +116,7 @@ export const renderCategory = async (
             insideContainer: category.insideContainer || false,
             background,
             color: category.color || '#000000',
+            country
           })
     : '';
 
