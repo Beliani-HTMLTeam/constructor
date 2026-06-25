@@ -41,7 +41,7 @@ const links = {
 const TopImageTitle_data = {
   color: '#000000',
   backgroundColor: '#DCE0E2',
-  type: 'twoSameLines',
+  type: 'twoSameLinesOverlay',
 };
 
 const timer = {

@@ -584,6 +584,16 @@ table {
   table-layout: fixed;
 }
 
+#newsletter .title-overlay {
+  position: absolute; 
+  top: 30px; 
+  left: 0; 
+  right: 0; 
+  text-align: center;
+   z-index: 2;
+   opacity: 0;
+}
+
 /* ==================== DESKTOP (5 columns - 2 rows) ==================== */
 @media screen and (min-width: 769px) {
   #newsletter .products-grid td {
@@ -675,4 +685,8 @@ table {
   #newsletter .lighting-section .item-9 { order: 8; }
   #newsletter .lighting-section .item-10 { order: 9; }
   #newsletter .lighting-section .item-5 { display: none !important; }
+
+  #newsletter .title-overlay {
+     top: 10px;
+  }
 }

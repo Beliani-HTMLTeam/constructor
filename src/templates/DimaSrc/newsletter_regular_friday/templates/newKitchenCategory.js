@@ -30,6 +30,7 @@ import { getCategoryName, getHrefWithOverride } from '../utils/categories';
 import { getProductHrefWithOverride } from '../utils/products';
 import { newKitchenGrid } from '../category/newKitchenGrind';
 import { renderCategory } from '../components/category/renderCategory';
+import { TopImageWithTitle } from '../components/TopImageWithTitle';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -74,6 +75,20 @@ const NewKitchenCategory = async ({
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
   // Hero
+
+  const TopImageWithTopImageTitleElement = links?.TopImageTitle_href && links?.TopImageTitle_src && links?.TopImage_href && links?.TopImage_lp_src
+    ? TopImageWithTitle({
+      href: links.TopImage_href,
+      imgSrc: links.TopImage_lp_src,
+      title1: queries.TopImageTitle[0] || 'Translation not found',
+      title2: queries.TopImageTitle[1] || 'Translation not found',
+      title3: queries.TopImageTitle[2] || null,
+      type: TopImageTitle_data.type,
+      color: TopImageTitle_data.color,
+      backgroundColor: TopImageTitle_data.backgroundColor,
+      className: TopImageTitle_data.className,
+    })
+    : ''
 
   const TopImageTitleElement = links?.TopImageTitle_href && links?.TopImageTitle_src
     ? TopImageTitle({
@@ -219,8 +234,7 @@ const NewKitchenCategory = async ({
 
   return `
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 1056px; background-color: ${background};" id="newsletter">
-    ${TopImageTitleElement}
-    ${TopImageElement}
+   ${TopImageWithTopImageTitleElement}
       ${IntroElement}
 
       ${CategoriesHTML}

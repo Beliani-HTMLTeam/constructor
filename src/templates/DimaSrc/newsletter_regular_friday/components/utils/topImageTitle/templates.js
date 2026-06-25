@@ -46,6 +46,10 @@ export const templates = ({ color, title1, title2, title3 = null }) => ({
       <h4 style="color:${color};" class="newsletterTitleH1">${title1}</h4>
       <h4 style="color:${color};" class="newsletterTitleH1">${title2}</h4>
     `,
+    twoSameLinesOverlay: `
+      <h4 style="color:${color}; font-size: clamp(20px, 4.2vw, 45px) !important; line-height: clamp(28px, 5.5vw, 53px) !important;" class="newsletterTitleH1">${title1}</h4>
+      <h4 style="color:${color}; font-size: clamp(20px, 4.2vw, 45px) !important; line-height: clamp(28px, 5.5vw, 53px) !important;" class="newsletterTitleH1">${title2}</h4>
+    `,
   twoSameMediumLines: `
     <h4 style="color:${color}; font-weight: 500;" class="newsletterTitleH1">${title1}</h4>
     <h4 style="color:${color}; font-weight: 500;" class="newsletterTitleH1">${title2}</h4>
