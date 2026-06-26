@@ -121,6 +121,7 @@ const categories_nslt = [
 const categories = [
   {
     name: 'Tableware',
+    name_original: 'Tableware',
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category10.png', true),
@@ -202,7 +203,8 @@ const categories = [
     ],
   },
   {
-    name: 'Kitchen Storage',
+    name: 'Kitchen Organisation & Storage',
+    name_original: 'Kitchen Storage',
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category20.png', true),
@@ -285,6 +287,7 @@ const categories = [
   },
   {
     name: 'Outdoor Kitchen',
+    name_original: 'Outdoor Kitchen',
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category30.png', true),
@@ -367,6 +370,7 @@ const categories = [
   },
   {
     name: 'Lighting',
+    name_original: 'Lighting',
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category40.png', true),

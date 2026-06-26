@@ -173,7 +173,14 @@ const NewKitchenCategory = async ({
 
   for (let i = 0; i < categoriesWithProducts.length; i++) {
     const category = categoriesWithProducts[i];
-
+    category.name = getCategoryName(category, i, country, queries, getCategoryTitle);
+    category.href = getHrefWithOverride( category, 
+      country, 
+      category.href, 
+      queries, 
+      i, 
+      add_utm, 
+      getCategoryLink);
     if (category.view === 'newsletterOnly') continue;
 
     CategoriesHTML += await renderCategory(

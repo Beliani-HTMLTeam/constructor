@@ -111,7 +111,7 @@ export const renderCategory = async (
           : category.type === 'kitchenGrid' && type === 'landing'
     ? newKitchenGrid({
         products: category.products,
-        categoryKey: category.name.toLowerCase().replace(/\s+/g, ''),
+        categoryKey: category.name_original.toLowerCase().replace(/\s+/g, ''),
         showPrices: category.showPrices ?? true,
         showNames: category.showNames ?? true,
         color: color,
