@@ -9,12 +9,13 @@ const ImageWithLink = ({
   tdClass,
   insideTable = false,
   tableContainer = false,
+  targetBlank = false
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
   let html = '';
 
-  html += `<a href="${href}"><img src="${src}" alt="${alt}" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
+  html += `<a target="${targetBlank ? '_blank' : '_self'}" href="${href}"><img src="${src}" alt="${alt}" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
 
   if (insideTr) {
     html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}>${html}</td></tr>`;
