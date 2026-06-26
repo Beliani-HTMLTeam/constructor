@@ -281,7 +281,7 @@ const RegularFridayNslt = async ({
         src: timer.image[country],
         color: Inside.color,
         background: Inside.backgroundColor,
-        freebies: timer.freebies,
+        freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
         isCtaVisible: timer.isCtaVisible,
         ctaText: shopNowPhrase,
         spaceAfter: Inside.spaceAfter,
