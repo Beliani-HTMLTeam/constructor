@@ -237,6 +237,14 @@ export default new entities.Campaign({
         type: "code",
         spaceClass: "newsletterBottom35px",
         isSpaceBetweenAllParts: true,
+        overrides:{
+          landing: {
+            HU: {
+              offerPart2: "Vásárolj legalább 120 000 Ft értékben, és ajándékba adunk egy <br/>40 000 Ft értékű utalványt, amit a következő rendelésednél válthatsz be."
+            }
+          }
+          
+        }
       },
       shopCTA: {
         space: '80'
