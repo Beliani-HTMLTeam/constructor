@@ -81,6 +81,11 @@ img {
   padding-right: 60px;
 }
 
+.newsletterContainer55px {
+  padding-left: 55px;
+  padding-right: 55px;
+}
+
 .newsletterContainerFree {
   padding-left: 124px;
   padding-right: 124px;
@@ -491,6 +496,11 @@ img {
   .newsletterContainer {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .newsletterContainer55px {
+    padding-left: 35px;
+    padding-right: 35px;
   }
 
   .newsletterMiniContainer {
