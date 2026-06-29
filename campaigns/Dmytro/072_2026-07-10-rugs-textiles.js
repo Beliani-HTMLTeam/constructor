@@ -46,7 +46,7 @@ const intro_data = {
   type: "paragraph",
   cta: {
     overrides: {
-    
+    FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
