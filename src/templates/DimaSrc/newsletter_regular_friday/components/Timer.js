@@ -4,19 +4,33 @@ import { Paragraph } from './Paragraph.js';
 import { CTA } from './CTA.js';
 
 const Timer = ({
-  title,
-  subtitle,
-  href,
-  src,
-  color = '#000000',
-  background = 'white',
-  freebies,
-  isCtaVisible,
-  ctaText,
-  spaceAfter = '',
-  spaceWithoutCTA = 'newsletterBottom35px'
+  queries,
+ links,
+ country,
+ timer,
+ getImageUrl,
+ ctaText,
 }) => {
-  // console.log("Timer Component:", { title, subtitle, href, src, color, background, freebies, ctaText });
+  const {color,background, image, overrides, freebies, isCtaVisible, isWithTitles, spaceWithoutCTA, spaceAfter} = timer;
+  const title = isWithTitles ? queries.timer[0] || 'Translation not found' : '';
+  const subtitle = isWithTitles ? queries.timer[1] || 'Translation not found' : '';
+  const href = links.Timer_href;
+  const src = image[country];
+  const freebiesSrc = overrides && overrides[country] ? getImageUrl(overrides[country], true) : freebies;
+
+  // title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
+  // // title: 'Free scatter cushions set',
+  // subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
+  // // subtitle: 'deal ends in:',
+  // href: links.Timer_href,
+  // src: timer.image[country],
+  // color: Inside.color,
+  // background: Inside.backgroundColor,
+  // freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
+  // isCtaVisible: timer.isCtaVisible,
+  // ctaText: shopNowPhrase,
+  // spaceAfter: Inside.spaceAfter,
+  // spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
 
   return `
     <tr>

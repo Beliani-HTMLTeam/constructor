@@ -6,7 +6,6 @@ import FreebiesGenerator from '@/components/FreebiesGenerator';
 
 const NewsletterOfferPart = ({
   country,
-  isMonday = false,
   color,
   data,
   getPhrase,
@@ -32,52 +31,7 @@ const NewsletterOfferPart = ({
   };
 
   const offerPartContent = 
-  isMonday ? `
-  ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-<tr>
-  <td style="color: ${color}; text-align: center;">
-  ${Paragraph({ text: getText(0, paragraph1, 'offerPart1'), align: 'center', color})}
-  </td>
-</tr>
-${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-
-<tr>
-  <td style="color: ${color}; text-align: center;">
-  ${Paragraph({ text: data ? data[1] : paragraph1, align: 'center', color })}
-  </td>
-</tr>
-${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-
-<tr>
-  <td >
-    ${GetCode({
-      color: color,
-      code: queries?.codeCTA || 'Code tableQuery not found.',
-      link: href,
-      type,
-    })}
-  </td>
-</tr>
-
-${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-
-<tr>
-  <td style="color: ${color}; text-align: center;">
-    ${Paragraph({ text: data ? data[3] : paragraph3, align: 'center', color })}
-  </td> 
-</tr>
-
-${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-
-<tr>
-  <td style="color: ${color}; text-align: center;">
-    ${Paragraph({ text: data ? data[6] : paragraph3, align: 'center', color })}
-  </td> 
-</tr>
-
-${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-`
- :`
+  `
       ${Space({ insideTr: true, className: spaceClass })}
     <tr>
       <td style="color: ${color}; text-align: center;">
@@ -127,7 +81,6 @@ ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
 
 const LandingOfferPart = ({
   country,
-  isMonday = false,
   color,
   data,
   getPhrase,
@@ -146,7 +99,6 @@ const LandingOfferPart = ({
   copyCodeLabel = '',
   overrides = {},
 }) => {
-  console.log("landing overrides: ", overrides)
   const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
 
   const getText = (dataIndex, defaultText, overrideKey) => {
@@ -156,76 +108,6 @@ const LandingOfferPart = ({
   };
 
   const offerPartContent = 
-  isMonday ? `
-  <tr>
-  <td >
-  ${Space({ className: 'newsletterBottom35px' })}
-  </td>
-</tr>
-<tr>
-  <td  style="color: ${color}; text-align: center;">
-  ${Paragraph({ text: getText(0, paragraph1, 'offerPart1'), align: 'center', color })}
-  </td>
-</tr>
-<tr>
-  <td >
-    ${Space({ className: 'newsletterBottom35px' })}
-  </td>
-</tr>
-
-<tr>
-  <td style="color: ${color}; text-align: center;">
-   ${Paragraph({ text: data ? data[1] : paragraph2, align: 'center', color })}
-  </td>
-</tr>
-<tr>
-  <td style="color: ${color}; text-align: center;">
-    ${Space({ className: 'newsletterBottom35px' })}
-  </td>
-</tr>
-
-<tr>
-  <td >
-    ${GetCode({
-      color: color,
-      code: queries?.code || 'Code tableQuery not found.',
-      link: href,
-      type,
-      showCopyCode: true,
-    })}
-  </td>
-</tr>
-
-<tr>
-  <td >
-    ${Space({ className: 'newsletterBottom35px' })}
-  </td>
-</tr>
-
-<tr>
-  <td style="color: ${color}; text-align: center;" >
-    ${Paragraph({ text: data ? data[3] : paragraph3, align: 'center', color })}
-  </td>
-</tr>
-
-<tr>
-  <td >
-    ${Space({ className: 'newsletterBottom35px' })}
-  </td>
-</tr>
-<tr>
-  <td style="color: ${color}; text-align: center;" >
-    ${Paragraph({ text: data ? data[6] : paragraph3, align: 'center', color })}
-  </td>
-</tr>
-
-<tr>
-  <td >
-    ${Space({ className: 'newsletterBottom35px' })}
-  </td>
-</tr>
-  `
-  :
   `
     <tr>
     <td >

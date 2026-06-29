@@ -28,6 +28,7 @@ import { ImageWithoutLink } from '../components/ImageWithoutLink';
 import { TopImageTitleWithoutLink } from '../components/TopImageTitleWithoutLink';
 import { getCategoryName, getHrefWithOverride } from '../utils/categories';
 import { getProductHrefWithOverride } from '../utils/products';
+import { SoonEndingBanners } from '../components/SoonEndingBanners';
 
 const RegularFridayNslt = async ({
   links,
@@ -61,18 +62,12 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', TopImageTitle_data, type, queries, shop,
-    country,);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
   // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
   // prettier-ignore
-  // const FooterElement = categories_type === 'liquidator'
-  //   ? FooterLiquidator({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id })
-  //   : Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
-
   const FooterElement =  Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const seeMore = getPhrase('See more');
@@ -102,23 +97,6 @@ const RegularFridayNslt = async ({
     className: TiT_className,
   })
 
-  // if (categories_type === 'liquidator') {
-  //   TopImageTitleElement = links?.TopImageTitle_src
-  //     ? TopImageTitleWithoutLink({
-  //       src: links.TopImageTitle_src,
-  //       title1: queriesTiT[0] || 'Translation not found',
-  //       title2: queriesTiT[1] || 'Translation not found',
-  //       title3: queriesTiT[2] || null,
-  //       color: TopImageTitle_data.color,
-  //       backgroundColor: TopImageTitle_data.backgroundColor,
-  //       type: TopImageTitle_data.type,
-  //       renderType: type,
-  //       className: TopImageTitle_data.className,
-  //     })
-  //     : ''
-  // }
-
-
   let TopImageElement = ImageWithLink({
     href: links.TopImage_href,
     src: links.TopImage_src,
@@ -126,24 +104,6 @@ const RegularFridayNslt = async ({
     alt: 'Top Image',
   })
 
-  // if (categories_type === 'liquidator') {
-  //   TopImageElement = links?.TopImage_src
-  //     ? ImageWithoutLink({
-  //       src: links.TopImage_src,
-  //       insideTr: true,
-  //       alt: 'Top Image',
-  //     })
-  //     : ''
-  // } else {
-  //   TopImageElement = links?.TopImage_href && links?.TopImage_src
-  //     ? ImageWithLink({
-  //       href: links.TopImage_href,
-  //       src: links.TopImage_src,
-  //       insideTr: true,
-  //       alt: 'Top Image',
-  //     })
-  //     : ''
-  // }
 
   let TopImageVideoElement = (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) ? VideoLPWithLink({
     href: links.TopImageVideo_href,
@@ -152,40 +112,18 @@ const RegularFridayNslt = async ({
     insideTr: true,
   }) : '';
 
-  // if (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) {
-  //   TopImageElement = VideoLPWithLink({
-  //     href: links.TopImageVideo_href,
-  //     src: links.TopImageVideo_src,
-  //     alt: 'Landing Page Video',
-  //     insideTr: true,
-  //   });
-  // }
-
 
   let OfferPartElement = '';
 
   if (OfferPart && OfferPart.type === 'code') {
     OfferPartElement = OfferPartCode({
       country,
-      isMonday: OfferPart.isMonday || false,
-      color: OfferPart.color,
       data: queries.offerPart,
       href: links.code_href,
       getPhrase,
       type,
       queries,
-      selectCampaign: selectCampaign,
-      add_utm,
-      shop,
-      overrides: OfferPart.overrides,
-      backgroundColor: OfferPart.backgroundColor,
-      paragraphAlign: OfferPart.alignment,
-      germanSeparatingLine: OfferPart.germanSeparatingLine,
-      spaceClass: OfferPart?.spaceClass,
-      isSpaceBetweenAllParts: OfferPart?.isSpaceBetweenAllParts,
-      spanStyle: OfferPart?.spanStyle,
-      copyCodeColor: OfferPart?.copyCodeColor,
-      copyCodeLabel: getPhrase('Copy code'),
+     OfferPart
     });
   } else if (OfferPart && OfferPart.type === 'codes') {
     OfferPartElement = `<tr>
@@ -292,19 +230,10 @@ const RegularFridayNslt = async ({
   const TimerElement =
     Inside && Inside.type === 'timer'
       ? Timer({
-        title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
-        // title: 'Free scatter cushions set',
-        subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
-        // subtitle: 'deal ends in:',
-        href: links.Timer_href,
-        src: timer.image[country],
-        color: Inside.color,
-        background: Inside.backgroundColor,
-        freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
-        isCtaVisible: timer.isCtaVisible,
-        ctaText: shopNowPhrase,
-        spaceAfter: Inside.spaceAfter,
-        spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
+        queries,
+        links,
+        country,
+        timer,ctaText: shopNowPhrase, getImageUrl
       })
       : '';
   const categoriesWithProducts = await Promise.all(
@@ -441,42 +370,6 @@ const RegularFridayNslt = async ({
     CategoriesElement = '';
   }
 
-  let soonEndingBannersElement = '';
-
-  soonEndingBannersElement = soonEndingBanners ?
-    `
-  <!-- 🎈 Soon Ending Banners -->
-    <table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
-      ${Line({ insideTr: true })}
-      
-      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
-
-      <tr>
-        <td align="left">
-          <span class="newsletterFooterTitle">${shopLimitedTimeDeals}</span>
-        </td>
-      </tr>
-      
-      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
-      
-      ${SoonEndingBanner({
-      href: links.Banner_1,
-      src: links.Banner_1_Image,
-      orderingId: '1',
-    })}
-
-      ${Space({ className: 'newsletterBottom20px', insideTr: true })}
-
-      ${SoonEndingBanner({
-      href: links.Banner_2,
-      src: links.Banner_2_Image,
-      orderingId: '2',
-    })}
-
-      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
-    </table>
-    ` : '';
-
   return `
     ${HeaderElement}
 
@@ -513,7 +406,8 @@ const RegularFridayNslt = async ({
     </table>
 
 
-    ${soonEndingBannersElement}
+    ${soonEndingBanners ?
+    SoonEndingBanners({ links, getPhrase }) : ''}
       
     ${FooterElement}
   `;
