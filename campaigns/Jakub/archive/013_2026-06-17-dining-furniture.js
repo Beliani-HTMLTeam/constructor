@@ -309,7 +309,7 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
-  isArchive: false,
+  isArchive: true,
   optimizeImg: true,
   figmaUrl: 'https://www.figma.com/design/WslIHWAtC2SD6jIuXBzrhP/Newsletter-Dining-Room---Wednesday-2026.06.17--Copy-?node-id=0-1&t=njH6ZbzKX50m1lwT-1',
   templates: [

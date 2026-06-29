@@ -1,4 +1,4 @@
-import placeholderData from '../placeholder-data/placeholder-translations.json';
+import placeholderData from './placeholder-data/placeholder-translations.json';
 
 const FALLBACK = placeholderData.CHDE || {};
 
