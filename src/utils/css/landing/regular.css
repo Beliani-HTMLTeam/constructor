@@ -88,6 +88,11 @@ table {
   padding-right: 20px;
 }
 
+#newsletter .newsletterContainer55px {
+  padding-left: 55px;
+  padding-right: 55px;
+}
+
 .newsletterContainer60px {
   padding-left: 60px !important;
   padding-right: 60px !important;
@@ -422,6 +427,11 @@ table {
   #newsletter.newsletterContainer {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  #newsletter .newsletterContainer55px {
+    padding-left: 35px;
+    padding-right: 35px;
   }
 
   #newsletter .newsletterFreebieContainer {

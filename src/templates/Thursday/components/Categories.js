@@ -133,17 +133,21 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           type,
           country,
           offerTextOverrides: category.offerTextOverrides,
+          category,
         })
       : '';
 
   const CTAElement = category.cta
-    ? CTA({
+    ? `
+      ${category.cta.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
+      ${CTA({
         color: category.color ?? '#000000',
         href: ctaHref,
         text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
         insideTr: true,
         tdClass: 'newsletterContainer',
-      })
+      })}
+        `
     : '';
 
   return `
@@ -222,6 +226,7 @@ const renderBody = async ({
   type,
   country,
   offerTextOverrides,
+  category,
 }) => {
   // console.log('produkty ', products);
 
@@ -253,6 +258,7 @@ const renderBody = async ({
       renderType: type,
       country,
       offerTextOverrides,
+      category,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

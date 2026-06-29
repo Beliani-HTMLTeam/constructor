@@ -76,7 +76,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
   html += CTA({
     href: links?.TopImageTitle_href,
     text: t('Get codes'),
-    color: '#000000',
+    color: color || '#000000',
     align: 'center',
     insideTr: true,
   });
@@ -85,7 +85,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
   return html;
 };
 
-const renderCodeElement = ({ renderType, queries, links, t }) => {
+const renderCodeElement = ({ renderType, queries, links, t, color }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
 
   if (offerItems.length === 6) {
@@ -93,7 +93,7 @@ const renderCodeElement = ({ renderType, queries, links, t }) => {
       return CTA({
         href: links?.TopImageTitle_href,
         text: t('Get codes'),
-        color: '#000000',
+        color: color || '#000000',
         align: 'center',
         insideTr: true,
       });
@@ -106,7 +106,7 @@ const renderCodeElement = ({ renderType, queries, links, t }) => {
     return CTA({
       href: links?.TopImageTitle_href,
       text: t('Get code'),
-      color: '#000000',
+      color: color || '#000000',
       align: 'center',
       insideTr: true,
     });
@@ -115,7 +115,7 @@ const renderCodeElement = ({ renderType, queries, links, t }) => {
   return renderOfferRow(offerItems[2] ?? 'Code: xxxxx');
 };
 
-export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, offerTexts }) => {
+export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, offerTexts, color }) => {
   const t = getPhrase;
   const hasSixOffers = isSixOffers(queries);
   const offerItems = resolveOfferRows({ queries, renderType, offerTexts });
@@ -128,7 +128,7 @@ export const renderOfferSection = ({ queries, renderType, links, getPhrase, show
     html += renderSixOfferNewsletter({ queries, links, t });
   } else {
     html += renderOfferRows(offerItems);
-    html += renderCodeElement({ renderType, queries, links, t });
+    html += renderCodeElement({ renderType, queries, links, t, color });
     html += Space({ insideTr: true, className: 'newsletterBottom35px' });
   }
 

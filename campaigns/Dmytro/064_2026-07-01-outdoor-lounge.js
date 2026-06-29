@@ -195,6 +195,7 @@ const categories = [
     type: 'grid',
     cta: true,
     paddingTop: 0,
+    spaceAfter: 'newsletterBottom40px',
     title: {
       position: 'afterImg',
       show: true,

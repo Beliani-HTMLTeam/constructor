@@ -19,7 +19,8 @@ export const renderCategory = async (
   getCategoryLink,
   getCategoryTitle,
   add_utm,
-  lineType = 'white'
+  lineType = 'white',
+  country
 ) => {
   console.log('background: ', category);
 
@@ -76,7 +77,7 @@ export const renderCategory = async (
         
         ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : ''}
       `
-    : Space({ insideTr: true, backgroundColor: background });
+    : category?.paragraph?.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : Space({ insideTr: true, backgroundColor: background });
 
   const ProductsElement = category.products
     ? category.type === 'unique'
@@ -102,6 +103,8 @@ export const renderCategory = async (
             insideContainer: true,
             color,
             background,
+            add_utm,
+            country
           })
         : await renderProducts({
             products: category.products,
@@ -113,8 +116,9 @@ export const renderCategory = async (
             insideContainer: category.insideContainer || false,
             background,
             color: category.color || '#000000',
+            country
           })
-    : null;
+    : '';
 
   return `
     <tr>
