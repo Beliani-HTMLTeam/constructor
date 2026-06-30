@@ -70,6 +70,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         src: category.src,
         insideTr: true,
         tdClass: category.tdClass ?? categoryImageTdClass,
+        type,
       })
     : '';
 

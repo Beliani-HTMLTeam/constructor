@@ -254,7 +254,7 @@ export default new entities.Campaign({
   issueCardId: '493899',
   lpId: '30681',
   alarm: {
-    isActive: false,
+    isActive: true,
   },
   isArchive: false,
   optimizeImg: true,

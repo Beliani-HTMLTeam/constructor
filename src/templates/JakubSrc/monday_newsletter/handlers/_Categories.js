@@ -47,7 +47,7 @@ const enrichCategoryProducts = async ({ category, getProductById, getCategoryLin
   };
 };
 
-const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm, country }) => {
+const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm, country, type }) => {
   const countrySlug = String(country ?? '').toLowerCase();
   const name = queries?.categories?.[index]
     ? queries.categories[index]
@@ -74,7 +74,7 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
     }
   }
 
-  let src = category?.src;
+  let src = category?.srcByType?.[type] ?? category?.src;
   if (src && typeof src === 'object') {
     src = src.src;
   }
@@ -132,6 +132,7 @@ export const CategoriesHandler = async ({
       getCategoryLink,
       add_utm,
       country,
+      type,
     })
   );
 
