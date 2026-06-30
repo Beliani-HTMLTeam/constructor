@@ -86,8 +86,22 @@ const getRowsFromFreebiesConfig = (freebies) => {
   for (const row of configuredRows) {
     if (!Array.isArray(row) || row.length === 0) continue;
 
-    for (let i = 0; i < row.length; i += 3) {
-      rows.push(row.slice(i, i + 3));
+    // Determine the optimal columns per row
+    const totalItems = row.length;
+    let columnsPerRow = 3; // default
+    
+    // If 4 items, use 2 columns
+    if (totalItems === 4) {
+      columnsPerRow = 2;
+    } else if (totalItems === 2) {
+      columnsPerRow = 2;
+    } else if (totalItems === 1) {
+      columnsPerRow = 1;
+    }
+    // For 3 items, keep 3 columns
+
+    for (let i = 0; i < totalItems; i += columnsPerRow) {
+      rows.push(row.slice(i, i + columnsPerRow));
     }
   }
 
@@ -96,10 +110,24 @@ const getRowsFromFreebiesConfig = (freebies) => {
 
 const getRowsFromProductsList = (products, freebiesPerRow) => {
   const productList = Array.isArray(products) ? products : [];
-  const columns = normalizeColumns(freebiesPerRow);
+  const totalItems = productList.length;
+  
+  // Determine columns based on number of items
+  let columns = normalizeColumns(freebiesPerRow);
+  
+  // Override for specific counts
+  if (totalItems === 4) {
+    columns = 2; // 4 items -> 2 columns
+  } else if (totalItems === 2) {
+    columns = 2; // 2 items -> 2 columns
+  } else if (totalItems === 1) {
+    columns = 1; // 1 item -> 1 column
+  } else if (totalItems === 6) {
+    columns = 3; // 6 items -> 3 columns
+  }
+  
   const rows = [];
-
-  for (let i = 0; i < productList.length; i += columns) {
+  for (let i = 0; i < totalItems; i += columns) {
     rows.push(productList.slice(i, i + columns));
   }
 
