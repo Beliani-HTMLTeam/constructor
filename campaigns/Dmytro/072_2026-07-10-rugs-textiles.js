@@ -59,6 +59,7 @@ const timer = {
   background: '#FD9000',
   color: '#ffffff',
   isCtaVisible: true,
+  isWithTitles: true,
   image: {
       "UK": "https://gen.sendtric.com/countdown/rg56s58zac",
       "PL": "https://gen.sendtric.com/countdown/9mf650rlea",

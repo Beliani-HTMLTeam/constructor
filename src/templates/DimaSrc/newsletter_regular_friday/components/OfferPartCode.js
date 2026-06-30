@@ -13,10 +13,10 @@ export function OfferPartCode({
   data
 }) {
   const copyCodeLabel = getPhrase('Copy code')
-       const {
-        color, overrides, backgroundColor, alignment, germanSeparatingLine, spaceClass, isSpaceBetweenAllParts, spanStyle, copyCodeColor
-       } = OfferPart;
-     
+  const {
+    color, overrides, backgroundColor, alignment, germanSeparatingLine, spaceClass, isSpaceBetweenAllParts, spanStyle, copyCodeColor
+  } = OfferPart;
+
   const newsletter = NewsletterOfferPart({
     country,
     color,
@@ -46,7 +46,7 @@ export function OfferPartCode({
     isSpaceBetweenAllParts,
     spanStyle,
     copyCodeColor,
-    copyCodeLabel, 
+    copyCodeLabel,
     overrides: overrides?.landing || overrides || {}
   });
   return `

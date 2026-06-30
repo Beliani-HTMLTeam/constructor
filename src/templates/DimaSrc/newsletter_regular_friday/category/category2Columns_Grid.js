@@ -1,4 +1,4 @@
-export const render = ({ getCategoryLink, getCategoryTitle, categories, paddingStyle = 'padding-right:4px' }) => {
+ const render = ({ getCategoryLink, getCategoryTitle, categories, paddingStyle = 'padding-right:4px' }) => {
   console.log('render of category2Columns_Grid', categories);
   return `
     <td width="50%" valign="top">
@@ -15,3 +15,5 @@ export const render = ({ getCategoryLink, getCategoryTitle, categories, paddingS
     </table>
 </td>`;
 };
+
+export { render };

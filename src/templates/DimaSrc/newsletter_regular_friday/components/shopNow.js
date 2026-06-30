@@ -1,15 +1,15 @@
 import { Space } from './Space.js';
 
-export const shopNow = ({ href, cta, textColor, space = '', backgorund = '#FD9000' }) => {
+export const shopNow = ({ href, cta, textColor, space = '', background = '#FD9000' }) => {
   return `
         
             <tr>
-                <td align="center" style="background-color:${backgorund}">
+                <td align="center" style="background-color:${background}">
                     ${Space({ className: 'newsletterBottom35px' })}
                 </td>
             </tr>
             <tr>
-                <td align="center" style="background-color:${backgorund}">
+                <td align="center" style="background-color:${background}">
                     <a href="${href}" style="color:${textColor}; text-decoration: underline;">
                         <span class="newsletterCta">${cta}</span>
                     </a>
@@ -18,7 +18,7 @@ export const shopNow = ({ href, cta, textColor, space = '', backgorund = '#FD900
             ${
               space != '' && space.length !== 0
                 ? `<tr >
-                    <td style="background-color:${backgorund}" class="newsletterBottom${space}px"></td>
+                    <td style="background-color:${background}" class="newsletterBottom${space}px"></td>
                  </tr>
                 `
                 : ''

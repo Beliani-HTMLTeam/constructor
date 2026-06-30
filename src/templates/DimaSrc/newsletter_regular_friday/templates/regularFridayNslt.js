@@ -12,7 +12,6 @@ import { SoonEndingBanner } from '../components/SoonEndingBanner';
 import { shopNow } from '../components/shopNow';
 import { Create2Columns_Grid } from '../components/Create2Columns_Grid';
 import { render as category2Columns_Grid } from '../category/category2Columns_Grid';
-import { Intro } from '../components/Intro';
 import { CTA } from '../components/CTA';
 import FreebiesGenerator from '@/components/FreebiesGenerator';
 import { category4Tiles_Grid } from '../category/grid4tiles';
@@ -29,6 +28,10 @@ import { TopImageTitleWithoutLink } from '../components/TopImageTitleWithoutLink
 import { getCategoryName, getHrefWithOverride } from '../utils/categories';
 import { getProductHrefWithOverride } from '../utils/products';
 import { SoonEndingBanners } from '../components/SoonEndingBanners';
+import { CategoriesWrapper } from '../components/categories/index.js';
+import { OfferPartWrapper } from '../components/offerpart';
+import { FreebiesWrapper } from '../components/freebies';
+import { IntroWrapper } from '../components/intro/index.js';
 
 const RegularFridayNslt = async ({
   links,
@@ -47,8 +50,8 @@ const RegularFridayNslt = async ({
   // campaign elements
   Inside,
   OfferPart,
-  intro,
-  timer,
+  intro: introData,
+  timer: timerData,
   TopImageTitle_data,
   shopCTA,
   soonEndingBanners = true,
@@ -68,14 +71,14 @@ const RegularFridayNslt = async ({
   // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
   // prettier-ignore
-  const FooterElement =  Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNowPhrase = getPhrase('Shop now');
 
   const {
-    TopImageTitle: [title1, title2, title3], intro, offerPart, timer
+    TopImageTitle: [title1, title2, title3], intro: introQueries, offerPart, timer: timerQueries
   } = queries;
 
   const {
@@ -113,119 +116,34 @@ const RegularFridayNslt = async ({
   }) : '';
 
 
-  let OfferPartElement = '';
+  const OfferPartElement = OfferPartWrapper({
+    OfferPart,
+    country,
+    queries,
+    links,
+    getPhrase,
+    type,
+  });
 
-  if (OfferPart && OfferPart.type === 'code') {
-    OfferPartElement = OfferPartCode({
-      country,
-      data: queries.offerPart,
-      href: links.code_href,
-      getPhrase,
-      type,
-      queries,
-     OfferPart
-    });
-  } else if (OfferPart && OfferPart.type === 'codes') {
-    OfferPartElement = `<tr>
-            <td class="newsletterContainer" style="background-color: ${OfferPart.backgroundColor}">
-              ${OfferPartCodes({
-      color: OfferPart.color,
-      data: queries['offerPart'],
-      data2: queries['codes'],
-      href: links.code_href,
-      getPhrase,
-      type,
-      queries,
-    })}
-            </td>
-          </tr>`;
-  }
+  const FreebiesElement = await FreebiesWrapper({
+    freebies,
+    background,
+    color,
+    getProductById,
+    selectCampaign,
+    country,
+  });
 
-  const freebiesElement = freebies
-    ? `
-    <tr>
-                <td style="background-color: 
-                ${freebies.options.background || background}; color: ${freebies.options?.color || '#000'};">
-                  ${FreebiesGenerator({
-      background,
-      freebies: freebies.items || [],
-      getProductById,
-      color: freebies.options.color,
-      intro,
-      selectCampaign: selectCampaign,
-    })}
-                  </td>
-              </tr>
-              <tr>
-                <td style="background-color: 
-                ${freebies.options.background || background}; color: ${freebies.options?.color || '#000'};">
-                  ${FreebiesGenerator({
-      background,
-      freebies: freebies.items2 || [],
-      getProductById,
-      color: freebies.options.color,
-      intro,
-      selectCampaign: selectCampaign,
-    })}
-                  </td>
-              </tr>
-              <tr>
-                  <td style="background-color: ${freebies.options.background || background
-    }; color: ${freebies.options?.color || '#000'};">
-                    ${Space({ className: `${freebies.options?.space || 'newsletterBottom35px'}` })}
-                  </td>
-              </tr>
-            `
-    : '';
-
-  const IntroElement =
-    intro && intro.type === 'paragraph'
-      ? `
-          ${Intro({
-        text: intro.text || queries.intro || 'Translation not found',
-        // text: queries.intro || 'Translation not found',
-        paragraphAlign: intro.alignment,
-        color: intro.color,
-        spaceTop: intro.spaceTop || 'newsletterBottom35px',
-        spaceBottom: intro.spaceBottom || 'newsletterBottom35px',
-        backgroundColor: intro.backgroundColor,
-      })}
-          ${intro.cta
-        ? `
-              ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore, backgroundColor: intro.backgroundColor }) : ''}
-              ${CTA({
-          href:
-            intro.cta.hrefSource === 'queries'
-              ? add_utm(queries.introCTAhref)
-              : links.Intro_cta_href
-                ? getCategoryLink(links.Intro_cta_href)
-                : getCategoryLink(categories[0]?.href),
-          text: intro.cta.overrides?.[country] || queries.introCTA || shopNowPhrase,
-          // text: 'Lean more about outdoor trends',
-          background: intro.backgroundColor,
-          color: intro.color,
-          align: 'center',
-          insideTr: true,
-        })}
-              ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter, backgroundColor: intro.backgroundColor }) : ''}
-                `
-        : ''
-      }
-              ${intro.additionalSpace ? Space({ insideTr: true, className: intro.additionalSpace, backgroundColor: intro.backgroundColor }) : ''}
-          `
-      : intro && intro.type === 'liquidator' ? `
-      ${IntroLiquidator({
-        title: intro.title || queries.introTitle || 'Translation not found',
-        text: intro.text || queries.introParagraph || 'Translation not found',
-        // text: queries.intro || 'Translation not found',
-        paragraphAlign: intro.alignment,
-        titleColor: intro.titleColor,
-        color: intro.color,
-        spaceTop: intro.spaceTop || 'newsletterBottom35px',
-        spaceBottom: intro.spaceBottom || 'newsletterBottom35px',
-        backgroundColor: intro.backgroundColor,
-        additionalClass: intro.additionalClass ? intro.additionalClass : null
-      })}` : '';
+  const IntroElement = IntroWrapper({
+    intro: introData,
+    queries,
+    links,
+    categories,
+    country,
+    add_utm,
+    getCategoryLink,
+    shopNowPhrase,
+  });
 
   const TimerElement =
     Inside && Inside.type === 'timer'
@@ -233,142 +151,23 @@ const RegularFridayNslt = async ({
         queries,
         links,
         country,
-        timer,ctaText: shopNowPhrase, getImageUrl
+        timer: timerData, ctaText: shopNowPhrase, getImageUrl
       })
       : '';
-  const categoriesWithProducts = await Promise.all(
-    categories.map(async (category) => {
-      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && category.view !== 'newsletterOnly' && categories_type !== 'liquidator') {
-        
-        return {
-          ...category,
-          products: await Promise.all(category.products.map(async (p) => {
-            // Get the product data
-            const productData = await getProductById(p.id, p.src);
-            
-            // Check if there's an hrefOverride for the current country
-            const href = p.hrefOverride?.[country] 
-              ? add_utm(p.hrefOverride[country]) 
-              : productData?.href || p.href;
 
-              console.log('category',href, p.hrefOverride, productData?.href, p.href);
-            
-            return {
-              ...productData,
-              ...p, // Keep any overrides from the original product
-              href, // Use the overridden href if available
-              // Keep the hrefOverride in case it's needed elsewhere
-              hrefOverride: p.hrefOverride,
-            };
-          })),
-        };
-      
-      }
-      return { ...category };
-    })
-  );
-
-  let CategoriesElement = '';
-
-  if (categories &&
-    categories_type !== 'twoColumnsGrid' &&
-    categories_type !== 'fullWidthTiles' &&
-    categories_type !== 'liquidator') {
-    CategoriesElement = await Categories({
-      getPhrase: getPhrase,
-      getCategoryLink: getCategoryLink,
-      getCategoryTitle: getCategoryTitle,
-      categories:
-        categoriesWithProducts.length > 0
-          ? categoriesWithProducts.map((category, idx) => {
-            const href = getHrefWithOverride(
-              category, 
-              country, 
-              category.href, 
-              queries, 
-              idx, 
-              add_utm, 
-              getCategoryLink
-            );
-            const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
-            
-            return {
-              ...category,
-              href,
-              name,
-            };
-          })
-          : categories.map((category, idx) => {
-            const href = getHrefWithOverride(
-              category, 
-              country, 
-              category.href, 
-              queries, 
-              idx, 
-              add_utm, 
-              getCategoryLink
-            );
-            const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
-            // Also handle product href overrides
-            if (category.products && Array.isArray(category.products)) {
-              category.products = category.products.map(product => ({
-                ...product,
-                href: getProductHrefWithOverride(product, country, product.href)
-              }));
-            }
-            return {
-              ...category,
-              href,
-              name,
-            };
-          }),
-      categories_line,
-      queries,
-      add_utm,
-      country
-    });
-  } else if (categories && categories_type === 'twoColumnsGrid') {
-    CategoriesElement = `
-
-    <tr>
-              <td style="background-color: ${background};" class="newsletterContainer">
-                ${Create2Columns_Grid({
-      shuffle: false,
-      iter: categories,
-      left: (categories) =>
-        category2Columns_Grid({
-          getCategoryLink,
-          getCategoryTitle,
-          categories,
-          paddingStyle: 'padding-right:6px',
-        }),
-      right: (categories) =>
-        category2Columns_Grid({
-          getCategoryLink,
-          getCategoryTitle,
-          categories,
-          paddingStyle: 'padding-left:6px',
-        }),
-    })}
-              </td>
-            </tr>
-            `;
-  } else if (categories && categories_type === 'fullWidthTiles') {
-    CategoriesElement = `
-    <tr>
-              <td style="background-color: ${background};" class="newsletterContainer">
-            ${FullWidthTiles({
-      tiles: categories,
-      getCategoryLink,
-      getCategoryTitle,
-    })}
-            ${Space({ className: 'newsletterBottom80px' })}
-              </td>
-            </tr>
-    `;
-  }   else {
-    CategoriesElement = '';
-  }
+  const CategoriesElement = await CategoriesWrapper({
+    categories,
+    categories_type,
+    categories_line,
+    country,
+    queries,
+    getPhrase,
+    getCategoryLink,
+    getCategoryTitle,
+    getProductById,
+    add_utm,
+    background,
+  });
 
   return `
     ${HeaderElement}
@@ -376,7 +175,7 @@ const RegularFridayNslt = async ({
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; color: #000; background-color: ${background};" id="newsletter">
       ${TopImageTitleElement}
 
-      ${timer && timer.position === 'insideTopImageTitle' ? TimerElement : ''}
+      ${timerData && timerData.position === 'insideTopImageTitle' ? TimerElement : ''}
 
       ${TopImageElement}
 
@@ -384,9 +183,9 @@ const RegularFridayNslt = async ({
 
       ${OfferPartElement}
 
-      ${freebiesElement}
+      ${FreebiesElement}
 
-      ${timer && timer.position === 'outsideTopImageTitle' ? TimerElement : ''}
+      ${timerData && timerData.position === 'outsideTopImageTitle' ? TimerElement : ''}
       
       ${CategoriesElement}
               
@@ -395,19 +194,19 @@ const RegularFridayNslt = async ({
         href: links['ShopCTA'],
         cta: getPhrase('Shop All Categories'),
         textColor: shopCTA?.color || color,
-        backgorund: shopCTA?.backgroundColor || background,
+        background: shopCTA?.backgroundColor || background,
         space: shopCTA?.space || '35',
       })
       : ''
     }
 
-      ${timer && timer.position === 'afterTilesCategories' ? TimerElement : ''}
+      ${timerData && timerData.position === 'afterTilesCategories' ? TimerElement : ''}
     
     </table>
 
 
     ${soonEndingBanners ?
-    SoonEndingBanners({ links, getPhrase }) : ''}
+      SoonEndingBanners({ links, getPhrase }) : ''}
       
     ${FooterElement}
   `;
