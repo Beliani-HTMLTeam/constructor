@@ -252,6 +252,10 @@ img {
   font-size: 8px;
 }
 
+.newsletterConditions a {
+  mso-line-height-rule: exactly;
+}
+
 .newsletterFooterCompanyDetails {
   vertical-align: middle;
   padding-top: 20px;
