@@ -208,6 +208,7 @@ const categories = [
   },
   {
     name: 'Outdoor kitchen',
+    nameOverrides: { cz: 'abrakadabra' },
     src: getImageUrl('20260603/20260603Category40.jpg', true),
     href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
     background: '#FFDCCD',
@@ -286,6 +287,7 @@ const categories = [
     tiles: [
       {
         name: 'Parasols',
+        nameOverrides: { cz: 'abrakadabra' },
         src: getImageUrl('20260603/20260603Additional1.png', true),
         href: 'https://www.beliani.ch/garden-furniture/parasols/',
       },
