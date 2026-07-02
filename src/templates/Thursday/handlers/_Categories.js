@@ -84,12 +84,26 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
 
   const tilesOverride = Array.isArray(category?.tiles)
     ? category.tiles.map((tile) => {
-        const hrefOverride = tile?.hrefOverrides?.[countrySlug];
-        const nameOverride = tile?.nameOverrides?.[countrySlug];
-        const resolvedHref = hrefOverride ? add_utm(hrefOverride) : tile.href;
-        const resolvedName = nameOverride ? nameOverride : tile.name;
-        return { ...tile, resolvedHref, resolvedName };
-      })
+      console.log('tilesOverride', tile)
+      const hrefOverride = tile?.hrefOverrides?.[countrySlug];
+      const nameOverride = tile?.nameOverrides?.[countrySlug];
+
+      const resolvedHref = hrefOverride ? add_utm(hrefOverride) : tile.href;
+      const resolvedName = nameOverride || getCategoryTitle(tile.name);
+
+      // Create result object with original tile
+      const result = { ...tile };
+
+      // Always add resolvedName if it exists (either from override or original)
+      result.resolvedName = resolvedName;
+
+      // Add resolvedHref if href override exists or if we want to include it always
+      if (hrefOverride) {
+        result.resolvedHref = resolvedHref;
+      }
+
+      return result;
+    })
     : null;
 
   return {

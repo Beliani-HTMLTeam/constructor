@@ -287,7 +287,8 @@ const categories = [
     tiles: [
       {
         name: 'Parasols',
-        nameOverrides: { befr: 'abrakadabra' },
+        nameOverrides: { befr: 'abrakadabra', chfr: 'abrakadabra' },
+        hrefOverrides: { befr: 'https://www.beliani.ch/garden-furniture/parasols/', chfr: 'https://www.beliani.ch/garden-furniture/parasols/' },
         src: getImageUrl('20260603/20260603Additional1.png', true),
         href: 'https://www.beliani.ch/garden-furniture/parasols/',
       },
