@@ -1,115 +1,142 @@
-import { Space } from './Space.js';
+import { getCountryConfig } from '../utils/timerConfig.js';
+import { CTA } from './CTA.js';
 import { ImageWithLink } from './ImageWithLink.js';
 import { Paragraph } from './Paragraph.js';
-import { CTA } from './CTA.js';
+import { Space } from './Space.js';
+import { TimerGif, TimerHtml, getTimerLabels, getTimerLabelsSync, getTimerConfig } from './timer/index.js';
 
-const Timer = ({
-  queries,
- links,
- country,
- timer,
- getImageUrl,
- ctaText,
+export const Timer = async ({
+  timer, // The complete timer object
+  type, // 'newsletter' or 'landing'
+  country,
+  title = '',
+  subtitle = '',
+  href = '#',
+  ctaText = 'Shop now',
+  spaceAfter = null,
+  spaceWithoutCTA = 'newsletterBottom35px',
+  containerId = 'prolo-timer',
+  useDynamicLabels = true,
 }) => {
-  const {color,background, image, overrides, freebies, isCtaVisible, isWithTitles, spaceWithoutCTA, spaceAfter} = timer;
-  const title = isWithTitles ? queries.timer[0] || 'Translation not found' : '';
-  const subtitle = isWithTitles ? queries.timer[1] || 'Translation not found' : '';
-  const href = links.Timer_href;
-  const src = image[country];
-  const freebiesSrc = overrides && overrides[country] ? getImageUrl(overrides[country], true) : freebies;
+  console.log("timer", timer)
+  // Get labels
+  const config = getCountryConfig(country);
 
-  // title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
-  // // title: 'Free scatter cushions set',
-  // subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
-  // // subtitle: 'deal ends in:',
-  // href: links.Timer_href,
-  // src: timer.image[country],
-  // color: Inside.color,
-  // background: Inside.backgroundColor,
-  // freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
-  // isCtaVisible: timer.isCtaVisible,
-  // ctaText: shopNowPhrase,
-  // spaceAfter: Inside.spaceAfter,
-  // spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
+  const finalConfig = {
+    timezone: config?.timezone || 'Europe/Warsaw',
+    lang: config?.lang || 'english',
+    bg: config?.bg || '#000000',
+    color: config?.color || '#ffffff',
+    label: config?.label || '#000000',
+    ...(timer?.overrides?.[country] || {}),
+  };
+  
+  // Get labels
+  let labels;
+  if (useDynamicLabels) {
+    labels = await getTimerLabels(finalConfig.lang);
+  } else {
+    labels = getTimerLabelsSync(finalConfig.lang);
+  }
+  
+  const [dayLabel, hourLabel, minLabel, secLabel] = labels;
+  
+  // Generate timer content based on type
+  let timerContent = '';
+  if (type === 'newsletter') {
+    // For newsletter: use GIF image (no scripts)
+    const bg = (finalConfig.bg || '#000000').replace('#', '');
+    const color = (finalConfig.color || '#ffffff').replace('#', '');
+    const label = (finalConfig.label || '#000000').replace('#', '');
+    const background = (timer?.background || '#FD9000').replace('#', '');
+    
+    const gifUrl = `https://www.prologistics.info/timer.gif?deadline=${timer?.deadline || '2026-07-10T23:59:00'}&timezone=${encodeURIComponent(finalConfig.timezone)}&lang=${finalConfig.lang}&bg=${bg}&color=${color}&label=${label}&background=${background}&uid=USER_ID`;
+    
+    timerContent = ImageWithLink({
+      href: href,
+      src: gifUrl,
+      insideTr: true,
+      tdClass: 'newsletterContainer60px',
+    });
+  } else {
+    // For landing page: use HTML with scripts
+    timerContent = TimerHtml({
+      deadline: timer?.deadline || '2026-07-10T23:59:00',
+      timezone: finalConfig.timezone,
+      bg: finalConfig.bg || '#000000',
+      color: finalConfig.color || '#ffffff',
+      label: finalConfig.label || '#000000',
+      containerId: containerId,
+      dayLabel,
+      hourLabel,
+      minLabel,
+      secLabel,
+      showLoading: true,
+    });
+  }
 
+  // Assemble the timer with proper fallbacks
+  const timerColor = timer?.color || '#ffffff';
+  const timerBackground = timer?.background || '#FD9000';
+  const isCtaVisible = timer?.isCtaVisible !== undefined ? timer.isCtaVisible : true;
+  const freebies = timer?.freebies || null;
+  
   return `
     <tr>
       <td>
-        <table cellspacing="0" cellpadding="0" border="0" width="100%" align="center" style="color: ${color}; background-color: ${background};">
-          ${title && subtitle && Space({ insideTr: true, className: 'newsletterBottom10px' })}
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" align="center" style="color: ${timerColor}; background-color: ${timerBackground};">
+          ${title && subtitle ? Space({ insideTr: true, className: 'newsletterBottom10px' }) : ''}
           
-          <tr>
-            <td align="center" class="newsletterContainer">
-              ${
-                title
-                  ? Paragraph({
-                      text: title,
-                      tableContainer: true,
-                      className: 'newsletterSubtitleTimer',
-                      spanStyle: `color: ${color}`,
-                      align: 'center',
-                    })
-                  : ''
-              }
-            </td>
-          </tr>
+          ${title ? `
+            <tr>
+              <td align="center" class="newsletterContainer">
+                ${Paragraph({
+                  text: title,
+                  tableContainer: true,
+                  className: 'newsletterSubtitleTimer',
+                  spanStyle: `color: ${timerColor}`,
+                  align: 'center',
+                })}
+              </td>
+            </tr>
+          ` : ''}
           
-          
-          <tr>
-            <td align="center" class="newsletterContainer">
-              ${
-                subtitle
-                  ? Paragraph({
-                      text: subtitle,
-                      tableContainer: true,
-                      className: 'newsletterSubtitleTimer',
-                      spanStyle: `color: ${color}`,
-                      align: 'center',
-                    })
-                  : ''
-              }
-            </td>
-          </tr>
+          ${subtitle ? `
+            <tr>
+              <td align="center" class="newsletterContainer">
+                ${Paragraph({
+                  text: subtitle,
+                  tableContainer: true,
+                  className: 'newsletterSubtitleTimer',
+                  spanStyle: `color: ${timerColor}`,
+                  align: 'center',
+                })}
+              </td>
+            </tr>
+          ` : ''}
 
           ${title && subtitle ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
 
-          ${ImageWithLink({
-            href: href,
-            src: src,
-            insideTr: true,
-            tdClass: 'newsletterContainer60px',
-          })}
+          ${timerContent}
 
           ${Space({ insideTr: true, className: isCtaVisible ? 'newsletterBottom20px' : spaceWithoutCTA })}
 
-          ${
-            isCtaVisible
-              ? CTA({
-                  color: color,
-                  href: href,
-                  text: ctaText,
-                  align: 'center',
-                  insideTr: true,
-                  background: background,
-                })
-              : ''
-          }
+          ${isCtaVisible ? CTA({
+            color: timerColor,
+            href: href,
+            text: ctaText,
+            align: 'center',
+            insideTr: true,
+            background: timerBackground,
+          }) : ''}
           
-          ${
-            freebies
-              ? `
+          ${freebies ? `
             ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
-          
-            ${ImageWithLink({ insideTr: true, src: freebies, href: href, alt: 'Freebies Image' })}  
-
-            `
-              : `${Space({ insideTr: true, className: 'newsletterBottom15px' })}`
-          }
+            ${ImageWithLink({ insideTr: true, src: freebies, href: href, alt: 'Freebies Image' })}
+          ` : `${Space({ insideTr: true, className: 'newsletterBottom15px' })}`}
         </table>
       </td>
     </tr>
     ${spaceAfter ? Space({ insideTr: true, className: spaceAfter }) : ''}
   `;
 };
-
-export { Timer };

@@ -65,6 +65,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
+  console.log("shop and country", shop, country, timerData)
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -147,11 +148,18 @@ const RegularFridayNslt = async ({
 
   const TimerElement =
     Inside && Inside.type === 'timer'
-      ? Timer({
-        queries,
-        links,
-        country,
-        timer: timerData, ctaText: shopNowPhrase, getImageUrl
+      ? await Timer({
+        timer: timerData, // Pass the complete timer object
+        type: type, // 'newsletter' or 'landing'
+        country: country,
+        title: timerData?.isWithTitles ? queries.timer?.[0] || '' : '',
+        subtitle: timerData?.isWithTitles ? queries.timer?.[1] || '' : '',
+        href: links.Timer_href || '#',
+        ctaText: shopNowPhrase,
+        spaceAfter: Inside?.spaceAfter,
+        spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
+        containerId: `prolo-timer-${country?.toLowerCase() || 'default'}`,
+        useDynamicLabels: false,
       })
       : '';
 
