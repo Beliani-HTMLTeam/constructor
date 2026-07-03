@@ -41,7 +41,7 @@ const TopImageTitle_data = {
 
 const intro_data = {
   color: "#000000",
-  backgroundColor: "#FFEFD9",
+  backgroundColor: "#FFF4E6",
   alignment: "left",
   type: "paragraph",
   cta: {
