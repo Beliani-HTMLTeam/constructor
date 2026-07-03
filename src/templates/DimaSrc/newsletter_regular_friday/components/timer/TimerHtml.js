@@ -29,7 +29,7 @@ export const TimerHtml = ({
   ${styles}
 
       <tr>
-        <td id="${containerId}" align="center" style="padding: 10px 0; font-family: 'Poppins', sans-serif; font-size: 16px; color: ${label};">
+        <td id="${containerId}" align="center" style="margin: 0 auto;" class="newsletterContainer">
           ${showLoading ? 'Loading...' : ''}
         </td>
       </tr>

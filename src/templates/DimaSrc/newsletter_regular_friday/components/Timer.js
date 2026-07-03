@@ -25,19 +25,14 @@ export const Timer = async ({
   const finalConfig = {
     timezone: config?.timezone || 'Europe/Warsaw',
     lang: config?.lang || 'english',
-    bg: config?.bg || '#000000',
-    color: config?.color || '#ffffff',
-    label: config?.label || '#000000',
+    bg:  timer.timerBg || '#000000',
+    color: timer.timerColor || '#ffffff',
+    label:timer.timerLabel || '#000000',
     ...(timer?.overrides?.[country] || {}),
   };
   
   // Get labels
-  let labels;
-  if (useDynamicLabels) {
-    labels = await getTimerLabels(finalConfig.lang);
-  } else {
-    labels = getTimerLabelsSync(finalConfig.lang);
-  }
+  let labels = getTimerLabelsSync(finalConfig.lang);
   
   const [dayLabel, hourLabel, minLabel, secLabel] = labels;
   

@@ -62,8 +62,8 @@ const timer = createTimer({
   color: '#ffffff',           // White text for timer section
   
   // Timer numbers appearance
-  timerBg: '#000000',         // Black background for timer numbers
-  timerColor: '#ffffff',      // White numbers
+  timerBg: '#FD9000',         // Black background for timer numbers
+  timerColor: '#000000',      // White numbers
   timerLabel: '#000000',      // Black labels (days, hours, etc.)
   isCtaVisible: true,
   isWithTitles: true,
@@ -264,11 +264,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: "44891",
+  startId: "45728",
   name: "Rugs & Textiles",
   date: "10.07.2026",
   issueCardId: "501171",
-  lpId: "30738",
+  lpId: "31202",
   alarm: {
     isActive: false,
   },
