@@ -56,7 +56,7 @@ const intro_data = {
 
 
 const timer = createTimer({
-  deadline: '2026-07-10T23:59:00',
+  deadline: '2026-07-10',
   freebies: getImageUrl('20260710free.png', true),
   background: '#FD9000',      // Orange background for timer section
   color: '#ffffff',           // White text for timer section
