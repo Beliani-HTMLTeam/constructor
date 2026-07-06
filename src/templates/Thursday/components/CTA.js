@@ -9,6 +9,8 @@ const CTA = ({
   tableContainer = false,
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
+  const tableContainerClass =
+    (typeof tableContainer === 'string') ? tableContainer : (tableContainer ? 'newsletterContainer' : '');
 
   let html = '';
 
@@ -27,7 +29,7 @@ const CTA = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes}><tr><td ${tableContainerClass ? ` class="${tableContainerClass}"` : ''}>${html}</td></tr></table>`;
   }
 
   return html;
