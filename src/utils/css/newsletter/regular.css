@@ -524,6 +524,10 @@ img {
     padding-right: 0px !important;
   }
 
+	.newsletterBottom10px {
+		padding-bottom: 4px;
+	}
+
   .newsletterBottom25px {
     padding-bottom: 20px;
   }

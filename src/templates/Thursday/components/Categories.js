@@ -31,6 +31,8 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
 const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country) => {
   const background = category.background ?? 'white';
   const color = category.color ?? '#000000';
+  const container = category.container;
+  const containerClass = container ?? 'newsletterContainer';
 
   const styles = `background: ${background}; color: ${color}; ${category.styles || ''}`;
 
@@ -50,7 +52,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           align: category.title.align ?? 'left',
           insideTable: true,
           spanStyle: `color: ${color};`,
-          tableContainer: true,
+          tableContainer: containerClass,
           className: category.title.className ?? 'newsletterTitle',
         })}
       </td>
@@ -80,7 +82,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
-            tableContainer: true,
+            tableContainer: containerClass,
           })}
         </td>
       </tr>
@@ -125,6 +127,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           color: category.color ?? '#000000',
           id,
           imageSide: category.imageSide,
+          alignToSide: category.alignToSide ?? false,
           categoryHref: ctaHref,
           getCategoryLink,
           getCategoryTitle,
@@ -134,6 +137,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           country,
           offerTextOverrides: category.offerTextOverrides,
           category,
+          container,
         })
       : '';
 
@@ -145,7 +149,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         href: ctaHref,
         text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
         insideTr: true,
-        tdClass: 'newsletterContainer',
+        tdClass: containerClass,
       })}
         `
     : '';
@@ -227,6 +231,8 @@ const renderBody = async ({
   country,
   offerTextOverrides,
   category,
+  container,
+  alignToSide = false,
 }) => {
   // console.log('produkty ', products);
 
@@ -259,6 +265,8 @@ const renderBody = async ({
       country,
       offerTextOverrides,
       category,
+      container,
+      alignToSide,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);
@@ -283,6 +291,7 @@ const renderBody = async ({
       links,
       getPhrase,
       renderType: type,
+      container,
     });
   }
 };

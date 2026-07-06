@@ -26,6 +26,7 @@ const Thursday = async ({
   intro,
   timer,
   TopImageTitle_data,
+  TopImage_data,
 
   // functions passed:
   getHeader,
@@ -46,7 +47,7 @@ const Thursday = async ({
   const shopNow = getPhrase('Shop now');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ links });
+  const TopImageElement = TopImageHandler({ links, TopImage_data });
 
   const introCta_href = getIntroCtaHref({
     links,

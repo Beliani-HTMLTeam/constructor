@@ -10,7 +10,8 @@ const Product = (
   align = 'left',
   gapBetweenVertical = true,
   useCategoryLink = false,
-  imageAlign = 'center'
+  imageAlign = 'center',
+  container = ''
 ) => {
   if (!product || typeof product !== 'object') return '';
 
