@@ -4,7 +4,6 @@ import { Footer } from '../components/Footer';
 import { TopImageTitle } from '../components/TopImageTitle';
 import { ImageWithLink } from '../components/ImageWithLink';
 import { OfferPartCode } from '../components/OfferPartCode';
-import { Timer } from '../components/Timer';
 import { Categories } from '../components/Categories';
 import { Line } from '../../components/components/Line';
 import { Space } from '../components/Space';
@@ -32,6 +31,7 @@ import { CategoriesWrapper } from '../components/categories/index.js';
 import { OfferPartWrapper } from '../components/offerpart';
 import { FreebiesWrapper } from '../components/freebies';
 import { IntroWrapper } from '../components/intro/index.js';
+import { Timer } from '../components/timer/Timer.js';
 
 const RegularFridayNslt = async ({
   links,

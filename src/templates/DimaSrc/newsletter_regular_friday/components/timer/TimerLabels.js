@@ -30,24 +30,23 @@ export const FALLBACK_TIMER_LABELS = {
 
 export const DEFAULT_LABELS = ['days', 'h', 'm', 's'];
 
-/**
- * Get timer labels - tries API first, falls back to hardcoded
- * @param {string} lang - Language code
- * @param {Function} fetchFn - Optional custom fetch function for testing
- * @returns {Promise<Array<string>>} - Timer labels
- */
-export const getTimerLabels = async (lang, fetchFn = null) => {
+export const getTimerLabels = async (lang) => {
   try {
-    let labels = await fetchFn(lang);
+    const response = await fetch(
+      `https://www.prologistics.info/api/filtersOptions/?type[]=timer_labels&timer_lang=${encodeURIComponent(lang)}`
+    );
     
-    if (labels && Array.isArray(labels) && labels.length === 4) {
-      return labels;
+    if (response.ok) {
+      const data = await response.json();
+      const labels = data.options?.timer_labels;
+      if (labels && Array.isArray(labels) && labels.length === 4) {
+        return labels;
+      }
     }
   } catch (error) {
     console.warn(`API fetch failed for ${lang}, using fallback:`, error);
   }
   
-  // Fallback to hardcoded labels
   return FALLBACK_TIMER_LABELS[lang] || DEFAULT_LABELS;
 };
 

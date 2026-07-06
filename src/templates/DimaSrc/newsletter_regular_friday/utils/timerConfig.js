@@ -1,92 +1,36 @@
 export const COUNTRY_CONFIG = {
-  'CHDE': {
-    timezone: 'Europe/Zurich',
-    lang: 'german',
-  },
-  'DE': {
-    timezone: 'Europe/Berlin',
-    lang: 'german',
-  },
-  'AT': {
-    timezone: 'Europe/Vienna',
-    lang: 'german',
-  },
-  'FR': {
-    timezone: 'Europe/Paris',
-    lang: 'french',
-  },
-  'CHFR': {
-    timezone: 'Europe/Zurich',
-    lang: 'french',
-  },
-  'IT': {
-    timezone: 'Europe/Rome',
-    lang: 'italian',
-  },
-  'ES': {
-    timezone: 'Europe/Madrid',
-    lang: 'spanish',
-  },
-  'PT': {
-    timezone: 'Europe/Lisbon',
-    lang: 'portugal',
-  },
-  'NL': {
-    timezone: 'Europe/Amsterdam',
-    lang: 'dutch',
-  },
-  'BENL': {
-    timezone: 'Europe/Brussels',
-    lang: 'dutch',
-  },
-  'BEFR': {
-    timezone: 'Europe/Brussels',
-    lang: 'french',
-  },
-  'UK': {
-    timezone: 'Europe/London',
-    lang: 'english',
-  },
-  'GB': {
-    timezone: 'Europe/London',
-    lang: 'english',
-  },
-  'DK': {
-    timezone: 'Europe/Copenhagen',
-    lang: 'danish',
-  },
-  'NO': {
-    timezone: 'Europe/Oslo',
-    lang: 'norsk',
-  },
-  'FI': {
-    timezone: 'Europe/Helsinki',
-    lang: 'finnish',
-  },
-  'SE': {
-    timezone: 'Europe/Stockholm',
-    lang: 'swedish',
-  },
-  'PL': {
-    timezone: 'Europe/Warsaw',
-    lang: 'polish',
-  },
-  'CZ': {
-    timezone: 'Europe/Prague',
-    lang: 'czech',
-  },
-  'SK': {
-    timezone: 'Europe/Bratislava',
-    lang: 'slovak',
-  },
-  'HU': {
-    timezone: 'Europe/Budapest',
-    lang: 'Hungarian',
-  },
-  'RO': {
-    timezone: 'Europe/Bucharest',
-    lang: 'romanian',
-  },
+  'CHDE': { timezone: 'Europe/Zurich', lang: 'german' },
+  'DE': { timezone: 'Europe/Berlin', lang: 'germanDE' },
+  'AT': { timezone: 'Europe/Vienna', lang: 'germanDE' },
+  'FR': { timezone: 'Europe/Paris', lang: 'french' },
+  'CHFR': { timezone: 'Europe/Zurich', lang: 'french' },
+  'IT': { timezone: 'Europe/Rome', lang: 'italian' },
+  'ES': { timezone: 'Europe/Madrid', lang: 'spanish' },
+  'PT': { timezone: 'Europe/Lisbon', lang: 'portugal' },
+  'NL': { timezone: 'Europe/Amsterdam', lang: 'dutch' },
+  'BENL': { timezone: 'Europe/Brussels', lang: 'dutch' },
+  'BEFR': { timezone: 'Europe/Brussels', lang: 'french' },
+  'UK': { timezone: 'Europe/London', lang: 'english' },
+  'DK': { timezone: 'Europe/Copenhagen', lang: 'danish' },
+  'NO': { timezone: 'Europe/Oslo', lang: 'norsk' },
+  'FI': { timezone: 'Europe/Helsinki', lang: 'finnish' },
+  'SE': { timezone: 'Europe/Stockholm', lang: 'swedish' },
+  'PL': { timezone: 'Europe/Warsaw', lang: 'polish' },
+  'CZ': { timezone: 'Europe/Prague', lang: 'czech' },
+  'SK': { timezone: 'Europe/Bratislava', lang: 'slovak' },
+  'HU': { timezone: 'Europe/Budapest', lang: 'Hungarian' },
+  'RO': { timezone: 'Europe/Bucharest', lang: 'romanian' },
+};
+
+export const TIMER_DEFAULTS = {
+  bg: '#000000',
+  color: '#ffffff',
+  label: '#000000',
+  background: '#FD9000',
+  textColor: '#ffffff',
+  deadline: '2026-07-10T23:59:00',
+  timezone: 'Europe/Warsaw',
+  lang: 'english',
 };
 
 // Default config
@@ -96,6 +40,19 @@ const DEFAULT_CONFIG = {
 };
 export const getCountryConfig = (country) => {
   return COUNTRY_CONFIG[country] || DEFAULT_CONFIG;
+};
+
+export const getTimerConfig = (country, overrides = {}) => {
+  const countryConfig = getCountryConfig(country);
+  const countryOverrides = overrides[country] || {};
+  
+  return {
+    ...TIMER_DEFAULTS,
+    ...countryConfig,
+    ...countryOverrides,
+    lang: countryOverrides.lang || countryConfig.lang || TIMER_DEFAULTS.lang,
+    timezone: countryOverrides.timezone || countryConfig.timezone || TIMER_DEFAULTS.timezone,
+  };
 };
 
 /**

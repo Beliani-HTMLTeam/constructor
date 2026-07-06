@@ -24,6 +24,8 @@ export const TimerHtml = ({
     minLabel,
     secLabel,
   });
+
+  console.log("script", script);
   
   return `
   ${styles}

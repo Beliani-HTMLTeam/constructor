@@ -6,12 +6,12 @@ export const TimerScript = ({
     hourLabel = 'h',
     minLabel = 'm',
     secLabel = 's',
-  }) => {
+}) => {
     // Escape any special characters in the labels to prevent XSS
     const escapeString = (str) => {
-      return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+        return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
     };
-  
+
     return `
   <script>
   (function() {
@@ -78,16 +78,8 @@ export const TimerScript = ({
       // Initial update
       update();
       
-      // Update every second
-      var interval = setInterval(update, 1000);
-      
-      // Cleanup function (optional)
-      if (window.addEventListener) {
-          window.addEventListener('beforeunload', function() {
-              clearInterval(interval);
-          });
-      }
+    setInterval(update, 1000);
   })();
   </script>
     `;
-  };
+};
