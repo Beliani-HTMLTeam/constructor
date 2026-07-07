@@ -157,7 +157,7 @@ export const renderCategory = async (
             category.cta?.show
               ? CTA({
                   href: ctaHref,
-                  text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
+                  text: category.cta?.overrides?.[country] ?? (category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now')),
                   insideTr: true,
                   tdClass: 'newsletterContainer',
                   color: color,

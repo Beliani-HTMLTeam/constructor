@@ -82,7 +82,7 @@ const intro_data =  {
   type: "paragraph",
   cta: {
     overrides: {
-    
+    FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   },
@@ -113,7 +113,10 @@ const categories_nslt = [
       show: false
     },
     cta: {
-      show: true
+      show: true,
+      overrides: {
+        FI: "Tutustu valikoimaan"
+      }
     },
   },
 ];
@@ -122,6 +125,9 @@ const categories = [
   {
     name: 'Tableware',
     name_original: 'Tableware',
+    overrides: {
+      SK: "Stolový riad"
+    },
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category10.png', true),
