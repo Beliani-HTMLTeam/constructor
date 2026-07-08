@@ -37,7 +37,7 @@ const links = {
 	TopImage_href: translateLink({ value: 'content/lp26-07-23' }),
 
 	Banner_1: translateLink({ value: 'content/lp26-07-16' }),
-	Banner_1_Image: translateImage({ value: '20260723b.png' }),
+	Banner_1_Image: translateImage({ value: '20260716b.png' }),
 
 	Banner_2: translateLink({ value: 'content/lp26-07-15' }),
 	Banner_2_Image: translateImage({ value: '20260715b.png' }),
