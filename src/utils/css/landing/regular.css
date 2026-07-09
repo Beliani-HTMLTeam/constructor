@@ -157,7 +157,7 @@ table {
 }
 #newsletter .newsletterTitle {
   font-size: 30px;
-  line-height: 1.2;
+  line-height: 1.4;
   font-weight: 600;
 }
 
@@ -401,7 +401,6 @@ table {
   }
 
   #newsletter .newsletterTitle {
-    line-height: 1.4;
     font-size: 25px;
   }
 
