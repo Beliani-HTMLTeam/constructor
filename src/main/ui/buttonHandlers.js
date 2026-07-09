@@ -63,7 +63,7 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     const country = getState('country');
     let finalHtml = optimizeHtmlImages(html, getState);
 
-    if (template?.type === 'landing') finalHtml = addLangToLP(finalHtml, country);
+    if (template?.type === 'landing' && ((__SCOPE__ || import.meta.env?.VITE_SCOPE) !== "Dmytro")) finalHtml = addLangToLP(finalHtml, country);
 
     navigator.clipboard.writeText(finalHtml);
     toast.success('Template copied to clipboard!');
