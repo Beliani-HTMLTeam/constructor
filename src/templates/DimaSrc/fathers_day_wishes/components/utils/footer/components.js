@@ -109,12 +109,14 @@ const advantages = ({ getFooter }) => ({
   },
 });
 
-const conditions = ({ getFooter, queries }) => ({
-  conditionsTitle: getFooter('Conditions title'),
-  conditionsText:
-    queries.condition ||
-    'all items are subject to availability. All prices are subject to change without notification',
-});
+const conditions = ({ getFooter, queries, country, type, getPhrase }) => {
+  return {
+    conditionsTitle: getFooter('Conditions title'),
+    conditionsText:
+      queries.condition ||
+      'all items are subject to availability. All prices are subject to change without notification',
+  };
+};
 
 const companyDetails = ({ getFooter }) => ({
   title: getFooter('Company Details'),

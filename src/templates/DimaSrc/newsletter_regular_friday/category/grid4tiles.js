@@ -7,6 +7,8 @@ export const category4Tiles_Grid = ({
   insideContainer = true,
   color,
   background,
+  add_utm,
+  country
 }) => {
   let productsInnerHtml = '';
 
@@ -35,11 +37,18 @@ export const category4Tiles_Grid = ({
         productsInnerHtml += `<td style="color: ${color}; background: ${background}; width:50%;vertical-align:top;" width="50%" ${(col + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
 
         if (product) {
+          let href;
+          if (product.hrefOverride && product.hrefOverride[country]) {
+            href = add_utm(product.hrefOverride[country]);
+          } else {
+            href = getCategoryLink(product.href);
+          }
+
           productsInnerHtml += `
           <table cellspacing="0" cellpadding="0" border="0" width="100%">
             <tr>
                 <td>
-                  <a href="${getCategoryLink(product.href)}">
+                  <a href="${href}">
                       <img alt="${getCategoryTitle(product.name)}" src="${
                         product.src.src
                       }" style="width:100%; max-width: 100%; display:block;" loading="lazy">

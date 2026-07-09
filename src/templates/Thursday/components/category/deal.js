@@ -11,7 +11,16 @@ export const render = ({
   renderType,
   categoryHref,
   freebiesPerRow = 2,
+  country,
+  offerTextOverrides,
 }) => {
+  const countrySlug = String(country ?? '').toLowerCase();
+  const offerTextOverrideRaw = offerTextOverrides?.[countrySlug];
+  const resolved = typeof offerTextOverrideRaw === 'object' && !Array.isArray(offerTextOverrideRaw)
+    ? offerTextOverrideRaw[renderType === 'newsletter' ? 'ns' : 'lp']
+    : offerTextOverrideRaw;
+  const offerTexts = typeof resolved === 'string' ? [resolved] : (resolved ?? null);
+
   const hasProducts = Array.isArray(products) && products.length > 0;
   const hasFreebiesRows =
     (Array.isArray(freebies) && freebies.length > 0) ||
@@ -26,6 +35,8 @@ export const render = ({
     links,
     getPhrase,
     showChooseFrom: hasDealProducts,
+    offerTexts,
+    color,
   });
 
   if (hasDealProducts) {

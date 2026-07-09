@@ -21,6 +21,7 @@ const Monday = async ({
 
   intro,
   TopImageTitle_data,
+  conditionOverrides,
 
   getHeader,
   getFooter,
@@ -32,13 +33,14 @@ const Monday = async ({
   soonEndingBanner = true,
 }) => {
   const HeaderElement = Header({ getHeader, country, background, type, id });
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const countrySlug = String(country ?? '').toLowerCase();
+  const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
-  const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
+  const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type, countrySlug });
   const TopImageElement = TopImageHandler({ links });
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });

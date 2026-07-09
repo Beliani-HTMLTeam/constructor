@@ -24,6 +24,10 @@ import { liquidatorConditions } from '../category/liquidatorConditions';
 import { liquidatorItems } from '../category/liquidatorItems';
 import { liquidatorContact } from '../category/liquidatorContact';
 import { FooterLiquidator } from '../components/Footer_Liquidator';
+import { ImageWithoutLink } from '../components/ImageWithoutLink';
+import { TopImageTitleWithoutLink } from '../components/TopImageTitleWithoutLink';
+import { getCategoryName, getHrefWithOverride } from '../utils/categories';
+import { getProductHrefWithOverride } from '../utils/products';
 
 const RegularFridayNslt = async ({
   links,
@@ -57,7 +61,8 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', TopImageTitle_data, type, queries);
+  console.log('wszystko', TopImageTitle_data, type, queries,   shop,
+    country,);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -72,36 +77,60 @@ const RegularFridayNslt = async ({
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNowPhrase = getPhrase('Shop now');
 
-  const TopImageTitleElement =
-    // are both href and src available?
-    links?.TopImageTitle_href && links?.TopImageTitle_src
-      ? TopImageTitle({
-        href: links.TopImageTitle_href,
+  let TopImageTitleElement = ''
+
+  if (categories_type === 'liquidator') {
+    TopImageTitleElement = links?.TopImageTitle_src
+      ? TopImageTitleWithoutLink({
         src: links.TopImageTitle_src,
         title1: queries.TopImageTitle[0] || 'Translation not found',
         title2: queries.TopImageTitle[1] || 'Translation not found',
         title3: queries.TopImageTitle[2] || null,
-
-        // placeholder
-        // title1: 'Hurry!',
-        // title2: 'Spring Sale ends Sunday',
         color: TopImageTitle_data.color,
         backgroundColor: TopImageTitle_data.backgroundColor,
         type: TopImageTitle_data.type,
         renderType: type,
         className: TopImageTitle_data.className,
       })
-      : '';
+      : ''
+  }
+  else {
+    TopImageTitleElement = links?.TopImageTitle_href && links?.TopImageTitle_src
+      ? TopImageTitle({
+        href: links.TopImageTitle_href,
+        src: links.TopImageTitle_src,
+        title1: queries.TopImageTitle[0] || 'Translation not found',
+        title2: queries.TopImageTitle[1] || 'Translation not found',
+        title3: queries.TopImageTitle[2] || null,
+        color: TopImageTitle_data.color,
+        backgroundColor: TopImageTitle_data.backgroundColor,
+        type: TopImageTitle_data.type,
+        renderType: type,
+        className: TopImageTitle_data.className,
+      })
+      : ''
+  }
 
-  let TopImageElement =
-    links?.TopImage_href && links?.TopImage_src
+  let TopImageElement = ''
+
+  if (categories_type === 'liquidator') {
+    TopImageElement = links?.TopImage_src
+      ? ImageWithoutLink({
+        src: links.TopImage_src,
+        insideTr: true,
+        alt: 'Top Image',
+      })
+      : ''
+  } else {
+    TopImageElement = links?.TopImage_href && links?.TopImage_src
       ? ImageWithLink({
         href: links.TopImage_href,
         src: links.TopImage_src,
         insideTr: true,
         alt: 'Top Image',
       })
-      : '';
+      : ''
+  }
 
   if (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) {
     TopImageElement = VideoLPWithLink({
@@ -118,6 +147,7 @@ const RegularFridayNslt = async ({
 
   if (OfferPart && OfferPart.type === 'code') {
     OfferPartElement = OfferPartCode({
+      country,
       isMonday: OfferPart.isMonday || false,
       color: OfferPart.color,
       data: queries.offerPart,
@@ -128,15 +158,15 @@ const RegularFridayNslt = async ({
       selectCampaign: selectCampaign,
       add_utm,
       shop,
+      overrides: OfferPart.overrides,
       backgroundColor: OfferPart.backgroundColor,
-      paragraph1: 'Enjoy €100 cashback for your next order.',
-      paragraph2:
-        'Spend min. €300 on your purchase and we will give you a €100 cashback to use in your next order. Insert a code at the check out to receive a voucher with cashback.',
-      paragraph3: 'This is a time limited offer. Valid until 04/01/2026',
       paragraphAlign: OfferPart.alignment,
       germanSeparatingLine: OfferPart.germanSeparatingLine,
       spaceClass: OfferPart?.spaceClass,
       isSpaceBetweenAllParts: OfferPart?.isSpaceBetweenAllParts,
+      spanStyle: OfferPart?.spanStyle,
+      copyCodeColor: OfferPart?.copyCodeColor,
+      copyCodeLabel: getPhrase('Copy code'),
     });
   } else if (OfferPart && OfferPart.type === 'codes') {
     OfferPartElement = `<tr>
@@ -213,7 +243,7 @@ const RegularFridayNslt = async ({
               : links.Intro_cta_href
                 ? getCategoryLink(links.Intro_cta_href)
                 : getCategoryLink(categories[0]?.href),
-          text: queries.introCTA || shopNowPhrase,
+          text: intro.cta.overrides?.[country] || queries.introCTA || shopNowPhrase,
           // text: 'Lean more about outdoor trends',
           background: intro.backgroundColor,
           color: intro.color,
@@ -251,7 +281,7 @@ const RegularFridayNslt = async ({
         src: timer.image[country],
         color: Inside.color,
         background: Inside.backgroundColor,
-        freebies: timer.freebies,
+        freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
         isCtaVisible: timer.isCtaVisible,
         ctaText: shopNowPhrase,
         spaceAfter: Inside.spaceAfter,
@@ -260,11 +290,31 @@ const RegularFridayNslt = async ({
       : '';
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => {
-      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && categories_type !== 'liquidator') {
+      if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && category.view !== 'newsletterOnly' && categories_type !== 'liquidator') {
+        
         return {
           ...category,
-          products: await Promise.all(category.products.map((p) => getProductById(p.id, p.src))),
+          products: await Promise.all(category.products.map(async (p) => {
+            // Get the product data
+            const productData = await getProductById(p.id, p.src);
+            
+            // Check if there's an hrefOverride for the current country
+            const href = p.hrefOverride?.[country] 
+              ? add_utm(p.hrefOverride[country]) 
+              : productData?.href || p.href;
+
+              console.log('category',href, p.hrefOverride, productData?.href, p.href);
+            
+            return {
+              ...productData,
+              ...p, // Keep any overrides from the original product
+              href, // Use the overridden href if available
+              // Keep the hrefOverride in case it's needed elsewhere
+              hrefOverride: p.hrefOverride,
+            };
+          })),
         };
+      
       }
       return { ...category };
     })
@@ -283,19 +333,17 @@ const RegularFridayNslt = async ({
       categories:
         categoriesWithProducts.length > 0
           ? categoriesWithProducts.map((category, idx) => {
-            const href =
-              category.hrefSource && category.hrefSource === 'queries'
-                ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
-                : category.href
-                  ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
-                  : category.href;
-            const name =
-              category.title && category.title.source === 'queries'
-                ? queries.categories[idx]
-                : getCategoryTitle
-                  ? getCategoryTitle(category.name)
-                  : category.name;
-
+            const href = getHrefWithOverride(
+              category, 
+              country, 
+              category.href, 
+              queries, 
+              idx, 
+              add_utm, 
+              getCategoryLink
+            );
+            const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
+            
             return {
               ...category,
               href,
@@ -303,19 +351,23 @@ const RegularFridayNslt = async ({
             };
           })
           : categories.map((category, idx) => {
-            const href =
-              category.hrefSource && category.hrefSource === 'queries'
-                ? add_utm(queries.categoryLinks.length > 1 ? queries.categoryLinks[idx] : queries.categoryLinks[0])
-                : category.href
-                  ? getCategoryLink(category.hrefDACH ? category.hrefDACH : category.href)
-                  : category.href;
-            const name =
-              category.title.source === 'queries'
-                ? queries.categories[idx]
-                : getCategoryTitle
-                  ? getCategoryTitle(category.name)
-                  : category.name;
-
+            const href = getHrefWithOverride(
+              category, 
+              country, 
+              category.href, 
+              queries, 
+              idx, 
+              add_utm, 
+              getCategoryLink
+            );
+            const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
+            // Also handle product href overrides
+            if (category.products && Array.isArray(category.products)) {
+              category.products = category.products.map(product => ({
+                ...product,
+                href: getProductHrefWithOverride(product, country, product.href)
+              }));
+            }
             return {
               ...category,
               href,
@@ -325,6 +377,7 @@ const RegularFridayNslt = async ({
       categories_line,
       queries,
       add_utm,
+      country
     });
   } else if (categories && categories_type === 'twoColumnsGrid') {
     CategoriesElement = `
@@ -366,7 +419,7 @@ const RegularFridayNslt = async ({
             </tr>
     `;
   } else if (categories && categories_type === 'liquidator') {
-  
+
     CategoriesElement = categories
       .map(category => {
         if (category.type === 'liquidatorConditions') {
@@ -375,8 +428,8 @@ const RegularFridayNslt = async ({
             background,
             color
           });
-        } 
-        
+        }
+
         if (category.type === 'liquidatorItems') {
           return liquidatorItems({
             category,
@@ -395,7 +448,7 @@ const RegularFridayNslt = async ({
             color,
           })
         }
-  
+
         // Fallback for unknown types
         return '';
       })

@@ -4,7 +4,7 @@ import {
   figmaCardHandler,
   openLpHandler,
   purgeDynamicSpreadsheetData,
-  runRedirectCheck
+  runRedirectCheck,
 } from '@/main/events.js';
 import { generateLpLinks } from '@/helpers/generateLpLinks.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
@@ -22,6 +22,36 @@ export function setupProductsHandler(elements, setState, getState) {
   });
 }
 
+const countryToLang = {
+  DE: 'germanDE',
+  AT: 'germanDE',
+  CHDE: 'german',
+  FR: 'french',
+  CHFR: 'french',
+  BEFR: 'french',
+  UK: 'english',
+  PL: 'polish',
+  IT: 'italian',
+  CHIT: 'italian',
+  NL: 'dutch',
+  BENL: 'dutch',
+  SE: 'swedish',
+  ES: 'spanish',
+  PT: 'portugal',
+  HU: 'Hungarian',
+  DK: 'danish',
+  CZ: 'czech',
+  FI: 'finnish',
+  NO: 'norsk',
+  SK: 'slovak',
+  RO: 'romanian',
+};
+
+function addLangToLP(html, country) {
+  const lang = countryToLang[country] ?? 'english';
+  return `<!-- ${lang} -->\n${html}`;
+}
+
 export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
   const { copyTemplate } = elements;
 
@@ -29,7 +59,12 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     const html = getState('html');
     if (!html) return toast.error('No HTML to copy. Render template first.');
 
-    const finalHtml = optimizeHtmlImages(html, getState);
+    const template = getState('template');
+    const country = getState('country');
+    let finalHtml = optimizeHtmlImages(html, getState);
+
+    if (template?.type === 'landing' && ((__SCOPE__ || import.meta.env?.VITE_SCOPE) !== "Dmytro")) finalHtml = addLangToLP(finalHtml, country);
+
     navigator.clipboard.writeText(finalHtml);
     toast.success('Template copied to clipboard!');
 
@@ -166,8 +201,7 @@ export function setupOpenLPHandler(elements, getState) {
       'RO',
     ];
 
-    const selectedCountryOrder =
-      selectedCampaign.version === 'new' ? countryOrderNew : countryOrderOld;
+    const selectedCountryOrder = selectedCampaign.version === 'new' ? countryOrderNew : countryOrderOld;
 
     const lpLinks = generateLpLinks(
       selectedCampaign.lpId,

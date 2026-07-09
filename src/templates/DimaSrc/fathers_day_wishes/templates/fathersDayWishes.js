@@ -47,13 +47,42 @@ const FathersDayWishes = async ({
   getProductById,
   add_utm,
 }) => {
+  console.log('all: ',  links,
+    queries,
+    shop,
+    country,
+    type,
+    id,
+    categories,
+    categories_type,
+    categories_line,
+    background,
+    color,
+  
+    // campaign elements
+    Inside,
+    OfferPart,
+    intro,
+    timer,
+    TopImageTitle_data,
+    GiftCard_data,
+    shopCTA,
+  
+    // functions passed:
+    getHeader,
+    getFooter,
+    getCategoryLink,
+    getCategoryTitle,
+    getPhrase,
+    getProductById,
+    add_utm,)
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
   // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
   // prettier-ignore
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, getPhrase });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');

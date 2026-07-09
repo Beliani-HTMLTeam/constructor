@@ -10,7 +10,7 @@ import {
   workBanner,
 } from './utils/footer/components';
 
-const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id }) => {
+const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, getPhrase }) => {
   return FooterComponent(
     {
       id,
@@ -26,7 +26,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
 
       advantages: advantages({ getFooter }),
 
-      conditions: conditions({ getFooter, queries }),
+      conditions: conditions({ getFooter, queries, country, type, getPhrase }),
 
       companyDetails: companyDetails({ getFooter }),
     },

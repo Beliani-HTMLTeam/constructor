@@ -37,8 +37,9 @@ export const liquidatorConditions = ({
             <tr>
               <td>
                 <div>
-                    <img alt="Condition" src="${product.src.src || product.src
+                <a href="#"><img alt="Condition" src="${product.src.src || product.src
           }" style="width:100%; max-width: 100%; display:block;" loading="lazy">
+                </a>
                 </div>
               </td>
             </tr>

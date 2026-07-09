@@ -19,6 +19,7 @@ export function optimizeHtmlImages(inputHtml, getState) {
 
     // ! this prevents .gif files from being converted
     if (/\.gif(\?|$)/i.test(src)) return;
+    if (/\.svg(\?|$)/i.test(src)) return;
 
     const newSrc = swapImage({ format: '.webp', src });
     if (newSrc && newSrc !== src) img.setAttribute('src', newSrc);
