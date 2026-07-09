@@ -47,6 +47,11 @@ const TopImageTitle_data = {
 const timer = {
   position: 'afterTilesCategories',
   freebies: getImageUrl('20260717freebies.png', true),
+  overrides: {
+    PL: '20260717freebies_2.png',
+    UK: '20260717freebies_2.png',
+    NO: '20260717freebies_2.png',
+  },
   background: '#FFCCB7',
   color: '#000000',
   isCtaVisible: true,

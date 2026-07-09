@@ -270,23 +270,23 @@ const RegularFridayNslt = async ({
         additionalClass: intro.additionalClass ? intro.additionalClass : null
       })}` : '';
 
-  const TimerElement =
-    Inside && Inside.type === 'timer'
-      ? Timer({
-        title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
-        // title: 'Free scatter cushions set',
-        subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
-        // subtitle: 'deal ends in:',
-        href: links.Timer_href,
-        src: timer.image[country],
-        color: Inside.color,
-        background: Inside.backgroundColor,
-        freebies: timer.freebies,
-        isCtaVisible: timer.isCtaVisible,
-        ctaText: shopNowPhrase,
-        spaceAfter: Inside.spaceAfter,
-        spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
-      })
+      const TimerElement =
+      Inside && Inside.type === 'timer'
+        ? Timer({
+          title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
+          // title: 'Free scatter cushions set',
+          subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
+          // subtitle: 'deal ends in:',
+          href: links.Timer_href,
+          src: timer.image[country],
+          color: Inside.color,
+          background: Inside.backgroundColor,
+          freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
+          isCtaVisible: timer.isCtaVisible,
+          ctaText: shopNowPhrase,
+          spaceAfter: Inside.spaceAfter,
+          spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
+        })
       : '';
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => {
