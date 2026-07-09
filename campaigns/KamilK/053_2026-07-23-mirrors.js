@@ -25,7 +25,7 @@ const tableQueries = [
 	{
 		tableRange: '15:16',
 		name: 'timer',
-		tableName: '2026::20.07.26 - Free Gift',
+		tableName: '2026::Voucher - 20.07.26 - Free Gift',
 	},
 ];
 
@@ -44,7 +44,7 @@ const links = {
 
 	Timer_href: translateLink({ value: 'content/lp26-07-20' }),
 
-	Intro_cta_href: "https://www.beliani.ch",
+	Intro_cta_href: "https://www.beliani.ch/mirrors/",
 };
 
 const TopImageTitle_data = {
