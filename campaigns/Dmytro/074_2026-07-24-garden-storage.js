@@ -27,8 +27,8 @@ const links = {
   TopImage_href: translateLink({ value: 'content/lp26-07-24' }),
   Banner_1: translateLink({ value: 'content/lp26-07-17' }),
   Banner_1_Image: translateImage({ value: '20260717b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-06-16' }),
-  Banner_2_Image: translateImage({ value: '20260616b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-07-16' }),
+  Banner_2_Image: translateImage({ value: '20260716b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-07-20' }),
   Intro_cta_href:  "https://www.beliani.ch/garden-furniture/outdoor-storage/"
 
