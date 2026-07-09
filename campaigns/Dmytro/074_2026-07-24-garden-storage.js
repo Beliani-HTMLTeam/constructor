@@ -92,6 +92,9 @@ const timer = {
 const categories = [
   {
     name: 'Garden Shelving Units and Cabinets',
+    overrides: {
+      RO: "Rafturi și dulapuri"
+    },
     background: '#FFD8A6',
     color: '#000000',
     src: getImageUrl('20260724Category10.jpg', true),
@@ -139,7 +142,7 @@ const categories = [
   {
     name: 'Garden Sheds and Storage Boxes',
     overrides: {
-    
+    RO: "Magazii și cutii de depozitare"
     },
     background: '#FFEDE6',
     color: '#000000',
