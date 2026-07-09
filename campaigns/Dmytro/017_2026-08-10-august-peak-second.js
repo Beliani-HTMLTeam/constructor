@@ -46,7 +46,7 @@ const categories = [
   // main
   {
     name: 'Outdoor',
-    nameOverrides: { fi: 'Puutarha ja parveke', hu: 'Kültéri bútorok' },
+    nameOverrides: { fi: 'Puutarha ja parveke', hu: 'Kültéri bútorok', pt: 'Móveis de exterior' },
     src:  translateImage({ value: '20260810_Cat01.png' }),
     href: 'https://www.beliani.ch/outdoor-furniture',
     hrefOverrides: { no: 'https://www.beliani.no/hagemoebler/hagemobler', fi: 'https://www.beliani.fi/puutarhakalusteet/', nl: 'https://www.beliani.nl/tuinmeubelen/', benl: 'https://www.beliani.nl/tuinmeubelen/' },
