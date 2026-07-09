@@ -401,6 +401,7 @@ table {
   }
 
   #newsletter .newsletterTitle {
+    line-height: 1.4;
     font-size: 25px;
   }
 

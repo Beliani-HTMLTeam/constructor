@@ -126,7 +126,10 @@ const categories = [
     name: 'Tableware',
     name_original: 'Tableware',
     overrides: {
-      SK: "Stolový riad"
+      SK: "Stolový riad",
+      CHDE: "Geschirr & Küchenaccessoires",
+      AT: "Geschirr & Küchenaccessoires",
+      DE: "Geschirr & Küchenaccessoires"
     },
     background: '#F6E7E6',
     color: '#000000',
