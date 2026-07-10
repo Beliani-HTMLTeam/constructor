@@ -1,7 +1,6 @@
 import { Timer } from '../components/ProloTimer';
 import languages from "@config/languages"
 
-const base = "https://prolodev.prologistics.info/timer.gif";
 
 let languagesMap = {
   ...languages,
@@ -144,12 +143,15 @@ const buildProloTimerScript = ({ deadline, country }) => {
   `;
 };
 
-export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, type }) => {
+export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, type, shop }) => {
+
+  const base = (shop?.origin ?? 'https://prologistics.info') + '/timer.gif';
 
   let link = base + `?deadline=${timer.deadline}T23:59:00` +
     `&timezone=${timezones[country]}` +
-    `&lang=${languagesMap[country]?.title}` +
-    `&bg=${Inside.backgroundColor.replace('#', '')}` +
+		// in prolo timer generator pt uses "portugal" instead of portugese
+    `&lang=${shop.slug === "PT" ? "portugal" : languagesMap[country]?.title}` +
+    `&bg=${(Inside.unitBackground || Inside.backgroundColor).replace('#', '')}` +
     `&color=${Inside.color.replace('#', '')}` +
     `&label=${Inside.color.replace('#', '')}` +
     `&background=${Inside.backgroundColor.replace('#', '')}`
@@ -163,6 +165,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
       src: link,
       color: Inside.color,
       background: Inside.backgroundColor,
+      unitBackground: Inside.unitBackground,
       freebies: timer?.freebies,
       ctaText: shopNow,
       type: type,

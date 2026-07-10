@@ -26,6 +26,7 @@ const Thursday = async ({
   intro,
   timer,
   TopImageTitle_data,
+  TopImage_data,
 
   // functions passed:
   getHeader,
@@ -36,7 +37,7 @@ const Thursday = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log("timer dla prolo", timer, country);
+  // console.log("timer dla prolo", timer, country);
 
   const HeaderElement = Header({ getHeader, country, background, type, id });
   const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
@@ -46,7 +47,7 @@ const Thursday = async ({
   const shopNow = getPhrase('Shop now');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ links });
+  const TopImageElement = TopImageHandler({ links, TopImage_data });
 
   const introCta_href = getIntroCtaHref({
     links,
@@ -57,7 +58,7 @@ const Thursday = async ({
   });
 
   const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
-  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type });
+  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
 

@@ -628,7 +628,7 @@ table {
 }
 
 #prolo-timer .unit .number {
-  background: var(--timer-bg);
+  background: var(--timer-unit-bg, var(--timer-bg));
   color: var(--timer-numbers);
   font-size: clamp(28px, 8vw, 48px);
   font-weight: 700;

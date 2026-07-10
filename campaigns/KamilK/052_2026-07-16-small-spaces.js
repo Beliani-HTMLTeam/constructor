@@ -258,29 +258,7 @@ const categories = [
 
 const timer = {
   freebies: getImageUrl('20260716free.png', true),
-  image: {
-    "UK": "https://gen.sendtric.com/countdown/m2rkm0r2wu",
-    "PL": "https://gen.sendtric.com/countdown/bf335t4sbo",
-    "DE": "https://gen.sendtric.com/countdown/50izlru0mb",
-    "AT": "https://gen.sendtric.com/countdown/99heu82v3v",
-    "CHDE": "https://gen.sendtric.com/countdown/dqvpbxl7ex",
-    "NL": "https://gen.sendtric.com/countdown/6g8cn9ppgn",
-    "FR": "https://gen.sendtric.com/countdown/9lcxh3ibn6",
-    "CHFR": "https://gen.sendtric.com/countdown/a483jlvlwk",
-    "ES": "https://gen.sendtric.com/countdown/7a1zludhq4",
-    "PT": "https://gen.sendtric.com/countdown/lwzfaagxy7",
-    "IT": "https://gen.sendtric.com/countdown/jwzv4m2k9i",
-    "DK": "https://gen.sendtric.com/countdown/rnldtq6nte",
-    "NO": "https://gen.sendtric.com/countdown/gsa8m1qtrt",
-    "FI": "https://gen.sendtric.com/countdown/p16donx24v",
-    "SE": "https://gen.sendtric.com/countdown/oi3reehrxr",
-    "CZ": "https://gen.sendtric.com/countdown/oqra78vk7t",
-    "SK": "https://gen.sendtric.com/countdown/umc4vq17s4",
-    "HU": "https://gen.sendtric.com/countdown/6v9a5ljgwo",
-    "RO": "https://gen.sendtric.com/countdown/2nhomy3185",
-    "BENL": "https://gen.sendtric.com/countdown/nkv2sz1sm1",
-    "BEFR": "https://gen.sendtric.com/countdown/tolmwwrc5j"
-  }
+  deadline: '2026-07-19',
 };
 
 export default new entities.Campaign({
@@ -299,7 +277,7 @@ export default new entities.Campaign({
     {
       name: 'Newsletter',
       type: types.NEWSLETTER,
-      template: templates.Thursday, // User should change this
+      template: templates.Thursday_ProloTimer,
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: '#F6E7E6',
@@ -323,13 +301,14 @@ export default new entities.Campaign({
       Inside: {
         color: '#000000',
         backgroundColor: '#FFCCB7',
+        unitBackground: '#FFE6DB',
         type: 'timer',
       },
     },
     {
       name: 'Landing',
       type: types.LANDINGPAGE,
-      template: templates.Thursday, // User should change this
+      template: templates.Thursday_ProloTimer,
       css: types.CSS.LP,
       background: '#F6E7E6',
       color: '#000000',
@@ -352,6 +331,7 @@ export default new entities.Campaign({
       Inside: {
         color: '#000000',
         backgroundColor: '#FFCCB7',
+        unitBackground: '#FFE6DB',
         type: 'timer',
       },
     },

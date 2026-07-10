@@ -10,6 +10,7 @@ const Timer = ({
   src,
   color = '#000000',
   background = 'white',
+  unitBackground,
   freebies,
   ctaText,
   type,
@@ -86,8 +87,8 @@ const Timer = ({
 
           <style>
             :root {
-              // --timer-bg: ${background};
-              --timer-bg: #EAD9D9;
+              --timer-bg: ${background};
+              --timer-unit-bg: ${unitBackground ?? background};
               --timer-numbers: ${color};
               --timer-label: ${color};
             }
