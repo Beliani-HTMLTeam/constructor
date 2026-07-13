@@ -219,6 +219,10 @@ const categories = [
   {
     name: 'Kitchen Organisation & Storage',
     name_original: 'Kitchen Storage',
+    overrides: {
+      UK: "Organisation & Storage",
+      PL: "Przechowywanie"
+    },
     background: '#F6E7E6',
     color: '#000000',
     src: getImageUrl('20260717Category20.png', true),
