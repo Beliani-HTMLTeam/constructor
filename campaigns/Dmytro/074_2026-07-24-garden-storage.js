@@ -41,7 +41,7 @@ const intro_data = {
   type: "paragraph",
   cta: {
     overrides: {
-
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -93,7 +93,7 @@ const categories = [
   {
     name: 'Garden Shelving Units and Cabinets',
     overrides: {
-      RO: "Rafturi și dulapuri", PL: "Regały i szafki", UK: "Shelving Units and Cabinets"
+      RO: "Rafturi și dulapuri", PL: "Regały i szafki", UK: "Shelving Units and Cabinets", FI: "Puutarhahyllyt ja -kaapit"
     },
     background: '#FFD8A6',
     color: '#000000',
@@ -142,7 +142,7 @@ const categories = [
   {
     name: 'Garden Sheds and Storage Boxes',
     overrides: {
-      RO: "Magazii și cutii de depozitare", PL: "Domki narzędziowe i skrzynie", UK: "Sheds and Storage Boxes"
+      RO: "Magazii și cutii de depozitare", PL: "Domki narzędziowe i skrzynie", UK: "Sheds and Storage Boxes", FI: "Puutarhavajat ja säilytyslaatikot"
     },
     background: '#FFEDE6',
     color: '#000000',
