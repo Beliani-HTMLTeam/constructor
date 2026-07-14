@@ -478,4 +478,50 @@ export default [
       },
     },
   }),
+  new Shop({
+    origin: 'https://www.beliani.si/',
+    shopId: '34',
+    seller: 'Beliani.si',
+    slug: 'SI',
+    languages: [
+      {
+        language: LANGUAGES.SI,
+        tableColumn: 'AX',
+      },
+      {
+        language: LANGUAGES.UK,
+        tableColumn: '',
+      },
+    ],
+    price_format: {
+      currency: '€',
+      delimiters: {
+        hundred: '.',
+        thousand: '',
+      },
+    },
+  }),
+  new Shop({
+    origin: 'https://www.beliani.hr/',
+    shopId: '33',
+    seller: 'Beliani.hr',
+    slug: 'HR',
+    languages: [
+      {
+        language: LANGUAGES.HR,
+        tableColumn: 'AZ',
+      },
+      {
+        language: LANGUAGES.UK,
+        tableColumn: '',
+      },
+    ],
+    price_format: {
+      currency: '€',
+      delimiters: {
+        hundred: '.',
+        thousand: '',
+      },
+    },
+  }),
 ];
