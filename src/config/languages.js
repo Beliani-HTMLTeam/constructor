@@ -119,4 +119,14 @@ export default {
     title: 'germanDE',
     name: 'German De',
   },
+  SI: {
+    slug: 'SI',
+    title: 'slovenian',
+    name: 'Slovenian',
+  },
+  HR: {
+    slug: 'HR',
+    title: 'croatian',
+    name: 'Croatian',
+  }
 };

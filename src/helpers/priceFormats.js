@@ -70,6 +70,12 @@ const relativePriceFormat = {
   RO: {
     currency: currencies.romanianLeu,
   },
+  SI: {
+    currency: currencies.euro,
+  },
+  HR: {
+    currency: currencies.euro,
+  }
 };
 const priceFormats = {
   DE: (price) => {
@@ -129,6 +135,12 @@ const priceFormats = {
   RO: (price) => {
     return normalize(price, 'RO') + ' ' + relativePriceFormat.RO.currency;
   },
+  SI: (price) => {
+    return normalize(price, 'SI') + ' ' + relativePriceFormat.SI.currency;
+  },
+  HR: (price) => {
+    return normalize(price, 'HR') + ' ' + relativePriceFormat.HR.currency;
+  }
 };
 
 export { priceFormats };
