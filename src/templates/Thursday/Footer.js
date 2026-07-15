@@ -1,7 +1,7 @@
 import { Footer as FooterComponent } from '@/components/footer.js';
 import { getTrackingUrl, wrapFooterUrl } from "@/utils/getTrackingUrl";
 
-const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id }) => {
+const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory }) => {
   return FooterComponent(
     {
       id,
@@ -17,6 +17,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
         exclude: !['PL'].includes(country),
       },
       thousandsMore: {
+				exclude: hasSmallTilesCategory,
         title: getFooter('Title'),
         firstCategory: {
           src: getFooter('Category src 1'),

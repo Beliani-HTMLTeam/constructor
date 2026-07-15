@@ -30,7 +30,7 @@ const links = {
   Banner_2: translateLink({ value: 'content/lp26-07-16' }),
   Banner_2_Image: translateImage({ value: '20260716b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-07-20' }),
-  Intro_cta_href:  "https://www.beliani.ch/garden-furniture/outdoor-storage/"
+  Intro_cta_href: "https://www.beliani.ch/garden-furniture/outdoor-storage/"
 
 };
 
@@ -41,7 +41,7 @@ const intro_data = {
   type: "paragraph",
   cta: {
     overrides: {
-    
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -86,14 +86,14 @@ const timer = {
     "RO": "https://gen.sendtric.com/countdown/zn0catx656",
     "BENL": "https://gen.sendtric.com/countdown/1r2uvn1j9i",
     "BEFR": "https://gen.sendtric.com/countdown/kexytd0fda"
-}
+  }
 };
 
 const categories = [
   {
     name: 'Garden Shelving Units and Cabinets',
     overrides: {
-      RO: "Rafturi și dulapuri"
+      RO: "Rafturi și dulapuri", PL: "Regały i szafki", UK: "Shelving Units and Cabinets", FI: "Puutarhahyllyt ja -kaapit"
     },
     background: '#FFD8A6',
     color: '#000000',
@@ -142,7 +142,7 @@ const categories = [
   {
     name: 'Garden Sheds and Storage Boxes',
     overrides: {
-    RO: "Magazii și cutii de depozitare"
+      RO: "Magazii și cutii de depozitare", PL: "Domki narzędziowe i skrzynie", UK: "Sheds and Storage Boxes", FI: "Puutarhavajat ja säilytyslaatikot"
     },
     background: '#FFEDE6',
     color: '#000000',
@@ -195,7 +195,7 @@ const categories = [
     src: getImageUrl('20260724Category30.jpg', true),
     href: 'https://www.beliani.ch/garden-furniture/outdoor-storage/garden-and-balcony-greenhouses/',
     hrefOverride: {
-    
+
     },
     type: 'grid',
     insideContainer: true,

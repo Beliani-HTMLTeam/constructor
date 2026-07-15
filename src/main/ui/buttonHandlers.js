@@ -6,7 +6,7 @@ import {
   purgeDynamicSpreadsheetData,
   runRedirectCheck,
 } from '@/main/events.js';
-import { generateLpLinks } from '@/helpers/generateLpLinks.js';
+import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts.js';
 
@@ -153,60 +153,9 @@ export function setupOpenLPHandler(elements, getState) {
     if (!selectedCampaign.lpId)
       return toast.error('Campaign LP ID not found. Select campaign or update campaign file.');
 
-    const countryOrderOld = [
-      'CHDE',
-      'CHFR',
-      'UK',
-      'DE',
-      'FR',
-      'AT',
-      'ES',
-      'PL',
-      'NL',
-      'PT',
-      'IT',
-      'SE',
-      'HU',
-      'DK',
-      'CZ',
-      'FI',
-      'NO',
-      'SK',
-      'BENL',
-      'BEFR',
-      'RO',
-    ];
-
-    const countryOrderNew = [
-      'CHDE',
-      'CHFR',
-      'UK',
-      'DE',
-      'FR',
-      'AT',
-      'ES',
-      'PL',
-      'NL',
-      'BENL',
-      'BEFR',
-      'PT',
-      'IT',
-      'SE',
-      'HU',
-      'DK',
-      'CZ',
-      'FI',
-      'NO',
-      'SK',
-      'RO',
-    ];
-
-    const selectedCountryOrder = selectedCampaign.version === 'new' ? countryOrderNew : countryOrderOld;
-
     const lpLinks = generateLpLinks(
       selectedCampaign.lpId,
-      selectedCountryOrder,
-      selectedCampaign.name,
+      selectedCampaign.version ?? 'old',
       selectedCampaign.specialLpIds
     );
 

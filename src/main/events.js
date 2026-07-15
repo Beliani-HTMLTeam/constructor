@@ -1,5 +1,5 @@
 import { getIframe } from '@/helpers/getIframe';
-import { incrementId } from '@/helpers/incrementId.js';
+import { generateNewsletterIds } from '@/helpers/incrementIds.js'
 import { getState, setState } from '@/main/state/appState';
 import { appConfig as config } from '@/utils/config';
 import { toast } from 'sonner';
@@ -258,7 +258,7 @@ function selectCampaignHandler(ev, campaigns) {
 
   if (!selectedCampaign) return toast.error(`Campaign startId ${ev.target.value} not found.`);
 
-  setState('ids', incrementId(selectedCampaign.startId, selectedCampaign.version || 'new'));
+  setState('ids', generateNewsletterIds(selectedCampaign.startId, selectedCampaign.version || 'old'));
 
   setState('selectedCampaign', {
     startId: selectedCampaign.startId,
@@ -269,7 +269,7 @@ function selectCampaignHandler(ev, campaigns) {
     date: selectedCampaign.date,
     issueCardId: selectedCampaign.issueCardId,
     figmaUrl: selectedCampaign.figmaUrl,
-    version: selectedCampaign.version || 'new',
+    version: selectedCampaign.version || 'old',
   });
 
   return { selectedCampaign, templates: selectedCampaign.templates };
