@@ -40,7 +40,6 @@ const Thursday = async ({
   // console.log(categories);
 
   const HeaderElement = Header({ getHeader, country, background, type, id });
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
@@ -106,6 +105,14 @@ const Thursday = async ({
     isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
   const IntroAfterTimerAfterCategoriesElement =
     isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
+		
+	let hasSmallTilesCategory = false;
+
+	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.dimensions)) {
+		hasSmallTilesCategory = true;
+	}
+
+	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
 
   return `
     ${HeaderElement}
