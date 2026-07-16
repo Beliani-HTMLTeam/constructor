@@ -22,11 +22,11 @@ const tableQueries = [
 		tableRange: '24:25',
 		name: 'condition',
 	},
-	{
-		tableRange: '15:16',
-		name: 'timer',
-		tableName: '2026::Voucher - 20.07.26 - Free Gift',
-	},
+	// {
+	// 	tableRange: '15:16',
+	// 	name: 'timer',
+	// 	tableName: '2026::Voucher - 20.07.26 - Free Gift',
+	// },
 ];
 
 const links = {
@@ -42,7 +42,7 @@ const links = {
 	Banner_2: translateLink({ value: 'content/lp26-07-15' }),
 	Banner_2_Image: translateImage({ value: '20260715b.png' }),
 
-	Timer_href: translateLink({ value: 'content/lp26-07-20' }),
+	// Timer_href: translateLink({ value: 'content/lp26-07-20' }),
 
 	Intro_cta_href: "https://www.beliani.ch/mirrors/",
 };
@@ -78,6 +78,7 @@ const categories = [
 			insideContainer: true,
 		},
 		title: {
+			align: 'center',
 			show: true,
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -127,6 +128,7 @@ const categories = [
 		container: 'newsletterContainer55px',
 		tdClass: 'newsletterContainer55px',
 		title: {
+			align: 'center',
 			show: true,
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -180,6 +182,7 @@ const categories = [
 		container: 'newsletterContainer55px',
 		tdClass: 'newsletterContainer55px',
 		title: {
+			align: 'center',
 			show: true,
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -233,6 +236,7 @@ const categories = [
 		container: 'newsletterContainer55px',
 		tdClass: 'newsletterContainer55px',
 		title: {
+			align: 'center',
 			show: true,
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -269,32 +273,32 @@ const categories = [
 	},
 ];
 
-const timer = {
-	freebies: translateImage({ value: '20260723free.png' }),
-	image: {
-		"UK": "https://gen.sendtric.com/countdown/d5fj0j06iw",
-		"PL": "https://gen.sendtric.com/countdown/9ld4nd5jug",
-		"DE": "https://gen.sendtric.com/countdown/wc2zpnix04",
-		"AT": "https://gen.sendtric.com/countdown/okbj2r4lrh",
-		"CHDE": "https://gen.sendtric.com/countdown/gc3fwdueha",
-		"NL": "https://gen.sendtric.com/countdown/2lpmge1j30",
-		"FR": "https://gen.sendtric.com/countdown/jvg7z5o66l",
-		"CHFR": "https://gen.sendtric.com/countdown/2412gwx0pt",
-		"ES": "https://gen.sendtric.com/countdown/r2awj3xc2y",
-		"PT": "https://gen.sendtric.com/countdown/hn1ae9hqww",
-		"IT": "https://gen.sendtric.com/countdown/61j0yf6n7x",
-		"DK": "https://gen.sendtric.com/countdown/247d7nf3dy",
-		"NO": "https://gen.sendtric.com/countdown/ij977mj640",
-		"FI": "https://gen.sendtric.com/countdown/n3r0w1ur0f",
-		"SE": "https://gen.sendtric.com/countdown/jhnww47l4y",
-		"CZ": "https://gen.sendtric.com/countdown/71v88wpmr2",
-		"SK": "https://gen.sendtric.com/countdown/sv9lv8ddul",
-		"HU": "https://gen.sendtric.com/countdown/kq6r9z47fj",
-		"RO": "https://gen.sendtric.com/countdown/b56v7h7h8k",
-		"BENL": "https://gen.sendtric.com/countdown/leppn75pm6",
-		"BEFR": "https://gen.sendtric.com/countdown/qw893flhm0"
-	}
-};
+// const timer = {
+// 	freebies: translateImage({ value: '20260723free.png' }),
+// 	image: {
+// 		"UK": "https://gen.sendtric.com/countdown/d5fj0j06iw",
+// 		"PL": "https://gen.sendtric.com/countdown/9ld4nd5jug",
+// 		"DE": "https://gen.sendtric.com/countdown/wc2zpnix04",
+// 		"AT": "https://gen.sendtric.com/countdown/okbj2r4lrh",
+// 		"CHDE": "https://gen.sendtric.com/countdown/gc3fwdueha",
+// 		"NL": "https://gen.sendtric.com/countdown/2lpmge1j30",
+// 		"FR": "https://gen.sendtric.com/countdown/jvg7z5o66l",
+// 		"CHFR": "https://gen.sendtric.com/countdown/2412gwx0pt",
+// 		"ES": "https://gen.sendtric.com/countdown/r2awj3xc2y",
+// 		"PT": "https://gen.sendtric.com/countdown/hn1ae9hqww",
+// 		"IT": "https://gen.sendtric.com/countdown/61j0yf6n7x",
+// 		"DK": "https://gen.sendtric.com/countdown/247d7nf3dy",
+// 		"NO": "https://gen.sendtric.com/countdown/ij977mj640",
+// 		"FI": "https://gen.sendtric.com/countdown/n3r0w1ur0f",
+// 		"SE": "https://gen.sendtric.com/countdown/jhnww47l4y",
+// 		"CZ": "https://gen.sendtric.com/countdown/71v88wpmr2",
+// 		"SK": "https://gen.sendtric.com/countdown/sv9lv8ddul",
+// 		"HU": "https://gen.sendtric.com/countdown/kq6r9z47fj",
+// 		"RO": "https://gen.sendtric.com/countdown/b56v7h7h8k",
+// 		"BENL": "https://gen.sendtric.com/countdown/leppn75pm6",
+// 		"BEFR": "https://gen.sendtric.com/countdown/qw893flhm0"
+// 	}
+// };
 
 export default new entities.Campaign({
 	startId: 46007,
@@ -302,6 +306,10 @@ export default new entities.Campaign({
 	date: '23.07.2026',
 	issueCardId: 505689,
 	lpId: 31338,
+	specialLpIds: {
+		HR: 31564,
+		SI: 31565,
+	},
 	alarm: {
 		isActive: false,
 	},
@@ -323,7 +331,7 @@ export default new entities.Campaign({
 			categories: categories,
 			links: links,
 			tableQueries: tableQueries,
-			timer: timer,
+			// timer: timer,
 			intro: {
 				color: '#000000',
 				backgroundColor: '#FFF2ED',
@@ -335,11 +343,11 @@ export default new entities.Campaign({
 					spaceAfter: 'newsletterBottom35px',
 				}
 			},
-			Inside: {
-				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				type: 'timer',
-			},
+			// Inside: {
+			// 	color: '#000000',
+			// 	backgroundColor: '#F6E7E6',
+			// 	type: 'timer',
+			// },
 		},
 		{
 			name: 'Landing',
@@ -354,7 +362,7 @@ export default new entities.Campaign({
 			categories: categories,
 			links: links,
 			tableQueries: tableQueries,
-			timer: timer,
+			// timer: timer,
 			intro: {
 				color: '#000000',
 				backgroundColor: '#FFF2ED',
@@ -367,11 +375,11 @@ export default new entities.Campaign({
 					spaceAfter: 'newsletterBottom35px',
 				}
 			},
-			Inside: {
-				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				type: 'timer',
-			},
+			// Inside: {
+			// 	color: '#000000',
+			// 	backgroundColor: '#F6E7E6',
+			// 	type: 'timer',
+			// },
 		},
 	],
 });
