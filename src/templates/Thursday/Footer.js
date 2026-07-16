@@ -64,6 +64,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
       klarna: {
         src: getFooter('Klarna src'),
         href: getFooter('Klarna href'),
+				exclude: ['HR', 'SI'].includes(country),
         //exclude: ["HU"].includes(country),
       },
 
