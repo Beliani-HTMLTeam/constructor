@@ -79,7 +79,7 @@ export const renderCategory = async (
         
         ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : ''}
       `
-    : category?.paragraph?.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : '';
+    : category?.paragraph?.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : Space({ insideTr: true, backgroundColor: background });
 
   const ProductsElement = category.products
     ? category.type === 'unique'
@@ -126,6 +126,7 @@ export const renderCategory = async (
             insideContainer: category.insideContainer || false,
             background,
             color: category.color || '#000000',
+            country
           })
     : '';
 

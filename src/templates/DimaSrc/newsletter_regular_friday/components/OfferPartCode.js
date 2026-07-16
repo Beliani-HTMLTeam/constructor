@@ -21,7 +21,7 @@ export function OfferPartCode({
   copyCodeLabel,
   overrides,
 }) {
-  console.log('href:', href, data, isMonday);
+  console.log('href:', href, data, isMonday, "overrides:", overrides);
   const newsletter = NewsletterOfferPart({
     country,
     isMonday,
@@ -54,6 +54,7 @@ export function OfferPartCode({
     spanStyle,
     copyCodeColor,
     copyCodeLabel, overrides,
+    overrides: overrides?.landing || {}
   });
   return `
       <tr>

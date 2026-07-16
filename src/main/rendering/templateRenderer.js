@@ -188,6 +188,7 @@ export async function renderTemplate(getState, setState) {
       categories: templateToRender.categories?.map((item) =>
         Array.isArray(item) ? item.map((item) => computeValue({ ...item })) : computeValue({ ...item })
       ),
+      timer: computeValue(templateToRender.timer),
       type: templateToRender.type,
       getProductById: handlers.getProductById,
       getCategoryTitle: handlers.getCategoryTitle,

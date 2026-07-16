@@ -676,7 +676,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ conditionsTitle, conditionsText }) => {
           return `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='max-width: 650px; width: 100%; background-color: #ffffff;'>
+        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='max-width: 650px; width: 100%; background-color: #ffffff; line-height: 10px; mso-line-height-rule: exactly;'>
             <tbody>
                 <tr>
                     <td>

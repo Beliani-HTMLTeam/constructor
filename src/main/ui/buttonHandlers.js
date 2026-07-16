@@ -4,9 +4,9 @@ import {
   figmaCardHandler,
   openLpHandler,
   purgeDynamicSpreadsheetData,
-  runRedirectCheck
+  runRedirectCheck,
 } from '@/main/events.js';
-import { generateLpLinks } from '@/helpers/generateLpLinks.js';
+import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts.js';
 
@@ -22,6 +22,36 @@ export function setupProductsHandler(elements, setState, getState) {
   });
 }
 
+const countryToLang = {
+  DE: 'germanDE',
+  AT: 'germanDE',
+  CHDE: 'german',
+  FR: 'french',
+  CHFR: 'french',
+  BEFR: 'french',
+  UK: 'english',
+  PL: 'polish',
+  IT: 'italian',
+  CHIT: 'italian',
+  NL: 'dutch',
+  BENL: 'dutch',
+  SE: 'swedish',
+  ES: 'spanish',
+  PT: 'portugal',
+  HU: 'Hungarian',
+  DK: 'danish',
+  CZ: 'czech',
+  FI: 'finnish',
+  NO: 'norsk',
+  SK: 'slovak',
+  RO: 'romanian',
+};
+
+function addLangToLP(html, country) {
+  const lang = countryToLang[country] ?? 'english';
+  return `<!-- ${lang} -->\n${html}`;
+}
+
 export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
   const { copyTemplate } = elements;
 
@@ -29,7 +59,12 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     const html = getState('html');
     if (!html) return toast.error('No HTML to copy. Render template first.');
 
-    const finalHtml = optimizeHtmlImages(html, getState);
+    const template = getState('template');
+    const country = getState('country');
+    let finalHtml = optimizeHtmlImages(html, getState);
+
+    if (template?.type === 'landing' && ((__SCOPE__ || import.meta.env?.VITE_SCOPE) !== "Dmytro")) finalHtml = addLangToLP(finalHtml, country);
+
     navigator.clipboard.writeText(finalHtml);
     toast.success('Template copied to clipboard!');
 
@@ -118,61 +153,9 @@ export function setupOpenLPHandler(elements, getState) {
     if (!selectedCampaign.lpId)
       return toast.error('Campaign LP ID not found. Select campaign or update campaign file.');
 
-    const countryOrderOld = [
-      'CHDE',
-      'CHFR',
-      'UK',
-      'DE',
-      'FR',
-      'AT',
-      'ES',
-      'PL',
-      'NL',
-      'PT',
-      'IT',
-      'SE',
-      'HU',
-      'DK',
-      'CZ',
-      'FI',
-      'NO',
-      'SK',
-      'BENL',
-      'BEFR',
-      'RO',
-    ];
-
-    const countryOrderNew = [
-      'CHDE',
-      'CHFR',
-      'UK',
-      'DE',
-      'FR',
-      'AT',
-      'ES',
-      'PL',
-      'NL',
-      'BENL',
-      'BEFR',
-      'PT',
-      'IT',
-      'SE',
-      'HU',
-      'DK',
-      'CZ',
-      'FI',
-      'NO',
-      'SK',
-      'RO',
-    ];
-
-    const selectedCountryOrder =
-      selectedCampaign.version === 'new' ? countryOrderNew : countryOrderOld;
-
     const lpLinks = generateLpLinks(
       selectedCampaign.lpId,
-      selectedCountryOrder,
-      selectedCampaign.name,
+      selectedCampaign.version ?? 'old',
       selectedCampaign.specialLpIds
     );
 

@@ -34,7 +34,7 @@ export class Campaign {
     white_line,
     under_intro_line,
     soon_banners,
-    version = 'new',
+    version = 'old',
   }) {
     if (!Array.isArray(templates)) {
       throw new Error('templates property should be array');
@@ -74,7 +74,7 @@ export class Campaign {
     this.isArchive = isArchive || false;
     this.products = products || null;
     this.figmaUrl = figmaUrl || null;
-    this.version = version || 'new';
+    this.version = version;
     this.full_img_width = full_img_width || false;
     this.white_line = white_line || false;
     this.under_intro_line = under_intro_line || false;

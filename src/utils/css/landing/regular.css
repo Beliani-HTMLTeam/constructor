@@ -88,6 +88,11 @@ table {
   padding-right: 20px;
 }
 
+#newsletter .newsletterContainer55px {
+  padding-left: 55px;
+  padding-right: 55px;
+}
+
 .newsletterContainer60px {
   padding-left: 60px !important;
   padding-right: 60px !important;
@@ -197,6 +202,13 @@ table {
   padding-left: 10px;
 }
 
+#newsletter .newsletterRight5px {
+	padding-right: 5px;
+}
+
+#newsletter .newsletterLeft5px {
+	padding-left: 5px;
+}
 
 #newsletter .newsletterRight20px {
   padding-right: 20px;
@@ -424,6 +436,11 @@ table {
     padding-right: 10px;
   }
 
+  #newsletter .newsletterContainer55px {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
   #newsletter .newsletterFreebieContainer {
     padding-left: 10px;
     padding-right: 0px !important;
@@ -445,6 +462,14 @@ table {
     font-size: 16px;
   }
 
+	#newsletter .newsletterRight5px {
+		padding-right: 2px;
+	}
+	
+	#newsletter .newsletterLeft5px {
+		padding-left: 2px;
+	}
+
   #newsletter .newsletterLeft10px {
     padding-left: 5px;
   }
@@ -460,6 +485,10 @@ table {
   #newsletter .newsletterRight10px {
     padding-right: 5px;
   }
+
+	#newsletter .newsletterBottom10px {
+		padding-bottom: 4px;
+	}
   
   #newsletter .newsletterBottom15px {
     padding-bottom: 10px;

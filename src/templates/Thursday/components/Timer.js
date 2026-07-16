@@ -70,7 +70,7 @@ const Timer = ({
               ? `
             ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
           
-            ${ImageWithLink({ insideTr: true, src: freebies, href: href, alt: 'Freebies Image' })}  
+            ${ImageWithLink({ insideTr: true, src: typeof freebies === 'object' ? freebies.src : freebies, href: href, alt: 'Freebies Image' })}  
 
             `
               : `${Space({ insideTr: true, className: 'newsletterBottom10px' })}`

@@ -1,4 +1,6 @@
 export const getProductHrefWithOverride = (product, country, defaultHref) => {
+  console.log('getProduct', product, country, defaultHref);
+  
   // Priority 1: Check for hrefOverride on the product
   if (product.hrefOverride?.[country]) {
     return product.hrefOverride[country];

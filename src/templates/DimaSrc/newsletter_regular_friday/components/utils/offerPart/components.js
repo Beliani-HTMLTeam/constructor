@@ -146,6 +146,7 @@ const LandingOfferPart = ({
   copyCodeLabel = '',
   overrides = {},
 }) => {
+  console.log("landing overrides: ", overrides)
   const isSeparationLine = germanSeparatingLine && ['CHDE', 'AT', 'DE'].includes(getState('country'))
 
   const getText = (dataIndex, defaultText, overrideKey) => {
@@ -244,14 +245,14 @@ const LandingOfferPart = ({
   
   <tr>
     <td style="color: ${color}; text-align: center;">
-     ${Paragraph({ text: data ? data[1] : paragraph2, align: 'center', color })}
+     ${Paragraph({ text: getText(1, paragraph2, 'offerPart2'), align: 'center', color })}
     </td>
   </tr>
   ${ isSeparationLine ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
   ${ isSpaceBetweenAllParts ? Space({ insideTr: true, className: spaceClass }) : ''}
   <tr>
     <td style="color: ${color}; text-align: center;">
-      ${Paragraph({ text: data ? data[2] : paragraph2, align: 'center', color })}
+      ${Paragraph({ text: getText(2, paragraph2, 'offerPart3'), align: 'center', color })}
     </td>
   </tr>
   <tr>

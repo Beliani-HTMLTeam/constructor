@@ -269,6 +269,9 @@ const categories = [
       {
         id: '639021',
         src: getImageUrl('20260626/20260626Category42.png', true),
+        hrefOverride: {
+          UK: "https://www.beliani.co.uk/garden-figurine-bowe-bear-grey-639021.html"
+        }
       },
       // MONTCEL
       {
