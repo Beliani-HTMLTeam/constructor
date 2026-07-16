@@ -8,7 +8,6 @@ const Intro = ({
   paragraphAlign = 'center',
   color = '#000000',
   backgroundColor,
-  container,
 }) => {
   const hasTitleAndParagraph = Array.isArray(text) && text.length > 1;
   const hasSingleArrayValue = Array.isArray(text) && text.length === 1;
@@ -35,7 +34,7 @@ const Intro = ({
       text: introTitle,
       align: paragraphAlign,
       insideTable: true,
-      tableContainer: container || true,
+      tableContainer: true,
       className: 'newsletterIntroTitle',
       spanStyle: `color: ${color};`,
     })}</td></tr>
@@ -56,7 +55,7 @@ const Intro = ({
             text: introParagraph,
             align: paragraphAlign,
             insideTable: true,
-            tableContainer: container || true,
+            tableContainer: true,
             spanStyle: `color: ${color};`,
           })}</td></tr>
     

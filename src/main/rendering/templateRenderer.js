@@ -239,3 +239,87 @@ export async function renderTemplate(getState, setState) {
     toast.error('Something went wrong. More details in console.');
   }
 }
+
+export async function renderTemplateHtmlForCountry({ templateToRender, selectedCampaign, ids, queries }) {
+  const country = getState('country');
+
+  const isCompressedProducts = (value) =>
+    value &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    value[COMPRESSED_PRODUCTS_MARKER] === true &&
+    Array.isArray(value.payload);
+
+  const decompressIfNeeded = (value) => {
+    if (!value) return value;
+    if (!isCompressedProducts(value)) return value;
+    try { return decompress(value.payload); } catch { return []; }
+  };
+
+  const ensureNormalizedProducts = (value) => {
+    const arr = Array.isArray(value) ? value : [];
+    const needsNormalize = arr.some((p) => p && typeof p === 'object' && 'saved_params' in p);
+    return needsNormalize ? normalizeProducts(arr) : arr;
+  };
+
+  const localProducts = selectedCampaign?.products;
+  let productsForTemplate = [];
+
+  if (localProducts) {
+    productsForTemplate = ensureNormalizedProducts(decompressIfNeeded(localProducts));
+  } else {
+    let parsedIndex = [];
+    try {
+      const rawIndex = localStorage.getItem('products');
+      parsedIndex = rawIndex ? JSON.parse(rawIndex) : [];
+    } catch { parsedIndex = []; }
+    const campaignEntry = Array.isArray(parsedIndex)
+      ? parsedIndex.find((item) => String(item?.campaign_id) === String(selectedCampaign.startId))
+      : null;
+    productsForTemplate = ensureNormalizedProducts(decompressIfNeeded(campaignEntry?.products));
+  }
+
+  const handlers = new TemplateHandlers({ products: productsForTemplate });
+  const links = addParams({ links: templateToRender.links });
+
+  let slugData = {};
+  if (selectedCampaign.data && country in selectedCampaign.data) {
+    slugData = selectedCampaign.data[country] || {};
+  }
+
+  const html = await templateToRender.template({
+    queries,
+    country,
+    loading: false,
+    ids,
+    translations: getState('translations'),
+    selectedCampaign,
+    selectedTemplates: getState('selectedTemplates'),
+    shop: getState('shop'),
+    ...templateToRender,
+    background: templateToRender.background || '#ffffff',
+    id: ids[country],
+    categories: templateToRender.categories?.map((item) =>
+      Array.isArray(item) ? item.map((item) => computeValue({ ...item })) : computeValue({ ...item })
+    ),
+    type: templateToRender.type,
+    getProductById: handlers.getProductById,
+    getCategoryTitle: handlers.getCategoryTitle,
+    getCategoryLink: handlers.getCategoryLink,
+    getFooter: handlers.getFooter,
+    getHeader: handlers.getHeader,
+    getPhrase: handlers.getPhrase,
+    add_utm: (link) =>
+      templateToRender.type === 'newsletter'
+        ? link + `${link.includes('?') ? '&' : '?'}utm_source=newsletter&utm_medium=email&utm_campaign=${ids[country]}`
+        : link,
+    getCampaignData: (key) => (key in slugData ? slugData[key] : undefined),
+    links,
+    utm: getTrackingUrl({ type: templateToRender.type, id: ids[country] }),
+  });
+
+  const withStylesOrNo = 'css' in templateToRender ? `<style>${templateToRender.css}</style>` + html : html;
+  return templateToRender.wrapper
+    ? wrapTemplate(templateToRender.wrapper, { style: templateToRender.css ?? '', html })
+    : withStylesOrNo;
+}

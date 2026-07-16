@@ -26,7 +26,6 @@ const Thursday = async ({
   intro,
   timer,
   TopImageTitle_data,
-  TopImage_data,
 
   // functions passed:
   getHeader,
@@ -40,13 +39,14 @@ const Thursday = async ({
   // console.log(categories);
 
   const HeaderElement = Header({ getHeader, country, background, type, id });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNow = getPhrase('Shop now');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ links, TopImage_data });
+  const TopImageElement = TopImageHandler({ links });
 
   const introCta_href = getIntroCtaHref({
     links,
@@ -105,14 +105,6 @@ const Thursday = async ({
     isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
   const IntroAfterTimerAfterCategoriesElement =
     isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
-		
-	let hasSmallTilesCategory = false;
-
-	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.dimensions)) {
-		hasSmallTilesCategory = true;
-	}
-
-	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
 
   return `
     ${HeaderElement}

@@ -1,4 +1,4 @@
-import { getImageUrl } from '../../../../utils/ImageManager.js';
+import { getImageUrl } from '@utils/ImageManager.js';
 
 const toSlug = (name) =>
   name
@@ -11,9 +11,8 @@ const buildTileSrc = ({ tiles, itemName, country }) => {
   const text = tiles.text ?? '';
   const slug = (country ?? '').toLowerCase();
   const name = toSlug(itemName);
-  const dimensions = tiles.dimensions ? `${tiles.dimensions}/` : '';
-  // formula: /category_tiles/${bg}/${text}/[${dimensions}]/${slug}_${name}.jpg
-  return getImageUrl(`category_tiles/${bg}/${text}/${dimensions}${slug}_${name}.png`, true);
+  // formula: /category_tiles/${bg}/${text}/${slug}_${name}.jpg
+  return getImageUrl(`category_tiles/${bg}/${text}/${slug}_${name}.png`, true);
 };
 
 const renderTileCard = ({ item, tiles, color, getCategoryLink, getCategoryTitle, country, side }) => {

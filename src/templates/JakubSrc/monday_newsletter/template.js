@@ -21,6 +21,7 @@ const Monday = async ({
 
   intro,
   TopImageTitle_data,
+  topImage_data,
   conditionOverrides,
 
   getHeader,
@@ -31,6 +32,7 @@ const Monday = async ({
   getProductById,
   add_utm,
   soonEndingBanner = true,
+  categoryImageTdClass,
 }) => {
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
@@ -39,12 +41,20 @@ const Monday = async ({
   const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
+  let topImage = ''
+  if(topImage_data && typeof topImage_data === 'object') {
+    topImage_data[country] = topImage_data[country] || topImage_data['default'] || '';
+    console.log('topImage_data', topImage_data[country]);
+    topImage = topImage_data[country];
+  }
+
+  console.log('topImage', topImage);
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type, countrySlug });
-  const TopImageElement = TopImageHandler({ links });
+  const TopImageElement = TopImageHandler({ links, topImage });
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug });
 
   const introPosition = intro?.position ?? 'afterTopImage';
   const safeCategories = Array.isArray(categories) ? categories : [];
@@ -69,6 +79,7 @@ const Monday = async ({
     type,
     country,
     getPhrase,
+    categoryImageTdClass,
   };
 
   const CategoriesBeforeIntroElement = await CategoriesHandler({
@@ -87,7 +98,7 @@ const Monday = async ({
   return `
     ${HeaderElement}
 
-    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
 
       ${TopImageTitleElement}
 
@@ -103,7 +114,7 @@ const Monday = async ({
 
     </table>
 
-    ${soonEndingBanner ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals }) : ''}
+    ${soonEndingBanner ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
 
     ${FooterElement}
   `;
