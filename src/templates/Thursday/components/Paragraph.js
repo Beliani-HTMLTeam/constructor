@@ -8,8 +8,6 @@ const Paragraph = ({
   align = 'left',
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
-  const tableContainerClass =
-    (typeof tableContainer === 'string') ? tableContainer : (tableContainer ? 'newsletterContainer' : '');
 
   if (String(text).trim() === '') {
     text = 'Translation not found';
@@ -31,7 +29,7 @@ const Paragraph = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td style="text-align: ${align};" ${tableContainerClass ? ` class="${tableContainerClass}"` : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes}><tr><td style="text-align: ${align};" ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
   }
 
   return html;

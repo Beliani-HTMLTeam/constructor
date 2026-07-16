@@ -15,7 +15,6 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow }) => {
     paragraphAlign: intro?.alignment,
     color: introColor,
     backgroundColor: intro?.backgroundColor,
-    container: intro?.container,
   })}
   ${
     intro.cta

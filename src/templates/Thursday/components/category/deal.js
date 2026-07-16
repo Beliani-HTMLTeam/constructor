@@ -21,6 +21,30 @@ export const render = ({
     : offerTextOverrideRaw;
   const offerTexts = typeof resolved === 'string' ? [resolved] : (resolved ?? null);
 
+  const filterFreebiesByCountry = (freebiesData, country) => {
+    if (!Array.isArray(freebiesData)) return freebiesData;
+    
+    // If freebies is an array of arrays (rows)
+    if (Array.isArray(freebiesData[0])) {
+      return freebiesData.map(row => 
+        row.filter(freebie => {
+          // If no visibility defined, show everywhere
+          if (!freebie.visibility) return true;
+          // Check if country is in visibility array
+          return freebie.visibility.includes(country);
+        })
+      ).filter(row => row.length > 0); // Remove empty rows
+    }
+    
+    // If freebies is a flat array
+    return freebiesData.filter(freebie => {
+      if (!freebie.visibility) return true;
+      return freebie.visibility.includes(country);
+    });
+  };
+
+  const filteredFreebies = filterFreebiesByCountry(freebies, country);
+
   const hasProducts = Array.isArray(products) && products.length > 0;
   const hasFreebiesRows =
     (Array.isArray(freebies) && freebies.length > 0) ||
@@ -36,12 +60,11 @@ export const render = ({
     getPhrase,
     showChooseFrom: hasDealProducts,
     offerTexts,
-    color,
   });
 
   if (hasDealProducts) {
     html += renderFreebieGrid({
-      freebies,
+      freebies: filteredFreebies,
       products,
       color,
       freeText: getPhrase('Free'),
