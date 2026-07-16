@@ -9,12 +9,15 @@ const ImageWithLink = ({
   tdClass,
   insideTable = false,
   tableContainer = false,
+  targetBlank = false
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
+  const tableContainerClass =
+    (typeof tableContainer === 'string') ? tableContainer : (tableContainer ? 'newsletterContainer' : '');
 
   let html = '';
 
-  html += `<a href="${href}"><img src="${src}" alt="${alt}" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
+  html += `<a target="${targetBlank ? '_blank' : '_self'}" href="${href}"><img src="${src}" alt="${alt}" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
 
   if (insideTr) {
     html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}>${html}</td></tr>`;
@@ -28,7 +31,7 @@ const ImageWithLink = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td vAlign=${vAlign} ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes}><tr><td vAlign=${vAlign} ${tableContainerClass ? ` class="${tableContainerClass}"` : ''}>${html}</td></tr></table>`;
   }
 
   return html;

@@ -47,73 +47,30 @@ const enrichCategoryProducts = async ({ category, getProductById, getCategoryLin
   };
 };
 
-const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm, country, type }) => {
-  const countrySlug = String(country ?? '').toLowerCase();
+const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm }) => {
   const name = queries?.categories?.[index]
     ? queries.categories[index]
-    : category?.nameOverride
-      ? category.nameOverride
-      : category?.nameOverrides?.[countrySlug]
-        ? category.nameOverrides[countrySlug]
-        : category?.name
-          ? getCategoryTitle(category.name)
-          : category?.name;
+    : category?.name
+      ? getCategoryTitle(category.name)
+      : category?.name;
 
   let href = '';
   if (queries?.categoryLinks?.[index]) {
     href = add_utm(queries.categoryLinks[index]);
-  } else if (category?.hrefOverrides?.[countrySlug]) {
-    href = add_utm(category.hrefOverrides[countrySlug]);
   } else if (category?.href) {
-    if (category?.skipLinkTranslation) {
-      href = typeof category.href === 'string'
-        ? getCategoryLink(category.href, { suppressWarning: true })
-        : add_utm(category.href?.href);
-    } else {
-      href = typeof category.href === 'string' ? getCategoryLink(category.href) : add_utm(category.href?.href);
-    }
+    href = typeof category.href === 'string' ? getCategoryLink(category.href) : add_utm(category.href?.href);
   }
 
-  let src = category?.srcByType?.[type] ?? category?.src;
+  let src = category?.src;
   if (src && typeof src === 'object') {
     src = src.src;
   }
-
-  const paragraphText = category?.paragraph?.textOverrides?.[countrySlug] ?? null;
-  const ctaText = category?.cta?.textOverrides?.[countrySlug] ?? null;
-
-  const tilesOverride = Array.isArray(category?.tiles)
-    ? category.tiles.map((tile) => {
-      console.log('tilesOverride', tile)
-      const hrefOverride = tile?.hrefOverrides?.[countrySlug];
-      const nameOverride = tile?.nameOverrides?.[countrySlug];
-
-      const resolvedHref = hrefOverride ? add_utm(hrefOverride) : tile.href;
-      const resolvedName = nameOverride || getCategoryTitle(tile.name);
-
-      // Create result object with original tile
-      const result = { ...tile };
-
-      // Always add resolvedName if it exists (either from override or original)
-      result.resolvedName = resolvedName;
-
-      // Add resolvedHref if href override exists or if we want to include it always
-      if (hrefOverride) {
-        result.resolvedHref = resolvedHref;
-      }
-
-      return result;
-    })
-    : null;
 
   return {
     ...category,
     href,
     name,
     src,
-    ...(tilesOverride !== null && { tiles: tilesOverride }),
-    ...(paragraphText !== null && { paragraphText }),
-    ...(ctaText !== null && { ctaText }),
   };
 };
 
@@ -147,8 +104,6 @@ export const CategoriesHandler = async ({
       getCategoryTitle,
       getCategoryLink,
       add_utm,
-      country,
-      type,
     })
   );
 

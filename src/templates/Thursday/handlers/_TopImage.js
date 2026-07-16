@@ -1,6 +1,6 @@
 import { ImageWithLink } from '../components/ImageWithLink';
 
-export const TopImageHandler = ({ links }) => {
+export const TopImageHandler = ({ links, TopImage_data }) => {
   if (!links?.TopImage_href) return '';
 
   let html = '';
@@ -11,6 +11,7 @@ export const TopImageHandler = ({ links }) => {
       src: links.TopImage_src,
       insideTr: true,
       alt: 'Top Image',
+      tdClass: TopImage_data?.container,
     });
   }
 
@@ -28,6 +29,7 @@ export const TopImageHandler = ({ links }) => {
         src,
         insideTr: true,
         alt: 'Top Image',
+        tdClass: TopImage_data?.container,
       });
     });
 
