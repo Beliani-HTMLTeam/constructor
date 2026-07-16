@@ -121,7 +121,7 @@ export default {
   },
   SI: {
     slug: 'SI',
-    title: 'slovenian',
+    title: 'slovene',
     name: 'Slovenian',
   },
   HR: {

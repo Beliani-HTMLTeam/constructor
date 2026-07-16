@@ -16,7 +16,7 @@ const languageToSlug = {
   norsk: 'no',
   dutch: 'nl',
   croatian: 'hr',
-  slovenian: 'si',
+  slovene: 'si',
 };
 
 const slugToLanguage = {
@@ -37,7 +37,7 @@ const slugToLanguage = {
   no: 'norsk',
   nl: 'dutch',
   hr: 'croatian',
-  si: 'slovenian',
+  si: 'slovene',
 };
 
 const sellerToslug = {
