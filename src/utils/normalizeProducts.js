@@ -19,6 +19,8 @@ const allowedSellers = [
   'Beliani SK',
   'Beliani BE',
   'Beliani RO',
+  'Beliani HR',
+  'Beliani SI'
 ];
 
 export function normalizeProducts(products) {

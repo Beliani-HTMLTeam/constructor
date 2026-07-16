@@ -15,6 +15,8 @@ const languageToSlug = {
   english: 'uk',
   norsk: 'no',
   dutch: 'nl',
+  croatian: 'hr',
+  slovenian: 'si',
 };
 
 const slugToLanguage = {
@@ -34,6 +36,8 @@ const slugToLanguage = {
   uk: 'english',
   no: 'norsk',
   nl: 'dutch',
+  hr: 'croatian',
+  si: 'slovenian',
 };
 
 const sellerToslug = {
@@ -56,6 +60,8 @@ const sellerToslug = {
   'Beliani SK': 'sk',
   'Beliani BE': 'be',
   'Beliani RO': 'ro',
+  'Beliani HR': 'hr',
+  'Beliani SI': 'si',
 };
 
 const sellerToOrigin = {
@@ -78,6 +84,8 @@ const sellerToOrigin = {
   'Beliani SK': 'https://www.beliani.sk/',
   'Beliani BE': 'https://www.beliani.be/',
   'Beliani RO': 'https://www.beliani.ro/',
+  'Beliani HR': 'https://www.beliani.hr/',
+  'Beliani SI': 'https://www.beliani.si/',
 };
 
 export class Product {
