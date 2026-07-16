@@ -185,8 +185,8 @@ const categories = [
       },
       // 
       {
-        id: '585586',
-        src: getImageUrl('20260717Category15.png', true),
+        id: '585701',
+        src: getImageUrl('20260717Category15_hrsi.png', true),
       },
       // 
       {
@@ -252,13 +252,13 @@ const categories = [
     products: [
       // 
       {
-        id: '671895',
-        src: getImageUrl('20260717Category21.png', true),
+        id: '515471',
+        src: getImageUrl('20260717Category21_hrsi.png', true),
       },
       // 
       {
-        id: '224153',
-        src: getImageUrl('20260717Category22.png', true),
+        id: '108804',
+        src: getImageUrl('20260717Category22_hrsi.png', true),
       },
       // 
       {
@@ -419,8 +419,8 @@ const categories = [
     products: [
       // 
       {
-        id: '565431',
-        src: getImageUrl('20260717Category41.png', true),
+        id: '686690',
+        src: getImageUrl('20260717Category41_hrsi.png', true),
       },
       // 
       {
@@ -429,8 +429,8 @@ const categories = [
       },
       // 
       {
-        id: '582654',
-        src: getImageUrl('20260717Category43.png', true),
+        id: '650771',
+        src: getImageUrl('20260717Category43_hrsi.png', true),
       },
       // 
       {
