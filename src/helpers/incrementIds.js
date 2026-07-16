@@ -20,9 +20,16 @@ const NL_ORDER = [
 const getCountries = (order, version) =>
 	version === 'new' ? order : order.filter(c => !NEW_COUNTRIES.includes(c));
 
-export function generateLpLinks(baseId, version = 'new', customOrder = null) {
+export function generateLpLinks(baseId, version = 'new', specialLpIds = null) {
 	const SHARED_ID_COUNTRIES = ['CHFR', 'BEFR'];
-	const countries = customOrder || getCountries(LP_ORDER, version);
+	let countries = getCountries(LP_ORDER, version);
+
+	// Upgrade zajebistej funkcji [*] Michała
+	if (specialLpIds) {
+		const extraCountries = Object.keys(specialLpIds).filter(c => !countries.includes(c));
+		countries = [...countries, ...extraCountries];
+	}
+
 	const links = {};
 	let currentId = Number(baseId);
 
@@ -31,7 +38,10 @@ export function generateLpLinks(baseId, version = 'new', customOrder = null) {
 			currentId++;
 		}
 
-		links[country] = `https://www.prologistics.info/shop_content.php?id=${currentId}&shop_id=${SHOP_MAP[country]}`;
+		const overrideId = specialLpIds?.[country];
+		const id = overrideId ?? currentId;
+
+		links[country] = `https://www.prologistics.info/shop_content.php?id=${id}&shop_id=${SHOP_MAP[country]}`;
 	});
 
 	return links;
