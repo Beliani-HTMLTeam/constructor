@@ -27,7 +27,14 @@ const renderTileCard = ({ item, tiles, color, getCategoryLink, getCategoryTitle,
   // const tileClass = side === 'left' ? 'smallCategoryTilesLEFT' : 'smallCategoryTilesRIGHT';
   // const tileClass = `smallCategoryTiles${side === 'left' ? 'LEFT' : 'RIGHT'}`;
   let tileClass;
-  const tileStyle = `${side === 'left' ? 'padding-right: 4px;' : 'padding-left: 4px;'}`;
+  const padding = tiles.padding;
+  let tileStyle = '';
+
+  if (padding) {
+    tileClass = side === 'left' ? `newsletterRight${padding}px` : `newsletterLeft${padding}px`;
+  } else {
+    tileStyle = `${side === 'left' ? 'padding-right: 4px;' : 'padding-left: 4px;'}`;
+  }
 
   return `
     <td width="50%" valign="top">
@@ -53,10 +60,11 @@ export const render = ({ tiles, color, getCategoryLink, getCategoryTitle, countr
   let html = '';
   for (let i = 0; i < items.length; i += 2) {
     const isLastPair = i + 2 >= items.length;
+    const padding = tiles.padding;
+    const paddingBottomClass = padding && !isLastPair ? `newsletterBottom${padding * 2}px` : '';
+    const styleStr = !padding ? `padding-bottom: ${isLastPair ? '0' : '8px'};` : '';
 
-    html += `
-      <tr>
-        <td class="newsletterContainer" style="padding-bottom: ${isLastPair ? '0' : '8px'};">
+    const tilesContent = `
           <table cellspacing="0" cellpadding="0" border="0" width="100%">
             <tbody>
               <tr>
@@ -65,6 +73,14 @@ export const render = ({ tiles, color, getCategoryLink, getCategoryTitle, countr
               </tr>
             </tbody>
           </table>
+    `;
+
+    html += `
+      <tr>
+        <td class="newsletterContainer"${styleStr ? ` style="${styleStr}"` : ''}>
+          ${paddingBottomClass 
+            ? `<table cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td class="${paddingBottomClass}">${tilesContent}</td></tr></tbody></table>` 
+            : tilesContent}
         </td>
       </tr>
     `;
