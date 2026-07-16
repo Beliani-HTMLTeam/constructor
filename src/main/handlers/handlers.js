@@ -64,7 +64,11 @@ export class TemplateHandlers {
     const shop = getState('shop');
     const languageHREF = shop.languages.find((item) => item.language.slug === country);
 
+    console.log("shop, country, language", shop, country, languageHREF)
+
     let country_products = this.products?.filter((product) => product.country === shop.slug.toLowerCase());
+
+    console.log("country products", country_products, this.products)
 
     const product = country_products?.find((product) => Number(product.main_id) === Number(productId));
 
@@ -77,7 +81,8 @@ export class TemplateHandlers {
       };
     }
 
-    const href = shop.origin + product.href.hrefs[languageHREF.language.title].value + '.html';
+    console.log("product href", product.href.hrefs, product.href, product.href.hrefs[languageHREF.language.title], languageHREF.language.title)
+    const href = shop.origin + product.href.hrefs[languageHREF.language.title].value + '.html' ?? '';
     return handleProduct(src ? { ...product, href, src } : { ...product, href }, options);
   };
 

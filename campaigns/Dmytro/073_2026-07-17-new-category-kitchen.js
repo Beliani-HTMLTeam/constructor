@@ -483,6 +483,7 @@ export default new entities.Campaign({
   date: "17.07.2026",
   issueCardId: "504560",
   lpId: "31027",
+  version: "new",
   alarm: {
     isActive: false,
   },

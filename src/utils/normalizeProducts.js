@@ -19,6 +19,8 @@ const allowedSellers = [
   'Beliani SK',
   'Beliani BE',
   'Beliani RO',
+  'Beliani SI',
+  'Beliani HR',
 ];
 
 export function normalizeProducts(products) {
@@ -62,5 +64,7 @@ export function normalizeProducts(products) {
     }
   }
 
+  console.log("normilize products", normalized.filter((product) => product.country === 'hr').filter((product) => product.href.hrefs['croatian'].value === ""));
+  
   return normalized;
 }

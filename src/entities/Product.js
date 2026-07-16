@@ -56,6 +56,8 @@ const sellerToslug = {
   'Beliani SK': 'sk',
   'Beliani BE': 'be',
   'Beliani RO': 'ro',
+  'Beliani HR': 'hr',
+  'Beliani SI': 'si',
 };
 
 const sellerToOrigin = {
@@ -78,6 +80,8 @@ const sellerToOrigin = {
   'Beliani SK': 'https://www.beliani.sk/',
   'Beliani BE': 'https://www.beliani.be/',
   'Beliani RO': 'https://www.beliani.ro/',
+  'Beliani HR': 'https://www.beliani.hr/',
+  'Beliani SI': 'https://www.beliani.si/',
 };
 
 export class Product {

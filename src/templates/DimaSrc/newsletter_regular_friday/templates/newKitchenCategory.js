@@ -169,6 +169,8 @@ const NewKitchenCategory = async ({
     }))
   );
 
+  console.log("categories with produkts", categoriesWithProducts)
+
   let CategoriesHTML = '';
 
   for (let i = 0; i < categoriesWithProducts.length; i++) {
