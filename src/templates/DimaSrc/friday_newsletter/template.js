@@ -8,7 +8,7 @@ import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 
-const Monday = async ({
+const Friday = async ({
   links,
   queries,
   shop,
@@ -111,4 +111,4 @@ const Monday = async ({
   `;
 };
 
-export { Monday };
+export { Friday };

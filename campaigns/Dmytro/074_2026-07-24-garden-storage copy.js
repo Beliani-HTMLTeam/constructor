@@ -241,7 +241,7 @@ const categories = [
 
 export default new entities.Campaign({
   startId: "45888",
-  name: "Garden Storage",
+  name: "Garden Storage NEW TEMPLATE",
   date: "24.07.2026",
   issueCardId: "507295",
   lpId: "31278",
@@ -259,7 +259,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.Friday, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#FFD8A6",
@@ -284,7 +284,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.Friday, // User should change this
       css: types.CSS.LP,
       background: "#FFD8A6",
       color: "#000000",

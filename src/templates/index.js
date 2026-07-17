@@ -5,10 +5,10 @@ import { ThreeCategoriesUnder } from '@/templates/MichalTemporary/ThreeCategorie
 import { ThreeCategoriesUnderLP } from '@/templates/MichalTemporary/ThreeCategoriesUnderLP.js';
 import { FridayEolProducts } from './FridayEolProducts';
 import { Categories2Columns } from './MichalTemporary/Categories2Columns';
-import { Friday } from '@/templates//DimaSrc/newsletter_26122025/templates/template';
 import { RegularFridayNslt } from '@/templates//DimaSrc/newsletter_regular_friday/templates/regularFridayNslt';
 import { FridayLikeThursday } from './DimaSrc/Friday_like_Thursday/template';
 import { Monday } from '@/templates/JakubSrc/monday_newsletter/template.js';
+import { Friday } from './DimaSrc/friday_newsletter/template';
 
 export const templates = {
   Blackweek,
