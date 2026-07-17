@@ -295,7 +295,7 @@ const categories = [
 					// src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
 				},
 				{
-					name: 'Basins',
+					name: 'Basins and Accessories',
 					href: 'https://www.beliani.ch/bathroom-furniture/basins/',
 				},
 				{
@@ -356,7 +356,7 @@ const categories = [
 					href: 'https://www.beliani.ch/children-room/kids-storage/',
 				},
 				{
-					name: 'Decor',
+					name: 'Kids Decor',
 					href: 'https://www.beliani.ch/children-room/kids-decor/',
 				},
 			],
@@ -373,6 +373,7 @@ export default new entities.Campaign({
 	alarm: {
 		isActive: false,
 	},
+	version: 'new',
 	isArchive: false,
 	optimizeImg: true,
 	figmaUrl: 'https://www.figma.com/design/WQCDdCHZVPJLKcMH6emyKc/',
