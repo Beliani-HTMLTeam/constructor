@@ -1,3 +1,5 @@
+import { createTimer } from "@/templates/DimaSrc/newsletter_regular_friday1/utils/timerConfig";
+
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::24.07.26 - Garden Storage';
 
@@ -53,10 +55,25 @@ const TopImageTitle_data = {
   type: 'up_to',
 };
 
-const timer = {
-  freebies: getImageUrl('20260604free.png', true),
-  deadline: '2026-06-07',
-};
+const timer = createTimer({
+  deadline: '2026-07-26T23:59:00',
+  freebies: getImageUrl('20260724freebies_all.png', true),
+  overrides: {
+    PL: '20260724freebies_pl_cz_it.png',
+    CZ: '20260724freebies_pl_cz_it.png',
+    IT: '20260724freebies_pl_cz_it.png',
+  },
+  background: '#F6E7E6',      
+  color: '#000000',           // White text for timer section
+  
+  // Timer numbers appearance
+  timerBg: '#E3CCCC',         // Black background for timer numbers
+  timerColor: '#000000',      // White numbers
+  timerLabel: '#000000',      // Black labels (days, hours, etc.)
+  isCtaVisible: true,
+  isWithTitles: true,
+  position: 'outsideTopImageTitle',
+})
 
 
 const categories = [
@@ -229,7 +246,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.Friday, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#FFD8A6",
@@ -254,7 +271,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.Friday, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.LP,
       background: "#FFD8A6",
       color: "#000000",
