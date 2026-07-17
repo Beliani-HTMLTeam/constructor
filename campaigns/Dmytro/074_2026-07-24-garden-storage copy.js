@@ -54,40 +54,10 @@ const TopImageTitle_data = {
 };
 
 const timer = {
-  position: 'outsideTopImageTitle',
-  freebies: getImageUrl('20260724freebies_all.png', true),
-  overrides: {
-    PL: '20260724freebies_pl_cz_it.png',
-    CZ: '20260724freebies_pl_cz_it.png',
-    IT: '20260724freebies_pl_cz_it.png',
-  },
-  background: '#F6E7E6',
-  color: '#000000',
-  isCtaVisible: true,
-  image: {
-    "UK": "https://gen.sendtric.com/countdown/adimyfoswx",
-    "PL": "https://gen.sendtric.com/countdown/dduyesq92e",
-    "DE": "https://gen.sendtric.com/countdown/ikgdwum7xn",
-    "AT": "https://gen.sendtric.com/countdown/2x4zxj7osz",
-    "CHDE": "https://gen.sendtric.com/countdown/5g1twf3k1d",
-    "NL": "https://gen.sendtric.com/countdown/9yim8acojy",
-    "FR": "https://gen.sendtric.com/countdown/7fx27zlje9",
-    "CHFR": "https://gen.sendtric.com/countdown/gyxwpyumg8",
-    "ES": "https://gen.sendtric.com/countdown/3pnxdx0m9v",
-    "PT": "https://gen.sendtric.com/countdown/0fb4gx5khk",
-    "IT": "https://gen.sendtric.com/countdown/vl8xx2c2mu",
-    "DK": "https://gen.sendtric.com/countdown/v3m38rbg3f",
-    "NO": "https://gen.sendtric.com/countdown/cnvjkfqj2j",
-    "FI": "https://gen.sendtric.com/countdown/pgn3rdn6vi",
-    "SE": "https://gen.sendtric.com/countdown/577e49os8s",
-    "CZ": "https://gen.sendtric.com/countdown/vde5n73gmc",
-    "SK": "https://gen.sendtric.com/countdown/dqgm4zd818",
-    "HU": "https://gen.sendtric.com/countdown/cjt849kpra",
-    "RO": "https://gen.sendtric.com/countdown/zn0catx656",
-    "BENL": "https://gen.sendtric.com/countdown/1r2uvn1j9i",
-    "BEFR": "https://gen.sendtric.com/countdown/kexytd0fda"
-  }
+  freebies: getImageUrl('20260604free.png', true),
+  deadline: '2026-06-07',
 };
+
 
 const categories = [
   {
@@ -241,7 +211,7 @@ const categories = [
 
 export default new entities.Campaign({
   startId: "45888",
-  name: "Garden Storage",
+  name: "Garden Storage NEW TEMPLATE",
   date: "24.07.2026",
   issueCardId: "507295",
   lpId: "31278",
@@ -259,7 +229,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.Friday, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#FFD8A6",
@@ -284,7 +254,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.Friday, // User should change this
       css: types.CSS.LP,
       background: "#FFD8A6",
       color: "#000000",

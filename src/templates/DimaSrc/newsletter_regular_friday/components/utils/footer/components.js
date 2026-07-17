@@ -61,7 +61,7 @@ const thousandsMore = ({ getFooter, getCategoryLink, getCategoryTitle }) => ({
 const klarna = ({ getFooter, country }) => ({
   src: getFooter('Klarna src'),
   href: getFooter('Klarna href'),
-  //exclude: ["HU"].includes(country),
+  exclude: ["HR", "SI"].includes(country),
 });
 
 const socials = ({ getFooter }) => ({

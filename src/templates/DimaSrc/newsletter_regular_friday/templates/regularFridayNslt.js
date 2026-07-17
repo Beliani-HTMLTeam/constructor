@@ -61,7 +61,7 @@ const RegularFridayNslt = async ({
   getProductById,
   add_utm,
 }) => {
-  console.log('wszystko', TopImageTitle_data, type, queries,   shop,
+  console.log('wszystko', TopImageTitle_data, type, queries, shop,
     country,);
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
@@ -250,7 +250,7 @@ const RegularFridayNslt = async ({
           align: 'center',
           insideTr: true,
         })}
-              ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter, backgroundColor: intro.backgroundColor }) : ''}
+              ${intro.cta.spaceAfter && !(["HR", "SI"].includes(country)) ? Space({ insideTr: true, className: intro.cta.spaceAfter, backgroundColor: intro.backgroundColor }) : ''}
                 `
         : ''
       }
@@ -270,41 +270,48 @@ const RegularFridayNslt = async ({
         additionalClass: intro.additionalClass ? intro.additionalClass : null
       })}` : '';
 
-  const TimerElement =
-    Inside && Inside.type === 'timer'
-      ? Timer({
-        title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
-        // title: 'Free scatter cushions set',
-        subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
-        // subtitle: 'deal ends in:',
-        href: links.Timer_href,
-        src: timer.image[country],
-        color: Inside.color,
-        background: Inside.backgroundColor,
-        freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
-        isCtaVisible: timer.isCtaVisible,
-        ctaText: shopNowPhrase,
-        spaceAfter: Inside.spaceAfter,
-        spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
-      })
-      : '';
+  let TimerElement;
+
+  if (["HR", "SI"].includes(country)) {
+    TimerElement = '';
+  }
+  else {
+    TimerElement =
+      Inside && Inside.type === 'timer'
+        ? Timer({
+          title: Inside.isWithTitles ? queries.timer[0] || 'Translation not found' : '',
+          // title: 'Free scatter cushions set',
+          subtitle: Inside.isWithTitles ? queries.timer[1] || 'Translation not found' : '',
+          // subtitle: 'deal ends in:',
+          href: links.Timer_href,
+          src: timer.image[country],
+          color: Inside.color,
+          background: Inside.backgroundColor,
+          freebies: timer.overrides && timer.overrides[country] ? getImageUrl(timer.overrides[country], true) : timer.freebies,
+          isCtaVisible: timer.isCtaVisible,
+          ctaText: shopNowPhrase,
+          spaceAfter: Inside.spaceAfter,
+          spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
+        })
+        : '';
+  }
   const categoriesWithProducts = await Promise.all(
     categories.map(async (category) => {
       if (category.type !== 'tilesWithoutProducts' && category.type !== 'grid4tiles' && category.type !== 'liquidatorConditions' && category.view !== 'newsletterOnly' && categories_type !== 'liquidator') {
-        
+
         return {
           ...category,
           products: await Promise.all(category.products.map(async (p) => {
             // Get the product data
             const productData = await getProductById(p.id, p.src);
-            
+
             // Check if there's an hrefOverride for the current country
-            const href = p.hrefOverride?.[country] 
-              ? add_utm(p.hrefOverride[country]) 
+            const href = p.hrefOverride?.[country]
+              ? add_utm(p.hrefOverride[country])
               : productData?.href || p.href;
 
-              console.log('category',href, p.hrefOverride, productData?.href, p.href);
-            
+            console.log('category', href, p.hrefOverride, productData?.href, p.href);
+
             return {
               ...productData,
               ...p, // Keep any overrides from the original product
@@ -314,7 +321,7 @@ const RegularFridayNslt = async ({
             };
           })),
         };
-      
+
       }
       return { ...category };
     })
@@ -334,16 +341,16 @@ const RegularFridayNslt = async ({
         categoriesWithProducts.length > 0
           ? categoriesWithProducts.map((category, idx) => {
             const href = getHrefWithOverride(
-              category, 
-              country, 
-              category.href, 
-              queries, 
-              idx, 
-              add_utm, 
+              category,
+              country,
+              category.href,
+              queries,
+              idx,
+              add_utm,
               getCategoryLink
             );
             const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
-            
+
             return {
               ...category,
               href,
@@ -352,12 +359,12 @@ const RegularFridayNslt = async ({
           })
           : categories.map((category, idx) => {
             const href = getHrefWithOverride(
-              category, 
-              country, 
-              category.href, 
-              queries, 
-              idx, 
-              add_utm, 
+              category,
+              country,
+              category.href,
+              queries,
+              idx,
+              add_utm,
               getCategoryLink
             );
             const name = getCategoryName(category, idx, country, queries, getCategoryTitle);
@@ -460,8 +467,11 @@ const RegularFridayNslt = async ({
 
   let soonEndingBannersElement = '';
 
-  soonEndingBannersElement = soonEndingBanners ?
-    `
+  if (["HR", "SI"].includes(country)) {
+    soonEndingBannersElement = '';
+  } else {
+    soonEndingBannersElement = soonEndingBanners ?
+      `
   <!-- 🎈 Soon Ending Banners -->
     <table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
       ${Line({ insideTr: true })}
@@ -477,22 +487,25 @@ const RegularFridayNslt = async ({
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
       
       ${SoonEndingBanner({
-      href: links.Banner_1,
-      src: links.Banner_1_Image,
-      orderingId: '1',
-    })}
+        href: links.Banner_1,
+        src: links.Banner_1_Image,
+        orderingId: '1',
+      })}
 
       ${Space({ className: 'newsletterBottom20px', insideTr: true })}
 
       ${SoonEndingBanner({
-      href: links.Banner_2,
-      src: links.Banner_2_Image,
-      orderingId: '2',
-    })}
+        href: links.Banner_2,
+        src: links.Banner_2_Image,
+        orderingId: '2',
+      })}
 
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
     </table>
     ` : '';
+  }
+
+
 
   return `
     ${HeaderElement}
