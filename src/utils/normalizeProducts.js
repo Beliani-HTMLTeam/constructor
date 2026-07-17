@@ -19,6 +19,8 @@ const allowedSellers = [
   'Beliani SK',
   'Beliani BE',
   'Beliani RO',
+  'Beliani HR',
+  'Beliani SI'
 ];
 
 export function normalizeProducts(products) {
@@ -54,7 +56,10 @@ export function normalizeProducts(products) {
     if (allowedSellers.includes(username)) {
       const masterKey = String(element.saved_params.master_sa ?? '');
       const masterAlias = masterKey ? master_products[masterKey]?.ShopSAAlias : undefined;
-      const hrefs = masterAlias ?? element.ShopSAAlias;
+
+      const hrefs = masterAlias
+        ? { ...masterAlias, ...element.ShopSAAlias }
+        : element.ShopSAAlias;
       
       if (!hrefs) continue;
 

@@ -62,7 +62,13 @@ const categories = [
 			spaceAfter: 'newsletterBottom35px',
 		},
 
+		line: {
+			insideContainer: true,
+			show: true,
+		},
+
 		tiles: {
+			padding: 10,
 			background: '9f4d4d',
 			text: 'ffffff',
 			dimensions: '295x80',
@@ -87,6 +93,275 @@ const categories = [
 			],
 		},
 	},
+
+	{
+		name: 'Living Room',
+		href: 'https://www.beliani.ch/living-room-furniture',
+		src: getImageUrl('20260730_Cat10.jpg', true),
+		paddingTop: '45',
+		type: 'small-tiles',
+		background: '#F9EFEE',
+		color: '#000000',
+		spaceAfter: 'newsletterBottom45px',
+
+		cta: {
+			show: true,
+			spaceBefore: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		title: {
+			show: true,
+			align: 'center',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		line: {
+			insideContainer: true,
+			show: true,
+		},
+
+		tiles: {
+			padding: 10,
+			background: '9f4d4d',
+			text: 'ffffff',
+			dimensions: '295x80',
+			items: [
+				{
+					name: 'Sofas', // uzywane jako Alt, getCategoryTitle(name)
+					href: 'https://www.beliani.ch/living-room-furniture/sofas/', // link do kategorii -> getCategoryLink(href)
+					// src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
+				},
+				{
+					name: 'Armchairs',
+					href: 'https://www.beliani.ch/living-room-furniture/armchairs/',
+				},
+				{
+					name: 'TV Stands',
+					href: 'https://www.beliani.ch/storage/tv-stands/',
+				},
+				{
+					name: 'Coffee tables',
+					href: 'https://www.beliani.ch/tables/coffee-tables/',
+				},
+			],
+		},
+	},
+
+	{
+		name: 'Bedroom',
+		href: 'https://www.beliani.ch/bedroom-furniture',
+		src: getImageUrl('20260730_Cat20.jpg', true),
+		paddingTop: '45',
+		type: 'small-tiles',
+		background: '#F9EFEE',
+		color: '#000000',
+		spaceAfter: 'newsletterBottom80px',
+
+		cta: {
+			show: true,
+			spaceBefore: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		title: {
+			show: true,
+			align: 'center',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		line: {
+			insideContainer: true,
+			show: true,
+		},
+
+		tiles: {
+			padding: 10,
+			background: '9f4d4d',
+			text: 'ffffff',
+			dimensions: '295x80',
+			items: [
+				{
+					name: 'Beds', // uzywane jako Alt, getCategoryTitle(name)
+					href: 'https://www.beliani.ch/bedroom-furniture/beds/', // link do kategorii -> getCategoryLink(href)
+					// src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
+				},
+				{
+					name: 'Mattresses',
+					href: 'https://www.beliani.ch/bedroom-furniture/mattresses/',
+				},
+				{
+					name: 'Sideboards',
+					href: 'https://www.beliani.ch/bedroom-furniture/storage/sideboards/',
+				},
+				{
+					name: 'Textiles',
+					href: 'https://www.beliani.ch/bedroom-furniture/textiles/',
+				},
+			],
+		},
+	},
+
+	{
+		name: 'Dining Room',
+		href: 'https://www.beliani.ch/dining-room-furniture',
+		src: getImageUrl('20260730_Cat30.jpg', true),
+		paddingTop: '45',
+		type: 'small-tiles',
+		background: '#F9EFEE',
+		color: '#000000',
+		spaceAfter: 'newsletterBottom80px',
+
+		cta: {
+			show: true,
+			spaceBefore: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		title: {
+			show: true,
+			align: 'center',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		line: {
+			show: true,
+			insideContainer: true,
+		},
+
+		tiles: {
+			padding: 10,
+			background: '9f4d4d',
+			text: 'ffffff',
+			dimensions: '295x80',
+			items: [
+				{
+					name: 'Tables', // uzywane jako Alt, getCategoryTitle(name)
+					href: 'https://www.beliani.ch/dining-room-furniture/tables/', // link do kategorii -> getCategoryLink(href)
+					// src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
+				},
+				{
+					name: 'Chairs',
+					href: 'https://www.beliani.ch/dining-room-furniture/chairs/',
+				},
+				{
+					name: 'Tableware',
+					href: 'https://www.beliani.ch/dining-room-furniture/kitchenware-tableware/',
+				},
+				{
+					name: 'Lighting',
+					href: 'https://www.beliani.ch/dining-room-furniture/lighting/',
+				},
+			],
+		},
+	},
+
+	{
+		name: 'Bathroom',
+		href: 'https://www.beliani.ch/bathroom-furniture',
+		src: getImageUrl('20260730_Cat40.jpg', true),
+		paddingTop: '45',
+		type: 'small-tiles',
+		background: '#F9EFEE',
+		color: '#000000',
+		spaceAfter: 'newsletterBottom80px',
+
+		cta: {
+			show: true,
+			spaceBefore: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		title: {
+			show: true,
+			align: 'center',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		line: {
+			insideContainer: true,
+			show: true,
+		},
+
+		tiles: {
+			padding: 10,
+			background: '9f4d4d',
+			text: 'ffffff',
+			dimensions: '295x80',
+			items: [
+				{
+					name: 'Baths', // uzywane jako Alt, getCategoryTitle(name)
+					href: 'https://www.beliani.ch/bathroom-furniture/bathtubs-hot-tubs/', // link do kategorii -> getCategoryLink(href)
+					// src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
+				},
+				{
+					name: 'Basins and Accessories',
+					href: 'https://www.beliani.ch/bathroom-furniture/basins/',
+				},
+				{
+					name: 'Mirrors',
+					href: 'https://www.beliani.ch/bathroom-furniture/mirrors/',
+				},
+				{
+					name: 'Storage',
+					href: 'https://www.beliani.ch/bathroom-furniture/bathroom-storage/',
+				},
+			],
+		},
+	},
+
+	{
+		name: "Kids Room",
+		href: 'https://www.beliani.ch/children-room',
+		src: getImageUrl('20260730_Cat50.jpg', true),
+		paddingTop: '45',
+		type: 'small-tiles',
+		background: '#F9EFEE',
+		color: '#000000',
+		spaceAfter: 'newsletterBottom80px',
+
+		cta: {
+			show: true,
+			spaceBefore: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		title: {
+			show: true,
+			align: 'center',
+			spaceAfter: 'newsletterBottom35px',
+		},
+
+		// line: {
+		// 	show: true,
+		// },
+
+		tiles: {
+			padding: 10,
+			background: '9f4d4d',
+			text: 'ffffff',
+			dimensions: '295x80',
+			items: [
+				{
+					name: 'Beds', // uzywane jako Alt, getCategoryTitle(name)
+					href: 'https://www.beliani.ch/children-room/kids-beds/', // link do kategorii -> getCategoryLink(href)
+					// src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
+				},
+				{
+					name: 'Kids Chairs and tables',
+					href: 'https://www.beliani.ch/children-room/kids-chairs/',
+				},
+				{
+					name: 'Storage',
+					href: 'https://www.beliani.ch/children-room/kids-storage/',
+				},
+				{
+					name: 'Kids Decor',
+					href: 'https://www.beliani.ch/children-room/kids-decor/',
+				},
+			],
+		},
+	},
 ];
 
 export default new entities.Campaign({
@@ -98,6 +373,7 @@ export default new entities.Campaign({
 	alarm: {
 		isActive: false,
 	},
+	version: 'new',
 	isArchive: false,
 	optimizeImg: true,
 	figmaUrl: 'https://www.figma.com/design/WQCDdCHZVPJLKcMH6emyKc/',

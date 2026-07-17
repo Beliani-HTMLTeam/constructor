@@ -108,7 +108,7 @@ const Thursday = async ({
 		
 	let hasSmallTilesCategory = false;
 
-	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.dimensions)) {
+	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
 		hasSmallTilesCategory = true;
 	}
 
@@ -140,7 +140,7 @@ const Thursday = async ({
     </table>
 
 
-    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals })}
+    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
       
     ${FooterElement}
   `;

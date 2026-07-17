@@ -77,7 +77,29 @@ export class TemplateHandlers {
       };
     }
 
-    const href = shop.origin + product.href.hrefs[languageHREF.language.title].value + '.html';
+    if (!languageHREF) {
+      console.error(`getProductById: no language found for country "${country}" in shop "${shop.slug}"`);
+      return {
+        name: `Product not found [id: ${productId}]`,
+        lowPrice: '00.00',
+        highPrice: '00.00',
+        src: src,
+      };
+    }
+
+    const hrefEntry = product.href?.hrefs?.[languageHREF.language.title];
+
+    if (!hrefEntry) {
+      console.error(`getProductById: no href entry for language "${languageHREF.language.title}" in product ${productId}`);
+      return {
+        name: `Product not found [id: ${productId}]`,
+        lowPrice: '00.00',
+        highPrice: '00.00',
+        src: src,
+      };
+    }
+
+    const href = shop.origin + hrefEntry.value + '.html';
     return handleProduct(src ? { ...product, href, src } : { ...product, href }, options);
   };
 

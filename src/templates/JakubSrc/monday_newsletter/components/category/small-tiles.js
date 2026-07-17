@@ -1,4 +1,4 @@
-import { getImageUrl } from '../../../../utils/ImageManager.js';
+import { getImageUrl } from '@utils/ImageManager.js';
 
 const toSlug = (name) =>
   name
