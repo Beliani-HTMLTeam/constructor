@@ -7,6 +7,7 @@ import { IntroHandler } from './handlers/_Intro.js';
 import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
+import { TimerHandler } from './handlers/_ProloTimer.js';
 
 const Friday = async ({
   links,
@@ -20,6 +21,9 @@ const Friday = async ({
   color,
 
   intro,
+  Inside,
+  timer,
+  TopImage_data,
   TopImageTitle_data,
   conditionOverrides,
 
@@ -37,7 +41,6 @@ const Friday = async ({
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
@@ -46,19 +49,24 @@ const Friday = async ({
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
   const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug });
-
+  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type });
   const introPosition = intro?.position ?? 'afterTopImage';
+  const timerPosition = Inside?.position ?? 'beforeCategories';
+
+  const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
+  const TimerAfterCategories =
+    timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
+  const hasTimer = Boolean(TimerElement);
+
   const safeCategories = Array.isArray(categories) ? categories : [];
-  const dealIndex = safeCategories.findIndex((c) => String(c?.type).toLowerCase() === 'deal');
+  const freebiesIndex = safeCategories.findIndex((category) => String(category?.type).toLowerCase() === 'deal');
 
   const categoriesBeforeIntro =
-    introPosition === 'afterFreebies' && dealIndex >= 0
-      ? safeCategories.slice(0, dealIndex + 1)
+    introPosition === 'afterFreebies' && freebiesIndex >= 0
+      ? safeCategories.slice(0, freebiesIndex + 1)
       : safeCategories;
   const categoriesAfterIntro =
-    introPosition === 'afterFreebies' && dealIndex >= 0
-      ? safeCategories.slice(dealIndex + 1)
-      : [];
+    introPosition === 'afterFreebies' && freebiesIndex >= 0 ? safeCategories.slice(freebiesIndex + 1) : [];
 
   const categoriesSharedProps = {
     getProductById,
@@ -70,7 +78,6 @@ const Friday = async ({
     type,
     country,
     getPhrase,
-    categoryImageTdClass,
   };
 
   const CategoriesBeforeIntroElement = await CategoriesHandler({
@@ -83,25 +90,47 @@ const Friday = async ({
   });
 
   const isAfterFreebies = introPosition === 'afterFreebies';
-  const IntroAfterTopImageElement = isAfterFreebies ? '' : IntroElement;
-  const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
+  const isAfterTimer = introPosition === 'afterTimer' && hasTimer;
+  const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer ? '' : IntroElement;
+  const IntroAfterFreebiesElement = introPosition === 'afterFreebies' ? IntroElement : '';
+  const IntroAfterTimerBeforeCategoriesElement =
+    isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
+  const IntroAfterTimerAfterCategoriesElement =
+    isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
+		
+	let hasSmallTilesCategory = false;
+
+	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
+		hasSmallTilesCategory = true;
+	}
+
+	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
+
 
   return `
     ${HeaderElement}
 
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
 
-      ${TopImageTitleElement}
+    ${TopImageTitleElement}
 
-      ${TopImageElement}
+    ${TopImageElement}
 
-      ${IntroAfterTopImageElement}
+    ${IntroAfterTopImageElement}
 
-      ${CategoriesBeforeIntroElement}
+    ${TimerBeforeCategories}
 
-      ${IntroAfterFreebiesElement}
+    ${IntroAfterTimerBeforeCategoriesElement}
 
-      ${CategoriesAfterIntroElement}
+    ${CategoriesBeforeIntroElement}
+
+    ${IntroAfterFreebiesElement}
+
+    ${CategoriesAfterIntroElement}
+
+    ${TimerAfterCategories}
+
+    ${IntroAfterTimerAfterCategoriesElement}
 
     </table>
 
