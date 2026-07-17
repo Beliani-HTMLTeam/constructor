@@ -1,3 +1,4 @@
+
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::10.07.2026 - Rugs & Textiles';
 
@@ -52,37 +53,6 @@ const intro_data = {
   }
 }
 
-
-const timer = {
-  position: 'outsideTopImageTitle',
-  freebies: getImageUrl('20260710free.png', true),
-  background: '#FD9000',
-  color: '#ffffff',
-  isCtaVisible: true,
-  image: {
-      "UK": "https://gen.sendtric.com/countdown/rg56s58zac",
-      "PL": "https://gen.sendtric.com/countdown/9mf650rlea",
-      "DE": "https://gen.sendtric.com/countdown/5kw9l32mfg",
-      "AT": "https://gen.sendtric.com/countdown/nyve708mf8",
-      "CHDE": "https://gen.sendtric.com/countdown/mjajc1wzf3",
-      "NL": "https://gen.sendtric.com/countdown/oqeqf94bqc",
-      "FR": "https://gen.sendtric.com/countdown/czp2taq4yz",
-      "CHFR": "https://gen.sendtric.com/countdown/4dpya8lr1p",
-      "ES": "https://gen.sendtric.com/countdown/z8mb8xrp6m",
-      "PT": "https://gen.sendtric.com/countdown/go3y93m3zd",
-      "IT": "https://gen.sendtric.com/countdown/2hb396l55x",
-      "DK": "https://gen.sendtric.com/countdown/vfkl09a5d9",
-      "NO": "https://gen.sendtric.com/countdown/blw0berovw",
-      "FI": "https://gen.sendtric.com/countdown/vr7w3pxhyr",
-      "SE": "https://gen.sendtric.com/countdown/umc7flpq5p",
-      "CZ": "https://gen.sendtric.com/countdown/2xbgxwsvcb",
-      "SK": "https://gen.sendtric.com/countdown/er3swq700b",
-      "HU": "https://gen.sendtric.com/countdown/p3acdo1s4k",
-      "RO": "https://gen.sendtric.com/countdown/0pvgkrnag1",
-      "BENL": "https://gen.sendtric.com/countdown/ngfrpj9p4d",
-      "BEFR": "https://gen.sendtric.com/countdown/cli05x8duv"
-  },
-};
 
 const categories = [
   {
@@ -301,7 +271,6 @@ export default new entities.Campaign({
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      timer: timer,
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
@@ -324,7 +293,6 @@ export default new entities.Campaign({
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      timer: timer,
       full_img_width: false,
       white_line: false,
       under_intro_line: false,

@@ -31,7 +31,7 @@ import { CategoriesWrapper } from '../components/categories/index.js';
 import { OfferPartWrapper } from '../components/offerpart';
 import { FreebiesWrapper } from '../components/freebies';
 import { IntroWrapper } from '../components/intro/index.js';
-import { Timer } from '../components/timer/Timer.js';
+import { TimerHandler } from '../utils/_Timer_prolo.js';
 
 const RegularFridayNslt1 = async ({
   links,
@@ -146,23 +146,7 @@ const RegularFridayNslt1 = async ({
     shopNowPhrase,
   });
 
-  const TimerElement =
-    Inside && Inside.type === 'timer'
-      ? await Timer({
-        timer: timerData, // Pass the complete timer object
-        type: type, // 'newsletter' or 'landing'
-        country: country,
-        title: timerData?.isWithTitles ? queries.timer?.[0] || '' : '',
-        subtitle: timerData?.isWithTitles ? queries.timer?.[1] || '' : '',
-        href: links.Timer_href || '#',
-        ctaText: shopNowPhrase,
-        spaceAfter: Inside?.spaceAfter,
-        spaceWithoutCTA: Inside?.spaceWithoutCTA || 'newsletterBottom35px',
-        containerId: `prolo-timer-${country?.toLowerCase() || 'default'}`,
-        useDynamicLabels: false,
-        shop: shop, 
-      })
-      : '';
+   const TimerElement = TimerHandler({ Inside, queries, links, timer: timerData, shopNow: shopNowPhrase, country, type, shop });
 
   const CategoriesElement = await CategoriesWrapper({
     categories,
