@@ -32,13 +32,14 @@ const Monday = async ({
   getProductById,
   add_utm,
   soonEndingBanner = true,
+  disableFooterCategories = false,
   categoryImageTdClass,
 }) => {
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   let topImage = ''
