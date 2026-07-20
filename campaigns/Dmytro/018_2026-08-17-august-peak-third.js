@@ -369,7 +369,7 @@ export default new entities.Campaign({
     {
       background: '#FF2F00',
       color: '#000',
-      template: templates.Monday,
+      template: templates.Friday,
       css: types.CSS.NS,
       name: 'Newsletter',
       type: types.NEWSLETTER,
@@ -390,7 +390,7 @@ export default new entities.Campaign({
   {
     background: '#FF2F00',
     color: '#000',
-    template: templates.Monday,
+    template: templates.Friday,
     css: types.CSS.LP,
     name: 'Landing',
     type: types.LANDINGPAGE,

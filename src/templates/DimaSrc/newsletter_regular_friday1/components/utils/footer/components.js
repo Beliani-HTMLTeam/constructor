@@ -14,7 +14,8 @@ const workBanner = ({ getFooter, country }) => ({
   exclude: !['PL'].includes(country),
 });
 
-const thousandsMore = ({ getFooter, getCategoryLink, getCategoryTitle }) => ({
+const thousandsMore = ({ getFooter, getCategoryLink, getCategoryTitle, hasSmallTilesCategory }) => ({
+  exclude: hasSmallTilesCategory,
     title: getFooter('Title'),
     firstCategory: {
       src: getFooter('Category src 1'),
@@ -61,7 +62,7 @@ const thousandsMore = ({ getFooter, getCategoryLink, getCategoryTitle }) => ({
 const klarna = ({ getFooter, country }) => ({
   src: getFooter('Klarna src'),
   href: getFooter('Klarna href'),
-  //exclude: ["HU"].includes(country),
+  exclude: ["HR", "SI"].includes(country),
 });
 
 const socials = ({ getFooter }) => ({
