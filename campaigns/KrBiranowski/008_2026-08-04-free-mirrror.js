@@ -149,7 +149,7 @@ const categories = [
 
 export default new entities.Campaign({
   startId: "46502",
-  name: "Wednesday - Free Mirror",
+  name: "Tuesday - Free Mirror",
   date: "04.08.2026",
   issueCardId: "510567",
   lpId: "31572",
@@ -162,6 +162,7 @@ export default new entities.Campaign({
   },
   isArchive: false,
   optimizeImg: true,
+  version: "new",
   figmaUrl: "https://www.figma.com/design/NXI4yKNtAma4AuFUPt0lky/",
   templates: [
     {
