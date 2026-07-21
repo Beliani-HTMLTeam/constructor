@@ -53,36 +53,12 @@ const TopImageTitle_data = {
   type: 'twoSameLines',
 };
 
-const timer = {
+
+const timer ={
   position: 'outsideTopImageTitle',
-  freebies: getImageUrl('20260807free.png', true),
-  background: '#F6E7E6',
-  color: '#000000',
-  isCtaVisible: true,
-  image: {
-    "UK": "https://gen.sendtric.com/countdown/z12a1da4c3",
-    "PL": "https://gen.sendtric.com/countdown/uxu8813h0j",
-    "DE": "https://gen.sendtric.com/countdown/144a8u8bjq",
-    "AT": "https://gen.sendtric.com/countdown/w6ad0669i8",
-    "CHDE": "https://gen.sendtric.com/countdown/5x52r4xard",
-    "NL": "https://gen.sendtric.com/countdown/5dq7o4gb9j",
-    "FR": "https://gen.sendtric.com/countdown/7p1y4otqcl",
-    "CHFR": "https://gen.sendtric.com/countdown/kg1xzbm3fz",
-    "ES": "https://gen.sendtric.com/countdown/04f81jefmo",
-    "PT": "https://gen.sendtric.com/countdown/ek3bxdoacg",
-    "IT": "https://gen.sendtric.com/countdown/sjvq8b69w6",
-    "DK": "https://gen.sendtric.com/countdown/xxcnupaaan",
-    "NO": "https://gen.sendtric.com/countdown/7y7v0uelp5",
-    "FI": "https://gen.sendtric.com/countdown/w0mcedpk23",
-    "SE": "https://gen.sendtric.com/countdown/z7qa87j0uo",
-    "CZ": "https://gen.sendtric.com/countdown/wv3le7kiot",
-    "SK": "https://gen.sendtric.com/countdown/kwrpaqdktz",
-    "HU": "https://gen.sendtric.com/countdown/oysleeztkb",
-    "RO": "https://gen.sendtric.com/countdown/oglg1l6j5k",
-    "BENL": "https://gen.sendtric.com/countdown/01xbgsb0mq",
-    "BEFR": "https://gen.sendtric.com/countdown/ramlcvej5k"
-},
-};
+  deadline: '2026-08-09',
+  freebies: getImageUrl('20260807free.png', true)
+}
 
 const categories = [
   {
@@ -299,7 +275,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#EAD9D9",
@@ -313,9 +289,9 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#000000",
-        backgroundColor: "#F6E7E6",
-        type: "timer",
-        isWithTitles: true,
+        backgroundColor: '#F6E7E6',
+        unitBackground: '#E3CCCC',
+        type: 'timer',
       },
       intro: intro_data,
       links: links,
@@ -324,7 +300,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.LP,
       background: "#EAD9D9",
       color: "#000000",
@@ -337,9 +313,9 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#000000",
-        backgroundColor: "#F6E7E6",
-        type: "timer",
-        isWithTitles: true,
+        backgroundColor: '#F6E7E6',
+        unitBackground: '#E3CCCC',
+        type: 'timer',
       },
       intro: intro_data,
       links: links,

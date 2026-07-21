@@ -4,6 +4,8 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
+import { translateImage } from '@/helpers/translateImage.js';
+import { translateLink } from '@/helpers/translateLink.js';
 
 const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass }) => {
   let html = '';
@@ -142,6 +144,20 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           offerTextOverrides: category.offerTextOverrides,
         })
       : '';
+ 
+  const insideBannerElement = category?.insideBanner
+    ? `
+      ${category.insideBanner?.spaceAfter ? Space({ insideTr: true, className: category.insideBanner?.spaceAfter }) : ''}
+      ${category?.insideBanner?.image && category?.insideBanner?.link ? ImageWithLink({
+        href: category.insideBanner?.link.href,
+        src: category.insideBanner?.image.src,
+        insideTr: true,
+        tdClass: category.insideBanner?.tdClass ?? categoryImageTdClass,
+        type,
+      }) : ''}
+      ${category.insideBanner?.spaceBefore ? Space({ insideTr: true, className: category.insideBanner?.spaceBefore }) : ''}
+    `
+    : '';
 
   const CTAElement = category.cta
     ? CTA({
@@ -172,6 +188,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         ${ParagraphBeforeImg}
 
         ${ImageElement}
+
+        ${insideBannerElement}
 
         ${ParagraphAfterImg}
 

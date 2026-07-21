@@ -72,7 +72,7 @@ const RegularFridayNslt1 = async ({
   // prettier-ignore
   const HeaderElement = Header({ getHeader, country, background, type, id });
   // prettier-ignore
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id });
+ 
 
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
@@ -161,6 +161,14 @@ const RegularFridayNslt1 = async ({
     add_utm,
     background,
   });
+
+  let hasSmallTilesCategory = false;
+
+	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
+		hasSmallTilesCategory = true;
+	}
+
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
 
   return `
     ${HeaderElement}

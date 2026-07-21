@@ -423,6 +423,10 @@ export default new entities.Campaign({
     isActive: false,
   },
   isArchive: false,
+  specialLpIds: {
+		HR: 31570,
+		SI: 31571,
+	},
   accent: '#FFE9CC',
   optimizeImg: true,
   figmaUrl: 'https://www.figma.com/design/fxr4hBIlBDwZfzmCM4l8GI/Newsletter-Beliani-Birthday-Start---Monday-2026.06.01--Copy-?node-id=0-1&t=KWEIe4G753K8HxiT-1',

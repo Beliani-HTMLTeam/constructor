@@ -52,36 +52,11 @@ const intro_data = {
   }
 }
 
-const timer = {
+const timer ={
   position: 'outsideTopImageTitle',
-  freebies: getImageUrl('20260731free.png', true),
-  background: '#FD9000',
-  color: '#000000',
-  isCtaVisible: true,
-  image: {
-    "UK": "https://gen.sendtric.com/countdown/m9pf0a8koy",
-    "PL": "https://gen.sendtric.com/countdown/r2s2qpp6we",
-    "DE": "https://gen.sendtric.com/countdown/yn580glvzk",
-    "AT": "https://gen.sendtric.com/countdown/enykyb28p8",
-    "CHDE": "https://gen.sendtric.com/countdown/8z40tojmkn",
-    "NL": "https://gen.sendtric.com/countdown/n02lbd2mgi",
-    "FR": "https://gen.sendtric.com/countdown/y9g40wwr73",
-    "CHFR": "https://gen.sendtric.com/countdown/ggbi36r73m",
-    "ES": "https://gen.sendtric.com/countdown/o7pt4wq3h0",
-    "PT": "https://gen.sendtric.com/countdown/g4a9qage5d",
-    "IT": "https://gen.sendtric.com/countdown/r4nh9l2jjg",
-    "DK": "https://gen.sendtric.com/countdown/ck28w7fy4g",
-    "NO": "https://gen.sendtric.com/countdown/uy7f96512k",
-    "FI": "https://gen.sendtric.com/countdown/uw04s4er4y",
-    "SE": "https://gen.sendtric.com/countdown/izjvdc70c4",
-    "CZ": "https://gen.sendtric.com/countdown/ewbqktm8t2",
-    "SK": "https://gen.sendtric.com/countdown/wptm3ge4hg",
-    "HU": "https://gen.sendtric.com/countdown/pmwzwb18wh",
-    "RO": "https://gen.sendtric.com/countdown/pwqo7uyl8q",
-    "BENL": "https://gen.sendtric.com/countdown/bet0fzaec8",
-    "BEFR": "https://gen.sendtric.com/countdown/k7hzxu0rxu"
-},
-};
+  deadline: '2026-08-02',
+  freebies: getImageUrl('20260731free.png', true)
+}
 
 const categories = [
   {
@@ -132,6 +107,9 @@ const categories = [
   },
   {
     name: 'Basins and Accessories',
+    overrides: {
+      FI: "Pesualtaat ja tarvikkeet"
+    },
     background: '#FBF3F3',
     color: '#000000',
     src: getImageUrl('20260731Category20.jpg', true),
@@ -178,6 +156,13 @@ const categories = [
   },
   {
     name: 'Storage',
+    overrides: {
+      FR: "Meubles de salle de bain",
+      CHFR: "Meubles de salle de bain",
+      BEFR: "Meubles de salle de bain",
+      SK: "Úložný nábytok do kúpeľne",
+      HU: "Tárolók fürdőszobába"
+    },
     background: '#FFF4E6',
     color: '#000000',
     src: getImageUrl('20260731Category30.jpg', true),
@@ -224,6 +209,14 @@ const categories = [
   },
   {
     name: 'Accessories',
+    overrides: {
+      FI: "Kylpyhuonetarvikkeet",
+      FR: "Accessoires de salle de bain",
+      CHFR: "Accessoires de salle de bain",
+      BEFR: "Accessoires de salle de bain",
+      SK: "Kúpeľňové doplnky",
+      HU: "Fürdőszobai kiegészítők"
+    },
     background: '#FBF3F3',
     color: '#000000',
     src: getImageUrl('20260731Category40.jpg', true),
@@ -286,7 +279,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#FFF4E6",
@@ -300,9 +293,9 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#000000",
-        backgroundColor: "#FD9000",
-        type: "timer",
-        isWithTitles: true,
+        backgroundColor: '#FD9000',
+        unitBackground: '#FECD8C',
+        type: 'timer',
       },
       intro: intro_data,
       links: links,
@@ -311,7 +304,7 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.LP,
       background: "#FFF4E6",
       color: "#000000",
@@ -324,9 +317,9 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#000000",
-        backgroundColor: "#FD9000",
+        backgroundColor: '#FD9000',
+        unitBackground: '#FECD8C',
         type: "timer",
-        isWithTitles: true,
       },
       intro:intro_data,
       links: links,

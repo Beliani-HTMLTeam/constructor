@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = '22.07.26 - Chairs';
+const campaignTranslationsSheet = '2026::22.07.26 - Chairs';
 
 const tableQueries = [
   {
@@ -304,6 +304,10 @@ export default new entities.Campaign({
   date: "22.07.2026",
   issueCardId: "505116",
   lpId: "31297",
+  specialLpIds: {
+    HR: '31562',
+    SI: '31563',
+  },
   alarm: {
     isActive: false,
   },

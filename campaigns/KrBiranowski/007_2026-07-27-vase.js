@@ -277,7 +277,11 @@ export default new entities.Campaign({
         backgroundColor: '#FFF5F1',
         alignment: 'left',
         position: 'afterFreebies',
-        cta: true,
+        cta: {
+          textOverrides: {
+            fi: 'Tutustu valikoimaan'
+          },
+        }
       },
       css: types.CSS.NS,
       name: 'Newsletter',
@@ -298,7 +302,11 @@ export default new entities.Campaign({
         backgroundColor: '#FFF5F1',
         alignment: 'left',
         position: 'afterFreebies',
-        cta: true,
+        cta: {
+          textOverrides: {
+            fi: 'Tutustu valikoimaan'
+          },
+        },
       },
       css: types.CSS.LP,
       name: 'Landing',

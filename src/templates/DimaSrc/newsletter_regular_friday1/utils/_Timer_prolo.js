@@ -50,13 +50,29 @@ export const labels = {
   "SE": ["dagar", "h", "min", "s"],
   "HU": ["nap", "óra", "perc", "másodperc"],
   "DK": ["dage", "t", "min", "s"],
-  "CZ": ["dnů", "hours", "min.", "s"],
-  "FI": ["päivää", "t", "m", "s"],
+  "CZ": [
+    "dnů",
+    "hod.",
+    "min.",
+    "s"
+  ],
+  "FI": [
+    "päivää",
+    "tuntia",
+    "minuuttia",
+    "sekuntia"
+],
   "NO": ["dager", "t", "min", "s"],
   "SK": ["dní", "hod.", "min.", "s"],
   "BENL": ["dagen", "uren", "minuten", "seconden"],
   "BEFR": ["jours", "h", "min", "s"],
-  "RO": ["zile", "h", "m", "s"]
+  "RO": ["zile", "h", "m", "s"],
+  HR: [
+    "dani",
+    "sati",
+    "min.",
+    "s"
+]
 }
 
 const buildProloTimerScript = ({ deadline, country }) => {
@@ -144,6 +160,7 @@ const buildProloTimerScript = ({ deadline, country }) => {
 };
 
 export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, type, shop }) => {
+  if (["HR", "SI"].includes(country)) return '';
 
   console.log("timerhandler", Inside, queries, links, timer, shopNow, country, type, shop)
 
@@ -151,7 +168,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
 
   let link = base + `?deadline=${timer.deadline}T23:59:00` +
     `&timezone=${timezones[country]}` +
-		// in prolo timer generator pt uses "portugal" instead of portugese
+    // in prolo timer generator pt uses "portugal" instead of portugese
     `&lang=${shop.slug === "PT" ? "portugal" : languagesMap[country]?.title}` +
     `&bg=${(Inside.unitBackground || Inside.backgroundColor).replace('#', '')}` +
     `&color=${Inside.color.replace('#', '')}` +

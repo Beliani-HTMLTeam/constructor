@@ -40,6 +40,6 @@ export const IntroCTA = ({
       align: 'center',
       insideTr: true,
     })}
-    ${cta.spaceAfter ? Space({ insideTr: true, className: cta.spaceAfter, backgroundColor }) : ''}
+    ${cta.spaceAfter && !(["HR", "SI"].includes(country)) ? Space({ insideTr: true, className: cta.spaceAfter, backgroundColor }) : ''}
   `;
 };

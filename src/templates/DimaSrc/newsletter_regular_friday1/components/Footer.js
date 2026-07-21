@@ -10,7 +10,7 @@ import {
   workBanner,
 } from './utils/footer/components';
 
-const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id }) => {
+const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory }) => {
   return FooterComponent(
     {
       id,
@@ -18,7 +18,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
 
       workBanner: workBanner({ getFooter, country }),
 
-      thousandsMore: thousandsMore({ getFooter, getCategoryLink, getCategoryTitle }),
+      thousandsMore: thousandsMore({hasSmallTilesCategory, getFooter, getCategoryLink, getCategoryTitle }),
 
       klarna: klarna({ getFooter, country }),
 
