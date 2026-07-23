@@ -264,7 +264,7 @@ const categories = [
         href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
       },
       {
-        name: 'Hanging chairs',
+        name: 'Garden Hanging Chairs',
         src: getImageUrl('20260805_Add3.png', true),
         href: 'https://www.beliani.ch/outdoor-furniture/garden-hanging-chairs/',
       },

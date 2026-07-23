@@ -282,9 +282,9 @@ export default new entities.Campaign({
         position: 'afterFreebies',
         cta: {
           textOverrides: {
-            fi: 'Tutustu valikoimaan'
+            fi: 'Tutustu valikoimaan',
           },
-        }
+        },
       },
       css: types.CSS.NS,
       name: 'Newsletter',
@@ -307,7 +307,7 @@ export default new entities.Campaign({
         position: 'afterFreebies',
         cta: {
           textOverrides: {
-            fi: 'Tutustu valikoimaan'
+            fi: 'Tutustu valikoimaan',
           },
         },
       },
@@ -319,8 +319,9 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      disableKlarna: true,
-      disableSoonEnding: true,
+      disableKlarna: ['SI', 'HR'],
+      disableSoonEnding: ['SI', 'HR'],
     },
   ],
 });
+
