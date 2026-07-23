@@ -76,7 +76,7 @@ const categories = [
 			spaceAfter: 'newsletterBottom35px',
 		},
 		paragraph: {
-			show: false,
+			show: true,
 			align: 'left',
 			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
@@ -122,7 +122,7 @@ const categories = [
 			spaceAfter: 'newsletterBottom35px',
 		},
 		paragraph: {
-			show: false,
+			show: true,
 			align: 'left',
 			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
@@ -176,7 +176,7 @@ const categories = [
 			insideContainer: true,
 		},
 		paragraph: {
-			show: false,
+			show: true,
 			align: 'left',
 			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
@@ -223,7 +223,7 @@ const categories = [
 			spaceAfter: 'newsletterBottom35px',
 		},
 		paragraph: {
-			show: false,
+			show: true,
 			align: 'left',
 			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
