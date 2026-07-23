@@ -46,6 +46,8 @@ const countryToLang = {
   NO: 'norsk',
   SK: 'slovak',
   RO: 'romanian',
+  SI: 'slovene',
+  HR: 'croatian',
 };
 
 function addLangToLP(html, country) {
