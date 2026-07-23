@@ -22,11 +22,11 @@ const tableQueries = [
 		tableRange: '24:25',
 		name: 'condition',
 	},
-	// {
-	// 	tableRange: '15:16',
-	// 	name: 'timer',
-	// 	tableName: '2026::Voucher - 20.07.26 - Free Gift',
-	// },
+	{
+		tableRange: '15:16',
+		name: 'timer',
+		tableName: '2026::Voucher - 20.07.26 - Free Gift',
+	},
 ];
 
 const links = {
@@ -42,7 +42,7 @@ const links = {
 	Banner_2: translateLink({ value: 'content/lp26-07-15' }),
 	Banner_2_Image: translateImage({ value: '20260715b.png' }),
 
-	// Timer_href: translateLink({ value: 'content/lp26-07-20' }),
+	Timer_href: translateLink({ value: 'content/lp26-07-20' }),
 
 	Intro_cta_href: "https://www.beliani.ch/mirrors/",
 };
@@ -273,8 +273,10 @@ const categories = [
 	},
 ];
 
-// const timer = {
-// 	freebies: translateImage({ value: '20260723free.png' }),
+const timer = {
+	freebies: translateImage({ value: '20260723free.png' }),
+	deadline: '2026-07-26',
+}
 // 	image: {
 // 		"UK": "https://gen.sendtric.com/countdown/d5fj0j06iw",
 // 		"PL": "https://gen.sendtric.com/countdown/9ld4nd5jug",
@@ -331,7 +333,7 @@ export default new entities.Campaign({
 			categories: categories,
 			links: links,
 			tableQueries: tableQueries,
-			// timer: timer,
+			timer: timer,
 			intro: {
 				color: '#000000',
 				backgroundColor: '#FFF2ED',
@@ -343,11 +345,12 @@ export default new entities.Campaign({
 					spaceAfter: 'newsletterBottom35px',
 				}
 			},
-			// Inside: {
-			// 	color: '#000000',
-			// 	backgroundColor: '#F6E7E6',
-			// 	type: 'timer',
-			// },
+			Inside: {
+				color: '#000000',
+				backgroundColor: '#F6E7E6',
+				unitBackground: '#E3CCCC',
+				type: 'timer',
+			},
 		},
 		{
 			name: 'Landing',
@@ -362,7 +365,7 @@ export default new entities.Campaign({
 			categories: categories,
 			links: links,
 			tableQueries: tableQueries,
-			// timer: timer,
+			timer: timer,
 			intro: {
 				color: '#000000',
 				backgroundColor: '#FFF2ED',
@@ -375,11 +378,12 @@ export default new entities.Campaign({
 					spaceAfter: 'newsletterBottom35px',
 				}
 			},
-			// Inside: {
-			// 	color: '#000000',
-			// 	backgroundColor: '#F6E7E6',
-			// 	type: 'timer',
-			// },
+			Inside: {
+				color: '#000000',
+				backgroundColor: '#F6E7E6',
+				unitBackground: '#E3CCCC',
+				type: 'timer',
+			},
 		},
 	],
 });

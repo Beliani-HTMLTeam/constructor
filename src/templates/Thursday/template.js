@@ -57,7 +57,7 @@ const Thursday = async ({
   });
 
   const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
-  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country });
+  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
 
