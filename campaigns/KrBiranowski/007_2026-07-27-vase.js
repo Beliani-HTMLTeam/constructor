@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = 'Voucher - 27.07.26 - Vase';
+const campaignTranslationsSheet = '2026::Voucher - 27.07.26 - Vase';
 
 const tableQueries = [
   {
@@ -259,12 +259,15 @@ export default new entities.Campaign({
   date: '27.07.2026',
   issueCardId: '507435',
   lpId: '31376',
+  specialLpIds: {
+    SI: '31683',
+    HR: '31684',
+  },
   alarm: {
     isActive: false,
   },
   isArchive: false,
   optimizeImg: true,
-  soon_banners: true,
   figmaUrl: 'https://www.figma.com/design/4EClbaS0pQXQaPFKOTNPdT/',
   accent: '#d4f5e9',
   templates: [
@@ -316,6 +319,8 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
+      disableKlarna: true,
+      disableSoonEnding: true,
     },
   ],
 });
