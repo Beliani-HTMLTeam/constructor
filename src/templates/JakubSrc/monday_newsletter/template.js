@@ -31,15 +31,16 @@ const Monday = async ({
   getPhrase,
   getProductById,
   add_utm,
-  soonEndingBanner = true,
+  disableSoonEnding = false,
   disableFooterCategories = false,
+  disableKlarna = false,
   categoryImageTdClass,
 }) => {
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   let topImage = ''
@@ -115,7 +116,7 @@ const Monday = async ({
 
     </table>
 
-    ${soonEndingBanner ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
+    ${!disableSoonEnding ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
 
     ${FooterElement}
   `;

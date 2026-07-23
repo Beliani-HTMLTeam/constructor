@@ -10,6 +10,7 @@ const Footer = ({
   type,
   id,
   disableFooterCategories = false,
+  disableKlarna = false,
 }) => {
   let footerData = {
     id,
@@ -139,6 +140,7 @@ const Footer = ({
   };
 
   if (disableFooterCategories) delete footerData.thousandsMore;
+  if (disableKlarna) delete footerData.klarna;
 
   return FooterComponent(footerData, { type });
 };
