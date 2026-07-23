@@ -256,7 +256,7 @@ const renderBody = async ({
 
   try {
     const module = await import(`./category/${categoryTypeStr}.js`);
-
+    console.log(`Rendering category type "${categoryTypeStr}" using module:`, module);
     return module.render({
       products,
       freebies,

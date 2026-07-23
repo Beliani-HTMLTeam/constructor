@@ -17,6 +17,7 @@ export const render = ({
   imageSide,
   getCategoryLink,
   getCategoryTitle,
+  country,
 }) => {
   let productsInnerHtml = '';
 
@@ -41,6 +42,8 @@ export const render = ({
           if (tiles) {
             const href = item.resolvedHref ?? (getCategoryLink ? getCategoryLink(item.href) : item.href);
             const name = getCategoryTitle ? getCategoryTitle(item.name) : item.name;
+            const countryCode = queries?.country?.toLowerCase() ?? '';
+            let nameOverride = item?.nameOverrides?.[country.toLowerCase()] !== undefined ? item.nameOverrides[country.toLowerCase()] : name;
 
             productsInnerHtml += `<table width="100%" border="0" cellpadding="0" cellspacing="0">`;
 
@@ -57,7 +60,7 @@ export const render = ({
             <tr>
               <td align="center" style="text-align: center;">
                 <a class="newsletterAdditionalCategoryTitle" href="${href}" style="color: ${color}; text-decoration: underline;">
-                  ${name}
+                  ${nameOverride}
                 </a>
               </td>
             </tr>

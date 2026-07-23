@@ -31,9 +31,9 @@ const Monday = async ({
   getPhrase,
   getProductById,
   add_utm,
-  disableSoonEnding = false,
+  disableSoonEnding,
   disableFooterCategories = false,
-  disableKlarna = false,
+  disableKlarna,
   categoryImageTdClass,
 }) => {
   const HeaderElement = Header({ getHeader, country, background, type, id });
@@ -116,7 +116,7 @@ const Monday = async ({
 
     </table>
 
-    ${!disableSoonEnding ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
+    ${!disableSoonEnding?.includes(country) ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
 
     ${FooterElement}
   `;
