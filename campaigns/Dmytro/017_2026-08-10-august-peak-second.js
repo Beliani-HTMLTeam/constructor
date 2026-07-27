@@ -268,6 +268,10 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
+  specialLpIds: {
+		HR: 31614,
+		SI: 31615,
+	},
   isArchive: false,
   accent: '#ffcc40',
   optimizeImg: false,
@@ -276,7 +280,7 @@ export default new entities.Campaign({
     {
       background: '#F6E7E6',
       color: '#000000',
-      template: templates.Monday,
+      template: templates.Friday,
       css: types.CSS.NS,
       name: 'Newsletter',
       type: types.NEWSLETTER,
@@ -292,7 +296,7 @@ export default new entities.Campaign({
     {
       background: '#F6E7E6',
       color: '#000000',
-      template: templates.Monday,
+      template: templates.Friday,
       css: types.CSS.LP,
       name: 'Landing',
       type: types.LANDINGPAGE,

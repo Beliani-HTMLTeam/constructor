@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::07.08.2026 - Dining Room Sale';
+const campaignTranslationsSheet = '2026::14.08.26 - Kids Room';
 
 const tableQueries = [
   {
@@ -21,26 +21,26 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-07' }),
-  TopImageTitle_src: translateImage({ value: '20260807_01.png' }),
-  TopImage_src: getImageUrl('20260807topimage.jpg', true),
-  TopImage_href: translateLink({ value: 'content/lp26-08-07' }),
-  Banner_1: translateLink({ value: 'content/lp26-07-29' }),
-  Banner_1_Image: translateImage({ value: '20260729b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-07-31' }),
-  Banner_2_Image: translateImage({ value: '20260731b.png' }),
-  Timer_href: translateLink({ value: 'content/lp26-08-04' }),
-  Intro_cta_href: "https://www.beliani.ch/dining-room-furniture/"
+  TopImageTitle_href: translateLink({ value: 'content/lp26-08-14' }),
+  TopImageTitle_src: translateImage({ value: '20260814_01.png' }),
+  TopImage_src: getImageUrl('20260814topgif.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp26-08-14' }),
+  Banner_1: translateLink({ value: 'content/lp26-08-07' }),
+  Banner_1_Image: translateImage({ value: '20260807b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-08-05' }),
+  Banner_2_Image: translateImage({ value: '20260805b.png' }),
+  Timer_href: translateLink({ value: 'content/lp26-08-11' }),
+  Intro_cta_href: "https://www.beliani.ch/children-room/"
 };
 
 const intro_data = {
   color: "#000000",
-  backgroundColor: "#EAD9D9",
+  backgroundColor: "#FFEBE2",
   alignment: "left",
   type: "paragraph",
   cta: {
     overrides: {
-   FI: "Tutustu valikoimaan"
+   
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -49,27 +49,27 @@ const intro_data = {
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#EAD9D9',
+  backgroundColor: '#FFEBE2',
   type: 'twoSameLines',
 };
 
 
 const timer ={
   position: 'outsideTopImageTitle',
-  deadline: '2026-08-09',
-  freebies: getImageUrl('20260807free.png', true)
+  deadline: '2026-08-16',
+  freebies: getImageUrl('20260814free.png', true)
 }
 
 const categories = [
   {
-    name: 'Dining tables',
+    name: 'Kids beds',
     overrides: {
      
     },
-    background: '#EAD9D9',
+    background: '#FFEBE2',
     color: '#000000',
-    src: getImageUrl('20260807Category10.jpg', true),
-    href: 'https://www.beliani.ch/tables/dining-tables/',
+    src: getImageUrl('20260814Category10.jpg', true),
+    href: 'https://www.beliani.ch/children-room/kids-beds/',
     type: 'grid',
     insideContainer: true,
     title: {
@@ -88,37 +88,37 @@ const categories = [
       show: true
     },
     products: [
-      // MADOX
+      // POLIGNAC
       {
-        id: '389465',
-        src: getImageUrl('20260807Category11.png', true),
+        id: '812816',
+        src: getImageUrl('20260814Category11.png', true),
       },
-      // OYEN
+      // RUBIAN
       {
-        id: '568058',
-        src: getImageUrl('20260807Category12.png', true),
+        id: '592648',
+        src: getImageUrl('20260814Category12.png', true),
       },
-      // SAVORY
+      // COSSAYE
       {
-        id: '567982',
-        src: getImageUrl('20260807Category13.png', true),
+        id: '594775',
+        src: getImageUrl('20260814Category13.png', true),
       },
-      // KARLO
+      // KERVAN
       {
-        id: '643222',
-        src: getImageUrl('20260807Category14.png', true),
+        id: '591924',
+        src: getImageUrl('20260814Category14.png', true),
       },
     ],
   },
   {
-    name: 'Chairs',
+    name: 'Kids chairs and tables',
     overrides: {
     
     },
-    background: '#FFEBE6',
+    background: '#FEE3BF',
     color: '#000000',
-    src: getImageUrl('20260807Category20.jpg', true),
-    href: 'https://www.beliani.ch/dining-room-furniture/chairs/',
+    src: getImageUrl('20260814Category20.jpg', true),
+    href: 'https://www.beliani.ch/children-room/kids-chairs/',
     type: 'grid',
     insideContainer: true,
     title: {
@@ -137,37 +137,37 @@ const categories = [
       show: true
     },
     products: [
-      // AVA
+      // VEGA
       {
-        id: '609612',
-        src: getImageUrl('20260807Category21.png', true),
+        id: '428625',
+        src: getImageUrl('20260814Category21.png', true),
       },
-      // MINA
+      // BOO
       {
-        id: '583491',
-        src: getImageUrl('20260807Category22.png', true),
+        id: '428590',
+        src: getImageUrl('20260814Category22.png', true),
       },
-      // CRAIG
+      // WOOLI
       {
-        id: '515774',
-        src: getImageUrl('20260807Category23.png', true),
+        id: '680038',
+        src: getImageUrl('20260814Category23.png', true),
       },
-      // BURGES
+      // ASPRIA
       {
-        id: '805541',
-        src: getImageUrl('20260807Category24.png', true),
+        id: '522490',
+        src: getImageUrl('20260814Category24.png', true),
       },
     ],
   },
   {
-    name: 'Tableware',
+    name: 'Kids storage',
     overrides: {
     
     },
-    background: '#EAD9D9',
+    background: '#FFEBE2',
     color: '#000000',
-    src: getImageUrl('20260807Category30.jpg', true),
-    href: 'https://www.beliani.ch/dining-room-furniture/kitchenware-tableware/',
+    src: getImageUrl('20260814Category30.jpg', true),
+    href: 'https://www.beliani.ch/children-room/kids-storage/',
     type: 'grid',
     insideContainer: true,
     title: {
@@ -186,37 +186,37 @@ const categories = [
       show: true
     },
     products: [
-      // GALANGAL
+      // LACKEY
       {
-        id: '729791',
-        src: getImageUrl('20260807Category31.png', true),
+        id: '575403',
+        src: getImageUrl('20260814Category31.png', true),
       },
-      // NUTMEG
+      // CANEY
       {
-        id: '705851',
-        src: getImageUrl('20260807Category32.png', true),
+        id: '574639',
+        src: getImageUrl('20260814Category32.png', true),
       },
-      // HOPS
+      // LILOET
       {
-        id: '721952',
-        src: getImageUrl('20260807Category33.png', true),
+        id: '575306',
+        src: getImageUrl('20260814Category33.png', true),
       },
-      // CHAROLI
+      // RUPERT,
       {
-        id: '721953',
-        src: getImageUrl('20260807Category34.png', true),
+        id: '525454',
+        src: getImageUrl('20260814Category34.png', true),
       },
     ],
   },
   {
-    name: 'Kitchen trolleys',
+    name: 'Kids Décor',
     overrides: {
     
     },
-    background: '#FFEBE6',
+    background: '#FEE3BF',
     color: '#000000',
-    src: getImageUrl('20260807Category40.jpg', true),
-    href: 'https://www.beliani.ch/storage/kitchen-trolleys/',
+    src: getImageUrl('20260814Category40.jpg', true),
+    href: 'https://www.beliani.ch/children-room/kids-decor/',
     type: 'grid',
     insideContainer: true,
     title: {
@@ -235,42 +235,43 @@ const categories = [
       show: true
     },
     products: [
-      // VENETA
+      // TANDA
       {
-        id: '195790',
-        src: getImageUrl('20260807Category41.png', true),
+        id: '563320',
+        src: getImageUrl('20260814Category41.png', true),
       },
-      // MORINO
+      // YAMBA
       {
-        id: '251005',
-        src: getImageUrl('20260807Category42.png', true),
+        id: '703620',
+        src: getImageUrl('20260814Category42.png', true),
       },
-      // TRAPANI
+      // VAGSOY
       {
-        id: '108799',
-        src: getImageUrl('20260807Category43.png', true),
+        id: '345600',
+        src: getImageUrl('20260814Category43.png', true),
       },
-      // SIENA
+      // HIMBA
       {
-        id: '174046',
-        src: getImageUrl('20260807Category44.png', true),
+        id: '345636',
+        src: getImageUrl('20260814Category44.png', true),
       },
     ],
   },
 ];
 
 export default new entities.Campaign({
-  startId: "46136",
-  name: "Dining Room Sale",
-  date: "07.08.2026",
-  issueCardId: "513178",
-  lpId: "31396",
+  startId: "46568",
+  name: "Kids Room",
+  date: "14.08.2026",
+  issueCardId: "516919",
+  lpId: "31616",
   alarm: {
     isActive: false,
   },
+  version: "new",
   isArchive: false,
   optimizeImg: true,
-  figmaUrl: "https://www.figma.com/design/TtjQ8ihEDFYHOkKa0LGSNl/Newsletter-Dining-Room-Sale----Up-to-50--off---Friday-2026.08.07?node-id=0-1&t=ZFtZbq8t14RyOvq5-1",
+  figmaUrl: "https://www.figma.com/design/X1cpQ18rDfJqhTlaFJtf94/Newsletter-Kids-Room---Friday-2026.08.14?node-id=0-1&t=0dPLW8ClxmsM9BEW-1",
   templates: [
     {
       name: "Newsletter",
@@ -278,7 +279,7 @@ export default new entities.Campaign({
       template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: "#EAD9D9",
+      background: "#FFEBE2",
       color: "#000000",
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
@@ -289,8 +290,8 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#000000",
-        backgroundColor: '#F6E7E6',
-        unitBackground: '#E3CCCC',
+        backgroundColor: '#FD9000',
+        unitBackground: '#FECD8C',
         type: 'timer',
       },
       intro: intro_data,
@@ -302,7 +303,7 @@ export default new entities.Campaign({
       type: types.LANDINGPAGE,
       template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.LP,
-      background: "#EAD9D9",
+      background: "#FFEBE2",
       color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
@@ -313,8 +314,8 @@ export default new entities.Campaign({
       under_intro_line: false,
       Inside: {
         color: "#000000",
-        backgroundColor: '#F6E7E6',
-        unitBackground: '#E3CCCC',
+        backgroundColor: '#FD9000',
+        unitBackground: '#FECD8C',
         type: 'timer',
       },
       intro: intro_data,

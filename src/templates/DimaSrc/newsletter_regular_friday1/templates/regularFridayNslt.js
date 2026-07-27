@@ -101,21 +101,17 @@ const RegularFridayNslt1 = async ({
     className: TiT_className,
   })
 
-  let TopImageElement = ImageWithLink({
-    href: links.TopImage_href,
-    src: links.TopImage_src,
-    insideTr: true,
-    alt: 'Top Image',
-  })
-
-
-  let TopImageVideoElement = (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) ? VideoLPWithLink({
+  let TopImageElement = (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) ? VideoLPWithLink({
     href: links.TopImageVideo_href,
     src: links.TopImageVideo_src,
     alt: 'Landing Page Video',
     insideTr: true,
-  }) : '';
-
+  }) : ImageWithLink({
+    href: links.TopImage_href,
+    src: links.TopImage_src,
+    insideTr: true,
+    alt: 'Top Image',
+  });
 
   const OfferPartElement = OfferPartWrapper({
     OfferPart,

@@ -1,4 +1,3 @@
-import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
 
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::21.08.26 - August Peak Reminder';
@@ -21,9 +20,11 @@ const tableQueries = [
 
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-08-21' }),
-  TopImageTitle_src:  DimasTranslateImage({ value: '20260821_01.png', folder: '20260821', placeholderPosition: '47' }),
+  TopImageTitle_src:  translateImage({ value: '20260821_01.png'}),
   TopImage_src:  translateImage({ value: '20260821_gif.gif' }),
   TopImage_href: translateLink({ value: 'content/lp26-08-21' }),
+  TopImageVideo_src: translateImage({ value: '20260821_mp4.mp4' }),
+  TopImageVideo_href: translateLink({ value: 'content/lp26-08-21' }),
   Banner_1: translateLink({ value: 'content/lp26-08-14' }),
   Banner_1_Image: translateImage({ value: '20260814b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-13' }),
@@ -38,120 +39,103 @@ const TopImageTitle_data = {
   type: 'twoSameMediumLines',
 };
 
-const timer = {
+const intro_data = {
+  color: "#000000",
+  backgroundColor: "#F6E7E6",
+  alignment: "center",
+  type: "paragraph",
+}
+
+const timer ={
   position: 'insideTopImageTitle',
-  background: '#FF2F00',
-  color: '#FFFFFF',
-  image:{
-    "UK": "https://gen.sendtric.com/countdown/kmu7hpc9dy",
-    "PL": "https://gen.sendtric.com/countdown/49cq1oh5b4",
-    "DE": "https://gen.sendtric.com/countdown/ptworfen87",
-    "AT": "https://gen.sendtric.com/countdown/pzpz2axxjg",
-    "CHDE": "https://gen.sendtric.com/countdown/h93wko7g2d",
-    "NL": "https://gen.sendtric.com/countdown/q4dsk5phph",
-    "FR": "https://gen.sendtric.com/countdown/y1bvyv215r",
-    "CHFR": "https://gen.sendtric.com/countdown/7aagmpz4yq",
-    "ES": "https://gen.sendtric.com/countdown/ijrwrzs3fk",
-    "PT": "https://gen.sendtric.com/countdown/jnczmxf9ky",
-    "IT": "https://gen.sendtric.com/countdown/6fmlbmeyik",
-    "DK": "https://gen.sendtric.com/countdown/ok617d5dsr",
-    "NO": "https://gen.sendtric.com/countdown/r8aaovp1xq",
-    "FI": "https://gen.sendtric.com/countdown/1x5wxlbylt",
-    "SE": "https://gen.sendtric.com/countdown/i14w0p9c07",
-    "CZ": "https://gen.sendtric.com/countdown/8nm7mqd4s8",
-    "SK": "https://gen.sendtric.com/countdown/t30zouo5ax",
-    "HU": "https://gen.sendtric.com/countdown/fnr2l5p1o3",
-    "RO": "https://gen.sendtric.com/countdown/25x5ew2zr3",
-    "BENL": "https://gen.sendtric.com/countdown/p5ari5ppmo",
-    "BEFR": "https://gen.sendtric.com/countdown/yjcaszd2nk"
-},
-};
+  deadline: '2026-08-23',
+  isCtaVisible: false,
+  isWithTitles: false
+}
 
 const categories = [
   {
-    name: 'Outdoor',
-    src: DimasTranslateImage({ value: '_outdoor.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture/ ',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    paragraph: {
+      spaceAfter: '',
     },
-  {
-    name: 'Sofas',
-    src: DimasTranslateImage({ value: '_sofas.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/sofas/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
+    href: 'https://beliani.ch',
+    paddingTop: '0',
+    type: 'small-tiles',
+    background: '#F6E7E6',
+    color: '#000000',
+    paragraph: {
+      position: "afterProducts",
+      spaceAfter: 'newsletterBottom35px',
+    },
+    spaceAfter: 'newsletterBottom35px',
+    cta: {
+      phrase: "Shop all categories"
+    },
+    tiles: {
+      background: 'ff2f00',
+      text: 'ffffff',
+      items: [
+        {
+          name: 'Outdoor', // uzywane jako Alt, getCategoryTitle(name)
+          href: 'https://www.beliani.ch/garden-furniture', // link do kategorii -> getCategoryLink(href)
+          // src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
+        },
+        {
+          name: 'Sofas',
+          href: 'https://www.beliani.chk/sofas',
+        },
+        {
+          name: 'Beds',
+          href: 'https://www.beliani.ch/beds',
+        },
+        {
+          name: 'Armchairs',
+          href: 'https://www.beliani.ch/armchairs',
+        },
+        {
+          name: 'Chairs',
+          href: 'https://www.beliani.ch/chairs',
+        },
+        {
+          name: 'Tables',
+          href: 'https://www.beliani.ch/tables',
+        },
+        {
+          name: 'Storage',
+          href: 'https://www.beliani.ch/storage',
+        },
+        {
+          name: 'Kids',
+          href: 'https://www.beliani.ch/children-room',
+        },
+        {
+          name: 'Textiles',
+          href: 'https://www.beliani.ch/textiles',
+        },
+        {
+          name: 'Lighting',
+          href: 'https://www.beliani.ch/lighting',
+        },
+        {
+          name: 'Bathtubs',
+          href: 'https://www.beliani.ch/bathtubs-hot-tubs',
+        },
+        {
+          name: 'Desks',
+          href: 'https://www.beliani.ch/desks',
+        },
+        {
+          name: 'Rugs',
+          href: 'https://www.beliani.ch/rugs',
+        },
+        {
+          name: 'Accessories',
+          href: 'https://www.beliani.ch/accessories-decor',
+        },
+      ],
+    },
   },
-  {
-    name: 'Beds',
-    src: DimasTranslateImage({ value: '_beds.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/beds/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Armchairs',
-    src: DimasTranslateImage({ value: '_armchairs.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/armchairs/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Chairs',
-    src: DimasTranslateImage({ value: '_chairs.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/chairs/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Tables',
-    src: DimasTranslateImage({ value: '_tables.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/tables/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Storage',
-    src: DimasTranslateImage({ value: '_storage.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/storage/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Kids Room',
-    src: DimasTranslateImage({ value: '_kids.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/children-room/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Textiles',
-    src: DimasTranslateImage({ value: '_textiles.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/textiles/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Lighting',
-    src: DimasTranslateImage({ value: '_lighting.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/lighting/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Bathtubs',
-    src: DimasTranslateImage({ value: '_bathtubs.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Desks',
-    src: DimasTranslateImage({ value: '_desks.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/office-furniture/desks-eng/ ',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Rugs',
-    src: DimasTranslateImage({ value: '_rugs.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/rugs/ ',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
-  {
-    name: 'Accessories',
-    src: DimasTranslateImage({ value: '_accessories.png', folder: 'category_tiles/ff2f00/ffffff', placeholderPosition: '67' }),
-    href: 'https://www.beliani.ch/home-accessories/accessories-decor/',
-    type: 'tilesWithoutProducts', // make it by hand (of from old constructor)
-  },
+ 
 ];
 
 export default new entities.Campaign({
@@ -170,7 +154,7 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#F6E7E6",
@@ -178,55 +162,44 @@ export default new entities.Campaign({
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      categories_type: "twoColumnsGrid",
+      categories_type: 'small-tiles',
       timer: timer,
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#000000",
-        backgroundColor: "#FF2F00",
+        color: "#ffffff",
+        backgroundColor: '#FF2F00',
+        unitBackground: '#FF9780',
         type: "timer",
-        isWithTitles: false,
-        spaceWithoutCTA: 'newsletterBottom20px',
       },
-      intro: {
-        color: "#000000",
-        backgroundColor: "#F6E7E6",
-        alignment: "center",
-        type: "paragraph",
-      },
+      intro: intro_data,
       links: links,
       tableQueries: tableQueries,
     },
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.RegularFridayNslt, // User should change this
+      template: templates.RegularFridayNslt1, // User should change this
       css: types.CSS.LP,
       background: "#F6E7E6",
       color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
-      categories_type: "twoColumnsGrid",
+      categories_type: 'small-tiles',
+
       timer: timer,
       full_img_width: false,
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#000000",
-        backgroundColor: "#FF2F00",
+        color: "#ffffff",
+        backgroundColor: '#FF2F00',
+        unitBackground: '#FF9780',
         type: "timer",
-        isWithTitles: false,
-        spaceWithoutCTA: 'newsletterBottom20px',
       },
-      intro: {
-        color: "#000000",
-        backgroundColor: "#F6E7E6",
-        alignment: "center",
-        type: "paragraph",
-      },
+      intro: intro_data,
       links: links,
       tableQueries: tableQueries,
     },

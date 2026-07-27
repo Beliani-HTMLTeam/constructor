@@ -1,6 +1,9 @@
 import { Timer } from '../components/ProloTimer';
 import languages from "@config/languages"
 
+const getTranslation = (value) => {
+  return value && value.trim() !== '' ? value : 'Translation not found';
+};
 
 let languagesMap = {
   ...languages,
@@ -61,7 +64,7 @@ export const labels = {
     "tuntia",
     "minuuttia",
     "sekuntia"
-],
+  ],
   "NO": ["dager", "t", "min", "s"],
   "SK": ["dní", "hod.", "min.", "s"],
   "BENL": ["dagen", "uren", "minuten", "seconden"],
@@ -72,7 +75,12 @@ export const labels = {
     "sati",
     "min.",
     "s"
-]
+  ], SI: [
+    "dni",
+    "ur",
+    "min.",
+    "s"
+  ]
 }
 
 const buildProloTimerScript = ({ deadline, country }) => {
@@ -160,7 +168,7 @@ const buildProloTimerScript = ({ deadline, country }) => {
 };
 
 export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, type, shop }) => {
-  if (["HR", "SI"].includes(country)) return '';
+  // if (["HR", "SI"].includes(country)) return '';
 
   console.log("timerhandler", Inside, queries, links, timer, shopNow, country, type, shop)
 
@@ -178,10 +186,16 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
 
   const freebies = timer?.overrides?.[country] ? getImageUrl(timer.overrides[country], true) : timer?.freebies;
 
+  const isWithTitles = timer.isWithTitles ?? true;
+
+  const position = timer.position ?? 'outsideTopImageTitle';
+
+  console.log("isWithTitles ? queries?.timer?.[0] ?? 'Translation not found' : ''", isWithTitles ? queries?.timer?.[0] ?? 'Translation not found' : '')
+
   return Inside && Inside.type === 'timer'
     ? Timer({
-      title: queries?.timer?.[0] ?? 'Translation not found',
-      subtitle: queries?.timer?.[1] ?? 'Translation not found',
+      title: isWithTitles ? getTranslation(queries?.timer?.[0]) : '',
+      subtitle: isWithTitles ? getTranslation(queries?.timer?.[1]) : '',
       href: links?.Timer_href,
       src: link,
       color: Inside.color,
@@ -191,6 +205,9 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
       ctaText: shopNow,
       type: type,
       script: buildProloTimerScript({ deadline: timer.deadline, country }),
+      isCtaVisible: timer.isCtaVisible ?? true,
+      spaceWithoutCTA: timer.spaceWithoutCTA,
+      position: position
     })
     : '';
 };

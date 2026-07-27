@@ -257,7 +257,6 @@ export default new entities.Campaign({
       intro: intro_data,
       links: links,
       tableQueries: tableQueries,
-      soonEndingBanners: false
     },
     {
       name: "Landing",
@@ -282,7 +281,6 @@ export default new entities.Campaign({
       intro: intro_data,
       links: links,
       tableQueries: tableQueries,
-      soonEndingBanners: false
     },
   ],
 });

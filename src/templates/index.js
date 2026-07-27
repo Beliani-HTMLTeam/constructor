@@ -5,8 +5,6 @@ import { ThreeCategoriesUnder } from '@/templates/MichalTemporary/ThreeCategorie
 import { ThreeCategoriesUnderLP } from '@/templates/MichalTemporary/ThreeCategoriesUnderLP.js';
 import { FridayEolProducts } from './FridayEolProducts';
 import { Categories2Columns } from './MichalTemporary/Categories2Columns';
-import { RegularFridayNslt } from '@/templates//DimaSrc/newsletter_regular_friday/templates/regularFridayNslt';
-import { FridayLikeThursday } from './DimaSrc/Friday_like_Thursday/template';
 import { Monday } from '@/templates/JakubSrc/monday_newsletter/template.js';
 import { Thursday as Thursday_ProloTimer } from './Thursday/template_timer_prolo.js';
 import { Friday } from './DimaSrc/friday_newsletter/template';
@@ -22,8 +20,6 @@ export const templates = {
   ThreeCategoriesUnderLP,
   Categories2Columns,
   Friday,
-  RegularFridayNslt,
   RegularFridayNslt1,
-  FridayLikeThursday,
   Monday
 };

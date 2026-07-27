@@ -161,7 +161,11 @@ const categories = [
       CHFR: "Meubles de salle de bain",
       BEFR: "Meubles de salle de bain",
       SK: "Úložný nábytok do kúpeľne",
-      HU: "Tárolók fürdőszobába"
+      HU: "Fürdőszobai tárolók",
+      CZ: "Úložný nábytek do koupelny",
+      PT: "Arrumação para casa de banho",
+      NL: "Badkameropbergers",
+      BENL: "Badkameropbergers"
     },
     background: '#FFF4E6',
     color: '#000000',
@@ -215,7 +219,11 @@ const categories = [
       CHFR: "Accessoires de salle de bain",
       BEFR: "Accessoires de salle de bain",
       SK: "Kúpeľňové doplnky",
-      HU: "Fürdőszobai kiegészítők"
+      HU: "Fürdőszobai kiegészítők",
+      CZ: "Koupelnové příslušenství",
+      PT: "Acessórios para casa de banho",
+      NL: "Badkameraccessoires",
+      BENL: "Badkameraccessoires"
     },
     background: '#FBF3F3',
     color: '#000000',
@@ -272,6 +280,10 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
+  specialLpIds: {
+		HR: 31568,
+		SI: 31569,
+	},
   isArchive: false,
   optimizeImg: true,
   figmaUrl: "https://www.figma.com/design/FieuK3VuJ8ZxPMNMRwq5bb/Newsletter-bathroom.---Friday-2026.07.31?node-id=0-1&t=JlYLDrp95793kkth-1",

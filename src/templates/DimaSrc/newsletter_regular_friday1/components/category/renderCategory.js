@@ -6,6 +6,7 @@ import { Space } from '../Space';
 import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
+import { render } from '../../category/small-tiles';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -106,18 +107,26 @@ export const renderCategory = async (
             add_utm,
             country
           })
-        : await renderProducts({
-            products: category.products,
-            showPrices: category.showPrices || true,
-            showName: category.showName || true,
-            queries,
-            categoryType: category.type,
-            categoryIndex: id,
-            insideContainer: category.insideContainer || false,
-            background,
-            color: category.color || '#000000',
+        :  category.type === 'small-tiles'
+          ? render({
+            tiles: category.tiles,
+            color,
+            getCategoryLink,
+            getCategoryTitle,
             country
-          })
+            })
+          : await renderProducts({
+              products: category.products,
+              showPrices: category.showPrices || true,
+              showName: category.showName || true,
+              queries,
+              categoryType: category.type,
+              categoryIndex: id,
+              insideContainer: category.insideContainer || false,
+              background,
+              color: category.color || '#000000',
+              country
+            })
     : '';
 
   return `

@@ -361,6 +361,10 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
+  specialLpIds: {
+		HR: 31637,
+		SI: 31638,
+	},
   accent: '#e5ff00',
   isArchive: false,
   optimizeImg: true,

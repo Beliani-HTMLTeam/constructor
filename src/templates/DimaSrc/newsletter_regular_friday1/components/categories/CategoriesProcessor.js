@@ -9,6 +9,7 @@ export const CategoriesProcessor = async ({
     categories.map(async (category) => {
       const shouldProcessProducts = 
         category.type !== 'tilesWithoutProducts' &&
+        category.type !== 'small-tiles' &&
         category.type !== 'grid4tiles' &&
         category.type !== 'liquidatorConditions' &&
         category.view !== 'newsletterOnly' &&
