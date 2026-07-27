@@ -41,7 +41,7 @@ const TopImageTitle_data = {
 const categories = [
 
 	{
-		name: 'Outdoor',
+		name: 'Outdoor Furniture',
 		href: 'https://www.beliani.ch/garden-furniture/outdoor-furniture',
 		src: getImageUrl('20260730_Cat00.jpg', true),
 		paddingTop: '45',
@@ -303,7 +303,7 @@ const categories = [
 					href: 'https://www.beliani.ch/bathroom-furniture/mirrors/',
 				},
 				{
-					name: 'Storage',
+					name: 'Bathroom Storage',
 					href: 'https://www.beliani.ch/bathroom-furniture/bathroom-storage/',
 				},
 			],
@@ -343,7 +343,7 @@ const categories = [
 			dimensions: '295x80',
 			items: [
 				{
-					name: 'Beds', // uzywane jako Alt, getCategoryTitle(name)
+					name: 'Kids Beds', // uzywane jako Alt, getCategoryTitle(name)
 					href: 'https://www.beliani.ch/children-room/kids-beds/', // link do kategorii -> getCategoryLink(href)
 					// src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
 				},
@@ -352,7 +352,7 @@ const categories = [
 					href: 'https://www.beliani.ch/children-room/kids-chairs/',
 				},
 				{
-					name: 'Storage',
+					name: 'Kids Storage',
 					href: 'https://www.beliani.ch/children-room/kids-storage/',
 				},
 				{

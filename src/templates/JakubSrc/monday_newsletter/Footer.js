@@ -10,6 +10,7 @@ const Footer = ({
   type,
   id,
   disableFooterCategories = false,
+  disableKlarna,
 }) => {
   let footerData = {
     id,
@@ -137,8 +138,9 @@ const Footer = ({
       vat: getFooter('VAT'),
     },
   };
-
+  
   if (disableFooterCategories) delete footerData.thousandsMore;
+  if (disableKlarna?.includes(country)) delete footerData.klarna;
 
   return FooterComponent(footerData, { type });
 };

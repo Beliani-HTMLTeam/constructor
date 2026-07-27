@@ -204,6 +204,7 @@ const categories = [
 			// MALUNG
 			{
 				id: 598222,
+				// id: 704092,
 				src: getImageUrl('20260729_Pic24.png', true),
 			},
 		],
