@@ -1,4 +1,5 @@
 export const getCategoryName = (category, idx, country, queries, getCategoryTitle) => {
+  if (!category.name) return;
   // Priority 1: Query-based titles
   if (category.title?.source === 'queries') {
     return queries.categories[idx];

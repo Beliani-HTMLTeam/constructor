@@ -19,7 +19,7 @@ const ImageWithLink = ({
   let html = '';
 
   html += isVideo
-    ? `<a href="${href}"><video src="${src}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" autoplay muted loop playsinline></video></a>`
+    ? `<a href="${href}"><video src="${src}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%; filter: grayscale(0);" autoplay muted loop playsinline></video></a>`
     : `<a href="${href}"><img src="${src}" alt="${alt}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
 
   if (insideTr) {

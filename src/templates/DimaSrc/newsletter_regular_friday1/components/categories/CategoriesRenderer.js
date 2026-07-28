@@ -1,6 +1,7 @@
 import { Grid4TilesRenderer } from './Grid4TilesRenderer';
 import { TwoColumnsGridRenderer } from './TwoColumnsGridRenderer';
 import { FullWidthTilesRenderer } from './FullWidthTilesRenderer';
+import { SmallTilesRenderer } from './SmallTilesRenderer';
 
 export const CategoriesRenderer = async ({
   categories,
@@ -23,7 +24,7 @@ export const CategoriesRenderer = async ({
   if (
     categories_type !== 'twoColumnsGrid' &&
     categories_type !== 'fullWidthTiles' &&
-    categories_type !== 'liquidator'
+    categories_type !== 'liquidator' && categories_type !== 'small-tiles'
   ) {
     return await Grid4TilesRenderer({
       categories,
@@ -54,6 +55,16 @@ export const CategoriesRenderer = async ({
       getCategoryLink,
       getCategoryTitle,
       background,
+    });
+  }
+
+  if (categories_type === 'small-tiles') {
+    return SmallTilesRenderer({
+      categories,
+      getCategoryLink,
+      getCategoryTitle,
+      country,
+      background: background
     });
   }
 

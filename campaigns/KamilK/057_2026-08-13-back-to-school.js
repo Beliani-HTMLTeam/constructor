@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::06.08.2026 - Storage and shelving';
+const campaignTranslationsSheet = '2026::13.08.26 - Back to school';
 
 const tableQueries = [
 	{
@@ -11,58 +11,58 @@ const tableQueries = [
 		name: 'intro',
 	},
 	{
-		tableRange: '25:28',
+		tableRange: '21:24',
 		name: 'paragraphs',
 	},
-	{
-		tableRange: '21:24',
-		name: 'categories',
-	},
+	// {
+	// 	tableRange: '21:24',
+	// 	name: 'categories',
+	// },
 	// {
 	//   tableRange: '23:26',
 	//   name: 'categoryLinks',
 	// },
 	{
-		tableRange: '29:30',
+		tableRange: '25:26',
 		name: 'condition',
 	},
 	{
 		tableRange: '15:16',
 		name: 'timer',
-		tableName: '2026::Voucher - 04.08.26 - Free Mirror',
+		tableName: '2026::Voucher - 11.08.26 - Free kids wall decor',
 	},
 ];
 
 const links = {
-	TopImageTitle_href: translateLink({ value: 'content/lp26-08-06' }),
-	TopImageTitle_src: translateImage({ value: '20260806_01.png' }),
+	TopImageTitle_href: translateLink({ value: 'content/lp26-08-13' }),
+	TopImageTitle_src: translateImage({ value: '20260813_01.png' }),
 
-	TopImage_src: getImageUrl('20260806_Gif.gif', true),
-	TopImage_href: translateLink({ value: 'content/lp26-08-06' }),
+	TopImage_src: getImageUrl('20260813_Gif.gif', true),
+	TopImage_href: translateLink({ value: 'content/lp26-08-13' }),
 
-	Banner_1: translateLink({ value: 'content/lp26-07-23' }),
-	Banner_1_Image: translateImage({ value: '20260723b.png' }),
+	Banner_1: translateLink({ value: 'content/lp26-08-07' }),
+	Banner_1_Image: translateImage({ value: '20260807b.png' }),
 
-	Banner_2: translateLink({ value: 'content/lp26-07-22' }),
-	Banner_2_Image: translateImage({ value: '20260722b.png' }),
+	Banner_2: translateLink({ value: 'content/lp26-08-05' }),
+	Banner_2_Image: translateImage({ value: '20260805b.png' }),
 
-	Timer_href: translateLink({ value: 'content/lp26-08-04' }),
+	Timer_href: translateLink({ value: 'content/lp26-08-11' }),
 
-	Intro_cta_href: "https://www.beliani.ch/living-room-furniture/storage/",
+	Intro_cta_href: "https://www.beliani.ch/office-furniture/",
 };
 
 const TopImageTitle_data = {
 	color: '#000000',
-	backgroundColor: '#FFF5F1',
+	backgroundColor: '#FFE9CC',
 	type: 'twoSameLines',
 };
 
 const categories = [
 	{
-		name: 'Sideboards & Chest of Drawers',
-		src: getImageUrl('20260806_Cat00.jpg', true),
-		href: 'https://www.beliani.ch/living-room-furniture/storage/sideboards/',
-		background: '#FFF5F1',
+		name: 'Desks',
+		src: getImageUrl('20260813_Cat00.jpg', true),
+		href: 'https://www.beliani.ch/office-furniture/desks/',
+		background: '#FFE9CC',
 		color: '#000000',
 		type: 'grid',
 		cta: true,
@@ -86,34 +86,34 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// BRADLEY
+			// WILBANKS
 			{
-				id: 644073,
-				src: getImageUrl('20260806_Pic01.png', true),
+				id: 682477,
+				src: getImageUrl('20260813_Pic01.png', true),
 			},
-			// SELAH 
+			// DESTINES 
 			{
-				id: 553747,
-				src: getImageUrl('20260806_Pic02.png', true),
+				id: 444466,
+				src: getImageUrl('20260813_Pic02.png', true),
 			},
-			// TIFTON 
+			// THESLAY 
 			{
-				id: 170610,
-				src: getImageUrl('20260806_Pic03.png', true),
+				id: 729165,
+				src: getImageUrl('20260813_Pic03.png', true),
 			},
-			// OMBURA
+			// ALVAR 
 			{
-				id: 813656,
-				src: getImageUrl('20260806_Pic04.png', true),
+				id: 729260,
+				src: getImageUrl('20260813_Pic04.png', true),
 			},
 		],
 	},
 	{
-		name: 'TV Stands',
-		src: getImageUrl('20260806_Cat10.jpg', true),
-		href: 'https://www.beliani.ch/living-room-furniture/storage/tv-stands/',
-		background: '#F6E7E6',
-		color: '#000000',
+		name: 'Office Chairs',
+		src: getImageUrl('20260813_Cat10.jpg', true),
+		href: 'https://www.beliani.ch/office-furniture/office-chairs/',
+		background: '#913333',
+		color: '#ffffff',
 		type: 'grid',
 		cta: true,
 		paddingTop: '35',
@@ -136,33 +136,33 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// SYDNEY 
+			// EATON 
 			{
-				id: 161053,
-				src: getImageUrl('20260806_Pic11.png', true),
+				id: 655662,
+				src: getImageUrl('20260813_Pic11.png', true),
 			},
-			// TAROON 
+			// DELIGHT 
 			{
-				id: 601965,
-				src: getImageUrl('20260806_Pic12.png', true),
+				id: 803047,
+				src: getImageUrl('20260813_Pic12.png', true),
 			},
-			// GLADSTONE
+			// BELMAR 
 			{
-				id: 607916,
-				src: getImageUrl('20260806_Pic13.png', true),
+				id: 649156,
+				src: getImageUrl('20260813_Pic13.png', true),
 			},
-			// BRADLEY 
+			// IGNIS
 			{
-				id: 448683,
-				src: getImageUrl('20260806_Pic14.png', true),
+				id: 734893,
+				src: getImageUrl('20260813_Pic14.png', true),
 			},
 		],
 	},
 	{
-		name: 'Bookcases & Shelving units',
-		src: getImageUrl('20260806_Cat20.jpg', true),
-		href: 'https://www.beliani.ch/living-room-furniture/storage/bookcases-and-shelves/',
-		background: '#FFF5F1',
+		name: 'Storage',
+		src: getImageUrl('20260813_Cat20.jpg', true),
+		href: 'https://www.beliani.ch/office-furniture/storage-units-and-cabinets/',
+		background: '#FFE9CC',
 		color: '#000000',
 		type: 'grid',
 		cta: true,
@@ -186,35 +186,35 @@ const categories = [
 			name: true,
 		},
 		products: [
+			// RAKAIA 
+			{
+				id: 691414,
+				src: getImageUrl('20260813_Pic21.png', true),
+			},
+			// LERRYN 
+			{
+				id: 729412,
+				src: getImageUrl('20260813_Pic22.png', true),
+			},
+			// ZEHNA
+			{
+				id: 424990,
+				src: getImageUrl('20260813_Pic23.png', true),
+			},
 			// ZEHNA 
 			{
-				id: 686444,
-				src: getImageUrl('20260806_Pic21.png', true),
-			},
-			// CHATEH
-			{
-				id: 646021,
-				src: getImageUrl('20260806_Pic22.png', true),
-			},
-			// SALTON 
-			{
-				id: 562633,
-				src: getImageUrl('20260806_Pic23.png', true),
-			},
-			// BRISBANE
-			{
-				id: 180714,
+				id: 686463,
 				// id: 704092,
-				src: getImageUrl('20260806_Pic24.png', true),
+				src: getImageUrl('20260813_Pic24.png', true),
 			},
 		],
 	},
 	{
-		name: 'Display cabinets',
-		src: getImageUrl('20260806_Cat30.jpg', true),
-		href: 'https://www.beliani.ch/living-room-furniture/storage/display-cabinets/',
-		background: '#F6E7E6',
-		color: '#000000',
+		name: 'Lighting',
+		src: getImageUrl('20260813_Cat30.jpg', true),
+		href: 'https://www.beliani.ch/office-furniture/office-lamps/',
+		background: '#913333',
+		color: '#ffffff',
 		type: 'grid',
 		cta: true,
 		paddingTop: '35',
@@ -233,42 +233,42 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// TINGLEDALE 
+			// CANOPUS 
 			{
-				id: 576320,
-				src: getImageUrl('20260806_Pic31.png', true),
+				id: 668569,
+				src: getImageUrl('20260813_Pic31.png', true),
 			},
-			// GLENWOOD 
+			// VELA 
 			{
-				id: 639619,
-				src: getImageUrl('20260806_Pic32.png', true),
+				id: 664262,
+				src: getImageUrl('20260813_Pic32.png', true),
 			},
-			// RUMSON 
+			// CYGNUS 
 			{
-				id: 494633,
-				src: getImageUrl('20260806_Pic33.png', true),
+				id: 380833,
+				src: getImageUrl('20260813_Pic33.png', true),
 			},
-			// NEWPORT 
+			// RIMAVA 
 			{
-				id: 448004,
-				src: getImageUrl('20260806_Pic34.png', true),
+				id: 374723,
+				src: getImageUrl('20260813_Pic34.png', true),
 			},
 		],
 	},
 ];
 
 const timer = {
-	freebies: getImageUrl('20260806free.png', true),
-	deadline: '2026-08-09',
+	freebies: getImageUrl('20260813free.png', true),
+	deadline: '2026-08-16',
 }
 
 export default new entities.Campaign({
-	startId: 46602,
+	startId: 46636,
 	version: 'new',
-	name: 'Storage and shelving',
-	date: '06.08.2026',
-	issueCardId: 511329,
-	lpId: 31639,
+	name: 'Back to School',
+	date: '13.08.2026',
+	issueCardId: 516619,
+	lpId: 31662,
 	alarm: {
 		isActive: false,
 	},
@@ -282,7 +282,7 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 			css: types.CSS.NS,
 			translationsSpreadsheet: campaignTranslationsSheet,
-			background: '#FFF5F1',
+			background: '#FFE9CC',
 			color: '#000000',
 			wrapper: types.WRAPPER,
 			TopImageTitle_data: TopImageTitle_data,
@@ -292,7 +292,7 @@ export default new entities.Campaign({
 			timer: timer,
 			intro: {
 				color: '#000000', // unused
-				backgroundColor: '#FFF5F1', // unused
+				backgroundColor: '#FFE9CC', // unused
 				alignment: 'left',
 				type: 'paragraph',
 				cta: {
@@ -302,8 +302,8 @@ export default new entities.Campaign({
 			},
 			Inside: {
 				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				unitBackground: '#E3CCCC',
+				backgroundColor: '#FD9000',
+				unitBackground: '#FECD8C',
 				type: 'timer',
 			},
 		},
@@ -312,7 +312,7 @@ export default new entities.Campaign({
 			type: types.LANDINGPAGE,
 			template: templates.Thursday, // User should change this
 			css: types.CSS.LP,
-			background: '#FFF5F1',
+			background: '#FFE9CC',
 			color: '#000000',
 			translationsSpreadsheet: campaignTranslationsSheet,
 			TopImageTitle_data: TopImageTitle_data,
@@ -322,7 +322,7 @@ export default new entities.Campaign({
 			timer: timer,
 			intro: {
 				color: '#000000', // unused
-				backgroundColor: '#FFF5F1', // unused
+				backgroundColor: '#FFE9CC', // unused
 				alignment: 'left',
 				type: 'paragraph',
 				cta: {
@@ -332,8 +332,8 @@ export default new entities.Campaign({
 			},
 			Inside: {
 				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				unitBackground: '#E3CCCC',
+				backgroundColor: '#FD9000',
+				unitBackground: '#FECD8C',
 				type: 'timer',
 			},
 		},

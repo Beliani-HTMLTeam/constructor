@@ -12,9 +12,12 @@ const Timer = ({
   background = 'white',
   unitBackground,
   freebies,
+  isCtaVisible = true,
   ctaText,
   type,
-  script = ''
+  position,
+  script = '',
+  spaceWithoutCTA = 'newsletterBottom25px'
 }) => {
   // console.log("Timer Component:", { title, subtitle, href, src, color, background, freebies, ctaText });
 
@@ -22,34 +25,35 @@ const Timer = ({
     <tr>
       <td>
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="color: ${color}; background-color: ${background};">
-          ${Space({ insideTr: true, className: 'newsletterBottom10px' })}
+          ${position === 'outsideTopImageTitle' && title && subtitle ? Space({ insideTr: true, className: 'newsletterBottom10px' }) : ''}
           
           <tr>
             <td align="center" class="newsletterContainer">
-              ${Paragraph({
+              ${title
+              ?  Paragraph({
                 text: title,
                 tableContainer: true,
                 className: 'newsletterSubtitleTimer',
                 spanStyle: `color: ${color}`,
                 align: 'center',
-              })}
+              }) : ''}
             </td>
           </tr>
           
           
           <tr>
             <td align="center" class="newsletterContainer">
-              ${Paragraph({
+              ${subtitle ? Paragraph({
                 text: subtitle,
                 tableContainer: true,
                 className: 'newsletterSubtitleTimer',
                 spanStyle: `color: ${color}`,
                 align: 'center',
-              })}
+              }) : ''}
             </td>
           </tr>
 
-          ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
+          ${title && subtitle ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
 
           ${type === 'newsletter' ? 
             ImageWithLink({
@@ -62,16 +66,20 @@ const Timer = ({
             `<tr><td class="newsletterContainer60px" align="center" vAlign="middle"><a style="color: ${color}; text-decoration: none;" href="${href}"><div id="prolo-timer">Loading...</div></a></td></tr>`
           }
 
-          ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
+           ${Space({ insideTr: true, className: isCtaVisible ? 'newsletterBottom20px' : spaceWithoutCTA })}
 
-          ${CTA({
-            href: href,
-            text: ctaText,
-            color: color,
-            align: 'center',
-            insideTr: true,
-            background: background,
-          })}
+          ${
+            isCtaVisible
+              ? CTA({
+                  color: color,
+                  href: href,
+                  text: ctaText,
+                  align: 'center',
+                  insideTr: true,
+                  background: background,
+                })
+              : ''
+          }
           
           ${
             freebies
