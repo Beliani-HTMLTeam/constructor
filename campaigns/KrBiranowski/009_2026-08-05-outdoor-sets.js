@@ -265,6 +265,9 @@ const categories = [
       },
       {
         name: 'Garden Hanging Chairs',
+        nameOverrides: {
+          it: 'Poltrone Sospese',
+        },
         src: getImageUrl('20260805_Add3.png', true),
         href: 'https://www.beliani.ch/outdoor-furniture/garden-hanging-chairs/',
       },
