@@ -148,13 +148,18 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
   if (!Inside || Inside.type !== 'timer' || !timer?.deadline) {
     return '';
   }
+  
+  const changedLang = {
+    "PT": "portugal",
+    "NO": "norsk"
+  };
 
+  const lang = changedLang[shop?.slug] ?? languagesMap[country]?.title;
   const base = (shop?.origin ?? 'https://prologistics.info') + '/timer.gif';
-
   let link = base + `?deadline=${timer.deadline}T23:59:00` +
     `&timezone=${timezones[country]}` +
     // in prolo timer generator pt uses "portugal" instead of portugese
-    `&lang=${shop.slug === "PT" ? "portugal" : languagesMap[country]?.title}` +
+    `&lang=${lang}` +
     `&bg=${(Inside.unitBackground || Inside.backgroundColor).replace('#', '')}` +
     `&color=${Inside.color.replace('#', '')}` +
     `&label=${Inside.color.replace('#', '')}` +
