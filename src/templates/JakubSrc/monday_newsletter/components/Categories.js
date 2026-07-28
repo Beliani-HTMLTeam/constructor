@@ -149,7 +149,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? `
       ${category.insideBanner?.spaceAfter ? Space({ insideTr: true, className: category.insideBanner?.spaceAfter }) : ''}
       ${category?.insideBanner?.image && category?.insideBanner?.link ? ImageWithLink({
-        href: category.insideBanner?.link.href,
+        href: add_utm(category.insideBanner?.link.href),
         src: category.insideBanner?.image.src,
         insideTr: true,
         tdClass: category.insideBanner?.tdClass ?? categoryImageTdClass,
