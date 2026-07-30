@@ -136,6 +136,11 @@ const categories = [
   },
   {
     name: 'Balcony sets',
+    nameOverrides: {
+      fr: 'Meubles de balcon',
+      chfr: 'Meubles de balcon',
+      befr: 'Meubles de balcon',
+    },
     src: getImageUrl('20260812_Cat30.jpg', true),
     href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
     background: '#F7EAE9',
