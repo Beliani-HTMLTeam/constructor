@@ -223,7 +223,8 @@ const categories = [
       CZ: "Koupelnové příslušenství",
       PT: "Acessórios para casa de banho",
       NL: "Badkameraccessoires",
-      BENL: "Badkameraccessoires"
+      BENL: "Badkameraccessoires",
+      SI: "Kopalniški dodatki"
     },
     background: '#FBF3F3',
     color: '#000000',

@@ -391,7 +391,7 @@ const categories = [
   },
   {
     name: 'Accessories',
-    nameOverrides: { hu: 'Kiegészítők' },
+    nameOverrides: { hu: 'Kiegészítők', hr: "Dodaci", si: "Dodatki" },
     src:  translateImage({ value: '20260803_Cat14.png' }),
     href: 'https://www.beliani.ch/home-accessories/',
     background: '#FFE9CC',

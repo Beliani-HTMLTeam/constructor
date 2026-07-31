@@ -33,6 +33,7 @@ const Friday = async ({
   soonEndingBanner = true,
   categoryImageTdClass,
 }) => {
+  console.log("country", country, shop.slug)
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
   const countrySlug = String(country ?? '').toLowerCase();

@@ -40,7 +40,7 @@ const intro_data = {
   type: "paragraph",
   cta: {
     overrides: {
-   FI: "Tutustu valikoimaan"
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -54,7 +54,7 @@ const TopImageTitle_data = {
 };
 
 
-const timer ={
+const timer = {
   position: 'outsideTopImageTitle',
   deadline: '2026-08-09',
   freebies: getImageUrl('20260807free.png', true)
@@ -64,7 +64,8 @@ const categories = [
   {
     name: 'Dining tables',
     overrides: {
-     
+      UK: "Tables",
+      PL: "Stoły"
     },
     background: '#EAD9D9',
     color: '#000000',
@@ -113,7 +114,7 @@ const categories = [
   {
     name: 'Chairs',
     overrides: {
-    
+
     },
     background: '#FFEBE6',
     color: '#000000',
@@ -162,7 +163,14 @@ const categories = [
   {
     name: 'Tableware',
     overrides: {
-    
+      CHDE: "Geschirr & Küchenaccessoires",
+      DE: "Geschirr & Küchenaccessoires",
+      AT: "Geschirr & Küchenaccessoires",
+      ES: "Menaje de cocina",
+      PL: "Nakrycie stołu"
+    },
+    hrefOverride: {
+      SK: "https://www.beliani.sk/nabytok-do-jedalne/kuchynsky-a-stolovy-riad/jedalensky-riad/"
     },
     background: '#EAD9D9',
     color: '#000000',
@@ -211,7 +219,7 @@ const categories = [
   {
     name: 'Kitchen trolleys',
     overrides: {
-    
+
     },
     background: '#FFEBE6',
     color: '#000000',
@@ -268,6 +276,10 @@ export default new entities.Campaign({
   alarm: {
     isActive: false,
   },
+  specialLpIds: {
+		HR: 31728,
+		SI: 31729,
+	},
   isArchive: false,
   optimizeImg: true,
   figmaUrl: "https://www.figma.com/design/TtjQ8ihEDFYHOkKa0LGSNl/Newsletter-Dining-Room-Sale----Up-to-50--off---Friday-2026.08.07?node-id=0-1&t=ZFtZbq8t14RyOvq5-1",

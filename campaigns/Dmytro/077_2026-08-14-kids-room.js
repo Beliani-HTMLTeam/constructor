@@ -40,7 +40,7 @@ const intro_data = {
   type: "paragraph",
   cta: {
     overrides: {
-   
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -54,7 +54,7 @@ const TopImageTitle_data = {
 };
 
 
-const timer ={
+const timer = {
   position: 'outsideTopImageTitle',
   deadline: '2026-08-16',
   freebies: getImageUrl('20260814free.png', true)
@@ -64,7 +64,7 @@ const categories = [
   {
     name: 'Kids beds',
     overrides: {
-     
+
     },
     background: '#FFEBE2',
     color: '#000000',
@@ -113,7 +113,7 @@ const categories = [
   {
     name: 'Kids chairs and tables',
     overrides: {
-    
+      FI: "Lasten pöydät ja tuolit"
     },
     background: '#FEE3BF',
     color: '#000000',
@@ -162,7 +162,7 @@ const categories = [
   {
     name: 'Kids storage',
     overrides: {
-    
+
     },
     background: '#FFEBE2',
     color: '#000000',
@@ -211,7 +211,7 @@ const categories = [
   {
     name: 'Kids Décor',
     overrides: {
-    
+
     },
     background: '#FEE3BF',
     color: '#000000',

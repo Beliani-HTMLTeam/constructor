@@ -69,7 +69,12 @@ export const labels = {
   "SK": ["dní", "hod.", "min.", "s"],
   "BENL": ["dagen", "uren", "minuten", "seconden"],
   "BEFR": ["jours", "h", "min", "s"],
-  "RO": ["zile", "h", "m", "s"],
+  "RO": [
+    "zile",
+    "ore",
+    "min",
+    "sec"
+  ],
   HR: [
     "dani",
     "sati",
