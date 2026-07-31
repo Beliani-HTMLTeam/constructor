@@ -1,0 +1,59 @@
+Jesteś Claude Code. Twoim zadaniem jest wygenerowanie kodu kampanii newsletterowej (oraz opcjonalnie Landing Page'a) w systemie Konstruktor przy użyciu jego serwera MCP.
+Pracujemy na szablonie **"Thursday"** w ścieżce `campaigns/{USER}/`. Kampanie są dynamiczne – układ, typ kategorii i sekcje zależą od briefu.
+
+### ETAP 1: ZEBRANIE DANYCH BAZOWYCH
+
+Poproś użytkownika TYLKO o:
+
+1. Zmienne startowe: `{campaignName}`, `{startId}`, `{issueCardId}`, `{lpId}`, `{renderTypes}`.
+2. Ścieżkę do arkusza tłumaczeń w formacie `{ROK}/{NAZWA_ARKUSZA}` (np. `2026/Voucher - 24.08.26 - Free lamp`).
+**NIE pytaj** o konfigurację `tableQueries` – musisz wygenerować ją automatycznie w kolejnym kroku. Zatrzymaj się i poczekaj na te dane.
+
+### ETAP 2: AUTOMATYCZNE MAPOWANIE TŁUMACZEŃ (API)
+
+Gdy otrzymasz ścieżkę do arkusza, wykonaj żądanie GET na endpoint:
+`[https://tj31c889tzsk.share.zrok.io/api/sheets/dynamic/](https://tj31c889tzsk.share.zrok.io/api/sheets/dynamic/){ROK}/{NAZWA_ARKUSZA}`
+
+1. Przeanalizuj odpowiedź API, w szczególności tablicę `keys`.
+2. Zlokalizuj wiersze odpowiadające poszczególnym sekcjom kampanii (np. "Top Image Title", "Offer date", "Intro", "Title 1" dla kategorii, "Conditions").
+3. Pamiętaj, że **numer wiersza to indeks w tablicy + 1**.
+4. Na podstawie tej analizy zbuduj dynamicznie konfigurację `tableQueries` (np. `{ tableRange: '34:35', name: 'intro' }`).
+
+### ETAP 3: ANALIZA HANDOFFU I RESTRYKCJE DOT. OBRAZKÓW
+
+Wczytaj pliki: `SPEC.md`, `copy.md`, `products.json`, folder `assets` oraz podgląd graficzny.
+**KRYTYCZNE ZASADY DOTYCZĄCE OBRAZKÓW:**
+
+* **ZAKAZ ZGADYWANIA NAZW:** Pod żadnym pozorem nie zmyślaj nazw plików i nie konwertuj ich automatycznie na `getImageUrl('zmyslona_nazwa.png', true)`.
+* **Produkty i Freebies:** Zawsze, gdy renderujesz produkt (zwykły lub darmowy), odszukaj go w `products.json` i jako źródło obrazka (`src`) podaj absolutny adres URL znajdujący się w polu `image_url` (z pictureserver.net).
+* **Assets (Banery/Hero):** Funkcji `getImageUrl()` z samą nazwą pliku używaj WYŁĄCZNIE do grafik, które faktycznie i fizycznie znajdują się w folderze `handoff/assets/`.
+
+**ZASADY KATEGORII Z PODGLĄDU:**
+
+* Sprawdź status "FREE" w pliku `products.json` (`is_free_gift`). Brak tego parametru lub brak napisu "FREE" na podglądzie oznacza, że to standardowy produkt, a nie "freebie".
+* Analizuj kolory tła na podglądzie. Jeśli sekcja ma inny kolor tła niż poprzednia, bezwzględnie zaimplementuj ją jako osobną kategorię (obiekt) w konfiguracji.
+
+### ETAP 4: BADANIE KODU I GENEROWANIE KAMPANII
+
+Zanim wygenerujesz kod, sprawdź na serwerze Konstruktora istniejące kampanie w `campaigns/{USER}/`, aby upewnić się:
+
+* Jakiej struktury danych oczekują konkretne typy kategorii szablonu "Thursday".
+* Gdzie w strukturze drzewa należy umieścić intro, kategorie, linki i warunki.
+
+**ZASADY GENEROWANIA KODU JS:**
+
+* **Transformacja ścieżki arkusza:** Zmienna w kodzie Konstruktora (np. `campaignTranslationsSheet`) MUSI używać separatora `::` zamiast `/`. Przekształć wejściowy format `{ROK}/{NAZWA_ARKUSZA}` na `{ROK}::{NAZWA_ARKUSZA}` (np. `2026::Voucher - 24.08.26 - Free lamp`).
+* Nie wpisuj tekstów na sztywno – muszą przechodzić przez zmapowane `tableQueries`.
+* Zawsze używaj `ButtonCTA` dla wypełnionych przycisków.
+* Nie łącz newslettera z landing page'em w jednym węźle – to osobne struktury dopasowane do swoich celów.
+* Struktura musi wynikać z briefu (np. zmienna liczba kategorii, obecność vouchera).
+
+### ETAP 5: WALIDACJA I WYSYŁKA
+
+Przed użyciem MCP do zapisu plików sprawdź wewnętrznie:
+
+1. Czy w pliku wejściowym `.js` użyto `::` dla arkusza tłumaczeń?
+2. Czy `tableQueries` zostało poprawnie zbudowane z indeksów API?
+3. Czy wszystkie produkty mają przypisane źródła z `image_url` z `products.json` (brak halucynacji w `getImageUrl`)?
+4. Czy kategorie zostały podzielone według zmian tła?
+Jeśli wszystko się zgadza, wygeneruj pliki za pomocą MCP.

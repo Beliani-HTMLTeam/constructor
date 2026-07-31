@@ -50,9 +50,11 @@ import { BigProduct } from './bigProduct.js';
 import { ColumnsTwoPeak } from './ColumnsTwoPeak.js';
 import { shopNow } from './shopNow.js';
 import { CTA } from './CTA.js';
+import { ButtonCTA } from './ButtonCTA.js';
 
 export {
   CTA,
+  ButtonCTA,
   ProductWithSize,
   shopNow,
   ColumnsTwoPeak,

@@ -1,0 +1,19 @@
+Spakuj kompletny pakiet przekazania dla tego newslettera. Chcę jeden folder handoff/ i zip do pobrania.
+Interesuje nas wyłącznie content newslettera: od top image do ostatniej kategorii. Header i footer pomiń, bo obsługują je osobne template Konstruktora.
+
+Zawartość:
+
+handoff/design/ — źródłowy plik projektu (Free Lamp Newsletter.dc.html), NIE wersję zbundlowaną/inline. Bundle mnie nie interesuje.
+
+handoff/design/preview/ — zrzut ekranu newslettera: cała długość w 650 px.
+
+handoff/assets/ — oryginalne pliki od graficzki: hero GIF, referencyjny JPG z lampami, arkusz kolorów, źródłowy xlsx (arkusz tłumaczeń).
+
+handoff/data/products.json — wszystkie produkty: SA#, SA Name, cena, link do sklepu, finalny absolutny URL obrazka z pictureserver.net. Zaznacz wyraźnie, które produkty posiadają na designie oznaczenie "FREE".
+
+handoff/data/copy.md — cała treść tekstowa: top image title, offer text, title, intro, nazwy i linki kategorii, pełne warunki (conditions). Spróbuj wstępnie zaproponować mapowanie 'tableQueries' (który tekst odpowiada którym wierszom).
+
+handoff/SPEC.md — zasady konstruktora, schemat URL-i obrazków (md5, x_1000 działa / x_600 zwraca 404), lista rzeczy nierozstrzygniętych oraz wyraźna adnotacja o wszelkich zmianach koloru tła pomiędzy sekcjami na designie (aby dev wiedział, gdzie rozdzielić kategorie).
+
+Nie dodawaj plików wygenerowanych przez inliner ani kopii roboczych.
+Na koniec daj zip do pobrania.

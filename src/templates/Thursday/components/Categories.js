@@ -141,8 +141,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         })
       : '';
 
-  const CTAElement = category.cta
-    ? `
+  const CTAElement = category.ctaHtml
+    ? `<tr><td class="${containerClass}" align="center" width="100%">${category.ctaHtml}</td></tr>`
+    : category.cta
+      ? `
       ${category.cta.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
       ${CTA({
         color: category.color ?? '#000000',
@@ -152,7 +154,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         tdClass: containerClass,
       })}
         `
-    : '';
+      : '';
 
   return `
 

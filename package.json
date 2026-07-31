@@ -7,9 +7,11 @@
     "preview": "concurrently \"bun server/api-server.js\" \"vite preview --port 5000\"",
     "start": "concurrently \"bun server/api-server.js\" \"vite preview --port 5000\"",
     "api": "bun server/api-server.js",
-    "frontend": "vite --port 5000"
+    "frontend": "vite --port 5000",
+    "mcp": "node server/mcp-server.js"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "@vitejs/plugin-react": "^5.2.0",
     "axios": "^1.13.6",
     "compress-json": "^3.4.0",
@@ -24,7 +26,8 @@
     "react-dom": "^19.2.4",
     "sonner": "^2.0.7",
     "sweetalert2": "^11.26.24",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "baseline-browser-mapping": "^2.10.11",

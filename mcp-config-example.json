@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "newsletter-constructor": {
+      "command": "node",
+      "args": ["c:/Projects/others/constructor/server/mcp-server.js"],
+      "env": {
+        "CONSTRUCTOR_PATH": "c:/Projects/others/constructor"
+      }
+    }
+  }
+}

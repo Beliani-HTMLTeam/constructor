@@ -1,0 +1,45 @@
+Twoim zadaniem jest wygenerowanie kodu kampanii newsletterowej (oraz opcjonalnie Landing Page'a) w systemie Konstruktor przy użyciu jego serwera MCP.
+Obecnie pracujemy na szablonie docelowym **"Thursday"** w obrębie ścieżki `campaigns/{USER}/`. Kampanie opierają się na tym szablonie, ale są w pełni dynamiczne – układ, liczba i typ kategorii oraz sekcje zależą od konkretnego briefu.
+
+ETAP 1: ZEBRANIE DANYCH (ZAPYTAJ UŻYTKOWNIKA)
+Zanim przeanalizujesz kod i zaczniesz cokolwiek generować, musisz skompletować dane. Nigdy nie zgaduj brakujących identyfikatorów i wartości – jeśli ich nie masz, przerwij pracę i zapytaj!
+Poproś użytkownika o podanie:
+
+1. Zmiennych startowych: {campaignName}, {startId}, {issueCardId}, {lpId}, {renderTypes}.
+2. Linku do arkusza tłumaczeń (translations spreadsheet).
+3. Konfiguracji "tableQueries". Wymuś na użytkowniku podanie mapowania wierszy, pokazując mu poniższy przykład:
+intro - 20
+categoryLinks 21:25
+condition 26:27
+Zatrzymaj się i poczekaj na odpowiedź użytkownika. Dopiero po otrzymaniu tych danych przejdź dalej.
+
+ETAP 2: ZROZUMIENIE HANDOFFU
+Po otrzymaniu danych wczytaj i przeanalizuj pliki: `SPEC.md`, `copy.md`, `products.json`, folder `assets` oraz podgląd graficzny kampanii (preview).
+Bezwzględnie stosuj następujące zasady interpretacji podglądu:
+
+* Brak napisu "FREE" na przedmiotach oznacza, że są to zwykłe produkty, a nie "freebies". Nie używaj dla nich komponentów ani logiki przeznaczonej dla darmowych dodatków.
+* Analizuj kolory tła. Jeśli jakakolwiek sekcja lub grupa przedmiotów ma inny kolor tła niż sekcja ją poprzedzająca, to MUSI ona zostać zaimplementowana jako osobna kategoria w kodzie. Nie łącz ich w jeden blok.
+
+ETAP 3: BADANIE KODU KONSTRUKTORA
+Zanim wygenerujesz kod kampanii, zorientuj się w aktualnym kodzie bazy. Przeszukaj serwer Konstruktora i istniejące przykłady w `campaigns/{USER}/`, aby zrozumieć, jak zaimplementowany jest obecny szablon "Thursday":
+
+* Ustal, jakie dokładnie typy kategorii są obecnie obsługiwane przez ten szablon i jakiej struktury danych oczekują.
+* Sprawdź, w którym miejscu struktury (drzewa komponentów) dla newslettera oraz dla landing page'a należy umieścić poszczególne sekcje z briefu.
+* Zweryfikuj zasady obsługi grafik: upewnij się, kiedy kod Konstruktora wymaga podania absolutnych adresów URL, a w jakich komponentach konieczne jest użycie wrappera `getImageUrl`.
+
+ETAP 4: GENEROWANIE KAMPANII
+Podczas pisania kodu obowiązują Cię następujące reguły:
+
+* Zakaz "hardcodowania". Wszystkie teksty, kody voucherów i translacje muszą być dynamicznie zaciągane z arkusza tłumaczeń przy użyciu podanych przez użytkownika `tableQueries`. Zbuduj kod tak, aby przetwarzał to mapowanie.
+* Struktura kampanii wynika z briefu, nie ze sztywnych założeń. Szablon "Thursday" musi obsłużyć zmienną liczbę i typy kategorii, różne układy vouchera/freebies oraz zmienną kolejność sekcji.
+* Nie generuj i nie dodawaj "top bannerów", jeśli nie wynika to bezpośrednio z kodu Konstruktora dla tego szablonu oraz z briefu.
+* Pamiętaj, że struktura newslettera i landing page'a to osobne byty i nie należy mieszać ich instrukcji – umieszczaj dane w odpowiednich dla nich węzłach.
+* Zawsze używaj komponentu `ButtonCTA` dla wypełnionych przycisków CTA.
+
+ETAP 5: WALIDACJA I WYSYŁKA MCP
+Przed zapisaniem wygenerowanych plików wykonaj wewnętrzną walidację:
+
+1. Czy nie użyto żadnych zmyślonych zmiennych?
+2. Czy wszystkie teksty przechodzą przez `tableQueries` zamiast być wpisane na sztywno?
+3. Czy uwzględniono podział kategorii na podstawie kolorów tła z podglądu?
+Jeśli walidacja zakończy się sukcesem, użyj serwera MCP do wygenerowania plików kampanii.
