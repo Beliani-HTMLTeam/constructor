@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = '2026::Voucher - 04.08.26 - Free Mirror';
+const campaignTranslationsSheet = '2026::Voucher - 11.08.26 - Free kids wall decor';
 
 const tableQueries = [
   {
@@ -24,19 +24,19 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-04' }),
-  TopImageTitle_src: translateImage({ value: '20260804_01.png' }),
-  TopImage_src: getImageUrl('20260804_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-08-04' }),
-  Banner_1: translateLink({ value: 'content/lp26-07-15' }),
-  Banner_1_Image: translateImage({ value: '20260715b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-07-16' }),
-  Banner_2_Image: translateImage({ value: '20260716b.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-08-11' }),
+  TopImageTitle_src: translateImage({ value: '20260811_01.png' }),
+  TopImage_src: getImageUrl('20260811_Gif.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp26-08-11' }),
+  Banner_1: translateLink({ value: 'content/lp26-07-29' }),
+  Banner_1_Image: translateImage({ value: '20260729b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-07-31' }),
+  Banner_2_Image: translateImage({ value: '20260731b.png' }),
 };
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#F6E7E6',
+  backgroundColor: '#FFE9CC',
   type: 'twoSameLines',
 };
 
@@ -49,17 +49,17 @@ const categories = [
     },
     paddingTop: '0',
     type: 'deal',
-    background: '#F6E7E6',
+    background: '#FFE9CC',
     color: '#000000',
     spaceAfter: 'newsletterBottom45px',
     freebies: [
       [
-        { id: '369186', src: getImageUrl('20260804_Pic01.png', true) },
-        { id: '369238', src: getImageUrl('20260804_Pic02.png', true) },
-        { id: '314272', src: getImageUrl('20260804_Pic03.png', true) },
-        { id: '324994', src: getImageUrl('20260804_Pic04.png', true) },
-        { id: '314234', src: getImageUrl('20260804_Pic05.png', true) },
-        { id: '314370', src: getImageUrl('20260804_Pic06.png', true) },
+        { id: '368601', src: getImageUrl('20260811_Pic01.png', true) },
+        { id: '368583', src: getImageUrl('20260811_Pic02.png', true) },
+        { id: '368564', src: getImageUrl('20260811_Pic03.png', true) },
+        { id: '368545', src: getImageUrl('20260811_Pic04.png', true) },
+        { id: '368492', src: getImageUrl('20260811_Pic05.png', true) },
+        { id: '368527', src: getImageUrl('20260811_Pic06.png', true) },
       ],
     ],
   },
@@ -71,7 +71,7 @@ const categories = [
     href: 'https://beliani.ch',
     paddingTop: '0',
     type: 'small-tiles',
-    background: '#F6E7E6',
+    background: '#FFE9CC',
     color: '#000000',
     paragraph: {
       position: 'afterProducts',
@@ -82,12 +82,12 @@ const categories = [
       phrase: 'Shop all categories',
     },
     tiles: {
-      background: '9f4d4d',
+      background: 'ff2f00',
       text: 'ffffff',
       items: [
         {
           name: 'Outdoor', // uzywane jako Alt, getCategoryTitle(name)
-          href: 'https://www.beliani.ch/outdoor-furniture', // link do kategorii -> getCategoryLink(href)
+          href: 'https://www.beliani.ch/garden-furniture', // link do kategorii -> getCategoryLink(href)
           // src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
         },
         {
@@ -148,11 +148,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: "46502",
-  name: "Tuesday - Free Mirror",
-  date: "04.08.2026",
-  issueCardId: "510567",
-  lpId: "31572",
+  startId: "46702",
+  name: "Tuesday - Free kids wall decor",
+  date: "11.08.2026",
+  issueCardId: "516413",
+  lpId: "31686",
   // specialLpIds: {
   //   HR: '31562',
   //   SI: '31563',
@@ -163,10 +163,10 @@ export default new entities.Campaign({
   isArchive: false,
   optimizeImg: true,
   version: "new",
-  figmaUrl: "https://www.figma.com/design/NXI4yKNtAma4AuFUPt0lky/",
+  figmaUrl: "https://www.figma.com/design/r9e8bJLFa7hRYKWOcDheWI/",
   templates: [
     {
-      background: '#F6E7E6',
+      background: '#FFE9CC',
       color: '#000000',
       template: templates.Monday, // User should change this
 
@@ -182,7 +182,7 @@ export default new entities.Campaign({
       disableFooterCategories: true,
     },
     {
-      background: '#F6E7E6',
+      background: '#FFE9CC',
       color: '#000000',
       template: templates.Monday, // User should change this
 
@@ -195,8 +195,6 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       disableFooterCategories: true,
-      disableKlarna: ['SI', 'HR'],
-      disableSoonEnding: ['SI', 'HR'],
     },
   ],
 });

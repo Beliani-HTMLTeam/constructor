@@ -1,47 +1,47 @@
-const campaignTranslationsSheet = '2026::05.08.26 - Outdoor Sets';
+const campaignTranslationsSheet = '2026::12.08.26 - Outdoor';
 
 const tableQueries = [
   {
-    "tableRange": "17:18",
+    "tableRange": "16:17",
     "name": "TopImageTitle"
   },
   {
-    "tableRange": "21:24",
+    "tableRange": "19:22",
     "name": "paragraphs"
   },
   {
-    "tableRange": "25:26",
+    "tableRange": "23:24",
     "name": "condition"
   },
-  {
-    tableRange: '20:20',
-    name: 'categories',
-  }
+  // {
+  //   tableRange: '20:20',
+  //   name: 'categories',
+  // }
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-05' }),
-  TopImageTitle_src: translateImage({ value: '20260805_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-08-12' }),
+  TopImageTitle_src: translateImage({ value: '20260812_01.png' }),
   // TopImage_src: getImageUrl('20260715_Pic.png', true),
   // TopImage_href: translateLink({ value: 'content/lp26-07-15' }),
-  Banner_1: translateLink({ value: 'content/lp26-07-23' }),
-  Banner_1_Image: translateImage({ value: '20260723b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-07-22' }),
-  Banner_2_Image: translateImage({ value: '20260722b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-08-05' }),
+  Banner_1_Image: translateImage({ value: '20260805b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-08-07' }),
+  Banner_2_Image: translateImage({ value: '20260807b.png' }),
 };
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#FECD8C',
+  backgroundColor: '#F7EAE9',
   type: 'twoSameLines',
 };
 
 const categories = [
   {
-    name: 'Garden dining sets',
-    src: getImageUrl('20260805_Cat10.jpg', true),
-    href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
-    background: '#FECD8C',
+    name: 'Lounge sets',
+    src: getImageUrl('20260812_Cat10.jpg', true),
+    href: 'https://www.beliani.ch/outdoor-furniture/lounge-sets/',
+    background: '#F7EAE9',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -71,32 +71,28 @@ const categories = [
     },
     products: [
       {
-        id: '521423',
-        src: getImageUrl('20260805_Pic10.png', true),
+        id: '811192',
+        src: getImageUrl('20260812_Pic10.png', true),
       },
       {
-        id: '399733',
-        src: getImageUrl('20260805_Pic11.png', true),
+        id: '695914',
+        src: getImageUrl('20260812_Pic11.png', true),
       },
       {
-        id: '805625',
-        src: getImageUrl('20260805_Pic12.png', true),
+        id: '810482',
+        src: getImageUrl('20260812_Pic12.png', true),
       },
       {
-        id: '252681',
-        src: getImageUrl('20260805_Pic13.png', true),
+        id: '815399',
+        src: getImageUrl('20260812_Pic13.png', true),
       },
     ],
   },
   {
-    name: 'Garden chairs',
-    nameOverrides: {
-      pl: 'Krzesła',
-      uk: 'Chairs',
-    },
-    src: getImageUrl('20260805_Cat20.jpg', true),
-    href: 'https://www.beliani.ch/outdoor-furniture/garden-chairs/',
-    background: '#FEC273',
+    name: 'Dining sets',
+    src: getImageUrl('20260812_Cat20.jpg', true),
+    href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
+    background: '#FFE0D9',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -121,31 +117,33 @@ const categories = [
     },
     products: [
       {
-        id: '714641',
-        src: getImageUrl('20260805_Pic20.png', true),
+        id: '258544',
+        src: getImageUrl('20260812_Pic20.png', true),
       },
       {
-        id: '320879',
-        src: getImageUrl('20260805_Pic21.png', true),
+        id: '249032',
+        src: getImageUrl('20260812_Pic21.png', true),
       },
       {
-        id: '726634',
-        src: getImageUrl('20260805_Pic22.png', true),
+        id: '195463',
+        src: getImageUrl('20260812_Pic22.png', true),
       },
       {
-        id: '524064',
-        src: getImageUrl('20260805_Pic23.png', true),
+        id: '805583',
+        src: getImageUrl('20260812_Pic23.png', true),
       },
     ],
   },
   {
-    name: 'Swings',
+    name: 'Balcony sets',
     nameOverrides: {
-      pl: 'Huśtawki',
+      fr: 'Meubles de balcon',
+      chfr: 'Meubles de balcon',
+      befr: 'Meubles de balcon',
     },
-    src: getImageUrl('20260805_Cat30.jpg', true),
-    href: 'https://www.beliani.ch/outdoor-furniture/swings/',
-    background: '#FECD8C',
+    src: getImageUrl('20260812_Cat30.jpg', true),
+    href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
+    background: '#F7EAE9',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -170,32 +168,28 @@ const categories = [
     },
     products: [
       {
-        id: '598865',
-        src: getImageUrl('20260805_Pic30.png', true),
+        id: '162135',
+        src: getImageUrl('20260812_Pic30.png', true),
       },
       {
-        id: '589248',
-        src: getImageUrl('20260805_Pic31.png', true),
+        id: '263519',
+        src: getImageUrl('20260812_Pic31.png', true),
       },
       {
-        id: '809091',
-        src: getImageUrl('20260805_Pic32.png', true),
+        id: '622222',
+        src: getImageUrl('20260812_Pic32.png', true),
       },
       {
-        id: '591677',
-        src: getImageUrl('20260805_Pic33.png', true),
+        id: '385843',
+        src: getImageUrl('20260812_Pic33.png', true),
       },
     ],
   },
   {
-    name: 'Garden storage',
-    nameOverrides: {
-      pl: 'Przechowywanie',
-      uk: 'Storage',
-    },
-    src: getImageUrl('20260805_Cat40.jpg', true),
-    href: 'https://www.beliani.ch/garden-furniture/outdoor-storage/',
-    background: '#FEC273',
+    name: 'Outdoor kitchen',
+    src: getImageUrl('20260812_Cat40.jpg', true),
+    href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
+    background: '#FFE0D9',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -220,20 +214,20 @@ const categories = [
     },
     products: [
       {
-        id: '693412',
-        src: getImageUrl('20260805_Pic40.png', true),
+        id: '618456',
+        src: getImageUrl('20260812_Pic40.png', true),
       },
       {
-        id: '293954',
-        src: getImageUrl('20260805_Pic41.png', true),
+        id: '617701',
+        src: getImageUrl('20260812_Pic41.png', true),
       },
       {
-        id: '648548',
-        src: getImageUrl('20260805_Pic42.png', true),
+        id: '723446',
+        src: getImageUrl('20260812_Pic42.png', true),
       },
       {
-        id: '258263',
-        src: getImageUrl('20260805_Pic43.png', true),
+        id: '811703',
+        src: getImageUrl('20260812_Pic43.png', true),
       },
     ],
   },
@@ -265,38 +259,35 @@ const categories = [
     },
     tiles: [
       {
-        name: 'Lounge sets',
-        src: getImageUrl('20260805_Add1.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/lounge-sets/',
+        name: 'Parasols',
+        src: getImageUrl('20260812_Add1.png', true),
+        href: 'https://www.beliani.ch/garden-furniture/parasols/',
       },
       {
-        name: 'Outdoor kitchen',
-        src: getImageUrl('20260805_Add2.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
+        name: 'Fire pits & grills',
+        src: getImageUrl('20260812_Add2.png', true),
+        href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
       },
       {
-        name: 'Garden Hanging Chairs',
-        nameOverrides: {
-          it: 'Poltrone Sospese',
-        },
-        src: getImageUrl('20260805_Add3.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/garden-hanging-chairs/',
+        name: 'Outdoor textiles',
+        src: getImageUrl('20260812_Add3.png', true),
+        href: 'https://www.beliani.ch/garden-furniture/outdoor-textiles/',
       },
       {
-        name: 'Balcony furniture',
-        src: getImageUrl('20260805_Add4.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
+        name: 'Garden accessories',
+        src: getImageUrl('20260812_Add4.png', true),
+        href: 'https://www.beliani.ch/garden-furniture/garden-accessories/',
       },
     ],
   },
 ];
 
 export default new entities.Campaign({
-  startId: "46534",
-  name: "Wednesday - Outdoor sets",
-  date: "05.08.2026",
-  issueCardId: "511351",
-  lpId: "31593",
+  startId: "46734",
+  name: "Wednesday - Outdoor",
+  date: "12.08.2026",
+  issueCardId: "516696",
+  lpId: "31707",
   // specialLpIds: {
   //   HR: '31562',
   //   SI: '31563',
@@ -307,10 +298,10 @@ export default new entities.Campaign({
   isArchive: false,
   optimizeImg: true,
   version: "new",
-  figmaUrl: "https://www.figma.com/design/NXI4yKNtAma4AuFUPt0lky/",
+  figmaUrl: "https://www.figma.com/design/ymF6fIzb4tAyHUaWemJNST/",
   templates: [
     {
-      background: '#FECD8C',
+      background: '#F7EAE9',
       color: '#000000',
       template: templates.Monday, // User should change this
 
@@ -325,7 +316,7 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
     },
     {
-      background: '#FECD8C',
+      background: '#F7EAE9',
       color: '#000000',
       template: templates.Monday, // User should change this
 
