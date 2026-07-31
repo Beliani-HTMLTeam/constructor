@@ -87,7 +87,7 @@ const categories = [
       items: [
         {
           name: 'Outdoor', // uzywane jako Alt, getCategoryTitle(name)
-          href: 'https://www.beliani.ch/garden-furniture', // link do kategorii -> getCategoryLink(href)
+          href: 'https://www.beliani.ch/outdoor-furniture', // link do kategorii -> getCategoryLink(href)
           // src -> getImageUrl(/category_tiles/${background_color to lowercase if any letters}/${text_color to lowercase if any letters}/${slug}_${name to lowercase}, true)
         },
         {
@@ -195,6 +195,8 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       disableFooterCategories: true,
+      disableKlarna: ['SI', 'HR'],
+      disableSoonEnding: ['SI', 'HR'],
     },
   ],
 });
