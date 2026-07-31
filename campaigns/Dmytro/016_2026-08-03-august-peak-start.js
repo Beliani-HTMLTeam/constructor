@@ -432,7 +432,7 @@ export default new entities.Campaign({
   figmaUrl: 'https://www.figma.com/design/fxr4hBIlBDwZfzmCM4l8GI/Newsletter-Beliani-Birthday-Start---Monday-2026.06.01--Copy-?node-id=0-1&t=KWEIe4G753K8HxiT-1',
   templates: [
     {
-      background: '#d8fc56',
+      background: '#FFE9CC',
       color: '#000',
       template: templates.Friday, 
       css: types.CSS.NS,
