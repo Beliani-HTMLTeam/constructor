@@ -78,7 +78,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       <tr>
         <td>
           ${Paragraph({
-            text: queries.paragraphs[id] ?? 'Translation not found',
+            text: queries.paragraphs?.[id] ?? 'Translation not found',
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
