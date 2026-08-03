@@ -141,17 +141,38 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         })
       : '';
 
+  let ctaSrc = typeof category?.cta === 'object' && category.cta !== null ? category.cta.src : undefined;
+  if (ctaSrc && typeof ctaSrc === 'object') {
+    ctaSrc = ctaSrc.src;
+  }
+
+  let ctaButtonHref = typeof category?.cta === 'object' && category.cta !== null && category.cta.href ? category.cta.href : undefined;
+  if (ctaButtonHref) {
+    ctaButtonHref = typeof ctaButtonHref === 'object' ? add_utm(ctaButtonHref?.href) : ctaButtonHref;
+  } else {
+    ctaButtonHref = ctaHref;
+  }
+
   const CTAElement = category.ctaHtml
     ? `<tr><td class="${containerClass}" align="center" width="100%">${category.ctaHtml}</td></tr>`
     : category.cta
       ? `
       ${category.cta.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
-      ${CTA({
+      ${ctaSrc ? ImageWithLink({
+        href: ctaButtonHref,
+        src: ctaSrc,
+        insideTr: true,
+        tdClass: category.cta.tdClass ?? containerClass,
+        align: category.cta.align ?? 'center',
+        alt: category.cta.alt ?? 'Newsletter CTA Image',
+        targetBlank: category.cta.targetBlank ?? false,
+      }) : CTA({
         color: category.color ?? '#000000',
-        href: ctaHref,
+        href: ctaButtonHref,
         text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
         insideTr: true,
-        tdClass: containerClass,
+        tdClass: category.cta.tdClass ?? containerClass,
+        align: category.cta.align ?? 'center',
       })}
         `
       : '';

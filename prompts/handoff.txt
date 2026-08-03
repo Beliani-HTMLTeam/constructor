@@ -7,13 +7,16 @@ handoff/design/ — źródłowy plik projektu (Free Lamp Newsletter.dc.html), NI
 
 handoff/design/preview/ — zrzut ekranu newslettera: cała długość w 650 px.
 
-handoff/assets/ — oryginalne pliki od graficzki: hero GIF, referencyjny JPG z lampami, arkusz kolorów, źródłowy xlsx (arkusz tłumaczeń).
+handoff/assets/ — oryginalne pliki od graficzki: hero GIF, referencyjny JPG z lampami, arkusz kolorów, wyeksportowane grafiki przycisków CTA (jeśli są w formie obrazków) oraz źródłowy xlsx (arkusz tłumaczeń).
 
-handoff/data/products.json — wszystkie produkty: SA#, SA Name, cena, link do sklepu, finalny absolutny URL obrazka z pictureserver.net. Zaznacz wyraźnie, które produkty posiadają na designie oznaczenie "FREE".
+handoff/data/products.json — wszystkie produkty: SA#, SA Name, cena, link do sklepu, finalny absolutny URL obrazka z pictureserver.net. Zaznacz wyraźnie, które produkty posiadają na designie oznaczenie "FREE" (np. używając pola is_free_gift).
 
 handoff/data/copy.md — cała treść tekstowa: top image title, offer text, title, intro, nazwy i linki kategorii, pełne warunki (conditions). Spróbuj wstępnie zaproponować mapowanie 'tableQueries' (który tekst odpowiada którym wierszom).
 
-handoff/SPEC.md — zasady konstruktora, schemat URL-i obrazków (md5, x_1000 działa / x_600 zwraca 404), lista rzeczy nierozstrzygniętych oraz wyraźna adnotacja o wszelkich zmianach koloru tła pomiędzy sekcjami na designie (aby dev wiedział, gdzie rozdzielić kategorie).
+handoff/SPEC.md — zasady konstruktora, schemat URL-i obrazków (md5, x_1000 działa / x_600 zwraca 404), lista rzeczy nierozstrzygniętych.
+KRYTYCZNE DODATKI DO SPEC.md:
+1. Dokładne kody HEX tła (background) i tekstu (color) dla KAŻDEJ sekcji/kategorii z designu (aby dev wiedział, gdzie rozdzielić kategorie na podstawie zmian tła).
+2. Jeśli przyciski CTA są wyeksportowane jako grafiki (obrazki), wskaż dokładnie, który plik z folderu assets odpowiada której kategorii.
 
 Nie dodawaj plików wygenerowanych przez inliner ani kopii roboczych.
 Na koniec daj zip do pobrania.

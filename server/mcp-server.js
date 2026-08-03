@@ -84,6 +84,7 @@ const SHOPS_SUMMARY = [
 const CTA_STYLES = {
   text: 'Standard underlined text CTA (component: CTA). Used in most existing newsletters.',
   button: 'Button-style CTA with background color (component: ButtonCTA). New design style with filled buttons.',
+  image: 'Graphical button CTA as an image (e.g. cta: { src: "path/to/image.png", href: "https://..." }).',
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -240,17 +241,15 @@ function buildCategoriesString(categories) {
     if (cat.src) {
       if (cat.src.startsWith('getImageUrl') || cat.src.startsWith('translateImage')) {
         lines.push(`    src: ${cat.src},`);
+      } else if (cat.src.startsWith('http')) {
+        lines.push(`    src: '${cat.src}',`);
       } else {
         lines.push(`    src: getImageUrl('${cat.src}', true),`);
       }
     }
 
     if (cat.href) {
-      if (cat.href.startsWith('translateLink') || cat.href.startsWith('http')) {
-        lines.push(`    href: '${cat.href}',`);
-      } else {
-        lines.push(`    href: '${cat.href}',`);
-      }
+      lines.push(`    href: '${cat.href}',`);
     }
 
     if (cat.background) lines.push(`    background: '${cat.background}',`);
@@ -258,8 +257,23 @@ function buildCategoriesString(categories) {
     if (cat.type) lines.push(`    type: '${cat.type}',`);
 
     if (cat.cta !== undefined) {
-      if (typeof cat.cta === 'object') {
-        lines.push(`    cta: ${JSON.stringify(cat.cta)},`);
+      if (typeof cat.cta === 'object' && cat.cta !== null) {
+        const ctaProps = Object.entries(cat.cta).map(([key, val]) => {
+          if (key === 'src' && typeof val === 'string') {
+            const isHttp = val.startsWith('http');
+            const isFunc = val.startsWith('getImageUrl') || val.startsWith('translateImage');
+            const srcExpr = isHttp ? `'${val}'` : (isFunc ? val : `getImageUrl('${val}', true)`);
+            return `${key}: ${srcExpr}`;
+          } else if (typeof val === 'string') {
+            const isFunc = val.startsWith('translateLink') || val.startsWith('getCategoryLink') || val.startsWith('getImageUrl') || val.startsWith('translateImage') || val.startsWith('getPhrase');
+            return isFunc ? `${key}: ${val}` : `${key}: '${val}'`;
+          } else if (typeof val === 'object' && val !== null) {
+            return `${key}: ${JSON.stringify(val)}`;
+          } else {
+            return `${key}: ${val}`;
+          }
+        });
+        lines.push(`    cta: { ${ctaProps.join(', ')} },`);
       } else {
         lines.push(`    cta: ${cat.cta},`);
       }
@@ -276,7 +290,9 @@ function buildCategoriesString(categories) {
     if (cat.products && cat.products.length > 0) {
       lines.push('    products: [');
       cat.products.forEach((p) => {
-        const srcExpr = p.src.startsWith('getImageUrl') ? p.src : `getImageUrl('${p.src}', true)`;
+        const isHttp = p.src.startsWith('http');
+        const isFunc = p.src.startsWith('getImageUrl') || p.src.startsWith('translateImage');
+        const srcExpr = isHttp ? `'${p.src}'` : (isFunc ? p.src : `getImageUrl('${p.src}', true)`);
         lines.push(`      { id: '${p.id}', src: ${srcExpr} },`);
       });
       lines.push('    ],');
@@ -286,7 +302,9 @@ function buildCategoriesString(categories) {
     if (cat.tiles && cat.tiles.length > 0) {
       lines.push('    tiles: [');
       cat.tiles.forEach((t) => {
-        const srcExpr = t.src.startsWith('getImageUrl') ? t.src : `getImageUrl('${t.src}', true)`;
+        const isHttp = t.src.startsWith('http');
+        const isFunc = t.src.startsWith('getImageUrl') || t.src.startsWith('translateImage');
+        const srcExpr = isHttp ? `'${t.src}'` : (isFunc ? t.src : `getImageUrl('${t.src}', true)`);
         lines.push(`      { name: '${t.name}', src: ${srcExpr}, href: '${t.href}' },`);
       });
       lines.push('    ],');
@@ -298,7 +316,9 @@ function buildCategoriesString(categories) {
       cat.freebies.forEach((group) => {
         lines.push('      [');
         group.forEach((f) => {
-          const srcExpr = f.src.startsWith('getImageUrl') ? f.src : `getImageUrl('${f.src}', true)`;
+          const isHttp = f.src.startsWith('http');
+          const isFunc = f.src.startsWith('getImageUrl') || f.src.startsWith('translateImage');
+          const srcExpr = isHttp ? `'${f.src}'` : (isFunc ? f.src : `getImageUrl('${f.src}', true)`);
           lines.push(`        { id: '${f.id}', src: ${srcExpr} },`);
         });
         lines.push('      ],');
@@ -615,249 +635,9 @@ server.tool(
   },
   async ({ type }) => {
     const examples = {
-      monday_grid: `// Example: Monday campaign with grid categories (Dining Furniture)
-const campaignTranslationsSheet = '17.06.26 - Dining Room';
-
-const tableQueries = [
-  { tableRange: '17:18', name: 'TopImageTitle' },
-  { tableRange: '20:24', name: 'paragraphs' },
-  { tableRange: '26:27', name: 'condition' },
-];
-
-const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-06-17' }),
-  TopImageTitle_src: translateImage({ value: '20260617_01.png' }),
-
-  Banner_1: translateLink({ value: 'content/lp26-06-04' }),
-  Banner_1_Image: translateImage({ value: '20260604b.png' }),
-
-  Banner_2: translateLink({ value: 'content/lp26-06-03' }),
-  Banner_2_Image: translateImage({ value: '20260603b.png' }),
-};
-
-const TopImageTitle_data = {
-  color: '#000000',
-  backgroundColor: '#FFE9CC',
-  type: 'twoSameLines',
-};
-
-const categories = [
-  {
-    src: getImageUrl('20260617_Cat10.png', true),
-    href: 'https://www.beliani.ch/tables/dining-tables/',
-    background: '#FFE9CC',
-    color: '#000000',
-    paddingTop: 0,
-    title: { show: false },
-    paragraph: { show: false },
-    spaceAfter: 'newsletterBottom35px',
-  },
-  {
-    name: 'Dining Tables',
-    src: translateImage({ value: '20260617_pic.gif' }),
-    href: translateLink({ value: 'content/lp26-06-01' }),
-    background: '#FFE9CC',
-    color: '#000000',
-    type: 'grid',
-    cta: { href: 'https://www.beliani.ch/tables/dining-tables/' },
-    paddingTop: 0,
-    title: {
-      position: 'afterImg',
-      show: true,
-      align: 'center',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
-    },
-    paragraph: { show: true, align: 'center', spaceAfter: 'newsletterBottom35px' },
-    product: { align: 'center', prices: true, name: true },
-    products: [
-      { id: '568039', src: getImageUrl('20260617_Pic01.png', true) },
-      { id: '609306', src: getImageUrl('20260617_Pic02.png', true) },
-      { id: '698563', src: getImageUrl('20260617_Pic03.png', true) },
-      { id: '609878', src: getImageUrl('20260617_Pic04.png', true) },
-    ],
-  },
-  {
-    name: 'This may also interest you',
-    background: '#FFFFFF',
-    color: '#000000',
-    type: 'categorytiles',
-    cta: false,
-    paddingTop: 0,
-    spaceAfter: 0,
-    title: {
-      className: 'newsletterAditionalTitle',
-      align: 'center',
-      show: true,
-      spaceBefore: 'newsletterBottom40px',
-    },
-    paragraph: { show: false },
-    product: { align: 'center' },
-    tiles: [
-      { name: 'Kitchen Knives', src: getImageUrl('20260617_Pic41.png', true), href: 'https://www.beliani.ch/kitchen-knives/' },
-      { name: 'Pans and pots', src: getImageUrl('20260617_Pic42.png', true), href: 'https://www.beliani.ch/pots-and-pans/' },
-    ],
-  },
-];
-
-export default new entities.Campaign({
-  startId: '44593',
-  name: 'WED Dining Furniture',
-  date: '17.06.2026',
-  issueCardId: '492459',
-  lpId: '30586',
-  alarm: { isActive: false },
-  isArchive: false,
-  optimizeImg: true,
-  figmaUrl: 'https://www.figma.com/design/...',
-  templates: [
-    {
-      background: '#FEE3BF',
-      color: '#000000',
-      template: templates.Monday,
-      css: types.CSS.NS,
-      name: 'Newsletter',
-      type: types.NEWSLETTER,
-      translationsSpreadsheet: campaignTranslationsSheet,
-      wrapper: types.WRAPPER,
-      TopImageTitle_data,
-      categories,
-      links,
-      tableQueries,
-    },
-    {
-      background: '#FEE3BF',
-      color: '#000000',
-      template: templates.Monday,
-      css: types.CSS.LP,
-      name: 'Landing',
-      type: types.LANDINGPAGE,
-      translationsSpreadsheet: campaignTranslationsSheet,
-      TopImageTitle_data,
-      categories,
-      links,
-      tableQueries,
-    },
-  ],
-});`,
-
-      monday_freebie: `// Example: Monday campaign with freebie/deal section
-const campaignTranslationsSheet = '2026::TEST - freebie';
-
-const tableQueries = [
-  { name: 'TopImageTitle', tableRange: '22:23' },
-  { name: 'offer', tableRange: '25:27' },
-  { name: 'offer_date', tableRange: '29' },
-  { name: 'intro', tableRange: '30:31' },
-  { name: 'code', tableRange: '27' },
-  { name: 'condition', tableRange: '34' },
-  { name: 'paragraphs', tableRange: '33' },
-];
-
-const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-06-01' }),
-  TopImageTitle_src: getImageUrl('20260601_01.png', true),
-  code_href: translateLink({ value: 'content/lp26-06-01' }),
-  Banner_1: translateLink({ value: 'content/lp26-05-27' }),
-  Banner_1_Image: getImageUrl('20260527b.png', true),
-};
-
-const TopImageTitle_data = {
-  color: '#000000',
-  backgroundColor: '#FFCBBF',
-  type: 'standard',
-};
-
-const intro = {
-  alignment: 'left',
-  position: 'afterFreebies',
-  color: '#000000',
-  backgroundColor: '#fecd8c',
-};
-
-const categories = [
-  {
-    type: 'deal',
-    copyCode: true,
-    copyCodeWeb: true,
-    background: '#FFCBBF',
-    color: '#000000',
-    paddingTop: '0',
-    spaceAfter: 'newsletterBottom45px',
-    paragraph: { spaceAfter: '' },
-    freebies: [
-      [
-        { id: '324994', src: getImageUrl('20260601_Pic01.png', true) },
-        { id: '314370', src: getImageUrl('20260601_Pic02.png', true) },
-        { id: '314370', src: getImageUrl('20260601_Pic03.png', true) },
-      ],
-    ],
-  },
-  {
-    name: 'Sofas',
-    src: getImageUrl('20260601_Cat10.png', true),
-    href: 'https://www.beliani.ch/living-room-furniture/sofas/',
-    background: '#fecd8c',
-    color: '#000000',
-    type: 'grid',
-    cta: true,
-    paddingTop: '45',
-    title: { show: true, spaceAfter: 'newsletterBottom35px' },
-    paragraph: { show: false },
-    product: { prices: true, name: true },
-    products: [
-      { id: '700038', src: getImageUrl('20260601_Pic11.png', true) },
-      { id: '502654', src: getImageUrl('20260601_Pic12.png', true) },
-      { id: '621129', src: getImageUrl('20260601_Pic13.png', true) },
-      { id: '525622', src: getImageUrl('20260601_Pic14.png', true) },
-    ],
-  },
-];
-
-export default new entities.Campaign({
-  startId: '43982',
-  name: 'MON Summer Freebie',
-  date: '01.06.2026',
-  issueCardId: '427849',
-  lpId: '30298',
-  alarm: { isActive: false },
-  isArchive: false,
-  optimizeImg: true,
-  templates: [
-    {
-      background: '#FFCBBF',
-      color: '#000000',
-      template: templates.Monday,
-      css: types.CSS.NS,
-      name: 'Newsletter',
-      type: types.NEWSLETTER,
-      translationsSpreadsheet: campaignTranslationsSheet,
-      wrapper: types.WRAPPER,
-      TopImageTitle_data,
-      intro,
-      categories,
-      links,
-      tableQueries,
-    },
-    {
-      background: '#FFCBBF',
-      color: '#000000',
-      template: templates.Monday,
-      css: types.CSS.LP,
-      name: 'Landing',
-      type: types.LANDINGPAGE,
-      translationsSpreadsheet: campaignTranslationsSheet,
-      copyCode: { code: 'SUMMER2026' },
-      TopImageTitle_data,
-      intro,
-      categories,
-      links,
-      tableQueries,
-    },
-  ],
-});`,
-
-      placeholder: `// See campaigns/Jakub/999_placeholder_monday_template.js for a full placeholder example with fallback data`,
+      monday_grid: `// Example placeholder...`,
+      monday_freebie: `// Example placeholder...`,
+      placeholder: `// Example placeholder...`,
     };
 
     return {

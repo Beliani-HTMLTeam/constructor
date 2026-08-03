@@ -66,8 +66,28 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
     src = src.src;
   }
 
+  let cta = category?.cta;
+  if (cta && typeof cta === 'object' && !Array.isArray(cta)) {
+    let ctaSrc = cta.src;
+    if (ctaSrc && typeof ctaSrc === 'object') {
+      ctaSrc = ctaSrc.src;
+    }
+
+    let ctaHref = cta.href;
+    if (ctaHref) {
+      ctaHref = typeof ctaHref === 'string' ? getCategoryLink(ctaHref) : add_utm(ctaHref?.href);
+    }
+
+    cta = {
+      ...cta,
+      src: ctaSrc,
+      href: ctaHref,
+    };
+  }
+
   return {
     ...category,
+    cta,
     href,
     name,
     src,
