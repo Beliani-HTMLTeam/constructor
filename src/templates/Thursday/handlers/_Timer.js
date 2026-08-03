@@ -1,4 +1,5 @@
 import { Timer } from '../components/ProloTimer';
+import { Space } from '../components/Space';
 import languages from "@config/languages"
 
 
@@ -174,7 +175,11 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
   }
 
   return Inside && Inside.type === 'timer'
-    ? Timer({
+    ? 
+    `
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore }) : ''}
+
+    ${Timer({
       title: queries?.timer?.[0] ?? 'Translation not found',
       subtitle: queries?.timer?.[1] ?? 'Translation not found',
       href: links?.Timer_href,
@@ -186,6 +191,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
       ctaText: shopNow,
       type: type,
       script: buildProloTimerScript({ deadline: timer.deadline, country }),
-    })
+    })}
+      `
     : '';
 };
