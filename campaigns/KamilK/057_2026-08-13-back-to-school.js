@@ -159,7 +159,7 @@ const categories = [
 		],
 	},
 	{
-		name: 'Storage',
+		name: 'Storage Units & Cabinets',
 		src: getImageUrl('20260813_Cat20.jpg', true),
 		href: 'https://www.beliani.ch/office-furniture/storage-units-and-cabinets/',
 		background: '#FFE9CC',
@@ -210,7 +210,7 @@ const categories = [
 		],
 	},
 	{
-		name: 'Lighting',
+		name: 'Office Lighting',
 		src: getImageUrl('20260813_Cat30.jpg', true),
 		href: 'https://www.beliani.ch/office-furniture/office-lamps/',
 		background: '#913333',
