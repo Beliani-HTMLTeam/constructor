@@ -93,6 +93,11 @@ table {
   padding-right: 55px;
 }
 
+#newsletter .newsletterContainer35px {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
 .newsletterContainer60px {
   padding-left: 60px !important;
   padding-right: 60px !important;
@@ -172,6 +177,11 @@ table {
   font-weight: 600;
 }
 
+#newsletter .newsletterOfferHeadline {
+  font-size: 38px;
+  line-height: 44px;
+}
+
 #newsletter .newsletterTitleOfferPart {
   font-size: 30px;
   line-height: 1.2;
@@ -192,6 +202,69 @@ table {
   font-size: 14px;
   line-height: 1.2;
   text-decoration: line-through;
+}
+
+/* Thursday template only — additive, doesn't touch .newsletterProductTitle so other
+   templates sharing this stylesheet are unaffected. Values from the design handoff. */
+#newsletter .newsletterProductNameCaps {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#newsletter .newsletterProductDescription {
+  font-size: 13px;
+  line-height: 20px;
+  color: #6b6663;
+}
+
+#newsletter .newsletterFreebiePriceLabel {
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+#newsletter .newsletterProductPriceFree {
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+#newsletter .newsletterProductPriceAccent {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+#newsletter .newsletterOfferLabel {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+#newsletter .newsletterOfferDate {
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.06em;
+}
+
+#newsletter .newsletterFreeSubtitle {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+#newsletter .newsletterCtaCaps {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 #newsletter .newsletterRight10px {

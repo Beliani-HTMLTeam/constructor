@@ -3,10 +3,13 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import fs from 'fs';
 import path from 'path';
+import { chromium } from 'playwright';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const CONSTRUCTOR_ROOT = process.env.CONSTRUCTOR_PATH || path.resolve(import.meta.dirname, '..');
 const CAMPAIGNS_DIR = path.join(CONSTRUCTOR_ROOT, 'campaigns');
+const PREVIEWS_DIR = path.join(CONSTRUCTOR_ROOT, 'previews');
+const DEV_SERVER_PORT = process.env.CONSTRUCTOR_DEV_PORT || 5500;
 
 // ─── Available templates ─────────────────────────────────────────────────────
 const AVAILABLE_TEMPLATES = {
@@ -108,8 +111,117 @@ function listUserCampaigns(user) {
     .map((f) => f.name);
 }
 
+/** Splits `arr` into consecutive chunks of `size` items each (last chunk may be shorter). */
+function chunkArray(arr, size) {
+  const chunks = [];
+  for (let i = 0; i < arr.length; i += size) {
+    chunks.push(arr.slice(i, i + size));
+  }
+  return chunks;
+}
+
 function sanitizeFilename(name) {
   return name.replace(/[^a-zA-Z0-9_\-\.]/g, '-');
+}
+
+/**
+ * Finds a campaign file on disk by basename (any user folder), for
+ * `capture_campaign_preview`'s localStorage product injection.
+ */
+function findCampaignFilePath(campaignParam) {
+  const key = campaignParam.replace(/\.[^.]+$/, '').toLowerCase();
+
+  for (const user of listCampaignUsers()) {
+    const userDir = path.join(CAMPAIGNS_DIR, user);
+    const match = fs.readdirSync(userDir, { withFileTypes: true })
+      .find((f) => f.isFile() && f.name.endsWith('.js') && f.name.replace(/\.js$/, '').toLowerCase() === key);
+
+    if (match) return path.join(userDir, match.name);
+  }
+
+  return null;
+}
+
+/** Extracts `startId: '...'` from a generated campaign file's source. */
+function extractStartId(campaignFileContent) {
+  const match = campaignFileContent.match(/startId:\s*['"]([^'"]+)['"]/);
+  return match ? match[1] : null;
+}
+
+/** Best-effort product-detail-page slug from an absolute shop URL (path minus leading slash and `.html`). */
+function extractSlugFromShopUrl(shopUrl) {
+  try {
+    return new URL(shopUrl).pathname.replace(/^\//, '').replace(/\.html$/, '');
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * `src/entities/Product.js`'s `sellerToslug` map — the `saved_params.username` string that
+ * resolves to each shop slug's `country` field (which `getProductById` filters seeded
+ * products by). Keep in sync with that file.
+ */
+const SHOP_SLUG_TO_SELLER_USERNAME = {
+  chde: 'Beliani',
+  uk: 'Beliani UK',
+  de: 'Beliani DE',
+  fr: 'Beliani FR',
+  at: 'Beliani AT',
+  es: 'Beliani SP',
+  pl: 'Beliani PL',
+  nl: 'Beliani NL',
+  pt: 'Beliani PT',
+  it: 'Beliani IT',
+  se: 'Beliani SE',
+  hu: 'Beliani HU',
+  dk: 'Beliani DK',
+  cz: 'Beliani CZ',
+  fi: 'Beliani FI',
+  no: 'Beliani NO',
+  sk: 'Beliani SK',
+  be: 'Beliani BE',
+  ro: 'Beliani RO',
+  hr: 'Beliani HR',
+  si: 'Beliani SI',
+};
+
+/**
+ * Builds the raw "SA export" shaped entries `getProductById` (src/main/handlers/handlers.js,
+ * via src/utils/normalizeProducts.js + src/entities/Product.js) expects in the
+ * `localStorage['products']` index — same shape a human would paste into the "Manage
+ * Products" editor.
+ *
+ * `saved_params.username` must match the seller string `sellerToslug` (src/entities/Product.js)
+ * maps to the *target* shop's slug — get this wrong and every seeded product resolves to the
+ * wrong `country` and `getProductById` reports "Product not found" for all of them, even
+ * though the products index isn't actually empty. Resolved from the tool's own `shop` param
+ * via {@link SHOP_SLUG_TO_SELLER_USERNAME}, falling back to the CH/master seller.
+ *
+ * `ShopSAAlias` is populated under every language key `Product.js`'s `languageToSlug` knows
+ * (not just german/italian/french) with the same slug, since a single test product only has
+ * one real slug and which alias key `getProductById` reads depends on the target market.
+ */
+function buildRawProductEntries(products, shopSlug) {
+  const username = SHOP_SLUG_TO_SELLER_USERNAME[String(shopSlug ?? '').toLowerCase()] ?? 'Beliani';
+  const aliasLanguages = [
+    'german', 'germanDE', 'italian', 'french', 'english', 'polish', 'portugal', 'spanish',
+    'Hungarian', 'finnish', 'czech', 'slovak', 'danish', 'swedish', 'norsk', 'dutch', 'croatian', 'slovene',
+  ];
+
+  return products.map((p) => {
+    const slug = extractSlugFromShopUrl(p.shopUrl);
+    return {
+      id: p.id,
+      article_name: p.name,
+      saved_params: {
+        username,
+        ShopPrice: p.price ?? '0.00',
+        ShopHPrice: p.price ?? '0.00',
+      },
+      ShopSAAlias: Object.fromEntries(aliasLanguages.map((lang) => [lang, { value: slug }])),
+    };
+  });
 }
 
 /**
@@ -228,6 +340,31 @@ ${templateEntries}
 `;
 }
 
+/**
+ * Warns (rather than silently generating a broken/empty href) when a category can't
+ * resolve a real link at render time: a CTA with no href of its own and no category
+ * `href` to fall back to, or a category with no `href` at all despite having a CTA/products
+ * that would want one. Doesn't fail generation — the frontend already falls back to an
+ * empty string instead of the literal text "undefined" (see safeValue in
+ * src/templates/Thursday/helpers/safePhrase.ts) — this just surfaces the gap early so it
+ * can be fixed in the campaign file instead of discovered as a dead link in preview.
+ */
+function validateCategoriesForMissingLinks(categories) {
+  const warnings = [];
+
+  (categories || []).forEach((cat, i) => {
+    const label = cat.name || `category[${i}]`;
+    const hasCta = cat.cta !== undefined && cat.cta !== false;
+    const ctaHasOwnHref = typeof cat.cta === 'object' && cat.cta !== null && !!cat.cta.href;
+
+    if (hasCta && !ctaHasOwnHref && !cat.href) {
+      warnings.push(`"${label}": has a cta but no cta.href and no category href — CTA link will be empty at render time.`);
+    }
+  });
+
+  return warnings;
+}
+
 function buildCategoriesString(categories) {
   if (!categories || categories.length === 0) return '[]';
 
@@ -286,14 +423,23 @@ function buildCategoriesString(categories) {
     if (cat.paragraph) lines.push(`    paragraph: ${JSON.stringify(cat.paragraph)},`);
     if (cat.product) lines.push(`    product: ${JSON.stringify(cat.product)},`);
 
-    // Products
-    if (cat.products && cat.products.length > 0) {
+    // Products — for `type: 'deal'`, the Thursday component's freebie grid expects `freebies`
+    // pre-grouped into rows (`ProductEntry[][]`); a flat `products` list is chunked into rows
+    // of `freebiesPerRow` (default 2) here instead of being emitted as `products`, so the
+    // generated file matches the shape the design/handoff expects rather than relying on
+    // deal/grid.ts's own flat-array auto-chunking fallback.
+    const isDealWithFlatProducts = cat.type === 'deal' && cat.products && cat.products.length > 0 && !cat.freebies;
+
+    if (cat.products && cat.products.length > 0 && !isDealWithFlatProducts) {
       lines.push('    products: [');
       cat.products.forEach((p) => {
         const isHttp = p.src.startsWith('http');
         const isFunc = p.src.startsWith('getImageUrl') || p.src.startsWith('translateImage');
         const srcExpr = isHttp ? `'${p.src}'` : (isFunc ? p.src : `getImageUrl('${p.src}', true)`);
-        lines.push(`      { id: '${p.id}', src: ${srcExpr} },`);
+        // description is author-supplied only (see ProductEntry in src/types/thursday.ts) —
+        // it's not part of the live getProductById enrichment, so it always survives merging.
+        const descriptionField = p.description ? `, description: '${p.description}'` : '';
+        lines.push(`      { id: '${p.id}', src: ${srcExpr}${descriptionField} },`);
       });
       lines.push('    ],');
     }
@@ -310,16 +456,24 @@ function buildCategoriesString(categories) {
       lines.push('    ],');
     }
 
-    // Freebies (for deal type)
-    if (cat.freebies && cat.freebies.length > 0) {
+    // Freebies (for deal type) — explicit pre-grouped `cat.freebies`, or `cat.products`
+    // auto-chunked into rows of `freebiesPerRow` (default 2) above.
+    const freebieGroups = cat.freebies && cat.freebies.length > 0
+      ? cat.freebies
+      : isDealWithFlatProducts
+        ? chunkArray(cat.products, cat.freebiesPerRow || 2)
+        : null;
+
+    if (freebieGroups && freebieGroups.length > 0) {
       lines.push('    freebies: [');
-      cat.freebies.forEach((group) => {
+      freebieGroups.forEach((group) => {
         lines.push('      [');
         group.forEach((f) => {
           const isHttp = f.src.startsWith('http');
           const isFunc = f.src.startsWith('getImageUrl') || f.src.startsWith('translateImage');
           const srcExpr = isHttp ? `'${f.src}'` : (isFunc ? f.src : `getImageUrl('${f.src}', true)`);
-          lines.push(`        { id: '${f.id}', src: ${srcExpr} },`);
+          const descriptionField = f.description ? `, description: '${f.description}'` : '';
+          lines.push(`        { id: '${f.id}', src: ${srcExpr}${descriptionField} },`);
         });
         lines.push('      ],');
       });
@@ -609,11 +763,16 @@ Example category structure for type "grid":
       const content = generateCampaignFile(campaignParams);
       fs.writeFileSync(filePath, content, 'utf-8');
 
+      const linkWarnings = validateCategoriesForMissingLinks(campaignParams.categories);
+      const warningsBlock = linkWarnings.length
+        ? `\n\n⚠️ Link warnings:\n${linkWarnings.map((w) => `- ${w}`).join('\n')}`
+        : '';
+
       return {
         content: [
           {
             type: 'text',
-            text: `✅ Campaign created successfully!\n\nFile: campaigns/${user}/${filename}\nTemplate: ${campaignParams.templateName}\nDate: ${campaignParams.date}\n\nNext steps:\n1. Set VITE_SCOPE=${user} in .env\n2. Run: bun run dev\n3. Preview the campaign in the constructor UI\n4. Generate newsletters for all shops and languages`,
+            text: `✅ Campaign created successfully!\n\nFile: campaigns/${user}/${filename}\nTemplate: ${campaignParams.templateName}\nDate: ${campaignParams.date}${warningsBlock}\n\nNext steps:\n1. Set VITE_SCOPE=${user} in .env\n2. Run: bun run dev\n3. Preview the campaign in the constructor UI\n4. Generate newsletters for all shops and languages`,
           },
         ],
       };
@@ -648,6 +807,288 @@ server.tool(
         },
       ],
     };
+  },
+);
+
+// ── Tool: capture_campaign_preview ───────────────────────────────────────────
+
+server.tool(
+  'capture_campaign_preview',
+  `Capture a full-page screenshot of a campaign as rendered by the local constructor dev server.
+
+Requires the dev server to already be running (bun run dev, or vite --port ${DEV_SERVER_PORT}) with the
+campaign's user set as VITE_SCOPE — this tool does not start the dev server itself.
+
+Deep-links straight to the rendered campaign via ?campaign=&template=&shop=&lang= query params
+(see src/main/urlParams.js), so no manual dropdown interaction is needed. Optionally seeds
+localStorage with product data first (see the \`products\` param) so the render doesn't show
+"Product not found" placeholders. Saves the screenshot to previews/[shop]_[campaign].png
+(relative to the repo root) and returns that path.`,
+  {
+    campaign: z.string().describe('Campaign filename (with or without .js extension) — matched against the source filename, e.g. "058_2026-08-24-free-lamp-test"'),
+    template: z.string().default('Newsletter').describe('Template name as shown in the Select Template dropdown, e.g. "Newsletter" or "Landing"'),
+    shop: z.string().describe('Shop slug as configured in src/config/shops.js, e.g. "CHDE"'),
+    lang: z.string().describe('Language name as shown in the Select Language dropdown, e.g. "German"'),
+    port: z.number().optional().describe(`Dev server port, defaults to ${DEV_SERVER_PORT}`),
+    products: z.array(z.object({
+      id: z.union([z.string(), z.number()]).describe('SA product number, matches the campaign category\'s product id'),
+      name: z.string().describe('Product display name'),
+      price: z.union([z.string(), z.number()]).optional().describe('Price shown for the product (omit for freebies)'),
+      shopUrl: z.string().describe('Absolute product page URL, e.g. "https://www.beliani.ch/some-product.html" — the slug is extracted from it'),
+    })).optional().describe('Product data to seed into localStorage before rendering, so getProductById resolves real names/prices/links instead of "Product not found" (currently only wired for the CHDE/CHIT/CHFR "Beliani" seller — see buildRawProductEntries).'),
+  },
+  async ({ campaign, template, shop, lang, port, products }) => {
+    const resolvedPort = port || DEV_SERVER_PORT;
+    const url = `http://localhost:${resolvedPort}/?${new URLSearchParams({ campaign, template, shop, lang }).toString()}`;
+
+    if (!fs.existsSync(PREVIEWS_DIR)) {
+      fs.mkdirSync(PREVIEWS_DIR, { recursive: true });
+    }
+
+    const campaignSlug = sanitizeFilename(campaign.replace(/\.[^.]+$/, ''));
+    const outputPath = path.join(PREVIEWS_DIR, `${sanitizeFilename(shop)}_${campaignSlug}.png`);
+
+    let campaignStartId = null;
+    if (products?.length) {
+      const campaignFilePath = findCampaignFilePath(campaign);
+      if (!campaignFilePath) {
+        return { content: [{ type: 'text', text: `Error: could not find a campaign file matching "${campaign}" to resolve its startId for localStorage seeding.` }] };
+      }
+      campaignStartId = extractStartId(fs.readFileSync(campaignFilePath, 'utf-8'));
+      if (!campaignStartId) {
+        return { content: [{ type: 'text', text: `Error: could not read startId from ${campaignFilePath}.` }] };
+      }
+    }
+
+    let browser;
+    try {
+      browser = await chromium.launch({ headless: true });
+      const page = await browser.newPage({ viewport: { width: 650, height: 1200 } });
+
+      // The app uses window.confirm() to gate rendering when it detects an "undefined"
+      // value (see src/main/rendering/templateRenderer.js). A human clicks OK; headless
+      // Chromium auto-dismisses with no handler, which cancels the render. Auto-accept so
+      // this tool behaves like a human driving the UI, not like a stuck dialog.
+      page.on('dialog', (dialog) => dialog.accept());
+
+      // Surfaced in the tool's response text below — lets us see *why* something rendered
+      // as "Translation not found"/"Product not found" (missing static translations, failed
+      // sheet fetches, etc.) without needing a separate manual browser session to debug.
+      const consoleIssues = [];
+      page.on('console', (msg) => {
+        const type = msg.type();
+        if (type === 'warning' || type === 'error') {
+          consoleIssues.push(`[${type}] ${msg.text()}`);
+        }
+      });
+      page.on('pageerror', (err) => consoleIssues.push(`[pageerror] ${err.message}`));
+
+      if (campaignStartId) {
+        // Must run before goto() — templateRenderer.js reads localStorage['products'] at
+        // render time (src/main/ui/manageProducts/storage.js), same key a human would
+        // populate via the "Manage Products" editor.
+        await page.addInitScript(
+          ({ campaignId, entries }) => {
+            window.localStorage.setItem(
+              'products',
+              JSON.stringify([{ campaign_id: String(campaignId), products: entries, meta: {} }])
+            );
+          },
+          { campaignId: campaignStartId, entries: buildRawProductEntries(products, shop) }
+        );
+      }
+
+      await page.goto(url, { waitUntil: 'networkidle', timeout: 60_000 });
+
+      // Static translations (category_titles/category_links/templates/header/footer) load
+      // sequentially with a 1s stagger between each sheet (src/api/translations.js) plus a
+      // minimum 1s toast delay — on a cold cache that's several seconds, well past
+      // `networkidle`. Worse, `urlParams.js` fires the campaign/template/shop/language
+      // dropdown `change` events (and therefore the actual render) synchronously during page
+      // load, *before* that async cascade resolves — so simply waiting longer afterwards
+      // doesn't help, the broken render already happened. Wait for the app's own readiness
+      // flag (set in src/api/translations.js once staticTranslations is populated), then
+      // re-fire the language change to force a fresh render with translations available.
+      const staticTranslationsReady = await page
+        .waitForFunction(() => window.__staticTranslationsReady === true, { timeout: 20_000 })
+        .then(() => true)
+        .catch(() => false);
+
+      if (staticTranslationsReady) {
+        // The first render pass (before translations were ready) already logged its own
+        // "not loaded"/"Missing value" warnings above — clear them so the issues block below
+        // reflects only the retried, final render instead of conflating both passes.
+        consoleIssues.length = 0;
+        await page.evaluate(() => {
+          document.querySelector('#languages')?.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        await page.waitForTimeout(2000);
+      } else {
+        // Static translations never signaled ready (e.g. the local API proxy — `bun run dev`'s
+        // `server/api-server.js`, port from API_PORT in .env — isn't running). Fall back to a
+        // fixed wait so the screenshot still gets taken, just possibly with translation gaps.
+        await page.waitForTimeout(9000);
+      }
+
+      // Strip the constructor's own chrome (side panel, toasts) before screenshotting.
+      await page.evaluate(() => {
+        const style = document.createElement('style');
+        style.textContent = `
+          [data-sonner-toaster], .toast, [role="alert"] { display: none !important; }
+          #panel, .hamburger-menu { display: none !important; }
+          body, html, .container, #app, #app-content {
+            height: auto !important;
+            overflow: visible !important;
+            position: static !important;
+          }
+        `;
+        document.head.appendChild(style);
+      });
+
+      // Screenshot only the rendered newsletter element (its own bounding box, any height)
+      // rather than the whole page — sidesteps 100vh clipping without needing to unwrap
+      // #app-content from the surrounding admin panel layout.
+      const newsletterHandle = (await page.$('#newsletter')) ?? (await page.$('#app-content'));
+      if (newsletterHandle) {
+        await newsletterHandle.screenshot({ path: outputPath });
+      } else {
+        await page.screenshot({ path: outputPath, fullPage: true });
+      }
+
+      const uniqueIssues = [...new Set(consoleIssues)];
+      const issuesBlock = uniqueIssues.length
+        ? `\n\n⚠️ Console warnings/errors (${uniqueIssues.length} unique):\n${uniqueIssues.slice(0, 30).map((w) => `- ${w}`).join('\n')}`
+        : '';
+
+      // A human declining the app's own "render with undefined value?" confirm() would
+      // cancel rendering entirely (see src/main/rendering/templateRenderer.js) — this tool
+      // auto-accepts that dialog so the screenshot still gets taken, which can silently mask
+      // a real literal "undefined" leak in the HTML. Surface it explicitly instead.
+      const undefinedSnippets = await page.evaluate(() => {
+        const root = document.querySelector('#newsletter') ?? document.querySelector('#app-content');
+        const html = root?.innerHTML ?? '';
+        const matches = [];
+        const re = /.{0,40}undefined.{0,40}/g;
+        let m;
+        while ((m = re.exec(html)) && matches.length < 10) matches.push(m[0]);
+        return matches;
+      });
+      // Temporary diagnostic: check whether the intro/lede section (Intro.ts) rendered any
+      // text at all, and where in the DOM order it landed relative to the first category.
+      const introDebug = await page.evaluate(() => {
+        const root = document.querySelector('#newsletter') ?? document.querySelector('#app-content');
+        const html = root?.innerHTML ?? '';
+        const offerIdx = html.indexOf('Offer Part 1');
+        const chooseIdx = html.indexOf('Choose from:');
+        const lineIdx = html.indexOf('line.jpg');
+        return {
+          hasLivingRoom: html.includes('Living room'),
+          hasTranslationNotFound: (html.match(/Translation not found/g) || []).length,
+          hasIntroTitleClass: html.includes('newsletterIntroTitle'),
+          hasShopNow: html.includes('Shop now') || html.includes('newsletterCta'),
+          firstOfferIndex: offerIdx,
+          introTitleIndex: html.indexOf('newsletterIntroTitle'),
+          lineCount: (html.match(/line\.jpg/g) || []).length,
+          aroundLine: lineIdx > -1 ? html.slice(Math.max(0, lineIdx - 250), lineIdx + 50) : 'NOT FOUND',
+          aroundChooseFrom: chooseIdx > -1 ? html.slice(Math.max(0, chooseIdx - 600), chooseIdx + 200) : 'NOT FOUND',
+        };
+      });
+      const introDebugBlock = `\n\n🔎 Intro debug: ${JSON.stringify(introDebug)}`;
+
+      const undefinedBlock = undefinedSnippets.length
+        ? `\n\n🚨 Literal "undefined" found in rendered HTML (${undefinedSnippets.length} snippet(s)):\n${undefinedSnippets.map((s) => `- …${s}…`).join('\n')}`
+        : '';
+
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `✅ Screenshot saved to previews/${path.basename(outputPath)}\n\nURL: ${url}${issuesBlock}${undefinedBlock}${introDebugBlock}`,
+          },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [{ type: 'text', text: `Error capturing preview: ${error.message}\n\nURL attempted: ${url}` }],
+      };
+    } finally {
+      await browser?.close();
+    }
+  },
+);
+
+// ── Tool: get_available_campaigns ────────────────────────────────────────────
+
+const SHEETS_API_BASE = 'https://tj31c889tzsk.share.zrok.io/api/sheets';
+
+server.tool(
+  'get_available_campaigns',
+  `List cached translation-sheet tabs available for a given year. Queries the sheets API
+so campaign generation can validate the translationsSheet param against what actually exists.`,
+  { year: z.union([z.string(), z.number()]).describe('Year to look up, e.g. 2026') },
+  async ({ year }) => {
+    try {
+      const res = await fetch(`${SHEETS_API_BASE}/misc/getCachedTabs/${year}`);
+      if (!res.ok) {
+        return { content: [{ type: 'text', text: `Error: sheets API returned ${res.status} ${res.statusText}` }] };
+      }
+      const data = await res.json();
+      const tabs = data.tabs || [];
+      return {
+        content: [{ type: 'text', text: `Available tabs for ${year} (${tabs.length}):\n${tabs.map((t) => `- ${t}`).join('\n')}` }],
+      };
+    } catch (error) {
+      return { content: [{ type: 'text', text: `Error fetching cached tabs: ${error.message}` }] };
+    }
+  },
+);
+
+// ── Tool: get_translation_keys ───────────────────────────────────────────────
+
+server.tool(
+  'get_translation_keys',
+  `List available translation keys for a dataset (category_titles, category_links, templates,
+header, footer). Use to validate phrase/category-title keys before referencing them in a campaign
+(getPhrase, getCategoryLink, translateLink, etc.) instead of guessing.`,
+  { dataset: z.enum(['category_titles', 'category_links', 'templates', 'header', 'footer']).describe('Translation dataset to query') },
+  async ({ dataset }) => {
+    try {
+      const res = await fetch(`${SHEETS_API_BASE}/static/${dataset}/keys`);
+      if (!res.ok) {
+        return { content: [{ type: 'text', text: `Error: sheets API returned ${res.status} ${res.statusText}` }] };
+      }
+      const json = await res.json();
+      const keys = json.data || [];
+      return {
+        content: [{ type: 'text', text: `Translation keys for "${dataset}" (${keys.length}):\n${keys.map((k) => `- ${k}`).join('\n')}` }],
+      };
+    } catch (error) {
+      return { content: [{ type: 'text', text: `Error fetching translation keys: ${error.message}` }] };
+    }
+  },
+);
+
+// ── Tool: get_translation_languages ──────────────────────────────────────────
+
+server.tool(
+  'get_translation_languages',
+  `List available languages for a translation dataset (category_titles, category_links, templates,
+header, footer). Use to confirm a shop/lang combination has translations before generating a campaign.`,
+  { dataset: z.enum(['category_titles', 'category_links', 'templates', 'header', 'footer']).describe('Translation dataset to query') },
+  async ({ dataset }) => {
+    try {
+      const res = await fetch(`${SHEETS_API_BASE}/static/${dataset}/lang`);
+      if (!res.ok) {
+        return { content: [{ type: 'text', text: `Error: sheets API returned ${res.status} ${res.statusText}` }] };
+      }
+      const json = await res.json();
+      const languages = json.data || [];
+      return {
+        content: [{ type: 'text', text: `Languages for "${dataset}" (${languages.length}):\n${languages.map((l) => `- ${l}`).join('\n')}` }],
+      };
+    } catch (error) {
+      return { content: [{ type: 'text', text: `Error fetching translation languages: ${error.message}` }] };
+    }
   },
 );
 

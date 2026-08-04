@@ -10,5 +10,11 @@ const entries = Object.entries(allCampaigns).filter(([path]) =>
 export async function getUserCampaigns() {
   const modules = await Promise.all(entries.map(([, mod]) => mod()));
 
-  return modules.map((m) => (m.default?.toJSON ? m.default.toJSON() : m.default));
+  return modules.map((m, i) => {
+    const campaign = m.default?.toJSON ? m.default.toJSON() : m.default;
+    // Filename (no path, no extension) for URL-param based lookups (?campaign=...) — see src/main/urlParams.js
+    const [path] = entries[i];
+    campaign._sourceFileName = path.split('/').pop().replace(/\.[^.]+$/, '');
+    return campaign;
+  });
 }

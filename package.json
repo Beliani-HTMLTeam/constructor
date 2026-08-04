@@ -32,6 +32,8 @@
   "devDependencies": {
     "baseline-browser-mapping": "^2.10.11",
     "concurrently": "^9.2.1",
+    "playwright": "^1.62.1",
+    "typescript": "^7.0.2",
     "unplugin-auto-import": "^19.3.0",
     "vite-plugin-vanilla": "^2.1.1"
   }

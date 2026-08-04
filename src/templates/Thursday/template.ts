@@ -1,0 +1,160 @@
+import { Footer } from './Footer.js';
+import { Header } from './Header.js';
+
+// handlers:
+import { TopImageTitleHandler } from './handlers/_TopImageTitle.js';
+import { TopImageHandler } from './handlers/_TopImage.js';
+import { IntroHandler } from './handlers/_Intro.js';
+import { TimerHandler } from './handlers/_Timer.js';
+import { CategoriesHandler } from './handlers/_Categories.js';
+import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
+import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
+import { safePhrase } from './helpers/safePhrase.js';
+import type { ThursdayTemplateProps } from '@/types/thursday';
+
+/**
+ * Thursday newsletter/landing-page template: composes header/footer chrome with the
+ * hero (title overlay and/or plain image), an intro paragraph, a countdown timer, and
+ * the category list — each slotted in per campaign config (`intro.position`,
+ * `Inside.position`, and the presence of a `type: 'deal'` category, which the intro's
+ * `'afterFreebies'` position anchors to).
+ *
+ * @returns Full rendered HTML body (header chrome through footer chrome).
+ */
+const Thursday = async ({
+  links,
+  queries,
+  shop,
+  country,
+  type,
+  id,
+  categories,
+  background,
+  color,
+
+  // campaign elements
+  Inside,
+  intro,
+  timer,
+  TopImageTitle_data,
+  TopImage_data,
+
+  // functions passed:
+  getHeader,
+  getFooter,
+  getCategoryLink,
+  getCategoryTitle,
+  getPhrase,
+  getProductById,
+  add_utm,
+}: ThursdayTemplateProps): Promise<string> => {
+  // console.log(categories);
+
+  const HeaderElement = Header({ getHeader, country, background, type, id });
+
+  const seeMore = safePhrase(getPhrase, 'See more', 'See more');
+  const shopLimitedTimeDeals = safePhrase(getPhrase, 'Shop limited-time deals', 'Shop limited-time deals');
+  const shopNow = safePhrase(getPhrase, 'Shop now', 'Shop now');
+
+  const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
+  const TopImageElement = TopImageHandler({ links, TopImage_data });
+
+  const introCta_href = getIntroCtaHref({
+    links,
+    queries,
+    categories,
+    add_utm,
+    getCategoryLink,
+  });
+
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
+  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
+  const introPosition = intro?.position ?? 'afterTopImage';
+  const timerPosition = Inside?.position ?? 'beforeCategories';
+
+  const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
+  const TimerAfterCategories =
+    timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
+  const hasTimer = Boolean(TimerElement);
+
+  const safeCategories = Array.isArray(categories) ? categories : [];
+  const freebiesIndex = safeCategories.findIndex((category) => String(category?.type ?? '').toLowerCase() === 'deal');
+
+  const categoriesBeforeIntro =
+    introPosition === 'afterFreebies' && freebiesIndex >= 0
+      ? safeCategories.slice(0, freebiesIndex + 1)
+      : safeCategories;
+  const categoriesAfterIntro =
+    introPosition === 'afterFreebies' && freebiesIndex >= 0 ? safeCategories.slice(freebiesIndex + 1) : [];
+
+  const categoriesSharedProps = {
+    getProductById,
+    getCategoryLink,
+    getCategoryTitle,
+    queries,
+    add_utm,
+    links,
+    type,
+    country,
+    getPhrase,
+  };
+
+  const CategoriesBeforeIntroElement = await CategoriesHandler({
+    categories: categoriesBeforeIntro,
+    ...categoriesSharedProps,
+  });
+  const CategoriesAfterIntroElement = await CategoriesHandler({
+    categories: categoriesAfterIntro,
+    ...categoriesSharedProps,
+  });
+
+  const isAfterFreebies = introPosition === 'afterFreebies';
+  const isAfterTimer = introPosition === 'afterTimer' && hasTimer;
+  const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer ? '' : IntroElement;
+  const IntroAfterFreebiesElement = introPosition === 'afterFreebies' ? IntroElement : '';
+  const IntroAfterTimerBeforeCategoriesElement =
+    isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
+  const IntroAfterTimerAfterCategoriesElement =
+    isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
+		
+	let hasSmallTilesCategory = false;
+
+	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
+		hasSmallTilesCategory = true;
+	}
+
+	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
+
+  return `
+    ${HeaderElement}
+
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
+      ${TopImageTitleElement}
+
+      ${TopImageElement}
+
+      ${IntroAfterTopImageElement}
+
+      ${TimerBeforeCategories}
+
+      ${IntroAfterTimerBeforeCategoriesElement}
+
+      ${CategoriesBeforeIntroElement}
+
+      ${IntroAfterFreebiesElement}
+
+      ${CategoriesAfterIntroElement}
+
+      ${TimerAfterCategories}
+
+      ${IntroAfterTimerAfterCategoriesElement}
+    </table>
+
+
+    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
+      
+    ${FooterElement}
+  `;
+};
+
+export { Thursday };

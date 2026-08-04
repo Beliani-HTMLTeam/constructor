@@ -40,6 +40,7 @@ export default async function initStaticTranslations({ force = false } = {}) {
 
   if (isAlreadyLoaded && !force) {
     console.log('Static translations already loaded, skipping initialization');
+    if (typeof window !== 'undefined') window.__staticTranslationsReady = true;
     return;
   }
 
@@ -74,6 +75,11 @@ export default async function initStaticTranslations({ force = false } = {}) {
     },
     error: 'Failed to load translations',
   });
+
+  // Observability hook for automated preview/QA tooling (see capture_campaign_preview in
+  // server/mcp-server.js) — lets it wait for the real readiness signal instead of a guessed
+  // fixed delay before triggering/screenshotting a render.
+  if (typeof window !== 'undefined') window.__staticTranslationsReady = true;
 
   // check if translations are present:
   // console.log(staticTranslations);

@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Vite dev-server transform, not tsc emit */
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Incremental adoption: keep existing untyped .js (campaigns/, most of src/) working */
+    "allowJs": true,
+    "checkJs": false,
+    "strict": false,
+
+    "paths": {
+      "@/*": ["./src/*"],
+      "@api/*": ["./src/api/*"],
+      "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@main/*": ["./src/main/*"],
+      "@data/*": ["./src/main/data/*"],
+      "@handlers/*": ["./src/main/handlers/*"],
+      "@services/*": ["./src/services/*"],
+      "@templates/*": ["./src/templates/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@css/*": ["./src/utils/css/*"],
+      "@types/*": ["./src/types/*"]
+    }
+  },
+  "include": ["src", "server"],
+  "exclude": ["node_modules", "**/components_remake/**"]
+}

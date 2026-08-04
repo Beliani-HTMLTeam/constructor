@@ -24,6 +24,7 @@ import {
 } from '@/main/ui/buttonHandlers.js';
 import { createSetSelectedTemplate } from '@/main/ui/templateHelpers.js';
 import { handleSlugChange } from '@/main/events.js';
+import { applyUrlParamsFromLocation } from '@/main/urlParams.js';
 
 export function initApp({ campaigns, shops, config }) {
   const jsConfetti = new JSConfetti();
@@ -35,6 +36,11 @@ export function initApp({ campaigns, shops, config }) {
 
   // Setup all event listeners
   setupEventListeners(domElements, campaigns, shops, jsConfetti);
+
+  // Headless-preview support: ?campaign=&template=&shop=&lang= deep-links straight to a
+  // rendered campaign by driving the selects above — see src/main/urlParams.js. No-op when
+  // the URL has no `campaign` param.
+  applyUrlParamsFromLocation(domElements, campaigns, shops);
 }
 
 function setupEventListeners(elements, campaigns, shops, jsConfetti) {
