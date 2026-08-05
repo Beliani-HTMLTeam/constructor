@@ -167,7 +167,9 @@ const categories = [
       DE: "Geschirr & Küchenaccessoires",
       AT: "Geschirr & Küchenaccessoires",
       ES: "Menaje de cocina",
-      PL: "Nakrycie stołu"
+      PL: "Nakrycie stołu", 
+      NL: "Servies",
+      BENL: "Servies",
     },
     hrefOverride: {
       SK: "https://www.beliani.sk/nabytok-do-jedalne/kuchynsky-a-stolovy-riad/jedalensky-riad/"
