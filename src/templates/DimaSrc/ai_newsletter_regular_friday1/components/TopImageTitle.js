@@ -1,5 +1,7 @@
+import { ImageWithLink } from './ImageWithLink.js';
 import { Space } from './Space.js';
 import { templates as TopImageTitleTemplates } from './utils/topImageTitle/templates.js';
+import { getImageUrl } from '../../../../utils/ImageManager.js';
 
 const TopImageTitle = ({
   href,
@@ -16,7 +18,10 @@ const TopImageTitle = ({
   type,
   renderType,
   className,
+  intro,
+  country
 }) => {
+  console.log("introData", intro)
   // HTML Header Section (Subtitle + Title + Intro Paragraph + CTA button)
   if (subtitle || title1 || title2 || title3 || introText) {
     const bg = backgroundColor || '#750000';
@@ -90,21 +95,38 @@ const TopImageTitle = ({
 
             ${
               href
-                ? `
-              <tr>
-                <td align="left" style="font-family: 'Open Sans', Arial, sans-serif;">
-                  <table cellspacing="0" cellpadding="0" border="0" align="left">
+                ? renderType === 'newsletter' && intro?.cta?.newsletter?.src
+                  ? `
                     <tr>
-                      <td align="center" style="background-color: #FFFFFF; border-radius: 4px; padding: 10px 22px;">
-                        <a href="${href}" style="color: ${bg}; font-family: 'Open Sans', Arial, sans-serif; font-size: 14px; font-weight: 700; text-decoration: none; display: inline-block;">
-                          <span style="color: ${bg}; text-decoration: none;">${ctaText}</span>
-                        </a>
+                      <td style="line-height:0; font-size:0; padding:0;">
+                       ${ImageWithLink({
+                          href: href,
+                          src: getImageUrl(`${country.toLowerCase()}_${intro?.cta?.newsletter?.src}.png`, true)
+                        })}
                       </td>
                     </tr>
-                  </table>
-                </td>
-              </tr>
-            `
+                  `
+                  : renderType === 'landing'
+                    ? `
+                      <tr>
+                        <td align="left">
+                          <a
+                            href="${href}"
+                            style="
+                              display:inline-block;
+                              text-decoration:none;
+                              background-color:${intro?.cta?.landing?.background || '#FFCCB7'};
+                              color:${intro?.cta?.landing?.color || '#750000'};
+                              padding:10px 20px;
+                              border-radius:5px;
+                            "
+                          >
+                            ${ctaText}
+                          </a>
+                        </td>
+                      </tr>
+                    `
+                    : ''
                 : ''
             }
             ${Space({className: 'newsletterBottom25px', insideTr: true, backgroundColor: bg})}
@@ -130,17 +152,6 @@ const TopImageTitle = ({
   //     ${className || className === '' ? Space({ insideTr: true, className, backgroundColor }) : Space({ insideTr: true, backgroundColor })}
   //   `;
   // }
-
-  if (src) {
-    return `
-      <tr>
-        <td style="line-height: 0; font-size: 0; padding: 0;">
-          <a href="${href}" style="display: block; text-decoration: none;">
-            <img alt="Top Image Title" src="${src}" style="display: block; width: 100%; max-width: 100%; height: auto; border: 0; line-height: 0;" loading="lazy">
-          </a>
-        </td>
-      </tr>`;
-  }
 
   return '';
 };

@@ -92,13 +92,14 @@ const AIRegularFridayNslt1 = async ({
   const hasTopHtmlHeader = Boolean(title1 || title2 || introTextContent);
 
   let TopImageTitleElement = TopImageTitle({
-    href: links.Intro_cta_href || TopImageTitle_href,
+    href: getCategoryLink(links.Intro_cta_href) || getCategoryLink(TopImageTitle_href),
     src: TopImageTitle_src,
     subtitle: queries.subtitle,
     title1,
     title2,
     title3,
     introText: introTextContent,
+    intro: introData,
     ctaText: shopNowPhrase,
     color: introData?.color || TiT_color || '#FFCCB7',
     titleColor: '#FFFFFF',
@@ -106,6 +107,7 @@ const AIRegularFridayNslt1 = async ({
     type: TiT_type,
     renderType: type,
     className: TiT_className,
+    country: country
   });
 
   let TopImageElement = (type === 'landing' && links?.TopImageVideo_src && links?.TopImageVideo_href) ? VideoLPWithLink({

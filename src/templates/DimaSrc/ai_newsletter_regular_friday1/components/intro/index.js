@@ -12,6 +12,8 @@ export const IntroWrapper = ({
 }) => {
   if (!intro) return '';
 
+  console.log("intro data", intro)
+
   return IntroRenderer({
     intro,
     queries,

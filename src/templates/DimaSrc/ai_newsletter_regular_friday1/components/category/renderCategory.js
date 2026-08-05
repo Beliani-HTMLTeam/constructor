@@ -158,21 +158,20 @@ export const renderCategory = async (
           
           ${category.cta?.show ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
   
+        
+  
           ${
             category.cta?.show
-              ? CTA({
+              ? ImageWithLink({
                   href: ctaHref,
-                  text: category.cta?.source == 'queries' ? queries.CTA[id] : category.cta?.text || (category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : `Shop ${category.name}`),
+                  src: getImageUrl(`${country.toLowerCase()}_${category.cta?.newsletter?.src}.png`, true),
                   insideTr: true,
-                  tdClass: 'newsletterContainer',
-                  color: category.cta?.color || '#FFFFFF',
-                  background: background,
-                  buttonBackground: category.cta?.buttonBackground,
-                })
+                  tableContainer: true,
+                  align: 'center',
+              })
               : ''
           }
-  
-          ${Space({ insideTr: true, className: 'newsletterBottom30px', backgroundColor: background })}
+          ${Space({ insideTr: true, className: 'newsletterBottom40px', backgroundColor: background })}
   
          
         </table>

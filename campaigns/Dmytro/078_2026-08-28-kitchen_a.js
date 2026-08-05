@@ -57,6 +57,16 @@ const intro_data = {
 
     },
     spaceAfter: 'newsletterBottom20px',
+    newsletter: {
+      type: "image",
+      src: 'shop_now',
+    },
+    landing: {
+      type: "button",
+      source: 'queries',
+      background: "#FFFFFF",
+      color: "#750000", 
+    }
   }
 }
 
@@ -103,9 +113,16 @@ const categories = [
     },
     cta: {
       show: true,
-      buttonBackground: '#750000',
-      color: '#FFFFFF',
-      source: 'queries',
+      newsletter: {
+        type: "image",
+        src: `kitchen_accessories`
+      },
+      landing: {
+        type: "button",
+        source: 'queries',
+        background: '#750000',
+        color: '#FFFFFF',
+      }
     },
     products: [
       // ELITE PRO
@@ -157,9 +174,16 @@ const categories = [
     },
     cta: {
       show: true,
-      buttonBackground: '#750000',
-      color: '#FFFFFF',
-      source: 'queries',
+      newsletter: {
+        type: "image",
+        src: 'tableware'
+      },
+      landing: {
+        type: "button",
+        source: 'queries',
+        background: '#750000',
+        color: '#FFFFFF',
+      }
     },
     products: [
       // HYSSOP
@@ -211,9 +235,16 @@ const categories = [
     },
     cta: {
       show: true,
-      buttonBackground: '#750000',
-      color: '#FFFFFF',
-      source: 'queries',
+      newsletter: {
+        type: "image",
+        src: 'organization_and_storage'
+      },
+      landing: {
+        type: "button",
+        source: 'queries',
+        background: '#750000',
+        color: '#FFFFFF',
+      }
     },
     products: [
       // ALAMO
@@ -265,9 +296,16 @@ const categories = [
     },
     cta: {
       show: true,
-      buttonBackground: '#750000',
-      color: '#FFFFFF',
-      source: 'queries',
+      newsletter: {
+        type: "image",
+        src: 'lighting'
+      },
+      landing: {
+        type: "button",
+        source: 'queries',
+        background: '#750000',
+        color: '#FFFFFF',
+      }
     },
     products: [
       // ANDERSON
