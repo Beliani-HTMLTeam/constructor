@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::13.08.26 - Back to school';
+const campaignTranslationsSheet = '2026::20.08.26 - Prepare outdoor for colder nights';
 
 const tableQueries = [
 	{
@@ -27,42 +27,42 @@ const tableQueries = [
 		name: 'condition',
 	},
 	{
-		tableRange: '15:16',
+		tableRange: '13:14',
 		name: 'timer',
-		tableName: '2026::Voucher - 11.08.26 - Free kids wall decor',
+		tableName: '2026::03.08.26 - August Peak Start',
 	},
 ];
 
 const links = {
-	TopImageTitle_href: translateLink({ value: 'content/lp26-08-13' }),
-	TopImageTitle_src: translateImage({ value: '20260813_01.png' }),
+	TopImageTitle_href: translateLink({ value: 'content/lp26-08-20' }),
+	TopImageTitle_src: translateImage({ value: '20260820_01.png' }),
 
-	TopImage_src: getImageUrl('20260813_Gif.gif', true),
-	TopImage_href: translateLink({ value: 'content/lp26-08-13' }),
+	TopImage_src: getImageUrl('20260820_Pic.jpg', true),
+	TopImage_href: translateLink({ value: 'content/lp26-08-20' }),
 
-	Banner_1: translateLink({ value: 'content/lp26-08-07' }),
-	Banner_1_Image: translateImage({ value: '20260807b.png' }),
+	Banner_1: translateLink({ value: 'content/lp26-08-13' }),
+	Banner_1_Image: translateImage({ value: '20260813b.png' }),
 
-	Banner_2: translateLink({ value: 'content/lp26-08-05' }),
-	Banner_2_Image: translateImage({ value: '20260805b.png' }),
+	Banner_2: translateLink({ value: 'content/lp26-08-12' }),
+	Banner_2_Image: translateImage({ value: '20260812b.png' }),
 
-	Timer_href: translateLink({ value: 'content/lp26-08-11' }),
+	Timer_href: translateLink({ value: 'content/lp26-08-21' }),
 
-	Intro_cta_href: "https://www.beliani.ch/office-furniture/",
+	Intro_cta_href: "https://www.beliani.ch/garden-furniture/",
 };
 
 const TopImageTitle_data = {
 	color: '#000000',
-	backgroundColor: '#FFE9CC',
+	backgroundColor: '#FFD9C9',
 	type: 'twoSameLines',
 };
 
 const categories = [
 	{
-		name: 'Desks',
-		src: getImageUrl('20260813_Cat00.jpg', true),
-		href: 'https://www.beliani.ch/office-furniture/desks/',
-		background: '#FFE9CC',
+		name: 'Fire pits',
+		src: getImageUrl('20260820_Cat00.jpg', true),
+		href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
+		background: '#FFD9C9',
 		color: '#000000',
 		type: 'grid',
 		cta: true,
@@ -86,34 +86,34 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// WILBANKS
+			// KELUD
 			{
-				id: 682477,
-				src: getImageUrl('20260813_Pic01.png', true),
+				id: 85075,
+				src: getImageUrl('20260820_Pic01.png', true),
 			},
-			// DESTINES 
+			// SHIGA
 			{
-				id: 444466,
-				src: getImageUrl('20260813_Pic02.png', true),
+				id: 86997,
+				src: getImageUrl('20260820_Pic02.png', true),
 			},
-			// THESLAY 
+			// TANARA
 			{
-				id: 729165,
-				src: getImageUrl('20260813_Pic03.png', true),
+				id: 197909,
+				src: getImageUrl('20260820_Pic03.png', true),
 			},
-			// ALVAR 
+			// HEKLA
 			{
-				id: 729260,
-				src: getImageUrl('20260813_Pic04.png', true),
+				id: 584867,
+				src: getImageUrl('20260820_Pic04.png', true),
 			},
 		],
 	},
 	{
-		name: 'Office Chairs',
-		src: getImageUrl('20260813_Cat10.jpg', true),
-		href: 'https://www.beliani.ch/office-furniture/office-chairs/',
-		background: '#913333',
-		color: '#ffffff',
+		name: 'Patio heaters',
+		src: getImageUrl('20260820_Cat10.jpg', true),
+		href: 'https://www.beliani.ch/garden-accessories/patio-heaters/',
+		background: '#FFD9C9',
+		color: '#000000',
 		type: 'grid',
 		cta: true,
 		paddingTop: '35',
@@ -136,33 +136,33 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// EATON 
+			// ASKJA
 			{
-				id: 655662,
-				src: getImageUrl('20260813_Pic11.png', true),
+				id: 300801,
+				src: getImageUrl('20260820_Pic11.png', true),
 			},
-			// DELIGHT 
+			// SANGAY
 			{
-				id: 803047,
-				src: getImageUrl('20260813_Pic12.png', true),
+				id: 300799,
+				src: getImageUrl('20260820_Pic12.png', true),
 			},
-			// BELMAR 
+			// LLAIMA
 			{
-				id: 649156,
-				src: getImageUrl('20260813_Pic13.png', true),
+				id: 600561,
+				src: getImageUrl('20260820_Pic13.png', true),
 			},
-			// IGNIS
+			// STROMBOLI
 			{
-				id: 734893,
-				src: getImageUrl('20260813_Pic14.png', true),
+				id: 29418,
+				src: getImageUrl('20260820_Pic14.png', true),
 			},
 		],
 	},
 	{
-		name: 'Storage Units & Cabinets',
-		src: getImageUrl('20260813_Cat20.jpg', true),
-		href: 'https://www.beliani.ch/office-furniture/storage-units-and-cabinets/',
-		background: '#FFE9CC',
+		name: 'Outdoor lighting',
+		src: getImageUrl('20260820_Cat20.jpg', true),
+		href: 'https://www.beliani.ch/garden-furniture/garden-lighting/',
+		background: '#FFD9C9',
 		color: '#000000',
 		type: 'grid',
 		cta: true,
@@ -186,35 +186,35 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// RAKAIA 
+			// AWUNA
 			{
-				id: 691414,
-				src: getImageUrl('20260813_Pic21.png', true),
+				id: 500615,
+				src: getImageUrl('20260820_Pic21.png', true),
 			},
-			// LERRYN 
+			// HEZIR
 			{
-				id: 729412,
-				src: getImageUrl('20260813_Pic22.png', true),
+				id: 619872,
+				src: getImageUrl('20260820_Pic22.png', true),
 			},
-			// ZEHNA
+			// BESOS
 			{
-				id: 424990,
-				src: getImageUrl('20260813_Pic23.png', true),
+				id: 561075,
+				src: getImageUrl('20260820_Pic23.png', true),
 			},
-			// ZEHNA 
+			// LIZANDRO
 			{
-				id: 686463,
+				id: 559208,
 				// id: 704092,
-				src: getImageUrl('20260813_Pic24.png', true),
+				src: getImageUrl('20260820_Pic24.png', true),
 			},
 		],
 	},
 	{
-		name: 'Office Lighting',
-		src: getImageUrl('20260813_Cat30.jpg', true),
-		href: 'https://www.beliani.ch/office-furniture/office-lamps/',
-		background: '#913333',
-		color: '#ffffff',
+		name: 'Blankets',
+		src: getImageUrl('20260820_Cat30.jpg', true),
+		href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
+		background: '#FFD9C9',
+		color: '#000000',
 		type: 'grid',
 		cta: true,
 		paddingTop: '35',
@@ -233,48 +233,48 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// CANOPUS 
+			// CHAGYL 
 			{
-				id: 668569,
-				src: getImageUrl('20260813_Pic31.png', true),
+				id: 503210,
+				src: getImageUrl('20260820_Pic31.png', true),
 			},
-			// VELA 
+			// NAIKHU
 			{
-				id: 664262,
-				src: getImageUrl('20260813_Pic32.png', true),
+				id: 338398,
+				src: getImageUrl('20260820_Pic32.png', true),
 			},
-			// CYGNUS 
+			// YUVALI
 			{
-				id: 380833,
-				src: getImageUrl('20260813_Pic33.png', true),
+				id: 395580,
+				src: getImageUrl('20260820_Pic33.png', true),
 			},
-			// RIMAVA 
+			// CHAAB 
 			{
-				id: 374723,
-				src: getImageUrl('20260813_Pic34.png', true),
+				id: 211877,
+				src: getImageUrl('20260820_Pic34.png', true),
 			},
 		],
 	},
 ];
 
 const timer = {
-	freebies: getImageUrl('20260813free.png', true),
-	deadline: '2026-08-16',
+	// freebies: getImageUrl('20260806free.png', true),
+	deadline: '2026-08-23',
 }
 
 export default new entities.Campaign({
-	startId: 46636,
+	startId: 46929,
 	version: 'new',
-	name: 'Back to School',
-	date: '13.08.2026',
-	issueCardId: 516619,
-	lpId: 31662,
+	name: 'Prepare outdoor for colder nights',
+	date: '20.08.2026',
+	issueCardId: 519001,
+	lpId: 31838,
 	alarm: {
 		isActive: false,
 	},
 	isArchive: false,
 	optimizeImg: true,
-	figmaUrl: 'https://www.figma.com/design/pDoMjQ31ugTvI23yXBKmVc/',
+	figmaUrl: 'https://www.figma.com/design/YJr2dzIyKMTZryTvMybFO7/',
 	templates: [
 		{
 			name: 'Newsletter',
@@ -282,7 +282,7 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 			css: types.CSS.NS,
 			translationsSpreadsheet: campaignTranslationsSheet,
-			background: '#FFE9CC',
+			background: '#FFD9C9',
 			color: '#000000',
 			wrapper: types.WRAPPER,
 			TopImageTitle_data: TopImageTitle_data,
@@ -292,18 +292,20 @@ export default new entities.Campaign({
 			timer: timer,
 			intro: {
 				color: '#000000', // unused
-				backgroundColor: '#FFE9CC', // unused
+				backgroundColor: '#FFD9C9', // unused
 				alignment: 'left',
 				type: 'paragraph',
+				position: 'afterTimer',
 				cta: {
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
 				}
 			},
 			Inside: {
-				color: '#000000',
-				backgroundColor: '#FD9000',
-				unitBackground: '#FECD8C',
+				spaceBefore: 'newsletterBottom35px',
+				color: '#ffffff',
+				backgroundColor: '#FF2F00',
+				unitBackground: '#FF9780',
 				type: 'timer',
 			},
 		},
@@ -312,7 +314,7 @@ export default new entities.Campaign({
 			type: types.LANDINGPAGE,
 			template: templates.Thursday, // User should change this
 			css: types.CSS.LP,
-			background: '#FFE9CC',
+			background: '#FFD9C9',
 			color: '#000000',
 			translationsSpreadsheet: campaignTranslationsSheet,
 			TopImageTitle_data: TopImageTitle_data,
@@ -322,18 +324,20 @@ export default new entities.Campaign({
 			timer: timer,
 			intro: {
 				color: '#000000', // unused
-				backgroundColor: '#FFE9CC', // unused
+				backgroundColor: '#FFD9C9', // unused
 				alignment: 'left',
 				type: 'paragraph',
+				position: 'afterTimer',
 				cta: {
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
 				}
 			},
 			Inside: {
-				color: '#000000',
-				backgroundColor: '#FD9000',
-				unitBackground: '#FECD8C',
+				spaceBefore: 'newsletterBottom35px',
+				color: '#ffffff',
+				backgroundColor: '#FF2F00',
+				unitBackground: '#FF9780',
 				type: 'timer',
 			},
 		},
