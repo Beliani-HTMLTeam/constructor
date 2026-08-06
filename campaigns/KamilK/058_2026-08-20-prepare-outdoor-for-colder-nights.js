@@ -109,9 +109,9 @@ const categories = [
 		],
 	},
 	{
-		name: 'Patio heaters',
+		name: 'Garden lanterns',
 		src: getImageUrl('20260820_Cat10.jpg', true),
-		href: 'https://www.beliani.ch/garden-accessories/patio-heaters/',
+		href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',
 		background: '#FFD9C9',
 		color: '#000000',
 		type: 'grid',
@@ -136,24 +136,24 @@ const categories = [
 			name: true,
 		},
 		products: [
-			// ASKJA
+			// BORNEO
 			{
-				id: 300801,
+				id: 106078,
 				src: getImageUrl('20260820_Pic11.png', true),
 			},
-			// SANGAY
+			// TONGA
 			{
-				id: 300799,
+				id: 121547,
 				src: getImageUrl('20260820_Pic12.png', true),
 			},
-			// LLAIMA
+			// LUZON
 			{
-				id: 600561,
+				id: 200077,
 				src: getImageUrl('20260820_Pic13.png', true),
 			},
-			// STROMBOLI
+			// BISTAL
 			{
-				id: 29418,
+				id: 325520,
 				src: getImageUrl('20260820_Pic14.png', true),
 			},
 		],

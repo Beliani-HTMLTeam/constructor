@@ -212,7 +212,7 @@ const categories = [
 	{
 		name: 'Office Lighting',
 		src: getImageUrl('20260813_Cat30.jpg', true),
-		href: 'https://www.beliani.ch/office-furniture/office-lamps/',
+		href: 'https://www.beliani.ch/office-furniture/office-lighting/',
 		background: '#913333',
 		color: '#ffffff',
 		type: 'grid',
