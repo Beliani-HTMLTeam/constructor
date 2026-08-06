@@ -97,14 +97,15 @@ const TopImageTitle = ({
               href
                 ? renderType === 'newsletter' && intro?.cta?.newsletter?.src
                   ? `
-                    <tr>
-                      <td align="left">
+                    
                        ${ImageWithLink({
                           href: href,
-                          src: getImageUrl(`${country.toLowerCase()}_${intro?.cta?.newsletter?.src}.png`, true)
+                          src: getImageUrl(`${country.toLowerCase()}_${intro?.cta?.newsletter?.src}.png`, true),
+                          tdClass: 'newsletterRight150px',
+                          insideTr: true,
+                          align: 'left',
                         })}
-                      </td>
-                    </tr>
+                     
                   `
                   : renderType === 'landing'
                     ? `

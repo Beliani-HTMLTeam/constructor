@@ -171,6 +171,7 @@ export const renderCategory = async (
                   insideTr: true,
                   tableContainer: true,
                   align: 'center',
+                  tdClass: 'newsletterContainer80px',
               })
               : '' : 
               `<tr>
