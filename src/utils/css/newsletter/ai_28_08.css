@@ -207,7 +207,7 @@ img {
 }
 
 .newsletterTitle {
-  font-size: 30px;
+  font-size: 22px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-weight: 600;
@@ -242,7 +242,7 @@ img {
 }
 
 .newsletterProductHighPrice {
-  font-size: 14px;
+  font-size: 12px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   text-decoration: line-through;
@@ -489,11 +489,12 @@ img {
   }
 
   .newsletterProductHighPrice {
+    font-size: 10px;
     display: block;
   }
 
   .newsletterTitle {
-    font-size: 25px;
+    font-size: 18px;
   }
 
   .newsletterTitleAditional {

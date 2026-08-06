@@ -51,7 +51,7 @@ const intro_data = {
   alignment: "left",
   type: "paragraph",
   cta: {
-    background: "#FFFFFF",
+    background: "#F6E7E6",
     color: "#750000",
     overrides: {
 
@@ -64,7 +64,7 @@ const intro_data = {
     landing: {
       type: "button",
       source: 'queries',
-      background: "#FFFFFF",
+      background: "#F6E7E6",
       color: "#750000", 
     }
   }

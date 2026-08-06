@@ -98,7 +98,7 @@ const TopImageTitle = ({
                 ? renderType === 'newsletter' && intro?.cta?.newsletter?.src
                   ? `
                     <tr>
-                      <td style="line-height:0; font-size:0; padding:0;">
+                      <td align="left">
                        ${ImageWithLink({
                           href: href,
                           src: getImageUrl(`${country.toLowerCase()}_${intro?.cta?.newsletter?.src}.png`, true)
@@ -113,13 +113,10 @@ const TopImageTitle = ({
                           <a
                             href="${href}"
                             style="
-                              display:inline-block;
-                              text-decoration:none;
                               background-color:${intro?.cta?.landing?.background || '#FFCCB7'};
                               color:${intro?.cta?.landing?.color || '#750000'};
-                              padding:10px 20px;
-                              border-radius:5px;
                             "
+                            class="newsletterTopButton"
                           >
                             ${ctaText}
                           </a>

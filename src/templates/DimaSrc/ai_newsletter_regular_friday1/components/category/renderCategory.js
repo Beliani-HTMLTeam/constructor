@@ -7,6 +7,8 @@ import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
 import { render } from '../../category/small-tiles';
+import { getState } from '@/main/state/appState';
+
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -24,7 +26,8 @@ export const renderCategory = async (
   country
 ) => {
   console.log('background: ', category);
-
+  
+  const type = getState('template').type;
   const background = category.background || 'white';
   const color = category.color || '#000000';
 
@@ -161,7 +164,7 @@ export const renderCategory = async (
         
   
           ${
-            category.cta?.show
+            type === 'newsletter' ?  category.cta?.show
               ? ImageWithLink({
                   href: ctaHref,
                   src: getImageUrl(`${country.toLowerCase()}_${category.cta?.newsletter?.src}.png`, true),
@@ -169,7 +172,21 @@ export const renderCategory = async (
                   tableContainer: true,
                   align: 'center',
               })
-              : ''
+              : '' : 
+              `<tr>
+              <td align="center">
+                <a
+                  href="${ctaHref}"
+                  style="
+                    background-color:${background?.cta?.landing?.background || '#750000'};
+                    color:${background?.cta?.landing?.color || '#ffffff'};
+                  "
+                  class="newsletterHtmlCTA"
+                >
+                  ${queries.CTA && queries.CTA[id] ? queries.CTA[id] : ctaText}
+                </a>
+              </td>
+            </tr>`
           }
           ${Space({ insideTr: true, className: 'newsletterBottom40px', backgroundColor: background })}
   
