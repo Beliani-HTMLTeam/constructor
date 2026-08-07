@@ -227,6 +227,8 @@ const renderCategory = async (
         align: ctaConfig.align ?? 'center',
         alt: ctaConfig.alt ?? 'Newsletter CTA Image',
         targetBlank: ctaConfig.targetBlank ?? false,
+        width: ctaConfig.width,
+        height: ctaConfig.height,
       }) : CTA({
         color: category.color ?? '#000000',
         href: safeValue(ctaButtonHref, '/', `CTA href for category "${category.name ?? ''}"`),

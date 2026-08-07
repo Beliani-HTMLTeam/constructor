@@ -41,6 +41,14 @@ export interface CtaConfig {
   spaceBefore?: string;
   /** Spacer CSS class inserted after the CTA row. */
   spaceAfter?: string;
+  /**
+   * Intrinsic display width (px) for the image-button mode. Set this when `src` points at
+   * a higher-density export (e.g. a 2x-retina CTA PNG) — otherwise the browser renders it
+   * at native file resolution instead of the intended on-page size.
+   */
+  width?: number | string;
+  /** Intrinsic display height (px) for the image-button mode. See `width`. */
+  height?: number | string;
 }
 
 /** Category title row configuration. */
@@ -116,8 +124,10 @@ export interface ProductEntry {
   lowPrice?: string;
   /** Original/strikethrough price string. */
   highPrice?: string;
-  /** When true, the price row renders a "Free" label instead of `lowPrice`/`highPrice` (see `Prices.ts`). */
+  /** When true, the price row renders a "Free" label followed by the struck-through normal price (see `Prices.ts`). */
   isFree?: boolean;
+  /** Translated "Free" label for `isFree` entries (e.g. `'GRATIS'`). Set by `deal.ts` via `getPhrase`; unset falls back to the English `'Free'`. */
+  freeText?: string;
   /** Accent colour for this entry's price / "Free" label. Falls back to the card's text colour. */
   priceColor?: string;
   /** Override spacer class rendered below this product. */
@@ -225,11 +235,44 @@ export interface CategoryConfig {
   /** `type: 'deal'` only. Colour for the offer validity/date row. */
   offerDateColor?: string;
   /**
+   * `type: 'deal'` only. Renders the offer's code CTA as a filled pill button (background +
+   * radius + padding) instead of the legacy underlined `newsletterCtaCaps` text link. Unset =>
+   * unchanged legacy behaviour — every existing `deal` campaign renders exactly as before.
+   */
+  codeButtonStyle?: 'filled';
+  /** `type: 'deal'` only. Background colour for the filled code button (newsletter). Falls back to the category's own `color`. */
+  codeButtonBackground?: string;
+  /** `type: 'deal'` only. Text colour for the filled code button (newsletter). Defaults to `'#ffffff'`. */
+  codeButtonColor?: string;
+  /** `type: 'deal'` only. Filled code button width (px). Defaults to `230`. */
+  codeButtonWidth?: number | string;
+  /** `type: 'deal'` only. Filled code button height (px). Defaults to `48`. */
+  codeButtonHeight?: number | string;
+  /**
+   * `type: 'deal'` only. Landing-page toast text shown after the "Code: xxxxx" copy button is
+   * clicked (see `CopyCodeCTA`). Only takes effect once an `offer_code` tableQuery is wired in —
+   * see `QueriesConfig.offer_code`. Defaults to `'Code copied'`.
+   */
+  copyCodeLabel?: string;
+  /**
+   * `type: 'deal'` only. Landing-page: use the floating corner-notification "copied" alert
+   * (ported from KrBiranowski's Monday `copyCodeWeb: true` campaigns, e.g.
+   * `campaigns/KrBiranowski/010_2026-08-11-free-kids.js`) instead of the default inline
+   * tooltip. Only takes effect alongside `offer_code`.
+   */
+  copyCodeWeb?: boolean;
+  /**
    * `type: 'deal'` only. When `anotherTableForFreebies` is true, background colour for the
    * split-off "Choose from:" + freebie grid table (rather than inheriting the category's
    * `background`, e.g. a maroon offer field). Defaults to `'#ffffff'`.
    */
   freebiesBackground?: string;
+  /**
+   * `type: 'deal'` + `freebiesLikeProducts` only. Text colour for the freebie product cards.
+   * Defaults to `'#242222'` — override when `freebiesBackground` is dark, otherwise the card
+   * text renders near-invisible.
+   */
+  freebiesTextColor?: string;
   /**
    * `type: 'deal'` only. When true, "Choose from:" and the freebie grid (and everything the
    * category renders after them — CTA, bottom spacer, divider line) move into their own
@@ -399,6 +442,13 @@ export interface QueriesConfig {
   offer_date?: string[];
   /** `[ctaLabel]` for the offer's code CTA (e.g. "Get the code"), preferred over the generic `getPhrase('Get code')`. */
   offer_cta?: string[];
+  /**
+   * `[rawCodeLine]` for the offer's raw sheet line, e.g. `"Code: freelampUK26"` — distinct from
+   * `offer_cta` (the button's own label). Landing pages render this through the click-to-copy
+   * `CopyCodeCTA` button (see `codeButtonStyle`/`deal/offer.ts`); unset => unchanged legacy
+   * `offerItems[2]` text-row fallback.
+   */
+  offer_code?: string[];
   /** `[smallPrint]` rendered under the freebie grid, e.g. how/when the free gift is chosen. */
   free_subtitle?: string[];
   /** Per-category CTA labels ("Shop sofas", ...), indexed like `categories`. Preferred over `cta.phrase`/`getPhrase`. */

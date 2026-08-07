@@ -36,7 +36,10 @@ export const render = ({
         const gapSize = typeof gapBetweenHorizontal === 'number' || (typeof gapBetweenHorizontal === 'string' && gapBetweenHorizontal !== 'true') ? String(gapBetweenHorizontal).replace('px', '') : 10;
         let horizontalGapValue = gapBetweenHorizontal ? ((c + 1) % 2 !== 0 ? `class="newsletterRight${gapSize}px"` : `class="newsletterLeft${gapSize}px"`) : '';
 
-        const imageAlign = alignToSide ? (c === 0 ? 'right' : 'left') : 'center';
+        // Default: image follows the same alignment as the text below it (design's usual
+        // case — both flush left in their column). `alignToSide` opts into the older
+        // gutter-leaning behaviour (images lean toward the row's centre gap) instead.
+        const imageAlign = alignToSide ? (c === 0 ? 'right' : 'left') : align;
 
         // prettier-ignore
         productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${horizontalGapValue} align="${imageAlign}">`;

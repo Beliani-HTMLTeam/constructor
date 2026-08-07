@@ -25,7 +25,18 @@ const Prices = ({ high, low = '', color, align = 'left', isFree = false, freeTex
   html += `<tr><td align="${align}" style="text-align: ${align};">`;
 
   if (isFree) {
+    // A freebie still shows what the item normally costs, struck through, next to the "Free"
+    // label — same convention as the bespoke freebie card (`category/deal/grid.ts`) and
+    // `helpers/priceFree.js`, both of which strike the normal selling price (`low`), falling
+    // back to `high`. Rendered only when a price is actually present, so markets whose data
+    // carries no price (e.g. PL) get the bare label rather than an empty strikethrough.
+    const normalPrice = low || high;
+
     html += `<span style="color: ${accent}" class="newsletterProductPriceFree">${freeText}</span>`;
+
+    if (normalPrice) {
+      html += ` <span style="color: ${color}" class="newsletterProductHighPrice">${normalPrice}</span>`;
+    }
   } else {
     html += `<span style="color: ${accent}" class="newsletterProductPriceAccent">${low} </span>`;
     html += `<span style="color: ${color}" class="newsletterProductHighPrice">${high}</span>`;

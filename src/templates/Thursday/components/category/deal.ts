@@ -85,6 +85,13 @@ export const render = ({
     offerHeadlineIndex: category?.offerHeadlineIndex,
     offerLabelColor: category?.offerLabelColor,
     offerDateColor: category?.offerDateColor,
+    codeButtonStyle: category?.codeButtonStyle,
+    codeButtonBackground: category?.codeButtonBackground,
+    codeButtonColor: category?.codeButtonColor,
+    codeButtonWidth: category?.codeButtonWidth,
+    codeButtonHeight: category?.codeButtonHeight,
+    copyCodeLabel: category?.copyCodeLabel,
+    copyCodeWeb: category?.copyCodeWeb,
   });
 
   if (hasDealProducts) {
@@ -99,15 +106,25 @@ export const render = ({
             priceColor: category?.product?.priceColor,
             ...product,
             isFree: true,
+            // Same translated label the bespoke freebie grid uses below — without this the
+            // card renders the hardcoded English "Free" on every market.
+            freeText: getPhrase ? safePhrase(getPhrase, 'Free', 'Free') : 'Free',
           })),
           showPrices: true,
           showNames: true,
-          gapBetweenVertical: false,
+          // Mirror the regular `grid` category's own default (`Categories.ts`) rather than
+          // hardcoding `false` — with `false`, `Product.ts` drops BOTH the image→name gap and
+          // the card's bottom spacer, so freebie rows sit flush against each other (side
+          // padding present, nothing underneath). `freebiesLikeProducts` means "render exactly
+          // like a product card", and product cards have those gaps.
+          gapBetweenVertical: category?.product?.gapBetweenVertical ?? true,
           gapBetweenHorizontal,
-          align: 'left',
+          // Respect the category's own product alignment instead of pinning to 'left', so a
+          // centred freebie design isn't unreachable. Defaults to 'left' as before.
+          align: category?.product?.align ?? 'left',
           insideContainer,
           container,
-          color: FREEBIES_TABLE_PRODUCT_TEXT_COLOR,
+          color: category?.freebiesTextColor ?? FREEBIES_TABLE_PRODUCT_TEXT_COLOR,
         })
       : renderFreebieGrid({
           freebies,

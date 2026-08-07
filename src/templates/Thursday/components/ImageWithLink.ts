@@ -21,6 +21,15 @@ export interface ImageWithLinkProps {
   tableContainer?: boolean | string;
   /** Open the link in a new tab. */
   targetBlank?: boolean;
+  /**
+   * Explicit intrinsic display width (px). Set this for assets exported at a higher
+   * pixel density than their intended display size (e.g. 2x-retina CTA button PNGs) —
+   * without it the browser renders the image at its native file resolution, since
+   * `max-width: 100%` alone only caps growth, it never scales an oversized asset down.
+   */
+  width?: number | string;
+  /** Explicit intrinsic display height (px). See `width`. */
+  height?: number | string;
 }
 
 /**
@@ -38,7 +47,9 @@ const ImageWithLink = ({
   tdClass,
   insideTable = false,
   tableContainer = false,
-  targetBlank = false
+  targetBlank = false,
+  width,
+  height,
 }: ImageWithLinkProps): string => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
   const tableContainerClass =
@@ -46,7 +57,10 @@ const ImageWithLink = ({
 
   let html = '';
 
-  html += `<a target="${targetBlank ? '_blank' : '_self'}" href="${href}"><img src="${src}" alt="${alt}" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
+  const widthAttr = width !== undefined ? ` width="${width}"` : '';
+  const heightAttr = height !== undefined ? ` height="${height}"` : '';
+
+  html += `<a target="${targetBlank ? '_blank' : '_self'}" href="${href}"><img src="${src}" alt="${alt}"${widthAttr}${heightAttr} style="vertical-align: ${imgVAlign}; max-width: 100%; height: auto;" loading="lazy"></a>`;
 
   if (insideTr) {
     html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}>${html}</td></tr>`;

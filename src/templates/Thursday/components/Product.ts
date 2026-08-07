@@ -86,6 +86,10 @@ const Product = (
             color: color,
             align,
             isFree: product.isFree,
+            // Translated "Free"/"GRATIS" label, threaded per-entry (like `priceColor`) because
+            // `Product`'s own signature is positional and has no `getPhrase` access. Unset =>
+            // `Prices` falls back to the English default, as before.
+            freeText: product.freeText,
             priceColor: product.priceColor,
           })}
         </td>
