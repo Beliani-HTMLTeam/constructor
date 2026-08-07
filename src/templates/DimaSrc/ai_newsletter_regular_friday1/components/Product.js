@@ -11,7 +11,7 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true,
   let html = `
   <table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: ${cardBg}; border-radius: 8px;">
     <tr>
-      <td style="padding: 16px; background-color: ${cardBg};">
+      <td style="padding: 9px 9px 20px; background-color: ${cardBg};">
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
 
   if (product.src && product.href) {

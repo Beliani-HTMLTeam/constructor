@@ -8,6 +8,7 @@ import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
 import { render } from '../../category/small-tiles';
 import { getState } from '@/main/state/appState';
+import { BulletproofButton } from '../BulletproofButton';
 
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
@@ -164,30 +165,29 @@ export const renderCategory = async (
         
   
           ${
-            type === 'newsletter' ?  category.cta?.show
-              ? ImageWithLink({
-                  href: ctaHref,
-                  src: getImageUrl(`${country.toLowerCase()}_${category.cta?.newsletter?.src}.png`, true),
-                  insideTr: true,
-                  tableContainer: true,
-                  align: 'center',
-                  tdClass: 'newsletterContainer80px',
-              })
-              : '' : 
-              `<tr>
-              <td align="center">
-                <a
-                  href="${ctaHref}"
-                  style="
-                    background-color:${background?.cta?.landing?.background || '#750000'};
-                    color:${background?.cta?.landing?.color || '#ffffff'};
-                  "
-                  class="newsletterHtmlCTA"
-                >
-                  ${queries.CTA && queries.CTA[id] ? queries.CTA[id] : ctaText}
-                </a>
-              </td>
-            </tr>`
+            category.cta?.show
+              ? `
+                <tr>
+                  <td align="center">
+                    ${BulletproofButton({
+                      href: ctaHref,
+                      text: queries.CTA?.[id] || ctaText,
+                      background:
+                        background?.cta?.landing?.background || '#750000',
+                      color:
+                        background?.cta?.landing?.color || '#FFFFFF',
+                      align: 'center',
+                      radius: 4,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      lineHeight: 1.2,
+                      paddingX: 20,
+                      paddingY: 11,
+                    })}
+                  </td>
+                </tr>
+              `
+              : ''
           }
           ${Space({ insideTr: true, className: 'newsletterBottom40px', backgroundColor: background })}
   

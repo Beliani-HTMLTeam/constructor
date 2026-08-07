@@ -2,6 +2,7 @@ import { ImageWithLink } from './ImageWithLink.js';
 import { Space } from './Space.js';
 import { templates as TopImageTitleTemplates } from './utils/topImageTitle/templates.js';
 import { getImageUrl } from '../../../../utils/ImageManager.js';
+import { BulletproofButton } from './BulletproofButton.js';
 
 const TopImageTitle = ({
   href,
@@ -95,36 +96,27 @@ const TopImageTitle = ({
 
             ${
               href
-                ? renderType === 'newsletter' && intro?.cta?.newsletter?.src
-                  ? `
-                    
-                       ${ImageWithLink({
-                          href: href,
-                          src: getImageUrl(`${country.toLowerCase()}_${intro?.cta?.newsletter?.src}.png`, true),
-                          tdClass: 'newsletterRight150px',
-                          insideTr: true,
-                          align: 'left',
-                        })}
-                     
-                  `
-                  : renderType === 'landing'
-                    ? `
-                      <tr>
-                        <td align="left">
-                          <a
-                            href="${href}"
-                            style="
-                              background-color:${intro?.cta?.landing?.background || '#FFCCB7'};
-                              color:${intro?.cta?.landing?.color || '#750000'};
-                            "
-                            class="newsletterTopButton"
-                          >
-                            ${ctaText}
-                          </a>
-                        </td>
-                      </tr>
-                    `
-                    : ''
+                ? `
+                  <tr>
+                    <td align="left">
+                      ${BulletproofButton({
+                        href,
+                        text: ctaText,
+                        background:
+                          intro?.cta?.landing?.background || '#FFCCB7',
+                        color:
+                          intro?.cta?.landing?.color || '#750000',
+                        align: 'left',
+                        radius: 5,
+                        fontSize: 15,
+                        fontWeight: 600,
+                        lineHeight: 1.2,
+                        paddingX: 20,
+                        paddingY: 8,
+                      })}
+                    </td>
+                  </tr>
+                `
                 : ''
             }
             ${Space({className: 'newsletterBottom25px', insideTr: true, backgroundColor: bg})}
