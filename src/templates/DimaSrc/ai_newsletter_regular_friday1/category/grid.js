@@ -1,4 +1,5 @@
 import { Product } from '../components/Product';
+import { Prices } from '../../components/components/Prices.js';
 
 // export const render = (
 //   products,
@@ -152,31 +153,105 @@ export const render = (
   }
 
   const cardBg = '#F7EBE6';
+  const textColor = color || '#750000';
+  const gap = 6;
   const totalRows = Math.ceil(products.length / 2);
 
-  const renderProduct = (product, index) => {
-    if (!product) return '&nbsp;';
+  const getBackground = (product) =>
+    product ? cardBg : background;
 
-    return Product(
-      product,
-      showPrices,
-      showNames,
-      color,
-      index,
-      false,
-      !insideContainer,
-      priceColor,
-      ctaText
-    );
+  const renderImage = (product) => {
+    if (!product?.src || !product?.href) {
+      return '&nbsp;';
+    }
+
+    return `
+      <a
+        href="${product.href}"
+        style="
+          display:block;
+          border:0;
+          text-decoration:none;
+        "
+      >
+        <img
+          src="${product.src}"
+          alt="${product.name || 'Product Image'}"
+          style="
+            display:block;
+            width:100%;
+            max-width:100%;
+            height:auto;
+            border:0;
+          "
+        >
+      </a>
+    `;
+  };
+
+  const renderName = (product) => {
+    if (!showNames || !product?.name) {
+      return '&nbsp;';
+    }
+
+    return product.name;
+  };
+
+  const renderProductPrices = (product) => {
+    if (
+      !showPrices ||
+      !product ||
+      (!product.lowPrice && !product.highPrice)
+    ) {
+      return '&nbsp;';
+    }
+
+    return Prices({
+      high: product.highPrice || '',
+      low: product.lowPrice || '',
+      color: priceColor || textColor,
+    });
+  };
+
+  const renderCTA = (product) => {
+    if (!product?.href) {
+      return '&nbsp;';
+    }
+
+    return `
+      <a
+        href="${product.href}"
+        style="
+          color:${textColor};
+          font-family:'Open Sans', Arial, sans-serif;
+          font-size:13px;
+          font-weight:700;
+          text-decoration:underline;
+        "
+      >
+        <span
+          style="
+            color:${textColor};
+            font-size:13px;
+            font-weight:700;
+          "
+        >
+          ${ctaText || 'Shop now'}
+        </span>
+      </a>
+    `;
   };
 
   let html = `
     <tr>
       <td
         style="
-          color:${color};
+          padding-left:6px;
+          padding-right:6px;
+          color:${textColor};
           background-color:${background};
         "
+        ${insideContainer ? 'class="newsletterContainer"' : ''}
       >
         <table
           cellspacing="0"
@@ -199,79 +274,165 @@ export const render = (
     const leftProduct = products[leftIndex];
     const rightProduct = products[rightIndex];
 
+    const leftBg = getBackground(leftProduct);
+    const rightBg = getBackground(rightProduct);
+
+    // Image row
     html += `
       <tr>
-        <!-- Left product -->
         <td
           width="49.5%"
           valign="top"
+          bgcolor="${leftBg}"
           style="
             width:49.5%;
-            padding-left:6px;
+            padding:15px 9px 0;
             vertical-align:top;
-            background-color:${background};
+            background-color:${leftBg};
           "
         >
-          <table
-            cellspacing="0"
-            cellpadding="0"
-            border="0"
-            width="100%"
-            role="presentation"
-            bgcolor="${leftProduct ? cardBg : background}"
-            style="
-              width:100%;
-              background-color:${leftProduct ? cardBg : background};
-            "
-          >
-            <tr>
-              <td valign="top">
-                ${renderProduct(leftProduct, leftIndex)}
-              </td>
-            </tr>
-          </table>
+          ${renderImage(leftProduct)}
         </td>
 
-        <!-- Middle space -->
         <td
-          width="1%"
+          rowspan="5"
+          width="${gap}"
+          bgcolor="${background}"
           style="
-            width:1%;
+            width:${gap}px;
+            min-width:${gap}px;
             font-size:0;
             line-height:0;
             background-color:${background};
           "
         >&nbsp;</td>
 
-        <!-- Right product -->
         <td
           width="49.5%"
           valign="top"
+          bgcolor="${rightBg}"
           style="
             width:49.5%;
-            padding-right:6px;
+            padding:15px 9px 0;
             vertical-align:top;
-            background-color:${background};
+            background-color:${rightBg};
           "
         >
-          <table
-            cellspacing="0"
-            cellpadding="0"
-            border="0"
-            width="100%"
-            role="presentation"
-            bgcolor="${rightProduct ? cardBg : background}"
-            style="
-              width:100%;
-              background-color:${rightProduct ? cardBg : background};
-            "
-          >
-            <tr>
-              <td valign="top">
-                ${renderProduct(rightProduct, rightIndex)}
-              </td>
-            </tr>
-          </table>
+          ${renderImage(rightProduct)}
+        </td>
+      </tr>
+
+      <!-- Space below both images -->
+      <tr>
+        <td
+          height="35"
+          bgcolor="${leftBg}"
+          style="
+            height:15px;
+            font-size:0;
+            line-height:0;
+            background-color:${leftBg};
+          "
+        >&nbsp;</td>
+
+        <td
+          height="35"
+          bgcolor="${rightBg}"
+          style="
+            height:15px;
+            font-size:0;
+            line-height:0;
+            background-color:${rightBg};
+          "
+        >&nbsp;</td>
+      </tr>
+
+      <!-- Shared name row -->
+      <tr>
+        <td
+          valign="top"
+          bgcolor="${leftBg}"
+          class="newsletterProductTitle"
+          style="
+            padding:0 9px;
+            color:${textColor};
+            vertical-align:top;
+            background-color:${leftBg};
+          "
+        >
+          ${renderName(leftProduct)}
+        </td>
+
+        <td
+          valign="top"
+          bgcolor="${rightBg}"
+          class="newsletterProductTitle"
+          style="
+            padding:0 9px;
+            color:${textColor};
+            vertical-align:top;
+            background-color:${rightBg};
+          "
+        >
+          ${renderName(rightProduct)}
+        </td>
+      </tr>
+
+      <!-- Shared price row -->
+      <tr>
+        <td
+          valign="top"
+          bgcolor="${leftBg}"
+          style="
+            padding:3px 9px 0;
+            color:${priceColor || textColor};
+            vertical-align:top;
+            background-color:${leftBg};
+          "
+        >
+          ${renderProductPrices(leftProduct)}
+        </td>
+
+        <td
+          valign="top"
+          bgcolor="${rightBg}"
+          style="
+            padding:3px 9px 0;
+            color:${priceColor || textColor};
+            vertical-align:top;
+            background-color:${rightBg};
+          "
+        >
+          ${renderProductPrices(rightProduct)}
+        </td>
+      </tr>
+
+      <!-- Shared CTA row -->
+      <tr>
+        <td
+          valign="bottom"
+          bgcolor="${leftBg}"
+          style="
+            padding:10px 9px 16px;
+            color:${textColor};
+            vertical-align:bottom;
+            background-color:${leftBg};
+          "
+        >
+          ${renderCTA(leftProduct)}
+        </td>
+
+        <td
+          valign="bottom"
+          bgcolor="${rightBg}"
+          style="
+            padding:10px 9px 16px;
+            color:${textColor};
+            vertical-align:bottom;
+            background-color:${rightBg};
+          "
+        >
+          ${renderCTA(rightProduct)}
         </td>
       </tr>
     `;
@@ -281,9 +442,10 @@ export const render = (
         <tr>
           <td
             colspan="3"
-            height="6"
+            height="${gap}"
+            bgcolor="${background}"
             style="
-              height:6px;
+              height:${gap}px;
               font-size:0;
               line-height:0;
               background-color:${background};

@@ -3,24 +3,12 @@ const campaignTranslationsSheet = '2026::28.08.26 - Kitchen';
 
 const tableQueries = [
   {
-    "tableRange": "16:17",
+    "tableRange": "17:18",
     "name": "TopImageTitle"
-  },
-  {
-    "tableRange": "20",
-    "name": "subtitle"
   },
   {
     "tableRange": "21",
     "name": "intro"
-  },
-  {
-    "tableRange": "22:25",
-    "name": "paragraph"
-  },
-  {
-    "tableRange": "26:29",
-    "name": "CTA"
   },
   {
     "tableRange": "30:31",
@@ -35,7 +23,7 @@ const tableQueries = [
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-08-28' }),
   TopImageTitle_src: translateImage({ value: '20260828_01.png' }),
-  TopImage_src: getImageUrl('20260828_gif_a.gif', true),
+  TopImage_src: getImageUrl('20260828_gif_b.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-08-28' }),
   Banner_1: translateLink({ value: 'content/lp26-08-19' }),
   Banner_1_Image: translateImage({ value: '20260819b.png' }),
@@ -46,35 +34,22 @@ const links = {
 };
 
 const intro_data = {
-  color: "#FFCCB7",
-  backgroundColor: "#750000",
+  color: "#000000",
+  backgroundColor: "#FFEBE2",
   alignment: "left",
   type: "paragraph",
   cta: {
-    background: "#F6E7E6",
-    color: "#750000",
     overrides: {
-
     },
-    spaceAfter: 'newsletterBottom20px',
-    newsletter: {
-      type: "image",
-      src: 'shop_now',
-    },
-    landing: {
-      type: "button",
-      source: 'queries',
-      background: "#F6E7E6",
-      color: "#750000", 
-    }
+    spaceAfter: 'newsletterBottom35px',
   }
 }
 
 
 const TopImageTitle_data = {
-  color: '#FFCCB7',
-  backgroundColor: '#750000',
-  type: 'twoSameLines',
+  color: '#000000',
+  backgroundColor: '#F6E7E6',
+  type: 'up_to',
 };
 
 
@@ -90,39 +65,26 @@ const categories = [
     overrides: {
 
     },
-    background: '#ffffff',
-    color: '#750000',
-    // src: getImageUrl('20260814Category10.jpg', true),
+    background: '#F6E7E6',
+    color: '#000000',
+    src: getImageUrl('20260828Category10_b.jpg', true),
     href: 'https://www.beliani.ch/kitchen/kitchen-accessories/',
     type: 'grid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom10px',
+      spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
-      color: "#5A4040",
-      spaceAfter: "newsletterBottom30px"
+      show: false,
     },
-    paddingTop: 30,
-    priceColor: '#FF2F00',
+    paddingTop: 60,
     line: {
       show: false
     },
     cta: {
-      show: true,
-      newsletter: {
-        type: "image",
-        src: `kitchen_accessories`
-      },
-      landing: {
-        type: "button",
-        source: 'queries',
-        background: '#750000',
-        color: '#FFFFFF',
-      }
+      show: true
     },
     products: [
       // ELITE PRO
@@ -150,40 +112,28 @@ const categories = [
   {
     name: 'Tableware',
     overrides: {
-
+     
     },
-    background: '#ffffff',
-    color: '#750000',
+    background: '#750000',
+    color: '#ffffff',
+    src: getImageUrl('20260828Category20_b.jpg', true),
     href: 'https://www.beliani.ch/kitchen/kitchenware-tableware/',
     type: 'grid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom10px',
+      spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
-      color: "#5A4040",
-      spaceAfter: "newsletterBottom30px"
+      show: false,
     },
-    paddingTop: 0,
-    priceColor: '#FF2F00',
+    paddingTop: 35,
     line: {
       show: false
     },
     cta: {
-      show: true,
-      newsletter: {
-        type: "image",
-        src: 'tableware'
-      },
-      landing: {
-        type: "button",
-        source: 'queries',
-        background: '#750000',
-        color: '#FFFFFF',
-      }
+      show: true
     },
     products: [
       // HYSSOP
@@ -213,38 +163,26 @@ const categories = [
     overrides: {
 
     },
-    background: '#ffffff',
-    color: '#750000',
+    background: '#F6E7E6',
+    color: '#000000',
+    src: getImageUrl('20260828Category30_b.jpg', true),
     href: 'https://www.beliani.ch/kitchen/kitchen-organization/',
     type: 'grid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom10px',
+      spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
-      color: "#5A4040",
-      spaceAfter: "newsletterBottom30px"
+      show: false,
     },
-    paddingTop: 0,
-    priceColor: '#FF2F00',
+    paddingTop: 35,
     line: {
       show: false
     },
     cta: {
-      show: true,
-      newsletter: {
-        type: "image",
-        src: 'organization_and_storage'
-      },
-      landing: {
-        type: "button",
-        source: 'queries',
-        background: '#750000',
-        color: '#FFFFFF',
-      }
+      show: true
     },
     products: [
       // ALAMO
@@ -274,38 +212,26 @@ const categories = [
     overrides: {
 
     },
-    background: '#ffffff',
-    color: '#750000',
+    background: '#750000',
+    color: '#ffffff',
+    src: getImageUrl('20260828Category40_b.jpg', true),
     href: 'https://www.beliani.ch/kitchen/lighting/',
     type: 'grid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom10px',
+      spaceAfter: 'newsletterBottom35px',
     },
     paragraph: {
-      show: true,
-      color: "#5A4040",
-      spaceAfter: "newsletterBottom30px"
+      show: false,
     },
-    paddingTop: 0,
-    priceColor: '#FF2F00',
+    paddingTop: 35,
     line: {
       show: false
     },
     cta: {
-      show: true,
-      newsletter: {
-        type: "image",
-        src: 'lighting'
-      },
-      landing: {
-        type: "button",
-        source: 'queries',
-        background: '#750000',
-        color: '#FFFFFF',
-      }
+      show: true
     },
     products: [
       // ANDERSON
@@ -333,11 +259,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: "46801",
-  name: "Kitchen_a",
+  startId: "46994",
+  name: "Kitchen_b",
   date: "28.08.2026",
   issueCardId: "521572",
-  lpId: "31751",
+  // lpId: "31616",
   alarm: {
     isActive: false,
   },
@@ -349,10 +275,10 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.AIRegularFridayNslt1, // User should change this
-      css: types.CSS.NS_AI_28_08,
+      template: templates.RegularFridayNslt1, // User should change this
+      css: types.CSS.NS,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: "#ffffffff",
+      background: "#F6E7E6",
       color: "#000000",
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
@@ -362,9 +288,9 @@ export default new entities.Campaign({
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#FFFFFF",
+        color: "#ffffff",
         backgroundColor: '#750000',
-        unitBackground: '#900C0C',
+        unitBackground: '#AC6666',
         type: 'timer',
       },
       intro: intro_data,
@@ -374,9 +300,9 @@ export default new entities.Campaign({
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.AIRegularFridayNslt1, // User should change this
-      css: types.CSS.LP_AI_28_08,
-      background: "#ffffffff",
+      template: templates.RegularFridayNslt1, // User should change this
+      css: types.CSS.LP,
+      background: "#F6E7E6",
       color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
@@ -386,9 +312,9 @@ export default new entities.Campaign({
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#FFFFFF",
+        color: "#ffffff",
         backgroundColor: '#750000',
-        unitBackground: '#900C0C',
+        unitBackground: '#AC6666',
         type: 'timer',
       },
       intro: intro_data,

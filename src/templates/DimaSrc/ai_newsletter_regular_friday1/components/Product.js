@@ -54,14 +54,63 @@ const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true,
 
   if (product.href) {
     html += `
-     ${Space({ insideTr: true, className: 'newsletterBottom10px', backgroundColor: cardBg })}
-          <tr>
-            <td style="color: ${textColor}; font-family: 'Open Sans', Arial, sans-serif;">
-              <a href="${product.href}" style="color: ${textColor}; text-decoration: underline; font-size: 13px; font-weight: 700;">
-                <span style="color: ${textColor}; font-size: 13px; font-weight: 700;">${ctaText || 'Shop now'}</span>
-              </a>
-            </td>
-          </tr>
+      <tr>
+        <td
+          height="100%"
+          valign="bottom"
+          style="
+            height:100%;
+            color:${textColor};
+            font-family:'Open Sans', Arial, sans-serif;
+            vertical-align:bottom;
+          "
+        >
+          <table
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="100%"
+            role="presentation"
+          >
+            ${Space({
+              insideTr: true,
+              className: 'newsletterBottom10px',
+              backgroundColor: cardBg,
+            })}
+  
+            <tr>
+              <td
+                valign="bottom"
+                style="
+                  color:${textColor};
+                  font-family:'Open Sans', Arial, sans-serif;
+                  vertical-align:bottom;
+                "
+              >
+                <a
+                  href="${product.href}"
+                  style="
+                    color:${textColor};
+                    text-decoration:underline;
+                    font-size:13px;
+                    font-weight:700;
+                  "
+                >
+                  <span
+                    style="
+                      color:${textColor};
+                      font-size:13px;
+                      font-weight:700;
+                    "
+                  >
+                    ${ctaText || 'Shop now'}
+                  </span>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
     `;
   }
 
