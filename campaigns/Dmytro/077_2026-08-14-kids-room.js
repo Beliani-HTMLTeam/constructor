@@ -64,7 +64,8 @@ const categories = [
   {
     name: 'Kids beds',
     overrides: {
-
+      UK: "Beds",
+      PL: "Łóżka"
     },
     background: '#FFEBE2',
     color: '#000000',
@@ -113,7 +114,9 @@ const categories = [
   {
     name: 'Kids chairs and tables',
     overrides: {
-      FI: "Lasten pöydät ja tuolit"
+      FI: "Lasten pöydät ja tuolit",
+      UK: "Chairs and Tables",
+      PL: "Krzesła i stoły"
     },
     background: '#FEE3BF',
     color: '#000000',
@@ -162,7 +165,8 @@ const categories = [
   {
     name: 'Kids storage',
     overrides: {
-
+      UK: "Storage",
+      PL: "Przechowywanie"
     },
     background: '#FFEBE2',
     color: '#000000',
@@ -211,7 +215,8 @@ const categories = [
   {
     name: 'Kids Décor',
     overrides: {
-
+      UK: "Décor",
+      PL: "Dekoracje"
     },
     background: '#FEE3BF',
     color: '#000000',
