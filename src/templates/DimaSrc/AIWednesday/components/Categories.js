@@ -5,6 +5,220 @@ import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
+
+const renderWednesdayCategory = ({
+  category,
+  id,
+  queries,
+  background,
+  color,
+  containerClass,
+  ctaHref,
+  ProductsElement,
+  getPhrase,
+}) => {
+  const categoryNumber = String(id + 1).padStart(2, '0');
+
+  // category.name is already translated in _Categories.js
+  const title = category.name || 'Translation not found';
+
+  // Paragraph translations come from tableQueries: 24:27
+  const paragraph =
+    queries?.paragraphs?.[id] ||
+    'Translation not found';
+
+  const numberColor =
+    category.title?.numberColor ||
+    '#FD9000';
+
+  const titleColor =
+    category.title?.color ||
+    '#750000';
+
+  const paragraphColor =
+    category.paragraph?.color ||
+    color ||
+    '#000000';
+
+  const ctaBackground =
+    category.cta?.background ||
+    '#750000';
+
+  const ctaColor =
+    category.cta?.color ||
+    '#FFFFFF';
+
+  const ctaText =
+    queries?.categoryCTA?.[id] ||
+    (category.cta?.phrase
+      ? getPhrase(category.cta.phrase)
+      : getPhrase('shop now')) ||
+    category.cta?.text ||
+    'Shop now';
+
+  const ImageElement = category.src
+    ? ImageWithLink({
+        href: ctaHref,
+        src: category.src,
+        insideTr: true,
+        tdClass: category.tdClass,
+      })
+    : '';
+
+  const CTAElement =
+    category.cta &&
+    category.cta.visible !== false &&
+    ctaHref
+      ? `
+        <tr>
+          <td
+            bgcolor="${background}"
+            class="${containerClass}"
+            style="
+              background-color:${background};
+            "
+          >
+            <table
+              cellspacing="0"
+              cellpadding="0"
+              border="0"
+              role="presentation"
+              align="left"
+            >
+            ${Space({ className: 'newsletterBottom25px', insideTr: true})}
+              <tr>
+                <td
+                  align="center"
+                  bgcolor="${ctaBackground}"
+                  style="
+                    background-color:${ctaBackground};
+                  "
+                >
+                  <a
+                  class="newsletterWednesdayCategoryCTA"
+                    href="${ctaHref}"
+                    style="
+                    background-color:${ctaBackground};
+                    border-color:${ctaBackground};
+                    color:${ctaColor};
+                    
+                    "
+                  >${ctaText}</a>
+                </td>
+              </tr>
+              ${Space({ className: 'newsletterBottom25px', insideTr: true})}
+            </table>
+          </td>
+        </tr>
+      `
+      : '';
+
+  return `
+    <tr>
+      <td>
+        <table
+          cellspacing="0"
+          cellpadding="0"
+          border="0"
+          width="100%"
+          role="presentation"
+          bgcolor="${background}"
+          style="
+            width:100%;
+            color:${color};
+            background-color:${background};
+          "
+        >
+          ${Space({className: 'newsletterBottom40px', insideTr: true})}
+          <tr>
+            <td
+              class="${containerClass}"
+              bgcolor="${background}"
+              style="
+                background-color:${background};
+              "
+            >
+              <table
+                cellspacing="0"
+                cellpadding="0"
+                border="0"
+                width="100%"
+                role="presentation"
+              >
+                <tr>
+                  <!-- Category number -->
+                  <td
+                    width="80"
+                    valign="top"
+                    style="
+                    color:${numberColor};
+                    "
+                    class="newsletterWednesdayNumber"
+                  >
+                    ${categoryNumber}
+                  </td>
+
+                  <!-- Title and paragraph -->
+                  <td
+                    valign="top"
+                    style="vertical-align:top;"
+                  >
+                    <table
+                      cellspacing="0"
+                      cellpadding="0"
+                      border="0"
+                      width="100%"
+                      role="presentation"
+                    >
+                      <tr>
+                        <td
+                          align="left"
+                          class="newsletterWednesdayCategoryTitle"
+                          style="
+                            color:${titleColor};
+                          
+                          "
+                        >
+                          ${title}
+                        </td>
+                      </tr>
+
+                     ${Space({className: 'newsletterBottom10px', insideTr: true})}
+
+                      <tr>
+                        <td
+                          align="left"
+                          class="newsletterWednesdayCategoryParagraph"
+                          style="
+                            color:${paragraphColor};
+                           
+                          "
+                        >
+                          ${paragraph}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          ${Space({className: 'newsletterBottom25px', insideTr: true})}
+
+          <!-- Full-width lifestyle image -->
+          ${ImageElement}
+
+          <!-- CTA below the category image -->
+          ${CTAElement}
+
+          <!-- Existing 2×2 product grid -->
+          ${ProductsElement}
+        </table>
+      </td>
+    </tr>
+  `;
+};
+
 const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country }) => {
   let html = '';
 
@@ -38,6 +252,27 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
   const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : '';
   const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
+
+  const SubtitleElement = category?.subtitle?.show
+    ? `
+    ${category.subtitle.spaceBefore ? Space({ insideTr: true, className: category.subtitle.spaceBefore }) : ''}
+    <tr>
+      <td>
+        ${Paragraph({
+          text: queries?.additionalSubtitle ?? 'Translation not found',
+          color: category.subtitle.color ?? color,
+          background: background,
+          align: category.subtitle.align ?? 'left',
+          insideTable: true,
+          spanStyle: `color: ${category.subtitle.color ?? color};`,
+          tableContainer: containerClass,
+          className: category.subtitle.className ?? 'newsletterWednesdayAdditionalSubtitle',
+        })}
+      </td>
+    </tr>
+    ${category.subtitle.spaceAfter ? Space({ insideTr: true, className: category.subtitle.spaceAfter }) : ''}
+    `
+    : '';
 
   const TitleElement = category?.title?.show
     ? `
@@ -141,6 +376,22 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         })
       : '';
 
+     
+
+      if (category.layout === 'wednesday') {
+        return renderWednesdayCategory({
+          category,
+          id,
+          queries,
+          background,
+          color,
+          containerClass,
+          ctaHref,
+          ProductsElement,
+          getPhrase,
+        });
+      }
+
   const CTAElement = category.cta
     ? `
       ${category.cta.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
@@ -153,6 +404,59 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       })}
         `
     : '';
+
+    if(category.type === 'newcategorytiles') {
+      return  `<tr>
+      <td>
+        <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%">
+          ${
+            !category.paddingTop || category.paddingTop > 0
+              ? Space({
+                  insideTr: true,
+                  className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 60 : 35)}px`,
+                })
+              : ''
+          }
+
+          ${SubtitleElement}
+  
+          ${!category.title?.position || category.title?.position === 'beforeImg' ? TitleElement : ''}
+  
+          ${ParagraphBeforeImg}
+  
+          ${ImageElement}
+  
+          ${ParagraphAfterImg}
+  
+          ${category.title?.position === 'afterImg' ? TitleElement : ''}
+  
+          ${ParagraphBeforeProducts}
+  
+          ${SpaceBeforeProducts}
+  
+          ${ProductsElement}
+  
+          ${ParagraphAfterProducts}
+  
+          ${CTAElement}
+  
+          ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom80px' })}
+  
+          ${
+            category?.line?.show
+              ? Line({
+                  insideTr: true,
+                  insideContainer: category?.line?.insideContainer,
+                  src: category?.line?.src,
+                })
+              : ''
+          }
+        </table>
+      </td>
+    </tr>
+  
+    `
+    }
 
   return `
 
@@ -297,3 +601,4 @@ const renderBody = async ({
 };
 
 export { Categories };
+

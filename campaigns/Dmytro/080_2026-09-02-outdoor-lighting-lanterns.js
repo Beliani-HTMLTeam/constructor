@@ -63,7 +63,10 @@ const categories = [
     src: getImageUrl('20260902Category10.jpg', true),
     href: 'https://www.beliani.ch/garden-furniture/garden-lighting/',
     background: '#F6E7E6',
+    container: "newsletterContainer25px",
+    gapBetweenHorizontal: '7_5',
     color: '#000000',
+    layout: 'wednesday',
     type: 'grid',
     cta: {
       visible: true,
@@ -88,276 +91,301 @@ const categories = [
       spaceAfter: 'newsletterBottom25px',
     },
     product: {
-      align: 'center',
+      align: 'left',
       prices: true,
       name: true,
       borderWidth: 1,
+      nameColor: "#750000",
       borderColor: '#FFCCB7',
       pricesColor: '#FF2F00',
+      background: '#FFFFFF',
+      spaceAfter: 'newsletterBottom15px',
     },
     products: [
       // TIZU
       {
         id: '562022',
         src: getImageUrl('20260902Category11.png', true),
+     
       },
       // TANGON
       {
         id: '562174',
         src: getImageUrl('20260902Category12.png', true),
+       
       },
       // KULSI
       {
         id: '561813',
         src: getImageUrl('20260902Category13.png', true),
+  
       },
       // ROSALIE
       {
         id: '396479',
         src: getImageUrl('20260902Category14.png', true),
+       
       },
     ],
   },
-  // {
-  //   name: 'Table lamps',
-  //   src: getImageUrl('20260902Category20.jpg', true),
-  //   href: 'https://www.beliani.ch/garden-lighting/outdoor-table-lamps/',
-  //   background: '#F6E7E6',
-  //   color: '#000000',
-  //   type: 'grid',
-  //   cta: {
-  //     visible: true,
-  //     text: 'Shop now',
-  //     background: '#750000',
-  //     color: '#F6E7E6'
-  //   },
-  //   paddingTop: 0,
-  //   title: {
-  //     position: 'beforeImg',
-  //     show: true,
-  //     align: 'center',
-  //     spaceBefore: 'newsletterBottom40px',
-  //     spaceAfter: 'newsletterBottom10px',
-  //     color: '#750000',
-  //     numberColor: '#FD9000'
-  //   },
-  //   paragraph: {
-  //     show: true,
-  //     position: 'beforeImg',
-  //     align: 'center',
-  //     spaceAfter: 'newsletterBottom25px',
-  //   },
-  //   product: {
-  //     align: 'center',
-  //     prices: true,
-  //     name: true,
-  //     borderWidth: 1,
-  //     borderColor: '#FFCCB7',
-  //     pricesColor: '#FF2F00',
-  //   },
-  //   products: [
-  //     // MODJO
-  //     {
-  //       id: '695472',
-  //       src: getImageUrl('20260902Category21.png', true),
-  //     },
-  //     // ALVIELA
-  //     {
-  //       id: '559170',
-  //       src: getImageUrl('20260902Category22.png', true),
-  //     },
-  //     // VOUGA
-  //     {
-  //       id: '559132',
-  //       src: getImageUrl('20260902Category23.png', true),
-  //     },
-  //     // JOANES
-  //     {
-  //       id: '561206',
-  //       src: getImageUrl('20260902Category24.png', true),
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'Decorative lamps',
-  //   src: getImageUrl('20260902Category30.jpg', true),
-  //   href: 'https://www.beliani.ch/garden-lighting/outdoor-decorative-lamps/',
-  //   background: '#F6E7E6',
-  //   color: '#000000',
-  //   type: 'grid',
-  //   cta: {
-  //     visible: true,
-  //     text: 'Shop now',
-  //     background: '#750000',
-  //     color: '#F6E7E6'
-  //   },
-  //   paddingTop: 0,
-  //   title: {
-  //     position: 'beforeImg',
-  //     show: true,
-  //     align: 'center',
-  //     spaceBefore: 'newsletterBottom40px',
-  //     spaceAfter: 'newsletterBottom10px',
-  //     color: '#750000',
-  //     numberColor: '#FD9000'
-  //   },
-  //   paragraph: {
-  //     show: true,
-  //     position: 'beforeImg',
-  //     align: 'center',
-  //     spaceAfter: 'newsletterBottom25px',
-  //   },
-  //   product: {
-  //     align: 'center',
-  //     prices: true,
-  //     name: true,
-  //     borderWidth: 1,
-  //     borderColor: '#FFCCB7',
-  //     pricesColor: '#FF2F00',
-  //   },
-  //   products: [
-  //     // SABANAS
-  //     {
-  //       id: '588724',
-  //       src: getImageUrl('20260902Category31.png', true),
-  //     },
-  //     // LAGARTO
-  //     {
-  //       id: '588727',
-  //       src: getImageUrl('20260902Category32.png', true),
-  //     },
-  //     // VULETAS
-  //     {
-  //       id: '588725',
-  //       src: getImageUrl('20260902Category33.png', true),
-  //     },
-  //     // LOBAINA
-  //     {
-  //       id: '588729',
-  //       src: getImageUrl('20260902Category34.png', true),
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'Lanterns',
-  //   src: getImageUrl('20260902Category40.jpg', true),
-  //   href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',
-  //   background: '#F6E7E6',
-  //   color: '#000000',
-  //   type: 'grid',
-  //   cta: {
-  //     visible: true,
-  //     text: 'Shop now',
-  //     background: '#750000',
-  //     color: '#F6E7E6'
-  //   },
-  //   paddingTop: 0,
-  //   title: {
-  //     position: 'beforeImg',
-  //     show: true,
-  //     align: 'center',
-  //     spaceBefore: 'newsletterBottom40px',
-  //     spaceAfter: 'newsletterBottom10px',
-  //     color: '#750000',
-  //     numberColor: '#FD9000'
-  //   },
-  //   paragraph: {
-  //     show: true,
-  //     position: 'beforeImg',
-  //     align: 'center',
-  //     spaceAfter: 'newsletterBottom25px',
-  //   },
-  //   product: {
-  //     align: 'center',
-  //     prices: true,
-  //     name: true,
-  //     borderWidth: 1,
-  //     borderColor: '#FFCCB7',
-  //     pricesColor: '#FF2F00',
-  //   },
-  //   products: [
-  //     // LUMBIS
-  //     {
-  //       id: '325483',
-  //       src: getImageUrl('20260902Category41.png', true),
-  //     },
-  //     // TAHITI
-  //     {
-  //       id: '113574',
-  //       src: getImageUrl('20260902Category42.png', true),
-  //     },
-  //     // BINTAN
-  //     {
-  //       id: '199499',
-  //       src: getImageUrl('20260902Category43.png', true),
-  //     },
-  //     // TONGA
-  //     {
-  //       id: '121559',
-  //       src: getImageUrl('20260902Category44.png', true),
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'This may also interest you',
-  //   subtitle: {
-  //     visible: true,
-  //     color: "#FF2F00",
-  //     spaceAfter: "newsletterBottom15px"
-  //   }
-  //   // src: getImageUrl('20260311_Cat30.png', true),
-  //   // href: 'https://www.beliani.ch/home-accessories/kitchenware-tableware/',
-  //   background: '#F6E7E6',
-  //   color: '#000000',
-  //   type: 'categorytiles',
-  //   cta: false,
-  //   paddingTop: 80,
-  //   spaceAfter: 0,
-  //   title: {
-  //     className: 'newsletterAditionalTitle',
-  //     align: 'center',
-  //     show: true,
-  //     spaceBefore: 'newsletterBottom30px',
-  //     color: "#750000"
-  //     // spaceAfter: 'newsletterBottom35px',
-  //   },
-  //   paragraph: {
-  //     show: false,
-  //     align: 'center',
-  //     spaceBefore: 'newsletterBottom35px',
-  //     spaceAfter: 'newsletterBottom35px',
-  //   },
-  //   product: {
-  //     align: 'center',
-  //     background: '#FFCCB7',
-  //     color: "#750000"
-  //   },
-  //   tiles: [
-  //     {
-  //       name: 'Outdoor cushions',
-  //       src: getImageUrl('20260902Additional1.png', true),
-  //       href: 'https://www.beliani.ch/outdoor-textiles/cushions-for-garden/',
-  //     },
-  //     {
-  //       name: 'Blankets',
-  //       src: getImageUrl('20260902Additional2.png', true),
-  //       href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
-  //       hrefOverrides: {},
-  //     },
-  //     {
-  //       name: 'Fire pits',
-  //       src: getImageUrl('20260902Additional3.png', true),
-  //       href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
-  //       hrefOverrides: { },
-  //     },
-  //     {
-  //       name: 'Patio heaters',
-  //       src: getImageUrl('20260902Additional4.png', true),
-  //       href: 'https://www.beliani.ch/garden-accessories/patio-heaters/',
-  //       hrefOverrides: { },
-  //     },
-  //   ],
-  // },
+  {
+    name: 'Outdoor Table Lamps',
+    src: getImageUrl('20260902Category20.jpg', true),
+    href: 'https://www.beliani.ch/garden-lighting/outdoor-table-lamps/',
+    background: '#F6E7E6',
+    container: "newsletterContainer25px",
+    gapBetweenHorizontal: '7_5',
+    color: '#000000',
+    layout: 'wednesday',
+    type: 'grid',
+    cta: {
+      visible: true,
+      text: 'Shop now',
+      background: '#750000',
+      color: '#F6E7E6'
+    },
+    paddingTop: 0,
+    title: {
+      position: 'beforeImg',
+      show: true,
+      align: 'center',
+      spaceBefore: 'newsletterBottom40px',
+      spaceAfter: 'newsletterBottom10px',
+      color: '#750000',
+      numberColor: '#FD9000'
+    },
+    paragraph: {
+      show: true,
+      position: 'beforeImg',
+      align: 'center',
+      spaceAfter: 'newsletterBottom25px',
+    },
+    product: {
+      align: 'left',
+      prices: true,
+      name: true,
+      borderWidth: 1,
+      nameColor: "#750000",
+      borderColor: '#FFCCB7',
+      pricesColor: '#FF2F00',
+      background: '#FFFFFF',
+      spaceAfter: 'newsletterBottom15px',
+    },
+    products: [
+      // MODJO
+      {
+        id: '695472',
+        src: getImageUrl('20260902Category21.png', true),
+      },
+      // ALVIELA
+      {
+        id: '559170',
+        src: getImageUrl('20260902Category22.png', true),
+      },
+      // VOUGA
+      {
+        id: '559132',
+        src: getImageUrl('20260902Category23.png', true),
+      },
+      // JOANES
+      {
+        id: '561206',
+        src: getImageUrl('20260902Category24.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Outdoor Decorative Lamps',
+    src: getImageUrl('20260902Category30.jpg', true),
+    href: 'https://www.beliani.ch/garden-lighting/outdoor-decorative-lamps/',
+    background: '#F6E7E6',
+    container: "newsletterContainer25px",
+    gapBetweenHorizontal: '7_5',
+    color: '#000000',
+    layout: 'wednesday',
+    type: 'grid',
+    cta: {
+      visible: true,
+      text: 'Shop now',
+      background: '#750000',
+      color: '#F6E7E6'
+    },
+    paddingTop: 0,
+    title: {
+      position: 'beforeImg',
+      show: true,
+      align: 'center',
+      spaceBefore: 'newsletterBottom40px',
+      spaceAfter: 'newsletterBottom10px',
+      color: '#750000',
+      numberColor: '#FD9000'
+    },
+    paragraph: {
+      show: true,
+      position: 'beforeImg',
+      align: 'center',
+      spaceAfter: 'newsletterBottom25px',
+    },
+    product: {
+      align: 'left',
+      prices: true,
+      name: true,
+      borderWidth: 1,
+      nameColor: "#750000",
+      borderColor: '#FFCCB7',
+      pricesColor: '#FF2F00',
+      background: '#FFFFFF',
+      spaceAfter: 'newsletterBottom15px',
+    },
+    products: [
+      // SABANAS
+      {
+        id: '588724',
+        src: getImageUrl('20260902Category31.png', true),
+      },
+      // LAGARTO
+      {
+        id: '588727',
+        src: getImageUrl('20260902Category32.png', true),
+      },
+      // VULETAS
+      {
+        id: '588725',
+        src: getImageUrl('20260902Category33.png', true),
+      },
+      // LOBAINA
+      {
+        id: '588729',
+        src: getImageUrl('20260902Category34.png', true),
+      },
+    ],
+  },
+  {
+    name: 'Lanterns',
+    src: getImageUrl('20260902Category40.jpg', true),
+    href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',
+    background: '#F6E7E6',
+    container: "newsletterContainer25px",
+    gapBetweenHorizontal: '7_5',
+    color: '#000000',
+    layout: 'wednesday',
+    type: 'grid',
+    cta: {
+      visible: true,
+      text: 'Shop now',
+      background: '#750000',
+      color: '#F6E7E6'
+    },
+    paddingTop: 0,
+    title: {
+      position: 'beforeImg',
+      show: true,
+      align: 'center',
+      spaceBefore: 'newsletterBottom40px',
+      spaceAfter: 'newsletterBottom10px',
+      color: '#750000',
+      numberColor: '#FD9000'
+    },
+    paragraph: {
+      show: true,
+      position: 'beforeImg',
+      align: 'center',
+      spaceAfter: 'newsletterBottom25px',
+    },
+    product: {
+      align: 'left',
+      prices: true,
+      name: true,
+      borderWidth: 1,
+      nameColor: "#750000",
+      borderColor: '#FFCCB7',
+      pricesColor: '#FF2F00',
+      background: '#FFFFFF',
+      spaceAfter: 'newsletterBottom15px',
+    },
+    products: [
+      // LUMBIS
+      {
+        id: '325483',
+        src: getImageUrl('20260902Category41.png', true),
+      },
+      // TAHITI
+      {
+        id: '113574',
+        src: getImageUrl('20260902Category42.png', true),
+      },
+      // BINTAN
+      {
+        id: '199499',
+        src: getImageUrl('20260902Category43.png', true),
+      },
+      // TONGA
+      {
+        id: '121559',
+        src: getImageUrl('20260902Category44.png', true),
+      },
+    ],
+  },
+  {
+    name: 'This may also interest you',
+    subtitle: {
+      show: true,
+      color: "#FF2F00",
+      spaceAfter: "newsletterBottom10px",
+      className: "newsletterWednesdayAdditionalSubtitle",
+    },
+    // src: getImageUrl('20260311_Cat30.png', true),
+    // href: 'https://www.beliani.ch/home-accessories/kitchenware-tableware/',
+    background: '#F6E7E6',
+    color: '#750000',
+    type: 'newcategorytiles',
+    cta: false,
+    paddingTop: 80,
+    spaceAfter: 0,
+    title: {
+      className: 'newsletterAditionalTitle',
+      align: 'left',
+      show: true,
+      color: "#750000"
+      // spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: false,
+      align: 'center',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      align: 'center',
+      background: '#FFCCB7',
+      color: "#750000"
+    },
+    tiles: [
+      {
+        name: 'Outdoor cushions',
+        src: getImageUrl('20260902Additional1.png', true),
+        href: 'https://www.beliani.ch/outdoor-textiles/cushions-for-garden/',
+      },
+      {
+        name: 'Blankets',
+        src: getImageUrl('20260902Additional2.png', true),
+        href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
+        hrefOverrides: {},
+      },
+      {
+        name: 'Fire pits',
+        src: getImageUrl('20260902Additional3.png', true),
+        href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
+        hrefOverrides: {},
+      },
+      {
+        name: 'Patio heaters',
+        src: getImageUrl('20260902Additional4.png', true),
+        href: 'https://www.beliani.ch/garden-accessories/patio-heaters/',
+        hrefOverrides: {},
+      },
+    ],
+  },
 ];
 
 
@@ -399,7 +427,7 @@ export default new entities.Campaign({
       name: 'Landing',
       type: types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,
-     intro: Intro_data,
+      intro: Intro_data,
       categories: categories,
       links: links,
       tableQueries: tableQueries,

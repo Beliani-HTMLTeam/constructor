@@ -54,10 +54,10 @@ img {
 }
 
 .newsletterAditionalTitle {
-  font-size: 30px;
+  font-size: 27px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 600;
 }
 .newsletterAdditionalCategoryTitle {
   font-size: 27px;
@@ -108,7 +108,7 @@ img {
   font-family: "Open Sans", sans-serif;
 }
 
-.newsletterWednesaySubtitle {
+.newsletterWednesdaySubtitle {
   font-family: "Open Sans", sans-serif;
     font-size:12px;
   line-height:1.2;
@@ -118,7 +118,26 @@ img {
   text-transform:uppercase;
 }
 
-.newsletterWednesayTitle {
+.newsletterWednesdayAdditionalTitle {
+  padding: 14px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
+  width: stretch;
+}
+
+.newsletterWednesdayAdditionalSubtitle {
+  font-family: "Open Sans", sans-serif;
+    font-size:11px;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:3px;
+  text-align:left;
+  text-transform:uppercase;
+}
+
+.newsletterWednesdayTitle {
   font-family:"Open Sans", sans-serif;
                       font-size:53px;
                       line-height:1.2;
@@ -168,6 +187,14 @@ img {
 /* ============================ newsletterPadding ================================*/
 .newsletterRight10px {
   padding-right: 10px;
+}
+
+.newsletterRight7_5px {
+  padding-right: 7.5px;
+}
+
+.newsletterLeft7_5px {
+  padding-left: 7.5px;
 }
 
 .newsletterRight02px {
@@ -227,6 +254,56 @@ img {
   -webkit-text-size-adjust:none;
 }
 
+.newsletterWednesdayNumber {
+  width:100px;
+  font-family:"Open Sans", sans-serif;
+  font-size:46px;
+  line-height:1.2;
+  font-weight:700;
+  vertical-align:top;
+}
+
+.newsletterWednesdayCategoryTitle {
+  font-family:"Open Sans", sans-serif;
+  font-size:27px;
+  line-height:1.2;
+  font-weight:600;
+  text-align:left;
+}
+
+.newsletterWednesdayCategoryParagraph {
+  font-family:"Open Sans", sans-serif;
+  font-size: 14px;
+  line-height:1.4;
+  text-align:left;
+}
+
+.newsletterWednesdayCategoryCTA {
+  display:inline-block;
+  border-style:solid;
+  border-top-width:15px;
+  border-bottom-width:15px;
+  border-left-width: 34px;
+  border-right-width: 34px;
+  font-family:"Open Sans", sans-serif;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:700;
+  letter-spacing:2px;
+  text-align:center;
+  text-decoration:none;
+  text-transform:uppercase;
+  white-space:nowrap;
+  -webkit-text-size-adjust:none;
+}
+
+.newsletterWednesdayProductPaddings {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 20px;
+}
+
 .newsletterMiniContainer {
   padding-left: 10px;
   padding-right: 10px;
@@ -271,6 +348,14 @@ img {
   line-height: 1.2;
 }
 
+.newsletterProductWednesdayTitle {
+  font-size: 13px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+
 .newsletterProductLowPrice {
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
@@ -278,7 +363,22 @@ img {
   font-weight: 600;
 }
 
+.newsletterWednesdayProductLowPrice {
+  font-size: 17px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+
 .newsletterProductHighPrice {
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+
+.newsletterWednesdayProductHighPrice {
   font-size: 14px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;

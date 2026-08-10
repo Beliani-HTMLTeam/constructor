@@ -103,7 +103,7 @@ export const IntroHandler = ({
                 <tr>
                   <td
                     align="left"
-                    class="newsletterWednesaySubtitle"
+                    class="newsletterWednesdaySubtitle"
                     style="
                       color:${subtitleColor};
                      
@@ -125,7 +125,7 @@ export const IntroHandler = ({
                 <tr>
                   <td
                     align="left"
-                    class="newsletterWednesayTitle"
+                    class="newsletterWednesdayTitle"
                     style="
                       color:${titleColor};
                      

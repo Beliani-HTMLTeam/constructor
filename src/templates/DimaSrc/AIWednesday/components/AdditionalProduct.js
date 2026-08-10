@@ -2,7 +2,7 @@ import { ImageWithLink } from './ImageWithLink.js';
 import { Prices } from './Prices.js';
 import { Space } from './Space.js';
 
-const Product = (
+const AdditionalProduct = (
   product,
   showPrices,
   showName,
@@ -51,7 +51,7 @@ const Product = (
       ${nameGapClass ? Space({ insideTr: true, className: nameGapClass }) : ''}
       
       <tr>
-        <td align="${align}" style="text-align: ${align}; color: ${category.product.nameColor || color}" class="newsletterProductWednesdayTitle">${product.name}</td>
+        <td align="${align}" style="text-align: ${align}; color: ${category.product.color || color}; background: ${category.product.background || 'transparent'};" class="newsletterProductWednesdayAdditionalTitle">${product.name}</td>
       </tr>
       ${nameGapClass ? Space({ insideTr: true, className: "newsletterBottom10px" }) : ''}
     `;
@@ -83,4 +83,4 @@ const Product = (
   return html;
 };
 
-export { Product };
+export { AdditionalProduct };

@@ -14,7 +14,9 @@ export const render = ({
   id,
   imageSide,
   alignToSide = false,
+  category
 }) => {
+  console.log("category,", category)
   let productsInnerHtml = '';
   const containerClass = insideContainer ? (container ?? 'newsletterContainer') : '';
 
@@ -40,7 +42,7 @@ export const render = ({
         productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${horizontalGapValue} align="${imageAlign}">`;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container);
+          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container, category);
         }
 
         productsInnerHtml += '</td>';
