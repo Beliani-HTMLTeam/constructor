@@ -56,6 +56,7 @@ export function normalizeProducts(products) {
     if (allowedSellers.includes(username)) {
       const masterKey = String(element.saved_params.master_sa ?? '');
       const masterAlias = masterKey ? master_products[masterKey]?.ShopSAAlias : undefined;
+      const masterDescription = masterKey ? master_products[masterKey]?.shop_description : undefined;
 
       const hrefs = masterAlias
         ? { ...masterAlias, ...element.ShopSAAlias }
@@ -63,7 +64,7 @@ export function normalizeProducts(products) {
       
       if (!hrefs) continue;
 
-      normalized.push(new Product({ ...element, saved_params, hrefs }));
+      normalized.push(new Product({ ...element, saved_params, hrefs, shop_description: element.shop_description ?? masterDescription }));
     }
   }
 

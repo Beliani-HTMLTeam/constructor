@@ -8,6 +8,7 @@ import { Categories2Columns } from './MichalTemporary/Categories2Columns';
 import { Monday } from '@/templates/JakubSrc/monday_newsletter/template.js';
 import { Friday } from './DimaSrc/friday_newsletter/template';
 import { RegularFridayNslt1 } from './DimaSrc/newsletter_regular_friday1/templates/regularFridayNslt';
+import { MondayNew } from './AISrc/monday_new/template.js';
 
 export const templates = {
   Blackweek,
@@ -19,5 +20,6 @@ export const templates = {
   Categories2Columns,
   Friday,
   RegularFridayNslt1,
-  Monday
+  Monday,
+  MondayNew
 };

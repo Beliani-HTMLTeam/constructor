@@ -2,6 +2,7 @@ import { handleProduct } from '@/main/handlers/index.js';
 import { getQueryLink } from '@/helpers/getQueryLink.js';
 import { getState } from '@/main/state/appState';
 import { staticTranslations } from '@/api/translations';
+import { countryToLanguage } from '@/entities/Product.js';
 
 import _templates from '@/main/data/templates.js';
 import _categoriesLinks from '@/main/data/categoriesLinks.js';
@@ -100,7 +101,22 @@ export class TemplateHandlers {
     }
 
     const href = shop.origin + hrefEntry.value + '.html';
-    return handleProduct(src ? { ...product, href, src } : { ...product, href }, options);
+
+    let description = '';
+    if (options?.useDescription && product.shop_description) {
+      const language = countryToLanguage[country?.toLowerCase()];
+
+      const descEntry = product.shop_description[language];
+      if (descEntry?.title) {
+        description = descEntry.title;
+        description = description.replace(product.name, '').trim();
+      }
+    }
+
+    return handleProduct(
+      src ? { ...product, href, src, name: product.name, description } : { ...product, href, name: product.name, description },
+      options
+    );
   };
 
   getCategoryTitle = (column) => {
