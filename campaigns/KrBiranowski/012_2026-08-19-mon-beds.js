@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = '2026::12.08.26 - Outdoor';
+const campaignTranslationsSheet = '2026::19.08.26 - Beds';
 
 const tableQueries = [
   {
@@ -20,28 +20,28 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-12' }),
-  TopImageTitle_src: translateImage({ value: '20260812_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-08-19' }),
+  TopImageTitle_src: translateImage({ value: '20260819_01.png' }),
   // TopImage_src: getImageUrl('20260715_Pic.png', true),
   // TopImage_href: translateLink({ value: 'content/lp26-07-15' }),
-  Banner_1: translateLink({ value: 'content/lp26-08-05' }),
-  Banner_1_Image: translateImage({ value: '20260805b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-08-12' }),
+  Banner_1_Image: translateImage({ value: '20260812b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-07' }),
   Banner_2_Image: translateImage({ value: '20260807b.png' }),
 };
 
 const TopImageTitle_data = {
   color: '#000000',
-  backgroundColor: '#F7EAE9',
+  backgroundColor: '#FFE0D4',
   type: 'twoSameLines',
 };
 
 const categories = [
   {
-    name: 'Lounge sets',
-    src: getImageUrl('20260812_Cat10.jpg', true),
-    href: 'https://www.beliani.ch/outdoor-furniture/lounge-sets/',
-    background: '#F7EAE9',
+    name: 'Fabric Beds',
+    src: getImageUrl('20260819_Cat10.jpg', true),
+    href: 'https://www.beliani.ch/beds/fabric-beds/',
+    background: '#FFE0D4',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -71,28 +71,28 @@ const categories = [
     },
     products: [
       {
-        id: '811192',
-        src: getImageUrl('20260812_Pic10.png', true),
+        id: '667808',
+        src: getImageUrl('20260819_Pic10.png', true),
       },
       {
-        id: '695914',
-        src: getImageUrl('20260812_Pic11.png', true),
+        id: '605695',
+        src: getImageUrl('20260819_Pic11.png', true),
       },
       {
-        id: '810482',
-        src: getImageUrl('20260812_Pic12.png', true),
+        id: '588244',
+        src: getImageUrl('20260819_Pic12.png', true),
       },
       {
-        id: '815399',
-        src: getImageUrl('20260812_Pic13.png', true),
+        id: '387772',
+        src: getImageUrl('20260819_Pic13.png', true),
       },
     ],
   },
   {
-    name: 'Dining sets',
-    src: getImageUrl('20260812_Cat20.jpg', true),
-    href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
-    background: '#FFE0D9',
+    name: 'Storage Beds',
+    src: getImageUrl('20260819_Cat20.jpg', true),
+    href: 'https://www.beliani.ch/beds/storage-beds/',
+    background: '#F6E7E6',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -117,28 +117,28 @@ const categories = [
     },
     products: [
       {
-        id: '258544',
-        src: getImageUrl('20260812_Pic20.png', true),
+        id: '497279',
+        src: getImageUrl('20260819_Pic20.png', true),
       },
       {
-        id: '249032',
-        src: getImageUrl('20260812_Pic21.png', true),
+        id: '686424',
+        src: getImageUrl('20260819_Pic21.png', true),
       },
       {
-        id: '195463',
-        src: getImageUrl('20260812_Pic22.png', true),
+        id: '583928',
+        src: getImageUrl('20260819_Pic22.png', true),
       },
       {
-        id: '805583',
-        src: getImageUrl('20260812_Pic23.png', true),
+        id: '683822',
+        src: getImageUrl('20260819_Pic23.png', true),
       },
     ],
   },
   {
-    name: 'Balcony furniture',
-    src: getImageUrl('20260812_Cat30.jpg', true),
-    href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
-    background: '#F7EAE9',
+    name: 'Wooden Beds',
+    src: getImageUrl('20260819_Cat30.jpg', true),
+    href: 'https://www.beliani.ch/beds/wooden-beds/',
+    background: '#FFE0D4',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -163,28 +163,28 @@ const categories = [
     },
     products: [
       {
-        id: '162135',
-        src: getImageUrl('20260812_Pic30.png', true),
+        id: '521815',
+        src: getImageUrl('20260819_Pic30.png', true),
       },
       {
-        id: '263519',
-        src: getImageUrl('20260812_Pic31.png', true),
+        id: '610490',
+        src: getImageUrl('20260819_Pic31.png', true),
       },
       {
-        id: '622222',
-        src: getImageUrl('20260812_Pic32.png', true),
+        id: '461880',
+        src: getImageUrl('20260819_Pic32.png', true),
       },
       {
-        id: '385843',
-        src: getImageUrl('20260812_Pic33.png', true),
+        id: '447265',
+        src: getImageUrl('20260819_Pic33.png', true),
       },
     ],
   },
   {
-    name: 'Outdoor kitchen',
-    src: getImageUrl('20260812_Cat40.jpg', true),
-    href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
-    background: '#FFE0D9',
+    name: 'Single Beds',
+    src: getImageUrl('20260819_Cat40.jpg', true),
+    href: 'https://www.beliani.ch/beds/single-beds/',
+    background: '#F6E7E6',
     color: '#000000',
     type: 'grid',
     cta: true,
@@ -209,20 +209,20 @@ const categories = [
     },
     products: [
       {
-        id: '618456',
-        src: getImageUrl('20260812_Pic40.png', true),
+        id: '728900',
+        src: getImageUrl('20260819_Pic40.png', true),
       },
       {
-        id: '617701',
-        src: getImageUrl('20260812_Pic41.png', true),
+        id: '249451',
+        src: getImageUrl('20260819_Pic41.png', true),
       },
       {
-        id: '723446',
-        src: getImageUrl('20260812_Pic42.png', true),
+        id: '812770',
+        src: getImageUrl('20260819_Pic42.png', true),
       },
       {
-        id: '811703',
-        src: getImageUrl('20260812_Pic43.png', true),
+        id: '503715',
+        src: getImageUrl('20260819_Pic43.png', true),
       },
     ],
   },
@@ -254,35 +254,35 @@ const categories = [
     },
     tiles: [
       {
-        name: 'Parasols',
-        src: getImageUrl('20260812_Add1.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/parasols/',
+        name: 'Mattresses',
+        src: getImageUrl('20260819_Add1.png', true),
+        href: 'https://www.beliani.ch/bedroom-furniture/mattresses/',
       },
       {
-        name: 'Fire pits & grills',
-        src: getImageUrl('20260812_Add2.png', true),
-        href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
+        name: 'Textiles',
+        src: getImageUrl('20260819_Add2.png', true),
+        href: 'https://www.beliani.ch/bedroom-furniture/textiles/',
       },
       {
-        name: 'Garden accessories',
-        src: getImageUrl('20260812_Add3.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/garden-accessories/',
+        name: 'Storage',
+        src: getImageUrl('20260819_Add3.png', true),
+        href: 'https://www.beliani.ch/storage/',
       },
       {
-        name: 'Outdoor textiles',
-        src: getImageUrl('20260812_Add4.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/outdoor-textiles/',
+        name: 'Rugs',
+        src: getImageUrl('20260819_Add4.png', true),
+        href: 'https://www.beliani.ch/bedroom-furniture/rugs/',
       },
     ],
   },
 ];
 
 export default new entities.Campaign({
-  startId: "46734",
-  name: "Wednesday - Outdoor",
-  date: "12.08.2026",
-  issueCardId: "516696",
-  lpId: "31707",
+  startId: "46961",
+  name: "Wednesday - Beds",
+  date: "19.08.2026",
+  issueCardId: "517340",
+  lpId: "31859",
   // specialLpIds: {
   //   HR: '31562',
   //   SI: '31563',
@@ -293,10 +293,10 @@ export default new entities.Campaign({
   isArchive: false,
   optimizeImg: true,
   version: "new",
-  figmaUrl: "https://www.figma.com/design/ymF6fIzb4tAyHUaWemJNST/",
+  figmaUrl: "https://www.figma.com/design/pux210JQBEyJqNXLIuhhS5/",
   templates: [
     {
-      background: '#F7EAE9',
+      background: '#FFE0D4',
       color: '#000000',
       template: templates.Monday, // User should change this
 
@@ -309,10 +309,9 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      disableKlarna: ['SI', 'HR'],
     },
     {
-      background: '#F7EAE9',
+      background: '#FFE0D4',
       color: '#000000',
       template: templates.Monday, // User should change this
 
@@ -324,7 +323,7 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      disableKlarna: ['SI', 'HR'],
+      disableKlarna: ['HR', 'SI'],
     },
   ],
 });
