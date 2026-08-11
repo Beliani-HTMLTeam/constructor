@@ -10,6 +10,7 @@ import { Friday } from './DimaSrc/friday_newsletter/template';
 import { RegularFridayNslt1 } from './DimaSrc/newsletter_regular_friday1/templates/regularFridayNslt';
 import { AIRegularFridayNslt1 } from './DimaSrc/ai_newsletter_regular_friday1/templates/regularFridayNslt';
 import { AIWednesday } from './DimaSrc/AIWednesday/template';
+import { AIRegularFridayNslt2 } from './DimaSrc/ai_newsletter_regular_friday2/templates/regularFridayNslt';
 
 export const templates = {
   Blackweek,
@@ -23,5 +24,6 @@ export const templates = {
   RegularFridayNslt1,
   Monday,
   AIRegularFridayNslt1,
+  AIRegularFridayNslt2,
   AIWednesday
 };
