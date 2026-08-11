@@ -364,7 +364,7 @@ const categories = [
       {
         name: 'Outdoor cushions',
         src: getImageUrl('20260902Additional1.png', true),
-        href: 'https://www.beliani.ch/outdoor-textiles/cushions-for-garden/',
+        href: 'https://www.beliani.ch/outdoor-textiles/outdoor-cushions/',
       },
       {
         name: 'Blankets',
