@@ -171,7 +171,6 @@ export const IntroHandler = ({
                     >
                       <tr>
                         <td
-                          align="center"
                           style="
                             border-radius:4px;
                           "
