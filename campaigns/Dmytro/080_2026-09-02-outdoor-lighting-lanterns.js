@@ -85,7 +85,7 @@ const categories = [
       numberColor: '#FD9000'
     },
     paragraph: {
-      show: true,
+      show: false,
       position: 'beforeImg',
       align: 'center',
       spaceAfter: 'newsletterBottom25px',
@@ -155,7 +155,7 @@ const categories = [
       numberColor: '#FD9000'
     },
     paragraph: {
-      show: true,
+      show: false,
       position: 'beforeImg',
       align: 'center',
       spaceAfter: 'newsletterBottom25px',
@@ -221,7 +221,7 @@ const categories = [
       numberColor: '#FD9000'
     },
     paragraph: {
-      show: true,
+      show: false,
       position: 'beforeImg',
       align: 'center',
       spaceAfter: 'newsletterBottom25px',
@@ -287,7 +287,7 @@ const categories = [
       numberColor: '#FD9000'
     },
     paragraph: {
-      show: true,
+      show: false,
       position: 'beforeImg',
       align: 'center',
       spaceAfter: 'newsletterBottom25px',

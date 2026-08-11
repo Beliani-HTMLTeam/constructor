@@ -14,58 +14,103 @@ const Product = (
   container = '',
   category
 ) => {
-  if (!product || typeof product !== 'object') return '';
+  if (!product || typeof product !== 'object') {
+    return '';
+  }
+
+  const productSettings = category?.product || {};
 
   const resolveGapClass = (gap, fallback) => {
     if (gap === false || gap === 0) return '';
     if (typeof gap === 'string' && gap.trim()) return gap;
+
     return fallback;
   };
 
-  const nameGapClass = resolveGapClass(gapBetweenVertical, 'newsletterBottom15px');
-  const bottomGapClass =
-    typeof gapBetweenVertical === 'string'
-      ? gapBetweenVertical
-      : resolveGapClass(gapBetweenVertical, product.spaceAfter ?? 'newsletterBottom35px');
+  const nameGapClass = resolveGapClass(
+    gapBetweenVertical,
+    'newsletterBottom15px'
+  );
 
   let html = `
-  <table cellspacing="0" cellpadding="0" border="0" width="100%">
-  <tr>
-  <td class="newsletterWednesdayProductPaddings" style="background: ${category.product.background || 'transparent'}; color: ${color}; border: ${category.product.borderWidth || 0}px solid ${category.product.borderColor || 'transparent'};">
-  <table cellspacing="0" cellpadding="0" border="0" width="100%">
-
+    <table
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+      role="presentation"
+      style="
+        width:100%;
+        table-layout:fixed;
+        border-collapse:collapse;
+        mso-table-lspace:0pt;
+        mso-table-rspace:0pt;
+      "
+    >
   `;
 
   if (product.src && product.href) {
     html += ImageWithLink({
-      href: useCategoryLink ? product?.categoryLink : product.href,
-      src: typeof product.src === 'object' ? product.src.src : product.src,
+      href: useCategoryLink
+        ? product.categoryLink
+        : product.href,
+      src:
+        typeof product.src === 'object'
+          ? product.src.src
+          : product.src,
       insideTr: true,
       align: imageAlign,
-      targetBlank: true
+      targetBlank: true,
     });
   }
 
   if (showName && product.name) {
     html += `
-      ${nameGapClass ? Space({ insideTr: true, className: nameGapClass }) : ''}
-      
+      ${
+        nameGapClass
+          ? Space({
+              insideTr: true,
+              className: nameGapClass,
+              backgroundColor:
+                productSettings.background,
+            })
+          : ''
+      }
+
       <tr>
-        <td align="${align}" style="text-align: ${align}; color: ${category.product.nameColor || color}" class="newsletterProductWednesdayTitle">${product.name}</td>
+        <td
+          align="${align}"
+          class="newsletterProductWednesdayTitle"
+          style="
+            color:${productSettings.nameColor || color};
+            text-align:${align};
+          "
+        >
+          ${product.name}
+        </td>
       </tr>
-      ${nameGapClass ? Space({ insideTr: true, className: "newsletterBottom10px" }) : ''}
+
+      ${Space({
+        insideTr: true,
+        className: 'newsletterBottom10px',
+        backgroundColor: productSettings.background,
+      })}
     `;
   }
 
-  if (showPrices && (product.lowPrice || product.highPrice)) {
+  if (
+    showPrices &&
+    (product.lowPrice || product.highPrice)
+  ) {
     html += `
       <tr>
-        <td>
+        <td align="${align}">
           ${Prices({
             high: product.highPrice || '',
             low: product.lowPrice || '',
             insideTr: true,
-            color: category.product.pricesColor || color,
+            color:
+              productSettings.pricesColor || color,
             align,
           })}
         </td>
@@ -73,12 +118,7 @@ const Product = (
     `;
   }
 
-  html += `
-  </table>
-  </td>
-  </tr>
-    ${bottomGapClass ? Space({ insideTr: true, className: category.product.spaceAfter || bottomGapClass }) : ''}
-  </table>`;
+  html += '</table>';
 
   return html;
 };

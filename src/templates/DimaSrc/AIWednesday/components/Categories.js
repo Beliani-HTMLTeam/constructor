@@ -87,12 +87,7 @@ const renderWednesdayCategory = ({
             >
             ${Space({ className: 'newsletterBottom25px', insideTr: true})}
               <tr>
-                <td
-                  align="center"
-                  bgcolor="${ctaBackground}"
-                  style="
-                    background-color:${ctaBackground};
-                  "
+                <td                  
                 >
                   <a
                   class="newsletterWednesdayCategoryCTA"

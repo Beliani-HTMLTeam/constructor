@@ -2,6 +2,7 @@ import { Product } from '../Product.js';
 import { ImageWithLink } from '../ImageWithLink.js';
 import { Paragraph } from '../Paragraph.js';
 import { Space } from '../Space.js';
+import { AdditionalImageWithLink } from '../AdditionalImageWithLink.js';
 
 export const render = ({
   products,
@@ -38,7 +39,7 @@ export const render = ({
       for (let c = 0; c < cols; c++) {
         const item = items[i + c];
         // prettier-ignore
-        productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${(c + 1) % 2 !== 0 ? 'class="newsletterRight7_5px"' : 'class="newsletterLeft7_5px"'}>`;
+        productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${(c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
 
         if (item) {
           if (tiles) {
@@ -47,25 +48,56 @@ export const render = ({
 
             productsInnerHtml += `<table width="100%" border="0" cellpadding="0" cellspacing="0">`;
 
-            productsInnerHtml += ImageWithLink({
+            productsInnerHtml += AdditionalImageWithLink({
               src: item.src,
               href: href,
               insideTr: true,
               align: 'center',
+              width: 295,
             });
 
             productsInnerHtml += `
             <tr>
-              <td align="center" style="text-align: center; width: 100%;">
-                <a class="newsletterWednesdayAdditionalTitle" href="${href}" style="color: ${color}; text-decoration: underline; background: ${category.product.background || 'transparent'}; display: inline-block;">
+            <td align="center" style="background-color:${category?.product?.background || 'transparent'}; text-align: center;">
+            <table  width="100%" border="0" cellpadding="0" cellspacing="0">
+            ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
+            <tr>
+              <td
+                bgcolor="${category?.product?.background || 'transparent'}"
+                width="295"
+                style="
+                width:295px;
+                max-width:100%;
+                  background-color:${category?.product?.background || 'transparent'};
+                "
+              >
+                <a
+                  class="newsletterWednesdayAdditionalTitle"
+                  href="${href}"
+                  style="
+                  padding: 0 14px;
+                    display:block;
+                    color:${color};
+                    text-decoration:none; 
+                  text-align:left;
+                  background-color:${category?.product?.background || 'transparent'};
+                    "
+                >
                   ${name}
                 </a>
+
               </td>
             </tr>
-            `;
+            ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
+            </table>
+            </td>
+            </tr>
+           
+
+          `;
 
             if (!isLastRow) {
-            productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom15px' });
+            productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom20px' });
             }
             productsInnerHtml += `</table>`;
           } else {
@@ -79,9 +111,13 @@ export const render = ({
       
       productsInnerHtml += '</tr>';
       if (isLastRow) {
+        productsInnerHtml += '<tr>'
         productsInnerHtml += `
-        ${Space({ insideTr: true, className: 'newsletterBottom80px' })}
+        ${Space({ className: 'newsletterBottom80px' })}
+        ${Space({ className: 'newsletterBottom80px' })}
         `;
+        productsInnerHtml += '</tr>'
+
       }
     }
 

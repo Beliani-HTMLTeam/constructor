@@ -55,7 +55,7 @@ export const render = ({
 
             productsInnerHtml += `
             <tr>
-              <td align="center" style="text-align: center;">
+              <td align="center">
                 <a class="newsletterAdditionalCategoryTitle" href="${href}" style="color: ${color}; text-decoration: underline;">
                   ${name}
                 </a>

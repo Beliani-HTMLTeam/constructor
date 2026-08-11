@@ -1,29 +1,23 @@
 import { Intro } from '../components/Intro';
 import { Space } from '../components/Space';
 import { CTA } from '../components/CTA';
+
 const normalizeTitleLines = (value) => {
-  if (Array.isArray(value)) {
-    return value
-      .flatMap((item) =>
-        typeof item === 'string'
-          ? item.split(/\r?\n/)
-          : item == null
-            ? []
-            : [String(item)]
-      )
+  const normalize = (item) =>
+    String(item ?? '')
+      .split(/\r?\n/)
+      .map((line) => line.trim())
       .filter(Boolean);
+
+  if (Array.isArray(value)) {
+    return value.flatMap(normalize);
   }
 
   if (value && typeof value === 'object') {
-    return Object.values(value)
-      .filter((item) => typeof item === 'string')
-      .flatMap((item) => item.split(/\r?\n/))
-      .filter(Boolean);
+    return Object.values(value).flatMap(normalize);
   }
 
-  return String(value || '')
-    .split(/\r?\n/)
-    .filter(Boolean);
+  return normalize(value);
 };
 
 export const IntroHandler = ({
@@ -122,32 +116,29 @@ export const IntroHandler = ({
           ${
             titleLines.length
               ? `
-                <tr>
-                  <td
-                    align="left"
-                    class="newsletterWednesdayTitle"
-                    style="
-                      color:${titleColor};
-                     
-                    "
-                  >
-                    ${titleLines
-                      .map(
-                        (line) => `
-                          <span
-                            style="
-                              display:block;
-                              color:${titleColor};
-                            "
-                          >${line}</span>
-                        `
-                      )
-                      .join('')}
-                  </td>
-                </tr>
-
-                ${Space({ className: 'newsletterBottom20px', insideTr: true})}
-
+                ${titleLines
+                  .map(
+                    (line) => `
+                      <tr>
+                        <td
+                          align="left"
+                          class="newsletterWednesdayTitle"
+                          style="
+                            color:${titleColor};
+                            text-align:left;
+                          "
+                        >
+                          ${line}
+                        </td>
+                      </tr>
+                    `
+                  )
+                  .join('')}
+          
+                ${Space({
+                  className: 'newsletterBottom20px',
+                  insideTr: true,
+                })}
               `
               : ''
           }
@@ -171,20 +162,17 @@ export const IntroHandler = ({
                 ${Space({ className: 'newsletterBottom25px', insideTr: true})}
 
                 <tr>
-                  <td align="left">
+                  <td align="left" style="background-color:${background};">
                     <table
                       cellspacing="0"
                       cellpadding="0"
                       border="0"
                       role="presentation"
-                      align="left"
                     >
                       <tr>
                         <td
                           align="center"
-                          bgcolor="${ctaBackground}"
                           style="
-                            background-color:${ctaBackground};
                             border-radius:4px;
                           "
                         >
