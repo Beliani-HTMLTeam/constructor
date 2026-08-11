@@ -3,7 +3,7 @@ const campaignTranslationsSheet = '2026::28.08.26 - Kitchen';
 
 const tableQueries = [
   {
-    "tableRange": "16:17",
+    "tableRange": "17:18",
     "name": "TopImageTitle"
   },
   {

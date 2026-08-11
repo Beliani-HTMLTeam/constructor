@@ -49,7 +49,7 @@ const intro_data = {
 const TopImageTitle_data = {
   color: '#000000',
   backgroundColor: '#F6E7E6',
-  type: 'up_to',
+  type: 'standard',
 };
 
 
