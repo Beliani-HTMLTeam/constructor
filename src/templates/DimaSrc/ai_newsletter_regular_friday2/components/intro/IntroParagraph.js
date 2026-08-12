@@ -23,6 +23,7 @@ export const IntroParagraph = ({
     backgroundColor,
     cta,
     additionalSpace,
+    tableContainerClass
   } = intro;
 
   const introText = text || queries.intro || 'Translation not found';
@@ -35,6 +36,7 @@ export const IntroParagraph = ({
       spaceTop: spaceTop,
       spaceBottom: spaceBottom,
       backgroundColor: backgroundColor,
+      tableContainerClass: tableContainerClass
     })}
     ${cta ? IntroCTA({
       cta,

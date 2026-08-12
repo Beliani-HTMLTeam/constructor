@@ -40,6 +40,7 @@ const intro_data = {
   backgroundColor: "#FFFFFF",
   alignment: "center",
   type: "paragraph",
+  tableContainerClass: "newsletterContainer55px",
 }
 
 
@@ -77,6 +78,7 @@ const categories = [
       show: true,
       background: '#FF2F00',
       color: '#FFFFFF',
+      type: 'ai',
     }, showPrices: true,
     showName: true,
     product: {
@@ -133,7 +135,7 @@ const categories = [
     cta: {
       show: true,
       background: '#FF2F00',
-      color: '#FFFFFF',
+      color: '#FFFFFF',    type: 'ai',
     },
     product: {
       titleColor: '#750000',
@@ -189,7 +191,7 @@ const categories = [
     cta: {
       show: true,
       background: '#FF2F00',
-      color: '#FFFFFF',
+      color: '#FFFFFF',    type: 'ai',
     },
     product: {
       titleColor: '#750000',
@@ -246,7 +248,7 @@ const categories = [
     cta: {
       show: true,
       background: '#FF2F00',
-      color: '#FFFFFF',
+      color: '#FFFFFF',    type: 'ai',
     },
     product: {
       titleColor: '#750000',

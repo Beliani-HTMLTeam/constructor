@@ -8,6 +8,7 @@ const Intro = ({
   paragraphAlign = 'center',
   color = '#000000',
   backgroundColor = '#FFFFFF',
+  tableContainerClass = 'newsletterContainer55px',
 }) => {
   if (String(text).trim() === '') {
     text = 'Translation not found';
@@ -22,6 +23,7 @@ const Intro = ({
       insideTable: true,
       tableContainer: true,
       spanStyle: `color: ${color};`,
+      tableContainerClass: tableContainerClass,
     })}</td></tr>
     
     ${ spaceBottom !== "0" ? Space({ className: spaceBottom, insideTr: true, backgroundColor: backgroundColor }) : '' }

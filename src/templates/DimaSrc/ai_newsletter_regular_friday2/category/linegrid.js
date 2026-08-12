@@ -1,4 +1,5 @@
 import { Product } from '../components/Product';
+import { Space } from '../components/Space';
 
 export const render = (
   products,
@@ -49,6 +50,23 @@ export const render = (
         }
       </td>
     `;
+
+    if (index < 3) {
+      productCells += `
+        <td
+          width="10"
+          bgcolor="${background}"
+          style="
+            width:10px;
+            min-width:10px;
+            padding:0;
+            font-size:0;
+            line-height:0;
+            background-color:${background};
+          "
+        >&nbsp;</td>
+      `;
+    }
   }
 
   return `
@@ -83,5 +101,6 @@ export const render = (
         </table>
       </td>
     </tr>
+    ${Space({ insideTr: true, className: 'newsletterBottom20px'})}
   `;
 };

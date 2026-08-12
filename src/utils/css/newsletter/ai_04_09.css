@@ -102,6 +102,25 @@ img {
   font-family: "Open Sans", sans-serif;
 }
 
+.newsletterCtaButton {
+  display:inline-block;
+  border-style:solid;
+  border-top-width:15px;
+  border-bottom-width:15px;
+  border-left-width: 34px;
+  border-right-width: 34px;
+  font-family:"Open Sans", sans-serif;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:700;
+  letter-spacing:2px;
+  border-radius:20px;
+  text-align:center;
+  text-decoration:none;
+  white-space:nowrap;
+  -webkit-text-size-adjust:none;
+}
+
 .newsletterCode {
   font-size: 20px;
   line-height: 1.2;
@@ -206,7 +225,7 @@ img {
   font-size: 30px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .newsletterTitleAditional {
@@ -231,14 +250,14 @@ img {
 }
 
 .newsletterProductLowPrice {
-  font-size: 18px;
+  font-size: 15px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-weight: 600;
 }
 
 .newsletterProductHighPrice {
-  font-size: 14px;
+  font-size: 12px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   text-decoration: line-through;
@@ -467,7 +486,7 @@ img {
   }
 
   .newsletterProductLowPrice {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .newsletterProductHighPrice {

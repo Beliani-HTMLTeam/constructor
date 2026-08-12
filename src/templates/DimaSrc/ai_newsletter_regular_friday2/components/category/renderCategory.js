@@ -7,6 +7,7 @@ import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
 import { render } from '../../category/small-tiles';
+import { AI_CTA } from '../AI_CTA';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -142,9 +143,21 @@ export const renderCategory = async (
           ${ProductsElement}
           
           ${category.cta?.show ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
+
+          ${category.cta.type === 'ai' && category.cta?.show ? AI_CTA({
+            href: ctaHref,
+            text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
+            insideTr: true,
+            tdClass: 'newsletterContainer',
+            color: category.cta?.color || color,
+            background: background,
+            ctaBackgroundColor: category.cta?.background || '#FFFFFF',
+          })
+        :''
+        }
   
           ${
-            category.cta?.show
+            category.cta.type !== 'ai' &&  category.cta?.show
               ? CTA({
                   href: ctaHref,
                   text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),

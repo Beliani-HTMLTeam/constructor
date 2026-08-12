@@ -155,14 +155,13 @@ const AIRegularFridayNslt2 = async ({
 
       ${timerData && timerData.position === 'insideTopImageTitle' ? TimerElement : ''}
 
-
-      ${IntroElement}
-
       ${OfferPartElement}
-
+      
       ${FreebiesElement}
-
+      
       ${timerData && timerData.position === 'outsideTopImageTitle' ? TimerElement : ''}
+   
+      ${IntroElement}
       
       ${CategoriesElement}
               

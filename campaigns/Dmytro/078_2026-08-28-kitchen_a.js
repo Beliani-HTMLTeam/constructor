@@ -54,7 +54,7 @@ const intro_data = {
     background: "#F6E7E6",
     color: "#750000",
     overrides: {
-
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom20px',
     newsletter: {
