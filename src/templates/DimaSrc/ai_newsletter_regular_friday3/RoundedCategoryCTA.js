@@ -1,0 +1,72 @@
+const RoundedCategoryCTA = ({
+  href,
+  text,
+  background,
+  color,
+  sectionBackground,
+}) => `
+  <tr>
+    <td
+      align="center"
+      bgcolor="${sectionBackground}"
+      style="
+        background-color:${sectionBackground};
+        text-align:center;
+        font-size:0;
+        line-height:0;
+      "
+    >
+      <!--[if mso]>
+      <v:roundrect
+        xmlns:v="urn:schemas-microsoft-com:vml"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        href="${href}"
+        style="
+          width:127px;
+          height:37px;
+          v-text-anchor:middle;
+        "
+        arcsize="100%"
+        stroke="f"
+        fillcolor="${background}"
+      >
+        <w:anchorlock/>
+        <center
+          style="
+            color:${color};
+            font-family:Arial, sans-serif;
+            font-size:13px;
+            font-weight:bold;
+          "
+        >
+          ${text}
+        </center>
+      </v:roundrect>
+      <![endif]-->
+
+      <!--[if !mso]><!-->
+      <a
+        href="${href}"
+        target="_blank"
+        style="
+          display:inline-block;
+          width:127px;
+          background-color:${background};
+          border-radius:20px;
+          color:${color};
+          font-family:'Open Sans', Arial, sans-serif;
+          font-size:13px;
+          line-height:37px;
+          font-weight:700;
+          text-align:center;
+          text-decoration:none;
+          white-space:nowrap;
+          -webkit-text-size-adjust:none;
+        "
+      >
+        ${text}
+      </a>
+      <!--<![endif]-->
+    </td>
+  </tr>
+`;

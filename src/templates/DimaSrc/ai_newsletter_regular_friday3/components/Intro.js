@@ -1,0 +1,33 @@
+import { Space } from './Space.js';
+import { Paragraph } from './Paragraph.js';
+
+const Intro = ({
+  text = 'Translation not found',
+  spaceTop = 'newsletterBottom35px',
+  spaceBottom = 'newsletterBottom35px',
+  paragraphAlign = 'center',
+  color = '#000000',
+  backgroundColor = '#FFFFFF',
+  tableContainerClass = 'newsletterContainer55px',
+}) => {
+  if (String(text).trim() === '') {
+    text = 'Translation not found';
+  }
+
+  return `
+    ${spaceTop !== "0" ? Space({ className: spaceTop, insideTr: true, backgroundColor: backgroundColor }) : ''}
+            
+    <tr><td style="background-color: ${backgroundColor};">${Paragraph({
+      text,
+      align: paragraphAlign,
+      insideTable: true,
+      tableContainer: true,
+      spanStyle: `color: ${color};`,
+      tableContainerClass: tableContainerClass,
+    })}</td></tr>
+    
+    ${ spaceBottom !== "0" ? Space({ className: spaceBottom, insideTr: true, backgroundColor: backgroundColor }) : '' }
+  `;
+};
+
+export { Intro };

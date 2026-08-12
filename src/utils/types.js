@@ -5,6 +5,7 @@ import nslt_ai_28_08 from '@css/newsletter/ai_28_08.css?inline';
 import nslt_ai_02_09 from '@css/newsletter/ai_02_09.css?inline';
 import nslt_ai_04_09 from '@css/newsletter/ai_04_09.css?inline';
 import nslt_ai_03_09 from '@css/newsletter/ai_03_09.css?inline';
+import nslt_ai_04_09_chat from '@css/newsletter/ai_04_09_chat.css?inline';
 
 import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
@@ -12,6 +13,7 @@ import lp_mattress from '@css/landing/mattress.css?inline';
 import lp_ai_28_08 from '@css/landing/ai_28_08.css?inline';
 import lp_ai_02_09 from '@css/landing/ai_02_09.css?inline';
 import lp_ai_04_09 from '@css/landing/ai_04_09.css?inline';
+import lp_ai_04_09_chat from '@css/landing/ai_04_09_chat.css?inline';
 import lp_ai_03_09 from '@css/landing/ai_03_09.css?inline';
 
 import cgb_desktop from '@css/cgb/desktop.css?inline';
@@ -31,6 +33,7 @@ export const types = {
     NS_AI_28_08: nslt_ai_28_08,
     NS_AI_02_09: nslt_ai_02_09,
     NS_AI_04_09: nslt_ai_04_09,
+    NS_AI_04_09_CHAT: nslt_ai_04_09_chat,
     NS_AI_03_09: nslt_ai_03_09,
 
     LP: lp_regular,
@@ -40,6 +43,7 @@ export const types = {
     LP_AI_28_08: lp_ai_28_08,
     LP_AI_02_09: lp_ai_02_09,
     LP_AI_04_09: lp_ai_04_09,
+    LP_AI_04_09_CHAT: lp_ai_04_09_chat,
     LP_AI_03_09: lp_ai_03_09,
 
     CGB: {
