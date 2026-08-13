@@ -20,7 +20,7 @@ const Product = ({product, showPrices, showName, color, idx, isSpaceAfter = true
 
   if (showName && product.name) {
     html += `
-      ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
+      ${product.spaceBetweenImageAndTitle ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
       
       <tr>
         <td style="color: ${color || '#000000'};" class="${idx % 2 === 0 && priceAdditionalPadding ? 'newsletterProductTitleWithPaddingLeft' : 'newsletterProductTitle'}">${

@@ -163,7 +163,7 @@ table {
 #newsletter .newsletterTitle {
   font-size: 30px;
   line-height: 1.4;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 #newsletter .newsletterIntroTitle {
@@ -172,24 +172,49 @@ table {
   font-weight: 600;
 }
 
+#newsletter .newsletterContainer40px {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+
+#newsletter .newsletterCtaButton {
+  display:inline-block;
+  border-style:solid;
+  border-top-width:11px;
+  border-bottom-width:11px;
+  border-left-width: 31px;
+  border-right-width: 31px;
+  font-family:"Open Sans", sans-serif;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:700;
+  border-radius:20px;
+  text-align:center;
+  text-decoration:none;
+  white-space:nowrap;
+  -webkit-text-size-adjust:none;
+}
+
+
 #newsletter .newsletterTitleOfferPart {
   font-size: 30px;
   line-height: 1.2;
 }
 
 #newsletter .newsletterProductTitle {
-  font-size: 20px;
+  font-size: 12px;
   line-height: 1.2;
+  font-weight: 700;
 }
-
 #newsletter .newsletterProductLowPrice {
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.2;
   font-weight: 600;
 }
 
 #newsletter .newsletterProductHighPrice {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.2;
   text-decoration: line-through;
 }
@@ -322,6 +347,11 @@ table {
 
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+
+  #newsletter .newsletterContainer40px{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   #newsletter .newsletterFooterCategoryLEFTBottom {
     padding-right: 5px !important;
   }
@@ -397,11 +427,11 @@ table {
   }
 
   #newsletter .newsletterProductTitle {
-    font-size: 18px;
+    font-size: 11px;
   }
 
   #newsletter .newsletterProductLowPrice {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   #newsletter .newsletterProductHighPrice {

@@ -126,7 +126,7 @@ export const renderCategory = async (
               categoryIndex: id,
               insideContainer: category.insideContainer || false,
               background,
-              color: category.color || '#000000',
+              color: category.product.titleColor || '#000000',
               country, category: category
             })
     : '';
@@ -143,10 +143,26 @@ export const renderCategory = async (
           ${TitleElement}
 
           ${ParagraphElement}
+
+          
+          ${category.cta.type === 'after_paragraph' && category.cta?.show ? AI_CTA({
+            href: ctaHref,
+            text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
+            insideTr: true,
+            tdClass: 'newsletterContainer',
+            color: category.cta?.color || color,
+            background: background,
+            ctaBackgroundColor: category.cta?.background || '#FFFFFF',
+            align: category.cta?.align || 'center',
+          })
+        :''
+        }
+
+        ${Space({ insideTr: true, className: 'newsletterBottom50px', backgroundColor: background })}
   
           ${ProductsElement}
           
-          ${category.cta?.show ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
+          ${category.cta?.show && category.cta.type !== 'after_paragraph' ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
 
           ${category.cta.type === 'ai' && category.cta?.show ? AI_CTA({
             href: ctaHref,
@@ -161,7 +177,7 @@ export const renderCategory = async (
         }
   
           ${
-            category.cta.type !== 'ai' &&  category.cta?.show
+            category.cta.type === 'normal' &&  category.cta?.show
               ? CTA({
                   href: ctaHref,
                   text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
@@ -173,7 +189,7 @@ export const renderCategory = async (
               : ''
           }
   
-          ${Space({ insideTr: true, className: 'newsletterBottom80px', backgroundColor: background })}
+          ${Space({ insideTr: true, className: category.spaceAfter, backgroundColor: background })}
   
          
         </table>

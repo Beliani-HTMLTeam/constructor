@@ -1,52 +1,191 @@
 import { Product } from '../components/Product';
-
-export const render = ({products,
+export const render = ({
+  products,
   showPrices,
   showNames,
   queries,
   insideContainer = true,
   color = '#000000',
   background = '#FFFFFF',
-  category = {}}) => {
-  let productsInnerHtml = '';
-
-  console.log("render category", products);
-  
-
-  if (Array.isArray(products)) {
-    const cols = 2;
-    const totalProducts = products.length;
-    const totalRows = Math.ceil(totalProducts / cols);
-
-    productsInnerHtml += `
-    <tr>
-      <td style="color: ${color}; background: ${background}" ${insideContainer ? 'class="newsletterContainer"' : ''}>
-        <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
-
-    for (let row = 0; row < totalRows; row++) {
-      productsInnerHtml += '<tr>';
-      const currentRow = row + 1;
-      const isLastRow = currentRow === totalRows;
-
-      for (let col = 0; col < cols; col++) {
-        const productIndex = row * cols + col;
-        const product = products[productIndex];
-
-        // prettier-ignore
-        productsInnerHtml += `<td style="color: ${color}; background: ${product.background}; width:50%;vertical-align:top;" width="50%" ${(col + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
-
-        if (product) {
-          productsInnerHtml += Product({product: product, showPrices, showName:showNames, color, idx: productIndex, isSpaceAfter: !isLastRow, insideContainer: !insideContainer, category});
-        }
-
-        productsInnerHtml += '</td>';
-      }
-
-      productsInnerHtml += '</tr>';
-    }
-
-    productsInnerHtml += '</td></tr></table>';
+  category = {},
+}) => {
+  if (!Array.isArray(products) || products.length === 0) {
+    return '';
   }
 
-  return productsInnerHtml;
+  const cols = 2;
+  const gap = 20;
+  const totalRows = Math.ceil(products.length / cols);
+
+  const renderProduct = (product, index) => {
+    if (!product) return '&nbsp;';
+
+    return Product({
+      product,
+      showPrices,
+      showName: showNames,
+      color,
+      idx: index,
+
+      // The grid creates the vertical gap.
+      isSpaceAfter: true,
+
+      insideContainer: !insideContainer,
+      category,
+    });
+  };
+
+  let html = `
+    <tr>
+      <td
+        ${insideContainer ? 'class="newsletterContainer"' : ''}
+        bgcolor="${background}"
+        style="
+          padding-top:0;
+          padding-bottom:0;
+          color:${color};
+          background-color:${background};
+        "
+      >
+        <table
+          cellspacing="0"
+          cellpadding="0"
+          border="0"
+          width="100%"
+          align="center"
+          role="presentation"
+          bgcolor="${background}"
+          style="
+            width:100%;
+            border-collapse:collapse;
+            table-layout:fixed;
+            mso-table-lspace:0pt;
+            mso-table-rspace:0pt;
+            background-color:${background};
+          "
+        >
+  `;
+
+  for (let row = 0; row < totalRows; row++) {
+    const leftIndex = row * cols;
+    const rightIndex = leftIndex + 1;
+
+    const leftProduct = products[leftIndex];
+    const rightProduct = products[rightIndex];
+
+    const isLastRow = row === totalRows - 1;
+
+    const leftBackground =
+      leftProduct?.background ||
+      category?.product?.background ||
+      background;
+
+    const rightBackground = rightProduct
+      ? rightProduct.background ||
+      category?.product?.background ||
+      background
+      : background;
+
+    html += `
+      <tr>
+        <td
+          valign="top"
+          bgcolor="${leftBackground}"
+          style="
+            padding:0;
+            color:${color};
+            vertical-align:top;
+            background-color:${leftBackground};
+          "
+        >
+          ${renderProduct(leftProduct, leftIndex)}
+        </td>
+
+        <td
+        width="${gap}"
+        class="newsletterProductGridHorizontalGap"
+        valign="top"
+        bgcolor="${background}"
+        style="
+          width:${gap}px;
+          padding:0;
+          font-size:0;
+          line-height:0;
+          vertical-align:top;
+          background-color:${background};
+          mso-line-height-rule:exactly;
+        "
+      >&nbsp;</td>
+
+        <td
+          valign="top"
+          bgcolor="${rightBackground}"
+          style="
+            padding:0;
+            color:${color};
+            vertical-align:top;
+            background-color:${rightBackground};
+          "
+        >
+          ${renderProduct(rightProduct, rightIndex)}
+        </td>
+      </tr>
+    `;
+
+    if (!isLastRow) {
+      html += `
+          <tr>
+            <td
+              height="${gap}"
+              class="newsletterProductGridVerticalGap"
+              bgcolor="${background}"
+              style="
+                height:${gap}px;
+                padding:0;
+                font-size:0;
+                line-height:${gap}px;
+                background-color:${background};
+                mso-line-height-rule:exactly;
+              "
+            >&nbsp;</td>
+      
+            <td
+              height="${gap}"
+              class="newsletterProductGridVerticalGap"
+              bgcolor="${background}"
+              style="
+                height:${gap}px;
+                padding:0;
+                font-size:0;
+                line-height:${gap}px;
+                background-color:${background};
+                mso-line-height-rule:exactly;
+              "
+            >&nbsp;</td>
+      
+            <td
+              height="${gap}"
+              class="newsletterProductGridVerticalGap"
+              bgcolor="${background}"
+              style="
+                height:${gap}px;
+                padding:0;
+                font-size:0;
+                line-height:${gap}px;
+                background-color:${background};
+                mso-line-height-rule:exactly;
+              "
+            >&nbsp;</td>
+          </tr>
+        `;
+    }
+  }
+
+  html += `
+        </table>
+      </td>
+    </tr>
+  `;
+
+  return html;
 };

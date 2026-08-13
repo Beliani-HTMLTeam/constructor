@@ -60,6 +60,7 @@ const categories = [
     href: 'https://www.beliani.ch/textiles/scatter-cushions/',
     type: 'grid',
     insideContainer: true,
+    spaceAfter: 'newsletterBottom20px',
     title: {
       show: true,
       align: 'left',
@@ -76,9 +77,10 @@ const categories = [
     },
     cta: {
       show: true,
-      background: '#FF2F00',
-      color: '#FFFFFF',
-      type: 'ai',
+      background: '#FFCCB7',
+      color: '#750000',
+      type: 'after_paragraph',
+      align: 'left',
     }, showPrices: true,
     showName: true,
     product: {
@@ -121,6 +123,7 @@ const categories = [
     href: 'https://www.beliani.ch/rugs/',
     type: 'grid',
     insideContainer: true,
+    spaceAfter: 'newsletterBottom20px',
     title: {
       show: true,
       align: 'left',
@@ -138,32 +141,35 @@ const categories = [
     showName: true,
     cta: {
       show: true,
-      color: '#750000',    type: 'ai',
+      background: '#750000',
+      color: '#ffffff',    
+      type: 'after_paragraph',
+      align: 'left',
     },
     product: {
       titleColor: '#750000',
       priceColor: '#FF2F00',
     },
     products: [
-      // Dawa
+      // VASCO
       {
-        id: '820623',
+        id: '728746',
         src: getImageUrl('20260904Category21_chat.png', true),
         background: "#FFEBE6"
       },
-      // Hartz
+      // HARTZ
       {
         id: '821418',
         src: getImageUrl('20260904Category22_chat.png', true),
         background: "#FFFFFF"
       },
-      // Vasco
+      // DAWA
       {
-        id: '728746',
+        id: '820623',
         src: getImageUrl('20260904Category23_chat.png', true),
         background: "#FFFFFF"
       },
-      // Demirci
+      // DEMIRCI
       {
         id: '427463',
         src: getImageUrl('20260904Category24_chat.png', true),
@@ -180,6 +186,7 @@ const categories = [
     href: 'https://www.beliani.ch/accessories-decor/wall-art-frames/',
     type: 'grid',
     insideContainer: true,
+    spaceAfter: 'newsletterBottom20px',
     title: {
       show: true,
       align: 'left',
@@ -197,32 +204,35 @@ const categories = [
     showName: true,
     cta: {
       show: true,
-      color: '#750000',    type: 'ai',
+      background: '#FFCCB7',
+      color: '#750000',    
+      type: 'after_paragraph',
+      align: 'left',
     },
     product: {
       titleColor: '#750000',
       priceColor: '#FF2F00',
     },
     products: [
-      // Coleraine
+      // OMAGH
       {
-        id: '734106',
+        id: '734012',
         src: getImageUrl('20260904Category31_chat.png', true),
         background: "#FFFFFF"
       },
-      // Omagh
+      // TUAM
       {
-        id: '734012',
+        id: '734241',
         src: getImageUrl('20260904Category32_chat.png', true),
         background: "#FFF2ED"
       },
-      // Tuam
+      // COLERAINE
       {
-        id: '734241',
+        id: '734106',
         src: getImageUrl('20260904Category33_chat.png', true),
         background: "#FFF2ED"
       },
-      // Wexford
+      // WEXFORD
       {
         id: '734184',
         src: getImageUrl('20260904Category34_chat.png', true),
@@ -239,6 +249,7 @@ const categories = [
     href: 'https://www.beliani.ch/home-accessories/mirrors/',
     type: 'grid',
     insideContainer: true,
+    spaceAfter: 'newsletterBottom80px',
     title: {
       show: true,
       align: 'left',
@@ -257,34 +268,37 @@ const categories = [
     },
     cta: {
       show: true,
-      color: '#750000',    type: 'ai',
+      background: '#750000',
+      color: '#ffffff',    
+      type: 'after_paragraph',
+      align: 'left',
     },
     product: {
       titleColor: '#750000',
       priceColor: '#FF2F00',
     },
     products: [
-      // Anizy
+      // ANIZY
       {
         id: '819658',
         src: getImageUrl('20260904Category41_chat.png', true),
         background: "#FFEBE6"
       },
-      // Mancey
+      // TAWLEY
       {
-        id: '818009',
+        id: '700343',
         src: getImageUrl('20260904Category42_chat.png', true),
         background: "#FFFFFF"
       },
-      // Suin
+      // MANCEY
       {
-        id: '818135',
+        id: '818009',
         src: getImageUrl('20260904Category43_chat.png', true),
         background: "#FFFFFF"
       },
-      // Tawley
+      // SUIN
       {
-        id: '700343',
+        id: '818135',
         src: getImageUrl('20260904Category44_chat.png', true),
         background: "#FFEBE6"
       },

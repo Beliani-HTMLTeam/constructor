@@ -37,7 +37,7 @@ export const renderCategory = async (
   const TitleElement = category?.title?.show
     ? `
       <tr>
-        <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
+        <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer40px">
           ${Paragraph({
             text: category.name,
             color: color,

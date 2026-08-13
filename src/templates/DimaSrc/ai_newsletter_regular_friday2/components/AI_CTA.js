@@ -28,8 +28,7 @@ return `<tr>
     align="${align}"
   >
     <tr>
-      <td                  
-      >
+      <td align="${align}" style="text-align:${align};">                
         <a
         class="newsletterCtaButton"
           href="${href}"
