@@ -16,7 +16,7 @@ const tableQueries = [
   },
   {
     "tableRange": "25:28",
-    "name": "paragraph"
+    "name": "paragraphs"
   },
   {
     "tableRange": "29:32",
@@ -79,27 +79,31 @@ const categories = [
 		color: '#000000',
 		type: 'grid',
     container: 'newsletterContainer55px',
-		cta: true,
+		cta: {
+			spaceBefore: 'newsletterBottom25px',
+			phrase: 'Shop Spiced Tones',
+		},
 		paddingTop: '60',
 		line: {
-			show: false,
+			show: true,
 			insideContainer: true,
 		},
 		title: {
 			show: true,
 			spaceAfter: 'newsletterBottom35px',
+			align: 'center',
 		},
 		paragraph: {
 			show: true,
 			align: 'center',
 			spaceBefore: 'newsletterBottom35px',
-			spaceAfter: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom40px',
 		},
+		gapBetweenHorizontal: 5,
 		product: {
+			gapBetweenVertical: 'newsletterBottom10px',
 			prices: false,
 			name: false,
-      gapBetweenVertical: 'newsletterBottom10px',
-      gapBetweenHorizontal: '10px',
 		},
 		products: [
       // VANVEY
@@ -132,23 +136,29 @@ const categories = [
 		color: '#000000',
 		type: 'grid',
     container: 'newsletterContainer55px',
-		cta: true,
+		cta: {
+			spaceBefore: 'newsletterBottom25px',
+			phrase: 'Shop Wood Everywhere',
+		},
 		paddingTop: '35',
 		title: {
 			show: true,
-			spaceAfter: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom35px',			
+			align: 'center',
 		},
 		paragraph: {
 			show: true,
 			align: 'center',
 			spaceBefore: 'newsletterBottom35px',
-			spaceAfter: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom40px',
 		},
 		line: {
-			show: false,
+			show: true,
 			insideContainer: true,
 		},
+		gapBetweenHorizontal: 5,
 		product: {
+			gapBetweenVertical: 'newsletterBottom10px',
 			prices: false,
 			name: false,
 		},
@@ -182,24 +192,30 @@ const categories = [
 		background: '#F9EFEE',
 		color: '#000000',
 		type: 'grid',
-		cta: true,
+		cta: {
+			spaceBefore: 'newsletterBottom25px',
+			phrase: 'Shop Soft Touch',
+		},
     container: 'newsletterContainer55px',
 		paddingTop: '35',
 		title: {
 			show: true,
 			spaceAfter: 'newsletterBottom35px',
+			align: 'center',
 		},
 		line: {
-			show: false,
+			show: true,
 			insideContainer: true,
 		},
 		paragraph: {
 			show: true,
-			align: 'left',
+			align: 'center',
 			spaceBefore: 'newsletterBottom35px',
-			spaceAfter: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom40px',
 		},
+		gapBetweenHorizontal: 5,
 		product: {
+			gapBetweenVertical: 'newsletterBottom10px',
 			prices: false,
 			name: false,
 		},
@@ -230,23 +246,29 @@ const categories = [
 		name: 'Romantic Bloom',
 		src: getImageUrl( '20260903Category40.jpg', true),
 		href: 'https://www.beliani.ch/meet-beliani/colourful-charm/',
-		background: '#FFEFD9',
+		background: '#F9EFEE',
 		color: '#000000',
 		type: 'grid',
-		cta: true,
+		cta: {
+			spaceBefore: 'newsletterBottom25px',
+			phrase: 'Shop Romantic Bloom',
+		},
     container: 'newsletterContainer55px',
 		paddingTop: '35',
 		title: {
 			show: true,
 			spaceAfter: 'newsletterBottom35px',
+			align: 'center',
 		},
 		paragraph: {
 			show: true,
-			align: 'left',
+			align: 'center',
 			spaceBefore: 'newsletterBottom35px',
-			spaceAfter: 'newsletterBottom35px',
+			spaceAfter: 'newsletterBottom40px',
 		},
+		gapBetweenHorizontal: 5,
 		product: {
+			gapBetweenVertical: 'newsletterBottom10px',
 			prices: false,
 			name: false,
 		},
@@ -276,11 +298,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: "47218",
+  startId: "47284",
   name: "Autumn Trends 2026",
   date: "03.09.2026",
   issueCardId: "524693",
-  lpId: "31943",
+  lpId: "31972",
   alarm: {
     isActive: false,
   },
