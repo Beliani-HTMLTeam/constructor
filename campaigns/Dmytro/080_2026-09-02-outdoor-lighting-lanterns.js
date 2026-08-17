@@ -40,7 +40,7 @@ const links = {
   TopImage_src: getImageUrl('20260902Main.jpg', true),
   TopImage_href: translateLink({ value: 'content/lp26-09-02' }),
   Banner_1: translateLink({ value: 'content/lp26-08-20' }),
-  Banner_1_Image: translateImage({ value: '202608020b.png' }),
+  Banner_1_Image: translateImage({ value: '20260820b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-27' }),
   Banner_2_Image: translateImage({ value: '20260827b.png' }),
   introCTA_href: "https://www.beliani.ch/garden-lighting/",
