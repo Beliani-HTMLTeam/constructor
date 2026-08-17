@@ -13,6 +13,7 @@ import { AIWednesday } from './DimaSrc/AIWednesday/template';
 import { AIRegularFridayNslt2 } from './DimaSrc/ai_newsletter_regular_friday2/templates/regularFridayNslt';
 import { AIRegularFridayNslt_03_09 } from './DimaSrc/ai_newsletter_regular_friday_03_09/templates/regularFridayNslt';
 import { AIRegularFridayNslt2Chat } from './DimaSrc/ai_newsletter_regular_friday3/templates/regularFridayNslt';
+import { AdventCalendar2026 } from './DimaSrc/Advent_Calendar/template';
 
 export const templates = {
   Blackweek,
@@ -29,5 +30,6 @@ export const templates = {
   AIRegularFridayNslt2,
   AIRegularFridayNslt2Chat,
   AIRegularFridayNslt_03_09,
-  AIWednesday
+  AIWednesday,
+  AdventCalendar2026
 };
