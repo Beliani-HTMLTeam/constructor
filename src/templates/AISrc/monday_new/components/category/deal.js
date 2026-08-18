@@ -18,6 +18,7 @@ export const render = ({
   ctaSrc = null,
   theme,
   disableHighPrice = false,
+  type = 'newsletter',
 }) => {
 
   const countrySlug = String(country ?? '').toLowerCase();
@@ -83,7 +84,7 @@ export const render = ({
     html += `
       <tr>
         <td style="background-color: ${dealColorBg}; color: ${dealColorText}; padding: 25px 20px 15px 20px;" align="center">
-          <span style="font-family: 'Open Sans', Arial, sans-serif; font-size: 15px; color: ${dealColorText}; display: block; text-align: center;">
+          <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 15px; color: ${dealColorText}; display: block; text-align: center;">
             ${chooseFromHeader}
           </span>
         </td>
@@ -108,7 +109,7 @@ export const render = ({
     html += `
       <tr>
         <td class="freebieSubtitle" style="background-color: ${colorBg}; color: ${colorText}; padding: 0 20px 25px 20px;" align="left">
-          <span style="font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; color: ${colorText}; display: block;">
+          <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; color: ${colorText}; display: block;">
             ${freebiesSubtitle}
           </span>
         </td>

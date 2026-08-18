@@ -118,7 +118,7 @@ const CTA = ({
               <!--[if mso]>
               <i style="letter-spacing: 35px; mso-font-width: -100%; mso-text-raise: 30pt">&nbsp;</i>
               <![endif]-->
-              <a href="${href}" target="_blank" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; font-weight: 600; color: ${textColor} !important; text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1.5px;">
+              <a href="${href}" target="_blank" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; font-weight: 600; color: ${textColor} !important; text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1.5px;">
                 <span style="color: ${textColor} !important;">${text}</span>
               </a>
               <!--[if mso]>
