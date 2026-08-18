@@ -69,7 +69,7 @@ const tableQueries = [
 ];
 
 const links = {
-  Intro_cta_href: 'https://www.beliani.ch/',
+  Intro_cta_href: 'https://www.beliani.ch/living-room-furniture/',
   TopImageTitle_href: translateLink({ value: 'content/lp26-08-24' }),
   TopImageTitle_src: translateImage({ value: '20260824_01.png' }),
 
@@ -271,6 +271,7 @@ const categories = [
     type: 'grid',
     cta: { variant: 'maroon', color: theme.primary },
     paddingTop: '35',
+    spaceAfter: 'newsletterBottom40px',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
