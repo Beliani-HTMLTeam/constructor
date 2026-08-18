@@ -146,7 +146,11 @@ export default new entities.Campaign({
   lpId: "30873",
   alarm: {
     isActive: false,
-  },
+  }, 
+  specialLpIds: {
+		HR: 31660,
+		SI: 31661,
+	},
   isArchive: false,
   optimizeImg: true,
   figmaUrl: "https://www.figma.com/design/THJ5RoD4CL3nTHJys11GsD/August-peak-Reminder---Friday-2026.08.21?node-id=0-1&t=eAN4mhP60ixDCi6W-1",
