@@ -28,8 +28,9 @@ const tableQueries = [
   },
   {
     "tableRange": "15:16",
-    "name": "2026::Voucher - 31.08.26 - Free gift"
-  }
+    "tableName": "2026::Voucher - 31.08.26 - Free gift",
+		name: "timer"
+	}
 ];
 
 const links = {
@@ -79,6 +80,7 @@ const categories = [
 		color: '#000000',
 		type: 'grid',
     container: 'newsletterContainer55px',
+		tdClass: 'newsletterContainer55px',
 		cta: {
 			spaceBefore: 'newsletterBottom25px',
 			phrase: 'Shop Spiced Tones',
@@ -136,6 +138,7 @@ const categories = [
 		color: '#000000',
 		type: 'grid',
     container: 'newsletterContainer55px',
+		tdClass: 'newsletterContainer55px',
 		cta: {
 			spaceBefore: 'newsletterBottom25px',
 			phrase: 'Shop Wood Everywhere',
@@ -197,6 +200,7 @@ const categories = [
 			phrase: 'Shop Soft Touch',
 		},
     container: 'newsletterContainer55px',
+		tdClass: 'newsletterContainer55px',
 		paddingTop: '35',
 		title: {
 			show: true,
@@ -254,6 +258,7 @@ const categories = [
 			phrase: 'Shop Romantic Bloom',
 		},
     container: 'newsletterContainer55px',
+		tdClass: 'newsletterContainer55px',
 		paddingTop: '35',
 		title: {
 			show: true,
