@@ -153,7 +153,9 @@ const TopImageTitle_data = {
 const categories = [
   // main
   {
-    copyCodeWeb: true,
+    copyCodeWeb: {
+      color: theme.white,
+    },
     paragraph: {
       spaceAfter: '',
     },
