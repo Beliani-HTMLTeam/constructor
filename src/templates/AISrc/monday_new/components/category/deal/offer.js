@@ -43,7 +43,9 @@ export const renderOfferSection = ({
       ? translatedGetCode
       : offerItems[3].includes('xxx')
         ? `MISSING CODE`
-        : offerItems[3] ?? `MISSING CODE`
+        : offerItems[3]
+          ? offerItems[3].split(':')[0].toUpperCase() + ':' + offerItems[3].split(':')[1]
+          : `MISSING CODE`;
 
   const bgColor = theme?.primary ?? '#750000';
   const textColor = theme?.primaryText ?? '#ffffff';
