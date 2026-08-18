@@ -94,7 +94,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
   return html;
 };
 
-const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel }) => {
+const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel, ctaColor = '' }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
 
   if (offerItems.length === 6) {
@@ -102,7 +102,7 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
       return CTA({
         href: links?.TopImageTitle_href,
         text: t('Get codes'),
-        color: '#000000',
+        color: ctaColor ?? '#000000',
         align: 'center',
         insideTr: true,
       });
@@ -115,7 +115,7 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
     return CTA({
       href: links?.TopImageTitle_href,
       text: t('Get code'),
-      color: '#000000',
+      color: ctaColor ?? '#000000',
       align: 'center',
       insideTr: true,
     });
@@ -133,7 +133,7 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
   return renderOfferRow(codeText);
 };
 
-export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, offerTexts }) => {
+export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, offerTexts, ctaColor = '', }) => {
   const t = getPhrase;
   const copyCodeLabel = getPhrase?.('Copy code') || 'Code copied';
   const hasSixOffers = isSixOffers(queries);
@@ -147,7 +147,7 @@ export const renderOfferSection = ({ queries, renderType, links, getPhrase, show
     html += renderSixOfferNewsletter({ queries, links, t });
   } else {
     html += renderOfferRows(offerItems);
-    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel });
+    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel, ctaColor });
     html += Space({ insideTr: true, className: 'newsletterBottom35px' });
   }
 

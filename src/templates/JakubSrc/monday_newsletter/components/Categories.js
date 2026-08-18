@@ -142,6 +142,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           copyCode: category.copyCode,
           copyCodeWeb: category.copyCodeWeb,
           offerTextOverrides: category.offerTextOverrides,
+          ctaColor: category?.ctaColor ?? '#000000',
         })
       : '';
  
@@ -249,6 +250,7 @@ const renderBody = async ({
   copyCode,
   copyCodeWeb,
   offerTextOverrides,
+  ctaColor = '',
 }) => {
   // console.log('produkty ', products);
 
@@ -282,6 +284,7 @@ const renderBody = async ({
       offerTextOverrides,
       copyCode,
       copyCodeWeb,
+      ctaColor,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

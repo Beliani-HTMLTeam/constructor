@@ -15,6 +15,7 @@ export const render = ({
   copyCodeWeb = false,
   country,
   offerTextOverrides,
+  ctaColor = '',
 }) => {
   const countrySlug = String(country ?? '').toLowerCase();
   const offerTextOverrideRaw = offerTextOverrides?.[countrySlug];
@@ -69,6 +70,7 @@ export const render = ({
     showCopyCodeWeb: !!effectiveCopyCodeWeb,
     copyCodeColor: copyCodeWebColor ?? copyCodeColor,
     offerTexts,
+    ctaColor
   });
 
   if (hasDealProducts) {
