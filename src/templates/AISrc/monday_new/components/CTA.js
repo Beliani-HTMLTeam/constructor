@@ -26,8 +26,6 @@ const CTA = ({
 
   const codeCopied = getPhrase?.('Copy code');
 
-  text = text.toUpperCase();
-
   const copyOnlyOnClickScript = codeValue ? `
     onclick="(function(e){
       e.preventDefault();

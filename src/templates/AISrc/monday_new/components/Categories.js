@@ -120,7 +120,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     : '';
 
   const ctaSrc = typeof category.cta === 'object' && category.cta?.src ? category.cta.src : null;
-
+  
   const ProductsElement =
     category.products || category.tiles || category.freebies
       ? await renderBody({
