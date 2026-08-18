@@ -60,6 +60,9 @@ const Intro_data = {
 const categories = [
   {
     name: 'Outdoor lamps',
+    overrides: {
+      HU: "Kültéri világítás"
+    },
     src: getImageUrl('20260902Category10.jpg', true),
     href: 'https://www.beliani.ch/garden-furniture/garden-lighting/',
     background: '#F6E7E6',
@@ -262,6 +265,9 @@ const categories = [
   },
   {
     name: 'Lanterns',
+    overrides: {
+      HU: "Kerti lámpások"
+    },
     src: getImageUrl('20260902Category40.jpg', true),
     href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',
     background: '#F6E7E6',

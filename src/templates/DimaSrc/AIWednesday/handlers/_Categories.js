@@ -47,12 +47,18 @@ const enrichCategoryProducts = async ({ category, getProductById, getCategoryLin
   };
 };
 
-const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm }) => {
-  const name = queries?.categories?.[index]
-    ? queries.categories[index]
-    : category?.name
-      ? getCategoryTitle(category.name)
-      : category?.name;
+const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm , country}) => {
+  let name = '';
+  console.log("overrides", category?.overrides, country)
+  if (category?.overrides && country && category.overrides[country]) {
+    name = category.overrides[country];
+  } else {
+     name = queries?.categories?.[index]
+      ? queries.categories[index]
+      : category?.name
+        ? getCategoryTitle(category.name)
+        : category?.name;
+  }
 
   let href = '';
   if (queries?.categoryLinks?.[index]) {
@@ -104,6 +110,7 @@ export const CategoriesHandler = async ({
       getCategoryTitle,
       getCategoryLink,
       add_utm,
+      country
     })
   );
 
