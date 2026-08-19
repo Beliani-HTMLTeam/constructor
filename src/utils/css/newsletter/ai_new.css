@@ -88,6 +88,11 @@ img {
   padding-right: 25px;
 }
 
+.newsletterContainer40px {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 .newsletterContainer55px {
   padding-left: 55px;
   padding-right: 55px;
@@ -559,6 +564,11 @@ img {
   .newsletterContainer25px {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .newsletterContainer40px {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .newsletterContainer55px {

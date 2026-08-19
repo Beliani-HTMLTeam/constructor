@@ -76,7 +76,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ${category.title?.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore, style: { bg: spaceStyle } }) : ''}
    
     <tr>
-      <td class="newsletterContainer" style="background: ${spaceStyle ?? background};">
+      <td class="${category?.title?.tdClass ?? 'newsletterContainer'}" style="background: ${spaceStyle ?? background};">
         ${Paragraph({
           text: category.name,
           color: category?.title?.color ?? color,

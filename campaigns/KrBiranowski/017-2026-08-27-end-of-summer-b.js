@@ -117,11 +117,11 @@ const tableQueries = [
 
 const links = {
   Intro_cta_href: 'https://www.beliani.ch/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-27' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-08-27-tb' }),
   TopImageTitle_src: translateImage({ value: '20260827_01.png' }),
 
   TopImage_src: getImageUrl('20260827_Gif_B.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-08-27' }),
+  TopImage_href: translateLink({ value: 'content/lp26-08-27-tb' }),
 
   Banner_1: translateLink({ value: 'content/lp26-08-13' }),
   Banner_1_Image: translateImage({ value: '20260813b.png' }),
