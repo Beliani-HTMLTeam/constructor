@@ -1,7 +1,7 @@
 import { Intro } from '../components/Intro';
 import { CTA } from '../components/CTA';
 
-export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySlug, links, cta = {}, add_utm }) => {
+export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySlug, links, cta = {}, add_utm, getCategoryLink, }) => {
   const introType = intro?.type ?? 'paragraph';
   const introColor = intro?.color ?? '#000000';
 
@@ -23,6 +23,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
     backgroundColor: intro?.backgroundColor,
     links: links,
     add_utm: add_utm,
+    getCategoryLink: getCategoryLink,
   })}
   ${
     intro.cta

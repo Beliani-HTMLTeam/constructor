@@ -11,6 +11,7 @@ const Intro = ({
   backgroundColor,
   links = {},
   add_utm,
+  getCategoryLink,
 }) => {
   const hasTitleAndParagraph = Array.isArray(text) && text.length > 1;
   const hasSingleArrayValue = Array.isArray(text) && text.length === 1;
@@ -53,7 +54,7 @@ const Intro = ({
 
           ${links?.IntroImage_src
             ? ImageWithLink({
-              href: add_utm(links?.IntroImage_href || '#') ?? '#',
+              href: getCategoryLink(add_utm(links?.IntroImage_href || '#') ?? '#'),
               src: links.IntroImage_src,
               alt: 'Intro Image',
               insideTr: true,

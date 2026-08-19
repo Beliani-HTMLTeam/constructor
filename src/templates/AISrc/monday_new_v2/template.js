@@ -56,7 +56,7 @@ const MondayNewV2 = async ({
   const TopImageElement = TopImageHandler({ links, topImage });
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug, links, cta: intro?.cta ?? {}, add_utm });
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug, links, cta: intro?.cta ?? {}, add_utm, getCategoryLink });
 
   const introPosition = intro?.position ?? 'afterTopImage';
   const safeCategories = Array.isArray(categories) ? categories : [];
