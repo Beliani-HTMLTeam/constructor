@@ -16,9 +16,11 @@ const renderWednesdayCategory = ({
   ctaHref,
   ProductsElement,
   getPhrase,
+  country,
 }) => {
-  const categoryNumber = String(id + 1).padStart(2, '0');
+  const categoryNumber = country !== 'FI' ? String(id + 1).padStart(2, '0') : String(id + 1);
 
+  const categoryNumberWidth = country !== 'FI' ? '80' : '50';
   // category.name is already translated in _Categories.js
   const title = category.name || 'Translation not found';
 
@@ -143,10 +145,11 @@ const renderWednesdayCategory = ({
                 <tr>
                   <!-- Category number -->
                   <td
-                    width="80"
+                    width="${categoryNumberWidth}"
                     valign="top"
                     style="
                     color:${numberColor};
+                    width:${categoryNumberWidth}px !important;
                     "
                     class="newsletterWednesdayNumber"
                   >
@@ -384,6 +387,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           ctaHref,
           ProductsElement,
           getPhrase,
+          country
         });
       }
 

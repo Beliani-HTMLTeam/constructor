@@ -266,7 +266,10 @@ const categories = [
   {
     name: 'Lanterns',
     overrides: {
-      HU: "Kerti lámpások"
+      HU: "Kerti lámpások",
+      FR: "Lanternes de jardin",
+      CHFR: "Lanternes de jardin",
+      BEFR: "Lanternes de jardin"
     },
     src: getImageUrl('20260902Category40.jpg', true),
     href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',

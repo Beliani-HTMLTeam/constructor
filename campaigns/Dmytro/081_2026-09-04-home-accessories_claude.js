@@ -258,7 +258,7 @@ const categories = [
       // Anizy
       {
         id: '819658',
-        src: getImageUrl('20260904Category41_claude.png', true),
+        src: getImageUrl('20260904Category43_claude.png', true),
       },
       // Mancey
       {
@@ -268,7 +268,7 @@ const categories = [
       // Suin
       {
         id: '818135',
-        src: getImageUrl('20260904Category43_claude.png', true),
+        src: getImageUrl('20260904Category41_claude.png', true),
       },
       // Tawley
       {

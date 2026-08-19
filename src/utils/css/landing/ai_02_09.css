@@ -12,6 +12,14 @@
   margin: 0;
 }
 
+#newsletter .newsletterWednesdayProductHighPrice {
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+
+
 #newsletter .newsletterWednesdaySubtitle {
   font-family: "Open Sans", sans-serif;
     font-size:12px;
