@@ -261,7 +261,7 @@ const CTA = ({
               <a
                 href="${codeValue ? '#' : href}"
                 ${codeValue ? copyOnlyOnClickScript : 'target="_blank"'}
-                style="font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; font-weight: 500; color: ${textColor} !important; text-decoration: none; display: inline-block; letter-spacing: 1.5px;"
+                style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; font-weight: 500; color: ${textColor} !important; text-decoration: none; display: inline-block; letter-spacing: 1.5px;"
               >
                 <span
                   style="color: ${textColor} !important;"
