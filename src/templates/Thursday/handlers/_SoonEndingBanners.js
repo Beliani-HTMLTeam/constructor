@@ -4,9 +4,10 @@ import { Line } from '../components/Line.js';
 
 export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country }) => {
 
-	if (["HR", "SI"].includes(country)) {
-		return ``;
-	}
+  // sorry for that, but we already have banners for HR and SI :)
+	// if (["HR", "SI"].includes(country)) {
+	// 	return ``;
+	// }
 
 	return `
     <!-- Soon Ending Banners -->
