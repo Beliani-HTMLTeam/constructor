@@ -63,7 +63,7 @@ export const renderOfferSection = ({
           ${offerTitle ? `
             <tr>
               <td align="center" style="padding-bottom: 8px;">
-                <span style="font-family: 'Open Sans', Arial, sans-serif; font-size: 15px; line-height: 1.3; text-transform: uppercase; letter-spacing: 2px; color: ${secondaryTextColor}; display: block; text-align: center;">
+                <span style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 15px; line-height: 1.3; text-transform: uppercase; letter-spacing: 2px; color: ${secondaryTextColor}; display: block; text-align: center;">
                   ${offerTitle}
                 </span>
               </td>
@@ -73,7 +73,7 @@ export const renderOfferSection = ({
           ${offerPart1 ? `
             <tr>
               <td align="center" style="padding-bottom: 12px;">
-                <span class="introRedTitle" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 38px; line-height: 1.25; color: ${textColor}; display: block; text-align: center;">
+                <span class="introRedTitle" style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 38px; line-height: 1.25; color: ${textColor}; display: block; text-align: center;">
                   ${offerPart1}
                 </span>
               </td>
@@ -83,7 +83,7 @@ export const renderOfferSection = ({
           ${offerPart2 ? `
             <tr>
               <td align="center" style="padding-bottom: 28px;">
-                <span class="introRedParagraph" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5; color: ${secondaryTextColor}; display: block; text-align: center; max-width: 520px; margin: 0 auto;">
+                <span class="introRedParagraph" style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.5; color: ${secondaryTextColor}; display: block; text-align: center; max-width: 520px; margin: 0 auto;">
                   ${offerPart2}
                 </span>
               </td>
@@ -108,7 +108,7 @@ export const renderOfferSection = ({
           ${offerDate ? `
             <tr>
               <td align="center">
-                <span style="font-family: 'Open Sans', Arial, sans-serif; font-size: 14px; color: #ffffff; display: block; text-align: center; letter-spacing: 0.3px;">
+                <span style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 14px; color: #ffffff; display: block; text-align: center; letter-spacing: 0.3px;">
                   ${offerDate}
                 </span>
               </td>

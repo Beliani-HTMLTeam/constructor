@@ -42,7 +42,7 @@ export const CategoryQuickLinks = ({
             <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
               <tr>
                 <td align="center" bgcolor="#750000" style="background-color: #750000; border-radius: 4px; padding: 14px 10px;">
-                  <a href="${href}" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 14px; font-weight: bold; color: #ffffff !important; text-decoration: none; display: block; text-align: center; text-transform: uppercase;">
+                  <a href="${href}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 14px; font-weight: bold; color: #ffffff !important; text-decoration: none; display: block; text-align: center; text-transform: uppercase;">
                     <span class="categoryLinkCard" style="color: #ffffff !important;">${name}</span>
                   </a>
                 </td>
@@ -65,7 +65,7 @@ export const CategoryQuickLinks = ({
           ${title ? `
             <tr>
               <td align="center" style="padding-bottom: 20px;">
-                <span style="font-family: 'Open Sans', Georgia, serif; font-size: 20px; font-weight: bold; color: #000000; display: block; text-align: center;">
+                <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Georgia, serif;' : ''} font-size: 20px; font-weight: bold; color: #000000; display: block; text-align: center;">
                   ${title}
                 </span>
               </td>

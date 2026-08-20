@@ -20,7 +20,7 @@ export const ShopByCategoryHeader = ({
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
           <tr>
             <td align="center">
-              <span class="shopByCategoryTitle" style="font-family: 'Open Sans', Georgia, serif; font-size: 26px; font-weight: bold; color: ${black}; display: block; text-align: center; letter-spacing: 0.5px;">
+              <span class="shopByCategoryTitle" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Georgia, serif;' : ''} font-size: 26px; font-weight: bold; color: ${black}; display: block; text-align: center; letter-spacing: 0.5px;">
                 ${title}
               </span>
             </td>
@@ -29,7 +29,7 @@ export const ShopByCategoryHeader = ({
             ${Space({ insideTr: true, className: 'newsletterBottom10px' })}
             <tr>
               <td align="center">
-                <span class="shopByCategorySubtitle" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 14px; color: ${gray}; display: block; text-align: center; line-height: 1.5;">
+                <span class="shopByCategorySubtitle" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 14px; color: ${gray}; display: block; text-align: center; line-height: 1.5;">
                   ${subtitle}
                 </span>
               </td>
@@ -47,7 +47,7 @@ export const ShopByCategoryHeader = ({
                       type,
                       align: 'center',
                     })
-                  : `<a href="${linkHref}" class="secondaryLinkMaroon" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 13px; font-weight: bold; color: ${primary} !important; text-decoration: none;">${linkText}</a>`}
+                  : `<a href="${linkHref}" class="secondaryLinkMaroon" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 13px; font-weight: bold; color: ${primary} !important; text-decoration: none;">${linkText}</a>`}
               </td>
             </tr>
           ` : ''}

@@ -29,7 +29,7 @@ export const render = ({
     const cols = 2;
     productsInnerHtml += `
     <tr>
-      <td style="color: ${color}; ${styleBg}" ${insideContainer ? 'class="newsletterContainer"' : ''}>
+      <td style="color: ${color}; ${styleBg}" ${insideContainer ? `class="${prodSettings.tdClass}"` : ''}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
 
     for (let i = 0; i < products.length; i += cols) {

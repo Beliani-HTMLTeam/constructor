@@ -101,6 +101,11 @@ table {
   padding-right: 25px;
 }
 
+#newsletter .newsletterContainer40px {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 #newsletter .newsletterContainer55px {
   padding-left: 55px;
   padding-right: 55px;
@@ -509,6 +514,11 @@ table {
     padding-right: 10px;
   }
 
+  #newsletter .newsletterContainer40px {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   #newsletter .newsletterContainer55px {
     padding-left: 25px;
     padding-right: 25px;
@@ -809,7 +819,6 @@ table {
 .shopByCategoryTitle {
   font-size: 26px;
   font-weight: 700;
-  font-family: 'Open Sans', Georgia, serif;
   color: #000000;
   text-align: center;
   letter-spacing: 0.5px;

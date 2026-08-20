@@ -75,6 +75,7 @@ const prodSetData = {
   rounded: 'bottom',
   spaceBottom: 'newsletterBottom20px',
   spaceBetween: 'newsletterContainer15px',
+  tdClass: 'newsletterContainer40px',
 };
 
 const tableQueries = [
@@ -153,15 +154,14 @@ const categories = [
     href: catData[0].href,
     skipLinkTranslation: true,
     background: theme.secondary,
-    rounded: 'all',
-    padding: 'newsletterTop25px newsletterContainer25px',
     spaceAfter: 'newsletterBottom25px',
-    paddingTop: '35',
+    paddingTop: '60',
     spaceTop: '25',
     prodSettings: prodSetData,
     color: theme.black,
     type: 'grid',
     titleFontSize: '24',
+    tdClass: 'newsletterContainer40px',
     cta: {
       variant: 'maroon',
       color: theme.ctaText,
@@ -173,6 +173,7 @@ const categories = [
       align: 'center',
       position: 'inParagraph',
       spaceAfter: 'newsletterBottom10px',
+      tdClass: 'newsletterContainer40px',
     },
     paragraph: {
       show: true,
@@ -180,6 +181,7 @@ const categories = [
       color: theme.paragraphColor,
       spaceBefore: 'newsletterBottom25px',
       spaceAfter: 'newsletterBottom25px',
+      tdClass: 'newsletterContainer40px',
     },
     product: {
       prices: true,
@@ -195,13 +197,12 @@ const categories = [
     href: catData[1].href,
     skipLinkTranslation: true,
     background: theme.secondary,
-    rounded: 'all',
-    padding: 'newsletterContainer25px',
     spaceAfter: 'newsletterBottom25px',
     prodSettings: prodSetData,
     color: theme.black,
     type: 'grid',
     titleFontSize: '24',
+    tdClass: 'newsletterContainer40px',
     cta: {
       variant: 'maroon',
       color: theme.ctaText,
@@ -214,6 +215,7 @@ const categories = [
       align: 'center',
       position: 'inParagraph',
       spaceAfter: 'newsletterBottom10px',
+      tdClass: 'newsletterContainer40px',
     },
     paragraph: {
       show: true,
@@ -221,6 +223,7 @@ const categories = [
       color: theme.paragraphColor,
       spaceBefore: 'newsletterBottom25px',
       spaceAfter: 'newsletterBottom25px',
+      tdClass: 'newsletterContainer40px',
     },
     product: {
       prices: true,
@@ -236,13 +239,12 @@ const categories = [
     href: catData[2].href,
     skipLinkTranslation: true,
     background: theme.secondary,
-    rounded: 'all',
-    padding: 'newsletterContainer25px',
     spaceAfter: 'newsletterBottom25px',
     color: theme.black,
     prodSettings: prodSetData,
     type: 'grid',
     titleFontSize: '24',
+    tdClass: 'newsletterContainer40px',
     cta: {
       variant: 'maroon',
       color: theme.ctaText,
@@ -255,6 +257,7 @@ const categories = [
       color: theme.primary,
       position: 'inParagraph',
       spaceAfter: 'newsletterBottom10px',
+      tdClass: 'newsletterContainer40px',
     },
     paragraph: {
       show: true,
@@ -262,6 +265,7 @@ const categories = [
       color: theme.paragraphColor,
       spaceBefore: 'newsletterBottom25px',
       spaceAfter: 'newsletterBottom25px',
+      tdClass: 'newsletterContainer40px',
     },
     product: {
       prices: true,
@@ -277,13 +281,12 @@ const categories = [
     href: catData[3].href,
     skipLinkTranslation: true,
     background: theme.secondary,
-    rounded: 'all',
-    padding: 'newsletterContainer25px',
     spaceAfter: 'newsletterBottom65px',
     color: theme.black,
     prodSettings: prodSetData,
     type: 'grid',
     titleFontSize: '24',
+    tdClass: 'newsletterContainer40px',
     cta: {
       variant: 'maroon',
       color: theme.ctaText,
@@ -296,6 +299,7 @@ const categories = [
       color: theme.primary,
       position: 'inParagraph',
       spaceAfter: 'newsletterBottom10px',
+      tdClass: 'newsletterContainer40px',
     },
     paragraph: {
       show: true,
@@ -303,6 +307,7 @@ const categories = [
       color: theme.paragraphColor,
       spaceBefore: 'newsletterBottom25px',
       spaceAfter: 'newsletterBottom25px',
+      tdClass: 'newsletterContainer40px',
     },
     product: {
       prices: true,
@@ -338,7 +343,7 @@ export default new entities.Campaign({
   figmaUrl: 'https://www.figma.com/design/pC70LMdl48JU2X9pDox3kk/',
   templates: [
     {
-      background: theme.white,
+      background: theme.secondary,
       color: theme.black,
       template: templates.ThursdayNew,
 
@@ -350,7 +355,7 @@ export default new entities.Campaign({
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
       links: links,
-      topImagePadding: 'newsletterTop55px newsletterContainer25px',
+      topImagePadding: 'newsletterTop55px newsletterContainer40px',
       tableQueries: tableQueries,
       timer: timer,
       disableTopImageTitle: true,
@@ -358,7 +363,7 @@ export default new entities.Campaign({
       theme,
       intro: {
         color: theme.primary,
-        backgroundColor: theme.white,
+        backgroundColor: theme.secondary,
         alignment: 'center',
         position: 'beforeFreebies',
         secondaryLink: false,
@@ -385,7 +390,7 @@ export default new entities.Campaign({
       },
     },
     {
-      background: theme.white,
+      background: theme.secondary,
       color: theme.black,
       template: templates.ThursdayNew,
 
@@ -396,7 +401,7 @@ export default new entities.Campaign({
       TopImageTitle_data: TopImageTitle_data,
       categories: categories,
       links: links,
-      topImagePadding: 'newsletterTop55px newsletterContainer25px',
+      topImagePadding: 'newsletterTop55px newsletterContainer40px',
       tableQueries: tableQueries,
       shopByCategory: false,
       theme,
@@ -404,7 +409,7 @@ export default new entities.Campaign({
       intro: {
         color: theme.primary,
         paragraphColor: theme.paragraphColor,
-        backgroundColor: theme.white,
+        backgroundColor: theme.secondary,
         alignment: 'center',
         position: 'beforeFreebies',
         secondaryLink: false,

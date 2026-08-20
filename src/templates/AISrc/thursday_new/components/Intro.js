@@ -52,7 +52,7 @@ const Intro = ({
     ? `
     <tr>
       <td align="${paragraphAlign}" style="padding: 0 25px;">
-        <span class="${titleClass}" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 28px; line-height: 1.25; color: ${color}; font-weight: 600; display: block; text-align: ${paragraphAlign};">
+        <span class="${titleClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 28px; line-height: 1.25; color: ${color}; font-weight: 600; display: block; text-align: ${paragraphAlign};">
           ${introTitle}
         </span>
       </td>
@@ -65,7 +65,7 @@ const Intro = ({
     ? `
     <tr>
       <td align="${paragraphAlign}" style="padding: 0 25px;">
-        <span class="${paragraphClass}" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5; color: ${paragraphColor ?? textColor}; display: block; text-align: ${paragraphAlign};">
+        <span class="${paragraphClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.5; color: ${paragraphColor ?? textColor}; display: block; text-align: ${paragraphAlign};">
           ${introParagraph}
         </span>
       </td>
@@ -106,7 +106,7 @@ const Intro = ({
               align: paragraphAlign,
               theme,
             })
-          : `<a href="${secondaryLinkHref}" class="introSecondaryLink" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 13px; color: ${textColor} !important; text-decoration: underline;">${secondaryLinkText}</a>`}
+          : `<a href="${secondaryLinkHref}" class="introSecondaryLink" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 13px; color: ${textColor} !important; text-decoration: underline;">${secondaryLinkText}</a>`}
       </td>
     </tr>
     `

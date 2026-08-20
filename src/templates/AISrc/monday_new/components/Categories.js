@@ -199,7 +199,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       <tr>
         <td align="center" class="newsletterContainer" style="text-align: center;">
-          <span class="conditionText" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 11px; color: #777777; line-height: 1.4; display: block;">
+          <span class="conditionText" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 11px; color: #777777; line-height: 1.4; display: block;">
             ${Array.isArray(queries.condition) ? queries.condition.join('<br>') : queries.condition}
           </span>
         </td>
@@ -323,6 +323,7 @@ const renderBody = async ({
       ctaSrc,
       theme,
       disableHighPrice,
+      type,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);
