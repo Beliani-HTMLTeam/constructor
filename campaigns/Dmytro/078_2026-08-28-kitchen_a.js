@@ -150,7 +150,8 @@ const categories = [
   {
     name: 'Tableware',
     overrides: {
-
+      NL: "Keukengerei en servies",
+      BENL: "Keukengerei en servies"
     },
     background: '#ffffff',
     color: '#750000',
