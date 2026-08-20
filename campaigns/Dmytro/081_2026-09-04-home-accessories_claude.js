@@ -25,9 +25,9 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-09-04' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-04-ta' }),
   TopImage_src: translateImage({ value: '20260904_top_image_claude.png' }),
-  TopImage_href: translateLink({ value: 'content/lp26-09-04' }),
+  TopImage_href: translateLink({ value: 'content/lp26-09-04-ta' }),
   Banner_1: translateLink({ value: 'content/lp26-08-28' }),
   Banner_1_Image: translateImage({ value: '20260828b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-27' }),

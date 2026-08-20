@@ -25,9 +25,9 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-09-04' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-04-tb' }),
   TopImage_src: translateImage({ value: '20260904_top_image_chat.png' }),
-  TopImage_href: translateLink({ value: 'content/lp26-09-04' }),
+  TopImage_href: translateLink({ value: 'content/lp26-09-04-tb' }),
   Banner_1: translateLink({ value: 'content/lp26-08-28' }),
   Banner_1_Image: translateImage({ value: '20260828b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-27' }),
@@ -307,10 +307,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: "47252",
+  startId: "47540",
   name: "Home Accessories - Chat",
   date: "04.09.2026",
   issueCardId: "522965",
+  lpId: "32140",
   alarm: {
     isActive: false,
   },
