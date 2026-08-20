@@ -48,12 +48,11 @@ const CTA = ({
   } else if (type === 'landing') {
     if (variant === 'cream') {
       const buttonContent = codeValue ? `${text} ${copyIcon}` : text;
-      html = `<a href="#" class="ctaBtn" style="background-color: ${ctaCreamBg}; color: ${ctaCreamText} !important;">${buttonContent}</a>`;
+      html = `<a href="javascript:void(0)" class="ctaBtn" style="background-color: ${ctaCreamBg}; color: ${ctaCreamText} !important;">${buttonContent}</a>`;
     } else if (variant === 'underline') {
-      const underlineHref = codeValue ? '#' : href;
-      html = `<a href="${underlineHref}" class="secondaryLinkMaroon">${text} ${copyIcon}</a>`;
+      html = `<a href="${codeValue ? 'javascript:void(0)' : href}" class="secondaryLinkMaroon">${text} ${copyIcon}</a>`;
     } else {
-      html = `<a href="${href}" class="ctaBtn" style="background-color: ${ctaMaroonBg}; color: ${ctaMaroonText} !important;">${text} ${copyIcon}</a>`;
+      html = `<a href="javascript:void(0)" class="ctaBtn" style="background-color: ${ctaMaroonBg}; color: ${ctaMaroonText} !important;">${text} ${copyIcon}</a>`;
     }
   } else {
     if (variant === 'underline') {
