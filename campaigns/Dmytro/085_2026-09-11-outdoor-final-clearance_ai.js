@@ -342,6 +342,7 @@ export default new entities.Campaign({
       intro: intro_data,
       links: links,
       tableQueries: tableQueries,
+      categories_type: 'biggrid',
     },
     {
       name: "Landing",
@@ -365,6 +366,7 @@ export default new entities.Campaign({
       intro: intro_data,
       links: links,
       tableQueries: tableQueries,
+      categories_type: 'biggrid',
     },
   ],
 });

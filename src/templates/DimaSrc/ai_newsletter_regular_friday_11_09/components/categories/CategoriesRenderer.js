@@ -2,6 +2,7 @@ import { Grid4TilesRenderer } from './Grid4TilesRenderer';
 import { TwoColumnsGridRenderer } from './TwoColumnsGridRenderer';
 import { FullWidthTilesRenderer } from './FullWidthTilesRenderer';
 import { SmallTilesRenderer } from './SmallTilesRenderer';
+import BigGrid from '../../category/biggrid';
 
 export const CategoriesRenderer = async ({
   categories,
@@ -24,7 +25,7 @@ export const CategoriesRenderer = async ({
   if (
     categories_type !== 'twoColumnsGrid' &&
     categories_type !== 'fullWidthTiles' &&
-    categories_type !== 'liquidator' && categories_type !== 'small-tiles'
+    categories_type !== 'liquidator' && categories_type !== 'small-tiles' && categories_type !== 'biggrid'
   ) {
     return await Grid4TilesRenderer({
       categories,
@@ -36,6 +37,23 @@ export const CategoriesRenderer = async ({
       getCategoryTitle,
       add_utm,
     });
+  }
+
+  if (categories_type === "biggrid") {
+    console.log("before", categories)
+  return BigGrid({
+    categories: categories[0]?.categories,
+    background: categories[0]?.background || background,
+
+    getTitle: (item) =>
+      getCategoryTitle(item.name, country),
+
+    getHref: (item) =>
+      add_utm(item.href),
+
+    getCtaText: () =>
+      getPhrase('Shop now'),
+  });
   }
 
   // Two columns grid

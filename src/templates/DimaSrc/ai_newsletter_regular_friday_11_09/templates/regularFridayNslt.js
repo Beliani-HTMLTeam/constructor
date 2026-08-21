@@ -86,8 +86,6 @@ const AINewsletter1109 = async ({
     TopImageTitle_href, TopImageTitle_src, TopImage_src, TopImage_href, Timer_href, Banner_1, Banner_1_Image, Banner_2, Banner_2_Image, code_href, ShopCTA
   } = links;
 
-  const { color: TiT_color, backgroundColor: TiT_bg, type: TiT_type, className: TiT_className } = TopImageTitle_data
-
   // let TopImageTitleElement = TopImageTitle({
   //   href: TopImageTitle_href,
   //   src: TopImageTitle_src,

@@ -13,7 +13,7 @@ export const CategoriesProcessor = async ({
         category.type !== 'grid4tiles' &&
         category.type !== 'liquidatorConditions' &&
         category.view !== 'newsletterOnly' &&
-        categories_type !== 'liquidator';
+        categories_type !== 'liquidator' && categories_type !== 'biggrid';
 
       if (!shouldProcessProducts) {
         return { ...category };
