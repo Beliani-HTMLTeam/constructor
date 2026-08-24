@@ -2,7 +2,7 @@
 let ICON_OK = 'https://pictureserver.net/static/2026/copy-icon-ok{variant}.svg';
 
 const isColorLight = (color) => {
-  const hex = color.replace('#', '');
+  let hex = color.replace('#', '');
 
   if (hex.length === 3) {
     hex = hex.split('').map((c) => c + c).join('');
@@ -18,15 +18,13 @@ const isColorLight = (color) => {
 }
 
 const CopyCodeCTA = ({ text, codeValue, color = '#750000', label = 'Code copied', font = 'Poppins, Tahoma, Geneva, sans-serif' }) => {
-  let copy_variants = ['-black', '-light'];
-  let ok_variants = ['', '-light'];
-
+  
   if (isColorLight(color)) {
-    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', copy_variants[1]);
-    ICON_OK = ICON_OK.replace('{variant}', ok_variants[1]);
+    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', '-light');
+    ICON_OK = ICON_OK.replace('{variant}', '-light');
   } else {
-    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', copy_variants[0]);
-    ICON_OK = ICON_OK.replace('{variant}', ok_variants[0]);
+    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', '-black');
+    ICON_OK = ICON_OK.replace('{variant}', '');
   }
 
   return `
@@ -37,15 +35,12 @@ const CopyCodeCTA = ({ text, codeValue, color = '#750000', label = 'Code copied'
 }
 
 const CopyCodeWebNotification = ({ text, codeValue, color = '#FFCCB7', label = 'Code copied', font = 'Poppins, Tahoma, Geneva, sans-serif' }) => {
-  let copy_variants = ['-black', '-light'];
-  let ok_variants = ['', '-light'];
-  console.log(color, 'color');
   if (isColorLight(color)) {
-    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', copy_variants[1]);
-    ICON_OK = ICON_OK.replace('{variant}', ok_variants[1]);
+    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', '-light');
+    ICON_OK = ICON_OK.replace('{variant}', '-light');
   } else {
-    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', copy_variants[0]);
-    ICON_OK = ICON_OK.replace('{variant}', ok_variants[0]);
+    ICON_DEFAULT = ICON_DEFAULT.replace('{variant}', '-black');
+    ICON_OK = ICON_OK.replace('{variant}', '');
   }
 
   return `
