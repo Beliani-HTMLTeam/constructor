@@ -88,7 +88,7 @@ const AIRegularFridayNslt2Chat = async ({
     alt: 'Landing Page Video',
     insideTr: true,
   }) : ImageWithLink({
-    href: links.TopImage_href,
+    href: getCategoryLink(links.TopImage_href),
     src: links.TopImage_src,
     insideTr: true,
     alt: 'Top Image',

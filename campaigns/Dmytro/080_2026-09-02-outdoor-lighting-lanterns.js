@@ -133,6 +133,10 @@ const categories = [
   },
   {
     name: 'Outdoor Table Lamps',
+    overrides: {
+      UK: "Table Lamps",
+      PL: "Lampy stołowe"
+    },
     src: getImageUrl('20260902Category20.jpg', true),
     href: 'https://www.beliani.ch/garden-lighting/outdoor-table-lamps/',
     background: '#F6E7E6',
@@ -199,6 +203,10 @@ const categories = [
   },
   {
     name: 'Outdoor Decorative Lamps',
+    overrides: {
+      UK: "Decorative Lamps",
+      PL: "Lampy dekoracyjne",
+    },
     src: getImageUrl('20260902Category30.jpg', true),
     href: 'https://www.beliani.ch/garden-lighting/outdoor-decorative-lamps/',
     background: '#F6E7E6',
@@ -269,7 +277,8 @@ const categories = [
       HU: "Kerti lámpások",
       FR: "Lanternes de jardin",
       CHFR: "Lanternes de jardin",
-      BEFR: "Lanternes de jardin"
+      BEFR: "Lanternes de jardin",
+      PL: "Lampiony",
     },
     src: getImageUrl('20260902Category40.jpg', true),
     href: 'https://www.beliani.ch/garden-accessories/garden-lanterns/',

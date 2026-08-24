@@ -27,7 +27,7 @@ const tableQueries = [
 const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-09-04-tb' }),
   TopImage_src: translateImage({ value: '20260904_top_image_chat.png' }),
-  TopImage_href: translateLink({ value: 'content/lp26-09-04-tb' }),
+  TopImage_href: 'https://www.beliani.ch/home-accessories/',
   Banner_1: translateLink({ value: 'content/lp26-08-28' }),
   Banner_1_Image: translateImage({ value: '20260828b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-27' }),
@@ -180,6 +180,7 @@ const categories = [
   {
     name: 'Frames & Wall Art',
     overrides: {
+      FI: "Taulut ja kehykset"
     },
     background: '#FFCCB7',
     color: '#750000',

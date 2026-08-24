@@ -167,6 +167,7 @@ const categories = [
   {
     name: 'Frames & Wall Art',
     overrides: {
+      FI: "Taulut ja kehykset"
     },
     background: '#FFFFFF',
     color: '#750000',
