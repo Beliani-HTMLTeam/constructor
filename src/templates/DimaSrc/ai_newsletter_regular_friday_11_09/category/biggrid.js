@@ -3,6 +3,8 @@
  * Designed for a 650 px newsletter container.
  */
 
+import { Space } from "../components/Space";
+
 const escapeHtml = (value = '') =>
   String(value)
     .replace(/&/g, '&amp;')
@@ -97,25 +99,19 @@ const renderTile = ({
                   max-width:290px;
                   height:auto;
                   border:0;
-                  border-radius:4px;
                 "
               >
             </a>
           </td>
         </tr>
 
+        ${Space({ className: 'newsletterBottom10px', insideTr: true, backgroundColor: background })}
         <tr>
           <td
             align="left"
+            class="newsletterBigGridTitle"
             style="
-              padding:7px 0 0;
-              color:${titleColor};
-              font-family:Poppins, Arial, sans-serif;
-              font-size:14px;
-              line-height:18px;
-              font-weight:600;
-              text-align:left;
-              mso-line-height-rule:exactly;
+              color:${titleColor};     
             "
           >
             <a
@@ -131,19 +127,15 @@ const renderTile = ({
           </td>
         </tr>
 
+        ${Space({ className: 'newsletterBottom10px', insideTr: true, backgroundColor: background })}
+
         <tr>
           <td
             align="left"
             style="
-              padding:1px 0 ${bottomPadding}px;
               color:${ctaColor};
-              font-family:Poppins, Arial, sans-serif;
-              font-size:12px;
-              line-height:16px;
-              font-weight:600;
-              text-align:left;
-              mso-line-height-rule:exactly;
             "
+            class="newsletterBigGridCTA"
           >
             <a
               href="${safeHref}"
@@ -157,6 +149,7 @@ const renderTile = ({
             </a>
           </td>
         </tr>
+        ${Space({ className: `newsletterBottom20px`, insideTr: true, backgroundColor: background })}
       </table>
     </td>
   `;
@@ -233,12 +226,12 @@ export const BigGrid = ({
   }
 
   return `
+  ${Space({ className: 'newsletterBottom60px', insideTr: true, backgroundColor: background })}
     <tr>
       <td
         class="newsletterContainer30px"
         align="center"
         style="
-          padding:0 30px;
           background-color:${background};
         "
       >
@@ -259,6 +252,7 @@ export const BigGrid = ({
         </table>
       </td>
     </tr>
+    ${Space({ className: 'newsletterBottom60px', insideTr: true, backgroundColor: background })}
   `;
 };
 

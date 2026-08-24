@@ -76,6 +76,11 @@ img {
   padding-right: 20px;
 }
 
+.newsletterContainer30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 .newsletterContainer60px {
   padding-left: 60px;
   padding-right: 60px;
@@ -202,6 +207,26 @@ img {
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-weight: 600;
+}
+
+.newsletterBigGridTitle {
+  font-family: "Open Sans", sans-serif;
+  font-size:19px;
+  line-height:1.2;
+  font-weight:700;
+  text-align:left;
+
+  mso-line-height-rule:exactly;
+}
+
+.newsletterBigGridCTA {
+  font-family: "Open Sans", sans-serif;
+  font-size:16px;
+  line-height:1.2;
+  font-weight:700;
+  text-align:left;
+  mso-line-height-rule:exactly;
+  text-decoration:none;
 }
 
 .newsletterTitleAditional {
@@ -364,6 +389,10 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  .newsletterContainer30px {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .stack-column {
     display: block !important;
     width: 100% !important;

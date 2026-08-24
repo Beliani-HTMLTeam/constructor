@@ -112,20 +112,17 @@ export const IntroParagraph = ({
     ${
       introTitle
         ? `
+        ${Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor })}
           <tr>
             <td
               class="${tableContainerClass}"
               align="${alignment}"
-              bgcolor="${backgroundColor}"
               style="
-                padding-top:20px;
                 background-color:${backgroundColor};
                 color:${titleColor || color};
-                font-family:Poppins, Arial, sans-serif;
-                font-size:48px;
-                line-height:1.15;
+                font-size:72px;
+                line-height:1.2;
                 font-weight:700;
-                letter-spacing:-1.4px;
                 text-align:${alignment};
                 mso-line-height-rule:exactly;
               "
@@ -140,30 +137,24 @@ export const IntroParagraph = ({
     ${
       introSubtitle
         ? `
+        ${Space({ insideTr: true, className: 'newsletterBottom20px', backgroundColor })}
           <tr>
             <td
               class="${tableContainerClass}"
               align="${alignment}"
-              bgcolor="${backgroundColor}"
               style="
-                padding-top:2px;
                 background-color:${backgroundColor};
                 color:${
                   subtitleColor ||
                   titleColor ||
                   color
                 };
-                font-family:Poppins, Arial, sans-serif;
-                font-size:22px;
+                font-size:32px;
                 line-height:1.2;
                 font-weight:700;
-                letter-spacing:0;
+                letter-spacing:1px;
                 text-align:${alignment};
-                text-transform:${
-                  uppercaseSubtitle
-                    ? 'uppercase'
-                    : 'none'
-                };
+                text-transform: uppercase;
                 mso-line-height-rule:exactly;
               "
             >
@@ -174,6 +165,7 @@ export const IntroParagraph = ({
         : ''
     }
 
+    ${Space({ insideTr: true, className: 'newsletterBottom20px', backgroundColor })}
     <tr>
       <td
         class="${tableContainerClass}"
