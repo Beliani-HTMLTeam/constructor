@@ -3,11 +3,11 @@ const campaignTranslationsSheet = '03.08.26 - August Peak Start';
 
 const tableQueries = [
   {
-    tableRange: '21',
+    tableRange: '22',
     name: 'paragraphs',
   },
   {
-    tableRange: '22:23',
+    tableRange: '23:24',
     name: 'condition',
   },
 ];
