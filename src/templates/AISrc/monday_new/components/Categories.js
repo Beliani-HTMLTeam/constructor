@@ -53,7 +53,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ${category.title?.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore }) : ''}
    
     <tr>
-      <td class="newsletterContainer">
+      <td class="${category?.title?.tdClass ?? 'newsletterContainer'}">
         ${Paragraph({
           text: category.name,
           color: color,
@@ -93,6 +93,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             insideTable: true,
             spanStyle: `color: ${color};`,
             tableContainer: true,
+            containerClass: category?.paragraph?.tdClass ?? 'newsletterContainer',
           })}
         </td>
       </tr>
@@ -120,7 +121,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     : '';
 
   const ctaSrc = typeof category.cta === 'object' && category.cta?.src ? category.cta.src : null;
-  
+  console.log(theme, 'theme in renderCategory');
   const ProductsElement =
     category.products || category.tiles || category.freebies
       ? await renderBody({
@@ -151,6 +152,9 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           ctaSrc,
           theme,
           disableHighPrice,
+          combineOfferParts: category?.combineOfferParts ?? false,
+          ctaSettings: category?.cta ?? {},
+          containerClass: category?.tdClass ?? 'newsletterContainer',
         })
       : '';
 
@@ -180,7 +184,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? `
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       ${CTA({
-        color: category.color ?? '#000000',
+        color: category?.cta?.color ?? category.color ?? '#000000',
         href: ctaButtonHref,
         text: ctaText,
         insideTr: true,
@@ -190,6 +194,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         src: type !== 'landing' ? ctaSrc : null,
         align: 'center',
         theme,
+        bg: category?.cta?.bg ?? theme?.ctaBg ?? '#F6E7E6',
       })}
     `
     : '';
@@ -290,6 +295,9 @@ const renderBody = async ({
   ctaSrc,
   theme = {},
   disableHighPrice = false,
+  combineOfferParts = false,
+  ctaSettings = {},
+  containerClass = 'newsletterContainer',
 }) => {
   const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
 
@@ -324,6 +332,9 @@ const renderBody = async ({
       theme,
       disableHighPrice,
       type,
+      combineOfferParts,
+      ctaSettings,
+      containerClass,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

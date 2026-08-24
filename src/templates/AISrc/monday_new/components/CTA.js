@@ -16,6 +16,7 @@ const CTA = ({
   alwaysRenderAsImage = false,
   theme = {},
   getPhrase = null,
+  bg = '',
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -24,7 +25,7 @@ const CTA = ({
   const ctaCreamBg = theme?.secondary ?? '#ffe0d4';
   const ctaCreamText = theme?.secondaryText ?? '#750000';
   const ctaToastBg = theme?.toastBg ?? '#ffe0d4';
-  const ctaToastText = color ?? theme?.primary ?? '#750000';
+  const ctaToastText = theme?.toastText ?? theme?.primary ?? '#750000';
 
   const codeCopied = getPhrase?.('Copy code');
 
@@ -38,6 +39,8 @@ const CTA = ({
 
   let html = '';
 
+  let codeCopyHandler = codeValue ? `onclick="(function(e){e.preventDefault();e.stopPropagation();var btn=e.currentTarget.querySelector('button');if(btn&&!e.target.closest('button')){btn.click();}})(event)"` : '';
+
   if (src || alwaysRenderAsImage) {
     const effectiveSrc = src || '';
     if (type === 'landing' && codeValue) {
@@ -48,48 +51,43 @@ const CTA = ({
   } else if (type === 'landing') {
     if (variant === 'cream') {
       const buttonContent = codeValue ? `${text} ${copyIcon}` : text;
-      html = `<a href="javascript:void(0)" class="ctaBtn" style="background-color: ${ctaCreamBg}; color: ${ctaCreamText} !important;">${buttonContent}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaCreamBg}; color: ${color ?? ctaCreamText} !important;">${buttonContent}</a>`;
     } else if (variant === 'underline') {
-      html = `<a href="${codeValue ? 'javascript:void(0)' : href}" class="secondaryLinkMaroon">${text} ${copyIcon}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLinkMaroon">${text} ${copyIcon}</a>`;
     } else {
-      html = `<a href="javascript:void(0)" class="ctaBtn" style="background-color: ${ctaMaroonBg}; color: ${ctaMaroonText} !important;">${text} ${copyIcon}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaMaroonBg}; color: ${color ?? ctaMaroonText} !important;">${text} ${copyIcon}</a>`;
     }
   } else {
     if (variant === 'underline') {
       html = `<a href="${href}" class="secondaryLinkMaroon">${text}</a>`;
     } else {
-      let bgColor;
-      let textColor;
-      switch (variant) {
-        case 'cream':
-          bgColor = '#ffe0d4';
-          textColor = '#750000';
-          break;
-        case 'maroon':
-          bgColor = '#750000';
-          textColor = '#ffffff';
-          break;
-        default:
-          bgColor = '#750000';
-          textColor = '#ffffff';
-      }
+      let bgColor = bg ?? '#750000';
+      let textColor = color ?? '#ffffff';
 
       html = `
+        <!--[if mso]>
         <table cellspacing="0" cellpadding="0" border="0" align="${align}" style="margin: 0 auto;">
           <tr>
-            <td align="center" bgcolor="${bgColor}" style="background-color: ${bgColor}; border-radius: 4px; padding: 15px 45px;">
-              <!--[if mso]>
-              <i style="letter-spacing: 35px; mso-font-width: -100%; mso-text-raise: 30pt">&nbsp;</i>
-              <![endif]-->
-              <a href="${href}" target="_blank" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; font-weight: 600; color: ${textColor} !important; text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1.5px;">
-                <span style="color: ${textColor} !important;">${text}</span>
-              </a>
-              <!--[if mso]>
-              <i style="letter-spacing: 35px; mso-font-width: -100%;">&nbsp;</i>
-              <![endif]-->
+            <td align="center" bgcolor="${bgColor}" style="background-color: ${bgColor};">
+              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${href}" style="height:50px;v-text-anchor:middle;width:200px;" arcsize="0%" stroke="f" fillcolor="${bgColor}">
+                <w:anchorlock/>
+                <center style="color:${textColor};font-family:'Open Sans', Arial, sans-serif; font-size:16px; font-weight:600; letter-spacing:1.5px;">${text}</center>
+              </v:roundrect>
             </td>
           </tr>
         </table>
+        <![endif]-->
+        <!--[if !mso]><!-- -->
+        <table cellspacing="0" cellpadding="0" border="0" align="${align}" style="margin: 0 auto;">
+          <tr>
+            <td align="center" bgcolor="${bgColor}" style="background-color: ${bgColor}; border-radius: 4px;">
+              <a href="${href}" class="newsletterCtaBtn" target="_blank" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; font-weight: 600; color: ${textColor} !important; text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1.5px; max-width: 100%; box-sizing: border-box; padding: 15px 45px;">
+                <span style="color: ${textColor} !important;">${text}</span>
+              </a>
+            </td>
+          </tr>
+        </table>
+        <!--<![endif]-->
       `;
     }
   }

@@ -23,7 +23,7 @@ const ImageWithLink = ({
     : `<a href="${href}"><img src="${src}" alt="${alt}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
 
   if (insideTr) {
-    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}>${html}</td></tr>`;
+    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align="${align}" vAlign="${vAlign}">${html}</td></tr>`;
   }
 
   if (insideTable) {
@@ -34,7 +34,7 @@ const ImageWithLink = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td vAlign=${vAlign} ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes}><tr><td vAlign="${vAlign}" ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
   }
 
   return html;

@@ -49,7 +49,7 @@ export const render = ({
       productsInnerHtml += '</tr>';
     }
 
-    productsInnerHtml += '</td></tr></table>';
+    productsInnerHtml += '</table></td></tr>';
   }
 
   return productsInnerHtml;

@@ -156,7 +156,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           cta: category?.cta ?? {},
         })
       : '';
- 
+
   const insideBannerElement = category?.insideBanner
     ? `
       ${category.insideBanner?.spaceAfter ? Space({ insideTr: true, className: category.insideBanner?.spaceAfter }) : ''}

@@ -42,7 +42,7 @@ const Product = (
   if (showName && product.name) {
     let productDescription = '';
     if (product.useDescription)
-      productDescription = product.description.trim() ?? 'empty product description';
+      productDescription = product?.description?.trim() ?? 'empty product description';
 
     html += `
       ${nameGapClass ? Space({ insideTr: true, className: nameGapClass }) : ''}

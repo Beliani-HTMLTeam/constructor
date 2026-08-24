@@ -16,9 +16,11 @@ export const render = ({
   country,
   offerTextOverrides,
   ctaSrc = null,
-  theme,
+  theme = {},
   disableHighPrice = false,
   type = 'newsletter',
+  combineOfferParts = false,
+  ctaSettings = {},
 }) => {
 
   const countrySlug = String(country ?? '').toLowerCase();
@@ -72,7 +74,9 @@ export const render = ({
     getPhrase,
     offerTexts,
     ctaSrc,
-    theme
+    theme,
+    combineOfferParts,
+    ctaSettings,
   });
 
   // 2. White Section (#ffffff) with Choose from: header line & freebie products grid
@@ -84,7 +88,7 @@ export const render = ({
     html += `
       <tr>
         <td style="background-color: ${dealColorBg}; color: ${dealColorText}; padding: 25px 20px 15px 20px;" align="center">
-          <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 15px; color: ${dealColorText}; display: block; text-align: center;">
+          <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; color: ${dealColorText}; display: block; text-align: center;">
             ${chooseFromHeader}
           </span>
         </td>
@@ -109,7 +113,7 @@ export const render = ({
     html += `
       <tr>
         <td class="freebieSubtitle" style="background-color: ${colorBg}; color: ${colorText}; padding: 0 20px 25px 20px;" align="left">
-          <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; color: ${colorText}; display: block;">
+          <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 14px; color: ${colorText}; display: block;">
             ${freebiesSubtitle}
           </span>
         </td>

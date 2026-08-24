@@ -88,6 +88,11 @@ img {
   padding-right: 25px;
 }
 
+.newsletterContainer30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 .newsletterContainer40px {
   padding-left: 40px;
   padding-right: 40px;
@@ -526,6 +531,14 @@ img {
     display: inline-block !important;
   }
 
+  .newsletterCtaBtn {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 15px 20px !important;
+    box-sizing: border-box !important;
+  }
+
   .newsletterTitle {
     font-size: 25px;
   }
@@ -564,6 +577,11 @@ img {
   .newsletterContainer25px {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .newsletterContainer30px {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .newsletterContainer40px {

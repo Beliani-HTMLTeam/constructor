@@ -101,6 +101,11 @@ table {
   padding-right: 25px;
 }
 
+#newsletter .newsletterContainer30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 #newsletter .newsletterContainer40px {
   padding-left: 40px;
   padding-right: 40px;
@@ -421,6 +426,14 @@ table {
     padding: 0 10px 15px 10px !important;
   }
 
+  #newsletter .newsletterCtaBtn {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 15px 20px !important;
+    box-sizing: border-box !important;
+  }
+
   #newsletter .newsletterFooterCategoryLEFT {
     padding-bottom: 10px !important;
     padding-right: 5px !important;
@@ -512,6 +525,11 @@ table {
   #newsletter .newsletterContainer25px {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  #newsletter .newsletterContainer30px {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   #newsletter .newsletterContainer40px {

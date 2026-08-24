@@ -6,6 +6,7 @@ const Paragraph = ({
   className = 'newsletterParagraph',
   spanStyle,
   align = 'left',
+  containerClass = 'newsletterContainer',
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -29,7 +30,7 @@ const Paragraph = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td style="text-align: ${align};" ${tableContainer ? ' class="newsletterContainer"' : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes}><tr><td style="text-align: ${align};" ${tableContainer ? ` class="${containerClass}"` : ''}>${html}</td></tr></table>`;
   }
 
   return html;

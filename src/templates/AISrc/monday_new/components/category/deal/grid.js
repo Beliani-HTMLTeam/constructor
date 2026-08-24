@@ -138,7 +138,7 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
   }
 
   const productName = product.name ?? '';
-  const productDescription = product.description.trim() ?? '';
+  const productDescription = product?.description?.trim() ?? 'product description not found';
   const productSize = product.size ?? '';
   const productHref = product.href ?? fallbackHref ?? '#';
   const productSrc = getProductSrc(product);
@@ -186,7 +186,7 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
                           <tr>
                             <td align="left" style="padding: 0; color: ${textColor} !important;">
                               <span class="newsletterProductTitleFreebie" style="color: ${textColor} !important; font-size: 13px;">${productName}</span><br>
-                              <span class="newsletterProductTitleFreebie" style="color: ${textColor} !important; font-size: 13px;">${productDescription}</span>
+                              ${product?.useDescription ? `<span class="newsletterProductTitleFreebie" style="color: ${textColor} !important; font-size: 13px;">${productDescription}</span>` : ''}
                             </td>
                           </tr>
                           ${productSize ? `<tr>

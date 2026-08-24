@@ -89,7 +89,7 @@ const getRowsFromFreebiesConfig = (freebies) => {
     // Determine the optimal columns per row
     const totalItems = row.length;
     let columnsPerRow = 3; // default
-    
+
     // If 4 items, use 2 columns
     if (totalItems === 4) {
       columnsPerRow = 2;

@@ -9,8 +9,11 @@ export const renderOfferSection = ({
   getPhrase,
   offerTexts,
   ctaSrc = null,
-  theme,
+  theme = {},
+  combineOfferParts = false,
+  ctaSettings = {},
 }) => {
+  console.log(theme, 'theme in renderOfferSection');
   const t = getPhrase || ((s) => s);
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
   const missingTranslation = 'TRANSLATION NOT FOUND';
@@ -34,18 +37,34 @@ export const renderOfferSection = ({
   // Row 30: Get Code -> queries.get_code[0] / offerItems[5]
   const offerTitle = resolveOfferText(offerTexts?.[0], 0);
   const offerPart1 = resolveOfferText(offerTexts?.[1], 1);
-  const offerPart2 = resolveOfferText(offerTexts?.[2], 2);
-  const codeText = offerItems[3] ?? queries?.offer?.[3] ?? '';
+  let offerPart2 = resolveOfferText(offerTexts?.[2], 2);
   const offerDate = queries?.offer_date?.[0] ?? offerItems[4] ?? '';
   const translatedGetCode = t('Get code') || missingTranslation;
+  const codeRow = queries?.offer_code?.[0] ?? offerItems[3] ?? '';
+
+  let codeText = '';
+
   const getCodeBtnText =
     renderType === 'newsletter'
       ? translatedGetCode
-      : offerItems[3].includes('xxx')
+      : codeRow.includes('xxx')
         ? `MISSING CODE`
-        : offerItems[3]
-          ? offerItems[3].split(':')[0].toUpperCase() + ':' + offerItems[3].split(':')[1]
+        : codeRow
+          ? codeRow.split(':')[1].length > 0
+            ? codeRow.split(':')[0].toUpperCase() + ':' + codeRow.split(':')[1]
+            : `MISSING CODE`
           : `MISSING CODE`;
+
+  if (combineOfferParts) {
+    offerPart2 = `${offerPart2} ${resolveOfferText(offerTexts?.[3], 3)}`;
+    if (getCodeBtnText !== 'MISSING CODE')
+      codeText = codeRow.split(':')[1].trim();
+    else
+      codeText = 'xxx';
+  } else {
+    codeText = resolveOfferText(offerTexts?.[3], 3);
+  }
+
 
   const bgColor = theme?.primary ?? '#750000';
   const textColor = theme?.primaryText ?? '#ffffff';
@@ -103,6 +122,9 @@ export const renderOfferSection = ({
                 codeValue: codeValue,
                 src: renderType === 'newsletter' ? ctaSrc : null,
                 getPhrase: getPhrase,
+                color: ctaSettings?.color ?? theme?.primary ?? '#750000',
+                bg: ctaSettings?.bg ?? theme?.secondary ?? '#ffe0d4',
+                theme: theme,
               })}
             </td>
           </tr>

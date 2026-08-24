@@ -13,6 +13,7 @@ export const render = ({
   id,
   imageSide,
   theme = {},
+  containerClass = 'newsletterContainer',
 }) => {
   let productsInnerHtml = '';
 
@@ -20,7 +21,7 @@ export const render = ({
     const cols = 2;
     productsInnerHtml += `
     <tr>
-      <td style="color: ${color}" ${insideContainer ? 'class="newsletterContainer"' : ''}>
+      <td style="color: ${color}" ${insideContainer ? `class="${containerClass}"` : ''}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
 
     for (let i = 0; i < products.length; i += cols) {
