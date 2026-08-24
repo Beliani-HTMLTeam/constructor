@@ -96,6 +96,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
 
 const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel, ctaColor = '' }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
+  let codeRow = queries?.offer_code?.[0] ?? offerItems[2] ?? '';
 
   if (offerItems.length === 6) {
     if (renderType === 'newsletter') {
@@ -121,7 +122,7 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
     });
   }
 
-  const codeText = offerItems[2] ?? 'Code: xxxxx';
+  const codeText = codeRow ?? 'Code: xxxxx';
   if (showCopyCodeWeb) {
     const codeValue = codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText;
     return CopyCodeWebNotification({ text: codeText, codeValue, color: copyCodeColor, label: copyCodeLabel });
