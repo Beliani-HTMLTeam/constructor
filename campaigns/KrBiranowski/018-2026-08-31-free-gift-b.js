@@ -180,6 +180,7 @@ const categories = [
     prodSettings: {
       bg: theme.white,
       rounded: 'bottom',
+      maxWidth: '285px',
     },
     color: theme.black,
     type: 'grid',
@@ -208,6 +209,7 @@ const categories = [
     prodSettings: {
       bg: theme.white,
       rounded: 'bottom',
+      maxWidth: '285px',
     },
     color: theme.white,
     type: 'grid',
@@ -238,6 +240,7 @@ const categories = [
     prodSettings: {
       bg: theme.white,
       rounded: 'bottom',
+      maxWidth: '285px',
     },
     type: 'grid',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
@@ -268,6 +271,7 @@ const categories = [
     prodSettings: {
       bg: theme.white,
       rounded: 'bottom',
+      maxWidth: '285px',
     },
     type: 'grid',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
@@ -295,7 +299,7 @@ const timer = {
 
 export default new entities.Campaign({
   startId: '47380',
-  name: 'Monday - Free Gift - A',
+  name: 'Monday - Free Gift - B',
   date: '31.08.2026',
   issueCardId: '521620',
   lpId: '32035',

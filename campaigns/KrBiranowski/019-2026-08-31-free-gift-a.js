@@ -143,11 +143,11 @@ const links = {
   Intro_cta_href: 'https://www.beliani.ch/',
   IntroImage_href: 'https://www.beliani.ch/',
   IntroImage_src: getImageUrl('20260831_Intro_B.png', true),
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-31' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-08-31-ta' }),
   TopImageTitle_src: translateImage({ value: '20260831_01_B.png' }),
 
   TopImage_src: getImageUrl('20260831_static_B.png', true),
-  TopImage_href: translateLink({ value: 'content/lp26-08-31' }),
+  TopImage_href: translateLink({ value: 'content/lp26-08-31-ta' }),
 
   Banner_1: translateLink({ value: 'content/lp26-08-19' }),
   Banner_1_Image: translateImage({ value: '20260819b.png' }),
@@ -417,7 +417,7 @@ const categories = [
 
 export default new entities.Campaign({
   startId: '47444',
-  name: 'Monday - Free Gift - B',
+  name: 'Monday - Free Gift - A',
   date: '31.08.2026',
   issueCardId: '521620',
   lpId: '32035',

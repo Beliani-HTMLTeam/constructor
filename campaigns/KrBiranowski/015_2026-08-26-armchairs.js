@@ -26,8 +26,8 @@ const links = {
   Banner_1: translateLink({ value: 'content/lp26-08-13' }),
   Banner_1_Image: translateImage({ value: '20260813b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-08-12' }),
-  Banner_2_Image: translateImage({ value: '20260812b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-08-19' }),
+  Banner_2_Image: translateImage({ value: '20260819b.png' }),
 };
 
 const TopImageTitle_data = {

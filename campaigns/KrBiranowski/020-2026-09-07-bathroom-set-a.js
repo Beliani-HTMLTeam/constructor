@@ -1,41 +1,138 @@
-const campaignTranslationsSheet = '2026::Voucher - 24.08.26 - Free lamp';
+const campaignTranslationsSheet = '2026::Voucher - 07.09.26 - Free Bathroom set';
 
 const theme = {
   primary: '#750000',
   primaryText: '#ffffff',
   secondary: '#FBF3F0',
-  ctaOfferBg: '#FFCCB7',
-  ctaOfferText: '#3A2A24',
+  secondaryText: '#FFCCB7',
   black: '#000000',
   white: '#ffffff',
   grey: '#555555',
   greyLight: '#777777',
   introBg: '#750000',
-  toastBg: '#FBF3F0',
-  toastText: '#750000',
+  toastBg: '#F6E7E6',
+  toastText: '#000000',
+  ctaBg: '#F6E7E6'
 };
 
 const catData = [
   {
-    name: 'Sofas',
-    href: 'https://www.beliani.ch/living-room-furniture/sofas/',
-    btnImg: '20260824_shop_sofas.png',
-  },
-  {
-    name: 'Coffee tables',
-    href: 'https://www.beliani.ch/tables/coffee-tables/',
-    btnImg: '20260824_shop_coffee_tables.png',
+    name: 'Bathtubs',
+    href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
+    catImg: getImageUrl('20260907_Cat10_A2.png', true),
   },
   {
     name: 'Storage',
-    href: 'https://www.beliani.ch/living-room-furniture/storage/',
-    btnImg: '20260824_shop_storage.png',
+    href: 'https://www.beliani.ch/bathroom-furniture/bathroom-storage/',
+    catImg: getImageUrl('20260907_Cat20_A2.png', true),
   },
   {
-    name: 'Rugs',
-    href: 'https://www.beliani.ch/living-room-furniture/rugs/',
-    btnImg: '20260824_shop_rugs.png',
+    name: 'Mirrors',
+    href: 'https://www.beliani.ch/mirrors/bath-mirrors/',
+    catImg: getImageUrl('20260907_Cat30_A2.png', true),
   },
+  {
+    name: 'Lighting',
+    href: 'https://www.beliani.ch/bathroom-furniture/bathroom-lighting/',
+    catImg: getImageUrl('20260907_Cat40_A2.png', true),
+  },
+];
+
+const prodData = [
+  [
+    [
+      { id: '316914', src: getImageUrl('20260907_Free01_A.png', true), useDescription: true },
+      { id: '320374', src: getImageUrl('20260907_Free02_A.png', true), useDescription: true },
+    ],
+  ],
+  [
+    {
+      id: '417123',
+      src: getImageUrl('20260907_Pic01_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '96874',
+      src: getImageUrl('20260907_Pic02_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '59970',
+      src: getImageUrl('20260907_Pic03_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '731181',
+      src: getImageUrl('20260907_Pic04_A.png', true),
+      useDescription: true,
+    },
+  ],
+  [
+    {
+      id: '515187',
+      src: getImageUrl('20260907_Pic10_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '660887',
+      src: getImageUrl('20260907_Pic11_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '723642',
+      src: getImageUrl('20260907_Pic12_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '708741',
+      src: getImageUrl('20260907_Pic13_A.png', true),
+      useDescription: true,
+    },
+  ],
+  [
+    {
+      id: '819491',
+      src: getImageUrl('20260907_Pic20_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '819338',
+      src: getImageUrl('20260907_Pic21_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '818093',
+      src: getImageUrl('20260907_Pic22_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '817924',
+      src: getImageUrl('20260907_Pic23_A.png', true),
+      useDescription: true,
+    },
+  ],
+  [
+    {
+      id: '589801',
+      src: getImageUrl('20260907_Pic30_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '651538',
+      src: getImageUrl('20260907_Pic31_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '653660',
+      src: getImageUrl('20260907_Pic32_A.png', true),
+      useDescription: true,
+    },
+    {
+      id: '652896',
+      src: getImageUrl('20260907_Pic33_A.png', true),
+      useDescription: true,
+    },
+  ],
 ];
 
 const tableQueries = [
@@ -48,7 +145,7 @@ const tableQueries = [
     tableRange: '29',
   },
   {
-    name: 'get_code',
+    name: 'offer_code',
     tableRange: '30',
   },
   {
@@ -70,18 +167,18 @@ const tableQueries = [
 ];
 
 const links = {
-  Intro_cta_href: 'https://www.beliani.ch/living-room-furniture/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-24' }),
-  TopImageTitle_src: translateImage({ value: '20260824_01.png' }),
+  Intro_cta_href: 'https://www.beliani.ch/bathroom-furniture/',
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-07-ta' }),
+  TopImageTitle_src: translateImage({ value: '20260907_01.png' }),
 
-  TopImage_src: getImageUrl('20260824_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-08-24' }),
+  TopImage_src: getImageUrl('20260907_Gif.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp26-09-07-ta' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-08-12' }),
-  Banner_1_Image: translateImage({ value: '20260812b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-08-27' }),
+  Banner_1_Image: translateImage({ value: '20260827b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-08-13' }),
-  Banner_2_Image: translateImage({ value: '20260813b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-08-28' }),
+  Banner_2_Image: translateImage({ value: '20260828b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -102,25 +199,17 @@ const categories = [
     background: theme.primary,
     color: theme.primaryText,
     spaceAfter: 'newsletterBottom45px',
-    cta: { variant: 'cream', bg: theme.ctaOfferBg, color: theme.ctaOfferText },
+    cta: { variant: 'cream', color: theme.black, bg: theme.ctaBg },
     freebiesSize: 'large',
-    freebies: [
-      [
-        { id: '78710', src: getImageUrl('20260824_Pic01.png', true), useDescription: true },
-        { id: '192612', src: getImageUrl('20260824_Pic02.png', true), useDescription: true },
-      ],
-      [
-        { id: '78707', src: getImageUrl('20260824_Pic03.png', true), useDescription: true },
-        { id: '406012', src: getImageUrl('20260824_Pic04.png', true), useDescription: true },
-      ],
-    ],
+    combineOfferParts: true,
+    freebies: prodData[0],
   },
 
   // main
   {
     name: catData[0].name,
     // nameOverride: 'PASCO',
-    src: getImageUrl('20260824_Cat10.jpg', true),
+    src: catData[0].catImg,
     href: catData[0].href,
     skipLinkTranslation: true,
     background: theme.white,
@@ -128,47 +217,29 @@ const categories = [
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '45',
+    tdClass: 'newsletterContainer30px',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
+      tdClass: 'newsletterContainer30px',
     },
     paragraph: {
       show: false,
       align: 'left',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
+      tdClass: 'newsletterContainer30px',
     },
     product: {
       prices: true,
       name: true,
     },
-    products: [
-      {
-        id: '506046',
-        src: getImageUrl('20260824_Pic10.png', true),
-        useDescription: true,
-      },
-      {
-        id: '618213',
-        src: getImageUrl('20260824_Pic11.png', true),
-        useDescription: true,
-      },
-      {
-        id: '567128',
-        src: getImageUrl('20260824_Pic12.png', true),
-        useDescription: true,
-      },
-      {
-        id: '735462',
-        src: getImageUrl('20260824_Pic13.png', true),
-        useDescription: true,
-      },
-    ],
+    products: prodData[1],
   },
   {
     name: catData[1].name,
     // nameOverride: 'LYNWOOD',
-    src: getImageUrl('20260824_Cat20.jpg', true),
+    src: catData[1].catImg,
     href: catData[1].href,
     skipLinkTranslation: true,
     background: theme.secondary,
@@ -176,6 +247,7 @@ const categories = [
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '35',
+    tdClass: 'newsletterContainer30px',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -190,33 +262,12 @@ const categories = [
       prices: true,
       name: true,
     },
-    products: [
-      {
-        id: '817694',
-        src: getImageUrl('20260824_Pic20.png', true),
-        useDescription: true,
-      },
-      {
-        id: '649974',
-        src: getImageUrl('20260824_Pic21.png', true),
-        useDescription: true,
-      },
-      {
-        id: '622259',
-        src: getImageUrl('20260824_Pic22.png', true),
-        useDescription: true,
-      },
-      {
-        id: '597134',
-        src: getImageUrl('20260824_Pic23.png', true),
-        useDescription: true,
-      },
-    ],
+    products: prodData[2],
   },
   {
     name: catData[2].name,
     // nameOverride: 'OPOCO',
-    src: getImageUrl('20260824_Cat30.jpg', true),
+    src: catData[2].catImg,
     href: catData[2].href,
     skipLinkTranslation: true,
     background: theme.white,
@@ -224,6 +275,7 @@ const categories = [
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '35',
+    tdClass: 'newsletterContainer30px',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -238,33 +290,12 @@ const categories = [
       prices: true,
       name: true,
     },
-    products: [
-      {
-        id: '645981',
-        src: getImageUrl('20260824_Pic30.png', true),
-        useDescription: true,
-      },
-      {
-        id: '553767',
-        src: getImageUrl('20260824_Pic31.png', true),
-        useDescription: true,
-      },
-      {
-        id: '563169',
-        src: getImageUrl('20260824_Pic32.png', true),
-        useDescription: true,
-      },
-      {
-        id: '672749',
-        src: getImageUrl('20260824_Pic33.png', true),
-        useDescription: true,
-      },
-    ],
+    products: prodData[3],
   },
   {
     name: catData[3].name,
     // nameOverride: 'BRADLEY',
-    src: getImageUrl('20260824_Cat40.jpg', true),
+    src: catData[3].catImg,
     href: catData[3].href,
     skipLinkTranslation: true,
     background: theme.secondary,
@@ -272,6 +303,7 @@ const categories = [
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '35',
+    tdClass: 'newsletterContainer30px',
     spaceAfter: 'newsletterBottom40px',
     title: {
       show: true,
@@ -287,37 +319,16 @@ const categories = [
       prices: true,
       name: true,
     },
-    products: [
-      {
-        id: '425636',
-        src: getImageUrl('20260824_Pic40.png', true),
-        useDescription: true,
-      },
-      {
-        id: '377164',
-        src: getImageUrl('20260824_Pic41.png', true),
-        useDescription: true,
-      },
-      {
-        id: '390287',
-        src: getImageUrl('20260824_Pic42.png', true),
-        useDescription: true,
-      },
-      {
-        id: '455185',
-        src: getImageUrl('20260824_Pic43.png', true),
-        useDescription: true,
-      },
-    ],
+    products: prodData[4],
   },
 ];
 
 export default new entities.Campaign({
-  startId: "47026",
-  name: "Monday - Free lamp",
-  date: "24.08.2026",
-  issueCardId: "517340",
-  lpId: "31880",
+  startId: '47476',
+  name: 'Monday - Free Bathroom Set - A',
+  date: '07.09.2026',
+  issueCardId: '525572',
+  lpId: '32094',
   // specialLpIds: {
   //   HR: '31562',
   //   SI: '31563',
@@ -327,8 +338,8 @@ export default new entities.Campaign({
   },
   isArchive: false,
   optimizeImg: true,
-  version: "new",
-  figmaUrl: "https://www.figma.com/design/ivTLBnr4YDgyVtciBVAMzZ/",
+  version: 'new',
+  figmaUrl: 'https://www.figma.com/design/ivTLBnr4YDgyVtciBVAMzZ/',
   templates: [
     {
       background: theme.white,
@@ -390,7 +401,6 @@ export default new entities.Campaign({
         },
       },
       disableTopImageTitle: true,
-      disableKlarna: ['HR', 'SI'],
     },
   ],
 });
