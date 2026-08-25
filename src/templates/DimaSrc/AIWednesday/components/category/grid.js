@@ -10,6 +10,7 @@ export const render = ({
   container,
   color,
   category,
+  country
 }) => {
   if (!Array.isArray(products) || products.length === 0) {
     return '';
@@ -75,7 +76,7 @@ export const render = ({
           false,
           'center',
           container,
-          category
+          category, country
         )}
       </td>
     `;

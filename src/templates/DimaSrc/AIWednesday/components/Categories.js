@@ -570,6 +570,7 @@ const renderBody = async ({
       category,
       container,
       alignToSide,
+      country
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

@@ -383,6 +383,13 @@ img {
   text-decoration: line-through;
 }
 
+.newsletterWednesdayProductHighPriceCH {
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+
 .newsletterProductTitleWithPaddingLeft {
   font-size: 20px;
   font-family: "Open Sans", sans-serif;
@@ -509,6 +516,9 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  .newsletterWednesdayProductHighPriceCH {
+    display: block;
+  }
   .newsletterWednesdayCategoryParagraph {
     font-size: 12px;
   }

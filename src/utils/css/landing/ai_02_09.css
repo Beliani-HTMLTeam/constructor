@@ -56,6 +56,13 @@
                       text-align:left;
 }
 
+#newsletter .newsletterWednesdayProductHighPriceCH {
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+
 #newsletter .newsletterHrefTit {
   text-decoration: none;
   text-align: center;
@@ -483,6 +490,10 @@ table {
 
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  #newsletter .newsletterWednesdayProductHighPriceCH {
+    display: block;
+  }
+  
    #newsletter .newsletterContainer25px {
     padding-left: 15px;
     padding-right: 15px;

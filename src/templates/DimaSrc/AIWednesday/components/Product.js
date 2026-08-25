@@ -12,7 +12,8 @@ const Product = (
   useCategoryLink = false,
   imageAlign = 'center',
   container = '',
-  category
+  category,
+  country
 ) => {
   if (!product || typeof product !== 'object') {
     return '';
@@ -111,6 +112,7 @@ const Product = (
             insideTr: true,
             color:
               productSettings.pricesColor || color,
+            country,
             align,
           })}
         </td>
