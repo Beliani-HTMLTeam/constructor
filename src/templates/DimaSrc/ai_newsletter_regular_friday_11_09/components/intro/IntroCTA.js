@@ -30,9 +30,9 @@ export const IntroCTA = ({
     }
 
     if (links?.Intro_cta_href) {
-      return getCategoryLink(
-        links.Intro_cta_href
-      );
+      return typeof getCategoryLink === 'function'
+        ? getCategoryLink(links.Intro_cta_href)
+        : links.Intro_cta_href;
     }
 
     if (links?.introCTA_href) {
@@ -93,50 +93,60 @@ export const IntroCTA = ({
     <tr>
       <td
         align="center"
+        valign="middle"
         bgcolor="${backgroundColor}"
         style="
+          padding:0;
           background-color:${backgroundColor};
           text-align:center;
+          vertical-align:middle;
         "
       >
         <table
+          role="presentation"
+          border="0"
           cellspacing="0"
           cellpadding="0"
-          border="0"
           align="center"
-          role="presentation"
+          style="
+            border-collapse:separate;
+            mso-table-lspace:0pt;
+            mso-table-rspace:0pt;
+          "
         >
           <tr>
             <td
               align="center"
-              bgcolor="${buttonBackground}"
               style="
-                background-color:${buttonBackground};
-                border-radius:20px;
-                font-size:0;
-                line-height:0;
+                padding:0;
+                border-radius:25px;
+                text-align:center;
+                vertical-align:middle;
               "
             >
               <a
                 href="${getHref()}"
                 target="_blank"
+                class="newsletterIntroCTA"
                 style="
                   display:inline-block;
                   border-style:solid;
                   border-color:${buttonBackground};
-                  border-width:10px 22px;
-                  border-radius:20px;
+                  border-width:15px 32px;
+                  border-radius:25px;
                   background-color:${buttonBackground};
                   color:${buttonColor};
-                  font-family:Arial, sans-serif;
-                  font-size:13px;
-                  line-height:14px;
+                  font-family:'Open Sans', Arial, sans-serif;
+                  font-size:16px;
+                  line-height:19px;
                   font-weight:700;
                   text-align:center;
                   text-decoration:none;
                   white-space:nowrap;
                   vertical-align:middle;
-                  -webkit-text-size-adjust:none;
+                  mso-line-height-rule:exactly;
+                  -webkit-text-size-adjust:100%;
+                  -ms-text-size-adjust:100%;
                 "
               >${getText()}</a>
             </td>

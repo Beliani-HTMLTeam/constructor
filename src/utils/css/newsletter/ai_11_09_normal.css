@@ -10,6 +10,29 @@ img {
   -ms-interpolation-mode: bicubic;
 }
 
+.newsletterCategoryTitle {
+  font-family: 'Open Sans', sans-serif;
+  display:block;
+  font-size:30px;
+  line-height: 1.2;
+  font-weight:400;
+  text-decoration:none;
+  white-space:normal;
+  word-wrap:break-word;
+  overflow-wrap:anywhere;
+}
+
+.newsletterCategoryCTA {
+  display:inline-block;
+  font-family:'Open Sans', sans-serif;
+  font-size:20px;
+  line-height: 1.2;
+  font-weight:400;
+  text-align:center;
+  text-decoration:underline;
+  white-space:normal;
+}
+
 .title-advantages {
   text-align: center;
   font-size: 11px;
@@ -76,11 +99,6 @@ img {
   padding-right: 20px;
 }
 
-.newsletterContainer30px {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
 .newsletterContainer60px {
   padding-left: 60px;
   padding-right: 60px;
@@ -131,6 +149,10 @@ img {
 
 .newsletterBottom35px {
   padding-bottom: 35px;
+}
+
+.newsletterBottom30px {
+  padding-bottom: 30px;
 }
 
 .newsletterBottom40px {
@@ -185,42 +207,6 @@ img {
   line-height: 1.2;
 }
 
-.newsletterIntroMainTitle {
-  font-family: "Open Sans", sans-serif;
-  font-size:72px;
-  line-height:1.2;
-  font-weight:700;
-}
-
-.newsletterIntroSubtitle {
-  font-size:32px;
-  line-height:1.2;
-  font-weight:700;
-  letter-spacing:1px;
-  text-transform: uppercase;
-  font-family: "Open Sans", sans-serif;
-}
-
-.newsletterIntoCTA {
-  display:inline-block;
-  border-style:solid;
-  border-width:15px 32px;
-  border-radius:25px;
-  font-family: Open Sans, sans-serif;
-  font-size:16px;
-  line-height: 1.2;
-  font-weight:700;
-  text-align:center;
-  text-decoration:none;
-  white-space:nowrap;
-}
-
-.newsletterIntroParagraph {
-  font-size:16px;
-  line-height:1.4;
-  font-weight:400;
-}
-
 .newsletterMiniContainer {
   padding-left: 10px;
   padding-right: 10px;
@@ -243,25 +229,6 @@ img {
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-weight: 600;
-}
-
-.newsletterBigGridTitle {
-  font-family: "Open Sans", sans-serif;
-  font-size:19px;
-  line-height:1.2;
-  font-weight:700;
-  text-align:left;
-  mso-line-height-rule:exactly;
-}
-
-.newsletterBigGridCTA {
-  font-family: "Open Sans", sans-serif;
-  font-size:16px;
-  line-height:1.2;
-  font-weight:700;
-  text-align:left;
-  mso-line-height-rule:exactly;
-  text-decoration:none;
 }
 
 .newsletterTitleAditional {
@@ -424,17 +391,16 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
- .newsletterIntroMainTitle {
-    font-size:48px;
+  .newsletterCategoryTitle {
+    font-size:20px;
   }
   
-  .newsletterIntroSubtitle {
-    font-size:24px;
+  .newsletterCategoryCTA {
+    font-size:14px;
   }
 
-  .newsletterContainer30px {
-    padding-left: 15px;
-    padding-right: 15px;
+  .newsletterBottom30px {
+    padding-bottom: 20px;
   }
   .stack-column {
     display: block !important;

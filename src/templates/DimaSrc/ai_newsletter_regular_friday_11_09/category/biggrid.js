@@ -166,7 +166,7 @@ export const BigGrid = ({
   getCtaText = () => 'Shop now',
   background = '#FFFFFF',
 }) => {
-  console.log("biggrid", categories)
+  console.log("biggrid", getHref, categories)
   if (
     !Array.isArray(categories) ||
     categories.length === 0

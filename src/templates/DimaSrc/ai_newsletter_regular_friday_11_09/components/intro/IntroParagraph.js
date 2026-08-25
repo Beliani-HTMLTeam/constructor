@@ -28,12 +28,14 @@ export const IntroParagraph = ({
     backgroundColor = '#FFFFFF',
     cta,
     additionalSpace,
-    tableContainerClass = 'newsletterContainer',
+    tableContainerClass = 'newsletterContainer30px',
     useTopImageTitle = false,
     uppercaseSubtitle = true,
   } = intro;
 
-  const topImageTitle = Array.isArray(queries?.TopImageTitle)
+  const topImageTitle = Array.isArray(
+    queries?.TopImageTitle
+  )
     ? queries.TopImageTitle
     : [];
 
@@ -56,7 +58,7 @@ export const IntroParagraph = ({
     introTitle || introSubtitle
   );
 
-  // Keep the old paragraph-only layout for other campaigns.
+  // Preserve the old layout for paragraph-only campaigns.
   if (!hasHeading) {
     return `
       ${Intro({
@@ -98,7 +100,7 @@ export const IntroParagraph = ({
     `;
   }
 
-  return `
+  const content = `
     ${
       spaceTop !== '0'
         ? Space({
@@ -112,19 +114,25 @@ export const IntroParagraph = ({
     ${
       introTitle
         ? `
-        ${Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor })}
+          ${Space({
+            insideTr: true,
+            className: 'newsletterBottom35px',
+            backgroundColor,
+          })}
+
           <tr>
             <td
-              class="${tableContainerClass}"
               align="${alignment}"
+              bgcolor="${backgroundColor}"
+              class="newsletterIntroMainTitle"
               style="
+                padding:0;
                 background-color:${backgroundColor};
                 color:${titleColor || color};
-                font-size:72px;
-                line-height:1.2;
-                font-weight:700;
                 text-align:${alignment};
                 mso-line-height-rule:exactly;
+                -webkit-text-size-adjust:100%;
+                -ms-text-size-adjust:100%;
               "
             >
               ${introTitle}
@@ -137,25 +145,29 @@ export const IntroParagraph = ({
     ${
       introSubtitle
         ? `
-        ${Space({ insideTr: true, className: 'newsletterBottom20px', backgroundColor })}
+          ${Space({
+            insideTr: true,
+            className: 'newsletterBottom10px',
+            backgroundColor,
+          })}
+
           <tr>
             <td
-              class="${tableContainerClass}"
               align="${alignment}"
+              bgcolor="${backgroundColor}"
+              class="newsletterIntroSubtitle"
               style="
+                padding:0;
                 background-color:${backgroundColor};
                 color:${
                   subtitleColor ||
                   titleColor ||
                   color
                 };
-                font-size:32px;
-                line-height:1.2;
-                font-weight:700;
-                letter-spacing:1px;
                 text-align:${alignment};
-                text-transform: uppercase;
                 mso-line-height-rule:exactly;
+                -webkit-text-size-adjust:100%;
+                -ms-text-size-adjust:100%;
               "
             >
               ${introSubtitle}
@@ -165,22 +177,25 @@ export const IntroParagraph = ({
         : ''
     }
 
-    ${Space({ insideTr: true, className: 'newsletterBottom20px', backgroundColor })}
+    ${Space({
+      insideTr: true,
+      className: 'newsletterBottom20px',
+      backgroundColor,
+    })}
+
     <tr>
       <td
-        class="${tableContainerClass}"
+        class="newsletterIntroParagraph"
         align="${alignment}"
         bgcolor="${backgroundColor}"
         style="
-          padding-top:14px;
+          padding:0;
           background-color:${backgroundColor};
           color:${paragraphColor || color};
-          font-family:Arial, sans-serif;
-          font-size:12px;
-          line-height:1.4;
-          font-weight:400;
           text-align:${alignment};
           mso-line-height-rule:exactly;
+          -webkit-text-size-adjust:100%;
+          -ms-text-size-adjust:100%;
         "
       >
         ${introText}
@@ -224,5 +239,41 @@ export const IntroParagraph = ({
           })
         : ''
     }
+  `;
+
+  return `
+    <tr>
+      <td
+        class="${tableContainerClass}"
+        align="${alignment}"
+        bgcolor="${backgroundColor}"
+        style="
+          background-color:${backgroundColor};
+          text-align:${alignment};
+        "
+      >
+        <table
+          role="presentation"
+          border="0"
+          width="100%"
+          cellspacing="0"
+          cellpadding="0"
+          align="center"
+          bgcolor="${backgroundColor}"
+          style="
+            width:100%;
+            table-layout:fixed;
+            background-color:${backgroundColor};
+            border-collapse:collapse;
+            mso-table-lspace:0pt;
+            mso-table-rspace:0pt;
+          "
+        >
+          <tbody>
+            ${content}
+          </tbody>
+        </table>
+      </td>
+    </tr>
   `;
 };

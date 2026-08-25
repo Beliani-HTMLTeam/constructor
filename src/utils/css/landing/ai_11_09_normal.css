@@ -5,6 +5,31 @@
   margin: 0;
 }
 
+#newsletter .newsletterCategoryTitle {
+  display:block;
+  font-size:30px;
+  line-height: 1.2;
+  font-weight:400;
+  text-decoration:none;
+  white-space:normal;
+  word-wrap:break-word;
+  overflow-wrap:anywhere;
+}
+
+#newsletter .newsletterCategoryCTA {
+  display:inline-block;
+  font-size:20px;
+  line-height: 1.2;
+  font-weight:400;
+  text-align:center;
+  text-decoration:underline;
+  white-space:normal;
+}
+
+#newsletter .newsletterBottom30px {
+  padding-bottom: 30px;
+}
+
 #newsletter .newsletterTitleH2 {
   font-size: 30px;
   line-height: 45px;
@@ -23,62 +48,6 @@
   padding-bottom: 10px;
   padding-top: 10px;
   margin: 0;
-}
-
-#newsletter .newsletterIntroMainTitle {
-  font-size:72px;
-  line-height:1.2;
-  font-weight:700;
-}
-
-#newsletter .newsletterIntroSubtitle {
-  font-size:32px;
-  line-height:1.2;
-  font-weight:700;
-  letter-spacing:1px;
-  text-transform: uppercase;
-}
-
-#newsletter .newsletterIntoCTA {
-  display:inline-block;
-  border-style:solid;
-  border-width:15px 32px;
-  border-radius:25px;
-  font-family: Open Sans, sans-serif;
-  font-size:16px;
-  line-height: 1.2;
-  font-weight:700;
-  text-align:center;
-  text-decoration:none;
-  white-space:nowrap;
-}
-
-#newsletter .newsletterIntroParagraph {
-  font-size:16px;
-  line-height:1.4;
-  font-weight:400;
-}
-
-#newsletter .newsletterBigGridTitle {
-  font-size:19px;
-  line-height:1.2;
-  font-weight:700;
-  text-align:left;
-  mso-line-height-rule:exactly;
-}
-
-#newsletter .newsletterBigGridCTA {
-  font-size:16px;
-  line-height:1.2;
-  font-weight:700;
-  text-align:left;
-  mso-line-height-rule:exactly;
-  text-decoration:none;
-}
-
-.newsletterContainer30px {
-  padding-left: 30px !important;;
-  padding-right: 30px !important;
 }
 
 table {
@@ -378,17 +347,16 @@ table {
 
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
-  #newsletter .newsletterIntroMainTitle {
-    font-size:48px;
+  #newsletter .newsletterCategoryTitle {
+    font-size:20px;
   }
   
-  #newsletter .newsletterIntroSubtitle {
-    font-size:24px;
+  #newsletter .newsletterCategoryCTA {
+    font-size:14px;
   }
 
-  .newsletterContainer30px {
-    padding-left: 15px !important;
-    padding-right: 15px !important;
+  #newsletter .newsletterBottom30px {
+    padding-bottom: 20px;
   }
 
   #newsletter .newsletterFooterCategoryLEFTBottom {

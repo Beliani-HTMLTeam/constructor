@@ -21,44 +21,31 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImageTitle_href: translateLink({ value: 'content/lp26-09-11' }),
-  TopImage_src: getImageUrl('20260911topimage_ai.png', true),
-  TopImage_href: translateLink({ value: 'content/lp26-09-11' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-11-tb' }),
+  TopImageTitle_src: translateImage({ value: '20260911_01.png' }),
+  TopImage_src: getImageUrl('20260911topimage_normal.png', true),
+  TopImage_href: translateLink({ value: 'content/lp26-09-11-tb' }),
   Banner_1: translateLink({ value: 'content/lp26-09-04' }),
   Banner_1_Image: translateImage({ value: '20260904b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-09-03' }),
   Banner_2_Image: translateImage({ value: '20260903b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-09-07' }),
-  Intro_cta_href: "https://www.beliani.ch/garden-furniture/"
 };
 
 const intro_data = {
-  type: 'paragraph',
-  alignment: 'center',
+  color: "#000000",
+  backgroundColor: "#FFCCB7",
+  alignment: "left",
+  type: "paragraph",
+  spaceBefore: 'newsletterBottom30px',
+  spaceAfter: 'newsletterBottom35px',
+}
 
-  backgroundColor: '#FDF8F8',
 
-  titleColor: '#750000',
-  subtitleColor: '#750000',
-  paragraphColor: '#000000',
+const TopImageTitle_data = {
   color: '#000000',
-
-  tableContainerClass:
-    'newsletterContainer30px',
-
-  // TopImageTitle[0] becomes the main headline.
-  // TopImageTitle[1] becomes the subtitle.
-  useTopImageTitle: true,
-
-  spaceTop: '0',
-  spaceBottom: '0',
-
-  cta: {
-    background: '#FFCCB7',
-    color: '#750000',
-    spaceBefore: 'newsletterBottom20px',
-    spaceAfter: 'newsletterBottom35px',
-  },
+  backgroundColor: '#FFCCB7',
+  type: 'up_to',
 };
 
 
@@ -72,118 +59,73 @@ const categories = [
   {
     type: 'biggrid',
     spaceBefore: 'newsletterBottom60px',
+    gap: 20,
+    textHeight: 64,
+
+    layout: [
+      // Lounge sets
+      {
+        type: 'full',
+        items: [0],
+      },
+
+      // Storage + Lighting
+      {
+        type: 'pair',
+        items: [1, 2],
+      },
+
+      // Dining sets
+      {
+        type: 'full',
+        items: [3],
+      },
+
+      // Outdoor kitchen + Accessories
+      {
+        type: 'pair',
+        items: [4, 5],
+      },
+
+      // Sun loungers
+      {
+        type: 'full',
+        items: [6],
+      },
+
+      // Parasols + Balcony furniture
+      {
+        type: 'pair',
+        items: [7, 8],
+      },
+
+      // Outdoor SPA
+      {
+        type: 'full',
+        items: [9],
+      },
+    ],
+
     categories: [
       {
         name: 'Lounge sets',
         overrides: {
         },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category1_ai.png', true),
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category1.png', true),
         href: 'https://www.beliani.ch/outdoor-furniture/lounge-sets/',
         title: {
           show: true,
-          align: 'left',
+          align: 'center',
           spaceBefore: 'newsletterBottom10px',
           spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
+          color: '#000000'
         },
         cta: {
           show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
-          type: 'ai',
-        }, 
-       
-      },
-      {
-        name: 'Dining sets',
-        overrides: {
-        },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category2_ai.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
-        title: {
-          show: true,
-          align: 'left',
-          spaceBefore: 'newsletterBottom10px',
-          spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
-        },
-        cta: {
-          show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
-          type: 'ai',
-        }, 
-       
-      },
-      {
-        name: 'Balcony furniture',
-        overrides: {
-        },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category3_ai.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
-        title: {
-          show: true,
-          align: 'left',
-          spaceBefore: 'newsletterBottom10px',
-          spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
-        },
-        cta: {
-          show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
-          type: 'ai',
-        }, 
-       
-      },
-      {
-        name: 'Sun loungers',
-        overrides: {
-        },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category4_ai.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/sun-loungers/',
-        title: {
-          show: true,
-          align: 'left',
-          spaceBefore: 'newsletterBottom10px',
-          spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
-        },
-        cta: {
-          show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
-          type: 'ai',
-        }, 
-       
-      },
-      {
-        name: 'Outdoor kitchen',
-        overrides: {
-        },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category5_ai.png', true),
-        href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
-        title: {
-          show: true,
-          align: 'left',
-          spaceBefore: 'newsletterBottom10px',
-          spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
-        },
-        cta: {
-          show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
+          background: '#FFCCB7',
+          color: '#000000',
           type: 'ai',
         }, 
        
@@ -192,21 +134,136 @@ const categories = [
         name: 'Storage',
         overrides: {
         },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category6_ai.png', true),
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category2.png', true),
         href: 'https://www.beliani.ch/garden-furniture/outdoor-storage/',
         title: {
           show: true,
-          align: 'left',
+          align: 'center',
           spaceBefore: 'newsletterBottom10px',
           spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
+          color: '#000000'
         },
         cta: {
           show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
+          background: '#FFCCB7',
+          color: '#000000',
+          type: 'ai',
+        }, 
+       
+      },
+      {
+        name: 'Lighting',
+        overrides: {
+        },
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category3.png', true),
+        href: 'https://www.beliani.ch/garden-furniture/garden-lighting/',
+        title: {
+          show: true,
+          align: 'center',
+          spaceBefore: 'newsletterBottom10px',
+          spaceAfter: 'newsletterBottom10px',
+          color: '#000000'
+        },
+        cta: {
+          show: true,
+          background: '#FFCCB7',
+          color: '#000000',
+          type: 'ai',
+        }, 
+       
+      },
+      {
+        name: 'Dining sets',
+        overrides: {
+        },
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category4.png', true),
+        href: 'https://www.beliani.ch/outdoor-furniture/garden-dining-sets/',
+        title: {
+          show: true,
+          align: 'center',
+          spaceBefore: 'newsletterBottom10px',
+          spaceAfter: 'newsletterBottom10px',
+          color: '#000000'
+        },
+        cta: {
+          show: true,
+          background: '#FFCCB7',
+          color: '#000000',
+          type: 'ai',
+        }, 
+       
+      },
+      {
+        name: 'Outdoor kitchen',
+        overrides: {
+        },
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category5.png', true),
+        href: 'https://www.beliani.ch/outdoor-furniture/outdoor-kitchen/',
+        title: {
+          show: true,
+          align: 'center',
+          spaceBefore: 'newsletterBottom10px',
+          spaceAfter: 'newsletterBottom10px',
+          color: '#000000'
+        },
+        cta: {
+          show: true,
+          background: '#FFCCB7',
+          color: '#000000',
+          type: 'ai',
+        }, 
+       
+      },
+      {
+        name: 'Accessories',
+        overrides: {
+        },
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category6.png', true),
+        href: 'https://www.beliani.ch/garden-furniture/garden-accessories/',
+        title: {
+          show: true,
+          align: 'center',
+          spaceBefore: 'newsletterBottom10px',
+          spaceAfter: 'newsletterBottom10px',
+          color: '#000000'
+        },
+        cta: {
+          show: true,
+          background: '#FFCCB7',
+          color: '#000000',
+          type: 'ai',
+        }, 
+       
+      },
+      {
+        name: 'Sun loungers',
+        overrides: {
+        },
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category7.png', true),
+        href: 'https://www.beliani.ch/outdoor-furniture/sun-loungers/',
+        title: {
+          show: true,
+          align: 'center',
+          spaceBefore: 'newsletterBottom10px',
+          spaceAfter: 'newsletterBottom10px',
+          color: '#000000'
+        },
+        cta: {
+          show: true,
+          background: '#FFCCB7',
+          color: '#000000',
           type: 'ai',
         }, 
        
@@ -215,67 +272,44 @@ const categories = [
         name: 'Parasols',
         overrides: {
         },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category7_ai.png', true),
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category8.png', true),
         href: 'https://www.beliani.ch/garden-furniture/parasols/',
         title: {
           show: true,
-          align: 'left',
+          align: 'center',
           spaceBefore: 'newsletterBottom10px',
           spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
+          color: '#000000'
         },
         cta: {
           show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
+          background: '#FFCCB7',
+          color: '#000000',
           type: 'ai',
         }, 
        
       },
       {
-        name: 'Outdoor lighting',
+        name: 'Balcony furniture',
         overrides: {
         },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category8_ai.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/garden-lighting/',
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category9.png', true),
+        href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
         title: {
           show: true,
-          align: 'left',
+          align: 'center',
           spaceBefore: 'newsletterBottom10px',
           spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
+          color: '#000000'
         },
         cta: {
           show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
-          type: 'ai',
-        }, 
-       
-      },
-      {
-        name: 'Garden accessories',
-        overrides: {
-        },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category9_ai.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/garden-accessories/',
-        title: {
-          show: true,
-          align: 'left',
-          spaceBefore: 'newsletterBottom10px',
-          spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
-        },
-        cta: {
-          show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
+          background: '#FFCCB7',
+          color: '#000000',
           type: 'ai',
         }, 
        
@@ -284,21 +318,21 @@ const categories = [
         name: 'Outdoor SPA',
         overrides: {
         },
-        background: '#F9EFEE',
-        color: '#750000',
-        src: getImageUrl('20260911Category10_ai.png', true),
+        background: '#FFCCB7',
+        color: '#000000',
+        src: getImageUrl('20260911Category10.png', true),
         href: 'https://www.beliani.ch/garden-furniture/outdoor-spa/',
         title: {
           show: true,
-          align: 'left',
+          align: 'center',
           spaceBefore: 'newsletterBottom10px',
           spaceAfter: 'newsletterBottom10px',
-          color: '#750000'
+          color: '#000000'
         },
         cta: {
           show: true,
-          background: '#FF2F00',
-          color: '#FFFFFF',
+          background: '#FFCCB7',
+          color: '#000000',
           type: 'ai',
         }, 
        
@@ -308,11 +342,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: "47316",
-  name: "Outdoor Final Clearance - AI",
+  startId: "47669",
+  name: "Outdoor Final Clearance - Normal",
   date: "11.09.2026",
   issueCardId: "526874",
-  lpId: "31993",
+  lpId: "32253",
   alarm: {
     isActive: false,
   },
@@ -324,11 +358,11 @@ export default new entities.Campaign({
     {
       name: "Newsletter",
       type: types.NEWSLETTER,
-      template: templates.AINewsletter1109, // User should change this
-      css: types.CSS.NS_AI_11_09,
+      template: templates.AIRegularFridayNslt11_09_normal, // User should change this
+      css: types.CSS.NS_AI_11_09_NORMAL,
       translationsSpreadsheet: campaignTranslationsSheet,
-      background: "#F9EFEE",
-      color: "#750000",
+      background: "#FFCCB7",
+      color: "#000000",
       wrapper: types.WRAPPER,
       categories: categories,
       timer: timer,
@@ -345,14 +379,16 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       categories_type: 'biggrid',
+      TopImageTitle_data: TopImageTitle_data,
+
     },
     {
       name: "Landing",
       type: types.LANDINGPAGE,
-      template: templates.AINewsletter1109, // User should change this
-      css: types.CSS.LP_AI_11_09,
-      background: "#F9EFEE",
-      color: "#750000",
+      template: templates.AIRegularFridayNslt11_09_normal, // User should change this
+      css: types.CSS.LP_AI_11_09_NORMAL,
+      background: "#FFCCB7",
+      color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,
       categories: categories,
       timer: timer,
@@ -369,6 +405,8 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       categories_type: 'biggrid',
+      TopImageTitle_data: TopImageTitle_data,
+
     },
   ],
 });
