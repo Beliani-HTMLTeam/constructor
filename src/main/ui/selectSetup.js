@@ -49,6 +49,8 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
     handleShopChange(ev, shops);
     const shop = getState('shop');
 
+    setState('selectedLanguage', null);
+
     // Setup language options based on selected shop
     const languageItems = shop.languages.map(({ language }) => ({
       value: `${language.slug}-${language.name}`,
@@ -71,10 +73,15 @@ export function setupSelectShop(elements, shops, setState, getState, render) {
 export function setupSelectLanguage(elements, setState, getState, render, handleSlugChange) {
   const { selectLanguage, selectShop, selectShopWrapper, openLP, openCampaign, redirectCheck } = elements;
 
+  setState('selectedLanguage', null);
+
   selectLanguage.addEventListener('change', (ev) => {
     if (ev.target.value === 'default') {
+      setState('selectedLanguage', null);
       return;
     }
+
+    setState('selectedLanguage', ev.target.value);
 
     showElements(selectShop, selectShopWrapper, openLP, openCampaign, redirectCheck);
 
