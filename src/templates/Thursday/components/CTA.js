@@ -15,7 +15,7 @@ const CTA = ({
   let html = '';
 
   // prettier-ignore
-  html += `<a style="color: ${color}; text-decoration: underline;" href="${href}"><span class="newsletterCta">${text}</span></a>`;
+  html += `<a style="color: ${color}; text-decoration: none;" href="${href}"><span class="newsletterCta">${text}</span></a>`;
 
   if (insideTr) {
     html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align}>${html}</td></tr>`;
