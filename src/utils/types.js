@@ -9,6 +9,7 @@ import nslt_ai_04_09_chat from '@css/newsletter/ai_04_09_chat.css?inline';
 import nslt_advent2026 from '@css/newsletter/advent2026.css?inline';
 import nslt_ai_11_09 from '@css/newsletter/ai_11_09.css?inline';
 import nslt_ai_11_09_normal from '@css/newsletter/ai_11_09_normal.css?inline';
+import nslt_ai_18_09 from '@css/newsletter/ai_18_09.css?inline';
 
 import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
@@ -21,6 +22,7 @@ import lp_ai_03_09 from '@css/landing/ai_03_09.css?inline';
 import lp_advent2026 from '@css/landing/advent2026.css?inline';
 import lp_ai_11_09 from '@css/landing/ai_11_09.css?inline';
 import lp_ai_11_09_normal from '@css/landing/ai_11_09_normal.css?inline';
+import lp_ai_18_09 from '@css/landing/ai_18_09.css?inline';
 
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
@@ -44,6 +46,7 @@ export const types = {
     NS_ADVENT_CALENDAR_2026: nslt_advent2026,
     NS_AI_11_09: nslt_ai_11_09,
     NS_AI_11_09_NORMAL: nslt_ai_11_09_normal,
+    NS_AI_18_09: nslt_ai_18_09,
 
     LP: lp_regular,
     LP_BLACK_WEEK: lp_blackwek,
@@ -57,6 +60,7 @@ export const types = {
     LP_ADVENT_CALENDAR_2026: lp_advent2026,
     LP_AI_11_09: lp_ai_11_09,
     LP_AI_11_09_NORMAL: lp_ai_11_09_normal,
+    LP_AI_18_09: lp_ai_18_09,
 
     CGB: {
       DESKTOP: cgb_desktop,

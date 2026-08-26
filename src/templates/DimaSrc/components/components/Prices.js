@@ -4,9 +4,9 @@ const Prices = ({ high, low = '', color = '#000000' }) => {
   html += `<table cellspacing="0" cellpadding="0" border="0" width="100%" class="newsletterProductPrices">`;
 
   html += `<tr><td>`
-  html += `<span style="color: ${color};" class="newsletterProductLowPrice">${low} </span>`;
+  html += `<span style="color: ${color};" class="newsletterProductFridayLowPrice">${low} </span>`;
 
-  html += `<span style="color: ${color};" class="newsletterProductHighPrice">${high}</span>`;
+  html += `<span style="color: ${color};" class="newsletterProductFridayHighPrice">${high}</span>`;
   
   html += `</td></tr>`;
 

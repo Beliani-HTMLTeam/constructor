@@ -13,152 +13,399 @@ const escapeHtml = (value = '') =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 
-const renderTile = ({
+const normalizeImageSrc = (src) => {
+  if (!src) return '';
+
+  if (typeof src === 'object') {
+    return src.src || '';
+  }
+
+  return src;
+};
+
+const getTileData = ({
   category,
-  title,
-  href,
-  ctaText,
-  isLastRow,
+  getTitle,
+  getHref,
+  getCtaText,
 }) => {
-  if (!category) {
+  if (!category) return null;
+
+  return {
+    background:
+      category.background || '#FFFFFF',
+
+    titleColor:
+      category.title?.color ||
+      category.color ||
+      '#750000',
+
+    ctaColor:
+      category.cta?.linkColor ||
+      '#FF2F00',
+
+    image: escapeHtml(
+      normalizeImageSrc(category.src)
+    ),
+
+    href: escapeHtml(
+      getHref(category)
+    ),
+
+    title: escapeHtml(
+      getTitle(category)
+    ),
+
+    ctaText: escapeHtml(
+      getCtaText(category)
+    ),
+  };
+};
+
+const renderGapCell = ({
+  background,
+  height,
+}) => `
+  <td
+    width="10"
+    height="${height || ''}"
+    bgcolor="${background}"
+    style="
+      width:1.7%;
+      ${height ? `height:${height}px;` : ''}
+      padding:0;
+      background-color:${background};
+      font-size:0;
+      line-height:${height || 0}px;
+      mso-line-height-rule:exactly;
+    "
+  >&nbsp;</td>
+`;
+
+const renderSpacerCell = ({
+  background,
+  height,
+}) => `
+  <td
+    width="290"
+    height="${height}"
+    bgcolor="${background}"
+    style="
+      width:49.15%;
+      height:${height}px;
+      padding:0;
+      background-color:${background};
+      font-size:0;
+      line-height:${height}px;
+      mso-line-height-rule:exactly;
+    "
+  >&nbsp;</td>
+`;
+
+const renderImageCell = ({
+  tile,
+  background,
+}) => {
+  if (!tile) {
     return `
       <td
         width="290"
-        style="width:49.15%;"
-      >
-        &nbsp;
-      </td>
+        valign="top"
+        bgcolor="${background}"
+        style="
+          width:49.15%;
+          padding:0;
+          background-color:${background};
+          vertical-align:top;
+        "
+      >&nbsp;</td>
     `;
   }
-
-  const titleColor =
-    category.title?.color ||
-    category.color ||
-    '#750000';
-
-  /*
-   * cta.color in your campaign is #FFFFFF because it was
-   * intended for a red button. The Figma design uses a red
-   * text link, so linkColor is used separately.
-   */
-  const ctaColor =
-    category.cta?.linkColor ||
-    '#FF2F00';
-
-  const background =
-    category.background ||
-    '#FFFFFF';
-
-  const image = escapeHtml(category.src);
-  const safeHref = escapeHtml(href);
-  const safeTitle = escapeHtml(title);
-  const safeCta = escapeHtml(ctaText);
-
-  const bottomPadding = isLastRow ? 0 : 14;
 
   return `
     <td
       width="290"
       valign="top"
+      bgcolor="${tile.background}"
       style="
         width:49.15%;
+        padding:0;
+        background-color:${tile.background};
         vertical-align:top;
-        background-color:${background};
       "
     >
-      <table
-        role="presentation"
-        width="100%"
-        cellspacing="0"
-        cellpadding="0"
-        border="0"
+      <a
+        href="${tile.href}"
+        target="_blank"
         style="
+          display:block;
           width:100%;
-          border-collapse:collapse;
-          background-color:${background};
+          text-decoration:none;
         "
       >
-        <tr>
-          <td>
-            <a
-              href="${safeHref}"
-              target="_blank"
-              style="
-                display:block;
-                text-decoration:none;
-              "
-            >
-              <img
-                src="${image}"
-                width="290"
-                height="290"
-                alt="${safeTitle}"
-                style="
-                  display:block;
-                  width:100%;
-                  max-width:290px;
-                  height:auto;
-                  border:0;
-                "
-              >
-            </a>
-          </td>
-        </tr>
-
-        ${Space({ className: 'newsletterBottom10px', insideTr: true, backgroundColor: background })}
-        <tr>
-          <td
-            align="left"
-            class="newsletterBigGridTitle"
-            style="
-              color:${titleColor};     
-            "
-          >
-            <a
-              href="${safeHref}"
-              target="_blank"
-              style="
-                color:${titleColor};
-                text-decoration:none;
-              "
-            >
-              ${safeTitle}
-            </a>
-          </td>
-        </tr>
-
-        ${Space({ className: 'newsletterBottom10px', insideTr: true, backgroundColor: background })}
-
-        <tr>
-          <td
-            align="left"
-            style="
-              color:${ctaColor};
-            "
-            class="newsletterBigGridCTA"
-          >
-            <a
-              href="${safeHref}"
-              target="_blank"
-              style="
-                color:${ctaColor};
-                text-decoration:none;
-              "
-            >
-              ${safeCta}
-            </a>
-          </td>
-        </tr>
-        ${Space({ className: `newsletterBottom20px`, insideTr: true, backgroundColor: background })}
-      </table>
+        <img
+          src="${tile.image}"
+          width="290"
+          height="290"
+          alt="${tile.title}"
+          border="0"
+          style="
+            display:block;
+            width:100%;
+            max-width:290px;
+            height:auto;
+            margin:0;
+            padding:0;
+            border:0;
+            outline:none;
+            text-decoration:none;
+            -ms-interpolation-mode:bicubic;
+          "
+        >
+      </a>
     </td>
   `;
 };
 
-/**
- * Returns one complete <tr> that can be inserted
- * into the main 650 px newsletter table.
- */
+const renderTitleCell = ({
+  tile,
+  background,
+}) => {
+  if (!tile) {
+    return `
+      <td
+        width="290"
+        valign="top"
+        bgcolor="${background}"
+        style="
+          width:49.15%;
+          padding:0;
+          background-color:${background};
+          vertical-align:top;
+        "
+      >&nbsp;</td>
+    `;
+  }
+
+  return `
+    <td
+      width="290"
+      align="left"
+      valign="top"
+      bgcolor="${tile.background}"
+      class="newsletterBigGridTitle"
+      style="
+        width:49.15%;
+        padding:0;
+        background-color:${tile.background};
+        color:${tile.titleColor};
+        text-align:left;
+        vertical-align:top;
+      "
+    >
+      <a
+        href="${tile.href}"
+        target="_blank"
+        style="
+          display:block;
+          color:${tile.titleColor};
+          text-decoration:none;
+        "
+      >
+        ${tile.title}
+      </a>
+    </td>
+  `;
+};
+
+const renderCtaCell = ({
+  tile,
+  background,
+}) => {
+  if (!tile) {
+    return `
+      <td
+        width="290"
+        valign="top"
+        bgcolor="${background}"
+        style="
+          width:49.15%;
+          padding:0;
+          background-color:${background};
+          vertical-align:top;
+        "
+      >&nbsp;</td>
+    `;
+  }
+
+  return `
+    <td
+      width="290"
+      align="left"
+      valign="top"
+      bgcolor="${tile.background}"
+      class="newsletterBigGridCTA"
+      style="
+        width:49.15%;
+        padding:0;
+        background-color:${tile.background};
+        color:${tile.ctaColor};
+        text-align:left;
+        vertical-align:top;
+      "
+    >
+      <a
+        href="${tile.href}"
+        target="_blank"
+        style="
+          display:block;
+          color:${tile.ctaColor};
+          text-decoration:none;
+        "
+      >
+        ${tile.ctaText}
+      </a>
+    </td>
+  `;
+};
+
+const renderPair = ({
+  leftCategory,
+  rightCategory,
+  getTitle,
+  getHref,
+  getCtaText,
+  background,
+  isLastRow,
+}) => {
+  const leftTile = getTileData({
+    category: leftCategory,
+    getTitle,
+    getHref,
+    getCtaText,
+  });
+
+  const rightTile = getTileData({
+    category: rightCategory,
+    getTitle,
+    getHref,
+    getCtaText,
+  });
+
+  const leftBackground =
+    leftTile?.background || background;
+
+  const rightBackground =
+    rightTile?.background || background;
+
+  return `
+    <!-- Images -->
+    <tr>
+      ${renderImageCell({
+        tile: leftTile,
+        background,
+      })}
+
+      ${renderGapCell({
+        background,
+      })}
+
+      ${renderImageCell({
+        tile: rightTile,
+        background,
+      })}
+    </tr>
+
+    <!-- 10px between images and titles -->
+    <tr>
+      ${renderSpacerCell({
+        background: leftBackground,
+        height: 10,
+      })}
+
+      ${renderGapCell({
+        background,
+        height: 10,
+      })}
+
+      ${renderSpacerCell({
+        background: rightBackground,
+        height: 10,
+      })}
+    </tr>
+
+    <!-- Shared title row -->
+    <tr>
+      ${renderTitleCell({
+        tile: leftTile,
+        background,
+      })}
+
+      ${renderGapCell({
+        background,
+      })}
+
+      ${renderTitleCell({
+        tile: rightTile,
+        background,
+      })}
+    </tr>
+
+    <!-- 10px between titles and CTAs -->
+    <tr>
+      ${renderSpacerCell({
+        background: leftBackground,
+        height: 10,
+      })}
+
+      ${renderGapCell({
+        background,
+        height: 10,
+      })}
+
+      ${renderSpacerCell({
+        background: rightBackground,
+        height: 10,
+      })}
+    </tr>
+
+    <!-- Shared CTA row -->
+    <tr>
+      ${renderCtaCell({
+        tile: leftTile,
+        background,
+      })}
+
+      ${renderGapCell({
+        background,
+      })}
+
+      ${renderCtaCell({
+        tile: rightTile,
+        background,
+      })}
+    </tr>
+
+    <!-- Space below the pair -->
+    <tr>
+      ${renderSpacerCell({
+        background: leftBackground,
+        height: isLastRow ? 20 : 40,
+      })}
+
+      ${renderGapCell({
+        background,
+        height: isLastRow ? 20 : 40,
+      })}
+
+      ${renderSpacerCell({
+        background: rightBackground,
+        height: isLastRow ? 20 : 40,
+      })}
+    </tr>
+  `;
+};
+
 export const BigGrid = ({
   categories = [],
   getTitle = (category) => category.name,
@@ -166,7 +413,6 @@ export const BigGrid = ({
   getCtaText = () => 'Shop now',
   background = '#FFFFFF',
 }) => {
-  console.log("biggrid", getHref, categories)
   if (
     !Array.isArray(categories) ||
     categories.length === 0
@@ -181,58 +427,39 @@ export const BigGrid = ({
     index < categories.length;
     index += 2
   ) {
-    const leftCategory = categories[index];
-    const rightCategory = categories[index + 1];
+    let isLastRow = index + 2 >= categories.length;
 
-    const isLastRow =
-      index + 2 >= categories.length;
-
-    rows.push(`
-      <tr>
-        ${renderTile({
-          category: leftCategory,
-          title: getTitle(leftCategory),
-          href: getHref(leftCategory),
-          ctaText: getCtaText(leftCategory),
-          isLastRow,
-        })}
-
-        <td
-          width="10"
-          style="
-            width:1.7%;
-            font-size:0;
-            line-height:0;
-          "
-        >
-          &nbsp;
-        </td>
-
-        ${renderTile({
-          category: rightCategory,
-          title: rightCategory
-            ? getTitle(rightCategory)
-            : '',
-          href: rightCategory
-            ? getHref(rightCategory)
-            : '',
-          ctaText: rightCategory
-            ? getCtaText(rightCategory)
-            : '',
-          isLastRow,
-        })}
-      </tr>
-    `);
+    rows.push(
+      renderPair({
+        leftCategory: categories[index],
+        rightCategory:
+          categories[index + 1] || null,
+        getTitle,
+        getHref,
+        getCtaText,
+        background,
+        isLastRow,
+      })
+    );
   }
 
   return `
-  ${Space({ className: 'newsletterBottom60px', insideTr: true, backgroundColor: background })}
+    ${Space({
+      className: 'newsletterBottom60px',
+      insideTr: true,
+      backgroundColor: background,
+    })}
+
     <tr>
       <td
         class="newsletterContainer30px"
         align="center"
+        bgcolor="${background}"
         style="
+          padding-top:0;
+          padding-bottom:0;
           background-color:${background};
+          text-align:center;
         "
       >
         <table
@@ -241,18 +468,26 @@ export const BigGrid = ({
           cellspacing="0"
           cellpadding="0"
           border="0"
+          bgcolor="${background}"
           style="
             width:100%;
-            border-collapse:collapse;
             table-layout:fixed;
+            border-collapse:collapse;
             background-color:${background};
           "
         >
-          ${rows.join('')}
+          <tbody>
+            ${rows.join('')}
+          </tbody>
         </table>
       </td>
     </tr>
-    ${Space({ className: 'newsletterBottom60px', insideTr: true, backgroundColor: background })}
+
+    ${Space({
+      className: 'newsletterBottom60px',
+      insideTr: true,
+      backgroundColor: background,
+    })}
   `;
 };
 

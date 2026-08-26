@@ -10,6 +10,36 @@ img {
   -ms-interpolation-mode: bicubic;
 }
 
+.newsletterCtaButton {
+  display:inline-block;
+  border-style:solid;
+  border-top-width:16px;
+  border-bottom-width:16px;
+  border-left-width: 18px;
+  border-right-width: 18px;
+  font-family:"Open Sans", sans-serif;
+  font-size:18px;
+  line-height:1.2;
+  font-weight:700;
+  border-radius:3px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  text-align:center;
+  text-decoration:none;
+  white-space:nowrap;
+  -webkit-text-size-adjust:none;
+}
+
+
+
+.newsletterTitleH1 {
+  font-size: 44px !important;
+  line-height: 0 !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  font-family: "Poppins", sans-serif;
+}
+
 .title-advantages {
   text-align: center;
   font-size: 11px;
@@ -74,11 +104,6 @@ img {
 .newsletterContainer {
   padding-left: 20px;
   padding-right: 20px;
-}
-
-.newsletterContainer30px {
-  padding-left: 30px;
-  padding-right: 30px;
 }
 
 .newsletterContainer60px {
@@ -168,6 +193,10 @@ img {
   padding-left: 10px;
 }
 
+.newsletterLeft15px {
+  padding-left: 15px;
+}
+
 .newsletterLeft5px {
   padding-left: 5px;
 }
@@ -183,42 +212,6 @@ img {
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
-}
-
-.newsletterIntroMainTitle {
-  font-family: "Open Sans", sans-serif;
-  font-size:72px;
-  line-height:1.2;
-  font-weight:700;
-}
-
-.newsletterIntroSubtitle {
-  font-size:32px;
-  line-height:1.2;
-  font-weight:700;
-  letter-spacing:1px;
-  text-transform: uppercase;
-  font-family: "Open Sans", sans-serif;
-}
-
-.newsletterIntoCTA {
-  display:inline-block;
-  border-style:solid;
-  border-width:15px 32px;
-  border-radius:25px;
-  font-family: Open Sans, sans-serif;
-  font-size:16px;
-  line-height: 1.2;
-  font-weight:700;
-  text-align:center;
-  text-decoration:none;
-  white-space:nowrap;
-}
-
-.newsletterIntroParagraph {
-  font-size:16px;
-  line-height:1.4;
-  font-weight:400;
 }
 
 .newsletterMiniContainer {
@@ -245,24 +238,13 @@ img {
   font-weight: 600;
 }
 
-.newsletterBigGridTitle {
+.newsletterFridayTitle {
+  font-size: 30px;
   font-family: "Open Sans", sans-serif;
-  font-size:19px;
-  line-height:1.2;
-  font-weight:700;
-  text-align:left;
-  mso-line-height-rule:exactly;
+  line-height: 1.2;
+  font-weight: 400;
 }
 
-.newsletterBigGridCTA {
-  font-family: "Open Sans", sans-serif;
-  font-size:16px;
-  line-height:1.2;
-  font-weight:700;
-  text-align:left;
-  mso-line-height-rule:exactly;
-  text-decoration:underline;
-}
 
 .newsletterTitleAditional {
   font-size: 30px;
@@ -291,8 +273,22 @@ img {
   font-weight: 600;
 }
 
+.newsletterProductFridayLowPrice {
+  font-size: 15px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
 .newsletterProductHighPrice {
   font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+
+.newsletterProductFridayHighPrice {
+  font-size: 13px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   text-decoration: line-through;
@@ -302,7 +298,7 @@ img {
   font-size: 20px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
-  padding-left: 20px;
+  padding-left: 15px;
 }
 /*============================================================ Footer ============================================================*/
 
@@ -424,18 +420,6 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
- .newsletterIntroMainTitle {
-    font-size:48px;
-  }
-  
-  .newsletterIntroSubtitle {
-    font-size:24px;
-  }
-
-  .newsletterContainer30px {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
   .stack-column {
     display: block !important;
     width: 100% !important;
@@ -544,6 +528,10 @@ img {
     font-size: 25px;
   }
 
+  .newsletterFridayTitle {
+    font-size: 25px;
+  }
+
   .newsletterTitleAditional {
     font-size: 25px;
   }
@@ -626,6 +614,10 @@ img {
 
   .newsletterLeft10px {
     padding-left: 5px;
+  }
+
+  .newsletterLeft15px {
+    padding-left: 10px;
   }
 
   .newsletterLeft20px {
