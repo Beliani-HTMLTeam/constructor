@@ -62,6 +62,9 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     const html = getState('html');
     if (!html) return toast.error('No HTML to copy. Render template first.');
 
+    const language = getState('selectedLanguage');
+    if (!language) return toast.error('Select language to copy.');
+
     const template = getState('template');
     const country = getState('country');
     let finalHtml = optimizeHtmlImages(html, getState);
