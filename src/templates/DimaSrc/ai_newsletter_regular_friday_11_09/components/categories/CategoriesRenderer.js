@@ -46,7 +46,7 @@ export const CategoriesRenderer = async ({
     background: categories[0]?.background || background,
 
     getTitle: (item) =>
-      getCategoryTitle(item.name, country),
+      item.overrides[country] ||  getCategoryTitle( item.name, country),
 
     getHref: (item) =>
      { const link = getCategoryLink(item.href)

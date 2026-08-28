@@ -34,7 +34,6 @@ const RoundedCategoryCTA = ({
         <center
           style="
             color:${color};
-            font-family:Arial, sans-serif;
             font-size:13px;
             font-weight:bold;
           "

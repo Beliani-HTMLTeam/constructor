@@ -37,7 +37,6 @@ export const BulletproofButton = ({
             border-right-width:${paddingX}px;
             border-radius:${radius}px;
             color:${color};
-            font-family:Arial, sans-serif;
             font-size:${fontSize}px;
             line-height:${lineHeight};
             font-weight:${fontWeight};

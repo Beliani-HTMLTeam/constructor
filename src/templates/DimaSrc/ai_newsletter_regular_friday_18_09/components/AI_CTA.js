@@ -17,6 +17,7 @@ return `<tr>
   bgcolor="${background}"
   class="newsletterContainer"
   style="
+  text-align:${align};
     background-color:${background};
   "
 >

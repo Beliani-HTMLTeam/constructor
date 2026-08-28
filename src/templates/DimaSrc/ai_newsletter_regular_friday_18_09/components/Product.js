@@ -1,5 +1,5 @@
 import { ImageWithLink } from './ImageWithLink.js';
-import { Prices } from '../../components/components/Prices.js';
+import { Prices } from './Prices.js';
 import { Space } from './Space.js';
 
 const Product = (product, showPrices, showName, color, idx, isSpaceAfter = true, priceAdditionalPadding = true, paddingBottom = 'newsletterBottom35px') => {

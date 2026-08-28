@@ -3,6 +3,7 @@ import { IntroCTA } from './IntroCTA';
 import { Space } from '../Space';
 import { templates as TopImageTitleTemplates } from '../utils/topImageTitle/templates.js';
 import { Paragraph } from '../Paragraph.js';
+import { TopImageTitle } from '../TopImageTitle.js';
 
 export const IntroTiT = ({
   type,
@@ -33,14 +34,19 @@ export const IntroTiT = ({
   const templates = TopImageTitleTemplates({ color, title1: queries.TopImageTitle[0] || '', title2: queries.TopImageTitle[1] || '', title3: queries.TopImageTitle[2] || '' });
 
   const introText = text || queries.intro || 'Translation not found';
-
+  TopImageTitle
   return `
-  ${type === 'landing' ? Space({ insideTr: true, className: 'newsletterBottom60px', backgroundColor }) : ''}
-  <tr>
-    <td style="color: ${color}; background: ${backgroundColor}; text-align: ${alignment};" class="${container || 'newsletterContainer60px'}">
-        ${templates[topImageTitle] || 'Invalid type'}
-    </td>
-  </tr>
+  ${TopImageTitle({
+    href: links.TopImageTitle_href,
+    src: links.TopImageTitle_src,
+    title1: queries.TopImageTitle[0] || '',
+    title2: queries.TopImageTitle[1] || '',
+    title3: queries.TopImageTitle[2] || '',
+    color,
+    type: topImageTitle || 'twoSameLines',
+    renderType: type,
+    backgroundColor,
+  })}
   <tr><td style="background-color: ${backgroundColor};" class="newsletterContainer60px">${Paragraph({
     text:  queries.intro || 'Translation not found',
     align: 'center',

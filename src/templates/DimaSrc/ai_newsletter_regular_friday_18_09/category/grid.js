@@ -23,7 +23,7 @@ export const render = (products, showPrices, showNames, queries, insideContainer
         const product = products[productIndex];
 
         // prettier-ignore
-        productsInnerHtml += `<td style="color: ${color}; background: ${background}; width:50%;vertical-align:top;" width="50%" ${(col + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"'}>`;
+        productsInnerHtml += `<td style="color: ${color}; background: ${background}; width:50%;vertical-align:top;" width="50%" ${(col + 1) % 2 !== 0 ? 'class="newsletterRight8px"' : 'class="newsletterLeft8px"'}>`;
 
         if (product) {
           productsInnerHtml += Product(product, showPrices, showNames, color, productIndex, !isLastRow, !insideContainer,'newsletterBottom60px');

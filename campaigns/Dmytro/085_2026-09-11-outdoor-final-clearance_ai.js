@@ -24,7 +24,7 @@ const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-09-11' }),
   TopImage_src: getImageUrl('20260911topimage_ai.png', true),
   TopImage_href: translateLink({ value: 'content/lp26-09-11' }),
-  Banner_1: translateLink({ value: 'content/lp26-09-04' }),
+  Banner_1: translateLink({ value: 'content/lp26-09-04-ta' }),
   Banner_1_Image: translateImage({ value: '20260904b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-09-03' }),
   Banner_2_Image: translateImage({ value: '20260903b.png' }),
@@ -191,6 +191,8 @@ const categories = [
       {
         name: 'Storage',
         overrides: {
+          NL: "Tuinopslag",
+          BENL: "Tuinopslag"
         },
         background: '#F9EFEE',
         color: '#750000',

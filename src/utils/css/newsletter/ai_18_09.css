@@ -102,8 +102,8 @@ img {
   padding-left: 10px;
 }
 .newsletterContainer {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 21px;
+  padding-right: 21px;
 }
 
 .newsletterContainer60px {
@@ -175,6 +175,14 @@ img {
 /* ============================ newsletterPadding ================================*/
 .newsletterRight10px {
   padding-right: 10px;
+}
+
+.newsletterRight8px {
+  padding-right: 8px;
+}
+
+.newsletterLeft8px {
+  padding-left: 8px;
 }
 
 .newsletterRight02px {
@@ -420,6 +428,27 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  .newsletterContainer60px {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .newsletterCtaButton {
+   
+    border-top-width:13px;
+    border-bottom-width:13px;
+    border-left-width: 15px;
+    border-right-width: 15px;
+    font-size:15px;
+  }
+
+  .newsletterRight8px {
+    padding-right: 4px;
+  }
+  
+  .newsletterLeft8px {
+    padding-left: 4px;
+  }
+
   .stack-column {
     display: block !important;
     width: 100% !important;

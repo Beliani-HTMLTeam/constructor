@@ -100,6 +100,25 @@ export const IntroParagraph = ({
     `;
   }
 
+  const titleHasPercentage = String(
+    introTitle || ''
+  ).includes('%');
+  
+  const subtitleHasPercentage = String(
+    introSubtitle || ''
+  ).includes('%');
+  
+  const mainHeadingIsSubtitle =
+    !titleHasPercentage && subtitleHasPercentage;
+  
+  const titleClass = mainHeadingIsSubtitle
+    ? 'newsletterIntroSubtitle'
+    : 'newsletterIntroMainTitle';
+  
+  const subtitleClass = mainHeadingIsSubtitle
+    ? 'newsletterIntroMainTitle'
+    : 'newsletterIntroSubtitle';
+
   const content = `
     ${
       spaceTop !== '0'
@@ -124,7 +143,7 @@ export const IntroParagraph = ({
             <td
               align="${alignment}"
               bgcolor="${backgroundColor}"
-              class="newsletterIntroMainTitle"
+              class="${titleClass}"
               style="
                 padding:0;
                 background-color:${backgroundColor};
@@ -155,7 +174,7 @@ export const IntroParagraph = ({
             <td
               align="${alignment}"
               bgcolor="${backgroundColor}"
-              class="newsletterIntroSubtitle"
+              class="${subtitleClass}"
               style="
                 padding:0;
                 background-color:${backgroundColor};

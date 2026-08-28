@@ -25,8 +25,10 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImage_src: getImageUrl('20260918_gif_1.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-09-18-tb' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-18-ta' }),
+  TopImageTitle_src: translateImage({ value: '20260918_01-ta.png' }),
+  TopImage_src: getImageUrl('20260918_gif_2.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp26-09-18-ta' }),
   Banner_1: translateLink({ value: 'content/lp26-09-11' }),
   Banner_1_Image: translateImage({ value: '20260911b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-09-10' }),
@@ -82,7 +84,7 @@ const categories = [
       show: true,
       align: 'left',
       source: 'queries',
-      spaceAfter: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom25px',
     },
     paragraph: {
       show: false,
@@ -133,7 +135,7 @@ const categories = [
       show: true,
       align: 'left',
       source: 'queries',
-      spaceAfter: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom25px',
     },
     paragraph: {
       show: false,
@@ -184,7 +186,7 @@ const categories = [
       show: true,
       align: 'left',
       source: 'queries',
-      spaceAfter: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom25px',
     },
     paragraph: {
       show: false,
@@ -235,7 +237,7 @@ const categories = [
       show: true,
       align: 'left',
       source: 'queries',
-      spaceAfter: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom25px',
     },
     paragraph: {
       show: false,

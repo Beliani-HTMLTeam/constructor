@@ -25,7 +25,7 @@ const links = {
   TopImageTitle_src: translateImage({ value: '20260911_01.png' }),
   TopImage_src: getImageUrl('20260911topimage_normal.png', true),
   TopImage_href: translateLink({ value: 'content/lp26-09-11-tb' }),
-  Banner_1: translateLink({ value: 'content/lp26-09-04' }),
+  Banner_1: translateLink({ value: 'content/lp26-09-04-ta' }),
   Banner_1_Image: translateImage({ value: '20260904b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-09-03' }),
   Banner_2_Image: translateImage({ value: '20260903b.png' }),
@@ -133,6 +133,8 @@ const categories = [
       {
         name: 'Storage',
         overrides: {
+          NL: "Tuinopslag",
+          BENL: "Tuinopslag"
         },
         background: '#FFCCB7',
         color: '#000000',
@@ -156,6 +158,8 @@ const categories = [
       {
         name: 'Lighting',
         overrides: {
+          NL: "Buitenverlichting",
+          BENL: "Buitenverlichting"
         },
         background: '#FFCCB7',
         color: '#000000',
@@ -225,6 +229,8 @@ const categories = [
       {
         name: 'Accessories',
         overrides: {
+          NL: "Tuinaccessoires",
+          BENL: "Tuinaccessoires"
         },
         background: '#FFCCB7',
         color: '#000000',
