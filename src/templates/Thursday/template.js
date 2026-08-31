@@ -56,7 +56,7 @@ const Thursday = async ({
     getCategoryLink,
   });
 
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, getCategoryLink, links });
   const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
