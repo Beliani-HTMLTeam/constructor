@@ -14,6 +14,7 @@ export const render = ({
   id,
   imageSide,
   alignToSide = false,
+  category,
 }) => {
   let productsInnerHtml = '';
   const containerClass = insideContainer ? (container ?? 'newsletterContainer') : '';
@@ -39,8 +40,11 @@ export const render = ({
         // prettier-ignore
         productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${horizontalGapValue} align="${imageAlign}">`;
 
+        const isLastRow = i + cols >= products.length;
+        const showBottomGap = category?.product?.hideLastBottomGap ? !isLastRow : true;
+
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container);
+          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container, showBottomGap);
         }
 
         productsInnerHtml += '</td>';
