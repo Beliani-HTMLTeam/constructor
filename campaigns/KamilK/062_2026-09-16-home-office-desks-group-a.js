@@ -59,7 +59,7 @@ const additionalCss = `
     white-space: normal;
     word-break: break-word;
   }
-
+		
   .newsletterBottomAlways20px {
     padding-bottom: 20px;
   }
@@ -77,6 +77,40 @@ const additionalCss = `
   }
 `;
 
+const additionalCssLp = `
+  .newsletterCtaBtn {
+    width: auto !important;
+    text-align: center;
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .newsletterCtaLink {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .newsletterBottomAlways20px {
+    padding-bottom: 20px !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    .newsletterCtaLink {
+      width: auto !important;
+      max-width: 100% !important;
+    }
+
+    .newsletterContainer60px {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+  }
+`;
+
 const categories = [
 	{
 		name: 'Home Office Desks',
@@ -90,8 +124,8 @@ const categories = [
 			spaceBefore: 'newsletterBottomAlways20px',
 			paddingX: 45,
 			paddingY: 16,
-			mobilePaddingX: 10,
-			mobilePaddingY: 14,
+			mobilePaddingX: 24,
+			mobilePaddingY: 10,
 			background: '#750000',
 			color: '#ffffff',
 		},
@@ -153,8 +187,8 @@ const categories = [
 			spaceBefore: 'newsletterBottomAlways20px',
 			paddingX: 45,
 			paddingY: 16,
-			mobilePaddingX: 10,
-			mobilePaddingY: 14,
+			mobilePaddingX: 24,
+			mobilePaddingY: 10,
 			background: '#F6E7E6',
 			color: '#000000',
 		},
@@ -216,8 +250,8 @@ const categories = [
 			spaceBefore: 'newsletterBottomAlways20px',
 			paddingX: 45,
 			paddingY: 16,
-			mobilePaddingX: 10,
-			mobilePaddingY: 14,
+			mobilePaddingX: 24,
+			mobilePaddingY: 10,
 			background: '#750000',
 			color: '#ffffff',
 		},
@@ -279,8 +313,8 @@ const categories = [
 			spaceBefore: 'newsletterBottomAlways20px',
 			paddingX: 45,
 			paddingY: 16,
-			mobilePaddingX: 10,
-			mobilePaddingY: 14,
+			mobilePaddingX: 24,
+			mobilePaddingY: 10,
 			background: '#F6E7E6',
 			color: '#000000',
 		},
@@ -417,9 +451,6 @@ export default new entities.Campaign({
 				title: {
 					styles: "font-weight: 400;"
 				},
-				paragraph: {
-					styles: "line-height: 1.44;"
-				}
 			},
 			css: types.CSS.NS,
 			additionalCss: additionalCss,
@@ -449,12 +480,9 @@ export default new entities.Campaign({
 				title: {
 					styles: "font-weight: 400;"
 				},
-				paragraph: {
-					styles: "line-height: 1.44;"
-				}
 			},
 			css: types.CSS.LP,
-			additionalCss: additionalCss,
+			additionalCss: additionalCssLp,
 			name: 'Landing',
 			type: types.LANDINGPAGE,
 			translationsSpreadsheet: campaignTranslationsSheet,
