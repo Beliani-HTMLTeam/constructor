@@ -1,4 +1,5 @@
 import { ImageWithLink } from '../components/ImageWithLink';
+import { InteractiveHeroImage } from '../components/InteractiveHeroImage';
 
 export const TopImageHandler = ({ links, TopImage_data, type }) => {
   if (!links?.TopImage_href) return '';
@@ -6,15 +7,8 @@ export const TopImageHandler = ({ links, TopImage_data, type }) => {
   let html = '';
 
   if (type === 'landing'){
-    if (links?.TopImage_src_lp) {
-      html += ImageWithLink({
-        href: links.TopImage_href,
-        src: links.TopImage_src_lp,
-        insideTr: true,
-        alt: 'Top Image',
-        tdClass: TopImage_data?.container,
-      });
-    }
+   
+      html += InteractiveHeroImage({type});
   }
   else {
   if (links?.TopImage_src) {

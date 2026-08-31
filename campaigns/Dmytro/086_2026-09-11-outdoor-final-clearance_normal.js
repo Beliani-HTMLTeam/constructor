@@ -183,6 +183,7 @@ const categories = [
       {
         name: 'Dining sets',
         overrides: {
+          HU: "Étkezőgarnitúrák"
         },
         background: '#FFCCB7',
         color: '#000000',
@@ -230,7 +231,9 @@ const categories = [
         name: 'Accessories',
         overrides: {
           NL: "Tuinaccessoires",
-          BENL: "Tuinaccessoires"
+          BENL: "Tuinaccessoires",
+          HU: "Kerti kiegészítők",
+          CZ: "Zahradní doplňky"
         },
         background: '#FFCCB7',
         color: '#000000',

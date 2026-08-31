@@ -38,7 +38,7 @@ const links = {
 };
 
 const intro_data = {
-  container: "newsletterContainer60px",
+  container: "newsletterContainer",
   color: "#000000",
   backgroundColor: "#FFF0EA",
   alignment: "left",
@@ -95,7 +95,7 @@ const categories = [
     },
     cta: {
       show: true,
-      spaceBefore: 'newsletterBottom70px',
+      spaceBefore: 'newsletterBottom30px',
     },
     products: [
       // OTSBY 
@@ -146,7 +146,7 @@ const categories = [
     },
     cta: {
       show: true,
-      spaceBefore: 'newsletterBottom70px'
+      spaceBefore: 'newsletterBottom30px'
     },
     products: [
       // LAKEVILLE 
@@ -197,7 +197,7 @@ const categories = [
     },
     cta: {
       show: true,
-      spaceBefore: 'newsletterBottom70px'
+      spaceBefore: 'newsletterBottom30px'
     },
     products: [
       // CHYAMA 
@@ -248,7 +248,7 @@ const categories = [
     },
     cta: {
       show: true,
-      spaceBefore: 'newsletterBottom70px'
+      spaceBefore: 'newsletterBottom30px'
     },
     products: [
       // KEVIREL 

@@ -12,11 +12,11 @@
   border-style:solid;
   border-top-width:16px;
   border-bottom-width:16px;
-  border-left-width: 18px;
-  border-right-width: 18px;
+  border-left-width: 20px;
+  border-right-width: 20px;
   font-family:"Open Sans", sans-serif;
   font-size:18px;
-  line-height:1.2;
+  line-height:1.0;
   font-weight:700;
   border-radius:3px;
   letter-spacing:1px;
@@ -27,6 +27,9 @@
   -webkit-text-size-adjust:none;
 }
 
+#newsletter .newsletterBottom30px {
+  padding-bottom: 30px;
+}
 #newsletter .newsletterRight8px {
   padding-right: 8px;
 }
@@ -381,6 +384,9 @@ table {
 
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  #newsletter .newsletterBottom30px {
+    padding-bottom: 20px;
+  }
   #newsletter .newsletterContainer60px {
     padding-left: 40px;
     padding-right: 40px ;

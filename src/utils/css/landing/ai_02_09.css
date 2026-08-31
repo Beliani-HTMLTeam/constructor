@@ -14,14 +14,12 @@
 
 #newsletter .newsletterWednesdayProductHighPrice {
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   text-decoration: line-through;
 }
 
 
 #newsletter .newsletterWednesdaySubtitle {
-  font-family: "Open Sans", sans-serif;
     font-size:12px;
   line-height:1.2;
   font-weight:700;
@@ -31,14 +29,12 @@
 }
 
 #newsletter .newsletterWednesdayAdditionalTitle {
-  font-family: "Open Sans", sans-serif;
   font-size: 13px;
   line-height: 1.2;
   font-weight: 600;
 }
 
 #newsletter .newsletterWednesdayAdditionalSubtitle {
-  font-family: "Open Sans", sans-serif;
     font-size:11px;
   line-height:1.2;
   font-weight:600;
@@ -48,7 +44,6 @@
 }
 
 #newsletter .newsletterWednesdayTitle {
-  font-family:"Open Sans", sans-serif;
                       font-size:53px;
                       line-height:1.2;
                       font-weight:700;
@@ -58,7 +53,6 @@
 
 #newsletter .newsletterWednesdayProductHighPriceCH {
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   text-decoration: line-through;
 }
@@ -78,7 +72,6 @@
 
 #newsletter .newsletterWednesdayParagraph {
   font-size: 16px;
-  font-family: "Open Sans", sans-serif;
   line-height: 1.4;
 }
 
@@ -90,7 +83,6 @@
   border-left-width:31px;
   border-right-width:31px;
   border-radius:4px;
-  font-family:"Open Sans", sans-serif;
   font-size:14px;
   line-height:1.2;
   font-weight:700;
@@ -102,7 +94,6 @@
 
 #newsletter .newsletterWednesdayNumber {
   width:80px;
-  font-family:"Open Sans", sans-serif;
   font-size:46px;
   line-height:1.2;
   font-weight:700;
@@ -110,7 +101,6 @@
 }
 
 #newsletter .newsletterWednesdayCategoryTitle {
-  font-family:"Open Sans", sans-serif;
   font-size:27px;
   line-height:1.2;
   font-weight:600;
@@ -118,7 +108,6 @@
 }
 
 #newsletter .newsletterWednesdayCategoryParagraph {
-  font-family:"Open Sans", sans-serif;
   font-size: 14px;
   line-height:1.4;
   text-align:left;
@@ -131,7 +120,6 @@
   border-bottom-width:15px;
   border-left-width: 34px;
   border-right-width: 34px;
-  font-family:"Open Sans", sans-serif;
   font-size:13px;
   line-height:1.2;
   font-weight:700;
@@ -152,14 +140,12 @@
 
 #newsletter .newsletterWednesdayProductLowPrice {
   font-size: 17px;
-  font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-weight: 700;
 }
 
 #newsletter .newsletterProductWednesdayTitle {
   font-size: 13px;
-  font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-weight: 600;
 }
@@ -465,13 +451,11 @@ table {
 
   #newsletter .newsletterAditionalTitle {
     font-size: 27px;
-    font-family: "Open Sans", sans-serif;
     line-height: 1.2;
     font-weight: 600;
   }
   #newsletter .newsletterAdditionalCategoryTitle {
     font-size: 27px;
-    font-family: "Open Sans", sans-serif;
     line-height: 1.25;
     text-decoration: underline;
   }

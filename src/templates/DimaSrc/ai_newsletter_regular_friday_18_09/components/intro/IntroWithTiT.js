@@ -47,7 +47,7 @@ export const IntroTiT = ({
     renderType: type,
     backgroundColor,
   })}
-  <tr><td style="background-color: ${backgroundColor};" class="newsletterContainer60px">${Paragraph({
+  <tr><td style="background-color: ${backgroundColor};" class="newsletterContainer">${Paragraph({
     text:  queries.intro || 'Translation not found',
     align: 'center',
     insideTable: true,

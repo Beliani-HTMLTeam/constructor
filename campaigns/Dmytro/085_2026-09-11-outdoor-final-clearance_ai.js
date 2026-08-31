@@ -99,6 +99,7 @@ const categories = [
       {
         name: 'Dining sets',
         overrides: {
+          HU: "Étkezőgarnitúrák"
         },
         background: '#F9EFEE',
         color: '#750000',
@@ -239,6 +240,10 @@ const categories = [
       {
         name: 'Outdoor lighting',
         overrides: {
+          HU: "Kültéri világítás",
+          CHDE: "Beleuchtung",
+          DE: "Beleuchtung",
+          AT: "Beleuchtung"
         },
         background: '#F9EFEE',
         color: '#750000',
