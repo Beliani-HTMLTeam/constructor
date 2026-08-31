@@ -134,7 +134,7 @@ const CTA = ({
               <!--[if gte mso 9]>
                 <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${buttonHref}" style="height:${vmlHeight}px;v-text-anchor:middle;width:${vmlWidth}px;" arcsize="${arcsize}" stroke="f" fillcolor="${bgColor}">
                   <w:anchorlock/>
-                  <center style="color:${btnTextColor};font-family:${vmlFontFamily};font-size:${fontSize};font-weight:${fontWeight};letter-spacing:0px;">${text}</center>
+                  <center style="color:${btnTextColor};font-family:${vmlFontFamily};font-size:${fontSize};font-weight:${fontWeight};letter-spacing:0px;text-transform: ${textTransform};">${text}</center>
                 </v:roundrect>
               <![endif]-->
               <!--[if !mso]><!-->
