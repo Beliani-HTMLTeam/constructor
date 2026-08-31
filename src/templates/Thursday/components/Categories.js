@@ -51,7 +51,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           background: background,
           align: category.title.align ?? 'left',
           insideTable: true,
-          spanStyle: `color: ${color};`,
+          spanStyle: `${category.title.styles ?? ''} color: ${color};`,
           tableContainer: containerClass,
           className: category.title.className ?? 'newsletterTitle',
         })}
@@ -82,7 +82,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
-            tableContainer: containerClass,
+            tableContainer: category.paragraph.container ?? containerClass,
           })}
         </td>
       </tr>
@@ -118,6 +118,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
           showNames: category.showNames ?? category.product?.name ?? true,
+          showTileNames: category.showTileNames ?? true,
           gapBetweenHorizontal: category.gapBetweenHorizontal ?? true,
           gapBetweenVertical: category.product?.gapBetweenVertical ?? true,
           align: category.product?.align ?? 'left',
@@ -143,15 +144,30 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
   const CTAElement = category.cta
     ? `
-      ${category.cta.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
-      ${CTA({
-        color: category.color ?? '#000000',
-        href: ctaHref,
-        text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
-        insideTr: true,
-        tdClass: containerClass,
-      })}
-        `
+      ${category.cta.spaceBefore
+        ? Space({ insideTr: true, className: category.cta.spaceBefore })
+        : ''}
+      ${category.cta.src
+        ? ImageWithLink({
+            href: ctaHref,
+            src: typeof category.cta.src === 'object' ? category.cta.src.src : category.cta.src,
+            insideTr: true,
+            tdClass: containerClass,
+          })
+        : CTA({
+            color: category.color ?? '#000000',
+            href: ctaHref,
+            text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
+            insideTr: true,
+            tdClass: containerClass,
+            ...(typeof category.cta === 'object' ? {
+              ...category.cta,
+              bg: category.cta.background ?? category.cta.bg,
+              textColor: category.cta.color ?? category.cta.textColor,
+              background: category.cta.containerBackground,
+            } : {})
+          })}
+      `
     : '';
 
   return `
@@ -212,6 +228,7 @@ const renderBody = async ({
   tiles,
   showPrices,
   showNames,
+  showTileNames,
   gapBetweenHorizontal,
   gapBetweenVertical,
   align = 'left',
@@ -247,6 +264,7 @@ const renderBody = async ({
       tiles,
       showPrices,
       showNames,
+      showTileNames,
       gapBetweenHorizontal,
       gapBetweenVertical,
       align,
