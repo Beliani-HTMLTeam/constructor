@@ -29,7 +29,7 @@ const tableQueries = [
 	{
 		tableRange: '15:16',
 		name: 'timer',
-		tableName: '2026::Voucher - 07.09.26 - Free Bathroom set',
+		tableName: '2026::Voucher - 07.09.26 - Free Outdoor lamp',
 	},
 ];
 
@@ -259,7 +259,7 @@ const categories = [
 
 const timer = {
 	freebies: getImageUrl('20260910free.png', true),
-	deadline: '2026-09-10',
+	deadline: '2026-09-13',
 }
 
 export default new entities.Campaign({
@@ -301,9 +301,9 @@ export default new entities.Campaign({
 				}
 			},
 			Inside: {
-				color: '#ffffff',
-				backgroundColor: '#750000',
-				unitBackground: '#AC6666',
+				color: '#000000',
+				backgroundColor: '#FFCCB7',
+				unitBackground: '#FFE6DB',
 				type: 'timer',
 			},
 		},
@@ -331,9 +331,9 @@ export default new entities.Campaign({
 				}
 			},
 			Inside: {
-				color: '#ffffff',
-				backgroundColor: '#750000',
-				unitBackground: '#AC6666',
+				color: '#000000',
+				backgroundColor: '#FFCCB7',
+				unitBackground: '#FFE6DB',
 				type: 'timer',
 			},
 		},
