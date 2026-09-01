@@ -6,16 +6,16 @@ const tableQueries = [
     tableRange: '16:17',
     name: 'TopImageTitle',
   },
+  // {
+  //   tableRange: '21',
+  //   name: 'intro',
+  // },
   {
-    tableRange: '21',
-    name: 'intro',
-  },
-  {
-    tableRange: '21:24',
+    tableRange: '22:25',
     name: 'paragraphs',
   },
   {
-    tableRange: '25:26',
+    tableRange: '26:27',
     name: 'condition',
   },
 ];
@@ -283,7 +283,7 @@ const categories = [
         href: 'https://www.beliani.ch/office-furniture/office-chairs/',
       },
       {
-        name: 'Storage',
+        name: 'Storage Units',
         src: getImageUrl('20260916_Cat42b.png', true),
         href: 'https://www.beliani.ch/office-furniture/storage-units-and-cabinets/',
       },
