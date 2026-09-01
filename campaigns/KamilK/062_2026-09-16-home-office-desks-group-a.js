@@ -28,10 +28,10 @@ const links = {
 	// TopImage_href: 'https://www.beliani.ch/rugs/low-pile-rugs/',
 
 	Banner_1: translateLink({ value: 'content/lp26-09-09' }),
-	Banner_1_Image: translateImage({ value: '20260909a.png' }),
+	Banner_1_Image: translateImage({ value: '20260909b.png' }),
 
-	Banner_2: translateLink({ value: 'content/lp26-09-04' }),
-	Banner_2_Image: translateImage({ value: '20260904a.png' }),
+	Banner_2: translateLink({ value: 'content/lp26-09-04-ta' }),
+	Banner_2_Image: translateImage({ value: '20260904b.png' }),
 
 	intro_href: translateLink({ value: 'content/lp26-09-16' }),
 };
@@ -59,7 +59,7 @@ const additionalCss = `
     white-space: normal;
     word-break: break-word;
   }
-		
+
   .newsletterBottomAlways20px {
     padding-bottom: 20px;
   }
@@ -402,7 +402,7 @@ const categories = [
 				href: 'https://www.beliani.ch/office-furniture/office-chairs/',
 			},
 			{
-				name: 'Storage',
+				name: 'Storage Units',
 				src: translateImage({ value: '20260916/tiles/_storage.png', placeholderPosition: 53 }),
 				href: 'https://www.beliani.ch/office-furniture/storage-units-and-cabinets/',
 			},
