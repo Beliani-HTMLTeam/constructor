@@ -11,15 +11,15 @@ const tableQueries = [
 		name: 'intro',
 	},
 	{
-		tableRange: '20:23',
+		tableRange: '20:27',
 		name: 'categories',
 	},
 	{
-		tableRange: '24:30',
+		tableRange: '28:34',
 		name: 'paragraphs',
 	},
 	{
-		tableRange: '31:32',
+		tableRange: '35:36',
 		name: 'condition',
 	},
 	{
@@ -388,6 +388,7 @@ export default new entities.Campaign({
 				backgroundColor: '#FEC273',
 				alignment: 'left',
 				type: 'paragraph',
+				spaceBottom: 'newsletterBottom20px',
 				cta: {
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
@@ -418,6 +419,7 @@ export default new entities.Campaign({
 				backgroundColor: '#FEC273',
 				alignment: 'left',
 				type: 'paragraph',
+				spaceBottom: 'newsletterBottom20px',
 				cta: {
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
