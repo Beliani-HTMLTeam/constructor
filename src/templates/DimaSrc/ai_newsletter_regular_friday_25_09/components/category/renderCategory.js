@@ -7,6 +7,7 @@ import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
 import { render } from '../../category/small-tiles';
+import { Category_CTA } from '../Category_CTA';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -33,23 +34,118 @@ export const renderCategory = async (
   const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : '';
   const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
 
-  const TitleElement = category?.title?.show
+  const categoryNumber = String(
+    Number(id) + 1
+  ).padStart(2, '0');
+  
+  const categoryTitle =  category.name;
+  
+  const titleColor =
+    category.title?.color ||
+    category.color ||
+    '#750000';
+  
+  const numberColor =
+    category.numberColor ||
+    '#D6B3B3';
+
+    const TitleElement = category?.title?.show
     ? `
       <tr>
-        <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
-          ${Paragraph({
-            text: category.name,
-            color: color,
-            background: background,
-            align: category.title?.align || 'center',
-            tableContainer: true,
-            className: 'newsletterTitle',
-          })}
+        <td
+          class="newsletterContainer"
+          align="left"
+          bgcolor="${background}"
+          style="
+            padding-top:0;
+            padding-bottom:0;
+            background-color:${background};
+            color:${titleColor};
+            text-align:left;
+          "
+        >
+          <table
+            role="presentation"
+            width="100%"
+            border="0"
+            cellspacing="0"
+            cellpadding="0"
+            bgcolor="${background}"
+            style="
+              width:100%;
+              border-collapse:collapse;
+              background-color:${background};
+            "
+          >
+            <tr>
+              <!-- Category number -->
+              <td
+                width="60"
+                valign="middle"
+                align="left"
+                bgcolor="${background}"
+                style="
+                background-color:${background};
+                color:${numberColor};
+                  width:60px;
+                  padding:0;
+                "
+                class="newsletterBedsAndNightstandsNumber"
+              >
+                ${categoryNumber}
+              </td>
+  
+              <!-- Space between number and title -->
+              <td
+                width="16"
+                bgcolor="${background}"
+                class="newsletterCategorySpace"
+                style="
+                  width:16px;
+                  padding:0;
+                  background-color:${background};
+                  font-size:0;
+                  line-height:0;
+                "
+              >
+                &nbsp;
+              </td>
+  
+              <!-- Category title -->
+              <td
+                valign="middle"
+                align="${
+                  category.title?.align || 'left'
+                }"
+                bgcolor="${background}"
+                style="
+                text-align:${
+                  category.title?.align || 'left'
+                };
+                background-color:${background};
+                color:${titleColor};
+                padding-top:15px;
+                "
+                class="newletterBedsAndNightstandsTitle"
+              >
+                ${categoryTitle}
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
   
-      ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter, backgroundColor: background }) : ''}
-      `
+      ${
+        category.title.spaceAfter
+          ? Space({
+              insideTr: true,
+              className:
+                category.title.spaceAfter,
+              backgroundColor: background,
+            })
+          : ''
+      }
+    `
     : '';
 
   const ImageElement = category.src
@@ -155,18 +251,19 @@ export const renderCategory = async (
   
           ${
             category.cta?.show
-              ? CTA({
+              ? Category_CTA({
                   href: ctaHref,
                   text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
                   insideTr: true,
                   tdClass: 'newsletterContainer',
-                  color: color,
+                  color: category.cta?.color || '#000000',
                   background: background,
+                  align: category.cta?.align || 'left',
                 })
               : ''
           }
   
-          ${Space({ insideTr: true, className: 'newsletterBottom80px', backgroundColor: background })}
+          ${Space({ insideTr: true, className: category.paddingBottom ? `newsletterBottom${category.paddingBottom}px` : 'newsletterBottom80px', backgroundColor: background })}
   
          
         </table>

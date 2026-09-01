@@ -10,6 +10,7 @@ import nslt_advent2026 from '@css/newsletter/advent2026.css?inline';
 import nslt_ai_11_09 from '@css/newsletter/ai_11_09.css?inline';
 import nslt_ai_11_09_normal from '@css/newsletter/ai_11_09_normal.css?inline';
 import nslt_ai_18_09 from '@css/newsletter/ai_18_09.css?inline';
+import nslt_ai_25_09 from '@css/newsletter/ai_25_09.css?inline';
 
 import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
@@ -23,6 +24,7 @@ import lp_advent2026 from '@css/landing/advent2026.css?inline';
 import lp_ai_11_09 from '@css/landing/ai_11_09.css?inline';
 import lp_ai_11_09_normal from '@css/landing/ai_11_09_normal.css?inline';
 import lp_ai_18_09 from '@css/landing/ai_18_09.css?inline';
+import lp_ai_25_09 from '@css/landing/ai_25_09.css?inline';
 
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
@@ -47,6 +49,7 @@ export const types = {
     NS_AI_11_09: nslt_ai_11_09,
     NS_AI_11_09_NORMAL: nslt_ai_11_09_normal,
     NS_AI_18_09: nslt_ai_18_09,
+    NS_AI_25_09: nslt_ai_25_09,
 
     LP: lp_regular,
     LP_BLACK_WEEK: lp_blackwek,
@@ -61,6 +64,7 @@ export const types = {
     LP_AI_11_09: lp_ai_11_09,
     LP_AI_11_09_NORMAL: lp_ai_11_09_normal,
     LP_AI_18_09: lp_ai_18_09,
+    LP_AI_25_09: lp_ai_25_09,
 
     CGB: {
       DESKTOP: cgb_desktop,
@@ -76,7 +80,9 @@ export const types = {
                   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
                   <meta name="color-scheme" content="light only">
                   <meta name="supported-color-schemes" content="light only">
-                  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic-ext,latin-ext" rel="stylesheet">
+                  <link rel="preconnect" href="https://fonts.googleapis.com">
+                  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap" rel="stylesheet">
                   <!--[if gte mso 7]>
                     <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
                         <v:fill type="tile" color="#ececec">

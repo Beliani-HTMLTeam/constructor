@@ -17,7 +17,8 @@ const Timer = ({
   type,
   position,
   script = '',
-  spaceWithoutCTA = 'newsletterBottom25px'
+  spaceWithoutCTA = 'newsletterBottom25px',
+  bottomSpace = 'newsletterBottom10px',
 }) => {
   // console.log("Timer Component:", { title, subtitle, href, src, color, background, freebies, ctaText });
 
@@ -88,6 +89,7 @@ const Timer = ({
           
             ${ImageWithLink({ insideTr: true, src: freebies, href: href, alt: 'Freebies Image' })}  
 
+            ${bottomSpace ? Space({ insideTr: true, className: bottomSpace }) : ''}
             `
               : `${Space({ insideTr: true, className: 'newsletterBottom10px' })}`
           }

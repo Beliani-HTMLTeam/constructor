@@ -10,7 +10,7 @@ const TopImageTitle = ({ href, src, title1, title2, title3, color, type, renderT
       ${Space({ insideTr: true, backgroundColor })}
       <tr>
         <td style="color: ${color}; background: ${backgroundColor};" class="newsletterContainer">
-          <a style="color: ${color}" class="newsletterHrefTit" href="${href}">
+          <a style="color: ${color}; text-align: left;" class="newsletterHrefTit" href="${href}">
             ${templates[type] || 'Invalid type'}
           </a>
         </td>

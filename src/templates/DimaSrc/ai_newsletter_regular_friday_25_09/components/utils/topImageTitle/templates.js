@@ -57,6 +57,9 @@ export const templates = ({ color, title1, title2, title3 = null }) => ({
   singleLine: `
       <h4 style="color:${color};" class="newsletterTitleH1">${title1}</h4>
     `,
+  singleLineLight: `
+      <h4 style="color:${color};" class="newsletterTitleH1Light">${title1}</h4>
+    `,
   halloween: `
       <h4 style="color:${color};" class="${
         String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'

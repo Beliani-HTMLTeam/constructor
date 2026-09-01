@@ -34,30 +34,41 @@ const links = {
 };
 
 const intro_data = {
-  color: "#000000",
-  backgroundColor: "#FFF4F2",
-  alignment: "left",
-  type: "paragraph",
+  type: 'paragraph',
+  layout: 'decorativeLine',
+
+  color: '#000000',
+  backgroundColor: '#FFF4F2',
+  alignment: 'left',
+
+  lineColor: '#750000',
+  tableContainerClass:
+    'newsletterContainer40px',
+
+  spaceTop: 'newsletterBottom35px',
+  spaceBottom: '0',
+
   cta: {
-    overrides: {
-    },
-    color: "#750000",
+    overrides: {},
+    color: '#750000',
     spaceAfter: 'newsletterBottom35px',
-  }
+  },
 }
 
 
 const TopImageTitle_data = {
   color: '#750000',
   backgroundColor: '#FFF4F2',
-  type: 'standardLight',
+  type: 'singleLineLight',
+  align: 'left',
 };
 
 
 const timer = {
   position: 'outsideTopImageTitle',
-  deadline: '2026-08-30',
-  freebies: getImageUrl('20260828free.png', true)
+  deadline: '2026-09-27',
+  freebies: getImageUrl('20260925free.png', true),
+  bottomSpace: 'newsletterBottom10px',
 }
 
 const categories = [
@@ -70,12 +81,12 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260925Category10.jpg', true),
     href: 'https://www.beliani.ch/bedroom-furniture/beds/',
-    type: 'grid',
+    type: 'unusualgrid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom25px',
+      spaceAfter: 'newsletterBottom10px',
       color: "#750000"
     },
     numberColor: "#D6B3B3",
@@ -83,6 +94,7 @@ const categories = [
       show: false,
     },
     paddingTop: 30,
+    paddingBottom: 70,
     line: {
       show: false
     },
@@ -122,12 +134,12 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260925Category20.jpg', true),
     href: 'https://www.beliani.ch/bedroom-furniture/mattresses/',
-    type: 'grid',
+    type: 'unusualgrid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom25px',
+      spaceAfter: 'newsletterBottom10px',
       color: "#750000"
     },
     numberColor: "#D6B3B3",
@@ -135,6 +147,7 @@ const categories = [
       show: false,
     },
     paddingTop: 0,
+    paddingBottom: 70,
     line: {
       show: false
     },
@@ -174,12 +187,12 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260925Category30.jpg', true),
     href: 'https://www.beliani.ch/storage/bedside-tables/',
-    type: 'grid',
+    type: 'unusualgrid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom25px',
+      spaceAfter: 'newsletterBottom10px',
       color: "#750000"
     },
     numberColor: "#D6B3B3",
@@ -187,6 +200,7 @@ const categories = [
       show: false,
     },
     paddingTop: 0,
+    paddingBottom: 70,
     line: {
       show: false
     },
@@ -226,12 +240,12 @@ const categories = [
     color: '#000000',
     src: getImageUrl('20260925Category40.jpg', true),
     href: 'https://www.beliani.ch/bedroom-furniture/storage/',
-    type: 'grid',
+    type: 'unusualgrid',
     insideContainer: true,
     title: {
       show: true,
       align: 'left',
-      spaceAfter: 'newsletterBottom25px',
+      spaceAfter: 'newsletterBottom10px',
       color: "#750000"
     },
     numberColor: "#D6B3B3",
@@ -239,6 +253,7 @@ const categories = [
       show: false,
     },
     paddingTop: 0,
+    paddingBottom: 70,
     line: {
       show: false
     },
@@ -289,7 +304,7 @@ export default new entities.Campaign({
       name: "Newsletter",
       type: types.NEWSLETTER,
       template: templates.AIRegularFridayNslt25_09, // User should change this
-      css: types.CSS.NS,
+      css: types.CSS.NS_AI_25_09,
       translationsSpreadsheet: campaignTranslationsSheet,
       background: "#FFF4F2",
       color: "#000000",
@@ -314,7 +329,7 @@ export default new entities.Campaign({
       name: "Landing",
       type: types.LANDINGPAGE,
       template: templates.AIRegularFridayNslt25_09, // User should change this
-      css: types.CSS.LP,
+      css: types.CSS.LP_AI_25_09,
       background: "#FFF4F2",
       color: "#000000",
       translationsSpreadsheet: campaignTranslationsSheet,

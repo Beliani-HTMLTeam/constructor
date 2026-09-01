@@ -22,6 +22,9 @@ export const renderProducts = async (
       return module.render(products, showPrices, showName, queries, categoryIndex);
     } else if (type === 'grid') {
       return module.render(products, showPrices, showName, queries, insideContainer, color, background);
+    }
+    else if (type === 'unusualgrid') {
+      return module.render(products, showPrices, showName, queries, insideContainer, color, background, categoryIndex);
     } else if (type === 'grid4tiles') {
       return module.render(products, false, false, queries, insideContainer, color, background);
     }

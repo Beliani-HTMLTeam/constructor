@@ -1,3 +1,4 @@
+import { Category_CTA } from '../Category_CTA';
 import { CTA } from '../CTA';
 import { Space } from '../Space';
 
@@ -32,12 +33,12 @@ export const IntroCTA = ({
 
   return `
     ${cta.spaceBefore ? Space({ insideTr: true, className: cta.spaceBefore, backgroundColor }) : ''}
-    ${CTA({
+    ${Category_CTA({
       href: getHref(),
       text: getText(),
       background: backgroundColor,
       color: color,
-      align: 'center',
+      align: cta.align || 'center',
       insideTr: true,
     })}
     ${cta.spaceAfter ? Space({ insideTr: true, className: cta.spaceAfter, backgroundColor }) : ''}
