@@ -195,8 +195,6 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
 
   const position = timer.position ?? 'outsideTopImageTitle';
 
-  console.log("isWithTitles ? queries?.timer?.[0] ?? 'Translation not found' : ''", isWithTitles ? queries?.timer?.[0] ?? 'Translation not found' : '')
-
   return Inside && Inside.type === 'timer'
     ? Timer({
       title: isWithTitles ? getTranslation(queries?.timer?.[0]) : '',

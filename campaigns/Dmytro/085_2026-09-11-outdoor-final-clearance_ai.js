@@ -58,6 +58,9 @@ const intro_data = {
     color: '#750000',
     spaceBefore: 'newsletterBottom20px',
     spaceAfter: 'newsletterBottom35px',
+    overrides: {
+      FI: "Tutustu valikoimaan"
+    },
   },
 };
 
@@ -65,7 +68,11 @@ const intro_data = {
 const timer = {
   position: 'outsideTopImageTitle',
   deadline: '2026-09-13',
-  freebies: getImageUrl('20260911free.png', true)
+  freebies: getImageUrl('20260911free_new.png', true),
+  overrides: {
+    ES: '20260911free_new_different.png',
+    IT: '20260911free_new_different.png',
+  }
 }
 
 const categories = [
@@ -193,7 +200,9 @@ const categories = [
         name: 'Storage',
         overrides: {
           NL: "Tuinopslag",
-          BENL: "Tuinopslag"
+          BENL: "Tuinopslag",
+          PT: "Arrumação de jardim",
+          FI: "Ulkosäilytys"
         },
         background: '#F9EFEE',
         color: '#750000',
@@ -343,9 +352,9 @@ export default new entities.Campaign({
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#ffffff",
-        backgroundColor: '#750000',
-        unitBackground: '#AC6666',
+        color: "#000000",
+        backgroundColor: '#FFCCB7',
+        unitBackground: '#FFE6DB',
         type: 'timer',
       },
       intro: intro_data,
@@ -367,9 +376,9 @@ export default new entities.Campaign({
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#ffffff",
-        backgroundColor: '#750000',
-        unitBackground: '#AC6666',
+        color: "#000000",
+        backgroundColor: '#FFCCB7',
+        unitBackground: '#FFE6DB',
         type: 'timer',
       },
       intro: intro_data,

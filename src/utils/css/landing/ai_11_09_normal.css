@@ -16,6 +16,16 @@
   overflow-wrap:anywhere;
 }
 
+#newsletter .newsletterCategoryTitleFI {
+  display:block;
+  font-size:26px;
+  line-height: 1.2;
+  font-weight:400;
+  text-decoration:none;
+  white-space:normal;
+  word-wrap:break-word;
+  overflow-wrap:anywhere;
+}
 #newsletter .newsletterCategoryCTA {
   display:inline-block;
   font-size:20px;
@@ -347,7 +357,7 @@ table {
 
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
-  #newsletter .newsletterCategoryTitle {
+  #newsletter .newsletterCategoryTitle, #newsletter .newsletterCategoryTitleFI {
     font-size:16px;
   }
   

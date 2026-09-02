@@ -52,7 +52,11 @@ const TopImageTitle_data = {
 const timer = {
   position: 'outsideTopImageTitle',
   deadline: '2026-09-13',
-  freebies: getImageUrl('20260911free.png', true)
+  freebies: getImageUrl('20260911free_new_normal.png', true),
+  overrides: {
+    ES: '20260911free_new_normal_additional.png',
+    IT: '20260911free_new_normal_different.png',
+  }
 }
 
 const categories = [
@@ -134,7 +138,9 @@ const categories = [
         name: 'Storage',
         overrides: {
           NL: "Tuinopslag",
-          BENL: "Tuinopslag"
+          BENL: "Tuinopslag",
+          PT: "Arrumação de jardim",
+          FI: "Ulkosäilytys"
         },
         background: '#FFCCB7',
         color: '#000000',
@@ -159,7 +165,9 @@ const categories = [
         name: 'Lighting',
         overrides: {
           NL: "Buitenverlichting",
-          BENL: "Buitenverlichting"
+          BENL: "Buitenverlichting",
+          PT: "Iluminação para exterior",
+          FI: "Ulkovalaisimet"
         },
         background: '#FFCCB7',
         color: '#000000',
@@ -233,7 +241,10 @@ const categories = [
           NL: "Tuinaccessoires",
           BENL: "Tuinaccessoires",
           HU: "Kerti kiegészítők",
-          CZ: "Zahradní doplňky"
+          CZ: "Zahradní doplňky",
+          PT: "Acessórios de jardim",
+          FI: "Puutarhatarvikkeet",
+          SK: "Záhradné doplnky"
         },
         background: '#FFCCB7',
         color: '#000000',
@@ -379,9 +390,9 @@ export default new entities.Campaign({
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#ffffff",
-        backgroundColor: '#750000',
-        unitBackground: '#AC6666',
+        color: "#000000",
+        backgroundColor: '#F6E7E6',
+        unitBackground: '#E3CCCC',
         type: 'timer',
       },
       intro: intro_data,
@@ -405,9 +416,9 @@ export default new entities.Campaign({
       white_line: false,
       under_intro_line: false,
       Inside: {
-        color: "#ffffff",
-        backgroundColor: '#750000',
-        unitBackground: '#AC6666',
+        color: "#000000",
+        backgroundColor: '#F6E7E6',
+        unitBackground: '#E3CCCC',
         type: 'timer',
       },
       intro: intro_data,

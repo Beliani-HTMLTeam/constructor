@@ -118,7 +118,7 @@ const renderTextBlock = ({
                   <a
                     href="${href}"
                     target="_blank"
-                    class="newsletterCategoryTitle"
+                    class="${country === 'FI' ? 'newsletterCategoryTitleFI' : 'newsletterCategoryTitle'}"
                     style="
                     text-align:${item?.title?.align || 'center'};
                     color:${color};

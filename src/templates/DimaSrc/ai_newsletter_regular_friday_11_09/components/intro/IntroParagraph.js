@@ -184,6 +184,7 @@ export const IntroParagraph = ({
                   color
                 };
                 text-align:${alignment};
+                ${country === 'FI' && 'text-transform:lowercase;'}
                 mso-line-height-rule:exactly;
                 -webkit-text-size-adjust:100%;
                 -ms-text-size-adjust:100%;

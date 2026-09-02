@@ -22,6 +22,19 @@ img {
   overflow-wrap:anywhere;
 }
 
+.newsletterCategoryTitleFI {
+  font-family: 'Open Sans', sans-serif;
+  display:block;
+  font-size:26px;
+  line-height: 1.2;
+  font-weight:400;
+  text-decoration:none;
+  white-space:normal;
+  word-wrap:break-word;
+  overflow-wrap:anywhere;
+}
+
+
 .newsletterCategoryCTA {
   display:inline-block;
   font-family:'Open Sans', sans-serif;
@@ -391,7 +404,7 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
-  .newsletterCategoryTitle {
+  .newsletterCategoryTitle, .newsletterCategoryTitleFI {
     font-size:16px;
   }
   
