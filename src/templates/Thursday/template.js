@@ -20,6 +20,8 @@ const Thursday = async ({
   categories,
   background,
   color,
+  selectedCampaign,
+  date,
 
   // campaign elements
   Inside,
@@ -112,7 +114,7 @@ const Thursday = async ({
 		hasSmallTilesCategory = true;
 	}
 
-	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
+	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
 
   return `
     ${HeaderElement}
