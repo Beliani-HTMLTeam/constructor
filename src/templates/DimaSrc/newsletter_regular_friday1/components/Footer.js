@@ -40,10 +40,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
     {
       id,
       assembly:{
-        src: ['AT', 'PL', 'FR', 'UK'].includes(country)
-          ? getFooter('Delivery src')
-          : getFooter('Asembly src'),
-        href: getFooter('Asembly href'),
+        ...assemblyBanner,
         exclude: ['CHIT'].includes(country),
       },
 
