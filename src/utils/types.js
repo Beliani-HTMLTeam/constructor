@@ -11,6 +11,7 @@ import nslt_ai_11_09 from '@css/newsletter/ai_11_09.css?inline';
 import nslt_ai_11_09_normal from '@css/newsletter/ai_11_09_normal.css?inline';
 import nslt_ai_18_09 from '@css/newsletter/ai_18_09.css?inline';
 import nslt_ai_25_09 from '@css/newsletter/ai_25_09.css?inline';
+import nslt_october_reminder from '@css/newsletter/october_reminder.css?inline';
 
 import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
@@ -25,6 +26,7 @@ import lp_ai_11_09 from '@css/landing/ai_11_09.css?inline';
 import lp_ai_11_09_normal from '@css/landing/ai_11_09_normal.css?inline';
 import lp_ai_18_09 from '@css/landing/ai_18_09.css?inline';
 import lp_ai_25_09 from '@css/landing/ai_25_09.css?inline';
+import lp_october_reminder from '@css/landing/october_reminder.css?inline';
 
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
@@ -50,6 +52,7 @@ export const types = {
     NS_AI_11_09_NORMAL: nslt_ai_11_09_normal,
     NS_AI_18_09: nslt_ai_18_09,
     NS_AI_25_09: nslt_ai_25_09,
+    NS_OCTOBER_REMINDER: nslt_october_reminder,
 
     LP: lp_regular,
     LP_BLACK_WEEK: lp_blackwek,
@@ -65,6 +68,7 @@ export const types = {
     LP_AI_11_09_NORMAL: lp_ai_11_09_normal,
     LP_AI_18_09: lp_ai_18_09,
     LP_AI_25_09: lp_ai_25_09,
+    LP_OCTOBER_REMINDER: lp_october_reminder,
 
     CGB: {
       DESKTOP: cgb_desktop,

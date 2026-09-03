@@ -11,7 +11,7 @@ export const CategoriesProcessor = async ({
         category.type !== 'tilesWithoutProducts' &&
         category.type !== 'small-tiles' &&
         category.type !== 'grid4tiles' &&
-        category.type !== 'liquidatorConditions' &&
+        category.type !== 'liquidatorConditions' && category.type !== 'smallgrid' &&
         category.view !== 'newsletterOnly' &&
         categories_type !== 'liquidator';
 

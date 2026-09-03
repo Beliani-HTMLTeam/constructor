@@ -7,6 +7,7 @@ import { WhiteLine } from '../whiteLine';
 import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
 import { render } from '../../category/small-tiles';
+import { render as category3Columns_Grid } from '../../category/smallgrid';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -38,12 +39,12 @@ export const renderCategory = async (
       <tr>
         <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
           ${Paragraph({
-            text: category.name,
+            text: category.title?.source === 'categoryTitle' ? queries[category.title.source] : category.name,
             color: color,
             background: background,
             align: category.title?.align || 'center',
             tableContainer: true,
-            className: 'newsletterTitle',
+            className: category.title?.className || 'newsletterTitle',
           })}
         </td>
       </tr>
@@ -114,6 +115,18 @@ export const renderCategory = async (
             getCategoryLink,
             getCategoryTitle,
             country
+            }) :
+            category.type === 'smallgrid' ?
+            category3Columns_Grid(category.products, {
+              color,
+              background: category.background || '#ffffff',
+              titleColor: category.title.color,          // matches the red in your screenshot
+              ctaColor: category.cta.color,
+              insideContainer: true,
+              getPhrase,
+              getCategoryTitle,
+              getCategoryLink,
+              shopAllHref: category.href,
             })
           : await renderProducts({
               products: category.products,
@@ -151,7 +164,7 @@ export const renderCategory = async (
   
           ${ProductsElement}
           
-          ${category.cta?.show ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
+          ${category.cta?.show ? Space({ insideTr: true, className: category.cta?.spaceBefore || 'newsletterBottom35px', backgroundColor: background }) : ''}
   
           ${
             category.cta?.show
