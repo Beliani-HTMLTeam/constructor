@@ -55,7 +55,7 @@ const timer = {
   freebies: getImageUrl('20260911free_new_normal.png', true),
   overrides: {
     ES: '20260911free_new_normal_additional.png',
-    IT: '20260911free_new_normal_different.png',
+    IT: '20260911free_new_normal_additional.png',
   }
 }
 
