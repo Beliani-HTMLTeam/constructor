@@ -165,7 +165,7 @@ const RegularFridayNslt1 = async ({
 		hasSmallTilesCategory = true;
 	}
 
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date  });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectCampaign, date  });
 
   return `
     ${HeaderElement}
