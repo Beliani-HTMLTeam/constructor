@@ -23,7 +23,7 @@ function shouldUseNewAssembly(cDate) {
   return campaignDate > cutoffDate;
 }
 
-const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory }) => {
+const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date  }) => {
   const campaignDate = date || selectedCampaign?.date || getState('selectedCampaign')?.date;
   const newAssembly = shouldUseNewAssembly(campaignDate);
 

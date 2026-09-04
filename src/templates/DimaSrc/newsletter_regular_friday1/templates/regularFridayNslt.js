@@ -64,6 +64,7 @@ const RegularFridayNslt1 = async ({
   getPhrase,
   getProductById,
   add_utm,
+  date 
 }) => {
   console.log("shop and country", shop, country, timerData)
   // ogólne części kampanii
@@ -164,7 +165,7 @@ const RegularFridayNslt1 = async ({
 		hasSmallTilesCategory = true;
 	}
 
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date  });
 
   return `
     ${HeaderElement}
