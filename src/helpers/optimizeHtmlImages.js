@@ -4,7 +4,7 @@ let _optimizeContainer = null;
 
 export function optimizeHtmlImages(inputHtml, getState) {
   const isNeedToOptimizeImg = getState('optimizeImg');
-  console.warn("shop", getState('shop'), "isNeedToOptimizeImg", isNeedToOptimizeImg, "inputHtml", inputHtml);
+  // console.warn("shop", getState('shop'), "isNeedToOptimizeImg", isNeedToOptimizeImg, "inputHtml", inputHtml);
   if (!isNeedToOptimizeImg) return inputHtml;
 
   const isNewsletter = getState('template')?.type === 'newsletter';

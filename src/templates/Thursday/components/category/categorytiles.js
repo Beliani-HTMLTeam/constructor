@@ -8,6 +8,7 @@ export const render = ({
   tiles,
   showPrices,
   showNames,
+  showTileNames = true,
   gapBetweenVertical = true,
   align = 'left',
   queries,
@@ -45,25 +46,31 @@ export const render = ({
             productsInnerHtml += `<table width="100%" border="0" cellpadding="0" cellspacing="0">`;
 
             productsInnerHtml += ImageWithLink({
-              src: item.src,
+              src: typeof item.src === 'object' ? item.src.src : item.src,
               href: href,
               insideTr: true,
               align: 'center',
             });
 
-            productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom35px' });
+            if (showTileNames) {
+              productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom35px' });
+            }
 
-            productsInnerHtml += `
-            <tr>
-              <td align="center" style="text-align: center;">
-                <a class="newsletterAdditionalCategoryTitle" href="${href}" style="color: ${color}; text-decoration: underline;">
-                  ${name}
-                </a>
-              </td>
-            </tr>
-            `;
+            if (showTileNames) {
+              productsInnerHtml += `
+              <tr>
+                <td align="center" style="text-align: center;">
+                  <a class="newsletterAdditionalCategoryTitle" href="${href}" style="color: ${color}; text-decoration: underline;">
+                    ${name}
+                  </a>
+                </td>
+              </tr>
+              `;
+            }
 
-            productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom80px' });
+            if (showTileNames) {
+              productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom80px' });
+            }
 
             productsInnerHtml += `</table>`;
           } else {
@@ -75,6 +82,10 @@ export const render = ({
       }
 
       productsInnerHtml += '</tr>';
+
+      if (!showTileNames && i + cols < items.length) {
+        productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom20px' });
+      }
     }
 
     productsInnerHtml += '</td></tr></table>';

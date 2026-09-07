@@ -194,6 +194,10 @@ export async function renderTemplate(getState, setState) {
       shop: getState('shop'),
     };
 
+    if (typeof globalThis !== 'undefined') {
+      globalThis.collectedCtaStyles = new Set();
+    }
+
     const html = await templateToRender.template({
       ...state,
       ...templateToRender,
@@ -226,13 +230,19 @@ export async function renderTemplate(getState, setState) {
       utm: getTrackingUrl({ type: templateToRender.type, id: ids[country] }),
     });
 
-    const withStylesOrNo = 'css' in templateToRender ? `<style>${templateToRender.css}</style>` + html : html;
+    let generatedCtaCss = '';
+    if (typeof globalThis !== 'undefined' && globalThis.collectedCtaStyles) {
+      generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
+    }
+
+    const effectiveCss = (templateToRender.css ?? '') + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
+    const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
 
     const wrappedHtml = templateToRender.wrapper
       ? wrapTemplate(templateToRender.wrapper, {
-          style: templateToRender.css ?? '',
-          html: html,
-        })
+        style: effectiveCss,
+        html: html,
+      })
       : withStylesOrNo;
 
     const finalHtml = optimizeHtmlImages(wrappedHtml, getState);
@@ -304,6 +314,10 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
     slugData = selectedCampaign.data[country] || {};
   }
 
+  if (typeof globalThis !== 'undefined') {
+    globalThis.collectedCtaStyles = new Set();
+  }
+
   const html = await templateToRender.template({
     queries,
     country,
@@ -335,8 +349,14 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
     utm: getTrackingUrl({ type: templateToRender.type, id: ids[country] }),
   });
 
-  const withStylesOrNo = 'css' in templateToRender ? `<style>${templateToRender.css}</style>` + html : html;
+  let generatedCtaCss = '';
+  if (typeof globalThis !== 'undefined' && globalThis.collectedCtaStyles) {
+    generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
+  }
+
+  const effectiveCss = (templateToRender.css ?? '') + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
+  const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
   return templateToRender.wrapper
-    ? wrapTemplate(templateToRender.wrapper, { style: templateToRender.css ?? '', html })
+    ? wrapTemplate(templateToRender.wrapper, { style: effectiveCss, html })
     : withStylesOrNo;
 }

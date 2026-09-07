@@ -33,7 +33,9 @@ export const timezones = {
   "SK": "Europe/Bratislava",
   "BENL": "Europe/Brussels",
   "BEFR": "Europe/Brussels",
-  "RO": "Europe/Bucharest"
+  "RO": "Europe/Bucharest",
+  "HR": "Europe/Zagreb",
+  "SI": "Europe/Ljubljana"
 }
 
 export const labels = {
@@ -57,7 +59,9 @@ export const labels = {
   "SK": ["dní", "hod.", "min.", "s"],
   "BENL": ["dagen", "uren", "minuten", "seconden"],
   "BEFR": ["jours", "h", "min", "s"],
-  "RO": ["zile", "ore", "min", "sec"]
+  "RO": ["zile", "ore", "min", "sec"],
+  "SI": ["dani", "sati", "min.", "s"],
+  "HR": ["dni", "ur", "min.", "s"],
 }
 
 const buildProloTimerScript = ({ deadline, country }) => {

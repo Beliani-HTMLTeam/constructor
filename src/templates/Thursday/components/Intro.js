@@ -9,8 +9,12 @@ const Intro = ({
   color = '#000000',
   backgroundColor,
   container,
+  title,
+  paragraph,
+  href,
 }) => {
-  const hasTitleAndParagraph = Array.isArray(text) && text.length > 1;
+  const hasTitleAndParagraph = Array.isArray(text) && (text.length === 2 || text.length === 3);
+  const hasTwoLineTitle = Array.isArray(text) && text.length === 3;
   const hasSingleArrayValue = Array.isArray(text) && text.length === 1;
 
   const normalizeText = (value) => {
@@ -18,12 +22,25 @@ const Intro = ({
     return String(value).trim() === '' ? 'Translation not found' : value;
   };
 
-  const introTitle = hasTitleAndParagraph ? normalizeText(text[0]) : '';
+  const introTitle = hasTitleAndParagraph
+    ? hasTwoLineTitle
+      ? `${normalizeText(text[0])}<br>${normalizeText(text[1])}`
+      : normalizeText(text[0])
+    : '';
   const introParagraph = hasTitleAndParagraph
-    ? normalizeText(text[1])
+    ? normalizeText(text[hasTwoLineTitle ? 2 : 1])
     : hasSingleArrayValue
       ? normalizeText(text[0])
       : normalizeText(text);
+
+  let finalIntroTitle = introTitle;
+  let finalIntroParagraph = introParagraph;
+
+  if (href) {
+    const wrapLink = (content) => `<a href="${href}" target="_blank" style="color: ${color}; text-decoration: none;">${content}</a>`;
+    if (finalIntroTitle) finalIntroTitle = wrapLink(finalIntroTitle);
+    if (finalIntroParagraph) finalIntroParagraph = wrapLink(finalIntroParagraph);
+  }
 
   // outlook random white line fixes
   const sectionStyle = `${backgroundColor ? `background-color: ${backgroundColor};` : ''} color: ${color}; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;`;
@@ -32,12 +49,12 @@ const Intro = ({
   const IntroTitleElement = hasTitleAndParagraph
     ? `
     <tr><td>${Paragraph({
-      text: introTitle,
+      text: finalIntroTitle,
       align: paragraphAlign,
       insideTable: true,
       tableContainer: container || true,
       className: 'newsletterIntroTitle',
-      spanStyle: `color: ${color};`,
+      spanStyle: `${title?.styles ? `${title.styles} ` : ' '}color: ${color};`,
     })}</td></tr>
 
     ${Space({ insideTr: true })}
@@ -53,11 +70,11 @@ const Intro = ({
           ${IntroTitleElement}
             
           <tr><td>${Paragraph({
-            text: introParagraph,
+            text: finalIntroParagraph,
             align: paragraphAlign,
             insideTable: true,
             tableContainer: container || true,
-            spanStyle: `color: ${color};`,
+            spanStyle: `${paragraph?.styles ? `${paragraph.styles} ` : ' '}color: ${color};`,
           })}</td></tr>
     
           ${Space({ className: spaceBottom, insideTr: true })}

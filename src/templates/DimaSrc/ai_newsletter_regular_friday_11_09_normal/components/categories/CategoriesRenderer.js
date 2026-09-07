@@ -1,0 +1,86 @@
+import { Grid4TilesRenderer } from './Grid4TilesRenderer';
+import { TwoColumnsGridRenderer } from './TwoColumnsGridRenderer';
+import { FullWidthTilesRenderer } from './FullWidthTilesRenderer';
+import { SmallTilesRenderer } from './SmallTilesRenderer';
+import { BigGridRenderer } from './BigGridRenderer';
+
+export const CategoriesRenderer = async ({
+  categories,
+  categories_type,
+  categories_line,
+  country,
+  queries,
+  getPhrase,
+  getCategoryLink,
+  getCategoryTitle,
+  add_utm,
+  background,
+}) => {
+  // No categories
+  if (!categories) {
+    return '';
+  }
+
+  if (categories_type === 'biggrid') {
+    return BigGridRenderer({
+      categories,
+      country,
+      queries,
+      getPhrase,
+      getCategoryLink,
+      getCategoryTitle,
+      add_utm,
+      background,
+    });
+  }
+
+  // Grid 4 tiles (default)
+  if (
+    categories_type !== 'twoColumnsGrid' &&
+    categories_type !== 'fullWidthTiles' &&
+    categories_type !== 'liquidator' && categories_type !== 'small-tiles'
+  ) {
+    return await Grid4TilesRenderer({
+      categories,
+      categories_line,
+      country,
+      queries,
+      getPhrase,
+      getCategoryLink,
+      getCategoryTitle,
+      add_utm,
+    });
+  }
+
+  // Two columns grid
+  if (categories_type === 'twoColumnsGrid') {
+    return TwoColumnsGridRenderer({
+      categories,
+      getCategoryLink,
+      getCategoryTitle,
+      background,
+    });
+  }
+
+  // Full width tiles
+  if (categories_type === 'fullWidthTiles') {
+    return FullWidthTilesRenderer({
+      categories,
+      getCategoryLink,
+      getCategoryTitle,
+      background,
+    });
+  }
+
+  if (categories_type === 'small-tiles') {
+    return SmallTilesRenderer({
+      categories,
+      getCategoryLink,
+      getCategoryTitle,
+      country,
+      background: background
+    });
+  }
+
+  return '';
+};

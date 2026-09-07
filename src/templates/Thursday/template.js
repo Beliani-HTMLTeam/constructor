@@ -20,6 +20,8 @@ const Thursday = async ({
   categories,
   background,
   color,
+  selectedCampaign,
+  date,
 
   // campaign elements
   Inside,
@@ -56,7 +58,7 @@ const Thursday = async ({
     getCategoryLink,
   });
 
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow });
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, getCategoryLink, links });
   const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
@@ -112,7 +114,7 @@ const Thursday = async ({
 		hasSmallTilesCategory = true;
 	}
 
-	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory });
+	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
 
   return `
     ${HeaderElement}
