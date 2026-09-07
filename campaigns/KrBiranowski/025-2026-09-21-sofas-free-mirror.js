@@ -1,0 +1,495 @@
+const campaignTranslationsSheet = '2026::Voucher - 21.09.26 - Sofas Free mirror';
+
+const theme = {
+  primary: '#F6E7E6',
+  primaryText: '#ffffff',
+  secondary: '#FFEFD9',
+  secondaryText: '#FFCCB7',
+  offerBg: '#FFEFD9',
+  offerTitleColor: '#750000',
+  offerPrg1Color: '#000000',
+  offerPrg2Color: '#000000',
+  introBg: '#FFE6DB',
+  black: '#000000',
+  white: '#ffffff',
+  grey: '#555555',
+  greyLight: '#777777',
+  introBg: '#750000',
+  toastBg: '#F6E7E6',
+  toastText: '#000000',
+  ctaPrimary: '#750000',
+  ctaPrimaryText: '#ffffff',
+  ctaSecondary: '#F6E7E6',
+  ctaSecondaryText: '#000000',
+  addColor: '#FBEFEC',
+  tileText: '#5B1210',
+};
+
+const tableQueries = [
+  {
+    name: 'offer',
+    tableRange: '25:27',
+  },
+  {
+    name: 'offer_code',
+    tableRange: '31',
+  },
+  {
+    name: 'offer_date',
+    tableRange: '29',
+  },
+  {
+    name: 'freebies_subtitle',
+    tableRange: '30',
+  },
+  {
+    tableRange: '22:23',
+    name: 'TopImageTitle',
+  },
+  {
+    name: 'intro',
+    tableRange: '32:33',
+  },
+  // {
+  //   name: 'categoryButton',
+  //   tableRange: '34:37',
+  // },
+  // {
+  //   name: 'categories',
+  //   tableRange: '21:24',
+  // },
+  // {
+  //   name: 'paragraphs',
+  //   tableRange: '31:34',
+  // },
+  {
+    name: 'condition',
+    tableRange: '35:37',
+  },
+];
+
+const catData = [
+  {
+    name: 'Corner sofas',
+    href: 'https://www.beliani.ch/sofas/corner-sofas/',
+    catImg: getImageUrl('20260921_Cat01.jpg', true),
+  },
+  {
+    name: '3 seater sofas',
+    href: 'https://www.beliani.ch/sofas/3-seater-sofas/',
+    catImg: getImageUrl('20260921_Cat02.jpg', true),
+  },
+  {
+    name: '2 seater sofas',
+    href: 'https://www.beliani.ch/sofas/2-seater-sofas/',
+    catImg: getImageUrl('20260921_Cat03.jpg', true),
+  },
+  {
+    name: 'Sofa beds',
+    href: 'https://www.beliani.ch/sofas/sofa-beds/',
+    catImg: getImageUrl('20260921_Cat04.jpg', true),
+  },
+];
+
+const prodData = [
+  // Free
+  [
+    [
+      { id: '325032', src: getImageUrl('20260921_Free01.png', true), useDescription: true },
+      { id: '314234', src: getImageUrl('20260921_Free02.png', true), useDescription: true },
+    ],
+    [
+      { id: '368546', src: getImageUrl('20260921_Free03.png', true), useDescription: true },
+      { id: '368063', src: getImageUrl('20260921_Free04.png', true), useDescription: true },
+    ],
+  ],
+  // Cat 1
+  [
+    { id: '429175', src: getImageUrl('20260921_Prod01.png', true) },
+    { id: '442904', src: getImageUrl('20260921_Prod02.png', true) },
+    { id: '640249', src: getImageUrl('20260921_Prod03.png', true) },
+    { id: '425806', src: getImageUrl('20260921_Prod04.png', true) },
+  ],
+  // Cat 2
+  [
+    { id: '505993', src: getImageUrl('20260921_Prod10.png', true) },
+    { id: '662224', src: getImageUrl('20260921_Prod11.png', true), exclude: ['DK'] },
+    { id: '106595', src: getImageUrl('20260921_Prod11_DK.png', true), visibility: ['DK'] },
+    { id: '680707', src: getImageUrl('20260921_Prod12.png', true) },
+    { id: '507506', src: getImageUrl('20260921_Prod13.png', true) },
+  ],
+  // Cat 3
+  [
+    { id: '518571', src: getImageUrl('20260921_Prod20.png', true) },
+    { id: '520560', src: getImageUrl('20260921_Prod21.png', true) },
+    { id: '506749', src: getImageUrl('20260921_Prod22.png', true) },
+    { id: '504014', src: getImageUrl('20260921_Prod23.png', true) },
+  ],
+  // Cat 4
+  [
+    { id: '678537', src: getImageUrl('20260921_Prod30.png', true) },
+    { id: '447139', src: getImageUrl('20260921_Prod31.png', true) },
+    { id: '440115', src: getImageUrl('20260921_Prod32.png', true) },
+    { id: '497081', src: getImageUrl('20260921_Prod33.png', true) },
+  ],
+];
+
+const links = {
+  Intro_cta_href: 'https://www.beliani.ch/sofas/',
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-21' }),
+  TopImageTitle_src: translateImage({ value: '20260909_01.png' }),
+
+  TopImage_src: getImageUrl('20260921_Gif.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp26-09-21' }),
+
+  Banner_1: translateLink({ value: 'content/lp26-09-10' }),
+  Banner_1_Image: translateImage({ value: '20260910b.png' }),
+
+  Banner_2: translateLink({ value: 'content/lp26-09-11' }),
+  Banner_2_Image: translateImage({ value: '20260911b.png' }),
+};
+
+const TopImageTitle_data = {
+  color: theme.white,
+  backgroundColor: theme.primary,
+  type: 'standard',
+};
+
+const categories = [
+  // offer
+  {
+    copyCodeWeb: true,
+    paragraph: {
+      spaceAfter: '',
+    },
+    paddingTop: '0',
+    type: 'deal',
+    background: theme.primary,
+    color: theme.black,
+    offerSpaceAfter: 'newsletterBottom40px',
+    spaceAfter: 'newsletterBottom45px',
+    spaceColor: theme.primary,
+    cta: {
+      variant: 'maroon',
+      color: theme.ctaPrimaryText,
+      bg: theme.ctaPrimary,
+      phrase: 'Shop now',
+      spaceAfter: false,
+      spaceBefore: 'newsletterBottom40px',
+      tdClass: 'newsletterContainer40px',
+      borderColor: theme.ctaPrimary,
+      borderWidth: '15px 45px',
+      transform: 'uppercase',
+    },
+    freebiesSize: 'large',
+    freebies: prodData[0],
+    product: {
+      freebieSize: 16,
+      descSize: 15,
+      freebieBold: 'bold',
+      align: 'center',
+      priceLowSize: 16,
+      priceHighSize: 15,
+      lowPriceColor: theme.tileText,
+      highPriceColor: theme.tileText,
+      color: theme.black,
+    },
+  },
+
+  // main
+  {
+    name: catData[0].name,
+    // nameOverride: 'PASCO',
+    src: catData[0].catImg,
+    href: catData[0].href,
+    skipLinkTranslation: true,
+    background: theme.secondary,
+    color: theme.black,
+    type: 'grid',
+    tdClass: false,
+    spaceAfter: 'newsletterBottom40px',
+    paddingTop: false,
+    cta: {
+      variant: 'underline',
+      color: theme.black,
+      phrase: 'Shop now',
+      spaceAfter: false,
+      spaceBefore: 'newsletterBottom40px',
+      tdClass: 'newsletterContainer40px',
+      borderColor: theme.ctaPrimary,
+      borderWidth: '15px 45px',
+      // transform: 'uppercase',
+    },
+    title: {
+      show: true,
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: false,
+      align: 'center',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      prices: true,
+      name: true,
+      prodSize: 16,
+      descSize: 15,
+      priceLowSize: 16,
+      priceHighSize: 15,
+      lowPriceColor: theme.black,
+      highPriceColor: theme.black,
+      color: theme.black,
+      tdClass: 'newsletterContainer',
+    },
+    products: prodData[1],
+  },
+  {
+    name: catData[1].name,
+    // nameOverride: 'LYNWOOD',
+    src: catData[1].catImg,
+    href: catData[1].href,
+    skipLinkTranslation: true,
+    background: theme.primary,
+    color: theme.black,
+    type: 'grid',
+    tdClass: false,
+    spaceAfter: 'newsletterBottom40px',
+    cta: {
+      variant: 'underline',
+      color: theme.black,
+      phrase: 'Shop now',
+      spaceAfter: false,
+      spaceBefore: 'newsletterBottom40px',
+      tdClass: 'newsletterContainer40px',
+      borderColor: theme.ctaPrimary,
+      borderWidth: '15px 45px',
+      // transform: 'uppercase',
+    },
+    paddingTop: '35',
+    title: {
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: false,
+      align: 'left',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      prices: true,
+      name: true,
+      prodSize: 16,
+      descSize: 15,
+      priceLowSize: 16,
+      priceHighSize: 15,
+      lowPriceColor: theme.black,
+      highPriceColor: theme.black,
+      color: theme.black,
+      tdClass: 'newsletterContainer',
+    },
+    products: prodData[2],
+  },
+  {
+    name: catData[2].name,
+    // nameOverride: 'OPOCO',
+    src: catData[2].catImg,
+    href: catData[2].href,
+    skipLinkTranslation: true,
+    background: theme.secondary,
+    color: theme.black,
+    type: 'grid',
+    tdClass: false,
+    spaceAfter: 'newsletterBottom40px',
+    cta: {
+      variant: 'underline',
+      color: theme.black,
+      phrase: 'Shop now',
+      spaceAfter: false,
+      spaceBefore: 'newsletterBottom40px',
+      tdClass: 'newsletterContainer40px',
+      borderColor: theme.ctaPrimary,
+      borderWidth: '15px 45px',
+      // transform: 'uppercase',
+    },
+    paddingTop: '35',
+    title: {
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: false,
+      align: 'left',
+
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      prices: true,
+      name: true,
+      prodSize: 16,
+      descSize: 15,
+      priceLowSize: 16,
+      priceHighSize: 15,
+      lowPriceColor: theme.black,
+      highPriceColor: theme.black,
+      color: theme.black,
+      tdClass: 'newsletterContainer',
+    },
+    products: prodData[3],
+  },
+  {
+    name: catData[3].name,
+    // nameOverride: 'BRADLEY',
+    src: catData[3].catImg,
+    href: catData[3].href,
+    skipLinkTranslation: true,
+    background: theme.primary,
+    color: theme.black,
+    type: 'grid',
+    tdClass: false,
+    spaceAfter: 'newsletterBottom40px',
+    cta: {
+      variant: 'underline',
+      color: theme.black,
+      phrase: 'Shop now',
+      spaceAfter: false,
+      spaceBefore: 'newsletterBottom40px',
+      tdClass: 'newsletterContainer40px',
+      borderColor: theme.ctaPrimary,
+      borderWidth: '15px 45px',
+      // transform: 'uppercase',
+    },
+    paddingTop: '35',
+    title: {
+      show: true,
+      spaceAfter: 'newsletterBottom35px',
+    },
+    paragraph: {
+      show: false,
+      align: 'left',
+      spaceBefore: 'newsletterBottom35px',
+      spaceAfter: 'newsletterBottom35px',
+    },
+    product: {
+      prices: true,
+      name: true,
+      prodSize: 16,
+      descSize: 15,
+      priceLowSize: 16,
+      priceHighSize: 15,
+      lowPriceColor: theme.black,
+      highPriceColor: theme.black,
+      color: theme.black,
+      tdClass: 'newsletterContainer',
+    },
+    products: prodData[4],
+  },
+];
+
+const footerData = {
+  // deliverySrc: 'Delivery src NEW',
+  assemblySrc: 'Assembly src NEW',
+  assemblyHref: 'Assembly href NEW',
+};
+
+export default new entities.Campaign({
+  startId: '48085',
+  name: 'Monday - Sofas/Free mirror',
+  date: '21.09.2026',
+  issueCardId: '530987',
+  lpId: '32511',
+  // specialLpIds: {
+  //   HR: '31562',
+  //   SI: '31563',
+  // },
+  alarm: {
+    isActive: false,
+  },
+  isArchive: false,
+  optimizeImg: true,
+  version: 'new',
+  figmaUrl: 'https://www.figma.com/design/hUTSv8uEe4zci2b831bKcx/',
+  templates: [
+    {
+      background: theme.white,
+      color: theme.black,
+      template: templates.MondayNew,
+
+      css: types.CSS.NS_AI_NEW,
+      name: 'Newsletter',
+      type: types.NEWSLETTER,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      wrapper: types.WRAPPER,
+      TopImageTitle_data: TopImageTitle_data,
+      categories: categories,
+      links: links,
+      tableQueries: tableQueries,
+      disableTopImageTitle: true,
+      shopByCategory: false,
+      theme,
+      intro: {
+        color: theme.black,
+        backgroundColor: theme.secondary,
+        alignment: 'left',
+        position: 'afterFreebies',
+        secondaryLink: false,
+        disableLine: true,
+        spaceTop: 'newsletterBottom35px',
+        spaceBottom: 'newsletterBottom45px',
+        containerClass: 'newsletterContainer',
+        paragraphSpace: 'newsletterBottom35px',
+        cta: {
+          variant: 'underline',
+          align: 'center',
+          color: theme.black,
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
+        },
+      },
+      footerOverride: footerData,
+    },
+    {
+      background: theme.white,
+      color: theme.black,
+      template: templates.MondayNew,
+
+      css: types.CSS.LP_AI_NEW,
+      name: 'Landing',
+      type: types.LANDINGPAGE,
+      translationsSpreadsheet: campaignTranslationsSheet,
+      TopImageTitle_data: TopImageTitle_data,
+      categories: categories,
+      links: links,
+      tableQueries: tableQueries,
+      shopByCategory: false,
+      theme,
+      intro: {
+        color: theme.black,
+        backgroundColor: theme.secondary,
+        alignment: 'left',
+        position: 'afterFreebies',
+        secondaryLink: false,
+        disableLine: true,
+        spaceTop: 'newsletterBottom35px',
+        spaceBottom: 'newsletterBottom45px',
+        containerClass: 'newsletterContainer',
+        paragraphSpace: 'newsletterBottom35px',
+        cta: {
+          variant: 'underline',
+          align: 'center',
+          color: theme.black,
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
+        },
+      },
+      disableTopImageTitle: true,
+      disableKlarna: ['HR', 'SI'],
+      footerOverride: footerData,
+    },
+  ],
+});

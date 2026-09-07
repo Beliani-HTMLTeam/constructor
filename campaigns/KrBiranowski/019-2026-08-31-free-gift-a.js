@@ -140,8 +140,8 @@ const tableQueries = [
 ];
 
 const links = {
-  Intro_cta_href: 'https://www.beliani.ch/',
-  IntroImage_href: 'https://www.beliani.ch/',
+  Intro_cta_href: 'https://www.beliani.ch/living-room-furniture/',
+  IntroImage_href: 'https://www.beliani.ch/living-room-furniture/',
   IntroImage_src: getImageUrl('20260831_Intro_B.png', true),
   TopImageTitle_href: translateLink({ value: 'content/lp26-08-31-ta' }),
   TopImageTitle_src: translateImage({ value: '20260831_01_B.png' }),
@@ -245,6 +245,7 @@ const categories = [
         low: theme.urgent,
         high: theme.accent,
       },
+      fontSize: '15',
     },
     products: prodData[1],
   },
@@ -300,6 +301,7 @@ const categories = [
         low: theme.urgent,
         high: theme.accent,
       },
+      fontSize: '15',
     },
     products: prodData[2],
   },
@@ -355,6 +357,7 @@ const categories = [
         low: theme.urgent,
         high: theme.accent,
       },
+      fontSize: '15',
     },
     products: prodData[3],
   },
@@ -410,6 +413,7 @@ const categories = [
         low: theme.urgent,
         high: theme.accent,
       },
+      fontSize: '15',
     },
     products: prodData[4],
   },
@@ -495,7 +499,7 @@ export default new entities.Campaign({
         secondaryLink: false,
         cta: {
           variant: 'button',
-          bgColor: theme.urgent,
+          bgColor: theme.primary,
           textColor: theme.white,
           spaceAfter: 'newsletterBottom55px',
           textOverrides: {

@@ -126,8 +126,8 @@ const tableQueries = [
 ];
 
 const links = {
-  Intro_cta_href: 'https://www.beliani.ch/',
-  IntroImage_href: 'https://www.beliani.ch/',
+  Intro_cta_href: 'https://www.beliani.ch/living-room-furniture/',
+  IntroImage_href: 'https://www.beliani.ch/living-room-furniture/',
   IntroImage_src: getImageUrl('20260831_Intro_A.png', true),
   TopImageTitle_href: translateLink({ value: 'content/lp26-08-31' }),
   TopImageTitle_src: translateImage({ value: '20260831_01_A.png' }),
@@ -376,6 +376,7 @@ export default new entities.Campaign({
         },
       },
       disableTopImageTitle: false,
+      disableKlarna: ['SI', 'HR'],
     },
   ],
 });

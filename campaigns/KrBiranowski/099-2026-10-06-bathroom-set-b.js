@@ -3,7 +3,7 @@ const campaignTranslationsSheet = '2026::Voucher - 07.09.26 - Free Bathroom set'
 const theme = {
   primary: '#750000',
   primaryText: '#ffffff',
-  secondary: '#FBF3F0',
+  secondary: '#FFF9F2',
   secondaryText: '#FFCCB7',
   black: '#000000',
   white: '#ffffff',
@@ -19,117 +19,117 @@ const catData = [
   {
     name: 'Bathtubs',
     href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-    catImg: getImageUrl('20260907_Cat10_A2.png', true),
+    catImg: getImageUrl('20260907_Cat10_B.jpg', true),
   },
   {
-    name: 'Storage',
+    name: 'Bathroom Storage',
     href: 'https://www.beliani.ch/bathroom-furniture/bathroom-storage/',
-    catImg: getImageUrl('20260907_Cat20_A2.png', true),
+    catImg: getImageUrl('20260907_Cat20_B.jpg', true),
   },
   {
-    name: 'Mirrors',
+    name: 'Bathroom Mirrors',
     href: 'https://www.beliani.ch/mirrors/bath-mirrors/',
-    catImg: getImageUrl('20260907_Cat30_A2.png', true),
+    catImg: getImageUrl('20260907_Cat30_B.jpg', true),
   },
   {
-    name: 'Lighting',
+    name: 'Bathroom Lighting',
     href: 'https://www.beliani.ch/bathroom-furniture/bathroom-lighting/',
-    catImg: getImageUrl('20260907_Cat40_A2.png', true),
+    catImg: getImageUrl('20260907_Cat40_B.jpg', true),
   },
 ];
 
 const prodData = [
   [
     [
-      { id: '316914', src: getImageUrl('20260907_Free01_A.png', true), useDescription: true },
-      { id: '320374', src: getImageUrl('20260907_Free02_A.png', true), useDescription: true },
+      { id: '316914', src: getImageUrl('20260907_Free01_B.png', true), useDescription: true },
+      { id: '320374', src: getImageUrl('20260907_Free02_B.png', true), useDescription: true },
     ],
   ],
   [
     {
       id: '417123',
-      src: getImageUrl('20260907_Pic01_A.png', true),
+      src: getImageUrl('20260907_Pic01_B.png', true),
       useDescription: true,
     },
     {
       id: '96874',
-      src: getImageUrl('20260907_Pic02_A.png', true),
+      src: getImageUrl('20260907_Pic02_B.png', true),
       useDescription: true,
     },
     {
       id: '59970',
-      src: getImageUrl('20260907_Pic03_A.png', true),
+      src: getImageUrl('20260907_Pic03_B.png', true),
       useDescription: true,
     },
     {
       id: '731181',
-      src: getImageUrl('20260907_Pic04_A.png', true),
+      src: getImageUrl('20260907_Pic04_B.png', true),
       useDescription: true,
     },
   ],
   [
     {
       id: '515187',
-      src: getImageUrl('20260907_Pic10_A.png', true),
+      src: getImageUrl('20260907_Pic10_B.png', true),
       useDescription: true,
     },
     {
       id: '660887',
-      src: getImageUrl('20260907_Pic11_A.png', true),
+      src: getImageUrl('20260907_Pic11_B.png', true),
       useDescription: true,
     },
     {
       id: '723642',
-      src: getImageUrl('20260907_Pic12_A.png', true),
+      src: getImageUrl('20260907_Pic12_B.png', true),
       useDescription: true,
     },
     {
       id: '708741',
-      src: getImageUrl('20260907_Pic13_A.png', true),
+      src: getImageUrl('20260907_Pic13_B.png', true),
       useDescription: true,
     },
   ],
   [
     {
       id: '819491',
-      src: getImageUrl('20260907_Pic20_A.png', true),
+      src: getImageUrl('20260907_Pic20_B.png', true),
       useDescription: true,
     },
     {
       id: '819338',
-      src: getImageUrl('20260907_Pic21_A.png', true),
+      src: getImageUrl('20260907_Pic21_B.png', true),
       useDescription: true,
     },
     {
       id: '818093',
-      src: getImageUrl('20260907_Pic22_A.png', true),
+      src: getImageUrl('20260907_Pic22_B.png', true),
       useDescription: true,
     },
     {
       id: '817924',
-      src: getImageUrl('20260907_Pic23_A.png', true),
+      src: getImageUrl('20260907_Pic23_B.png', true),
       useDescription: true,
     },
   ],
   [
     {
       id: '589801',
-      src: getImageUrl('20260907_Pic30_A.png', true),
+      src: getImageUrl('20260907_Pic30_B.png', true),
       useDescription: true,
     },
     {
       id: '651538',
-      src: getImageUrl('20260907_Pic31_A.png', true),
+      src: getImageUrl('20260907_Pic31_B.png', true),
       useDescription: true,
     },
     {
       id: '653660',
-      src: getImageUrl('20260907_Pic32_A.png', true),
+      src: getImageUrl('20260907_Pic32_B.png', true),
       useDescription: true,
     },
     {
       id: '652896',
-      src: getImageUrl('20260907_Pic33_A.png', true),
+      src: getImageUrl('20260907_Pic33_B.png', true),
       useDescription: true,
     },
   ],
@@ -137,8 +137,12 @@ const prodData = [
 
 const tableQueries = [
   {
+    tableRange: '22:23',
+    name: 'TopImageTitle',
+  },
+  {
     name: 'offer',
-    tableRange: '25:28',
+    tableRange: '27:28',
   },
   {
     name: 'offer_date',
@@ -168,11 +172,11 @@ const tableQueries = [
 
 const links = {
   Intro_cta_href: 'https://www.beliani.ch/bathroom-furniture/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-09-07-ta' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-07' }),
   TopImageTitle_src: translateImage({ value: '20260907_01.png' }),
 
   TopImage_src: getImageUrl('20260907_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-09-07-ta' }),
+  TopImage_href: translateLink({ value: 'content/lp26-09-07' }),
 
   Banner_1: translateLink({ value: 'content/lp26-08-27' }),
   Banner_1_Image: translateImage({ value: '20260827b.png' }),
@@ -182,7 +186,7 @@ const links = {
 };
 
 const TopImageTitle_data = {
-  color: theme.black,
+  color: theme.white,
   backgroundColor: theme.primary,
   type: 'standard',
 };
@@ -199,7 +203,8 @@ const categories = [
     background: theme.primary,
     color: theme.primaryText,
     spaceAfter: 'newsletterBottom45px',
-    cta: { variant: 'cream', color: theme.black, bg: theme.ctaBg },
+    ctaColor: theme.white,
+    cta: false,
     freebiesSize: 'large',
     combineOfferParts: true,
     freebies: prodData[0],
@@ -212,23 +217,20 @@ const categories = [
     src: catData[0].catImg,
     href: catData[0].href,
     skipLinkTranslation: true,
-    background: theme.white,
+    background: theme.secondary,
     color: theme.black,
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '45',
-    tdClass: 'newsletterContainer30px',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
-      tdClass: 'newsletterContainer30px',
     },
     paragraph: {
       show: false,
       align: 'left',
       spaceBefore: 'newsletterBottom35px',
       spaceAfter: 'newsletterBottom35px',
-      tdClass: 'newsletterContainer30px',
     },
     product: {
       prices: true,
@@ -242,12 +244,11 @@ const categories = [
     src: catData[1].catImg,
     href: catData[1].href,
     skipLinkTranslation: true,
-    background: theme.secondary,
-    color: theme.black,
+    background: theme.primary,
+    color: theme.white,
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '35',
-    tdClass: 'newsletterContainer30px',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -270,12 +271,11 @@ const categories = [
     src: catData[2].catImg,
     href: catData[2].href,
     skipLinkTranslation: true,
-    background: theme.white,
+    background: theme.secondary,
     color: theme.black,
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '35',
-    tdClass: 'newsletterContainer30px',
     title: {
       show: true,
       spaceAfter: 'newsletterBottom35px',
@@ -298,12 +298,11 @@ const categories = [
     src: catData[3].catImg,
     href: catData[3].href,
     skipLinkTranslation: true,
-    background: theme.secondary,
-    color: theme.black,
+    background: theme.primary,
+    color: theme.white,
     type: 'grid',
     cta: { variant: 'maroon', color: theme.white, bg: theme.primary },
     paddingTop: '35',
-    tdClass: 'newsletterContainer30px',
     spaceAfter: 'newsletterBottom40px',
     title: {
       show: true,
@@ -324,11 +323,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: '47476',
-  name: 'Monday - Free Bathroom Set - A',
-  date: '07.09.2026',
+  startId: '47508',
+  name: 'Monday - Free Bathroom Set - B',
+  date: '06.10.2026',
   issueCardId: '525572',
-  lpId: '32094',
+  lpId: '32184',
   // specialLpIds: {
   //   HR: '31562',
   //   SI: '31563',
@@ -344,9 +343,9 @@ export default new entities.Campaign({
     {
       background: theme.white,
       color: theme.black,
-      template: templates.MondayNew,
+      template: templates.Monday,
 
-      css: types.CSS.NS_AI_NEW,
+      css: types.CSS.NS,
       name: 'Newsletter',
       type: types.NEWSLETTER,
       translationsSpreadsheet: campaignTranslationsSheet,
@@ -360,8 +359,8 @@ export default new entities.Campaign({
       theme,
       intro: {
         color: theme.black,
-        backgroundColor: theme.white,
-        alignment: 'center',
+        backgroundColor: theme.secondary,
+        alignment: 'left',
         position: 'afterFreebies',
         secondaryLink: false,
         cta: {
@@ -375,9 +374,9 @@ export default new entities.Campaign({
     {
       background: theme.white,
       color: theme.black,
-      template: templates.MondayNew,
+      template: templates.Monday,
 
-      css: types.CSS.LP_AI_NEW,
+      css: types.CSS.LP,
       name: 'Landing',
       type: types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,
@@ -389,8 +388,8 @@ export default new entities.Campaign({
       theme,
       intro: {
         color: theme.black,
-        backgroundColor: theme.white,
-        alignment: 'center',
+        backgroundColor: theme.secondary,
+        alignment: 'left',
         position: 'afterFreebies',
         secondaryLink: false,
         cta: {
