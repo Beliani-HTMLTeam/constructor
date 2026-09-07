@@ -25,7 +25,7 @@ const Product = (
   const bottomGapClass =
     typeof gapBetweenVertical === 'string'
       ? gapBetweenVertical
-      : resolveGapClass(gapBetweenVertical, product.spaceAfter ?? 'newsletterBottom35px');
+      : resolveGapClass(gapBetweenVertical, product?.settings?.spaceAfter ?? product.spaceAfter ?? 'newsletterBottom35px');
 
   let html = `
   <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
@@ -43,14 +43,15 @@ const Product = (
     let productDescription = '';
     if (product.useDescription)
       productDescription = product?.description?.trim() ?? 'empty product description';
+      productDescription = productDescription.replace(/(\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm\s+\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm)/gi, '<span style="display:inline-block;">$1</span>')
 
     html += `
       ${nameGapClass ? Space({ insideTr: true, className: nameGapClass }) : ''}
       
       <tr>
-        <td align="${align}" style="padding: 0; text-align: ${align}; color: ${color}">
-          <span class="newsletterProductTitle">${product.name}</span><br>
-          ${productDescription ? `<span class="newsletterProductDescription">${productDescription}</span>` : ''}
+        <td align="${align}" style="padding: 0; text-align: ${align}; color: ${product?.settings?.color ?? color}">
+          <span class="newsletterProductTitle"${product?.settings?.prodSize ? ` style="font-size:${product?.settings?.prodSize}px;"` : ""}>${product.name}</span><br>
+          ${productDescription ? `<span class="newsletterProductDescription"${product?.settings?.descSize ? ` style="font-size:${product?.settings?.descSize}px;"` : ""}>${productDescription}</span>` : ''}
         </td>
       </tr>
     `;
@@ -64,7 +65,10 @@ const Product = (
             high: product.highPrice || '',
             low: product.lowPrice || '',
             insideTr: true,
-            color: color,
+            lowColor: product?.settings?.lowPriceColor,
+            highColor: product?.settings?.highPriceColor,
+            lowSize: product?.settings?.priceLowSize,
+            highSize: product?.settings?.priceHighSize,
             align,
             theme,
           })}

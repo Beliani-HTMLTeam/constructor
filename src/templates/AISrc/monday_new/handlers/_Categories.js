@@ -142,6 +142,8 @@ export const CategoriesHandler = async ({
     })
   );
 
+  console.log(categoriesForRender)
+
   return Categories({
     getPhrase,
     getCategoryLink,

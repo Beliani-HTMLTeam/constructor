@@ -6,7 +6,9 @@ const Intro = ({
   text = 'Translation not found',
   spaceTop = 'newsletterBottom35px',
   spaceBottom = 'newsletterBottom35px',
+  paragraphSpace = 'newsletterBottom25px',
   paragraphAlign = 'center',
+  containerClass = '',
   color,
   backgroundColor,
   ctaHref,
@@ -17,6 +19,9 @@ const Intro = ({
   ctaSrc = null,
   ctaVariant = null,
   theme = {},
+  showCta = true,
+  disableLine = false,
+  ctaSettings = {},
 }) => {
   const resolvedBg = backgroundColor ?? theme.introBg ?? '#750000';
   const resolvedColor = color ?? theme.introText ?? '#ffffff';
@@ -50,8 +55,8 @@ const Intro = ({
   const IntroTitleElement = introTitle
     ? `
     <tr>
-      <td align="${paragraphAlign}" style="padding: 0 25px;">
-        <span class="${titleClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 28px; line-height: 1.25; color: ${textColor}; display: block; text-align: ${paragraphAlign};">
+      <td align="${paragraphAlign}"${containerClass ? ` class=${containerClass}` : ''}>
+        <span class="${titleClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; color: ${textColor}; display: block; text-align: ${paragraphAlign};">
           ${introTitle}
         </span>
       </td>
@@ -63,20 +68,20 @@ const Intro = ({
   const IntroParagraphElement = introParagraph
     ? `
     <tr>
-      <td align="${paragraphAlign}" style="padding: 0 25px;">
-        <span class="${paragraphClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.5; color: ${textColor}; display: block; text-align: ${paragraphAlign};">
+      <td align="${paragraphAlign}"${containerClass ? ` class=${containerClass}` : ''}>
+        <span class="${paragraphClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.2; color: ${textColor}; display: block; text-align: ${paragraphAlign};">
           ${introParagraph}
         </span>
       </td>
     </tr>
-    ${Space({ insideTr: true, className: 'newsletterBottom25px' })}
+    ${paragraphSpace === false ? '' : Space({ insideTr: true, className: paragraphSpace ?? 'newsletterBottom25px' })}
     `
     : '';
 
   const CTAElement = ctaHref && ctaText
     ? `
     <tr>
-      <td align="${paragraphAlign}">
+      <td align="${ctaSettings?.align ?? paragraphAlign}">
         ${CTA({
           href: ctaHref,
           text: ctaText,
@@ -84,8 +89,11 @@ const Intro = ({
           type: type,
           src: ctaSrc,
           align: paragraphAlign,
+          color: ctaSettings?.color ?? '#000000',
           alwaysRenderAsImage: type === 'newsletter' && btnVariant !== 'underline',
           theme,
+          borderColor: ctaSettings?.borderColor ?? '',
+          borderWidth: ctaSettings?.borderWidth ?? '',
         })}
       </td>
     </tr>
@@ -96,7 +104,7 @@ const Intro = ({
     ? `
     ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
     <tr>
-      <td align="${paragraphAlign}">
+      <td align="${ctaSettings?.align ?? paragraphAlign}">
         ${type === 'newsletter'
           ? CTA({
               href: secondaryLinkHref,
@@ -116,22 +124,25 @@ const Intro = ({
     <tr>
       <td style="${wrapperCellStyle}">
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="${sectionStyle}">
-          <tr>
-            <td align="center">
-              <img loading="lazy" src="https://pictureserver.net/static/2026/line_black.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
-            </td>
-          </tr>
-          ${Space({ className: spaceTop || 'newsletterBottom35px', insideTr: true })}
+          ${!disableLine ? `
+            <tr>
+              <td align="center">
+                <img loading="lazy" src="https://pictureserver.net/static/2026/line_black.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
+              </td>
+            </tr>
+            ` : ''
+          }
+          ${ spaceTop === false ? '' : Space({ className: spaceTop || 'newsletterBottom35px', insideTr: true })}
 
           ${IntroTitleElement}
             
           ${IntroParagraphElement}
 
-          ${CTAElement}
+          ${showCta ? CTAElement : ''}
 
-          ${SecondaryLinkElement}
+          ${showCta ? SecondaryLinkElement : ''}
     
-          ${Space({ className: spaceBottom || 'newsletterBottom35px', insideTr: true })}
+          ${ spaceBottom === false ? '' : Space({ className: spaceBottom || 'newsletterBottom35px', insideTr: true })}
         </table>
       </td>
     </tr>

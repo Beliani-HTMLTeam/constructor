@@ -18,6 +18,8 @@ const Monday = async ({
   categories,
   background,
   color,
+  selectedCampaign,
+  date,
 
   intro,
   TopImageTitle_data,
@@ -33,6 +35,7 @@ const Monday = async ({
   add_utm,
   disableSoonEnding,
   disableFooterCategories = false,
+  disableTopImageTitle = false,
   disableKlarna,
   categoryImageTdClass,
 }) => {
@@ -40,7 +43,7 @@ const Monday = async ({
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   let topImage = ''
@@ -52,7 +55,7 @@ const Monday = async ({
 
   console.log('topImage', topImage);
 
-  const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type, countrySlug });
+  const TopImageTitleElement = !disableTopImageTitle ? TopImageTitleHandler({ links, queries, TopImageTitle_data, type, countrySlug }) : '';
   const TopImageElement = TopImageHandler({ links, topImage });
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
@@ -65,7 +68,7 @@ const Monday = async ({
   const categoriesBeforeIntro =
     introPosition === 'afterFreebies' && dealIndex >= 0
       ? safeCategories.slice(0, dealIndex + 1)
-      : safeCategories;
+      : safeCategories
   const categoriesAfterIntro =
     introPosition === 'afterFreebies' && dealIndex >= 0
       ? safeCategories.slice(dealIndex + 1)

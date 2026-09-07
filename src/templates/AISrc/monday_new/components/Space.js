@@ -1,9 +1,9 @@
-const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTable = false }) => {
+const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTable = false, bg = '' }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
   let html = '';
 
-  html += `<td class="${className}"></td>`;
+  html += `<td class="${className}" ${bg ? `style="background: ${bg}"` : ''}></td>`;
 
   if (insideTr) {
     html = `<tr>${html}</tr>`;

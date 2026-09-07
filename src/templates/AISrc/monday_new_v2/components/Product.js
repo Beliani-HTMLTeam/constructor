@@ -9,6 +9,7 @@ const Product = (
   color,
   align = 'left',
   priceColors = {},
+  fontSize = '20',
   productsInnerBg = '',
   innerSpace = '',
   gapBetweenVertical = true,
@@ -62,7 +63,7 @@ const Product = (
       ${nameGapClass ? Space({ insideTr: true, className: nameGapClass }) : ''}
       
       <tr>
-        <td align="${align}" style="text-align: ${align}; color: ${color}; ${exportPx !== null ? `padding-left: ${exportPx}px; padding-right: ${exportPx}px;` : ''}" class="newsletterProductTitle ${className}">${product.name}</td>
+        <td align="${align}" style="text-align: ${align}; color: ${color}; font-size: ${fontSize}px; ${exportPx !== null ? `padding-left: ${exportPx}px; padding-right: ${exportPx}px;` : ''}" class="newsletterProductTitle ${className}">${product.name}</td>
       </tr>
     `;
   }

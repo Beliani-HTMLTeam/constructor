@@ -1,7 +1,7 @@
 import { Paragraph } from '../../Paragraph.js';
 import { CTA } from '../../CTA.js';
 import { Space } from '../../Space.js';
-import { CopyCodeCTA, CopyCodeWebNotification } from '../../CopyCodeCTA.js';
+import { buildCopyElement, CopyCodeCTA, CopyCodeWebNotification } from '../../CopyCodeCTA.js';
 
 const renderOfferRow = (text, className = 'newsletterParagraph') => {
   return `<tr><td>${Paragraph({
@@ -94,7 +94,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
   return html;
 };
 
-const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel, ctaColor = '' }) => {
+const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel, ctaColor = '', toastOptions = {} }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
   let codeRow = queries?.offer_code?.[0] ?? offerItems[2] ?? '';
 
@@ -124,8 +124,19 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
 
   const codeText = codeRow ?? 'Code: xxxxx';
   if (showCopyCodeWeb) {
+    const ctaToastBg = toastOptions?.toastBg ?? '#ffe0d4';
+    const ctaToastText = toastOptions?.toastText ?? toastOptions?.primary ?? '#750000';
+
     const codeValue = codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText;
-    return CopyCodeWebNotification({ text: codeText, codeValue, color: copyCodeColor, label: copyCodeLabel });
+    const copyIcon = codeValue ? buildCopyElement({
+      text: codeText,
+      codeValue,
+      color: ctaColor,
+      toastBg: ctaToastBg,
+      toastText: ctaToastText,
+      label: copyCodeLabel,
+    }) : '';
+    return copyIcon;
   }
   if (showCopyCode) {
     const codeValue = codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText;
@@ -134,7 +145,7 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
   return renderOfferRow(codeText);
 };
 
-export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, offerTexts, ctaColor = '', }) => {
+export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, offerTexts, ctaColor = '', toastOptions = {} }) => {
   const t = getPhrase;
   const copyCodeLabel = getPhrase?.('Copy code') || 'Code copied';
   const hasSixOffers = isSixOffers(queries);
@@ -148,7 +159,7 @@ export const renderOfferSection = ({ queries, renderType, links, getPhrase, show
     html += renderSixOfferNewsletter({ queries, links, t });
   } else {
     html += renderOfferRows(offerItems);
-    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel, ctaColor });
+    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel, ctaColor, toastOptions });
     html += Space({ insideTr: true, className: 'newsletterBottom35px' });
   }
 

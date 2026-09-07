@@ -68,6 +68,7 @@ export const render = ({
     showChooseFrom: hasDealProducts,
     showCopyCode: !!effectiveCopyCode,
     showCopyCodeWeb: !!effectiveCopyCodeWeb,
+    toastOptions: copyCodeWeb,
     copyCodeColor: copyCodeWebColor ?? copyCodeColor,
     offerTexts,
     ctaColor

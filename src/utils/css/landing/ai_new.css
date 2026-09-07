@@ -188,7 +188,7 @@ table {
 }
 
 #newsletter .newsletterParagraph {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.2;
 }
 .newsletterMarkTitle {
@@ -216,7 +216,7 @@ table {
 }
 
 #newsletter .newsletterProductTitle {
-  font-size: 13px;
+  font-size: 20px;
   line-height: 1.2;
 }
 
@@ -227,13 +227,13 @@ table {
 }
 
 #newsletter .newsletterProductLowPrice {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.2;
   font-weight: 600;
 }
 
 #newsletter .newsletterProductHighPrice {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.2;
   text-decoration: line-through;
 }
@@ -403,6 +403,41 @@ table {
     line-height: 27px !important;
   }
 
+  #newsletter .col4tile {
+    width: 23.5% !important;
+    min-width: 0 !important;
+    max-width: 23.5% !important;
+  }
+
+  #newsletter .col4tileGap {
+    width: 2% !important;
+    min-width: 0 !important;
+    max-width: 2% !important;
+  }
+ 
+  #newsletter .col4tileImg {
+    height: auto !important;
+  }
+ 
+  #newsletter .col4tileImg img {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+ 
+  #newsletter .col4tileTitle {
+    line-height: 1.2 !important;
+  }
+
+  #newsletter .col4tileTitleCell {
+    min-height: 60px !important;
+    vertical-align: middle !important;
+  }
+
+  #newsletter .introRedTitle {
+    font-size: 25px !important;
+  }
+
   #newsletter .newsletterFooterCategoryRIGHTBottom {
     padding-left: 5px !important;
   }
@@ -423,14 +458,12 @@ table {
 
   .freebieSubtitle {
     font-size: 13px !important;
-    padding: 0 10px 15px 10px !important;
   }
 
   #newsletter .newsletterCtaBtn {
     display: block !important;
     width: 100% !important;
     text-align: center !important;
-    padding: 15px 20px !important;
     box-sizing: border-box !important;
   }
 
@@ -462,22 +495,23 @@ table {
   }
 
   #newsletter .newsletterProductTitleFreebie {
-    font-size: 18px;
+    font-size: 14px !important;
   }
 
   #newsletter .newsletterProductTitle {
-    font-size: 13px;
+    font-size: 14px !important;
   }
 
   #newsletter .newsletterProductDescription {
-    font-size: 13px;
+    font-size: 12px !important;
   }
 
   #newsletter .newsletterProductLowPrice {
-    font-size: 14px;
+    font-size: 14px !important;
   }
 
   #newsletter .newsletterProductHighPrice {
+    font-size: 12px !important;
     display: block;
   }
 
@@ -495,6 +529,10 @@ table {
 
   #newsletter .newsletterTitle {
     font-size: 25px;
+  }
+
+  #newsletter .introTitle {
+    font-size: 28px !important;
   }
 
   #newsletter .newsletterTitleOfferPart {
@@ -572,7 +610,7 @@ table {
   }
 
   #newsletter .newsletterParagraph {
-    font-size: 16px;
+    font-size: 14px;
   }
 
 	#newsletter .newsletterRight5px {
@@ -630,7 +668,7 @@ table {
   }
 
   #newsletter .ctaBtn {
-    font-size: 13px;
+    font-size: 16px !important;
     padding: 10px 30px;
   }
 
@@ -780,13 +818,11 @@ table {
   font-size: 32px;
   line-height: 1.2;
   color: #ffffff;
-  margin-bottom: 12px;
-  letter-spacing: 0.5px;
 }
 
 .introTitle {
-  font-size: 28px;
-  line-height: 1.25;
+  font-size: 35px;
+  line-height: 1.2;
   margin-bottom: 12px;
   letter-spacing: 0.5px;
 }
@@ -825,9 +861,8 @@ table {
   margin-top: 14px;
 }
 
-.secondaryLinkMaroon {
-  color: #750000 !important;
-  font-size: 16px;
+.secondaryLink {
+  font-size: 20px;
   text-decoration: underline !important;
   display: inline-flex;
   align-items: center;

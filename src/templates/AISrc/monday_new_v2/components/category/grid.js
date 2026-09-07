@@ -40,7 +40,7 @@ export const render = ({
         productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${horizontalGapValue}>`;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, align, priceColors, productsInnerBg, productsInnerSpace, gapBetweenVertical);
+          productsInnerHtml += Product(product, showPrices, showNames, color, align, priceColors, '15', productsInnerBg, productsInnerSpace, gapBetweenVertical);
         }
 
         productsInnerHtml += '</td>';

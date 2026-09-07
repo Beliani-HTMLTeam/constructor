@@ -1,3 +1,4 @@
+import { Space } from '../Space.js';
 import { renderFreebieGrid } from './deal/grid.js';
 import { renderOfferSection } from './deal/offer.js';
 
@@ -21,8 +22,10 @@ export const render = ({
   type = 'newsletter',
   combineOfferParts = false,
   ctaSettings = {},
+  prodSettings = {},
+  offerSpaceAfter = '',
+  tdClass = 'newsletterContainer'
 }) => {
-
   const countrySlug = String(country ?? '').toLowerCase();
   const offerTextOverrideRaw = offerTextOverrides?.[countrySlug];
   const resolved =
@@ -65,8 +68,6 @@ export const render = ({
   const freebiesSubtitle = queries?.freebies_subtitle?.[0] ?? 'TRANSLATION NOT FOUND';
   let html = '';
 
-  // 1. Dark Red Offer Top Section (#750000)
-  // Renders: Row 25 (Offer title) -> Row 26 (Offer part 1) -> Row 27 (Offer part 2) -> Row 30 (Get Code Button) -> Row 29 (Offer date)
   html += renderOfferSection({
     queries,
     renderType,
@@ -77,23 +78,28 @@ export const render = ({
     theme,
     combineOfferParts,
     ctaSettings,
+    prodSettings,
+    tdClass,
+    offerSpaceAfter,
   });
 
-  // 2. White Section (#ffffff) with Choose from: header line & freebie products grid
   if (hasDealProducts) {
 
-    const dealColorBg = theme?.white ?? '#ffffff';
+    const dealColorBg = theme?.dealBg ?? theme?.primary ?? '#ffffff';
     const dealColorText = theme?.black ?? '#000000';
 
     html += `
+      ${Space({ insideTr: true, className: 'newsletterBottom40px', bg: dealColorBg })}
       <tr>
-        <td style="background-color: ${dealColorBg}; color: ${dealColorText}; padding: 25px 20px 15px 20px;" align="center">
+        <td style="background-color: ${dealColorBg}; color: ${dealColorText};" class=${tdClass} align="center">
           <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; color: ${dealColorText}; display: block; text-align: center;">
             ${chooseFromHeader}
           </span>
         </td>
       </tr>
     `;
+
+    const freebieSettings = {...prodSettings}
 
     html += renderFreebieGrid({
       freebies: filteredFreebies,
@@ -104,16 +110,17 @@ export const render = ({
       freebiesPerRow,
       theme,
       disableHighPrice,
+      prodSettings: freebieSettings
     });
 
-    const colorBg = theme?.white ?? '#ffffff';
+    const colorBg = theme?.freebieColor ?? theme?.primary ?? '#ffffff';
     const colorText = theme?.black ?? '#000000';
     const colorGray = theme?.gray ?? '#555555';
 
     html += `
       <tr>
-        <td class="freebieSubtitle" style="background-color: ${colorBg}; color: ${colorText}; padding: 0 20px 25px 20px;" align="left">
-          <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 14px; color: ${colorText}; display: block;">
+        <td class="${tdClass} freebieSubtitle" style="background-color:${colorBg};color:${colorText};" align="${prodSettings.align ?? 'left'}">
+          <span style="${type === 'newsletter' ? 'font-family:\'Open Sans\',Arial,sans-serif;' : ''}font-size:${prodSettings.freebieSize ? prodSettings.freebieSize : 14}px;line-height:1.2;color:${colorText};display:block;">
             ${freebiesSubtitle}
           </span>
         </td>

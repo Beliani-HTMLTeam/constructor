@@ -1,5 +1,19 @@
 import { Footer as FooterComponent } from '@/components/footer.js';
 import { getTrackingUrl, wrapFooterUrl } from '@/utils/getTrackingUrl';
+import { getState } from '@/main/state/appState';
+
+function shouldUseNewAssembly(cDate) {
+  const parts = cDate.split('.');
+
+  const day = Number(parts[0]);
+  const month = Number(parts[1]);
+  const year = Number(parts[2]);
+
+  const campaignDate = new Date(year, month - 1, day);
+  const cutoffDate = new Date(2026, 8, 14);
+
+  return campaignDate >= cutoffDate;
+}
 
 const Footer = ({
   getFooter,
@@ -11,12 +25,26 @@ const Footer = ({
   id,
   disableFooterCategories = false,
   disableKlarna,
+  selectedCampaign,
+  date,
 }) => {
+  const campaignDate = date || selectedCampaign?.date || getState('selectedCampaign')?.date;
+    const newAssembly = shouldUseNewAssembly(campaignDate);
+  
+    const assemblyBanner = newAssembly
+      ? {
+          src: getFooter('Assembly src new'),
+          href: getFooter('Assembly href NEW'),
+        }
+      : {
+          src: ['AT', 'PL', 'FR', 'UK'].includes(country) ? getFooter('Delivery src') : getFooter('Asembly src'),
+          href: getFooter('Asembly href'),
+        };
+
   let footerData = {
     id,
     assembly: {
-      src: ['AT', 'PL', 'FR', 'UK'].includes(country) ? getFooter('Delivery src') : getFooter('Asembly src'),
-      href: getFooter('Asembly href'),
+      ...assemblyBanner,
       exclude: ['CHIT'].includes(country),
     },
 

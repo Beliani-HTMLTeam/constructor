@@ -83,7 +83,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       <tr>
         <td>
           ${Paragraph({
-            text: category.paragraphText ?? queries.paragraphs[id] ?? 'Translation not found',
+            text: category.paragraphText ?? queries?.paragraphs?.[id] ?? 'Translation not found',
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
@@ -176,10 +176,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     <td>
       <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%">
         ${
-          !category.paddingTop || category.paddingTop > 0
+          !category?.paddingTop || category?.paddingTop > 0
             ? Space({
                 insideTr: true,
-                className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 60 : 35)}px`,
+                className: `newsletterBottom${category?.paddingTop ?? (id === 0 ? 60 : 35)}px`,
               })
             : ''
         }

@@ -37,7 +37,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
 
 const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme, disableHighPrice = false) => {
   const isDeal = category.type === 'deal';
-  const background = isDeal ? 'transparent' : (category.background ?? theme.white ?? 'white');
+  const background = isDeal ? theme?.dealBg ?? 'transparent' : (category.background ?? theme.white ?? 'white');
   const color = category.color ?? theme.black ?? '#000000';
 
   const styles = `background: ${background}; color: ${color}; ${category.styles || ''}`;
@@ -60,7 +60,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           background: background,
           align: category.title?.align ?? 'left',
           insideTable: true,
-          spanStyle: `color: ${color}; font-size: 22px;`,
+          spanStyle: `color: ${color}; font-size: 30px;`,
           tableContainer: false,
           className: category.title?.className ?? 'categoryTitle',
         })}
@@ -76,7 +76,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         href: ctaHref,
         src: category.src,
         insideTr: true,
-        tdClass: category.tdClass ?? categoryImageTdClass ?? 'newsletterContainer',
+        tdClass: categoryImageTdClass ?? category.tdClass ?? 'newsletterContainer',
         type,
       })
     : '';
@@ -129,6 +129,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           freebies: category.freebies,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
+          prodSettings: category.product,
+          showTileNames: category.showTileNames ?? true,
           showNames: category.showNames ?? category.product?.name ?? true,
           gapBetweenHorizontal: category.gapBetweenHorizontal ?? true,
           gapBetweenVertical: category.product?.gapBetweenVertical ?? true,
@@ -154,7 +156,12 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           disableHighPrice,
           combineOfferParts: category?.combineOfferParts ?? false,
           ctaSettings: category?.cta ?? {},
-          containerClass: category?.tdClass ?? 'newsletterContainer',
+          offerSpaceAfter: category?.offerSpaceAfter ?? '',
+          tdClass: category?.tdClass ?? 'newsletterContainer',
+          displayType: category?.displayType ?? '2col',
+          tileBgColor: category?.tileBgColor,
+          tileTextColor: category?.tileTextColor,
+          
         })
       : '';
 
@@ -165,7 +172,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         href: add_utm(category.insideBanner?.link.href),
         src: category.insideBanner?.image.src,
         insideTr: true,
-        tdClass: category.insideBanner?.tdClass ?? categoryImageTdClass,
+        tdClass: categoryImageTdClass ?? category.insideBanner?.tdClass,
         type,
       }) : ''}
       ${category.insideBanner?.spaceBefore ? Space({ insideTr: true, className: category.insideBanner?.spaceBefore }) : ''}
@@ -182,22 +189,30 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   // CTAElement only renders for non-deal categories
   const CTAElement = category.cta && !isDeal
     ? `
-      ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
+      ${category?.cta?.spaceAfter ? Space({ insideTr: true, className: category.cta.spaceAfter }) : ''}
       ${CTA({
         color: category?.cta?.color ?? category.color ?? '#000000',
         href: ctaButtonHref,
         text: ctaText,
         insideTr: true,
-        tdClass: 'newsletterContainer',
+        tdClass: category?.cta?.tdClass ?? 'newsletterContainer',
         variant: ctaVariant,
         type: type,
         src: type !== 'landing' ? ctaSrc : null,
         align: 'center',
         theme,
         bg: category?.cta?.bg ?? theme?.ctaBg ?? '#F6E7E6',
+        borderColor: category?.cta?.borderColor ?? '',
+        borderWidth: category?.cta?.borderWidth ?? '',
+        transform: category?.cta?.transform ?? '',
       })}
+      ${category?.cta?.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
     `
     : '';
+  
+  let ctaPos = 'afterProducts';
+
+  if (category?.ctaPosition) ctaPos = category.ctaPosition
 
   const ConditionElement = (!isDeal && category.showCondition) && queries?.condition
     ? `
@@ -241,15 +256,17 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${SpaceBeforeProducts}
 
+        ${ctaPos === 'afterParagraph' ? CTAElement : ''}
+
         ${ProductsElement}
 
         ${ParagraphAfterProducts}
 
         ${ConditionElement}
 
-        ${CTAElement}
+        ${(ctaPos === 'afterProducts') ? CTAElement : ''}
 
-        ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom60px' })}
+        ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom60px', bg: category?.spaceColor ?? '' })}
 
         ${
           category?.line?.show
@@ -272,6 +289,7 @@ const renderBody = async ({
   tiles,
   showPrices,
   showNames,
+  prodSettings = {},
   gapBetweenHorizontal,
   gapBetweenVertical,
   align = 'left',
@@ -297,7 +315,12 @@ const renderBody = async ({
   disableHighPrice = false,
   combineOfferParts = false,
   ctaSettings = {},
-  containerClass = 'newsletterContainer',
+  offerSpaceAfter = '',
+  tdClass = 'newsletterContainer',
+  showTileNames,
+  displayType = '2col',
+  tileBgColor = '',
+  tileTextColor = '',
 }) => {
   const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
 
@@ -334,7 +357,13 @@ const renderBody = async ({
       type,
       combineOfferParts,
       ctaSettings,
-      containerClass,
+      tdClass,
+      prodSettings,
+      offerSpaceAfter,
+      showTileNames,
+      displayType,
+      tileBgColor,
+      tileTextColor,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

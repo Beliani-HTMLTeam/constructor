@@ -19,6 +19,8 @@ const MondayNew = async ({
   categories,
   background = '#ffffff',
   color = '#000000',
+  selectedCampaign,
+  date,
 
   intro,
   TopImageTitle_data,
@@ -40,6 +42,7 @@ const MondayNew = async ({
   categoryImageTdClass,
   disableTopImageTitle = false,
   disableHighPrice = false,
+  footerOverride = {},
 }) => {
   const themeData = {...theme};
 
@@ -47,7 +50,7 @@ const MondayNew = async ({
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
@@ -70,16 +73,14 @@ const MondayNew = async ({
   const categoriesBeforeIntro =
     introPosition === 'afterFreebies' && dealIndex >= 0
       ? safeCategories.slice(0, dealIndex + 1)
-      : safeCategories.length > 1
-        ? [safeCategories[0]]
-        : safeCategories;
+      : safeCategories;
 
   const categoriesAfterIntro =
     introPosition === 'afterFreebies' && dealIndex >= 0
       ? safeCategories.slice(dealIndex + 1)
-      : safeCategories.length > 1
-        ? safeCategories.slice(1)
-        : [];
+      : [];
+  
+  console.log(categoriesBeforeIntro)
 
   const categoriesSharedProps = {
     getProductById,

@@ -11,6 +11,9 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
     titleOverride && Array.isArray(rawText)
       ? [titleOverride, ...rawText.slice(1)]
       : rawText;
+  
+  let showCta = true;
+  if (intro?.cta === false) showCta = false; 
 
   const ctaText = intro?.cta?.textOverrides?.[countrySlug] ?? intro?.cta?.text ?? shopNow ?? 'TRANSLATION NOT FOUND';
   const ctaSrc = intro?.cta?.srcByType?.[type] ?? intro?.cta?.src ?? null;
@@ -21,6 +24,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
   return Intro({
     spaceTop: intro?.spaceTop ?? 'newsletterBottom40px',
     spaceBottom: intro?.spaceBottom ?? 'newsletterBottom40px',
+    paragraphSpace: intro?.paragraphSpace ?? 'newsletterBottom25px',
     text: introText,
     paragraphAlign: intro?.alignment ?? 'center',
     color: introColor,
@@ -33,5 +37,9 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
     secondaryLinkText,
     type,
     theme,
+    showCta,
+    disableLine: intro?.disableLine ?? false,
+    ctaSettings: intro?.cta,
+    containerClass: intro?.containerClass
   });
 };

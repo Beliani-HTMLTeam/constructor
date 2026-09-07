@@ -124,7 +124,7 @@ const resolveFreebieRows = ({ freebies, products, freebiesPerRow }) => {
   return getRowsFromProductsList(products, freebiesPerRow);
 };
 
-const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, columnId, theme, disableHighPrice = false }) => {
+const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, columnId, theme, disableHighPrice = false, prodSettings = {} }) => {
   const width = getCellWidth(columns);
   const cellPadding = getCellPadding(columns, columnId);
   const innerPadding = getInnerTablePadding(columns, columnId);
@@ -144,13 +144,20 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
   const productSrc = getProductSrc(product);
   const oldPrice = product.lowPrice ?? product.highPrice ?? '';
 
+  // sizes
+  const freebieSize = prodSettings.freebieSize ? `font-size: ${prodSettings.freebieSize}px;` : '';
+  const freebieBold = prodSettings.freebieBold ? `font-weight: ${prodSettings.freebieBold};` : '';
+  const descSize = prodSettings.descSize ? `font-size: ${prodSettings.descSize}px;` : '';
+  const lowSize = prodSettings.priceLowSize ? `font-size: ${prodSettings.priceLowSize}px;` : '';
+  const highSize = prodSettings.priceHighSize ? `font-size: ${prodSettings.priceHighSize}px;` : '';
+
   return `
     <td style="vertical-align: top; width: ${width};" width="${width}">
       <table cellspacing="0" cellpadding="0" align="${alignConfig.outerTableAlign}">
         <tbody>
           <tr>
             <td align="${alignConfig.contentTdAlign}">
-              <table cellspacing="0" cellpadding="0" align="${alignConfig.innerCardAlign}" style="max-width: ${FREEBIE_CARD_MAX_WIDTH}px;">
+              <table cellspacing="0" cellpadding="0" align="${prodSettings?.align ?? alignConfig.innerCardAlign}" style="max-width: ${FREEBIE_CARD_MAX_WIDTH}px;">
                 <tbody>
                   <tr>
                     <td align="center">
@@ -184,20 +191,20 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
                             <td class="newsletterBottom15px"></td>
                           </tr>
                           <tr>
-                            <td align="left" style="padding: 0; color: ${textColor} !important;">
-                              <span class="newsletterProductTitleFreebie" style="color: ${textColor} !important; font-size: 13px;">${productName}</span><br>
-                              ${product?.useDescription ? `<span class="newsletterProductTitleFreebie" style="color: ${textColor} !important; font-size: 13px;">${productDescription}</span>` : ''}
+                            <td align="${prodSettings?.align ?? "left"}" style="padding: 0; color: ${textColor} !important;">
+                              <span class="newsletterProductTitleFreebie" style="color: ${textColor} !important;${freebieSize}${freebieBold}">${productName}</span><br>
+                              ${product?.useDescription ? `<span class="newsletterProductTitleFreebie" style="color: ${textColor} !important;${descSize}">${productDescription}</span>` : ''}
                             </td>
                           </tr>
                           ${productSize ? `<tr>
                             <td align="center" style="color: ${textColor} !important;">
-                              <span class="newsletterProductTitleFreebie" style="color: ${textColor} !important; font-size: 12px;">${productSize}</span>
+                              <span class="newsletterProductTitleFreebie" style="color: ${textColor} !important; font-size: 14px;">${productSize}</span>
                             </td>
                           </tr>` : ''}
                           <tr>
-                            <td align="left" style="color: ${textColor} !important;">
-                              <span class="newsletterProductLowPrice" style="color: ${priceColor} !important;">${freeText} </span>
-                              ${disableHighPrice ? '' : `<span class="newsletterProductHighPrice" style="color: ${textColor} !important;">${oldPrice}</span>`}
+                            <td align="${prodSettings?.align ?? "left"}" style="color: ${textColor} !important;">
+                              <span class="newsletterProductLowPrice" style="color: ${prodSettings?.lowPriceColor ?? priceColor} !important;${lowSize}">${freeText} </span>
+                              ${disableHighPrice ? '' : `<span class="newsletterProductHighPrice" style="color: ${prodSettings?.highPriceColor ?? textColor} !important;${highSize}">${oldPrice}</span>`}
                             </td>
                           </tr>
                         </tbody>
@@ -214,16 +221,18 @@ const renderFreebieCard = ({ product, color, freeText, fallbackHref, columns, co
   `;
 };
 
-export const renderFreebieGrid = ({ freebies, products, color, freeText, categoryHref, freebiesPerRow = 2, theme = {}, disableHighPrice = false, }) => {
+export const renderFreebieGrid = ({ freebies, products, color, freeText, categoryHref, freebiesPerRow = 2, theme = {}, disableHighPrice = false, prodSettings = {} }) => {
+  console.log(prodSettings)
   const rows = resolveFreebieRows({ freebies, products, freebiesPerRow });
   if (!Array.isArray(rows) || rows.length === 0) return '';
-
+  
   let rowsHtml = '';
   for (let rowId = 0; rowId < rows.length; rowId++) {
     const row = rows[rowId];
     const columns = normalizeColumns(row.length);
     const isLastRow = rowId === rows.length - 1;
     let rowCells = '';
+
 
     for (let columnId = 0; columnId < columns; columnId++) {
       rowCells += renderFreebieCard({
@@ -235,24 +244,25 @@ export const renderFreebieGrid = ({ freebies, products, color, freeText, categor
         columnId,
         theme,
         disableHighPrice,
+        prodSettings,
       });
     }
 
     rowsHtml += `
-      <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="background-color: #ffffff;">
+      <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" class="newsletterContainer" style="background-color: ${theme?.freebieColor ?? theme?.primary};">
         <tbody>
           <tr>
             ${rowCells}
           </tr>
         </tbody>
       </table>
-      ${Space({ insideTable: true, className: isLastRow ? 'newsletterBottom25px' : 'newsletterBottom20px' })}
+      ${Space({ insideTable: true, className: isLastRow ? 'newsletterBottom25px' : 'newsletterBottom20px', bg: theme?.freebieColor ?? theme?.primary })}
     `;
   }
 
   return `
     <tr>
-      <td style="background-color: #ffffff;" class="freebieGridContainer">
+      <td style="background-color: #ffffff;">
         ${rowsHtml}
       </td>
     </tr>
