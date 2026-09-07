@@ -57,7 +57,7 @@ const Intro = ({
       spanStyle: `${title?.styles ? `${title.styles} ` : ' '}color: ${color};`,
     })}</td></tr>
 
-    ${Space({ insideTr: true })}
+    ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
     `
     : '';
 

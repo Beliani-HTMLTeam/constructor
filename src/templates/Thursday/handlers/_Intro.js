@@ -37,8 +37,14 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, getCatego
         href: introCta_href,
         text: shopNow,
         color: introColor,
-        align: 'center',
+        align: intro?.alignment ?? 'center',
         insideTr: true,
+        ...(typeof intro.cta === 'object' ? {
+          ...intro.cta,
+          bg: intro.cta.background ?? intro.cta.bg,
+          textColor: intro.cta.color ?? intro.cta.textColor,
+          background: undefined,
+        } : {}),
       })}
       ${intro.cta.spaceAfter ? Space({ insideTr: true, className: intro.cta.spaceAfter }) : ''}
         `
