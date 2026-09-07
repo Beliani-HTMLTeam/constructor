@@ -293,7 +293,7 @@ export default new entities.Campaign({
 			intro: {
 				color: '#000000', // unused
 				backgroundColor: '#F2E6E6', // unused
-				alignment: 'left',
+				alignment: 'center',
 				type: 'paragraph',
 				cta: {
 					show: true,
@@ -323,7 +323,7 @@ export default new entities.Campaign({
 			intro: {
 				color: '#000000', // unused
 				backgroundColor: '#F2E6E6', // unused
-				alignment: 'left',
+				alignment: 'center',
 				type: 'paragraph',
 				cta: {
 					show: true,

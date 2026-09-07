@@ -386,7 +386,7 @@ export default new entities.Campaign({
 			intro: {
 				color: '#000000',
 				backgroundColor: '#FEC273',
-				alignment: 'left',
+				alignment: 'center',
 				type: 'paragraph',
 				spaceBottom: 'newsletterBottom20px',
 				cta: {
@@ -417,7 +417,7 @@ export default new entities.Campaign({
 			intro: {
 				color: '#000000',
 				backgroundColor: '#FEC273',
-				alignment: 'left',
+				alignment: 'center',
 				type: 'paragraph',
 				spaceBottom: 'newsletterBottom20px',
 				cta: {
