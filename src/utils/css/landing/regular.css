@@ -291,6 +291,22 @@ table {
 }
 
 .START_CTA_AND_CODES {}
+.newsletterCtaBtn {
+  width: auto !important;
+  text-align: center;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+.newsletterCtaLink {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  word-break: break-word;
+}
+
 #newsletter .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
@@ -694,6 +710,11 @@ table {
   }
 
   .START_MQ_TYPOGRAPHY {}
+  .newsletterCtaLink {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
   .newsletterMarkTitle {
     font-size: 18px;
   }
