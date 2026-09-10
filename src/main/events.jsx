@@ -5,7 +5,7 @@ import { appConfig as config } from '@/utils/config';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 import { TemplateHandlers } from './handlers/handlers';
-import { staticTranslations } from '@/api/translations';
+import { staticTranslations } from '@/api';
 import { getQueryLink } from '@/helpers/getQueryLink';
 import {
   foundRedirectsSwal,

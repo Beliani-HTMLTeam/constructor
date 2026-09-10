@@ -1,4 +1,4 @@
-import { staticTranslations } from '@/api/translations';
+import { staticTranslations } from '@/api';
 import { getState } from '@/main/state/appState';
 import { getQueryLink } from '../getQueryLink';
 
