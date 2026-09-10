@@ -100,6 +100,12 @@ table {
   padding-right: 55px;
 }
 
+#newsletter .newsletterContainer40px,
+.newsletterContainer40px {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
 #newsletter .newsletterContainer10px {
   padding-left: 10px;
   padding-right: 10px;
@@ -608,6 +614,12 @@ table {
   #newsletter .newsletterContainer55px {
     padding-left: 25px;
     padding-right: 25px;
+  }
+
+  #newsletter .newsletterContainer40px,
+  .newsletterContainer40px {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
   #newsletter .newsletterContainer10px {
