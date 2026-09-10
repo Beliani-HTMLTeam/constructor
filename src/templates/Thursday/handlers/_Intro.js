@@ -6,15 +6,6 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, getCatego
   const introType = intro?.type ?? 'paragraph';
   const introColor = intro?.color ?? '#000000';
 
-  let resolvedHref = undefined;
-  if (intro?.href) {
-    if (typeof intro.href === 'string' && links && links[intro.href]) {
-      resolvedHref = links[intro.href];
-    } else if (typeof intro.href === 'string') {
-      resolvedHref = getCategoryLink ? getCategoryLink(intro.href) : intro.href;
-    }
-  }
-
   return intro && introType === 'paragraph'
     ? `
   ${Intro({
@@ -27,7 +18,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, getCatego
     container: intro?.container,
     title: intro?.title,
     paragraph: intro?.paragraph,
-    href: resolvedHref,
+    href: introCta_href,
   })}
   ${
     intro.cta

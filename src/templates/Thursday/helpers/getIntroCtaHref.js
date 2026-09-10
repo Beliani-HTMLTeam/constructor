@@ -1,7 +1,7 @@
 export const getIntroCtaHref = ({ links, queries, categories, add_utm, getCategoryLink }) => {
+
   if (links?.Intro_cta_href) {
-    // return add_utm(links.Intro_cta_href);
-    return getCategoryLink(links.Intro_cta_href);
+    return links.Intro_cta_href.includes("/content/") ? links.Intro_cta_href : getCategoryLink(links.Intro_cta_href);
   }
 
   if (queries?.categoryLinks?.[0]) {
