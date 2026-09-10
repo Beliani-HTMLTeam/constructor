@@ -50,8 +50,8 @@ const Product = (
       
       <tr>
         <td align="${align}" style="padding: 0; text-align: ${align}; color: ${product?.settings?.color ?? color}">
-          <span class="newsletterProductTitle"${product?.settings?.prodSize ? ` style="font-size:${product?.settings?.prodSize}px;"` : ""}>${product.name}</span><br>
-          ${productDescription ? `<span class="newsletterProductDescription"${product?.settings?.descSize ? ` style="font-size:${product?.settings?.descSize}px;"` : ""}>${productDescription}</span>` : ''}
+          <span class="${product?.settings?.prodTitleClass ?? 'newsletterProductTitle'}"${product?.settings?.prodSize ? ` style="font-size:${product?.settings?.prodSize}px;"` : ""}>${product.name}</span><br>
+          ${productDescription ? `<span class="${product?.settings?.prodDescClass ?? 'newsletterProductDescription'}"${product?.settings?.descSize ? ` style="font-size:${product?.settings?.descSize}px;"` : ""}>${productDescription}</span>` : ''}
         </td>
       </tr>
     `;
@@ -69,6 +69,7 @@ const Product = (
             highColor: product?.settings?.highPriceColor,
             lowSize: product?.settings?.priceLowSize,
             highSize: product?.settings?.priceHighSize,
+            settings: product?.settings,
             align,
             theme,
           })}

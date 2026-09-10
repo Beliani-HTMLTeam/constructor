@@ -11,6 +11,9 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
     titleOverride && Array.isArray(rawText)
       ? [titleOverride, ...rawText.slice(1)]
       : rawText;
+  let ctaPadding;
+  if (intro?.cta?.useStyleAttribute)
+    ctaPadding = intro?.cta?.spaceAfter.match(/(\d+)px/)[1]
 
   return intro && introType === 'paragraph'
     ? `
@@ -34,7 +37,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
           align: 'center',
         })}
       </td></tr>
-      ${intro.cta.spaceAfter ? `<tr style="background-color: ${intro.backgroundColor ?? ''};"><td class="${intro.cta.spaceAfter}"></td></tr>` : ''}
+      ${intro.cta.spaceAfter ? `<tr style="background-color: ${intro.backgroundColor ?? ''};"><td ${!intro.cta?.useStyleAttribute ? `class="${intro.cta.spaceAfter}"` : `style="padding-bottom:${ctaPadding}px;"`}></td></tr>` : ''}
         `
       : ''
   }

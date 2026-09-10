@@ -100,6 +100,15 @@ const Monday = async ({
   const IntroAfterTopImageElement = isAfterFreebies ? '' : IntroElement;
   const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
 
+  let disableSE = false;
+
+  if (typeof disableSoonEnding === "boolean" && disableSoonEnding)
+    disableSE = true;
+
+  if (typeof disableSoonEnding === "object")
+    disableSE = disableSoonEnding?.includes(country)
+
+
   return `
     ${HeaderElement}
 
@@ -119,7 +128,7 @@ const Monday = async ({
 
     </table>
 
-    ${!disableSoonEnding?.includes(country) ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
+    ${disableSE ? '' : SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
 
     ${FooterElement}
   `;

@@ -142,7 +142,8 @@ table {
   padding-bottom: 25px;
 }
 
-#newsletter .newsletterBottom35px {
+#newsletter .newsletterBottom35px,
+#newsletter .newsletterBottomIntro35px {
   padding-bottom: 35px;
 }
 
@@ -455,6 +456,10 @@ table {
     padding-bottom: 20px;
   }
 
+  #newsletter .newsletterBottomIntro35px {
+    padding-bottom: 50px;
+  }
+
   #newsletter .newsletterBottom60px {
     padding-bottom: 40px;
   }
@@ -582,30 +587,68 @@ table {
 }
 
 .newsletter3ProductsLeft {
-  padding-left: 20px !important;
+  padding-left: 10px !important;
 }
 
 .newsletter3ProductsCenter {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
 }
 
 .newsletter3ProductsRight {
-  padding-right: 20px !important;
+  padding-right: 10px !important;
 }
 
 @media screen and (max-width: 768px) {
   .newsletter3ProductsLeft {
-    padding-left: 10px !important;
+    padding-left: 5px !important;
   }
 
   .newsletter3ProductsCenter {
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
   }
 
   .newsletter3ProductsRight {
-    padding-right: 10px !important;
+    padding-right: 5px !important;
+  }
+}
+
+.newsletter3ProdsPeakLeft {
+  padding-left: 10px !important;
+  padding-right: 5px !important;
+}
+
+.newsletter3ProdsPeakCenter {
+  padding-left: 8px !important;
+  padding-right: 7px !important;
+}
+
+.newsletter3ProdsPeakRight {
+  padding-left: 5px !important;
+  padding-right: 10px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .newsletter3ProdsPeakLeft {
+    padding-left: 6px !important;
+    padding-right: 3px !important;
+  }
+
+  .newsletter3ProdsPeakCenter {
+    padding-left: 5px !important;
+    padding-right: 4px !important;
+  }
+
+  .newsletter3ProdsPeakRight {
+    padding-left: 3px !important;
+    padding-right: 6px !important;
+  }
+
+  .newsletter3ProdsPeakLeft .newsletterProductTitle,
+  .newsletter3ProdsPeakCenter .newsletterProductTitle,
+  .newsletter3ProdsPeakRight .newsletterProductTitle {
+    font-size: 16px !important;
   }
 }
 

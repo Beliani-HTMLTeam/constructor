@@ -6,6 +6,7 @@ const Paragraph = ({
   className = 'newsletterParagraph',
   spanStyle,
   align = 'left',
+  uppercase = false,
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -15,7 +16,7 @@ const Paragraph = ({
 
   let html = '';
 
-  html += `<span class="${className}" style="text-align: ${align}; ${spanStyle ?? ''}">${text}</span>`;
+  html += `<span class="${className}" style="text-align: ${align}; ${spanStyle ?? ''}${uppercase ? ' text-transform: uppercase;' : ''}">${text}</span>`;
 
   if (insideTr) {
     html = `<tr><td style="text-align: ${align};">${html}</td></tr>`;

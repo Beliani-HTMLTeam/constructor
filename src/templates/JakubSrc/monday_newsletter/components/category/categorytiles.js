@@ -52,6 +52,7 @@ export const render = ({
               href: href,
               insideTr: true,
               align: 'center',
+              width: item?.width ?? 290,
             });
 
             productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom35px' });

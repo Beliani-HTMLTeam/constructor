@@ -6,27 +6,19 @@ export const render = ({
   showNames,
   gapBetweenVertical = true,
   gapBetweenHorizontal = true,
-  align = 'left',
-  queries,
-  insideContainer = true,
-  color,
-  id,
-  imageSide,
+  align = 'center',
+  color = '#000000',
   prodSettings = {},
   categoryHref,
 }) => {
-  let productsInnerHtml = '';
-
-  if (!Array.isArray(products) || products.length === 0) return productsInnerHtml;
+  if (!Array.isArray(products) || products.length === 0) return '';
 
   const columns = 3;
 
-  // ${insideContainer ? 'class="newsletterContainer"' : ''}
-
-  productsInnerHtml += `
+  let productsInnerHtml = `
     <tr>
-      <td style="color: ${color}" >
-        <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+      <td style="color: ${color};">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; table-layout: fixed;">`;
 
   for (let prodId = 0; prodId < products.length; prodId += columns) {
     productsInnerHtml += '<tr>';
@@ -36,27 +28,29 @@ export const render = ({
 
       if (product !== undefined) {
         product.settings = {
-          width: 200,
           ...prodSettings,
-        }
+        };
       }
 
-      // logic looks inverted but it's correct and stops layout from breaking
-      const productImageAlign = columnId === 0 ? 'right' : columnId === columns - 1 ? 'left' : 'center';
+      const productImageAlign = 'center';
 
       const horizontalGapClass = !gapBetweenHorizontal
         ? ''
         : columnId === 0
-          ? 'newsletter3ProductsLeft'
+          ? 'newsletter3ProdsPeakLeft'
           : columnId === columns - 1
-            ? 'newsletter3ProductsRight'
-            : 'newsletter3ProductsCenter';
+            ? 'newsletter3ProdsPeakRight'
+            : 'newsletter3ProdsPeakCenter';
 
-      productsInnerHtml += `<td style="color: ${color}; width:33.333333333333336%;vertical-align:top;" width="33.333333333333336%" ${horizontalGapClass ? `class="${horizontalGapClass}"` : ''}>`;
+      productsInnerHtml += `<td style="color: ${color}; width: 33.333333333333336%; vertical-align: top;" width="33.333333333333336%" ${
+        horizontalGapClass ? `class="${horizontalGapClass}"` : ''
+      }>`;
 
       if (product) {
         const productWithCategoryHref =
-          product?.useCategoryLink && categoryHref ? { ...product, categoryLink: categoryHref } : product;
+          product?.useCategoryLink && categoryHref
+            ? { ...product, categoryLink: categoryHref }
+            : product;
 
         productsInnerHtml += Product(
           productWithCategoryHref,
@@ -76,7 +70,14 @@ export const render = ({
     productsInnerHtml += '</tr>';
   }
 
-  productsInnerHtml += '</td></tr></table>';
+  productsInnerHtml += `
+        </table>
+      </td>
+    </tr>`;
 
   return productsInnerHtml;
 };
+
+
+
+

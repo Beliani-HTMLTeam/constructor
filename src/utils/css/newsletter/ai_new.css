@@ -331,6 +331,28 @@ img {
   font-size: 20px;
 }
 
+.newsletterProductTitleSmall {
+  letter-spacing: 1.3px;
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+.newsletterProductDescSmall {
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+.newsletterProductLowPriceSmall {
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+.newsletterProductHighPriceSmall {
+  line-height: 1.2;
+  font-size: 15px;
+  text-decoration: line-through;
+}
+
 .newsletterFooterCategoryLEFT {
   padding-bottom: 20px !important;
   padding-right: 10px !important;
@@ -679,7 +701,7 @@ img {
   }
 
   .introRedTitle {
-    font-size: 25px !important;
+    font-size: 30px !important;
   }
 
   .newsletterParagraph {

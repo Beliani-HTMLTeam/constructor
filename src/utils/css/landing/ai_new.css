@@ -295,8 +295,32 @@ table {
 
 #newsletter .newsletterProductTitleFreebie {
   text-align: center;
+  font-family: "Open Sans", sans-serif;
   font-size: 20px;
 }
+
+#newsletter .newsletterProductTitleSmall {
+  letter-spacing: 1.3px;
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+#newsletter .newsletterProductDescSmall {
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+#newsletter .newsletterProductLowPriceSmall {
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+#newsletter .newsletterProductHighPriceSmall {
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+
 
 #newsletter .newsletterFooterCategoryLEFT {
   padding-bottom: 20px !important;
@@ -435,7 +459,7 @@ table {
   }
 
   #newsletter .introRedTitle {
-    font-size: 25px !important;
+    font-size: 30px !important;
   }
 
   #newsletter .newsletterFooterCategoryRIGHTBottom {
