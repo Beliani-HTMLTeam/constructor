@@ -88,6 +88,25 @@ table {
   padding-right: 20px;
 }
 
+#newsletter.newsletterContainer {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#newsletter .newsletterContainerFooter20px,
+#newsletter.newsletterContainerFooter20px,
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#newsletter .newsletterContainerHeader20px,
+#newsletter.newsletterContainerHeader20px,
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 #newsletter .newsletterContainer55px {
   padding-left: 55px;
   padding-right: 55px;
@@ -96,11 +115,6 @@ table {
 .newsletterContainer60px {
   padding-left: 60px !important;
   padding-right: 60px !important;
-}
-
-#newsletter.newsletterContainer {
-  padding-left: 20px;
-  padding-right: 20px;
 }
 
 #newsletter .newsletterCta {
@@ -432,13 +446,27 @@ table {
     padding-right: 10px;
   }
 
-  #newsletter .newsletterContainerWithPaddingBottom20px {
-    padding-bottom: 10px;
+  #newsletter.newsletterContainer {
     padding-left: 10px;
-  padding-right: 10px;
+    padding-right: 10px;
   }
 
-  #newsletter.newsletterContainer {
+  #newsletter .newsletterContainerFooter20px,
+  #newsletter.newsletterContainerFooter20px,
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #newsletter .newsletterContainerHeader20px,
+  #newsletter.newsletterContainerHeader20px,
+  .newsletterContainerHeader20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #newsletter .newsletterContainerWithPaddingBottom20px {
+    padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -470,11 +498,11 @@ table {
   }
 
 	#newsletter .newsletterRight5px {
-		padding-right: 2px;
+		padding-right: 2.5px;
 	}
 	
 	#newsletter .newsletterLeft5px {
-		padding-left: 2px;
+		padding-left: 2.5px;
 	}
 
   #newsletter .newsletterLeft10px {
@@ -494,7 +522,7 @@ table {
   }
 
 	#newsletter .newsletterBottom10px {
-		padding-bottom: 4px;
+		padding-bottom: 5px;
 	}
   
   #newsletter .newsletterBottom15px {
