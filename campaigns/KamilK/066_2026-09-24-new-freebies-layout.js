@@ -1,4 +1,5 @@
 // Campaign generated from form
+// https://docs.google.com/spreadsheets/d/1RcsQspit0B3b3xX1NwZ9RWnUzZrkoVDULu2cnPMZ04U/edit?gid=591949385#gid=591949385
 const campaignTranslationsSheet = '2026::new freebies layout - DONT EDIT';
 
 const tableQueries = [
@@ -30,7 +31,7 @@ const links = {
 	// TopImageTitle_src: translateImage({ value: '20260924_01.png' }),
 
 	TopImage_src: getImageUrl('20260924_Pic.jpg', true),
-	TopImage_href: translateLink({ value: 'content/lp26-09-24' }),
+	TopImage_href: translateLink({ value: 'content/nowe-freebie-test' }),
 
 	Banner_1: translateLink({ value: 'content/lp26-09-17' }),
 	Banner_1_Image: translateImage({ value: '20260917b.png' }),
@@ -38,9 +39,9 @@ const links = {
 	Banner_2: translateLink({ value: 'content/lp26-09-16' }),
 	Banner_2_Image: translateImage({ value: '20260916b.png' }),
 
-	Timer_href: translateLink({ value: 'content/lp26-09-21' }),
-	
-  Intro_cta_href: "https://www.beliani.ch",
+	Timer_href: translateLink({ value: 'content/nowe-freebie-test' }),
+
+	Intro_cta_href: "https://www.beliani.ch",
 };
 
 // const TopImageTitle_data = {
@@ -434,7 +435,28 @@ const categories = [
 ];
 
 const timer = {
-	freebies: getImageUrl('20260924free.png', true),
+	freebies: [
+		// KALAMATA
+		{
+			id: '364500',
+			src: getImageUrl('20260924_Pic01b.png', true),
+		},
+		// SEBES
+		{
+			id: '330055',
+			src: getImageUrl('20260924_Pic02b.png', true),
+		},
+		// FRANKLINIA
+		{
+			id: '329139',
+			src: getImageUrl('20260924_Pic03b.png', true),
+		},
+		// CHALKIDA
+		{
+			id: '364571',
+			src: getImageUrl('20260924_Pic04b.png', true),
+		},
+	],
 	deadline: '2026-09-27',
 }
 
@@ -479,9 +501,9 @@ export default new entities.Campaign({
 				},
 			},
 			Inside: {
-				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				unitBackground: '#E3CCCC',
+				color: '#ffffff',
+				backgroundColor: '#750000',
+				unitBackground: '#A86A6A',
 				type: 'timer',
 				spaceBefore: 'newsletterBottom35px',
 			},
@@ -524,9 +546,9 @@ export default new entities.Campaign({
 				},
 			},
 			Inside: {
-				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				unitBackground: '#E3CCCC',
+				color: '#ffffff',
+				backgroundColor: '#750000',
+				unitBackground: '#A86A6A',
 				type: 'timer',
 				spaceBefore: 'newsletterBottom35px',
 			},
