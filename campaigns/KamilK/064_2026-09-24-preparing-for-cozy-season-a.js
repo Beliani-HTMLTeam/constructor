@@ -84,8 +84,8 @@ const additionalCss = `
     }
 
 		.newsletterContainer10px {
-			padding-left: 4px;
-			padding-right: 4px;
+			padding-left: 5px;
+			padding-right: 5px;
 		}
 
 		.newsletterContainer40px {
@@ -130,8 +130,8 @@ const additionalCssLp = `
     }
 			
 		.newsletterContainer10px {
-			padding-left: 4px !important;
-			padding-right: 4px !important;
+			padding-left: 5px !important;
+			padding-right: 5px !important;
 		}
 
 		.newsletterContainer40px {
