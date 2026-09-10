@@ -1,6 +1,5 @@
-/*============================================================
-  RESET & BASICS
-============================================================*/
+.START_RESET {}
+
 table {
   border-collapse: separate;
   mso-table-lspace: 0pt;
@@ -11,9 +10,7 @@ table {
   display: block;
 }
 
-/*============================================================
-  HEADER & ADVANTAGES
-============================================================*/
+.START_HEADER {}
 #newsletter .newsletterTitleH1 {
   font-size: 45px;
   line-height: 53px;
@@ -68,9 +65,7 @@ table {
   margin-top: 10px;
 }
 
-/*============================================================
-  CONTAINERS
-============================================================*/
+.START_CONTAINERS {}
 #newsletter .newsletterContainer {
   padding-left: 20px;
   padding-right: 20px;
@@ -125,9 +120,7 @@ table {
   padding-top: 35px;
 }
 
-/*============================================================
-  SPACING: BOTTOM (newsletterBottom)
-============================================================*/
+.START_SPACING_BOTTOM {}
 #newsletter .newsletterBottom10px {
   padding-bottom: 10px;
 }
@@ -169,9 +162,7 @@ table {
   padding-bottom: 80px;
 }
 
-/*============================================================
-  SPACING: PADDING LEFT / RIGHT (newsletterPadding)
-============================================================*/
+.START_SPACING_PADDING {}
 #newsletter .newsletterRight5px {
   padding-right: 5px;
 }
@@ -200,9 +191,7 @@ table {
   padding-left: 20px;
 }
 
-/*============================================================
-  TYPOGRAPHY & HEADINGS
-============================================================*/
+.START_TYPOGRAPHY {}
 .newsletterMarkTitle {
   font-size: 25px;
   line-height: 1;
@@ -251,9 +240,7 @@ table {
   font-weight: 600 !important;
 }
 
-/*============================================================
-  PRODUCTS & CATEGORIES
-============================================================*/
+.START_PRODUCTS {}
 #newsletter .newsletterProductTitle {
   font-size: 20px;
   line-height: 1.2;
@@ -298,9 +285,7 @@ table {
   padding-right: 20px !important;
 }
 
-/*============================================================
-  CTA & CODES
-============================================================*/
+.START_CTA_AND_CODES {}
 #newsletter .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
@@ -324,9 +309,7 @@ table {
   line-height: 1.20;
 }
 
-/*============================================================
-  TIMER COMPONENT
-============================================================*/
+.START_TIMER {}
 #newsletter .newsletterSubtitleTimer {
   font-size: 27px;
   line-height: 1.25;
@@ -376,9 +359,7 @@ table {
   margin-top: clamp(2px, 1vw, 4px);
 }
 
-/*============================================================
-  FREEBIES COMPONENT
-============================================================*/
+.START_FREEBIES {}
 #newsletter .freebiesContainer {
   padding-left: 40px;
   padding-right: 40px;
@@ -516,9 +497,7 @@ table {
   font-weight: 600;
 }
 
-/*============================================================
-  FOOTER
-============================================================*/
+.START_FOOTER {}
 #newsletter .newsletterFooter {
   padding-left: 20px !important;
   padding-right: 20px !important;
@@ -568,11 +547,9 @@ table {
   padding-left: 25px !important;
 }
 
-/*============================================================
-  MEDIA QUERIES
-============================================================*/
+.START_MEDIA_QUERIES {}
 @media screen and (max-width: 768px) {
-  /* Layout & Helpers */
+  .START_MQ_LAYOUT {}
   .br {
     display: contents;
   }
@@ -582,7 +559,7 @@ table {
     padding-right: 5px;
   }
 
-  /* Containers */
+  .START_MQ_CONTAINERS {}
   #newsletter .newsletterContainer {
     padding-left: 10px;
     padding-right: 10px;
@@ -632,7 +609,7 @@ table {
     padding-right: 20px !important;
   }
 
-  /* Spacing: Bottom */
+  .START_MQ_SPACING_BOTTOM {}
   #newsletter .newsletterBottom10px {
     padding-bottom: 4px;
   }
@@ -657,6 +634,14 @@ table {
     padding-bottom: 50px;
   }
 
+  #newsletter .newsletterBottom40px {
+    padding-bottom: 25px;
+  }
+
+  #newsletter .newsletterBottom45px {
+    padding-bottom: 30px;
+  }
+
   #newsletter .newsletterBottom60px {
     padding-bottom: 40px;
   }
@@ -669,7 +654,7 @@ table {
     padding-bottom: 50px;
   }
 
-  /* Spacing: Left / Right */
+  .START_MQ_SPACING_PADDING {}
   #newsletter .newsletterLeft5px {
     padding-left: 2px;
   }
@@ -698,7 +683,7 @@ table {
     padding-right: 10px;
   }
 
-  /* Typography & Headings */
+  .START_MQ_TYPOGRAPHY {}
   .newsletterMarkTitle {
     font-size: 18px;
   }
@@ -762,7 +747,7 @@ table {
     font-weight: 600 !important;
   }
 
-  /* Products & Categories */
+  .START_MQ_PRODUCTS {}
   #newsletter .newsletterProductTitle {
     font-size: 18px;
   }
@@ -801,12 +786,12 @@ table {
     padding-right: 10px !important;
   }
 
-  /* Timer Component */
+  .START_MQ_TIMER {}
   #newsletter .newsletterSubtitleTimer {
     font-size: 20px !important;
   }
 
-  /* Freebies Component */
+  .START_MQ_FREEBIES {}
   #newsletter .freebiesContainer {
     padding-left: 20px;
     padding-right: 20px;
@@ -861,7 +846,7 @@ table {
     overflow: visible !important;
   }
 
-  /* Footer */
+  .START_MQ_FOOTER {}
   #newsletter .newsletterFooterTitle {
     font-size: 18px;
   }
