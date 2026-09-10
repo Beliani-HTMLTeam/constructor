@@ -8,6 +8,8 @@ const state = {
   selectedTemplates: [],
   shop: null,
   campaigns: [],
+  scope: null,
+  scopes: [],
 };
 
 function getRoot() {

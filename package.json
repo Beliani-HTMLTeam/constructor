@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "main": "src/app.js",
+  "main": "src/app.jsx",
   "scripts": {
     "dev": "concurrently \"bun server/api-server.js\" \"vite --port 5500\"",
     "build": "vite build",

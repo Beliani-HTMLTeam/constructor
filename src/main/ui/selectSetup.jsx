@@ -1,10 +1,104 @@
 import { selectCampaignHandler, handleShopChange } from '@/main/events.jsx';
 import { renderAvailableTemplates } from '@/main/renderAvailableTemplates.js';
 import { populateSelect, createSelectOption, showElements, hideElements } from '@/utils/domUtils.js';
-import { root } from '@/app.js';
+import { root } from '@/app.jsx';
 import { getIframe } from '@/helpers/getIframe';
 import { toast } from 'sonner';
 import { appConfig as config } from '@/utils/config';
+
+export function setupSelectScopes(elements, scopes, setState, getState, onScopeChange) {
+  const {
+    selectScopes,
+    selectCampaigns,
+    selectTemplates,
+    selectTemplatesWrapper,
+    selectShop,
+    selectShopWrapper,
+    selectLanguage,
+    selectLanguageWrapper,
+    openIssue,
+    openFigma,
+    purgeDynamicSpreadsheet,
+    openCampaign,
+    openLP,
+    copyTemplate,
+    redirectCheck,
+  } = elements;
+
+  if (!selectScopes) return;
+
+  const scopeItems = (scopes || []).map((scopeName) => ({
+    value: scopeName,
+    text: scopeName,
+  }));
+  populateSelect(selectScopes, scopeItems, 'Select Scope');
+
+  const activeScope = getState('scope');
+  if (activeScope && scopes?.includes(activeScope)) {
+    selectScopes.value = activeScope;
+  }
+
+  selectScopes.addEventListener('change', async (ev) => {
+    const newScope = ev.target.value;
+
+    // Reset downstream elements and previews
+    hideElements(
+      selectTemplates,
+      selectTemplatesWrapper,
+      selectShop,
+      selectShopWrapper,
+      selectLanguage,
+      selectLanguageWrapper,
+      openIssue,
+      openFigma,
+      purgeDynamicSpreadsheet,
+      openCampaign,
+      openLP,
+      copyTemplate,
+      redirectCheck
+    );
+
+    if (root) {
+      root.innerHTML = '';
+    }
+
+    if (selectCampaigns) {
+      selectCampaigns.innerHTML = '<option value="default">Select Campaign</option>';
+    }
+    if (selectTemplates) {
+      selectTemplates.innerHTML = '<option value="default">Select Template</option>';
+    }
+    if (selectShop) {
+      selectShop.innerHTML = '<option value="default">Select shop</option>';
+    }
+    if (selectLanguage) {
+      selectLanguage.innerHTML = '<option value="default">Select Language</option>';
+    }
+
+    setState('selectedCampaign', {});
+    setState('selectedTemplates', []);
+    setState('shop', null);
+    setState('selectedLanguage', null);
+    setState('country', '');
+    setState('name', '');
+    setState('html', '');
+    setState('ids', {});
+
+    if (newScope === 'default') {
+      setState('scope', null);
+      setState('campaigns', []);
+      if (onScopeChange) {
+        await onScopeChange(null);
+      }
+      return;
+    }
+
+    setState('scope', newScope);
+    if (onScopeChange) {
+      await onScopeChange(newScope);
+    }
+  });
+}
 
 export function setupSelectCampaigns(elements, campaigns, setState, getState, render, setSelectedTemplate) {
   const { selectCampaigns, selectTemplates, selectTemplatesWrapper, openIssue, openFigma, purgeDynamicSpreadsheet } =
@@ -18,7 +112,8 @@ export function setupSelectCampaigns(elements, campaigns, setState, getState, re
     // Show select templates after selecting campaign
     showElements(selectTemplates, selectTemplatesWrapper, openIssue, openFigma, purgeDynamicSpreadsheet);
 
-    const { selectedCampaign, templates } = selectCampaignHandler(ev, campaigns);
+    const currentCampaigns = getState('campaigns') || campaigns || [];
+    const { selectedCampaign, templates } = selectCampaignHandler(ev, currentCampaigns);
 
     root.innerHTML = '';
     selectTemplates.innerHTML = '<option value="default">Select template</option>';

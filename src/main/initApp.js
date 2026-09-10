@@ -5,10 +5,12 @@ import { initCampaigns } from '@/main/initCampaigns.js';
 import { renderTemplate } from '@/main/rendering/templateRenderer.js';
 
 import {
+  setupSelectScopes,
   setupSelectCampaigns,
   setupSelectShop,
   setupSelectLanguage,
-  setupSelectTemplate, setupSelectPurge
+  setupSelectTemplate,
+  setupSelectPurge,
 } from '@/main/ui/selectSetup.jsx';
 
 import {
@@ -25,19 +27,24 @@ import {
 import { createSetSelectedTemplate } from '@/main/ui/templateHelpers.js';
 import { handleSlugChange } from '@/main/events.jsx';
 
-export function initApp({ campaigns, shops, config }) {
+export function initApp({ scopes, initialScope, campaigns, shops, config, onScopeChange }) {
   const jsConfetti = new JSConfetti();
   const domElements = getDOMElements();
 
   setState('config', config);
-  setState('campaigns', campaigns);
-  domElements.selectCampaigns.append(...initCampaigns(campaigns, config));
+  setState('scopes', scopes || []);
+  setState('scope', initialScope || null);
+  setState('campaigns', campaigns || []);
+
+  if (campaigns && campaigns.length > 0) {
+    domElements.selectCampaigns.append(...initCampaigns(campaigns, config));
+  }
 
   // Setup all event listeners
-  setupEventListeners(domElements, campaigns, shops, jsConfetti);
+  setupEventListeners(domElements, { scopes, campaigns, shops, jsConfetti, onScopeChange });
 }
 
-function setupEventListeners(elements, campaigns, shops, jsConfetti) {
+function setupEventListeners(elements, { scopes, campaigns, shops, jsConfetti, onScopeChange }) {
   // Login button
   // elements.login?.addEventListener('click', GoogleAuth.login);
 
@@ -48,6 +55,7 @@ function setupEventListeners(elements, campaigns, shops, jsConfetti) {
   const setSelectedTemplate = createSetSelectedTemplate(elements, setState, getState);
 
   // Setup select elements
+  setupSelectScopes(elements, scopes, setState, getState, onScopeChange);
   setupSelectCampaigns(elements, campaigns, setState, getState, render, setSelectedTemplate);
   setupSelectShop(elements, shops, setState, getState, render);
   setupSelectLanguage(elements, setState, getState, render, handleSlugChange);
@@ -67,3 +75,4 @@ function setupEventListeners(elements, campaigns, shops, jsConfetti) {
   // Setup purge elements handlers
   setupSelectPurge(elements);
 }
+
