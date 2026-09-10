@@ -9,7 +9,7 @@ import {
   setupSelectShop,
   setupSelectLanguage,
   setupSelectTemplate, setupSelectPurge
-} from '@/main/ui/selectSetup.js';
+} from '@/main/ui/selectSetup.jsx';
 
 import {
   setupProductsHandler,
@@ -23,7 +23,7 @@ import {
   setupRedirectCheckHandler,
 } from '@/main/ui/buttonHandlers.js';
 import { createSetSelectedTemplate } from '@/main/ui/templateHelpers.js';
-import { handleSlugChange } from '@/main/events.js';
+import { handleSlugChange } from '@/main/events.jsx';
 
 export function initApp({ campaigns, shops, config }) {
   const jsConfetti = new JSConfetti();

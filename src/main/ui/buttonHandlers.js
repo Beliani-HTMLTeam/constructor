@@ -5,7 +5,7 @@ import {
   openLpHandler,
   purgeDynamicSpreadsheetData,
   runRedirectCheck,
-} from '@/main/events.js';
+} from '@/main/events.jsx';
 import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts.js';

@@ -1,4 +1,4 @@
-import { selectCampaignHandler, handleShopChange } from '@/main/events.js';
+import { selectCampaignHandler, handleShopChange } from '@/main/events.jsx';
 import { renderAvailableTemplates } from '@/main/renderAvailableTemplates.js';
 import { populateSelect, createSelectOption, showElements, hideElements } from '@/utils/domUtils.js';
 import { root } from '@/app.js';
@@ -105,6 +105,7 @@ export function setupSelectTemplate(elements, setState, getState, render, setSel
   });
 }
 
+// static translations purge
 export function setupSelectPurge(elements) {
   const { selectPurge } = elements;
 
@@ -113,32 +114,51 @@ export function setupSelectPurge(elements) {
       return;
     }
 
-    const prettierTabName = ev.target.value.replace('_', ' ');
+    const tabName = ev.target.value;
+    const prettierTabName = tabName.replace('_', ' ');
 
-    const url = `${config.external_api_url}static/${ev.target.value}/force-refresh`;
-    if (!url) return;
+    const url = `${config.external_api_url}static/${tabName}/force-refresh`;
+
+    const headers = {
+      Accept: 'application/json',
+      skip_zrok_interstitial: 'true',
+    };
+
+    const purgePromise = fetch(url, {
+      method: 'GET',
+      headers: headers,
+      mode: 'cors',
+      credentials: 'omit',
+    }).then(async (response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to purge (${response.status})`);
+      }
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
+      return response;
+    });
+
+    toast.promise(purgePromise, {
+      // loading can be only string | React.ReactNode
+      loading: (
+        <div data-content="">
+          <div data-title="">Purging static spreadsheet...</div>
+          <div data-description="">{prettierTabName}</div>
+        </div>
+      ),
+      success: () => ({
+        message: 'Successfully purged static spreadsheet!',
+        description: prettierTabName,
+      }),
+      error: (err) => ({
+        message: 'Error during purge',
+        description: `${prettierTabName}, error: ${err.message}`,
+      }),
+    });
 
     try {
-      const headers = {
-        Accept: 'application/json',
-        skip_zrok_interstitial: 'true',
-      };
-
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: headers,
-        mode: 'cors',
-        credentials: 'omit',
-      });
-
-      if (response.ok) {
-        toast.success(`Successfully purged: ${prettierTabName}`);
-      } else {
-        toast.error(`Failed to purge: ${prettierTabName} (${response.status})`);
-      }
+      await purgePromise;
     } catch (error) {
-      console.error('Error during purge:', error);
-      toast.error(`Error during purge ${prettierTabName}: ${error.message}`);
+      console.error('Purge error: ', error);
     } finally {
       ev.target.value = 'default';
     }
