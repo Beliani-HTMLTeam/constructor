@@ -50,6 +50,13 @@
           <!--                                                  -->
           <div class="group">
             <div class="select-wrapper">
+              <select class="select-select" id="scopes">
+                <option value="default">Select Scope</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+
+            <div class="select-wrapper">
               <select class="select-select" id="campaigns">
                 <option value="default">Select Campaign</option>
               </select>
@@ -202,7 +209,7 @@
 
     <div id="root"></div>
 
-    <script type="module" src="src/app.js"></script>
+    <script type="module" src="src/app.jsx"></script>
     <script src="/hamburger.js"></script>
     <script type="module" src="/form/prepareCreatorForm.js"></script>
   </body>

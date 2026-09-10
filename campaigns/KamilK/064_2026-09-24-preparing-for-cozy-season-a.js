@@ -15,7 +15,7 @@ const tableQueries = [
 		name: 'paragraphs',
 	},
 	{
-		tableRange: '27:28',
+		tableRange: '31:32',
 		name: 'condition',
 	},
 	{
@@ -30,7 +30,7 @@ const links = {
 	// TopImageTitle_src: translateImage({ value: '20260924_01.png' }),
 
 	TopImage_src: getImageUrl('20260924_Pic.jpg', true),
-	TopImage_href: translateLink({ value: '/content/lp26-09-24/' }),
+	TopImage_href: translateLink({ value: 'content/lp26-09-24' }),
 
 	Banner_1: translateLink({ value: 'content/lp26-09-17' }),
 	Banner_1_Image: translateImage({ value: '20260917b.png' }),
@@ -39,8 +39,8 @@ const links = {
 	Banner_2_Image: translateImage({ value: '20260916b.png' }),
 
 	Timer_href: translateLink({ value: 'content/lp26-09-21' }),
-
-	Intro_cta_href: translateLink({ value: '/' }),
+	
+  Intro_cta_href: "https://www.beliani.ch",
 };
 
 // const TopImageTitle_data = {
@@ -53,11 +53,6 @@ const additionalCss = `
 	.newsletterContainer10px {
 		padding-left: 10px;
 		padding-right: 10px;
-	}
-
-	.newsletterContainer20px {
-		padding-left: 20px;
-		padding-right: 20px;
 	}
 
 	.newsletterContainer40px {
@@ -88,6 +83,11 @@ const additionalCss = `
       max-width: 100%;
     }
 
+		.newsletterContainer10px {
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+
 		.newsletterContainer40px {
 			padding-left: 20px;
 			padding-right: 20px;
@@ -99,11 +99,6 @@ const additionalCssLp = `
 	.newsletterContainer10px {
 		padding-left: 10px !important;
 		padding-right: 10px !important;
-	}
-
-	.newsletterContainer20px {
-		padding-left: 20px !important;
-		padding-right: 20px !important;
 	}
 
 	.newsletterContainer40px {
@@ -133,6 +128,11 @@ const additionalCssLp = `
       width: auto !important;
       max-width: 100% !important;
     }
+			
+		.newsletterContainer10px {
+			padding-left: 5px !important;
+			padding-right: 5px !important;
+		}
 
 		.newsletterContainer40px {
 			padding-left: 20px !important;
@@ -150,6 +150,7 @@ const categories = [
 		background: '#FECD8C',
 		color: '#000000',
 		type: 'grid',
+		tdClass: 'newsletterContainer10px',
 		container: 'newsletterContainer10px',
 		cta: {
 			variant: 'button',
@@ -172,13 +173,13 @@ const categories = [
 			align: 'left',
 			spaceAfter: 'newsletterBottom20px',
 			styles: 'font-weight: 600;',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 		},
 		paragraph: {
 			show: true,
 			align: 'left',
 			position: 'beforeImg',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 			// spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -218,6 +219,7 @@ const categories = [
 		src: getImageUrl('20260924_Cat10a.jpg', true),
 		href: 'https://www.beliani.ch/hallway/storage/',
 		background: '#FECD8C',
+		tdClass: 'newsletterContainer10px',
 		color: '#000000',
 		type: 'grid',
 		container: 'newsletterContainer10px',
@@ -243,13 +245,13 @@ const categories = [
 			// spaceBefore: 'newsletterBottom80px',
 			spaceAfter: 'newsletterBottom20px',
 			styles: 'font-weight: 600;',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 		},
 		paragraph: {
 			show: true,
 			align: 'left',
 			position: 'beforeImg',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 			// spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -290,6 +292,7 @@ const categories = [
 		href: 'https://www.beliani.ch/lighting/',
 		background: '#FECD8C',
 		color: '#000000',
+		tdClass: 'newsletterContainer10px',
 		type: 'grid',
 		container: 'newsletterContainer10px',
 		cta: {
@@ -314,13 +317,13 @@ const categories = [
 			// spaceBefore: 'newsletterBottom80px',
 			spaceAfter: 'newsletterBottom20px',
 			styles: 'font-weight: 600;',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 		},
 		paragraph: {
 			show: true,
 			align: 'left',
 			position: 'beforeImg',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 			// spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -361,6 +364,7 @@ const categories = [
 		href: 'https://www.beliani.ch/textiles/',
 		background: '#FECD8C',
 		color: '#000000',
+		tdClass: 'newsletterContainer10px',
 		type: 'grid',
 		container: 'newsletterContainer10px',
 		cta: {
@@ -386,13 +390,13 @@ const categories = [
 			// spaceBefore: 'newsletterBottom80px',
 			spaceAfter: 'newsletterBottom20px',
 			styles: 'font-weight: 600;',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 		},
 		paragraph: {
 			show: true,
 			align: 'left',
 			position: 'beforeImg',
-			container: 'newsletterContainer20px',
+			container: 'newsletterContainer',
 			// spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 		},
@@ -454,7 +458,6 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
-				href: 'Intro_cta_href',
 				color: '#000000', // unused
 				backgroundColor: '#FECD8C', // unused
 				alignment: 'left',
@@ -500,7 +503,6 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
-				href: 'Intro_cta_href',
 				color: '#000000', // unused
 				backgroundColor: '#FECD8C', // unused
 				alignment: 'left',

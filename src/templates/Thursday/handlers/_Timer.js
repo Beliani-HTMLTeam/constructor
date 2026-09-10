@@ -12,6 +12,7 @@ let languagesMap = {
   // },
 }
 
+// todo: get timezones and labels from translations api
 export const timezones = {
   "CHDE": "Europe/Zurich",
   "CHFR": "Europe/Zurich",

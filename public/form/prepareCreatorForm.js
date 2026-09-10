@@ -10,13 +10,20 @@ import { enhanceJSON } from './enhanceJSON.js';
 import { createAndSaveCampaignFile } from './createCampaignFile.js';
 import { schema } from './form.schema.js';
 
-const scope = __SCOPE__ || import.meta.env?.VITE_SCOPE;
-console.log('prepareCreatorForm.js - scope:', scope); // Debug log
+export function getActiveScope() {
+  const selectScopes = document.querySelector('#scopes');
+  
+	if (selectScopes && selectScopes.value && selectScopes.value !== 'default') {
+    return selectScopes.value;
+  }
 
-if (!scope) {
-  console.error('VITE_SCOPE is not defined in environment variables!');
-  alert('Error: User scope (VITE_SCOPE) is not configured. Please check your .env file.');
+  try {
+    const match = document.cookie.match(/(?:^|;\s*)selectedScope=([^;]+)/);
+  
+		if (match) return decodeURIComponent(match[1]);
+  } catch {}
 }
+
 const formContent = document.querySelector('.form-content');
 
 // Add a close button to the modal header that hides the modal with id `formModal`
@@ -436,9 +443,10 @@ document.addEventListener('creatorFormSubmit', async (event) => {
   console.log('Form submitted with data:', formData);
 
   try {
+    const activeScope = getActiveScope();
     // Validate scope first
-    if (!scope) {
-      throw new Error('User scope (VITE_SCOPE) is not configured. Please check your .env file.');
+    if (!activeScope) {
+      throw new Error('Please select a scope in the dropdown or configure VITE_SCOPE in .env');
     }
 
     // Validate required fields
@@ -448,7 +456,7 @@ document.addEventListener('creatorFormSubmit', async (event) => {
     }
 
     // Create campaign file
-    const { filename, path } = await createAndSaveCampaignFile(formData, scope);
+    const { filename, path } = await createAndSaveCampaignFile(formData, activeScope);
 
     // Show success message
     const modal = document.getElementById('formModal');

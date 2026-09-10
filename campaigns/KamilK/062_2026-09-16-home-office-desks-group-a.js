@@ -33,7 +33,7 @@ const links = {
 	Banner_2: translateLink({ value: 'content/lp26-09-04-ta' }),
 	Banner_2_Image: translateImage({ value: '20260904b.png' }),
 
-	intro_href: translateLink({ value: 'content/lp26-09-16' }),
+	Intro_cta_href: translateLink({ value: 'content/lp26-09-16' }),
 };
 
 // const TopImageTitle_data = {
@@ -440,7 +440,6 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
-				href: 'intro_href',
 				color: '#000000', // unused
 				backgroundColor: '#F6E7E6', // unused
 				alignment: 'center',
@@ -469,7 +468,6 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
-				href: 'intro_href',
 				color: '#000000', // unused
 				backgroundColor: '#F6E7E6', // unused
 				alignment: 'center',

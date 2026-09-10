@@ -1,11 +1,11 @@
 import { getIframe } from '@/helpers/getIframe';
-import { generateNewsletterIds } from '@/helpers/incrementIds.js'
+import { generateNewsletterIds } from '@/helpers/incrementIds.js';
 import { getState, setState } from '@/main/state/appState';
 import { appConfig as config } from '@/utils/config';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 import { TemplateHandlers } from './handlers/handlers';
-import { staticTranslations } from '@/api/translations';
+import { staticTranslations } from '@/api';
 import { getQueryLink } from '@/helpers/getQueryLink';
 import {
   foundRedirectsSwal,
@@ -46,31 +46,48 @@ function figmaCardHandler(url) {
 async function purgeDynamicSpreadsheetData(year, tabName) {
   const url = `${config.external_api_url}dynamic/${year}/${tabName}/force-refresh`;
 
-  try {
-    toast(`🔄 Purging dynamic spreadsheet...\nYear: ${year}\nTab: ${tabName}`);
+  const headers = {
+    Accept: 'application/json',
+    skip_zrok_interstitial: 'true',
+  };
 
-    const headers = {
-      Accept: 'application/json',
-      skip_zrok_interstitial: 'true',
-    };
-
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: headers,
-      mode: 'cors',
-      credentials: 'omit',
-    });
-
-    if (response.ok) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      toast.success(`Successfully purged dynamic spreadsheet!\nYear: ${year}\nTab: ${tabName}`);
-    } else {
-      toast.error(`Failed to purge (${response.status}):\nYear: ${year}\nTab: ${tabName}`);
+  const purgePromise = fetch(url, {
+    method: 'GET',
+    headers: headers,
+    mode: 'cors',
+    credentials: 'omit',
+  }).then(async (response) => {
+    if (!response.ok) {
+      throw new Error(`Failed to purge (${response.status})`);
     }
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    return response;
+  });
+
+  toast.promise(purgePromise, {
+    // loading can be only string | React.ReactNode
+    loading: (
+      <div data-content="">
+        <div data-title="">Purging dynamic spreadsheet...</div>
+        <div data-description="">
+          {year}::{tabName}
+        </div>
+      </div>
+    ),
+    success: () => ({
+      message: 'Successfully purged dynamic spreadsheet!',
+      description: `${year}::${tabName}`,
+    }),
+    error: (err) => ({
+      message: 'Error during purge',
+      description: `${year}::${tabName}, error: ${err.message}`,
+    }),
+  });
+
+  try {
+    await purgePromise;
   } catch (error) {
     console.error('Purge error: ', error);
-    toast.error(`Error during purge:\nYear: ${year}\nTab: ${tabName}\nError: ${error.message}`);
   }
 }
 
