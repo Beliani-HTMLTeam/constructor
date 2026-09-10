@@ -68,6 +68,11 @@ img {
   padding-right: 124px;
 }
 
+.newsletterContainer10px {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .newsletterMiniContainer {
   padding-left: 10px;
   padding-right: 10px;
@@ -600,6 +605,11 @@ img {
   .newsletterContainer40px {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .newsletterContainer10px {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .newsletterMiniContainer {
