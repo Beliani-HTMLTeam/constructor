@@ -82,6 +82,7 @@ body {
 }
 
 .container #app-content {
+	background: #ececec;
   min-height: 100%;
 }
 
