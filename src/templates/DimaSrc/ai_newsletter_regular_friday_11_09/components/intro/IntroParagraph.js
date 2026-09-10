@@ -1,4 +1,4 @@
-import { Intro } from '.';
+import { Intro } from '../Intro';
 import { IntroCTA } from './IntroCTA';
 import { Space } from '../Space';
 
