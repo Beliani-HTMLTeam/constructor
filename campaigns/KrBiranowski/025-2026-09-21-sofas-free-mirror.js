@@ -175,7 +175,7 @@ const categories = [
       bg: theme.ctaPrimary,
       phrase: 'Shop now',
       spaceAfter: false,
-      spaceBefore: 'newsletterBottom40px',
+      spaceBefore: 'newsletterBottom15px',
       tdClass: 'newsletterContainer40px',
       borderColor: theme.ctaPrimary,
       borderWidth: '15px 45px',

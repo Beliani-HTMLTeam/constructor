@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = '2026::Voucher - 07.09.26 - Free Bathroom set';
+const campaignTranslationsSheet = '2026::Voucher - 06.10.26 - Free Bathroom set';
 
 const theme = {
   primary: '#750000',
@@ -19,117 +19,117 @@ const catData = [
   {
     name: 'Bathtubs',
     href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-    catImg: getImageUrl('20260907_Cat10_B.jpg', true),
+    catImg: getImageUrl('20261006_Cat10_B.jpg', true),
   },
   {
     name: 'Bathroom Storage',
     href: 'https://www.beliani.ch/bathroom-furniture/bathroom-storage/',
-    catImg: getImageUrl('20260907_Cat20_B.jpg', true),
+    catImg: getImageUrl('20261006_Cat20_B.jpg', true),
   },
   {
     name: 'Bathroom Mirrors',
     href: 'https://www.beliani.ch/mirrors/bath-mirrors/',
-    catImg: getImageUrl('20260907_Cat30_B.jpg', true),
+    catImg: getImageUrl('20261006_Cat30_B.jpg', true),
   },
   {
     name: 'Bathroom Lighting',
     href: 'https://www.beliani.ch/bathroom-furniture/bathroom-lighting/',
-    catImg: getImageUrl('20260907_Cat40_B.jpg', true),
+    catImg: getImageUrl('20261006_Cat40_B.jpg', true),
   },
 ];
 
 const prodData = [
   [
     [
-      { id: '316914', src: getImageUrl('20260907_Free01_B.png', true), useDescription: true },
-      { id: '320374', src: getImageUrl('20260907_Free02_B.png', true), useDescription: true },
+      { id: '316914', src: getImageUrl('20261006_Free01_B.png', true), useDescription: true },
+      { id: '320374', src: getImageUrl('20261006_Free02_B.png', true), useDescription: true },
     ],
   ],
   [
     {
       id: '417123',
-      src: getImageUrl('20260907_Pic01_B.png', true),
+      src: getImageUrl('20261006_Pic01_B.png', true),
       useDescription: true,
     },
     {
       id: '96874',
-      src: getImageUrl('20260907_Pic02_B.png', true),
+      src: getImageUrl('20261006_Pic02_B.png', true),
       useDescription: true,
     },
     {
       id: '59970',
-      src: getImageUrl('20260907_Pic03_B.png', true),
+      src: getImageUrl('20261006_Pic03_B.png', true),
       useDescription: true,
     },
     {
       id: '731181',
-      src: getImageUrl('20260907_Pic04_B.png', true),
+      src: getImageUrl('20261006_Pic04_B.png', true),
       useDescription: true,
     },
   ],
   [
     {
       id: '515187',
-      src: getImageUrl('20260907_Pic10_B.png', true),
+      src: getImageUrl('20261006_Pic10_B.png', true),
       useDescription: true,
     },
     {
       id: '660887',
-      src: getImageUrl('20260907_Pic11_B.png', true),
+      src: getImageUrl('20261006_Pic11_B.png', true),
       useDescription: true,
     },
     {
       id: '723642',
-      src: getImageUrl('20260907_Pic12_B.png', true),
+      src: getImageUrl('20261006_Pic12_B.png', true),
       useDescription: true,
     },
     {
       id: '708741',
-      src: getImageUrl('20260907_Pic13_B.png', true),
+      src: getImageUrl('20261006_Pic13_B.png', true),
       useDescription: true,
     },
   ],
   [
     {
       id: '819491',
-      src: getImageUrl('20260907_Pic20_B.png', true),
+      src: getImageUrl('20261006_Pic20_B.png', true),
       useDescription: true,
     },
     {
       id: '819338',
-      src: getImageUrl('20260907_Pic21_B.png', true),
+      src: getImageUrl('20261006_Pic21_B.png', true),
       useDescription: true,
     },
     {
       id: '818093',
-      src: getImageUrl('20260907_Pic22_B.png', true),
+      src: getImageUrl('20261006_Pic22_B.png', true),
       useDescription: true,
     },
     {
       id: '817924',
-      src: getImageUrl('20260907_Pic23_B.png', true),
+      src: getImageUrl('20261006_Pic23_B.png', true),
       useDescription: true,
     },
   ],
   [
     {
       id: '589801',
-      src: getImageUrl('20260907_Pic30_B.png', true),
+      src: getImageUrl('20261006_Pic30_B.png', true),
       useDescription: true,
     },
     {
       id: '651538',
-      src: getImageUrl('20260907_Pic31_B.png', true),
+      src: getImageUrl('20261006_Pic31_B.png', true),
       useDescription: true,
     },
     {
       id: '653660',
-      src: getImageUrl('20260907_Pic32_B.png', true),
+      src: getImageUrl('20261006_Pic32_B.png', true),
       useDescription: true,
     },
     {
       id: '652896',
-      src: getImageUrl('20260907_Pic33_B.png', true),
+      src: getImageUrl('20261006_Pic33_B.png', true),
       useDescription: true,
     },
   ],
@@ -172,17 +172,17 @@ const tableQueries = [
 
 const links = {
   Intro_cta_href: 'https://www.beliani.ch/bathroom-furniture/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-09-07' }),
-  TopImageTitle_src: translateImage({ value: '20260907_01.png' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-10-06' }),
+  TopImageTitle_src: translateImage({ value: '20261006_01.png' }),
 
-  TopImage_src: getImageUrl('20260907_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-09-07' }),
+  TopImage_src: getImageUrl('20261006_Gif.gif', true),
+  TopImage_href: translateLink({ value: 'content/lp26-10-06' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-08-27' }),
-  Banner_1_Image: translateImage({ value: '20260827b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-09-24' }),
+  Banner_1_Image: translateImage({ value: '20260924b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-08-28' }),
-  Banner_2_Image: translateImage({ value: '20260828b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-09-25' }),
+  Banner_2_Image: translateImage({ value: '20260925b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -354,7 +354,6 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      disableTopImageTitle: true,
       shopByCategory: false,
       theme,
       intro: {
@@ -399,7 +398,6 @@ export default new entities.Campaign({
           },
         },
       },
-      disableTopImageTitle: true,
     },
   ],
 });
