@@ -82,7 +82,7 @@ const CTA = ({
 	} else {
 		// newsletter type
 		if (variant === 'underline') {
-			html = `<a style="color: ${color ?? '#000000'}; text-decoration: underline;" href="${href}"><span class="newsletterCta" ${className ? `class="${className}"` : ''}>${text}</span></a>`;
+			html = `<a style="color: ${color ?? '#000000'}; text-decoration: underline;" href="${href}"><span class="${className ? className : 'newsletterCta'}">${text}</span></a>`;
 		} else if (variant === 'button') {
 			const buttonContent = codeValue ? `${text} ${copyIcon}` : text;
 			const buttonHref = codeValue ? '#' : href;
@@ -148,7 +148,7 @@ const CTA = ({
       `;
 		} else {
 			// default: text variant
-			html = `<a style="color: ${color ?? '#000000'}; text-decoration: none;" href="${href}"><span class="newsletterCta" ${className ? `class="${className}"` : ''}>${text}</span></a>`;
+			html = `<a style="color: ${color ?? '#000000'}; text-decoration: none;" href="${href}"><span class="${className ? className : 'newsletterCta'}">${text}</span></a>`;
 		}
 	}
 
