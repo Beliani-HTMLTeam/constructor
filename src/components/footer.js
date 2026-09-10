@@ -9,7 +9,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ src, href }) => {
           return `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="max-width: 650px; width: 100%; background-color: #ffffff;">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
             <tbody>
                 <tr>
                     <td class="newsletterBottom35px" >
@@ -19,7 +19,7 @@ export function Footer(sections, options, name) {
                 <tr>
                     <td>
                         <a href="${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                            <img loading="lazy" alt="service banner" src="${src}" width="610" style="display: block; max-width: 610px; width: 100%">
+                            <img loading="lazy" alt="service banner" src="${src}" style="display: block; width: 100%;">
                         </a>
                     </td>
                 </tr>
@@ -34,7 +34,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ src, href }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td class="newsletterBottom35px" >
@@ -44,7 +44,7 @@ export function Footer(sections, options, name) {
                 <tr>
                     <td>
                         <a href="${href}">
-                            <img loading="lazy" alt="work banner" src="${src}" style="display: block; max-width: 610px; width: 100%;">
+                            <img loading="lazy" alt="work banner" src="${src}" style="display: block; width: 100%;">
                         </a>
                     </td>
                 </tr>
@@ -66,7 +66,7 @@ export function Footer(sections, options, name) {
       [types.LANDINGPAGE]: {
         value: ({ href, src }) => {
           return `
-                <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+                <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
                     <tbody>
                         <tr>
                             <td class="newsletterBottom35px" >
@@ -76,7 +76,7 @@ export function Footer(sections, options, name) {
                         <tr>
                             <td>
                                 <a href="${href}">
-                                <img loading="lazy" src="${src}" style="display: block; max-width: 610px; width: 100%">
+                                <img loading="lazy" src="${src}" style="display: block; width: 100%;">
                                 </a>
                             </td>
                         </tr>
@@ -104,7 +104,7 @@ export function Footer(sections, options, name) {
           eigthCategory,
         }) => {
           return `
-        <table cellspacing="0" class="newsletterContainer" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
+        <table cellspacing="0" class="newsletterContainerFooter20px" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
             <tbody>
                 <tr>
                     <td>
@@ -120,7 +120,7 @@ export function Footer(sections, options, name) {
                 </tr>
                 <tr>
                     <td class="newsletterBottom35px">
-                        <table cellspacing="0" cellpadding="0" border="0" align="center" >
+                        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
                             <tbody>
                                 <tr>
                                     <td class="newsletterFooterCategoryLEFT">
@@ -129,7 +129,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${firstCategory.src}" alt="${
             firstCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHT">
@@ -138,7 +138,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${secondCategory.src}" alt="${
             secondCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -149,7 +149,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${thirdCategory.src}" alt="${
             thirdCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHT">
@@ -158,7 +158,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${foutrthCategory.src}" alt="${
             foutrthCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -169,7 +169,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${fifthCategory.src}" alt="${
             fifthCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHT">
@@ -178,7 +178,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${sixthCategory.src}" alt="${
             sixthCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -189,7 +189,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${seventhCategory.src}" alt="${
             seventhCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHTBottom">
@@ -198,7 +198,7 @@ export function Footer(sections, options, name) {
                                             <img loading="lazy" src="${eigthCategory.src}" alt="${
             eigthCategory.name
           }"
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -223,7 +223,7 @@ export function Footer(sections, options, name) {
           seventhCategory,
           eigthCategory,
         }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td>
@@ -239,21 +239,21 @@ export function Footer(sections, options, name) {
                 </tr>
                 <tr>
                     <td class="newsletterBottom35px">
-                        <table cellspacing="0" cellpadding="0" border="0" align="center" >
+                        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
                             <tbody>
                                 <tr>
                                     <td class="newsletterFooterCategoryLEFT">
                                         <a
                                             href="${firstCategory.href}">
                                             <img loading="lazy" src="${firstCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHT">
                                         <a
                                             href="${secondCategory.href}">
                                             <img loading="lazy" src="${secondCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -262,14 +262,14 @@ export function Footer(sections, options, name) {
                                         <a
                                             href="${thirdCategory.href}">
                                             <img loading="lazy" src="${thirdCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHT">
                                         <a
                                             href="${foutrthCategory.href}">
                                             <img loading="lazy" src="${foutrthCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -278,14 +278,14 @@ export function Footer(sections, options, name) {
                                         <a
                                             href="${fifthCategory.href}">
                                             <img loading="lazy" src="${fifthCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHT">
                                         <a
                                             href="${sixthCategory.href}">
                                             <img loading="lazy" src="${sixthCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -294,14 +294,14 @@ export function Footer(sections, options, name) {
                                         <a
                                             href="${seventhCategory.href}">
                                             <img loading="lazy" src="${seventhCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                     <td class="newsletterFooterCategoryRIGHTBottom">
                                         <a
                                             href="${eigthCategory.href}">
                                             <img loading="lazy" src="${eigthCategory.src}" alt=""
-                                                style="display:block; max-width: 100%;"  border="0" />
+                                                style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -319,7 +319,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ href, src }) => {
           return `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
             <tbody>
                     <tr>
                         <td>${Line()}</td>
@@ -328,7 +328,7 @@ export function Footer(sections, options, name) {
                     <tr>
                         <td class="newsletterTopBottomContainer">
                             <a href="${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                <img alt="Klarma" border="0"  src="${src}" style="display:block; max-width: 100%;"/>
+                                <img alt="Klarma" border="0" src="${src}" style="display: block; width: 100%;"/>
                             </a>
                         </td>
                     </tr>
@@ -339,7 +339,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ href, src }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td>${Line()}</td>
@@ -347,10 +347,10 @@ export function Footer(sections, options, name) {
                 <!--KLARNA-->
                 <tr>
                     <td class="newsletterTopBottomContainer">
-                        <a href="${href}">
-                            <img alt="Klarma" border="0"  src="${src}" style="display:block; max-width: 100%;"/>
-                        </a>
-                    </td>
+                    <a href="${href}">
+                        <img alt="Klarma" border="0" src="${src}" style="display: block; width: 100%;"/>
+                    </a>
+                </td>
                 </tr>
             </tbody>
         </table>
@@ -361,7 +361,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ title, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => {
           return `
-            <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;">
+            <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
             <tbody>
                 <tr>
                     <td>
@@ -484,7 +484,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ title, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td>
@@ -603,7 +603,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
           return `
-        <table cellspacing="0" class="newsletterContainer" cellpadding="0" border="0" align="center" style="background-color: #ffffff;" >
+        <table cellspacing="0" class="newsletterContainerFooter20px" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" >
             <tbody>
                 <tr>
                     <td>
@@ -613,7 +613,7 @@ export function Footer(sections, options, name) {
                 <!-- ADVANTAGES -->
                 <tr>
                     <td class="newsletterTopBottomContainer">
-                        <table cellspacing="0" cellpadding="0" border="0"  style="background-color: #f5f5f5;">
+                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5;">
                             <tbody>
                                 <tr>
                                     <td>
@@ -622,7 +622,7 @@ export function Footer(sections, options, name) {
                                               firstAdvantage.href
                                             }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
                                             <img loading="lazy" src="${firstAdvantage.src}"
-                                                alt="Advantages" style="display:block; max-width: 100%;"  border="0" />
+                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -633,7 +633,7 @@ export function Footer(sections, options, name) {
                                               secondAdvantage.href
                                             }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
                                             <img loading="lazy" src="${secondAdvantage.src}"
-                                                alt="Advantages" style="display:block; max-width: 100%;"  border="0" />
+                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -644,7 +644,7 @@ export function Footer(sections, options, name) {
                                               thirdAdvantage.href
                                             }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
                                             <img loading="lazy" src="${thirdAdvantage.src}"
-                                                alt="Advantages" style="display:block; max-width: 100%;"  border="0" />
+                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -655,7 +655,7 @@ export function Footer(sections, options, name) {
                                               fourthAdvantage.href
                                             }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
                                             <img loading="lazy" src="${fourthAdvantage.src}"
-                                                alt="Advantages" style="display:block; max-width: 100%;"  border="0" />
+                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
                                         </a>
                                     </td>
                                 </tr>
@@ -676,7 +676,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ conditionsTitle, conditionsText }) => {
           return `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='max-width: 650px; width: 100%; background-color: #ffffff; line-height: 10px; mso-line-height-rule: exactly;'>
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff; line-height: 10px; mso-line-height-rule: exactly;">
             <tbody>
                 <tr>
                     <td>
@@ -701,7 +701,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ conditionsTitle, conditionsText }) => `
-        <table class="newsletterContainer" cellspacing="0" cellpadding="0" border="0" align="center" width='650' style='max-width: 650px; width: 100%' id="newsletter">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
             <tbody>
                 <tr>
                     <td>
@@ -741,7 +741,7 @@ export function Footer(sections, options, name) {
           vat,
         }) => {
           return `
-        <table cellspacing="0" cellpadding="0" border="0" align="center" id="newsletter">
+        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%;" id="newsletter">
             <tbody>
                 <tr>
                     <td align="center" class="newsletterFooterCompanyDetails">
