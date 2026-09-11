@@ -1,4 +1,3 @@
-import { getIframe } from '@/helpers/getIframe';
 import { generateNewsletterIds } from '@/helpers/incrementIds.js';
 import { getState, setState } from '@/main/state/appState';
 import { appConfig as config } from '@/utils/config';
