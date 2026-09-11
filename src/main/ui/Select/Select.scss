@@ -101,7 +101,7 @@
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin-right: 3px !important;
+    margin-right: 4px !important;
     flex-shrink: 0 !important;
     width: 14px !important;
     height: 14px !important;
@@ -281,6 +281,9 @@
       max-height: 250px;
       overflow-y: auto;
       overscroll-behavior: contain;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
 
       &::-webkit-scrollbar {
         width: 5px;
@@ -307,15 +310,15 @@
       }
 
       .custom-select-option {
-        padding: 8px 10px;
+        padding: 3.5px 8px;
         font-size: 12px;
         color: #334155;
-        border-radius: 10px;
+        border-radius: 6px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 8px;
+        gap: 10px;
         transition: all 0.15s ease;
         position: relative;
 
@@ -342,7 +345,7 @@
           min-width: 0;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 10px;
           overflow: hidden;
 
           .custom-select-option-content {
@@ -350,7 +353,8 @@
             min-width: 0;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            align-items: flex-start;
+            gap: 1px;
             overflow: hidden;
 
             .custom-select-option-subtitle {
@@ -359,6 +363,21 @@
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+            }
+
+            .custom-select-option-date-badge {
+              font-size: 9px;
+              font-weight: 500;
+              padding: 0 4px;
+              border-radius: 3.5px;
+              background-color: #e0e7ff;
+              color: #4338ca;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              font-variant-numeric: tabular-nums;
+              letter-spacing: 0.2px;
+              line-height: 1.15;
             }
           }
         }
@@ -376,16 +395,6 @@
           align-items: center;
           justify-content: center;
           box-sizing: border-box;
-
-          &.is-date {
-            width: 78px;
-            min-width: 78px;
-            max-width: 78px;
-            text-align: center;
-            justify-content: center;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: 0.2px;
-          }
         }
 
         .custom-select-check-icon {

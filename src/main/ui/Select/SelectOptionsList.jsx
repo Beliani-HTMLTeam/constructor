@@ -29,6 +29,7 @@ export function SelectOptionsList({
         const isSelected = selectedOption?.value === option.value;
         const isHighlighted = highlightedIndex === idx;
         const isJustAdded = justAddedValue === option.value;
+        const hasDate = isDateBadge(option.badge);
 
         return (
           <li
@@ -57,11 +58,16 @@ export function SelectOptionsList({
                   <div className="custom-select-option-content">
                     <MarqueeLabel text={option.label} className="custom-select-option-label" />
                     {option.subtitle && <span className="custom-select-option-subtitle">{option.subtitle}</span>}
+                    {hasDate && (
+                      <span className="custom-select-option-date-badge">
+                        {option.badge}
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                {option.badge && (
-                  <span className={`custom-select-option-badge ${isDateBadge(option.badge) ? 'is-date' : ''}`}>
+                {option.badge && !hasDate && (
+                  <span className="custom-select-option-badge">
                     {option.badge}
                   </span>
                 )}
