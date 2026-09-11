@@ -50,8 +50,7 @@ export default defineConfig(({ mode }) => {
       }),
 
       vanilla({
-        include: '**/*.html',
-        base: '/',
+        exclude: '**/node_modules/**',
       }),
     ],
 
