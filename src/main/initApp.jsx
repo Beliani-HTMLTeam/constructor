@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client';
 import JSConfetti from 'js-confetti';
 import { getDOMElements } from '@/utils/domUtils.js';
 import { setState, getState } from '@/main/state/appState.js';
-import { UpperSelects } from '@/main/ui/UpperSelects.jsx';
-import { PurgeSelect } from '@/main/ui/PurgeSelect.jsx';
+import { UpperSelects } from '@/main/ui/UpperSelects';
+import { PurgeSelect } from '@/main/ui/PurgeSelect';
 
 import {
   setupProductsHandler,
@@ -64,3 +64,4 @@ function setupButtonListeners(elements, { campaigns, jsConfetti }) {
   setupPurgeDynamicSpreadsheetHandler(elements);
   setupRedirectCheckHandler(elements);
 }
+
