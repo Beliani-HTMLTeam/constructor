@@ -143,7 +143,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
 
       conditions: {
         conditionsTitle: getFooter('Conditions title'),
-        conditionsText: queries.condition,
+        conditionsText: queries.condition || getFooter('Conditions text'),
       },
 
       companyDetails: {
