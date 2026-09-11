@@ -20,8 +20,26 @@ function getLoader() {
   return document.querySelector('#loader');
 }
 
+const listeners = new Set();
+
+export function subscribeState(listener) {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
 export function setState(key, value) {
   state[key] = value;
+
+  // Notify all state subscribers
+  listeners.forEach((listener) => {
+    try {
+      listener(key, value, state);
+    } catch (e) {
+      console.error('State listener error:', e);
+    }
+  });
 
   if (key !== 'loading') return;
 
@@ -48,3 +66,4 @@ export function getState(key) {
     return undefined;
   }
 }
+

@@ -1,5 +1,5 @@
 import { appConfig as config } from '@utils/config.js';
-import { initApp } from '@main/initApp.js';
+import { initApp } from '@main/initApp.jsx';
 import { getUserCampaigns, getAvailableScopes } from './utils/getUserCampaigns';
 import { getSavedScope, saveSelectedScope } from './utils/scopeStorage';
 import { getDOMElements } from './utils/domUtils';
@@ -56,12 +56,6 @@ async function handleScopeChange(newScope) {
 
     const sortedCampaigns = await loadPromise;
     setState('campaigns', sortedCampaigns);
-
-    const domElements = getDOMElements();
-    if (domElements.selectCampaigns) {
-      domElements.selectCampaigns.innerHTML = '<option value="default">Select Campaign</option>';
-      domElements.selectCampaigns.append(...initCampaigns(sortedCampaigns, config));
-    }
   } catch (err) {
     console.error('Error switching scope:', err);
   }
@@ -70,7 +64,10 @@ async function handleScopeChange(newScope) {
 async function initializeApp() {
   try {
     const scopes = getAvailableScopes();
-    let initialScope = await getSavedScope();
+    const favoriteScope = localStorage.getItem('constructor_favorite_scope');
+    let initialScope = (favoriteScope && scopes.includes(favoriteScope))
+      ? favoriteScope
+      : await getSavedScope();
 
     if (!initialScope || !scopes.includes(initialScope)) {
       const envScope = import.meta.env.VITE_SCOPE;

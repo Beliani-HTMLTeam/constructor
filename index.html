@@ -37,56 +37,18 @@
           <!--                                                  -->
           <!--               CAMPAIGN CREATOR TOOL              -->
           <!--                                                  -->
-          <div id="action_buttons" class="group">
+          <!-- <div id="action_buttons" class="group">
             <button id="new_campaign">
               <img src="/icons/new-campaign.svg" class="svg-icon" />
 
               New Campaign
             </button>
-          </div>
+          </div> -->
 
           <!--                                                  -->
           <!--               SELECTS FOR RENDERING              -->
           <!--                                                  -->
-          <div class="group">
-            <div class="select-wrapper">
-              <select class="select-select" id="scopes">
-                <option value="default">Select Scope</option>
-              </select>
-              <span class="select-arrow"></span>
-            </div>
-
-            <div class="select-wrapper">
-              <select class="select-select" id="campaigns">
-                <option value="default">Select Campaign</option>
-              </select>
-              <span class="select-arrow"></span>
-            </div>
-
-            <div class="select-wrapper" style="display: none">
-              <select class="select-select" id="templates">
-                <option value="default">Select Template</option>
-              </select>
-              <span class="select-arrow"></span>
-            </div>
-
-            <div class="select-wrapper" style="display: none">
-              <select class="select-select" id="shops"></select>
-              <span class="select-arrow"></span>
-            </div>
-
-            <div class="select-wrapper" style="display: none">
-              <select class="select-select" id="languages">
-                <option value="default">Select Language</option>
-              </select>
-              <span class="select-arrow"></span>
-            </div>
-
-            <!-- <button id="render_template">
-              <span style="width: 25px; height: 24px; line-height: 24px; text-align: center">👷🏿</span>
-              Render Template
-            </button> -->
-          </div>
+          <div id="upper-selects-root"></div>
 
           <!--                                                  -->
           <!--            ADD PRODUCTS/CLEAR STORAGE            -->
@@ -139,17 +101,7 @@
         <!--                    PURGE TOOL                    -->
         <!--                                                  -->
         <div class="group">
-          <div class="select-wrapper">
-            <select class="select-select" id="purge">
-              <option value="default">Select Purge</option>
-              <option value="header">Purge Header</option>
-              <option value="footer">Purge Footer</option>
-              <option value="templates">Purge Templates</option>
-              <option value="category_links">Purge Category Links</option>
-              <option value="category_titles">Purge Category Titles</option>
-            </select>
-            <span class="select-arrow"></span>
-          </div>
+          <div id="purge-select-root"></div>
 
           <button class="purgeDynamicSpreadsheet external" style="width: 100%; display: none">
             <span style="width: 100%">Purge dynamic spreadsheet</span>
