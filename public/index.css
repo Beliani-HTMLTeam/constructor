@@ -19,7 +19,11 @@ body {
 .container #panel {
   padding: 32px 16px;
   display: flex;
-  width: 35%;
+  width: 330px;
+  min-width: 330px;
+  max-width: 330px;
+  flex: 0 0 330px;
+  box-sizing: border-box;
   justify-content: space-between;
   flex-direction: column;
 }
