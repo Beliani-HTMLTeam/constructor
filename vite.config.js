@@ -6,10 +6,6 @@ import AutoImport from 'unplugin-auto-import/vite';
 import { saveCampaignPlugin } from './plugins/save-campaign-plugin.js';
 
 export default defineConfig(({ mode }) => {
-  // Load env vars based on `mode` in the current working directory.
-  const env = loadEnv(mode, process.cwd(), '');
-  console.log('VITE_SCOPE from env:', env.VITE_SCOPE);
-
   const aliasEntries = {
     '@': './src',
     '@api': './src/api',
@@ -58,11 +54,6 @@ export default defineConfig(({ mode }) => {
         base: '/',
       }),
     ],
-
-    define: {
-      __SCOPE__: JSON.stringify(env.VITE_SCOPE),
-      'import.meta.env.VITE_SCOPE': JSON.stringify(env.VITE_SCOPE),
-    },
 
     resolve: {
       alias: Object.fromEntries(
