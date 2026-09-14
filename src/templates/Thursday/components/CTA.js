@@ -82,7 +82,8 @@ const CTA = ({
 	} else {
 		// newsletter type
 		if (variant === 'underline') {
-			html = `<a style="color: ${color ?? '#000000'}; text-decoration: underline;" href="${href}"><span class="newsletterCta" ${className ? `class="${className}"` : ''}>${text}</span></a>`;
+			const underlineClass = className || 'newsletterCta';
+			html = `<a style="color: ${color ?? '#000000'}; text-decoration: underline;" href="${href}"><span class="${underlineClass}">${text}</span></a>`;
 		} else if (variant === 'button') {
 			const buttonContent = codeValue ? `${text} ${copyIcon}` : text;
 			const buttonHref = codeValue ? '#' : href;
@@ -106,8 +107,8 @@ const CTA = ({
 			
 			const safeFontSize = fontSize.toString().replace(/[^0-9a-zA-Z]/g, '');
 			const safeMobileFontSize = effectiveMobileFontSize.toString().replace(/[^0-9a-zA-Z]/g, '');
-			const ctaClass = `cta-${paddingY}-${paddingX}-${effectiveMobilePaddingY}-${effectiveMobilePaddingX}-${safeFontSize}-${safeMobileFontSize}`;
-			const buttonClass = `newsletterCtaLink ${ctaClass}${className ? ` ${className}` : ''}`;
+			const ctaClass = className || `cta-${paddingY}-${paddingX}-${effectiveMobilePaddingY}-${effectiveMobilePaddingX}-${safeFontSize}-${safeMobileFontSize}`;
+			const buttonClass = ctaClass;
 
 			if (typeof globalThis !== 'undefined') {
 				globalThis.collectedCtaStyles = globalThis.collectedCtaStyles || new Set();
@@ -119,9 +120,9 @@ const CTA = ({
           }
           @media screen and (max-width: 768px) {
             .${ctaClass} {
-              padding: ${effectiveMobilePaddingY}px ${effectiveMobilePaddingX}px;
-              font-size: ${effectiveMobileFontSize};
-              line-height: ${effectiveMobileLineHeight};
+              padding: ${effectiveMobilePaddingY}px ${effectiveMobilePaddingX}px !important;
+              font-size: ${effectiveMobileFontSize} !important;
+              line-height: ${effectiveMobileLineHeight} !important;
             }
           }
         `);
@@ -138,7 +139,7 @@ const CTA = ({
                 </v:roundrect>
               <![endif]-->
               <!--[if !mso]><!-->
-                <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-family: ${fontFamily}; font-weight: ${fontWeight}; text-transform: ${textTransform}; color: ${btnTextColor}; text-decoration: none; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box;">
+                <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-family: ${fontFamily}; font-size: ${fontSize}; line-height: ${lineHeight}; font-weight: ${fontWeight}; text-transform: ${textTransform}; color: ${btnTextColor}; padding: ${paddingY}px ${paddingX}px; text-decoration: none; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box; width: auto; max-width: 100%; white-space: normal; word-break: break-word;">
                   <span style="color: ${btnTextColor};">${buttonContent}</span>
                 </a>
               <!--<![endif]-->
@@ -148,7 +149,8 @@ const CTA = ({
       `;
 		} else {
 			// default: text variant
-			html = `<a style="color: ${color ?? '#000000'}; text-decoration: none;" href="${href}"><span class="newsletterCta" ${className ? `class="${className}"` : ''}>${text}</span></a>`;
+			const textClass = className || 'newsletterCta';
+			html = `<a style="color: ${color ?? '#000000'}; text-decoration: none;" href="${href}"><span class="${textClass}">${text}</span></a>`;
 		}
 	}
 

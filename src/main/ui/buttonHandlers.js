@@ -8,7 +8,7 @@ import {
 } from '@/main/events.jsx';
 import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
-import { openManageProductsModal } from '@/main/ui/manageProducts.js';
+import { openManageProductsModal } from '@/main/ui/manageProducts/index.js';
 import { renderTemplateHtmlForCountry } from '@/main/rendering/templateRenderer.js';
 
 import { toast } from 'sonner';

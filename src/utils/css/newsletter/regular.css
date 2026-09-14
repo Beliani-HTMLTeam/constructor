@@ -68,6 +68,11 @@ img {
   padding-right: 124px;
 }
 
+.newsletterContainer10px {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .newsletterMiniContainer {
   padding-left: 10px;
   padding-right: 10px;
@@ -320,6 +325,23 @@ img {
 }
 
 .START_CTA_AND_CODES {}
+.newsletterCtaBtn {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.newsletterCtaLink {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  word-break: break-word;
+}
+
 .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
@@ -602,6 +624,11 @@ img {
     padding-right: 20px;
   }
 
+  .newsletterContainer10px {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
   .newsletterMiniContainer {
     padding-left: 5px;
     padding-right: 5px;
@@ -732,6 +759,11 @@ img {
   }
 
   .START_MQ_TYPOGRAPHY {}
+  .newsletterCtaLink {
+    width: auto;
+    max-width: 100%;
+  }
+
   .newsletterMarkTitle {
     font-size: 18px;
   }
