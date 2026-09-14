@@ -26,9 +26,10 @@ const Product = (
     typeof gapBetweenVertical === 'string'
       ? gapBetweenVertical
       : resolveGapClass(gapBetweenVertical, product?.settings?.spaceAfter ?? product.spaceAfter ?? 'newsletterBottom35px');
+  const productBackground = product?.settings?.background ?? '';
 
   let html = `
-  <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"${productBackground ? ` bgcolor="${productBackground}"` : ''} style="border:0;mso-border-alt:none;border-collapse:collapse;border-spacing:0;mso-table-lspace:0pt;mso-table-rspace:0pt;${productBackground ? `background-color:${productBackground};` : ''}">`;
 
   if (product.src && product.href) {
     html += ImageWithLink({
@@ -36,6 +37,7 @@ const Product = (
       src: typeof product.src === 'object' ? product.src.src : product.src,
       insideTr: true,
       align: imageAlign,
+      background: productBackground,
     });
   }
 
@@ -46,21 +48,27 @@ const Product = (
       productDescription = productDescription.replace(/(\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm\s+\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm)/gi, '<span style="display:inline-block;">$1</span>')
 
     html += `
-      ${nameGapClass ? Space({ insideTr: true, className: nameGapClass }) : ''}
+      ${nameGapClass ? Space({ insideTr: true, className: nameGapClass, bg: productBackground }) : ''}
       
       <tr>
-        <td align="${align}" style="padding: 0; text-align: ${align}; color: ${product?.settings?.color ?? color}">
+        <td align="${align}"${productBackground ? ` bgcolor="${productBackground}"` : ''} style="padding:0;border:0;mso-border-alt:none;text-align:${align};color:${product?.settings?.color ?? color};${productBackground ? `background-color:${productBackground};` : ''}">
           <span class="${product?.settings?.prodTitleClass ?? 'newsletterProductTitle'}"${product?.settings?.prodSize ? ` style="font-size:${product?.settings?.prodSize}px;"` : ""}>${product.name}</span><br>
-          ${productDescription ? `<span class="${product?.settings?.prodDescClass ?? 'newsletterProductDescription'}"${product?.settings?.descSize ? ` style="font-size:${product?.settings?.descSize}px;"` : ""}>${productDescription}</span>` : ''}
         </td>
       </tr>
+      ${productDescription
+        ? `<tr>
+        <td align="${align}"${productBackground ? ` bgcolor="${productBackground}"` : ''} style="padding:0;border:0;mso-border-alt:none;text-align:${align};color:${product?.settings?.color ?? color};${productBackground ? `background-color:${productBackground};` : ''}">
+           <span class="${product?.settings?.prodDescClass ?? 'newsletterProductDescription'}"${product?.settings?.descSize ? ` style="font-size:${product?.settings?.descSize}px;"` : ""}>${productDescription}</span>
+        </td>
+      </tr>`
+      : ''}
     `;
   }
 
   if (showPrices && (product.lowPrice || product.highPrice)) {
     html += `
       <tr>
-        <td>
+        <td${productBackground ? ` bgcolor="${productBackground}"` : ''} style="border:0;mso-border-alt:none;${productBackground ? `background-color:${productBackground};` : ''}">
           ${Prices({
             high: product.highPrice || '',
             low: product.lowPrice || '',
@@ -79,7 +87,7 @@ const Product = (
   }
 
   html += `
-    ${bottomGapClass ? Space({ insideTr: true, className: bottomGapClass }) : ''}
+    ${bottomGapClass ? Space({ insideTr: true, className: bottomGapClass, bg: productBackground }) : ''}
   </table>`;
 
   return html;

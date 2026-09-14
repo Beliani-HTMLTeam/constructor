@@ -10,6 +10,7 @@ const ImageWithLink = ({
   insideTable = false,
   tableContainer = false,
   type,
+  background = '',
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -23,7 +24,7 @@ const ImageWithLink = ({
     : `<a href="${href}"><img src="${src}" alt="${alt}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
 
   if (insideTr) {
-    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}>${html}</td></tr>`;
+    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}${background ? ` bgcolor="${background}"` : ''} style="border:0;mso-border-alt:none;${background ? `background-color:${background};` : ''}">${html}</td></tr>`;
   }
 
   if (insideTable) {

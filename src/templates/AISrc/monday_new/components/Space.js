@@ -3,7 +3,7 @@ const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTab
 
   let html = '';
 
-  html += `<td class="${className}" style="font-size: 0; line-height: 0; mso-line-height-rule: exactly;${bg ? ` background: ${bg};` : ''}"></td>`;
+  html += `<td class="${className}" style="border:0;mso-border-alt:none;font-size:0;line-height:0;mso-line-height-rule:exactly;${bg ? `background-color:${bg};` : ''}"></td>`;
 
   if (insideTr) {
     html = `<tr>${html}</tr>`;
