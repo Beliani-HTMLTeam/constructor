@@ -8,7 +8,7 @@ import {
 } from '@/main/events.jsx';
 import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
-import { openManageProductsModal } from '@/main/ui/manageProducts.js';
+import { openManageProductsModal } from '@/main/ui/manageProducts/index.js';
 import { renderTemplateHtmlForCountry } from '@/main/rendering/templateRenderer.js';
 
 import { toast } from 'sonner';
@@ -69,7 +69,9 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     const country = getState('country');
     let finalHtml = optimizeHtmlImages(html, getState);
 
-    if (template?.type === 'landing' && ((__SCOPE__ || import.meta.env?.VITE_SCOPE) !== "Dmytro")) finalHtml = addLangToLP(finalHtml, country);
+    const activeScope = getState('scope');
+		// don't add lang comment to dmytro lps
+    if (template?.type === 'landing' && activeScope !== "Dmytro") finalHtml = addLangToLP(finalHtml, country);
 
     navigator.clipboard.writeText(finalHtml);
     toast.success('Template copied to clipboard!');

@@ -1,11 +1,10 @@
 import { addParams } from '@/helpers/getQueryLink.js';
 import { TemplateHandlers } from '@/main/handlers/handlers.js';
 import { wrapTemplate } from '@/helpers/wrapTemplate.js';
-import { fetchTranslations } from '@/api/fetchTranslations.js';
 import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { computeValue } from '@/helpers/computeValue.js';
 import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
-import { root } from '@/app.js';
+import { root } from '@/app.jsx';
 import { getState, setState } from '@/main/state/appState';
 
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
@@ -13,7 +12,7 @@ import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
 import { toast } from 'sonner';
 import { decompress } from 'compress-json';
 import { COMPRESSED_PRODUCTS_MARKER } from '@main/ui/manageProducts/constants.js';
-import { staticTranslations, setQueries, getQueries } from '@/api/translations';
+import { dynamicTranslations, translationCache } from '@/api';
 
 function executeScripts(rootElement) {
   const scripts = Array.from(rootElement.querySelectorAll('script'));
@@ -49,7 +48,7 @@ export async function renderTemplate(getState, setState) {
 
       // Check if we already have queries for this campaign and slug
       const campaignId = selectedCampaign.startId;
-      const existingQueries = getQueries(campaignId, country);
+      const existingQueries = translationCache.getQueries(campaignId, country);
 
       let queries;
       if (Object.keys(existingQueries).length > 0) {
@@ -58,7 +57,7 @@ export async function renderTemplate(getState, setState) {
         console.log(`Using cached queries for campaign ${campaignId}, slug ${country}`);
       } else {
         // Fetch new queries
-        const translationsResult = await fetchTranslations({
+        const translationsResult = await dynamicTranslations.fetch({
           tableQueries: templateToRender.tableQueries,
           tableName: spreadsheet,
         });
@@ -69,7 +68,7 @@ export async function renderTemplate(getState, setState) {
         }
 
         // Cache queries
-        setQueries(campaignId, country, queries);
+        translationCache.setQueries(campaignId, country, queries);
         console.log(`Cached queries for campaign ${campaignId}, slug ${country}`);
       }
 
@@ -86,7 +85,7 @@ export async function renderTemplate(getState, setState) {
   // Handle fallback data
   if (selectedCampaign.data && templateToRender.tableQueries.length > 0) {
     const campaignId = selectedCampaign.startId;
-    const existingQueries = getQueries(campaignId, country);
+    const existingQueries = translationCache.getQueries(campaignId, country);
 
     let queries;
     if (Object.keys(existingQueries).length > 0) {
@@ -98,7 +97,7 @@ export async function renderTemplate(getState, setState) {
         queries[translation.name] = translation.fallback;
       }
       // Cache fallback queries too
-      setQueries(campaignId, country, queries);
+      translationCache.setQueries(campaignId, country, queries);
       console.log(`Cached fallback queries for campaign ${campaignId}, slug ${country}`);
     }
 

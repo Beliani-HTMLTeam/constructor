@@ -519,6 +519,7 @@ export default new entities.Campaign({
         disableLine: true,
         containerClass: 'newsletterContainer40px',
       },
+      disableKlarna: ['SI', 'HR'],
     },
   ],
 });

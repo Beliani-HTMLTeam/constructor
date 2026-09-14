@@ -21,89 +21,89 @@ const catData = [
   // Cat 1
   {
     name: 'Living room',
-    src: getImageUrl('20260827_Cat40_B.jpg', true),
-    href: 'https://www.beliani.ch/dining-room-furniture/',
+    src: getImageUrl('20261005_Cat01.jpg', true),
+    href: 'https://www.beliani.ch/living-room-furniture/',
   },
   // Cat 2
   {
     name: 'Bedroom',
-    src: getImageUrl('20260827_Cat40_B.jpg', true),
-    href: 'https://www.beliani.ch/beds/fabric-beds/',
+    src: getImageUrl('20261005_Cat02.jpg', true),
+    href: 'https://www.beliani.ch/bedroom-furniture/',
   },
   // Cat 3
   {
     name: 'Dining room',
-    src: getImageUrl('20260827_Cat40_B.jpg', true),
-    href: 'https://www.beliani.ch/lighting/',
+    src: getImageUrl('20261005_Cat03.jpg', true),
+    href: 'https://www.beliani.ch/dining-room-furniture/',
   },
   // Cat 4
   {
     name: 'Bathroom',
-    src: getImageUrl('20260827_Cat40_B.jpg', true),
-    href: 'https://www.beliani.ch/beds/fabric-beds/',
+    src: getImageUrl('20261005_Cat04.jpg', true),
+    href: 'https://www.beliani.ch/bathroom-furniture/',
   },
   // Cat 5
   {
     name: 'Office',
-    src: getImageUrl('20260827_Cat40_B.jpg', true),
-    href: 'https://www.beliani.ch/beds/fabric-beds/',
+    src: getImageUrl('20261005_Cat05.jpg', true),
+    href: 'https://www.beliani.ch/office-furniture/',
   },
   // Cat 6
   {
     name: 'Hallway',
-    src: getImageUrl('20260827_Cat40_B.jpg', true),
-    href: 'https://www.beliani.ch/beds/fabric-beds/',
+    src: getImageUrl('20261005_Cat06.jpg', true),
+    href: 'https://www.beliani.ch/hallway/',
   },
   // Cat 7
   {
     name: 'Kids room',
-    src: getImageUrl('20260827_Cat40_B.jpg', true),
-    href: 'https://www.beliani.ch/beds/fabric-beds/',
+    src: getImageUrl('20261005_Cat07.jpg', true),
+    href: 'https://www.beliani.ch/children-room/',
   },
 ];
 
 const prodData = [
   // Cat 1
   [
-    { id: '664642', src: getImageUrl('20260827_Pic10_B.png', true) },
-    { id: '645146', src: getImageUrl('20260827_Pic11_B.png', true) },
-    { id: '468434', src: getImageUrl('20260827_Pic12_B.png', true) },
+    { id: '429175', src: getImageUrl('20261005_Prod01.png', true) },
+    { id: '676113', src: getImageUrl('20261005_Prod02.png', true) },
+    { id: '830408', src: getImageUrl('20261005_Prod03.png', true) },
   ],
   // Cat 2
   [
-    { id: '395648', src: getImageUrl('20260827_Pic20_B.png', true) },
-    { id: '569482', src: getImageUrl('20260827_Pic21_B.png', true) },
-    { id: '358007', src: getImageUrl('20260827_Pic22_B.png', true) },
+    { id: '813845', src: getImageUrl('20261005_Prod04.png', true) },
+    { id: '606489', src: getImageUrl('20261005_Prod05.png', true) },
+    { id: '688012', src: getImageUrl('20261005_Prod06.png', true) },
   ],
   // Cat 3
   [
-    { id: '728766', src: getImageUrl('20260827_Pic30_B.png', true) },
-    { id: '804786', src: getImageUrl('20260827_Pic31_B.png', true) },
-    { id: '689025', src: getImageUrl('20260827_Pic32_B.png', true) },
+    { id: '691685', src: getImageUrl('20261005_Prod07.png', true) },
+    { id: '693699', src: getImageUrl('20261005_Prod08.png', true) },
+    { id: '585145', src: getImageUrl('20261005_Prod09.png', true) },
   ],
   // Cat 4
   [
-    { id: '813719', src: getImageUrl('20260827_Pic40_B.png', true) },
-    { id: '676112', src: getImageUrl('20260827_Pic41_B.png', true) },
-    { id: '714220', src: getImageUrl('20260827_Pic42_B.png', true) },
+    { id: '653163', src: getImageUrl('20261005_Prod10.png', true) },
+    { id: '819338', src: getImageUrl('20261005_Prod11.png', true) },
+    { id: '635371', src: getImageUrl('20261005_Prod12.png', true) },
   ],
   // Cat 5
   [
-    { id: '813719', src: getImageUrl('20260827_Pic40_B.png', true) },
-    { id: '676112', src: getImageUrl('20260827_Pic41_B.png', true) },
-    { id: '714220', src: getImageUrl('20260827_Pic42_B.png', true) },
+    { id: '811744', src: getImageUrl('20261005_Prod13.png', true) },
+    { id: '334704', src: getImageUrl('20261005_Prod14.png', true) },
+    { id: '695550', src: getImageUrl('20261005_Prod15.png', true) },
   ],
   // Cat 6
   [
-    { id: '813719', src: getImageUrl('20260827_Pic40_B.png', true) },
-    { id: '676112', src: getImageUrl('20260827_Pic41_B.png', true) },
-    { id: '714220', src: getImageUrl('20260827_Pic42_B.png', true) },
+    { id: '828183', src: getImageUrl('20261005_Prod16.png', true) },
+    { id: '154135', src: getImageUrl('20261005_Prod17.png', true) },
+    { id: '527288', src: getImageUrl('20261005_Prod18.png', true) },
   ],
   // Cat 7
   [
-    { id: '813719', src: getImageUrl('20260827_Pic40_B.png', true) },
-    { id: '676112', src: getImageUrl('20260827_Pic41_B.png', true) },
-    { id: '714220', src: getImageUrl('20260827_Pic42_B.png', true) },
+    { id: '412611', src: getImageUrl('20261005_Prod19.png', true) },
+    { id: '826109', src: getImageUrl('20261005_Prod20.png', true) },
+    { id: '826025', src: getImageUrl('20261005_Prod21.png', true) },
   ]
 ];
 
@@ -120,19 +120,17 @@ const tableQueries = [
 
 const links = {
   Intro_cta_href: 'https://www.beliani.ch/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-08-27-tb' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-10-05' }),
   TopImageTitle_src: translateImage({ value: '20260827_01.png' }),
 
-  TopImage_src: getImageUrl('20260827_Gif_B.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-08-27-tb' }),
+  TopImage_src: translateImage({ value: '20261005_Gif.gif' }),
+  TopImage_href: translateLink({ value: 'content/lp26-10-05' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-08-13' }),
-  Banner_1_Image: translateImage({ value: '20260813b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-09-17' }),
+  Banner_1_Image: translateImage({ value: '20260917b.png' }),
 
-  Timer_href: translateLink({ value: 'content/lp26-08-24' }),
-
-  Banner_2: translateLink({ value: 'content/lp26-08-19' }),
-  Banner_2_Image: translateImage({ value: '20260819b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-09-24' }),
+  Banner_2_Image: translateImage({ value: '20260924b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -158,14 +156,16 @@ const categories = [
       rounded: 'bottom',
     },
     color: theme.black,
-    type: '3prods',
+    type: '3prods-peak',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
+    paddingTop: 0,
     title: {
       show: true,
       color: theme.primary,
       position: 'afterImg',
       align: 'center',
-      spaceAfter: 'newsletterBottom35px',
+      uppercase: true,
+      spaceBefore: 'newsletterBottom35px',
     },
     paragraph: {
       show: false,
@@ -176,7 +176,7 @@ const categories = [
     product: {
       prices: false,
       name: true,
-      align: 'left',
+      align: 'center',
     },
     products: prodData[0],
   },
@@ -194,15 +194,16 @@ const categories = [
       rounded: 'bottom',
     },
     color: theme.black,
-    type: '3prods',
+    type: '3prods-peak',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
-    paddingTop: '35',
+    paddingTop: 0,
     title: {
       show: true,
       color: theme.primary,
       position: 'afterImg',
       align: 'center',
-      spaceAfter: 'newsletterBottom35px',
+      uppercase: true,
+      spaceBefore: 'newsletterBottom35px',
     },
     paragraph: {
       show: false,
@@ -213,7 +214,7 @@ const categories = [
     product: {
       prices: false,
       name: true,
-      align: 'left',
+      align: 'center',
     },
     products: prodData[1],
   },
@@ -231,15 +232,16 @@ const categories = [
       bg: theme.white,
       rounded: 'bottom',
     },
-    type: '3prods',
+    type: '3prods-peak',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
-    paddingTop: '35',
+    paddingTop: 0,
     title: {
       show: true,
       position: 'afterImg',
       align: 'center',
       color: theme.primary,
-      spaceAfter: 'newsletterBottom35px',
+      uppercase: true,
+      spaceBefore: 'newsletterBottom35px',
     },
     paragraph: {
       show: false,
@@ -250,7 +252,7 @@ const categories = [
     product: {
       prices: false,
       name: true,
-      align: 'left',
+      align: 'center',
     },
     products: prodData[2],
   },
@@ -269,15 +271,16 @@ const categories = [
       bg: theme.white,
       rounded: 'bottom',
     },
-    type: '3prods',
+    type: '3prods-peak',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
-    paddingTop: '35',
+    paddingTop: 0,
     title: {
       show: true,
       position: 'afterImg',
       align: 'center',
       color: theme.primary,
-      spaceAfter: 'newsletterBottom35px',
+      uppercase: true,
+      spaceBefore: 'newsletterBottom35px',
     },
     paragraph: {
       show: false,
@@ -288,7 +291,7 @@ const categories = [
     product: {
       prices: false,
       name: true,
-      align: 'left',
+      align: 'center',
     },
     products: prodData[3],
   },
@@ -307,15 +310,16 @@ const categories = [
       bg: theme.white,
       rounded: 'bottom',
     },
-    type: '3prods',
+    type: '3prods-peak',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
-    paddingTop: '35',
+    paddingTop: 0,
     title: {
       show: true,
       position: 'afterImg',
       align: 'center',
       color: theme.primary,
-      spaceAfter: 'newsletterBottom35px',
+      uppercase: true,
+      spaceBefore: 'newsletterBottom35px',
     },
     paragraph: {
       show: false,
@@ -326,7 +330,7 @@ const categories = [
     product: {
       prices: false,
       name: true,
-      align: 'left',
+      align: 'center',
     },
     products: prodData[4],
   },
@@ -345,15 +349,16 @@ const categories = [
       bg: theme.white,
       rounded: 'bottom',
     },
-    type: '3prods',
+    type: '3prods-peak',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
-    paddingTop: '35',
+    paddingTop: 0,
     title: {
       show: true,
       position: 'afterImg',
       align: 'center',
       color: theme.primary,
-      spaceAfter: 'newsletterBottom35px',
+      uppercase: true,
+      spaceBefore: 'newsletterBottom35px',
     },
     paragraph: {
       show: false,
@@ -364,7 +369,7 @@ const categories = [
     product: {
       prices: false,
       name: true,
-      align: 'left',
+      align: 'center',
     },
     products: prodData[5],
   },
@@ -383,15 +388,16 @@ const categories = [
       bg: theme.white,
       rounded: 'bottom',
     },
-    type: '3prods',
+    type: '3prods-peak',
     cta: { variant: 'maroon', color: theme.primary, phrase: 'Shop now' },
-    paddingTop: '35',
+    paddingTop: 0,
     title: {
       show: true,
       position: 'afterImg',
       align: 'center',
       color: theme.primary,
-      spaceAfter: 'newsletterBottom35px',
+      uppercase: true,
+      spaceBefore: 'newsletterBottom35px',
     },
     paragraph: {
       show: false,
@@ -402,7 +408,7 @@ const categories = [
     product: {
       prices: false,
       name: true,
-      align: 'left',
+      align: 'center',
     },
     products: prodData[6],
   },
@@ -444,6 +450,20 @@ export default new entities.Campaign({
       disableTopImageTitle: true,
       shopByCategory: false,
       theme,
+      intro: {
+        color: theme.black,
+        backgroundColor: theme.secondary,
+        alignment: 'center',
+        position: 'afterTopImage',
+        secondaryLink: false,
+        cta: {
+          variant: 'underline',
+          spaceAfter: 'newsletterBottomIntro35px',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
+        },
+      },
     },
     {
       background: theme.primary,
@@ -461,7 +481,22 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
       shopByCategory: false,
       theme,
+      intro: {
+        color: theme.black,
+        backgroundColor: theme.secondary,
+        alignment: 'center',
+        position: 'afterTopImage',
+        secondaryLink: false,
+        cta: {
+          variant: 'underline',
+          spaceAfter: 'newsletterBottomIntro35px',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
+        },
+      },
       disableTopImageTitle: true,
+      disableSoonEnding: true,
     },
   ],
 });

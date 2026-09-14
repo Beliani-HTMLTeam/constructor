@@ -12,6 +12,7 @@ export const render = ({
   color,
   id,
   imageSide,
+  prodSettings = {},
   categoryHref,
 }) => {
   let productsInnerHtml = '';
@@ -32,6 +33,14 @@ export const render = ({
 
     for (let columnId = 0; columnId < columns; columnId++) {
       const product = products[prodId + columnId];
+
+      if (product !== undefined) {
+        product.settings = {
+          width: 200,
+          ...prodSettings,
+        }
+      }
+
       // logic looks inverted but it's correct and stops layout from breaking
       const productImageAlign = columnId === 0 ? 'right' : columnId === columns - 1 ? 'left' : 'center';
 
@@ -54,7 +63,7 @@ export const render = ({
           showPrices,
           showNames,
           color,
-          align,
+          prodSettings?.align ?? align,
           gapBetweenVertical,
           product?.useCategoryLink,
           productImageAlign

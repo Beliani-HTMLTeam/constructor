@@ -95,7 +95,7 @@ export const renderOfferSection = ({
           ${offerTitle ? `
             <tr>
               <td align="center">
-                <span style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.2; text-transform: uppercase; letter-spacing: 2px; color: ${titleColor}; display: block; text-align: center;">
+                <span style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; text-transform: uppercase; letter-spacing: 2px; color: ${titleColor}; display: block; text-align: center;">
                   ${offerTitle}
                 </span>
               </td>
@@ -106,7 +106,7 @@ export const renderOfferSection = ({
           ${offerPart1 ? `
             <tr>
               <td align="center">
-                <span class="introRedTitle" style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 38px; line-height: 1.2; color: ${textColor}; display: block; text-align: center;">
+                <span class="introRedTitle" style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; color: ${textColor}; display: block; text-align: center;">
                   ${offerPart1}
                 </span>
               </td>
@@ -122,7 +122,7 @@ export const renderOfferSection = ({
                 </span>
               </td>
             </tr>
-            ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
+            ${Space({ insideTr: true, className: ctaSettings?.spaceBefore ?? 'newsletterBottom15px' })}
           ` : ''}
 
           <tr>
@@ -145,7 +145,7 @@ export const renderOfferSection = ({
               })}
             </td>
           </tr>
-          ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
+          ${Space({ insideTr: true, className: ctaSettings?.spaceAfter ?? 'newsletterBottom15px' })}
 
           ${offerDate ? `
             <tr>

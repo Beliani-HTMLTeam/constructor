@@ -1,7 +1,7 @@
 import { handleProduct } from '@/main/handlers/index.js';
 import { getQueryLink } from '@/helpers/getQueryLink.js';
 import { getState } from '@/main/state/appState';
-import { staticTranslations } from '@/api/translations';
+import { staticTranslations } from '@/api';
 import { countryToLanguage } from '@/entities/Product.js';
 
 import _templates from '@/main/data/templates.js';

@@ -1,6 +1,5 @@
-/*============================================================
-  RESET & OUTLOOK FIXES
-============================================================*/
+.START_RESET {}
+
 table,
 td {
   mso-table-lspace: 0pt;
@@ -11,9 +10,7 @@ img {
   -ms-interpolation-mode: bicubic;
 }
 
-/*============================================================
-  HEADER & ADVANTAGES
-============================================================*/
+.START_HEADER {}
 .title-advantages {
   text-align: center;
   font-size: 11px;
@@ -35,9 +32,7 @@ img {
   margin-top: 10px;
 }
 
-/*============================================================
-  CONTAINERS
-============================================================*/
+.START_CONTAINERS {}
 .newsletterContainer {
   padding-left: 20px;
   padding-right: 20px;
@@ -71,6 +66,11 @@ img {
 .newsletterContainerFree {
   padding-left: 124px;
   padding-right: 124px;
+}
+
+.newsletterContainer10px {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .newsletterMiniContainer {
@@ -116,9 +116,7 @@ img {
   padding-top: 35px;
 }
 
-/*============================================================
-  SPACING: BOTTOM (newsletterBottom)
-============================================================*/
+.START_SPACING_BOTTOM {}
 .newsletterBottom10px {
   padding-bottom: 10px;
 }
@@ -135,7 +133,8 @@ img {
   padding-bottom: 25px;
 }
 
-.newsletterBottom35px {
+.newsletterBottom35px,
+.newsletterBottomIntro35px {
   padding-bottom: 35px;
 }
 
@@ -159,9 +158,7 @@ img {
   padding-bottom: 80px;
 }
 
-/*============================================================
-  SPACING: PADDING LEFT / RIGHT (newsletterPadding)
-============================================================*/
+.START_SPACING_PADDING {}
 .newsletterRight5px {
   padding-right: 5px;
 }
@@ -198,9 +195,7 @@ img {
   padding-left: 20px;
 }
 
-/*============================================================
-  TYPOGRAPHY & HEADINGS
-============================================================*/
+.START_TYPOGRAPHY {}
 .newsletterMarkTitle {
   font-size: 25px;
   font-family: "Open Sans", sans-serif;
@@ -215,7 +210,7 @@ img {
 .newsletterTitle {
   font-size: 30px;
   font-family: "Open Sans", sans-serif;
-  line-height: 1.2;
+  line-height: 1.4;
   font-weight: 600;
 }
 
@@ -259,6 +254,11 @@ img {
   line-height: 1.2;
 }
 
+.newsletterParagraph b {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+
 .backgroundOne {
   background-color: #ffffff !important;
 }
@@ -267,9 +267,7 @@ img {
   display: block;
 }
 
-/*============================================================
-  PRODUCTS & CATEGORIES
-============================================================*/
+.START_PRODUCTS {}
 .newsletterProductTitle {
   font-size: 20px;
   font-family: "Open Sans", sans-serif;
@@ -326,9 +324,24 @@ img {
   padding-right: 20px;
 }
 
-/*============================================================
-  CTA & CODES
-============================================================*/
+.START_CTA_AND_CODES {}
+.newsletterCtaBtn {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.newsletterCtaLink {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  word-break: break-word;
+}
+
 .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
@@ -349,12 +362,21 @@ img {
   font-family: "Open Sans", sans-serif;
 }
 
-/*============================================================
-  TIMER COMPONENT
-============================================================*/
+.newsletterSemiBoldCode {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.20;
+}
+
+.START_TIMER {}
 .newsletterSubtitleTimer {
   font-size: 27px;
   line-height: 1.25;
+}
+
+.newsletterSubtitleTimer1 {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .timerParagraph {
@@ -363,9 +385,7 @@ img {
   line-height: 1.2;
 }
 
-/*============================================================
-  FREEBIES COMPONENT
-============================================================*/
+.START_FREEBIES {}
 .freebiesContainer {
   padding-left: 40px;
   padding-right: 40px;
@@ -502,9 +522,7 @@ img {
   font-weight: 600;
 }
 
-/*============================================================
-  FOOTER
-============================================================*/
+.START_FOOTER {}
 .newsletterFooter {
   padding-left: 20px !important;
   padding-right: 20px !important;
@@ -557,11 +575,9 @@ img {
   padding-left: 25px !important;
 }
 
-/*============================================================
-  MEDIA QUERIES
-============================================================*/
+.START_MEDIA_QUERIES {}
 @media screen and (max-width: 768px) {
-  /* Layout & Helpers */
+  .START_MQ_LAYOUT {}
   .stack-column {
     display: block !important;
     width: 100% !important;
@@ -577,7 +593,12 @@ img {
     display: contents;
   }
 
-  /* Containers */
+  .threeProduct {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .START_MQ_CONTAINERS {}
   .newsletterContainer {
     padding-left: 10px;
     padding-right: 10px;
@@ -601,6 +622,11 @@ img {
   .newsletterContainer40px {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .newsletterContainer10px {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .newsletterMiniContainer {
@@ -645,7 +671,12 @@ img {
     padding-top: 15px;
   }
 
-  /* Spacing: Bottom */
+  .newsletterCounter {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .START_MQ_SPACING_BOTTOM {}
   .newsletterBottom10px {
     padding-bottom: 4px;
   }
@@ -664,6 +695,10 @@ img {
 
   .newsletterBottom35px {
     padding-bottom: 20px;
+  }
+
+  .newsletterBottomIntro35px {
+    padding-bottom: 50px;
   }
 
   .newsletterBottom40px {
@@ -686,7 +721,7 @@ img {
     padding-bottom: 50px;
   }
 
-  /* Spacing: Left / Right */
+  .START_MQ_SPACING_PADDING {}
   .newsletterLeft5px {
     padding-left: 2px;
   }
@@ -723,13 +758,22 @@ img {
     padding-right: 10px;
   }
 
-  /* Typography & Headings */
+  .START_MQ_TYPOGRAPHY {}
+  .newsletterCtaLink {
+    width: auto;
+    max-width: 100%;
+  }
+
   .newsletterMarkTitle {
     font-size: 18px;
   }
 
   .newsletterMarkTitleSpace {
     padding-bottom: 18px;
+  }
+
+  .newsletterMarkTitleAlign {
+    text-align: left;
   }
 
   .newsletterTitle {
@@ -760,9 +804,20 @@ img {
     font-size: 16px;
   }
 
-  /* Products & Categories */
+  .newsletterParagraph b {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+
+  .START_MQ_PRODUCTS {}
   .newsletterProductTitle {
     font-size: 18px;
+  }
+
+  .newsletter3ProductsLeft .newsletterProductTitle,
+  .newsletter3ProductsCenter .newsletterProductTitle,
+  .newsletter3ProductsRight .newsletterProductTitle {
+    font-size: 16px;
   }
 
   .newsletterProductLowPrice {
@@ -781,11 +836,6 @@ img {
   .newsletterProductTitleLast {
     font-size: 16px !important;
     text-decoration: underline;
-  }
-
-  .threeProduct {
-    padding-left: 5px;
-    padding-right: 5px;
   }
 
   .smallCategoryTilesLEFT {
@@ -809,7 +859,7 @@ img {
     padding-right: 10px;
   }
 
-  /* Timer Component */
+  .START_MQ_TIMER {}
   .newsletterSubtitleTimer {
     font-size: 20px !important;
   }
@@ -818,7 +868,7 @@ img {
     font-size: 27px;
   }
 
-  /* Freebies Component */
+  .START_MQ_FREEBIES {}
   .freebiesContainer {
     padding-left: 20px;
     padding-right: 20px;
@@ -873,7 +923,7 @@ img {
     overflow: visible !important;
   }
 
-  /* Footer */
+  .START_MQ_FOOTER {}
   .newsletterFooterTitle {
     font-size: 18px;
   }
@@ -916,5 +966,89 @@ img {
 @media screen and (max-width: 370px) {
   .newsletterProductTitleFreebie {
     font-size: 12px;
+  }
+}
+
+.smallCategoryTilesLEFT {
+  padding-right: 6px;
+}
+
+.smallCategoryTilesRIGHT {
+  padding-left: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  .smallCategoryTilesLEFT {
+    padding-right: 3px;
+  }
+
+  .smallCategoryTilesRIGHT {
+    padding-left: 3px;
+  }
+}
+
+.newsletter3ProductsLeft {
+  padding-left: 20px;
+}
+
+.newsletter3ProductsCenter {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.newsletter3ProductsRight {
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .newsletter3ProductsLeft {
+    padding-left: 10px;
+  }
+
+  .newsletter3ProductsCenter {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .newsletter3ProductsRight {
+    padding-right: 10px;
+  }
+}
+
+.newsletter3ProdsPeakLeft {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.newsletter3ProdsPeakCenter {
+  padding-left: 8px;
+  padding-right: 7px;
+}
+
+.newsletter3ProdsPeakRight {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .newsletter3ProdsPeakLeft {
+    padding-left: 6px !important;
+    padding-right: 3px !important;
+  }
+
+  .newsletter3ProdsPeakCenter {
+    padding-left: 5px !important;
+    padding-right: 4px !important;
+  }
+
+  .newsletter3ProdsPeakRight {
+    padding-left: 3px !important;
+    padding-right: 6px !important;
+  }
+
+  .newsletter3ProdsPeakLeft .newsletterProductTitle,
+  .newsletter3ProdsPeakCenter .newsletterProductTitle,
+  .newsletter3ProdsPeakRight .newsletterProductTitle {
+    font-size: 16px !important;
   }
 }

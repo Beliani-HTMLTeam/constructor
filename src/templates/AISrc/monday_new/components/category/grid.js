@@ -43,13 +43,14 @@ export const render = ({
 
   if (Array.isArray(products)) {
     const cols = 2;
+    const productBackground = prodSettings.background ?? '';
     productsInnerHtml += `
     <tr>
-      <td style="color: ${color};${prodSettings.background ? ` background: ${prodSettings.background}` : ''}" ${insideContainer ? `class="${prodSettings.tdClass ?? tdClass}"` : ''}>
-        <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+      <td${productBackground ? ` bgcolor="${productBackground}"` : ''} style="color:${color};border:0;mso-border-alt:none;${productBackground ? `background-color:${productBackground};` : ''}" ${insideContainer ? `class="${prodSettings.tdClass ?? tdClass}"` : ''}>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"${productBackground ? ` bgcolor="${productBackground}"` : ''} style="border:0;mso-border-alt:none;border-collapse:collapse;border-spacing:0;mso-table-lspace:0pt;mso-table-rspace:0pt;${productBackground ? `background-color:${productBackground};` : ''}">`;
     
     if (prodSettings.spaceBefore)
-      productsInnerHtml += Space({ insideTr: true, className: prodSettings.spaceBefore })
+      productsInnerHtml += Space({ insideTr: true, className: prodSettings.spaceBefore, bg: productBackground })
 
     let filteredProducts = filterProductByCategory(products, country)
 
@@ -65,7 +66,7 @@ export const render = ({
         let horizontalGapValue = gapBetweenHorizontal ? ((c + 1) % 2 !== 0 ? 'class="newsletterRight10px"' : 'class="newsletterLeft10px"') : '';
         
         // prettier-ignore
-        productsInnerHtml += `<td style="color: ${color}; width:50%;vertical-align:top;" width="50%" ${horizontalGapValue}>`;
+        productsInnerHtml += `<td${productBackground ? ` bgcolor="${productBackground}"` : ''} style="color:${color};width:50%;vertical-align:top;border:0;mso-border-alt:none;${productBackground ? `background-color:${productBackground};` : ''}" width="50%" ${horizontalGapValue}>`;
 
         if (product) {
           productsInnerHtml += Product(product, showPrices, showNames, color, theme, align, gapBetweenVertical);
@@ -77,7 +78,8 @@ export const render = ({
       productsInnerHtml += '</tr>';
     }
 
-    productsInnerHtml += '</td></tr></table>';
+    productsInnerHtml += '</table></td></tr>';
+
   }
 
   return productsInnerHtml;

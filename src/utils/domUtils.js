@@ -1,4 +1,5 @@
 export function getDOMElements() {
+  const selectScopes = document.querySelector('#scopes');
   const selectShop = document.querySelector('#shops');
   const selectLanguage = document.querySelector('#languages');
   const selectCampaigns = document.querySelector('#campaigns');
@@ -6,6 +7,9 @@ export function getDOMElements() {
   const selectPurge = document.querySelector('#purge');
 
   return {
+    selectScopes,
+    selectScopesWrapper: selectScopes?.parentElement,
+
     selectShop,
     selectShopWrapper: selectShop?.parentElement,
 

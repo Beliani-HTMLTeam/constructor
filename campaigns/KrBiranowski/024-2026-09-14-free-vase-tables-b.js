@@ -405,7 +405,6 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      disableTopImageTitle: true,
       shopByCategory: false,
       theme,
       intro: {
@@ -454,7 +453,6 @@ export default new entities.Campaign({
           },
         },
       },
-      disableTopImageTitle: true,
       disableKlarna: ['HR', 'SI'],
     },
   ],

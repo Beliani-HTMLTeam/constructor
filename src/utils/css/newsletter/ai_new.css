@@ -29,6 +29,16 @@ img {
   margin-top: 10px;
 }
 
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .newsletterLiquidatorBold {
   font-size: 28px;
   line-height: 45px;
@@ -329,6 +339,28 @@ img {
   text-align: center;
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
+}
+
+.newsletterProductTitleSmall {
+  letter-spacing: 1.3px;
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+.newsletterProductDescSmall {
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+.newsletterProductLowPriceSmall {
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+.newsletterProductHighPriceSmall {
+  line-height: 1.2;
+  font-size: 15px;
+  text-decoration: line-through;
 }
 
 .newsletterFooterCategoryLEFT {
@@ -679,7 +711,7 @@ img {
   }
 
   .introRedTitle {
-    font-size: 25px !important;
+    font-size: 30px !important;
   }
 
   .newsletterParagraph {
@@ -751,6 +783,16 @@ img {
   .threeProduct {
     padding-left: 5px;
     padding-right: 5px;
+  }
+
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .newsletterContainerHeader20px {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .newsletterProductTitleWithPaddingLeft {

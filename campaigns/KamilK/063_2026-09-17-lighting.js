@@ -64,7 +64,7 @@ const categories = [
 		gapBetweenHorizontal: false,
 		imageSide: 'right', // Wymuszamy obrazek z prawej
 		cta: false,
-		paddingTop: '60',
+		paddingTop: '60',	
 		spaceAfter: 0,
 		title: {
 			show: true,
@@ -131,7 +131,7 @@ const categories = [
 		gapBetweenHorizontal: false,
 		imageSide: 'right',
 		cta: false,
-		paddingTop: '60',
+		paddingTop: '35',
 		spaceAfter: 0,
 		title: {
 			show: true,
@@ -207,7 +207,7 @@ const categories = [
 		gapBetweenHorizontal: false,
 		imageSide: 'right',
 		cta: false,
-		paddingTop: '60',
+		paddingTop: '35',
 		spaceAfter: 0,
 		title: {
 			show: true,
@@ -283,7 +283,7 @@ const categories = [
 		gapBetweenHorizontal: false,
 		imageSide: 'right',
 		cta: false,
-		paddingTop: '60',
+		paddingTop: '35',
 		spaceAfter: 0,
 		title: {
 			show: true,

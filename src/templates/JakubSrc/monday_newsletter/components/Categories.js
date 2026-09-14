@@ -57,6 +57,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           insideTable: true,
           spanStyle: `color: ${color};`,
           tableContainer: true,
+          uppercase: category?.title?.uppercase ?? false,
           className: category.title.className ?? 'newsletterTitle',
         })}
       </td>
@@ -123,6 +124,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
           showNames: category.showNames ?? category.product?.name ?? true,
+          prodSettings: category.product,
           gapBetweenHorizontal: category.gapBetweenHorizontal ?? true,
           gapBetweenVertical: category.product?.gapBetweenVertical ?? true,
           align: category.product?.align ?? 'left',
@@ -251,6 +253,7 @@ const renderBody = async ({
   copyCodeWeb,
   offerTextOverrides,
   ctaColor = '',
+  prodSettings = {},
 }) => {
   // console.log('produkty ', products);
 
@@ -265,6 +268,7 @@ const renderBody = async ({
       tiles,
       showPrices,
       showNames,
+      prodSettings,
       gapBetweenHorizontal,
       gapBetweenVertical,
       align,

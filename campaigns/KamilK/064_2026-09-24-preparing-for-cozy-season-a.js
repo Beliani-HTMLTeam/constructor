@@ -49,99 +49,6 @@ const links = {
 //   type: 'twoSameLines',
 // };
 
-const additionalCss = `
-	.newsletterContainer10px {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-
-	.newsletterContainer40px {
-		padding-left: 40px;
-		padding-right: 40px;
-	}
-
-  .newsletterCtaBtn {
-    display: inline-block;
-    width: auto;
-    text-align: center;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  .newsletterCtaLink {
-    display: inline-block;
-    width: auto;
-    max-width: 100%;
-    box-sizing: border-box;
-    white-space: normal;
-    word-break: break-word;
-  }
-
-  @media screen and (max-width: 768px) {
-    .newsletterCtaLink {
-      width: auto;
-      max-width: 100%;
-    }
-
-		.newsletterContainer10px {
-			padding-left: 5px;
-			padding-right: 5px;
-		}
-
-		.newsletterContainer40px {
-			padding-left: 20px;
-			padding-right: 20px;
-		}
-  }
-`;
-
-const additionalCssLp = `
-	.newsletterContainer10px {
-		padding-left: 10px !important;
-		padding-right: 10px !important;
-	}
-
-	.newsletterContainer40px {
-		padding-left: 40px !important;
-		padding-right: 40px !important;
-	}
-
-  .newsletterCtaBtn {
-    width: auto !important;
-    text-align: center;
-    padding: 0 !important;
-    box-sizing: border-box;
-  }
-
-  .newsletterCtaLink {
-    display: inline-block;
-    width: auto;
-    max-width: 100%;
-    box-sizing: border-box;
-    white-space: normal;
-    word-break: break-word;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .newsletterCtaLink {
-      width: auto !important;
-      max-width: 100% !important;
-    }
-			
-		.newsletterContainer10px {
-			padding-left: 5px !important;
-			padding-right: 5px !important;
-		}
-
-		.newsletterContainer40px {
-			padding-left: 20px !important;
-			padding-right: 20px !important;
-		}
-
-  }
-`;
-
 const categories = [
 	{
 		name: 'Halloween Accessories',
@@ -486,7 +393,6 @@ export default new entities.Campaign({
 				spaceBefore: 'newsletterBottom35px',
 			},
 			css: types.CSS.NS,
-			additionalCss: additionalCss,
 			name: 'Newsletter',
 			type: types.NEWSLETTER,
 			translationsSpreadsheet: campaignTranslationsSheet,
@@ -531,7 +437,6 @@ export default new entities.Campaign({
 				spaceBefore: 'newsletterBottom35px',
 			},
 			css: types.CSS.LP,
-			additionalCss: additionalCssLp,
 			name: 'Landing',
 			type: types.LANDINGPAGE,
 			translationsSpreadsheet: campaignTranslationsSheet,
