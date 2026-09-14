@@ -28,7 +28,7 @@ const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeC
 
           <!--[if !mso]><!-->
           <div class="freebiePriceMobile">
-            ${oldPrice ? `<span class="freebieOldPriceMobile">${oldPrice}</span>` : ''}
+            ${oldPrice ? `<span class="freebieOldPriceMobile freebieOldPriceMobileSingleColumn">${oldPrice}</span>` : ''}
             <span class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</span>
           </div>
           <!--<![endif]-->
