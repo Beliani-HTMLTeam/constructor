@@ -208,6 +208,7 @@ export const TimerHandler = async ({
 			freebiesTitleColor: timer?.freebiesTitleColor,
 			freebiesFreeColor: timer?.freebiesFreeColor,
 			freebiesTextColor: timer?.freebiesTextColor,
+			freebiesColumns: timer?.columns ?? 1,
 			freeText,
 			ctaText: shopNow,
 			type: type,

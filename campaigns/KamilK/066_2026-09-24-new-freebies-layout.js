@@ -456,7 +456,18 @@ const timer = {
 			id: '364571',
 			src: getImageUrl('20260924_Pic04b.png', true),
 		},
+		// FRANKLINIA
+		{
+			id: '330055',
+			src: getImageUrl('20260924_Pic11b.png', true),
+		},
+		// CHALKIDA
+		{
+			id: '329139',
+			src: getImageUrl('20260924_Pic12b.png', true),
+		},
 	],
+	columns: 2,
 	deadline: '2026-09-27',
 }
 
@@ -507,7 +518,7 @@ export default new entities.Campaign({
 				type: 'timer',
 				spaceBefore: 'newsletterBottom35px',
 			},
-			css: types.CSS.NS,
+			css: types.CSS.NS_THURSDAY,
 			additionalCss: additionalCss,
 			name: 'Newsletter',
 			type: types.NEWSLETTER,

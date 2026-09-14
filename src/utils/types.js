@@ -1,3 +1,4 @@
+import nslt_thursday from '@css/newsletter/thursday.css?inline';
 import nslt_regular from '@css/newsletter/regular.css?inline';
 import nslt_blackweek from '@css/newsletter/blackweek.css?inline';
 import nslt_mattress from '@css/newsletter/mattress.css?inline';
@@ -31,6 +32,7 @@ export const types = {
   LANDINGPAGE: 'landing',
   CSS: {
     NS: nslt_regular,
+    NS_THURSDAY: nslt_thursday,
     NS_BLACK_WEEK: nslt_blackweek,
     NS_MATTRESS: nslt_mattress,
     NS_MD: md_nslt,

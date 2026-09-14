@@ -3,6 +3,108 @@ import { ImageWithLink } from './ImageWithLink.js';
 import { Paragraph } from './Paragraph.js';
 import { CTA } from './CTA.js';
 
+const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText }) => {
+	if (!product) return '';
+	const productHref = product.href;
+	const productSrc = typeof product.src === 'object' && product.src !== null ? product.src.src : product.src;
+	const rawTitle = (product.description?.trim() || product.name || '').trim();
+	const productTitle = rawTitle.replace(
+		/(\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm\s+\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm)/gi,
+		'<span style="display:inline-block;">$1</span>'
+	);
+	const oldPrice = product.highPrice || product.lowPrice || '';
+
+	return `
+        <td width="96" valign="middle" align="center" class="${isLast ? 'freebieImageTdLast' : 'freebieImageTd'}">
+          <a href="${productHref}" target="_blank">
+            <img src="${productSrc}" alt="${product.name || ''}" width="96" height="96" class="freebieImage" />
+          </a>
+        </td>
+
+        <td valign="middle" align="left" class="${isLast ? 'freebieTitleTdLast' : 'freebieTitleTd'}">
+          <a href="${productHref}" target="_blank" style="text-decoration: none; color: ${freebiesTextColor};">
+            <span class="newsletterProductTitleFreebie" style="color: ${freebiesTextColor};">${productTitle}</span>
+          </a>
+
+          <!--[if !mso]><!-->
+          <div class="freebiePriceMobile">
+            ${oldPrice ? `<span class="freebieOldPriceMobile">${oldPrice}</span>` : ''}
+            <span class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</span>
+          </div>
+          <!--<![endif]-->
+        </td>
+
+        <td valign="middle" align="right" class="${isLast ? 'freebiePriceDesktopTdLast' : 'freebiePriceDesktopTd'}">
+          ${oldPrice ? `<div class="freebieOldPriceDesktop">${oldPrice}</div>` : ''}
+          <div class="freebieLowPriceDesktop" style="color: ${freebiesFreeColor};">${freeText}</div>
+        </td>
+  `;
+};
+
+// 2-column variant: FLAT 7-TD row — no nested tables.
+// <tr> img | title | price | gap | img | title | price </tr>
+// Desktop: all 7 TDs visible, horizontal layout per product.
+// Mobile: title/price/gap TDs hidden; img TDs become 50% tiles with freebieTileMobile div below image.
+const renderSingleFreebie2col = ({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText }) => {
+	if (!product) return '';
+	const productHref = product.href;
+	const productSrc = typeof product.src === 'object' && product.src !== null ? product.src.src : product.src;
+	const rawTitle = (product.description?.trim() || product.name || '').trim();
+	const productTitle = rawTitle.replace(
+		/(\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm\s+\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm)/gi,
+		'<span style="display:inline-block;">$1</span>'
+	);
+	const oldPrice = product.highPrice || product.lowPrice || '';
+
+	const imgClass   = isLast ? 'freebieImgTd2colLast'   : 'freebieImgTd2col';
+	const titleClass = isLast ? 'freebieTitleTd2colLast' : 'freebieTitleTd2col';
+	const priceClass = isLast ? 'frebiePriceTd2colLast'  : 'frebiePriceTd2col';
+
+	// Returns 3 TDs (img, title, price) — caller adds the gap TD between pairs
+	return `
+        <td width="96" valign="middle" align="center" class="${imgClass}">
+          <a href="${productHref}" target="_blank">
+            <img src="${productSrc}" alt="${product.name || ''}" width="96" height="96" class="freebieImage" />
+          </a>
+          <!--[if !mso]><!-->
+          <div class="freebieTileMobile">
+            <a href="${productHref}" target="_blank" style="text-decoration: none; color: ${freebiesTextColor};">
+              <span class="newsletterProductTitleFreebie freebieTileMobileTitle" style="color: ${freebiesTextColor};">${productTitle}</span>
+            </a>
+            <div class="freebieTileMobilePrice">
+              ${oldPrice ? `<div class="freebieOldPriceMobile">${oldPrice}</div>` : ''}
+              <div class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</div>
+            </div>
+          </div>
+          <!--<![endif]-->
+        </td>
+
+        <td valign="middle" align="left" class="${titleClass}">
+          <a href="${productHref}" target="_blank" style="text-decoration: none; color: ${freebiesTextColor};">
+            <span class="newsletterProductTitleFreebie" style="color: ${freebiesTextColor};">${productTitle}</span>
+          </a>
+          <!--[if !mso]><!-->
+          <div class="freebiePriceMobile">
+            ${oldPrice ? `<span class="freebieOldPriceMobile">${oldPrice}</span>` : ''}
+            <span class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</span>
+          </div>
+          <!--<![endif]-->
+        </td>
+
+        <td valign="middle" align="right" class="${priceClass}">
+          ${oldPrice ? `<div class="freebieOldPriceDesktop">${oldPrice}</div>` : ''}
+          <div class="freebieLowPriceDesktop" style="color: ${freebiesFreeColor};">${freeText}</div>
+        </td>
+  `;
+};
+
+const renderEmpty2col = (isLast) => {
+	const imgClass   = isLast ? 'freebieImgTd2colLast'   : 'freebieImgTd2col';
+	const titleClass = isLast ? 'freebieTitleTd2colLast' : 'freebieTitleTd2col';
+	const priceClass = isLast ? 'frebiePriceTd2colLast'  : 'frebiePriceTd2col';
+	return `<td class="${imgClass}"></td><td class="${titleClass}"></td><td class="${priceClass}"></td>`;
+};
+
 const renderFreebiesList = ({
 	freebies,
 	freebiesTitle,
@@ -11,66 +113,58 @@ const renderFreebiesList = ({
 	freebiesFreeColor = '#750000',
 	freebiesTextColor = '#000000',
 	freeText = 'FREE',
+	columns = 1,
 }) => {
 	if (!Array.isArray(freebies) || freebies.length === 0) return '';
 
-	const itemsHtml = freebies
-		.map((product, index) => {
-			if (!product) return '';
-			const isLast = index === freebies.length - 1;
-			const productHref = product.href;
-			const productSrc = typeof product.src === 'object' && product.src !== null ? product.src.src : product.src;
-			const rawTitle = (product.description?.trim() || product.name || '').trim();
-			const productTitle = rawTitle.replace(
-				/(\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm\s+\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm)/gi,
-				'<span style="display:inline-block;">$1</span>'
-			);
-			const oldPrice = product.highPrice || product.lowPrice || '';
+	let itemsHtml = '';
 
-			return `
+	if (columns === 2) {
+		// Flat 7-TD row: [img][title][price][gap][img][title][price]
+		for (let i = 0; i < freebies.length; i += 2) {
+			const left = freebies[i];
+			const right = freebies[i + 1];
+			const isLastRow = i + 2 >= freebies.length;
+			const leftHtml  = renderSingleFreebie2col({ product: left, isLast: isLastRow, freebiesTextColor, freebiesFreeColor, freeText });
+			const rightHtml = right
+				? renderSingleFreebie2col({ product: right, isLast: isLastRow, freebiesTextColor, freebiesFreeColor, freeText })
+				: renderEmpty2col(isLastRow);
+			itemsHtml += `
         <tr>
-          <td width="96" valign="middle" align="center" class="${isLast ? 'freebieImageTdLast' : 'freebieImageTd'}">
-            <a href="${productHref}" target="_blank">
-              <img src="${productSrc}" alt="${product.name || ''}" width="96" height="96" class="freebieImage" />
-            </a>
-          </td>
-
-          <td valign="middle" align="left" class="${isLast ? 'freebieTitleTdLast' : 'freebieTitleTd'}">
-            <a href="${productHref}" target="_blank" style="text-decoration: none; color: ${freebiesTextColor};">
-              <span class="newsletterProductTitleFreebie" style="color: ${freebiesTextColor};">${productTitle}</span>
-            </a>
-
-            <!--[if !mso]><!-->
-            <div class="freebiePriceMobile">
-              ${oldPrice ? `<span class="freebieOldPriceMobile">${oldPrice}</span>` : ''}
-              <span class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</span>
-            </div>
-            <!--<![endif]-->
-          </td>
-
-          <td valign="middle" align="right" class="${isLast ? 'freebiePriceDesktopTdLast' : 'freebiePriceDesktopTd'}">
-            ${oldPrice ? `<div class="freebieOldPriceDesktop">${oldPrice}</div>` : ''}
-            <div class="freebieLowPriceDesktop" style="color: ${freebiesFreeColor};">${freeText}</div>
-          </td>
+          ${leftHtml}
+          <td class="freebieGapTd2col"></td>
+          ${rightHtml}
         </tr>
       `;
-		})
-		.join('');
+		}
+	} else {
+		itemsHtml = freebies
+			.map((product, index) => {
+				if (!product) return '';
+				const isLast = index === freebies.length - 1;
+				return `
+        <tr>
+          ${renderSingleFreebie({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText })}
+        </tr>
+      `;
+			})
+			.join('');
+	}
 
 	return `
     <tr>
       <td class="freebiesContainer" style="background-color: ${freebiesBackground};">
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
           ${freebiesTitle
-			? `
+		? `
           <tr>
-            <td colspan="3" align="left" class="newsletterBottom10px">
+            <td colspan="${columns === 2 ? 7 : 3}" align="left" class="newsletterBottom10px">
               <span class="newsletterFreebiesTitle" style="color: ${freebiesTitleColor};">${freebiesTitle}</span>
             </td>
           </tr>
           `
-			: ''
-		}
+		: ''
+	}
           ${itemsHtml}
         </table>
       </td>
@@ -93,6 +187,7 @@ const Timer = ({
 	freebiesFreeColor = '#750000',
 	freebiesTextColor = '#000000',
 	freeText = 'FREE',
+	freebiesColumns = 1,
 	ctaText,
 	type,
 	script = '',
@@ -163,16 +258,16 @@ const Timer = ({
 						: `${Space({ insideTr: true, className: 'newsletterBottom20px' })}`
 					}
 
-          ${script}
+          ${type === 'newsletter' ? '' : script}
 
-          <style>
+          ${type !== 'newsletter' ? `<style>
             :root {
               --timer-bg: ${background};
               --timer-unit-bg: ${unitBackground ?? background};
               --timer-numbers: ${color};
               --timer-label: ${color};
             }
-          </style>
+          </style>` : ''}
         </table>
       </td>
     </tr>
@@ -186,6 +281,7 @@ const Timer = ({
 				freebiesFreeColor,
 				freebiesTextColor,
 				freeText,
+				columns: freebiesColumns,
 			})
 			: ''
 		}

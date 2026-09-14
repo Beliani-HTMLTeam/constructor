@@ -1,0 +1,23 @@
+.newsletterProductLowPrice {
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.newsletterProductHighPrice {
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+@media screen and (max-width: 768px) {
+
+  .newsletterProductLowPrice {
+    font-size: 16px;
+  }
+
+  .newsletterProductHighPrice {
+    display: block;
+  }
+}

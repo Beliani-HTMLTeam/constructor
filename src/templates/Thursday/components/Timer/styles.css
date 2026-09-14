@@ -1,0 +1,29 @@
+.newsletterSubtitleTimer {
+  font-size: 27px;
+  line-height: 1.25;
+}
+
+.newsletterSubtitleTimer1 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.timerParagraph {
+  font-size: 30px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+}
+@media screen and (max-width: 768px) {
+
+  .newsletterCounter {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .newsletterSubtitleTimer {
+    font-size: 20px !important;
+  }
+
+  .timerParagraph {
+    font-size: 27px;
+  }
+}
