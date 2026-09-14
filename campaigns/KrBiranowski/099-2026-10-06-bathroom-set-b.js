@@ -178,11 +178,11 @@ const links = {
   TopImage_src: getImageUrl('20261006_Gif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-10-06' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-09-24' }),
-  Banner_1_Image: translateImage({ value: '20260924b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-09-17' }),
+  Banner_1_Image: translateImage({ value: '20260917b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-09-25' }),
-  Banner_2_Image: translateImage({ value: '20260925b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-09-24' }),
+  Banner_2_Image: translateImage({ value: '20260924b.png' }),
 };
 
 const TopImageTitle_data = {

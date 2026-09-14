@@ -86,6 +86,20 @@ table {
   padding-bottom: 40px;
 }
 
+#newsletter .newsletterContainerFooter20px,
+#newsletter.newsletterContainerFooter20px,
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#newsletter .newsletterContainerHeader20px,
+#newsletter.newsletterContainerHeader20px,
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 #newsletter .newsletterContainer {
   padding-left: 20px;
   padding-right: 20px;
@@ -411,7 +425,20 @@ table {
   #newsletter .newsletterBottom65px {
     padding-bottom: 35px;
   }
-  
+
+  #newsletter .newsletterContainerFooter20px,
+  #newsletter.newsletterContainerFooter20px,
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #newsletter .newsletterContainerHeader20px,
+  #newsletter.newsletterContainerHeader20px,
+  .newsletterContainerHeader20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
   #newsletter .newsletterBottom40px {
     padding-bottom: 25px;
