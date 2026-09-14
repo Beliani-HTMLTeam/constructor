@@ -235,14 +235,11 @@ export async function renderTemplate(getState, setState) {
     }
 
     const templateCss = templateToRender.template.resolveCss?.({
-
-
-      css: templateToRender.css ?? '', html, type: templateToRender.type, wrapper: templateToRender.wrapper,
-
-
+      css: templateToRender.css ?? '',
+      html,
+      type: templateToRender.type,
+      wrapper: templateToRender.wrapper,
     }) ?? (templateToRender.css ?? '');
-
-
     const effectiveCss = templateCss + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
     const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
 
@@ -363,14 +360,11 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
   }
 
   const templateCss = templateToRender.template.resolveCss?.({
-
-
-    css: templateToRender.css ?? '', html, type: templateToRender.type, wrapper: templateToRender.wrapper,
-
-
+    css: templateToRender.css ?? '',
+    html,
+    type: templateToRender.type,
+    wrapper: templateToRender.wrapper,
   }) ?? (templateToRender.css ?? '');
-
-
   const effectiveCss = templateCss + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
   const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
   return templateToRender.wrapper

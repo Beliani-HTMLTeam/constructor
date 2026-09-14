@@ -41,10 +41,6 @@ const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeC
   `;
 };
 
-// 2-column variant: FLAT 7-TD row — no nested tables.
-// <tr> img | title | price | gap | img | title | price </tr>
-// Desktop: all 7 TDs visible, horizontal layout per product.
-// Mobile: title/price/gap TDs hidden; img TDs become 50% tiles with freebieTileMobile div below image.
 const renderSingleFreebie2col = ({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText }) => {
 	if (!product) return '';
 	const productHref = product.href;
@@ -60,7 +56,6 @@ const renderSingleFreebie2col = ({ product, isLast, freebiesTextColor, freebiesF
 	const titleClass = isLast ? 'freebieTitleTd2colLast' : 'freebieTitleTd2col';
 	const priceClass = isLast ? 'frebiePriceTd2colLast'  : 'frebiePriceTd2col';
 
-	// Returns 3 TDs (img, title, price) — caller adds the gap TD between pairs
 	return `
         <td width="96" valign="middle" align="center" class="${imgClass}">
           <a href="${productHref}" target="_blank">
@@ -120,11 +115,10 @@ const renderFreebiesList = ({
 	let itemsHtml = '';
 
 	if (columns === 2) {
-		// Flat 7-TD row: [img][title][price][gap][img][title][price]
-		for (let i = 0; i < freebies.length; i += 2) {
-			const left = freebies[i];
-			const right = freebies[i + 1];
-			const isLastRow = i + 2 >= freebies.length;
+		for (let productIndex = 0; productIndex < freebies.length; productIndex += 2) {
+			const left = freebies[productIndex];
+			const right = freebies[productIndex + 1];
+			const isLastRow = productIndex + 2 >= freebies.length;
 			const leftHtml  = renderSingleFreebie2col({ product: left, isLast: isLastRow, freebiesTextColor, freebiesFreeColor, freeText });
 			const rightHtml = right
 				? renderSingleFreebie2col({ product: right, isLast: isLastRow, freebiesTextColor, freebiesFreeColor, freeText })
