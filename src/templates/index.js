@@ -11,6 +11,7 @@ import { RegularFridayNslt1 } from './DimaSrc/newsletter_regular_friday1/templat
 import { MondayNew } from './AISrc/monday_new/template.js';
 import { MondayNewV2 } from './AISrc/monday_new_v2/template.js';
 import { ThursdayNew } from './AISrc/thursday_new/template.js';
+import { FrenchDaysNew } from './AISrc/french_days/template.js';
 
 import { AINewsletter1109 } from './DimaSrc/ai_newsletter_regular_friday_11_09/templates/regularFridayNslt';
 import { AIRegularFridayNslt11_09_normal } from './DimaSrc/ai_newsletter_regular_friday_11_09_normal/templates/regularFridayNslt';
@@ -31,6 +32,7 @@ export const templates = {
   MondayNew,
   MondayNewV2,
   ThursdayNew,
+  FrenchDaysNew,
   AINewsletter1109,
   AIRegularFridayNslt11_09_normal,
   AIRegularFridayNslt_18_09,
