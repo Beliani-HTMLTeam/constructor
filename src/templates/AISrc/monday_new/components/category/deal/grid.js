@@ -1,8 +1,6 @@
 import { ImageWithLink } from '../../ImageWithLink.js';
 import { Space } from '../../Space.js';
 
-const FREEBIE_CARD_MAX_WIDTH = 285;
-
 const getProductSrc = (product) => {
   if (!product?.src) return '';
   return typeof product.src === 'object' ? product.src.src : product.src;
@@ -19,9 +17,10 @@ const getCellWidth = (columns) => {
   return '50%';
 };
 
-const getCellPadding = (columns, columnId) => {
+const getCellPadding = (columns, columnId, isCentered = false) => {
   if (columns === 1) return 'padding-left: 100px; padding-right: 100px;';
   if (columns !== 2) return '';
+  if (isCentered) return columnId === 0 ? 'padding-right: 5px;' : 'padding-left: 5px;';
   return columnId === 0 ? 'padding-left: 80px;' : 'padding-right: 80px;';
 };
 
@@ -31,52 +30,35 @@ const getInnerTablePadding = (columns, columnId) => {
   return columnId === 0 ? 'padding-right: 5px;' : 'padding-left: 5px;';
 };
 
-const getAlignConfig = (columns, columnId) => {
+const getAlignConfig = (columns, columnId, isCentered = false) => {
   if (columns === 3) {
     if (columnId === 0) {
-      return {
-        outerTableAlign: 'right',
-        contentTdAlign: 'right',
-        innerCardAlign: 'right',
-      };
+      return { outerTableAlign: 'right', contentTdAlign: 'right', innerCardAlign: 'right' };
     }
-
     if (columnId === 2) {
-      return {
-        outerTableAlign: 'left',
-        contentTdAlign: 'left',
-        innerCardAlign: 'left',
-      };
+      return { outerTableAlign: 'left', contentTdAlign: 'left', innerCardAlign: 'left' };
     }
-
-    return {
-      outerTableAlign: 'center',
-      contentTdAlign: 'center',
-      innerCardAlign: 'center',
-    };
+    return { outerTableAlign: 'center', contentTdAlign: 'center', innerCardAlign: 'center' };
   }
 
   if (columns !== 2) {
+    return { outerTableAlign: 'center', contentTdAlign: 'center', innerCardAlign: 'center' };
+  }
+
+  // For centered remainder rows (e.g. 2 leftover from a 5-item 3-col grid)
+  if (isCentered) {
     return {
-      outerTableAlign: 'center',
-      contentTdAlign: 'center',
-      innerCardAlign: 'center',
+      outerTableAlign: columnId === 0 ? 'right' : 'left',
+      contentTdAlign: columnId === 0 ? 'right' : 'left',
+      innerCardAlign: columnId === 0 ? 'right' : 'left',
     };
   }
 
+  // Normal 2-col full-width row
   if (columnId === 0) {
-    return {
-      outerTableAlign: 'center',
-      contentTdAlign: 'center',
-      innerCardAlign: 'right',
-    };
+    return { outerTableAlign: 'center', contentTdAlign: 'center', innerCardAlign: 'right' };
   }
-
-  return {
-    outerTableAlign: 'left',
-    contentTdAlign: 'left',
-    innerCardAlign: 'left',
-  };
+  return { outerTableAlign: 'left', contentTdAlign: 'left', innerCardAlign: 'left' };
 };
 
 const getRowsFromFreebiesConfig = (freebies) => {
@@ -85,6 +67,19 @@ const getRowsFromFreebiesConfig = (freebies) => {
     : Array.isArray(freebies)
       ? freebies
       : [];
+
+  // Determine the dominant column count across all rows so we know
+  // whether a 2-item row is a "full" 2-col row or a centered remainder.
+  const dominantColumns = (() => {
+    const counts = configuredRows
+      .filter((r) => Array.isArray(r) && r.length > 0)
+      .map((r) => (r.length >= 3 ? 3 : r.length === 1 ? 1 : 2));
+    if (counts.length === 0) return 2;
+    // Use the most common count; if tied, prefer the larger one
+    const freq = {};
+    for (const c of counts) freq[c] = (freq[c] ?? 0) + 1;
+    return Number(Object.entries(freq).sort((a, b) => b[1] - a[1] || b[0] - a[0])[0][0]);
+  })();
 
   const rows = [];
 
@@ -103,7 +98,10 @@ const getRowsFromFreebiesConfig = (freebies) => {
     }
 
     for (let i = 0; i < totalItems; i += columnsPerRow) {
-      rows.push(row.slice(i, i + columnsPerRow));
+      const slice = row.slice(i, i + columnsPerRow);
+      // Centered when: this slice has 2 items but the dominant grid is 3-col
+      const isCentered = slice.length === 2 && dominantColumns === 3;
+      rows.push({ items: slice, isCentered });
     }
   }
 
@@ -116,7 +114,7 @@ const getRowsFromProductsList = (products, freebiesPerRow) => {
   const rows = [];
 
   for (let i = 0; i < productList.length; i += columns) {
-    rows.push(productList.slice(i, i + columns));
+    rows.push({ items: productList.slice(i, i + columns), isCentered: false });
   }
 
   return rows;
@@ -137,14 +135,16 @@ const renderFreebieCard = ({
   fallbackHref,
   columns,
   columnId,
+  isCentered = false,
   theme,
   disableHighPrice = false,
   prodSettings = {},
+  gridSize = 'normal',
 }) => {
   const width = getCellWidth(columns);
-  const cellPadding = getCellPadding(columns, columnId);
+  const cellPadding = getCellPadding(columns, columnId, isCentered);
   const innerPadding = getInnerTablePadding(columns, columnId);
-  const alignConfig = getAlignConfig(columns, columnId);
+  const alignConfig = getAlignConfig(columns, columnId, isCentered);
 
   const textColor = theme?.black ?? '#000000';
   const priceColor = theme?.primary ?? '#000000';
@@ -204,6 +204,19 @@ const renderFreebieCard = ({
     ? `font-size: ${prodSettings.priceHighSize}px;`
     : '';
 
+  let FREEBIE_CARD_MAX_WIDTH = 285;
+  console.log(gridSize);
+  switch (gridSize) {
+    case 'small':
+      FREEBIE_CARD_MAX_WIDTH = 190;
+      break;
+    case 'normal':
+    default:
+      FREEBIE_CARD_MAX_WIDTH = 285;
+      break;
+  }
+  
+
   return `
     <td
       style="vertical-align: top; width: ${width}; background-color: ${freebieBackgroundColor};"
@@ -226,7 +239,7 @@ const renderFreebieCard = ({
                 cellspacing="0"
                 cellpadding="0"
                 border="0"
-                align="${prodSettings?.align ?? alignConfig.innerCardAlign}"
+                align="${alignConfig.innerCardAlign}"
                 style="max-width: ${FREEBIE_CARD_MAX_WIDTH}px; background-color: ${freebieBackgroundColor}; border: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
               >
                 <tbody>
@@ -366,6 +379,7 @@ export const renderFreebieGrid = ({
   theme = {},
   disableHighPrice = false,
   prodSettings = {},
+  gridSize = 'normal',
 }) => {
   console.log(prodSettings);
 
@@ -383,7 +397,7 @@ export const renderFreebieGrid = ({
   let rowsHtml = '';
 
   for (let rowId = 0; rowId < rows.length; rowId++) {
-    const row = rows[rowId];
+    const { items: row, isCentered } = rows[rowId];
     const columns = normalizeColumns(row.length);
     const isLastRow = rowId === rows.length - 1;
     let rowCells = '';
@@ -396,9 +410,11 @@ export const renderFreebieGrid = ({
         fallbackHref: categoryHref,
         columns,
         columnId,
+        isCentered,
         theme,
         disableHighPrice,
         prodSettings,
+        gridSize,
       });
     }
 
