@@ -16,11 +16,12 @@ export const ShopByCategoryHeader = ({
 
   return `
     <tr>
-      <td style="background-color: ${white}; padding: 40px 20px 20px 20px;" align="center">
+      <td class="newsletterContainer" style="background-color: ${white};" align="center">
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
+          ${Space({ insideTr: true, className: 'newsletterBottom35px', bg: white })}
           <tr>
             <td align="center">
-              <span class="shopByCategoryTitle" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Georgia, serif;' : ''} font-size: 26px; font-weight: bold; color: ${black}; display: block; text-align: center; letter-spacing: 0.5px;">
+              <span class="shopByCategoryTitle" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 26px; font-weight: bold; color: ${black}; display: block; text-align: center; letter-spacing: 0.5px;">
                 ${title}
               </span>
             </td>
@@ -51,9 +52,9 @@ export const ShopByCategoryHeader = ({
               </td>
             </tr>
           ` : ''}
+          ${Space({ insideTr: true, className: 'newsletterBottom20px', bg: white })}
         </table>
       </td>
     </tr>
   `;
 };
-

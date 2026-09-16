@@ -22,6 +22,7 @@ export const render = ({
   type = 'newsletter',
   combineOfferParts = false,
   ctaSettings = {},
+  rowOrder,
   prodSettings = {},
   offerSpaceAfter = '',
   tdClass = 'newsletterContainer',
@@ -70,6 +71,8 @@ export const render = ({
   let html = '';
 
   html += renderOfferSection({
+    rowOrder,
+    country,
     queries,
     renderType,
     links,
