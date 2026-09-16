@@ -352,7 +352,7 @@ const categories = [
 
 const timer = {
 	freebies: getImageUrl('20260917free.png', true),
-	deadline: '2026-09-17',
+	deadline: '2026-09-20',
 }
 
 export default new entities.Campaign({
