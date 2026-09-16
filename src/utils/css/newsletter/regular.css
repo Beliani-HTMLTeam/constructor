@@ -1001,6 +1001,10 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+  .hideMobile {
+    display: none !important;
+  }
+
   .newsletter3ProductsLeft {
     padding-left: 10px;
   }

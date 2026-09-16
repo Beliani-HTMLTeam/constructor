@@ -1,14 +1,15 @@
-import { Header as HeaderComponent } from '@/components/header.js';
+// import { Header as HeaderComponent } from '@/components/header.js';
+import { Header as HeaderComponent } from './components/HeaderNew.js';
 
 const Header = ({ getHeader, country, background, type, id }) => {
 
   return HeaderComponent(
     {
       id,
-      advantages: {
-        freeDelivery: getHeader('Free Delivery'),
-        daysReturn: getHeader('365-Day Return'),
-      },
+      // advantages: {
+      //   freeDelivery: getHeader('Free Delivery'),
+      //   daysReturn: getHeader('365-Day Return'),
+      // },
 
       paragraph: {
         troubleViewing: getHeader('Trouble viewing'),
