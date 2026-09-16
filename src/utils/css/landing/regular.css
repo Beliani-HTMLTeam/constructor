@@ -1057,3 +1057,11 @@ table {
   font-size: clamp(11px, 2vw, 14px);
   margin-top: clamp(2px, 1vw, 4px);
 }
+@media screen and (max-width: 600px) {
+  #newsletter .categoryBannerTitle {
+    padding: 14px 10px 40px 12px !important;
+  }
+  #newsletter .categoryBannerCtaCell {
+    padding: 14px 12px 40px 0 !important;
+  }
+}

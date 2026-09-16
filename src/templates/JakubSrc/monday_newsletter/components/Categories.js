@@ -4,6 +4,7 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
+import { render as renderCategoryBanner } from './category/category-banner.js';
 import { translateImage } from '@/helpers/translateImage.js';
 import { translateLink } from '@/helpers/translateLink.js';
 
@@ -42,6 +43,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const ctaButtonHref = (typeof category.cta === 'object' && category.cta?.href)
     ? getCategoryLink(category.cta.href)
     : ctaHref;
+
+  if (category.type === 'category-banner') {
+    return renderCategoryBanner({ category, href: ctaHref, ctaHref: ctaButtonHref, getPhrase });
+  }
 
   const TitleElement = category?.title?.show
     ? `
@@ -145,6 +150,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           copyCodeWeb: category.copyCodeWeb,
           offerTextOverrides: category.offerTextOverrides,
           ctaColor: category?.ctaColor ?? '#000000',
+          ctaSettings: category.type === 'deal' ? category.cta : undefined,
         })
       : '';
  
@@ -162,7 +168,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     `
     : '';
 
-  const CTAElement = category.cta
+  const CTAElement = category.cta && !(category.type === 'deal' && category.cta.variant === 'button')
     ? CTA({
         color: category.color ?? '#000000',
         href: ctaButtonHref,
@@ -253,6 +259,7 @@ const renderBody = async ({
   copyCodeWeb,
   offerTextOverrides,
   ctaColor = '',
+  ctaSettings = {},
   prodSettings = {},
 }) => {
   // console.log('produkty ', products);
@@ -289,6 +296,7 @@ const renderBody = async ({
       copyCode,
       copyCodeWeb,
       ctaColor,
+      ctaSettings,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

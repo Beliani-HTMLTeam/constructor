@@ -1052,3 +1052,18 @@ img {
     font-size: 16px !important;
   }
 }
+/* Category-only banners: mobile fallback for email clients without clamp(). */
+@media screen and (max-width: 600px) {
+  #newsletter .categoryBannerTitle {
+    font-size: 14px !important;
+    font-size: clamp(14px, 3.6vw, 24px) !important;
+    padding: 14px 10px 40px 12px !important;
+  }
+  #newsletter .categoryBannerCta {
+    font-size: 12px !important;
+    font-size: clamp(12px, 3vw, 18px) !important;
+  }
+  #newsletter .categoryBannerCtaCell {
+    padding: 14px 12px 40px 0 !important;
+  }
+}

@@ -132,11 +132,11 @@ const tableQueries = [
 
 const links = {
   // Intro_cta_href: 'https://www.beliani.ch/bathroom-furniture/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-09-28' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-28-ta' }),
   TopImageTitle_src: translateImage({ value: '20260928_01.png' }),
 
-  TopImage_src: getImageUrl('20260928_Gif.gif', true),
-  TopImage_href: translateLink({ value: 'content/lp26-09-28' }),
+  TopImage_src: translateImage({ value: '20260928_topImage.jpg' }),
+  TopImage_href: translateLink({ value: 'content/lp26-09-28-ta' }),
 
   Banner_1: translateLink({ value: 'content/lp26-08-27' }),
   Banner_1_Image: translateImage({ value: '20260827b.png' }),
@@ -174,7 +174,13 @@ const categories = [
     background: theme.white,
     color: theme.black,
     spaceAfter: 'newsletterBottom45px',
-    cta: { variant: 'cream', color: theme.white, bg: theme.primary, borderWidth: '15px 45px', borderColor: theme.primary  },
+    cta: {
+      variant: 'button',
+      bg: '#750000',
+      color: '#FFFFFF',
+      borderWidth: '15px 45px',
+      borderColor: '#750000',
+    },
     gridSize: 'small',
     combineOfferParts: false,
     freebies: prodData[0],
@@ -196,11 +202,11 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: '48469',
-  name: 'Monday - Christmas shop is open',
+  startId: '48437',
+  name: 'Monday - Christmas shop is open - A',
   date: '28.09.2026',
   issueCardId: '533908',
-  lpId: '32711',
+  lpId: '32690',
   alarm: {
     isActive: false,
   },
@@ -223,7 +229,7 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      disableTopImageTitle: false,
+      disableTopImageTitle: true,
       shopByCategory: false,
       theme,
       intro: {
@@ -264,7 +270,7 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
       shopByCategory: false,
       theme,
-      disableTopImageTitle: false,
+      disableTopImageTitle: true,
       disableFooterCategories: true,
       intro: {
         color: theme.black,

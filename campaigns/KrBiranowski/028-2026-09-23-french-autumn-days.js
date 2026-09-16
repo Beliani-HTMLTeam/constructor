@@ -114,7 +114,7 @@ const tableQueries = [
 
 const links = {
   // Intro_cta_href: 'https://www.beliani.ch/bathroom-furniture/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-09-23-ta' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-09-23' }),
   TopImageTitle_src: translateImage({ value: '20260923_01.png' }),
 
   TopImage_src: translateImage({ value: '20260923_topImage.png' }),
@@ -136,6 +136,10 @@ const TopImageTitle_data = {
 const categories = [
   {
     type: 'deal',
+    rowOrder: {
+      default: ['row1', 'row2', 'row3'],
+      'fr,chfr,befr': ['row1', 'row3', 'row2'],
+    },
     spaceAfter: 0,
     background: theme.primary,
     products: [],
@@ -206,5 +210,3 @@ export default new entities.Campaign({
     },
   ],
 });
-
-

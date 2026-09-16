@@ -1,4 +1,4 @@
-﻿const ICON_DEFAULT = 'https://pictureserver.net/static/2026/copy-icon{variant}.svg';
+const ICON_DEFAULT = 'https://pictureserver.net/static/2026/copy-icon{variant}.svg';
 const ICON_OK = 'https://pictureserver.net/static/2026/copy-icon-ok{variant}.svg';
 
 const isColorLight = (color) => {
@@ -60,4 +60,14 @@ const buildCopyElement = ({ text, codeValue, color, toastBg, toastText, label, f
   </td>`;
 }
 
-export { CopyCodeCTA, CopyCodeWebNotification, isColorLight, buildCopyElement };
+const CopyCodeButton = ({ text, codeValue, label = 'Code copied', color = '#FFFFFF', bg = '#750000', borderColor = bg, borderWidth = '15px 45px', toastBg = '#F6E7E6', toastText = '#000000', font = 'Poppins, Tahoma, Geneva, sans-serif' }) => {
+  const escapeAttribute = (value) => String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const { iconDefault, iconOk } = resolveIcons(color);
+  return `<tr><td align="center" class="newsletterContainer">
+    <button type="button" data-code="${escapeAttribute(codeValue)}" data-label="${escapeAttribute(label)}" onclick="navigator.clipboard.writeText(this.dataset.code).then(function(){var i=this.querySelector('img');i.src='${iconOk}';var previous=document.querySelector('[data-copy-notif]');if(previous)previous.remove();var n=document.createElement('div');n.setAttribute('data-copy-notif','1');n.setAttribute('role','status');n.setAttribute('aria-live','polite');var top=window.innerWidth<=600?'80px':'20px';n.style.cssText='position:fixed;right:-300px;top:'+top+';background:${toastBg};color:${toastText};padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;font-family:${font};z-index:9999;transition:right 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.15);white-space:nowrap;display:flex;align-items:center;gap:6px;';var ic=document.createElement('img');ic.src='${resolveIcons(toastText).iconOk}';ic.width=16;ic.height=16;ic.style.cssText='width:16px;height:16px;';n.appendChild(ic);n.appendChild(document.createTextNode(this.dataset.label));document.body.appendChild(n);requestAnimationFrame(function(){requestAnimationFrame(function(){n.style.right='20px';});});setTimeout(function(){n.style.right='-300px';setTimeout(function(){if(n.parentNode)n.parentNode.removeChild(n);i.style.transition='opacity 0.2s ease';i.style.opacity='0';setTimeout(function(){i.src='${iconDefault}';i.style.opacity='1';},200);},300);},2500);}.bind(this))" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;max-width:100%;box-sizing:border-box;cursor:pointer;background-color:${bg};color:${color};border-style:solid;border-width:${borderWidth};border-color:${borderColor};padding:0;font-family:Arial,sans-serif;font-size:16px;line-height:20px;font-weight:600;">
+      <span style="min-width:0;overflow-wrap:anywhere;">${text}</span><img src="${iconDefault}" data-no-webp alt="" width="16" height="16" style="display:block;flex-shrink:0;width:16px;height:16px;">
+    </button>
+  </td></tr>`;
+};
+
+export { CopyCodeCTA, CopyCodeWebNotification, isColorLight, buildCopyElement, CopyCodeButton };

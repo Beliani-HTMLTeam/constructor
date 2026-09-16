@@ -65,7 +65,7 @@ export const CategoryQuickLinks = ({
           ${title ? `
             <tr>
               <td align="center" style="padding-bottom: 20px;">
-                <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Georgia, serif;' : ''} font-size: 20px; font-weight: bold; color: #000000; display: block; text-align: center;">
+                <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 20px; font-weight: bold; color: #000000; display: block; text-align: center;">
                   ${title}
                 </span>
               </td>
