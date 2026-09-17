@@ -21,6 +21,15 @@ export function Header(sections, options) {
     paragraph: {
       [types.NEWSLETTER]: {
         value: (data) => `
+        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%;" id="newsletter">
+          <tr>
+            <td>
+              <span style="display:none; font-size:1px; color:#ffffff; max-height:0px; max-width:0px; opacity:0; overflow:hidden; mso-hide:all;">
+              ✔️ Free Delivery & Return ✔️ 365-Day Returns |
+              </span>
+            </td>
+          </tr>
+        </table>
         <!--[if !mso]><!-->
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; color: #000;" id="newsletter" class="hideMobile">
           <tr><td class="newsletterBottom20px" style="background-color: #ececec;"></td></tr>
