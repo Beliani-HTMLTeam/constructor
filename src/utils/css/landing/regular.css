@@ -1059,9 +1059,9 @@ table {
 }
 @media screen and (max-width: 600px) {
   #newsletter .categoryBannerTitle {
-    padding: 14px 10px 40px 12px !important;
+    padding: 14px 0 20px !important;
   }
   #newsletter .categoryBannerCtaCell {
-    padding: 14px 12px 40px 0 !important;
+    padding: 14px 0 20px !important;
   }
 }

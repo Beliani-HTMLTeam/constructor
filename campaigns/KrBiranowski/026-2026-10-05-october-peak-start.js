@@ -497,6 +497,7 @@ export default new entities.Campaign({
       },
       disableTopImageTitle: true,
       disableSoonEnding: true,
+      disableKlarna: ['HR', 'SI'],
     },
   ],
 });

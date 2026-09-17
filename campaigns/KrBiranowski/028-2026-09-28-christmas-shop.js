@@ -153,11 +153,16 @@ const TopImageTitle_data = {
 
 const catObj = {
   type: 'category-banner',
+  insideContainer: true,
+  title: { show: true, position: 'beforeImg', align: 'center', },
+  line: { show: true, src: 'https://pictureserver.net/static/2026/footer/line.jpg' },
   skipLinkTranslation: true,
-  background: theme.secondary,
+  background: theme.primary,
   color: theme.black,
   cta: {
     phrase: 'Shop now',
+    position: 'afterImg',
+    align: 'center',
     color: theme.black,
   },
 };
@@ -171,10 +176,16 @@ const categories = [
     },
     paddingTop: '0',
     type: 'deal',
-    background: theme.white,
+    background: theme.primary,
     color: theme.black,
     spaceAfter: 'newsletterBottom45px',
-    cta: { variant: 'cream', color: theme.white, bg: theme.primary, borderWidth: '15px 45px', borderColor: theme.primary  },
+    cta: {
+      variant: 'button',
+      bg: '#750000',
+      color: '#FFFFFF',
+      borderWidth: '15px 45px',
+      borderColor: '#750000',
+    },
     gridSize: 'small',
     combineOfferParts: false,
     freebies: prodData[0],
@@ -187,11 +198,13 @@ const categories = [
     }
   },
   
-  ...catData.map((cat) => ({
+  ...catData.map((cat, idx) => ({
     ...catObj,
     name: cat.name,
     src: cat.catImg,
-    href: cat.href
+    href: cat.href,
+    ...(idx === catData.length - 1 ? { line: undefined } : {}),
+    ...(idx === catData.length - 1 ? { spaceAfter: false } : {})
   }))
 ];
 
@@ -228,8 +241,8 @@ export default new entities.Campaign({
       theme,
       intro: {
         color: theme.black,
-        backgroundColor: theme.secondary,
-        alignment: 'left',
+        backgroundColor: theme.primary,
+        alignment: 'center',
         position: 'afterFreebies',
         secondaryLink: false,
         disableLine: true,
@@ -268,8 +281,8 @@ export default new entities.Campaign({
       disableFooterCategories: true,
       intro: {
         color: theme.black,
-        backgroundColor: theme.secondary,
-        alignment: 'left',
+        backgroundColor: theme.primary,
+        alignment: 'center',
         position: 'afterFreebies',
         secondaryLink: false,
         disableLine: true,

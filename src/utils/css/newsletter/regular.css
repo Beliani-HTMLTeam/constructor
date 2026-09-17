@@ -1057,13 +1057,13 @@ img {
   #newsletter .categoryBannerTitle {
     font-size: 14px !important;
     font-size: clamp(14px, 3.6vw, 24px) !important;
-    padding: 14px 10px 40px 12px !important;
+    padding: 14px 0 20px !important;
   }
   #newsletter .categoryBannerCta {
     font-size: 12px !important;
     font-size: clamp(12px, 3vw, 18px) !important;
   }
   #newsletter .categoryBannerCtaCell {
-    padding: 14px 12px 40px 0 !important;
+    padding: 14px 0 20px !important;
   }
 }
