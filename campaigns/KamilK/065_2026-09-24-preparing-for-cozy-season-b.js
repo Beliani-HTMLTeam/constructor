@@ -251,6 +251,7 @@ export default new entities.Campaign({
 				type: 'paragraph',
 				spaceBottom: 'newsletterBottom20px',
 				cta: {
+					phrase: 'Shop now First',
 					show: true,
 					align: 'center',
 					spaceAfter: 'newsletterBottom35px',
@@ -287,6 +288,7 @@ export default new entities.Campaign({
 				type: 'paragraph',
 				spaceBottom: 'newsletterBottom20px',
 				cta: {
+					phrase: 'Shop now First',
 					align: 'center',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
