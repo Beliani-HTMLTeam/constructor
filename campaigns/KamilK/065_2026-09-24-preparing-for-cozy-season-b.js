@@ -245,6 +245,7 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
+				container: 'newsletterContainer',
 				color: '#000000',
 				backgroundColor: '#FECD8C',
 				alignment: 'left',
@@ -282,6 +283,7 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
+				container: 'newsletterContainer',
 				color: '#000000',
 				backgroundColor: '#FECD8C',
 				alignment: 'left',
