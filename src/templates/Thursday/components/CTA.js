@@ -2,7 +2,7 @@ import { buildCopyIcon } from './CopyCodeCTA.js';
 
 const CTA = ({
 	href = '#',
-	text = 'Shop now',
+	text,
 	color,
 	align = 'center',
 	insideTr = false,
@@ -128,15 +128,17 @@ const CTA = ({
         `);
 			}
 
+			const tableAlignAttr = align === 'center' ? 'align="center"' : '';
+			const tableMarginStyle = align === 'left' ? 'margin: 0;' : align === 'right' ? 'margin: 0 0 0 auto;' : 'margin: 0 auto;';
+
 			html = `
-        <table cellspacing="0" cellpadding="0" border="0" align="${align}" style="margin: 0 auto;">
+        <table cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; ${tableMarginStyle}">
           <tr>
-            <td align="center" class="newsletterCtaBtn">
+            <td align="${align}" style="font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;">
               <!--[if gte mso 9]>
-                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${buttonHref}" style="height:${vmlHeight}px;v-text-anchor:middle;width:${vmlWidth}px;" arcsize="${arcsize}" stroke="f" fillcolor="${bgColor}">
-                  <w:anchorlock/>
-                  <center style="color:${btnTextColor};font-family:${vmlFontFamily};font-size:${fontSize};font-weight:${fontWeight};letter-spacing:0px;text-transform: ${textTransform};">${text}</center>
-                </v:roundrect>
+              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${buttonHref}" style="height:${vmlHeight}px;v-text-anchor:middle;width:${vmlWidth}px;" arcsize="${arcsize}" stroke="f" fillcolor="${bgColor}">
+                <center style="color:${btnTextColor};font-family:${vmlFontFamily};font-size:${fontSize};font-weight:${fontWeight};letter-spacing:0px;text-transform: ${textTransform};">${text}</center>
+              </v:roundrect>
               <![endif]-->
               <!--[if !mso]><!-->
                 <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-family: ${fontFamily}; font-size: ${fontSize}; line-height: ${lineHeight}; font-weight: ${fontWeight}; text-transform: ${textTransform}; color: ${btnTextColor}; padding: ${paddingY}px ${paddingX}px; text-decoration: none; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box; width: auto; max-width: 100%; white-space: normal; word-break: break-word;">
@@ -156,8 +158,8 @@ const CTA = ({
 
 	if (insideTr) {
 		html = `
-      <tr>
-        <td ${tdClass ? `class="${tdClass}"` : ''} align="${align}" ${background ? `style="background-color: ${background};"` : ''}>
+      <tr ${background ? `style="background-color: ${background};" bgcolor="${background}"` : ''}>
+        <td ${tdClass ? `class="${tdClass}"` : ''} align="${align}" ${background ? `style="background-color: ${background};" bgcolor="${background}"` : ''}>
           ${html}
         </td>
       </tr>
