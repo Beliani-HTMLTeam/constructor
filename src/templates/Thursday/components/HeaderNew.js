@@ -38,9 +38,10 @@ export function Header(sections, options) {
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; color: #000;" id="newsletter">
           <tr>
             <td class="newsletterContainer" style="background-color: white; color: #000000;">
-              <p class="newsletterRecommendationHeader" style="margin-bottom: 0; color: #000000;">
-                ${data.troubleViewing} <a class="newsletterRecommendationHeaderLink" style="color: #000000;text-decoration: underline;" href="[[newsshowurl]]">${data.troubleViewingHrefText}</a>
-                ${data.addBeliani} <a class="newsletterRecommendationHeaderLink" style="color: #000000;text-decoration: underline;" href="${data.whitelistHref}">${data.whiteList}</a>
+              <p class="newsletterRecommendationHeader" style="text-align: right; margin-bottom: 0; color: #000000;">
+                <!--${data.troubleViewing} <a class="newsletterRecommendationHeaderLink" style="color: #000000;text-decoration: underline;" href="[[newsshowurl]]">${data.troubleViewingHrefText}</a>
+                ${data.addBeliani} <a class="newsletterRecommendationHeaderLink" style="color: #000000;text-decoration: underline;" href="${data.whitelistHref}">${data.whiteList}</a>-->
+								View in <a class="newsletterRecommendationHeaderLink" style="color: #000000;text-decoration: underline;" href="[[newsshowurl]]">browser</a>
               </p>
             </td>
           </tr>
