@@ -63,6 +63,7 @@ const Thursday = async ({
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
 
+  const TimerAtTop = timerPosition === 'top' ? TimerElement : '';
   const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
   const TimerAfterCategories =
     timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
