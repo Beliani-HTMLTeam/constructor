@@ -45,45 +45,6 @@ const getLayout = ({ totalWidth, containerPadding, gap }) => {
 	return { inner, widths, gap };
 };
 
-const renderTile = ({ item, width, color, nameColor, ctaColor, ctaText, showText, getCategoryLink, getCategoryTitle, add_utm, fallbackHref }) => {
-	if (!item) {
-		return `<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;"></td>`;
-	}
-
-	const href = getHref({ item, getCategoryLink, add_utm, fallbackHref });
-	// the tile images already carry the category name and the cta
-	const name = showText ? getName({ item, getCategoryTitle }) : '';
-	const src = getSrc(item);
-
-	return `
-    <td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;">
-      <table cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tr>
-          <td align="center">
-            <a href="${href}" style="text-decoration: none;"><img src="${src}" alt="${name}" width="${width}" style="display: block; width: 100%; max-width: ${width}px; vertical-align: top;" loading="lazy"></a>
-          </td>
-        </tr>
-        ${showText
-			? `
-        <tr>
-          <td class="newsletterBottom20px"></td>
-        </tr>
-        <tr>
-          <td align="center">
-            <a href="${href}" class="newsletterProductTitle" style="color: ${nameColor ?? color}; text-decoration: none;">${name}</a>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding-top: 4px;">
-            <a href="${href}" class="newsletterFreebieCta" style="color: ${ctaColor ?? color}; text-decoration: underline;">${ctaText}</a>
-          </td>
-        </tr>
-          `
-			: ''}
-      </table>
-    </td>
-  `;
-};
 
 const renderHeading = ({ heading, queries, getPhrase, color, containerClass }) => {
 	if (!heading) return '';
@@ -151,25 +112,55 @@ export const render = ({
 		const row = Array.isArray(rows[rowId]) ? rows[rowId] : [];
 		const isLastRow = rowId === rows.length - 1;
 
-		let cells = '';
+		let imgCells = '';
+		let nameCells = '';
+		let ctaCells = '';
+
 		for (let columnId = 0; columnId < COLUMNS; columnId++) {
+			const item = row[columnId];
+			const width = layout.widths[columnId];
+			const gapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}" style="width: ${layout.gap}px; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
+
 			if (columnId > 0) {
-				cells += `<td class="newsletterCategoryGap" width="${layout.gap}" style="width: ${layout.gap}px; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
+				imgCells += gapHtml;
+				if (showText) {
+					nameCells += gapHtml;
+					ctaCells += gapHtml;
+				}
 			}
 
-			cells += renderTile({
-				item: row[columnId],
-				width: layout.widths[columnId],
-				color,
-				nameColor,
-				ctaColor,
-				ctaText,
-				showText,
-				getCategoryLink,
-				getCategoryTitle,
-				add_utm,
-				fallbackHref: categoryHref,
-			});
+			if (!item) {
+				imgCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;"></td>`;
+				if (showText) {
+					nameCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;"></td>`;
+					ctaCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;"></td>`;
+				}
+				continue;
+			}
+
+			const href = getHref({ item, getCategoryLink, add_utm, fallbackHref: categoryHref });
+			const name = getName({ item, getCategoryTitle });
+			const src = getSrc(item);
+
+			imgCells += `
+				<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;" align="center">
+					<a href="${href}" style="text-decoration: none; display: block; line-height: 0;"><img src="${src}" alt="${name}" width="${width}" style="display: block; width: 100%; max-width: ${width}px; vertical-align: top;" loading="lazy"></a>
+				</td>
+			`;
+
+			if (showText) {
+				nameCells += `
+					<td class="newsletterCategoryTile frenchDaysCategoryName" width="${width}" valign="top" align="center" style="width: ${width}px; padding-top: 16px; font-size: 20px; font-size: clamp(14px, 3.6vw, 20px); font-weight: 700; line-height: 1.25; vertical-align: top; overflow-wrap: anywhere; color: ${nameColor ?? '#750000'};">
+						<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
+					</td>
+				`;
+
+				ctaCells += `
+					<td class="newsletterCategoryTile" width="${width}" valign="top" align="center" style="width: ${width}px; padding-top: 6px; font-size: 16px; line-height: 1.25; vertical-align: top;">
+						<a href="${href}" class="frenchDaysCategoryCta" style="font-size: 16px; font-size: clamp(12px, 3.2vw, 16px); line-height: 1.25; overflow-wrap: anywhere; color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
+					</td>
+				`;
+			}
 		}
 
 		html += `
@@ -177,8 +168,16 @@ export const render = ({
         <td class="${containerClass}">
           <table cellspacing="0" cellpadding="0" border="0" width="${layout.inner}" style="width: 100%; max-width: ${layout.inner}px; table-layout: fixed;">
             <tr>
-              ${cells}
+              ${imgCells}
             </tr>
+            ${showText ? `
+            <tr>
+              ${nameCells}
+            </tr>
+            <tr>
+              ${ctaCells}
+            </tr>
+            ` : ''}
           </table>
         </td>
       </tr>
