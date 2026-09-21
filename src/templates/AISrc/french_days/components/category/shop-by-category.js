@@ -42,5 +42,5 @@ export const render = ({
     rows += `<tr>${cells}</tr>`;
   }
   return `${ShopByCategoryHeader({ title, type: renderType, theme })}
-    <tr><td bgcolor="${background}" style="background-color:${background};"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="${background}" style="table-layout:fixed;border-collapse:collapse;border-spacing:0;mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:${background};font-family:Arial,sans-serif;">${rows}</table></td></tr>`;
+    <tr><td bgcolor="${background}" style="background-color:${background};"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="${background}" style="table-layout:fixed;border-collapse:collapse;border-spacing:0;mso-table-lspace:0pt;mso-table-rspace:0pt;background-color:${background};${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''}">${rows}</table></td></tr>`;
 };
