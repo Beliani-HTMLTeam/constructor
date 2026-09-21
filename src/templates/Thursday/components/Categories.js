@@ -5,6 +5,9 @@ import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
+// category types that render on their own, without products/tiles/freebies
+const STANDALONE_CATEGORY_TYPES = ['deal_new', 'rowswith3categories'];
+
 const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country }) => {
   let html = '';
 
@@ -110,8 +113,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? Space({ insideTr: true, className: category.spaceBeforeProducts })
     : '';
 
+  const isStandaloneCategory = STANDALONE_CATEGORY_TYPES.includes(String(category.type ?? '').toLowerCase());
+
   const ProductsElement =
-    category.products || category.tiles || category.freebies
+    category.products || category.tiles || category.freebies || isStandaloneCategory
       ? await renderBody({
           products: category.products,
           freebies: category.freebies,
@@ -139,6 +144,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           offerTextOverrides: category.offerTextOverrides,
           category,
           container,
+          add_utm,
         })
       : '';
 
@@ -249,6 +255,7 @@ const renderBody = async ({
   offerTextOverrides,
   category,
   container,
+  add_utm,
   alignToSide = false,
 }) => {
   // console.log('produkty ', products);
@@ -284,6 +291,7 @@ const renderBody = async ({
       offerTextOverrides,
       category,
       container,
+      add_utm,
       alignToSide,
     });
   } catch (e) {

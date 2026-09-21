@@ -58,11 +58,13 @@ const Thursday = async ({
     getCategoryLink,
   });
 
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, getCategoryLink, links });
+  const introCtaText = intro?.cta?.phrase ? getPhrase(intro?.cta?.phrase) : shopNow;
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText, getCategoryLink, links });
   const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
 
+  const TimerAtTop = timerPosition === 'top' ? TimerElement : '';
   const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
   const TimerAfterCategories =
     timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
@@ -119,7 +121,9 @@ const Thursday = async ({
   return `
     ${HeaderElement}
 
-    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" ${background ? `bgcolor="${background}"` : ''} id="newsletter">
+      ${TimerAtTop}
+
       ${TopImageTitleElement}
 
       ${TopImageElement}

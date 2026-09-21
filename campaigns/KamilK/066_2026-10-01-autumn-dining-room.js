@@ -308,6 +308,7 @@ export default new entities.Campaign({
 			tableQueries: tableQueries,
 			timer: timer,
 			intro: {
+				container: 'newsletterContainer',
 				color: '#000000', // unused
 				backgroundColor: '#FFF5F1', // unused
 				alignment: 'center',
@@ -339,6 +340,7 @@ export default new entities.Campaign({
 			tableQueries: tableQueries,
 			timer: timer,
 			intro: {
+				container: 'newsletterContainer',
 				color: '#000000', // unused
 				backgroundColor: '#FFF5F1', // unused
 				alignment: 'center',

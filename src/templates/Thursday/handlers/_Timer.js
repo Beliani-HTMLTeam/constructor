@@ -182,7 +182,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
   return Inside && Inside.type === 'timer'
     ? 
     `
-    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore }) : ''}
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.backgroundColor }) : ''}
 
     ${Timer({
       title: queries?.timer?.[0] ?? 'Translation not found',
@@ -194,6 +194,10 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
       unitBackground: Inside.unitBackground,
       freebies,
       ctaText: shopNow,
+      showCta: Inside.showCta ?? true,
+      spaceTop: Inside.spaceTop,
+      spaceBottom: Inside.spaceBottom,
+      container: Inside.container,
       type: type,
       script: buildProloTimerScript({ deadline: timer.deadline, country }),
     })}

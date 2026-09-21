@@ -373,6 +373,7 @@ export default new entities.Campaign({
 				spaceBottom: 'newsletterBottom20px',
 				container: 'newsletterContainer40px',
 				cta: {
+					phrase: 'Shop now First',
 					variant: 'button',
 					spaceAfter: 'newsletterBottom35px',
 					paddingX: 45,
@@ -390,7 +391,7 @@ export default new entities.Campaign({
 				backgroundColor: '#F6E7E6',
 				unitBackground: '#E3CCCC',
 				type: 'timer',
-				spaceBefore: 'newsletterBottom35px',
+				// spaceBefore: 'newsletterBottom35px',
 			},
 			css: types.CSS.NS,
 			name: 'Newsletter',
@@ -417,6 +418,7 @@ export default new entities.Campaign({
 				spaceBottom: 'newsletterBottom20px',
 				container: 'newsletterContainer40px',
 				cta: {
+					phrase: 'Shop now First',
 					variant: 'button',
 					spaceAfter: 'newsletterBottom35px',
 					paddingX: 45,
@@ -434,7 +436,7 @@ export default new entities.Campaign({
 				backgroundColor: '#F6E7E6',
 				unitBackground: '#E3CCCC',
 				type: 'timer',
-				spaceBefore: 'newsletterBottom35px',
+				// spaceBefore: 'newsletterBottom35px',
 			},
 			css: types.CSS.LP,
 			name: 'Landing',

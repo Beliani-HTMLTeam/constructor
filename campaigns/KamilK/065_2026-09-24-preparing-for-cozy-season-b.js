@@ -245,12 +245,14 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
+				container: 'newsletterContainer',
 				color: '#000000',
 				backgroundColor: '#FECD8C',
 				alignment: 'left',
 				type: 'paragraph',
 				spaceBottom: 'newsletterBottom20px',
 				cta: {
+					phrase: 'Shop now First',
 					show: true,
 					align: 'center',
 					spaceAfter: 'newsletterBottom35px',
@@ -281,12 +283,14 @@ export default new entities.Campaign({
 			template: templates.Thursday, // User should change this
 
 			intro: {
+				container: 'newsletterContainer',
 				color: '#000000',
 				backgroundColor: '#FECD8C',
 				alignment: 'left',
 				type: 'paragraph',
 				spaceBottom: 'newsletterBottom20px',
 				cta: {
+					phrase: 'Shop now First',
 					align: 'center',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
