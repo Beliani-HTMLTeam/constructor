@@ -69,13 +69,16 @@ export const render = ({
         productsInnerHtml += `<td${productBackground ? ` bgcolor="${productBackground}"` : ''} style="color:${color};width:50%;vertical-align:top;border:0;mso-border-alt:none;${productBackground ? `background-color:${productBackground};` : ''}" width="50%" ${horizontalGapValue}>`;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, theme, align, gapBetweenVertical);
+          productsInnerHtml += Product(product, showPrices, showNames, color, theme, align, gapBetweenVertical)
         }
 
         productsInnerHtml += '</td>';
       }
 
       productsInnerHtml += '</tr>';
+
+      if (prodSettings?.outsideSpace)
+        productsInnerHtml += Space({ insideTr: true, className: prodSettings.outsideSpace })
     }
 
     productsInnerHtml += '</table></td></tr>';

@@ -66,7 +66,50 @@ export const render = ({
         </td>`;
       }
       productsInnerHtml += `</tr>`;
+    } else if (displayType === '2col-img' && tiles) {
+      const cols = 2;
+      // Gap dimensions follow the container's desktop and mobile CSS rules.
+      const gapClass = `col2imgGap ${tdClass || 'newsletterContainer'}`;
+      const gapStyle = 'padding:0!important;line-height:0;font-size:0;mso-line-height-rule:exactly;';
 
+      for (let i = 0; i < items.length; i += cols) {
+        if (i > 0) {
+          //productsInnerHtml += `<tr><td colspan="3" class="${gapClass}" style="${gapStyle}"></td></tr>`;
+          productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom70px' });
+        }
+        productsInnerHtml += '<tr>';
+
+        for (let c = 0; c < cols; c++) {
+          const item = items[i + c];
+
+          if (c > 0) {
+            // Padding cannot collapse like an empty cell's width when both images request 50%.
+            productsInnerHtml += `<td width="0" class="${tdClass || 'newsletterContainer'}" style="width:0;padding-right:0!important;padding-top:0!important;padding-bottom:0!important;line-height:0;font-size:0;mso-line-height-rule:exactly;"></td>`;
+          }
+
+          productsInnerHtml += `<td width="50%" style="width:50%;vertical-align:top;">`;
+
+          if (item) {
+            const href = item.resolvedHref ?? (getCategoryLink ? getCategoryLink(item.href) : item.href);
+            const name = getCategoryTitle ? getCategoryTitle(item.name) : item.name;
+            const nameOverride = item?.nameOverrides?.[country?.toLowerCase()] ?? name;
+
+            productsInnerHtml += `<table width="100%" border="0" cellpadding="0" cellspacing="0">`;
+            productsInnerHtml += ImageWithLink({
+              src: typeof item.src === 'object' ? item.src.src : item.src,
+              href,
+              alt: nameOverride ?? '',
+              insideTr: true,
+              align: 'center',
+            });
+            productsInnerHtml += '</table>';
+          }
+
+          productsInnerHtml += '</td>';
+        }
+
+        productsInnerHtml += '</tr>';
+      }
     } else {
       const cols = 2;
 
@@ -107,8 +150,6 @@ export const render = ({
                 </td>
               </tr>
               `;
-
-              productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom80px' });
 
               productsInnerHtml += `</table>`;
             } else {

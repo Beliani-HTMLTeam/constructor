@@ -55,11 +55,11 @@ const CTA = ({
   } else if (type === 'landing') {
     if (variant === 'cream') {
       const buttonContent = codeValue ? `${text} ${copyIcon}` : text;
-      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaCreamBg}; color: ${color ?? ctaCreamText} !important;">${buttonContent}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaCreamBg}; color: ${color ?? ctaCreamText} !important;${transform ? `text-transform:${transform};` : ''}">${buttonContent}</a>`;
     } else if (variant === 'underline') {
-      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLink" style="color: ${color};">${text} ${copyIcon}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLink" style="color: ${color};${transform ? `text-transform:${transform};` : ''}">${text} ${copyIcon}</a>`;
     } else {
-      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaMaroonBg}; color: ${color ?? ctaMaroonText} !important;">${text} ${copyIcon}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaMaroonBg}; color: ${color ?? ctaMaroonText} !important;${transform ? `text-transform:${transform};` : ''}">${text} ${copyIcon}</a>`;
     }
   } else {
     if (variant === 'underline') {
