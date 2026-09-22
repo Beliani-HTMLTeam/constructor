@@ -292,6 +292,10 @@ const categories = [
 		type: 'deal_new',
 		textColor: '#FFFFFF',
 		href: translateLink({ value: 'content/lp26-10-02' }),
+		copyToast: {
+			background: '#750000',
+			color: '#FFFFFF',
+		},
 		// newsletter only - on the landing page the deal is rendered as text
 		dealImg: translateImage({ value: '_20261002_deal.png' }),
 		// french shops put the discount after the description
@@ -317,11 +321,10 @@ const categories = [
 		color: '#000000',
 		type: 'rowswith3categories',
 		paddingTop: 0,
-		// the tile images already contain the category name and the cta
-		showTileText: false,
+		showTileText: true,
+		tileNameColor: '#750000',
+		tileCtaColor: '#000000',
 		spaceBetweenRows: 'newsletterBottom35px',
-		// 35px between the deal category and this one
-		paragraph: { spaceAfter: 'newsletterBottom35px' },
 		spaceAfter: 'newsletterBottom60px',
 		heading: {
 			phrase: 'Shop by category',
@@ -334,17 +337,17 @@ const categories = [
 					{
 						name: "Sofas",
 						href: 'https://www.beliani.ch/sofas/',
-						src: translateImage({ value: '_20261002_Sofas.png' }),
+						src: getImageUrl('20261002_Sofas.png', true),
 					},
 					{
 						name: "Beds",
 						href: 'https://www.beliani.ch/beds/',
-						src: translateImage({ value: '_20261002_Beds.png' }),
+						src: getImageUrl('20261002_Beds.png', true),
 					},
 					{
 						name: "Armchairs",
 						href: 'https://www.beliani.ch/armchairs/',
-						src: translateImage({ value: '_20261002_Armchairs.png' }),
+						src: getImageUrl('20261002_Armchairs.png', true),
 					},
 
 				],
@@ -352,51 +355,51 @@ const categories = [
 					{
 						name: "Tables",
 						href: 'https://www.beliani.ch/tables/',
-						src: translateImage({ value: '_20261002_Tables.png' }),
+						src: getImageUrl('20261002_Tables.png', true),
 					},
 					{
 						name: "Chairs",
 						href: 'https://www.beliani.ch/chairs/',
-						src: translateImage({ value: '_20261002_Chairs.png' }),
+						src: getImageUrl('20261002_Chairs.png', true),
 					},
 					{
 						name: "Storage",
 						href: 'https://www.beliani.ch/storage/',
-						src: translateImage({ value: '_20261002_Storage.png' }),
+						src: getImageUrl('20261002_Storage.png', true),
 					},
 				],
 				[
 					{
 						name: "Desks",
 						href: 'https://www.beliani.ch/desks/',
-						src: translateImage({ value: '_20261002_Desks.png' }),
+						src: getImageUrl('20261002_Desks.png', true),
 					},
 					{
 						name: "Kids",
 						href: 'https://www.beliani.ch/children-room/',
-						src: translateImage({ value: '_20261002_Kids.png' }),
+						src: getImageUrl('20261002_Kids.png', true),
 					},
 					{
 						name: "Lighting",
 						href: 'https://www.beliani.ch/lighting/',
-						src: translateImage({ value: '_20261002_Lighting.png' }),
+						src: getImageUrl('20261002_Lighting.png', true),
 					},
 				],
 				[
 					{
 						name: "Bathtubs",
 						href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-						src: translateImage({ value: '_20261002_Bathtubs.png' }),
+						src: getImageUrl('20261002_Bathtubs.png', true),
 					},
 					{
 						name: "Rugs",
 						href: 'https://www.beliani.ch/rugs/',
-						src: translateImage({ value: '_20261002_Rugs.png' }),
+						src: getImageUrl('20261002_Rugs.png', true),
 					},
 					{
 						name: "Accessories",
 						href: 'https://www.beliani.ch/accessories-decor/',
-						src: translateImage({ value: '_20261002_Accessories.png' }),
+						src: getImageUrl('20261002_Accessories.png', true),
 					},
 				],
 			]
@@ -424,7 +427,7 @@ export default new entities.Campaign({
 
 			Inside: timerInside,
 			timer: timer,
-			css: types.CSS.NS,
+			css: types.CSS.NS_FRENCH_DAYS,
 			additionalCss: additionalCss,
 			name: 'Newsletter',
 			type: types.NEWSLETTER,
@@ -442,7 +445,7 @@ export default new entities.Campaign({
 
 			Inside: timerInside,
 			timer: timer,
-			css: types.CSS.LP,
+			css: types.CSS.LP_FRENCH_DAYS,
 			additionalCss: additionalCssLp,
 			name: 'Landing',
 			type: types.LANDINGPAGE,

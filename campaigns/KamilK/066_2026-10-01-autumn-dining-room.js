@@ -169,7 +169,7 @@ const categories = [
 		],
 	},
 	{
-		name: 'Pendant lamps',
+		name: 'Pendant lights',
 		src: getImageUrl('20261001_Cat20.jpg', true),
 		href: 'https://www.beliani.ch/lighting/pendant-lights/',
 		background: '#FFF5F1',
@@ -314,6 +314,7 @@ export default new entities.Campaign({
 				alignment: 'center',
 				type: 'paragraph',
 				cta: {
+					phrase: 'Shop now First',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
 				}
@@ -346,6 +347,7 @@ export default new entities.Campaign({
 				alignment: 'center',
 				type: 'paragraph',
 				cta: {
+					phrase: 'Shop now First',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
 				}

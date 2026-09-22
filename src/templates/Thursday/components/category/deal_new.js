@@ -393,9 +393,19 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		align: 'center',
 		tdClass: containerClass,
 		fontSize: '16px',
-		lineHeight: '14px',
+		lineHeight: '16px',
+		mobileFontSize: '16px',
+		mobileLineHeight: '16px',
 		paddingX: 30,
 		paddingY: 14,
+		paddingTop: 15,
+		paddingBottom: 13,
+		mobilePaddingX: 30,
+		mobilePaddingY: 14,
+		mobilePaddingTop: 15,
+		mobilePaddingBottom: 13,
+		msoTextRaise: '2pt',
+		textTransform: category?.textTransform ?? 'uppercase',
 	};
 
 	let html = '';
