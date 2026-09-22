@@ -92,8 +92,8 @@ const catBase = {
   paragraph: {
     show: true,
     align: 'center',
-    spaceAfter: 'newsletterBottom15pxSame', // Space before the paragraph element
-    tdClass: 'newsletterContainer', // Paragraph container
+    spaceAfter: 'newsletterBottom20px', // Space before the paragraph element
+    tdClass: 'newsletterContainer40px', // Paragraph container
   },
 
   product: {
@@ -104,10 +104,11 @@ const catBase = {
     insideColor: theme.white, // Color of product element
     lowPriceColor: theme.priceLow,
     highPriceColor: theme.priceHigh,
-    spaceBefore: 'newsletterBottom40px', // Space before the product element
+    spaceBefore: 'newsletterBottom50px', // Space before the product element
     spaceAfter: 'newsletterBottom25px', // Space after the product element
     outsideSpace: 'newsletterBottom25px',  // Space outside of the product element
     tdClass: 'newsletterContainer', // Product container
+    gapBetweenVertical: 'newsletterBottom15px', // Space between product name and product prices
   },
 };
 
@@ -282,9 +283,10 @@ const categories = [
     title: {
       show: true,
       align: 'center',
-      spaceBefore: 'newsletterBottom40px', // Space before the title element
+      spaceBefore: 'newsletterBottom35px', // Space before the title element
       className: 'newsletterAditionalTitle', // Custom title class
       tdClass: 'newsletterContainer', // Title container
+      spaceAfter: 'newsletterBottom0px'
     },
 
     paragraph: {
@@ -338,9 +340,9 @@ export default new entities.Campaign({
     {
       background: theme.white,
       color: theme.black,
-      template: templates.MondayNew,
+      template: templates.MondayNewAI,
 
-      css: types.CSS.NS_AI_NEW,
+      css: types.CSS.DIMA_NS_AI_NEW,
       name: 'Newsletter',
       type: types.NEWSLETTER,
       translationsSpreadsheet: campaignTranslationsSheet,
@@ -365,15 +367,15 @@ export default new entities.Campaign({
         secondaryLink: false,
         cta: false,
         disableLine: true,
-        containerClass: 'newsletterContainer', // Intro container
+        containerClass: 'newsletterContainer40px', // Intro container
       },
     },
     {
       background: theme.white,
       color: theme.black,
-      template: templates.MondayNew,
+      template: templates.MondayNewAI,
 
-      css: types.CSS.LP_AI_NEW,
+      css: types.CSS.DIMA_LP_AI_NEW,
       name: 'Landing',
       type: types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,
@@ -393,10 +395,11 @@ export default new entities.Campaign({
         spaceTop: false,
         paragraphSpace: false,
         position: 'beforeCategories',
+        spaceBottom: 'newsletterBottom50px',
         secondaryLink: false,
         cta: false,
         disableLine: true,
-        containerClass: 'newsletterContainer', // Intro container
+        containerClass: 'newsletterContainer40px', // Intro container
       },
 
       disableKlarna: ['SI', 'HR'], // Disable klarna for specific countries
