@@ -80,7 +80,7 @@ const catBase = {
     position: 'afterImg',
     align: 'center',
     spaceBefore: 'newsletterBottom35px',
-    spaceAfter: 'newsletterBottom30px',
+    spaceAfter: 'newsletterBottom35px',
   },
   paragraph: {
     show: true,
@@ -218,6 +218,7 @@ const catData = [
   },
   {
     ...catBase,
+    spaceAfter: 'newsletterBottom40px',
     name: 'Floor Cushions',
     href: 'https://www.beliani.ch/textiles/floor-cushions/',
     src: getImageUrl('20260930_Cat04_B.jpg', true),
@@ -235,7 +236,7 @@ const categories = [
     color: theme.black,
     type: 'categorytiles',
     cta: false,
-    spaceAfter: 'newsletterBottom80px',
+    spaceAfter:  'newsletterBottom80px',
     tileBgColor: theme.white,
     tileTextColor: theme.tileText,
     paddingTop: 0,
