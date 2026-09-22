@@ -1,0 +1,229 @@
+import { Line } from '@/templates/Thursday/components/Line';
+import { CTA } from '../CTA';
+import { ImageWithLink } from '../ImageWithLink';
+import { Paragraph } from '../Paragraph';
+import { Space } from '../Space';
+import { WhiteLine } from '../whiteLine';
+import { renderProducts } from './renderProducts';
+import { category4Tiles_Grid } from '../../category/grid4tiles';
+import { render } from '../../category/small-tiles';
+import { getState } from '@/main/state/appState';
+import { BulletproofButton } from '../BulletproofButton';
+import { render as category3Columns_Grid } from '../../category/smallgrid';
+
+
+const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
+const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
+
+export const renderCategory = async (
+  category,
+  id,
+  categoriesLength,
+  queries,
+  getPhrase,
+  getCategoryLink,
+  getCategoryTitle,
+  add_utm,
+  lineType = 'white',
+  country
+) => {
+  console.log('background: ', category);
+  
+  const type = getState('template').type;
+  const background = category.background || 'white';
+  const color = category.color || '#000000';
+
+  const styles = `background: ${background}; color: ${color}; ${category.styles || ''}${category.styles ? ';' : ''}`;
+
+  const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : '';
+  const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
+
+  const ctaText = getPhrase('Shop Now')
+
+  const TitleElement = category?.title?.show
+    ? `
+      <tr>
+        <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
+          ${Paragraph({
+            text: category.name,
+            color: color,
+            background: background,
+            align: category.title?.align || 'center',
+            tableContainer: true,
+            className: 'newsletterTitle',
+          })}
+        </td>
+      </tr>
+  
+      ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter, backgroundColor: background }) : ''}
+      `
+    : '';
+
+  const ImageElement = category.src
+    ? ImageWithLink({
+        href: ctaHref,
+        src: category.src,
+        insideTr: true,
+        background: background,
+      })
+    : '';
+
+  const ParagraphElement = category?.paragraph?.show
+    ? `
+        ${category.paragraph.spaceBefore ? Space({ insideTr: true, className: category.paragraph.spaceBefore, backgroundColor: background }) : ''}
+  
+        <tr>
+          <td style="${styles}" class="newsletterContainer">
+            ${Paragraph({
+              text: (queries.paragraph && queries.paragraph[id]) || (queries.paragraphs && queries.paragraphs[id]) || 'Translation not found',
+              align: category.paragraph.align || 'left',
+              color: category.paragraph.color || color,
+              tableContainer: true,
+            })}
+          </td>
+        </tr>
+  
+        
+        ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : ''}
+      `
+    : category?.paragraph?.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter, backgroundColor: background }) : Space({ insideTr: true, backgroundColor: background });
+
+  const ProductsElement = category.products
+    ? category.type === 'unique'
+      ? await renderProducts({
+          products: [
+            ...category.products,
+            { href: ctaHref, src: category.src1 },
+            { href: ctaHref, src: category.src2 },
+            { href: ctaHref, src: category.src3 },
+          ],
+          showPrices: category.showPrices || true,
+          showName: category.showName || true,
+          queries,
+          categoryType: category.type,
+          categoryIndex: id,
+          insideContainer: category.insideContainer || false,
+
+        })
+      : category.type === 'grid4tiles'
+        ? category4Tiles_Grid({
+            getCategoryLink,
+            getCategoryTitle,
+            products: category.products,
+            insideContainer: true,
+            color,
+            background,
+            add_utm,
+            country
+          })
+        :  category.type === 'small-tiles'
+          ? render({
+            tiles: category.tiles,
+            color,
+            getCategoryLink,
+            getCategoryTitle,
+            country,
+            background,
+            }):
+             category.type === 'smallgrid' ?
+                        category3Columns_Grid(category.products, {
+                          color,
+                          background: category.background || '#ffffff',
+                          titleColor: category.title.color,          // matches the red in your screenshot
+                          ctaColor: category.cta.color,
+                          insideContainer: true,
+                          getPhrase,
+                          getCategoryTitle,
+                          getCategoryLink,
+                          shopAllHref: category.href,
+                        })
+                      
+          : await renderProducts({
+              products: category.products,
+              showPrices: category.showPrices || true,
+              priceColor: category.priceColor,
+              showName: category.showName || true,
+              queries,
+              categoryType: category.type,
+              categoryIndex: id,
+              insideContainer: category.insideContainer || false,
+              background,
+              color: category.color || '#000000',
+              ctaText: ctaText
+            })
+    : '';
+
+  return `
+    <tr>
+      <td>
+        <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%" align="center">
+          ${
+            !category.paddingTop || category.paddingTop > 0
+              ? Space({
+                  insideTr: true,
+                  className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 80 : 35)}px`,
+                  backgroundColor: background,
+                })
+              : ''
+          }
+  
+          ${TitleElement}
+  
+          ${ImageElement}
+
+          ${ParagraphElement}
+  
+          ${ProductsElement}
+          
+          ${category.cta?.show ? Space({ insideTr: true, className: 'newsletterBottom35px', backgroundColor: background }) : ''}
+  
+        
+  
+          ${
+            category.cta?.show
+              ? `
+                <tr>
+                  <td align="center">
+                    ${BulletproofButton({
+                      href: ctaHref,
+                      text: queries.CTA?.[id] || ctaText,
+                      background:
+                        background?.cta?.landing?.background || '#750000',
+                      color:
+                        background?.cta?.landing?.color || '#FFFFFF',
+                      align: 'center',
+                      radius: 4,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      lineHeight: 1.2,
+                      paddingX: 20,
+                      paddingY: 11,
+                    })}
+                  </td>
+                </tr>
+              `
+              : ''
+          }
+          ${Space({ insideTr: true, className: 'newsletterBottom40px', backgroundColor: background })}
+  
+         
+        </table>
+      </td>
+    </tr>
+  
+   
+      ${
+        category.line && !category.line?.show
+          ? ''
+          : id < categoriesLength - 1
+            ? `
+          ${Line({
+            insideTr: true,
+            src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
+            insideContainer: true,
+          })}
+    `
+            : ''
+      }
+    `;
+};

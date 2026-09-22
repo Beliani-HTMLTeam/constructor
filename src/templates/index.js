@@ -18,6 +18,7 @@ import { AINewsletter1109 } from './DimaSrc/ai_newsletter_regular_friday_11_09/t
 import { AIRegularFridayNslt11_09_normal } from './DimaSrc/ai_newsletter_regular_friday_11_09_normal/templates/regularFridayNslt';
 import { AIRegularFridayNslt_18_09 } from './DimaSrc/ai_newsletter_regular_friday_18_09/templates/regularFridayNslt';
 import { AIRegularFridayNslt25_09 } from './DimaSrc/ai_newsletter_regular_friday_25_09/templates/regularFridayNslt';
+import { AIRegularFridayNslt09_10 } from './DimaSrc/ai_newsletter_regular_friday_christmas_categories/templates/regularFridayNslt';
 
 export const templates = {
   Blackweek,
@@ -39,5 +40,6 @@ export const templates = {
   AINewsletter1109,
   AIRegularFridayNslt11_09_normal,
   AIRegularFridayNslt_18_09,
-  AIRegularFridayNslt25_09
+  AIRegularFridayNslt25_09,
+  AIRegularFridayNslt09_10
 };

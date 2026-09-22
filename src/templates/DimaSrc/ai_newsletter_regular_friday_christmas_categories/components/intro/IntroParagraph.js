@@ -1,4 +1,4 @@
-import { Intro } from '../Intro';
+import { Intro } from '../Intro.js';
 import { IntroCTA } from './IntroCTA';
 import { Space } from '../Space';
 
@@ -29,7 +29,7 @@ export const IntroParagraph = ({
 
   return `
     ${Intro({
-      text: 'Discover four key autumn trends designed to bring warmth, texture and personality into your home.',
+      text: introText,
       paragraphAlign: alignment,
       color: color,
       spaceTop: spaceTop,
