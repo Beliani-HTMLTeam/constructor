@@ -76,9 +76,9 @@ export const renderOfferSection = ({
     const inset = (48 / (Math.max(6, length) * 0.7)).toFixed(2);
     return `font-size:${max}px;font-size:clamp(25px, calc(${viewport}vw - ${inset}px), ${max}px);`;
   });
-  const row = (content, style = '', { before, after, className = '' } = {}) => `
+  const row = (content, style = '', { before, after, className = '', classNameSpan = '' } = {}) => `
     ${before ? Space({ insideTr: true, className: before, bg: background }) : ''}
-    <tr><td class="newsletterContainer ${className}" align="center" style="${style}">${content}</td></tr>
+    <tr><td class="newsletterContainer${className ? ` ${className}` : ''}" align="center" style="${style}">${classNameSpan ? `<span class="${classNameSpan}">${content}</span>` : content}</td></tr>
     ${after ? Space({ insideTr: true, className: after, bg: background }) : ''}`;
   const tiers = [1, 2, 3]
     .map((tier) => {
@@ -136,9 +136,9 @@ export const renderOfferSection = ({
   return `<tr><td style="background-color:${background};color:${theme.black ?? '#000000'};${fontStyle}">
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
       ${row(`<table role="presentation" class="frenchDaysOfferBadge" width="240" align="center" cellspacing="0" cellpadding="0" border="0" bgcolor="${accent}" style="width:240px !important;max-width:100%;margin:0 auto;table-layout:fixed;border-collapse:collapse;background-color:${accent};mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td height="15" style="height:15px;font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td></tr><tr><td align="center"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="table-layout:fixed;border-collapse:collapse;"><tr><td width="20" style="width:20px;font-size:0;line-height:0;">&nbsp;</td><td align="center" class="frenchDaysOfferLabel" style="color:#ffffff;${fontStyle}font-weight:700;mso-line-height-rule:exactly;text-transform:uppercase;overflow-wrap:anywhere;">${offer[0] ?? ''}</td><td width="20" style="width:20px;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr><tr><td height="15" style="height:15px;font-size:0;line-height:0;mso-line-height-rule:exactly;">&nbsp;</td></tr></table>`, '', { before: 'newsletterBottom35px', after: 'newsletterBottom20px' })}
-      ${row(offer[1] ?? '', `color:${accent};`, { after: 'newsletterBottom20px', className: 'frenchDaysOfferHeadline' })}
+      ${row(offer[1] ?? '', `color:${accent};`, { after: 'newsletterBottom20px', classNameSpan: 'frenchDaysOfferHeadline' })}
       ${row(offer[2] ?? '', '', { after: 'newsletterBottom35px', className: 'frenchDaysOfferDescription' })}
-      <tr><td><table role="presentation" class="frenchDaysResponsiveCodes" width="100%" cellspacing="0" cellpadding="0" border="0" style="--french-days-divider:${accent};table-layout:fixed;border-collapse:collapse;border-top:1px solid ${accent};border-bottom:1px solid ${accent};"><tr>${tiers}</tr></table></td></tr>
+      <tr><td style="border-top:1px solid ${accent};"><table role="presentation" class="frenchDaysResponsiveCodes" width="100%" cellspacing="0" cellpadding="0" border="0" style="--french-days-divider:${accent};table-layout:fixed;border-collapse:collapse;border-bottom:1px solid ${accent};"><tr>${tiers}</tr></table></td></tr>
       ${button}
       ${row(first(queries.offer_subtitle) ?? '', '', { before: 'newsletterBottom20px', className: 'frenchDaysOfferSubtitle' })}
       ${row(first(queries.offer_date) ?? '', '', { before: 'newsletterBottom15px', after: 'newsletterBottom20px', className: 'frenchDaysOfferDate' })}

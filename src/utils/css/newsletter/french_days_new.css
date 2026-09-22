@@ -965,9 +965,8 @@ img {
   }
 }
 @media screen and (max-width: 600px) {
-  #newsletter .frenchDaysResponsiveCodes > tbody,
-  #newsletter .frenchDaysResponsiveCodes > tbody > tr {
-    display: block !important;
+  #newsletter .frenchDaysResponsiveCodes tbody,
+  #newsletter .frenchDaysResponsiveCodes tr {
     width: 100% !important;
   }
   #newsletter .frenchDaysResponsiveCodes .frenchDaysCodeTier {

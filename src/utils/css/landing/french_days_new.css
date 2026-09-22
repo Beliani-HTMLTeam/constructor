@@ -956,9 +956,8 @@ table {
     font-size: 40px !important;
     font-size: clamp(32px, 12.5vw, 35px) !important;
   }
-  #newsletter .frenchDaysResponsiveCodes > tbody,
-  #newsletter .frenchDaysResponsiveCodes > tbody > tr {
-    display: block;
+  #newsletter .frenchDaysResponsiveCodes tbody,
+  #newsletter .frenchDaysResponsiveCodes tr {
     width: 100%;
   }
   #newsletter .frenchDaysResponsiveCodes .frenchDaysCodeTier {
