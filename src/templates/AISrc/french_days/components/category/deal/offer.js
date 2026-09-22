@@ -23,24 +23,45 @@ export const renderOfferSection = ({
 }) => {
   const slug = String(country ?? '').toLowerCase();
   const defaultOrder = ['row1', 'row2', 'row3'];
+
+  const isValidOrder = (value) =>
+    Array.isArray(value) &&
+    value.length === 3 &&
+    new Set(value).size === 3 &&
+    value.every((name) => defaultOrder.includes(name));
+
+  const isValidPerTierOrder = (value) =>
+    value &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    ['row1', 'row2', 'row3'].every((key) => isValidOrder(value[key]));
+
   let order = defaultOrder;
+
   const rules = Array.isArray(rowOrder)
     ? rowOrder.map(({ countries, order }) => [countries, order])
     : Object.entries(rowOrder);
-  const countryList = (key) => (Array.isArray(key) ? key : String(key ?? '').split(','))
-    .map((value) => String(value).trim().toLowerCase());
+
+  const countryList = (key) =>
+    (Array.isArray(key) ? key : String(key ?? '').split(','))
+      .map((value) => String(value).trim().toLowerCase());
+
   for (const matches of [
     (list) => list.includes('default'),
     (list) => list.length > 1 && list.includes(slug),
     (list) => list.length === 1 && list[0] === slug,
   ]) {
     for (const [key, candidate] of rules) {
-      if (matches(countryList(key)) && Array.isArray(candidate) && candidate.length === 3 &&
-          new Set(candidate).size === 3 && candidate.every((name) => defaultOrder.includes(name))) {
+      if (!matches(countryList(key))) continue;
+  
+      if (isValidOrder(candidate)) {
+        order = candidate;
+      } else if (isValidPerTierOrder(candidate)) {
         order = candidate;
       }
     }
   }
+
   const offerInfo = [1, 2, 3].map((tier) => queries[`offer_info_part_${tier}`] ?? []);
   const first = (value) => (Array.isArray(value) ? value[0] : value);
   const offer = queries.offer ?? [];
@@ -63,6 +84,10 @@ export const renderOfferSection = ({
     .map((tier) => {
 
       const info = offerInfo[tier - 1];
+
+      const tierOrder = Array.isArray(order)
+        ? order
+        : order[`row${tier}`];
       const rawCode = String(first(queries[`offer_code_${tier + 1}_items`]) ?? '').trim();
       const code = (rawCode.split(':')[1] ?? rawCode).trim();
       const codeButton =
@@ -85,7 +110,7 @@ export const renderOfferSection = ({
         row3: `<div style="font-size:14px;font-weight:normal;">${info[2] ?? ''}</div>`,
       };
       const cell = `<td class="frenchDaysCodeTier" width="33.33%" align="center" style="width:33.33%;padding:12px 4px;vertical-align:top;border-top-color:${accent};${divider}">
-      ${order.map((name) => styledRows[name]).join('')}
+      ${tierOrder.map((name) => styledRows[name]).join('')}
       ${codeButton ? `<div style="padding-top:12px;">${codeButton}</div>` : ''}
     </td>`;
       return cell;

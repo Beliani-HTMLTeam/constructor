@@ -139,6 +139,11 @@ const categories = [
     rowOrder: {
       default: ['row1', 'row2', 'row3'],
       'fr,chfr,befr': ['row1', 'row3', 'row2'],
+      'se': {
+        row1: ['row1', 'row2', 'row3'],
+        row2: ['row1', 'row2', 'row3'],
+        row3: ['row1', 'row3', 'row2']
+      }
     },
     spaceAfter: 0,
     background: theme.primary,

@@ -79,7 +79,7 @@ const catData = [
   // Cat 10
   {
     name: 'Candle Holders',
-    href: 'https://www.beliani.ch/sofas/sofa-beds/',
+    href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',
     catImg: getImageUrl('20260928_Cat10.jpg', true),
   },
 ];
@@ -131,18 +131,18 @@ const tableQueries = [
 ];
 
 const links = {
-  // Intro_cta_href: 'https://www.beliani.ch/bathroom-furniture/',
+  Intro_cta_href: 'https://www.beliani.ch/christmas-shop/',
   TopImageTitle_href: translateLink({ value: 'content/lp26-09-28' }),
   TopImageTitle_src: translateImage({ value: '20260928_01.png' }),
 
   TopImage_src: getImageUrl('20260928_Gif.gif', true),
   TopImage_href: translateLink({ value: 'content/lp26-09-28' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-08-27' }),
-  Banner_1_Image: translateImage({ value: '20260827b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-09-17' }),
+  Banner_1_Image: translateImage({ value: '20260917b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-08-28' }),
-  Banner_2_Image: translateImage({ value: '20260828b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-09-18' }),
+  Banner_2_Image: translateImage({ value: '20260918b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -178,7 +178,7 @@ const categories = [
     type: 'deal',
     background: theme.primary,
     color: theme.black,
-    spaceAfter: 'newsletterBottom45px',
+    spaceAfter: 'newsletterBottom50px',
     cta: {
       variant: 'button',
       bg: '#750000',
@@ -254,7 +254,7 @@ export default new entities.Campaign({
           variant: 'underline',
           align: 'center',
           color: theme.black,
-          spaceAfter: 'newsletterBottom45px',
+          spaceAfter: 'newsletterPadding45px',
           textOverrides: {
             fi: 'Tutustu valikoimaan',
           },
@@ -294,7 +294,7 @@ export default new entities.Campaign({
           variant: 'underline',
           align: 'center',
           color: theme.black,
-          spaceAfter: 'newsletterBottom45px',
+          spaceAfter: 'newsletterPadding45px',
           textOverrides: {
             fi: 'Tutustu valikoimaan',
           },
