@@ -236,7 +236,7 @@ const categories = [
     color: theme.black,
     type: 'categorytiles',
     cta: false,
-    spaceAfter: 0,
+    spaceAfter:  'newsletterBottom80px',
     tileBgColor: theme.white,
     tileTextColor: theme.tileText,
     paddingTop: 0,
