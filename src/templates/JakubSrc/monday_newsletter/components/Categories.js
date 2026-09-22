@@ -45,7 +45,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     : ctaHref;
 
   if (category.type === 'category-banner') {
-    return renderCategoryBanner({ category, href: ctaHref, ctaHref: ctaButtonHref, getPhrase });
+    return renderCategoryBanner({ category, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type });
   }
 
   const TitleElement = category?.title?.show
@@ -151,6 +151,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           offerTextOverrides: category.offerTextOverrides,
           ctaColor: category?.ctaColor ?? '#000000',
           ctaSettings: category.type === 'deal' ? category.cta : undefined,
+          freebieTextColor: category?.product?.color,
         })
       : '';
  
@@ -261,6 +262,7 @@ const renderBody = async ({
   ctaColor = '',
   ctaSettings = {},
   prodSettings = {},
+  freebieTextColor = '',
 }) => {
   // console.log('produkty ', products);
 
@@ -297,6 +299,7 @@ const renderBody = async ({
       copyCodeWeb,
       ctaColor,
       ctaSettings,
+      freebieTextColor,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

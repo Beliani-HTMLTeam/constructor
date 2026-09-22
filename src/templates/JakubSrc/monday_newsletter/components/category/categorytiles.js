@@ -66,8 +66,9 @@ export const render = ({
               </td>
             </tr>
             `;
-
-            productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom80px' });
+            const lastRow = i + cols >= items.length - 1; 
+            if (!lastRow)
+              productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom80px' });
 
             productsInnerHtml += `</table>`;
           } else {

@@ -133,6 +133,10 @@ img {
   padding-bottom: 25px;
 }
 
+.newsletterBottom30px {
+  padding-bottom: 30px;
+}
+
 .newsletterBottom35px,
 .newsletterBottomIntro35px {
   padding-bottom: 35px;
@@ -144,6 +148,14 @@ img {
 
 .newsletterBottom45px {
   padding-bottom: 45px;
+}
+
+.newsletterPadding45px {
+  padding-bottom: 45px;
+}
+
+.newsletterBottom50px {
+  padding-bottom: 50px;
 }
 
 .newsletterBottom60px {
@@ -693,6 +705,10 @@ img {
     padding-bottom: 20px;
   }
 
+  .newsletterBottom30px {
+    padding-bottom: 15px;
+  }
+
   .newsletterBottom35px {
     padding-bottom: 20px;
   }
@@ -707,6 +723,14 @@ img {
 
   .newsletterBottom45px {
     padding-bottom: 30px;
+  }
+
+  .newsletterPadding45px {
+    padding-bottom: 35px;
+  }
+
+  .newsletterBottom50px {
+    padding-bottom: 35px;
   }
 
   .newsletterBottom60px {
@@ -1055,15 +1079,9 @@ img {
 /* Category-only banners: mobile fallback for email clients without clamp(). */
 @media screen and (max-width: 600px) {
   #newsletter .categoryBannerTitle {
-    font-size: 14px !important;
-    font-size: clamp(14px, 3.6vw, 24px) !important;
-    padding: 14px 0 20px !important;
+    font-size: 25px !important;
   }
   #newsletter .categoryBannerCta {
-    font-size: 12px !important;
-    font-size: clamp(12px, 3vw, 18px) !important;
-  }
-  #newsletter .categoryBannerCtaCell {
-    padding: 14px 0 20px !important;
+    font-size: 18px !important;
   }
 }

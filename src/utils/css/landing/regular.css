@@ -148,6 +148,10 @@ table {
   padding-bottom: 25px;
 }
 
+#newsletter .newsletterBottom30px {
+  padding-bottom: 30px;
+}
+
 #newsletter .newsletterBottom35px,
 #newsletter .newsletterBottomIntro35px {
   padding-bottom: 35px;
@@ -157,8 +161,16 @@ table {
   padding-bottom: 40px;
 }
 
+#newsletter .newsletterPadding45px {
+  padding-bottom: 45px;
+}
+
 #newsletter .newsletterBottom45px {
   padding-bottom: 45px;
+}
+
+#newsletter .newsletterBottom50px {
+  padding-bottom: 50px;
 }
 
 #newsletter .newsletterBottom60px {
@@ -664,8 +676,16 @@ table {
     padding-bottom: 20px;
   }
 
+  #newsletter .newsletterBottom30px {
+    padding-bottom: 15px;
+  }
+
   #newsletter .newsletterBottom35px {
     padding-bottom: 20px;
+  }
+
+  #newsletter .newsletterPadding45px {
+    padding-bottom: 35px;
   }
 
   #newsletter .newsletterBottomIntro35px {
@@ -678,6 +698,10 @@ table {
 
   #newsletter .newsletterBottom45px {
     padding-bottom: 30px;
+  }
+
+  #newsletter .newsletterBottom50px {
+    padding-bottom: 35px;
   }
 
   #newsletter .newsletterBottom60px {
@@ -1059,9 +1083,9 @@ table {
 }
 @media screen and (max-width: 600px) {
   #newsletter .categoryBannerTitle {
-    padding: 14px 0 20px !important;
+    font-size: 25px;
   }
-  #newsletter .categoryBannerCtaCell {
-    padding: 14px 0 20px !important;
+  #newsletter .categoryBannerCta {
+    font-size: 18px;
   }
 }
