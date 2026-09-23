@@ -21,33 +21,6 @@ const Timer = ({
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="color: ${color}; background-color: ${background};">
           ${Space({ insideTr: true, className: 'newsletterBottom10px' })}
           
-          <tr>
-            <td align="center" class="newsletterContainer">
-              ${Paragraph({
-                text: title,
-                tableContainer: true,
-                className: 'newsletterSubtitleTimer',
-                spanStyle: `color: ${color}`,
-                align: 'center',
-              })}
-            </td>
-          </tr>
-          
-          
-          <tr>
-            <td align="center" class="newsletterContainer">
-              ${Paragraph({
-                text: subtitle,
-                tableContainer: true,
-                className: 'newsletterSubtitleTimer',
-                spanStyle: `color: ${color}`,
-                align: 'center',
-              })}
-            </td>
-          </tr>
-
-          ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
-
           ${ImageWithLink({
             href: href,
             src: src,

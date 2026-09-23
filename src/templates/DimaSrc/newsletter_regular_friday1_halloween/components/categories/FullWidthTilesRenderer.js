@@ -7,7 +7,7 @@ export const FullWidthTilesRenderer = ({
   getCategoryTitle,
   background,
 }) => {
-  console.log("fullWidth", categories)
+  console.log("FullWidthTilesRenderer", categories);
   return `
     <tr>
       <td style="background-color: ${background};" class="newsletterContainer">

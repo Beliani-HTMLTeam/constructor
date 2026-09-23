@@ -7,6 +7,7 @@ import { IntroHandler } from './handlers/_Intro.js';
 import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
+import { TimerHandler } from './helpers/_Timer.js';
 
 const HelloweenReminder = async ({
   links,
@@ -33,6 +34,8 @@ const HelloweenReminder = async ({
   getPhrase,
   getProductById,
   add_utm,
+  Inside,
+  timer,
   disableSoonEnding,
   disableFooterCategories = false,
   disableTopImageTitle = false,
@@ -57,6 +60,8 @@ const HelloweenReminder = async ({
 
   const TopImageTitleElement = !disableTopImageTitle ? TopImageTitleHandler({ links, queries, TopImageTitle_data, type, countrySlug }) : '';
   const TopImageElement = TopImageHandler({ links, topImage });
+
+    const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
   const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug });
@@ -115,6 +120,8 @@ const HelloweenReminder = async ({
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: #000;" id="newsletter">
 
       ${TopImageTitleElement}
+
+      ${TimerElement}
 
       ${TopImageElement}
 

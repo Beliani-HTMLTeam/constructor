@@ -2,7 +2,7 @@
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::Voucher - 30.10.26 - Halloween Cashback Reminder';
 const theme = {
-  primary: '#F9EFEE',
+  primary: '#000000',
   primaryText: '#FF2F00',
   secondary: '#FAF1F0',
   secondaryText: '#FFCCB7',
@@ -82,7 +82,7 @@ const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-10-30' }),
   TopImageTitle_src: translateImage({ value: '20261030_01.png' }),
 
-  TopImage_src: getImageUrl('20261030_img.png', true),
+  TopImage_src: translateImage({value: '20261030_img.png'}),
   TopImage_href: translateLink({ value: 'content/lp26-10-30' }),
 
   Banner_1: translateLink({ value: 'content/lp26-10-22' }),
@@ -90,6 +90,8 @@ const links = {
 
   Banner_2: translateLink({ value: 'content/lp26-10-21' }),
   Banner_2_Image: translateImage({ value: '20261021b.png' }),
+
+  Timer_href: translateLink({ value: 'content/lp26-10-30' }),
 };
 
 const TopImageTitle_data = {
@@ -97,6 +99,13 @@ const TopImageTitle_data = {
   backgroundColor: theme.black,
   type: 'standard_semibold_italic',
 };
+
+const timer ={
+  position: 'insideTopImageTitle',
+  deadline: '2026-11-01',
+  isCtaVisible: false,
+  isWithTitles: false,
+}
 
 const catObj = {
   type: 'category-banner',
@@ -109,7 +118,6 @@ const catObj = {
 };
 
 const categories = [
-  // offer
   {
     copyCodeWeb: true,
     paragraph: {
@@ -118,17 +126,31 @@ const categories = [
     paddingTop: '0',
     type: 'deal',
     background: theme.primary,
-    color: theme.black,
-    spaceAfter: 'newsletterBottom80px',
+    color: theme.white,
+    spaceAfter: 'newsletterBottom50px',
+    cta: {
+      variant: 'button',
+      bg: '#FF2F00',
+      color: '#FFFFFF',
+      borderWidth: '13px 45px',
+      borderColor: '#FF2F00',
+    },
     gridSize: 'small',
     combineOfferParts: false,
+    product: {
+      freebieSize: 16,
+      freebieBold: 'bold',
+      align: 'center',
+      priceLowSize: 16,
+      priceHighSize: 15
+    }
   },
-  
   ...catData.map((cat, idx) => ({
     ...catObj,
     name: cat.name,
     src: cat.catImg,
     href: cat.href,
+    type: 'tilesWithoutProducts',
     ...(idx === catData.length - 1 ? { line: undefined } : {}),
     ...(idx === catData.length - 1 ? { spaceAfter: false } : {})
   }))
@@ -150,8 +172,8 @@ export default new entities.Campaign({
   templates: [
     {
       background: theme.primary,
-      color: theme.black,
-      template: templates.HelloweenReminder,
+      color: theme.white,
+      template: templates.RegularFridayNslt1Halloween,
 
       css: types.CSS.NS,
       name: 'Newsletter',
@@ -165,33 +187,21 @@ export default new entities.Campaign({
       disableTopImageTitle: false,
       shopByCategory: false,
       theme,
-      intro: {
-        color: theme.black,
-        backgroundColor: theme.primary,
-        alignment: 'center',
-        position: 'afterFreebies',
-        secondaryLink: false,
-        disableLine: true,
-        spaceTop: 'newsletterBottom35px',
-        spaceBottom: 'newsletterBottom45px',
-        containerClass: 'newsletterContainer',
-        paragraphSpace: 'newsletterBottom35px',
-        cta: {
-          variant: 'underline',
-          align: 'center',
-          color: theme.black,
-          spaceAfter: 'newsletterPadding45px',
-          textOverrides: {
-            fi: 'Tutustu valikoimaan',
-          },
-        },
+      Inside: {
+        color: "#FF2F00",
+        backgroundColor: '#000000',
+        unitBackground: '#FFFFFF',
+        labelColor: '#FFFFFF',
+        type: "timer",
+        showCta: false,
       },
       disableFooterCategories: true,
+      timer: timer,
     },
     {
       background: theme.primary,
-      color: theme.black,
-      template: templates.HelloweenReminder,
+      color: theme.white,
+      template: templates.RegularFridayNslt1Halloween,
 
       css: types.CSS.LP,
       name: 'Landing',
@@ -205,27 +215,15 @@ export default new entities.Campaign({
       theme,
       disableTopImageTitle: false,
       disableFooterCategories: true,
-      intro: {
-        color: theme.black,
-        backgroundColor: theme.primary,
-        alignment: 'center',
-        position: 'afterFreebies',
-        secondaryLink: false,
-        disableLine: true,
-        spaceTop: 'newsletterBottom35px',
-        spaceBottom: 'newsletterBottom45px',
-        containerClass: 'newsletterContainer',
-        paragraphSpace: 'newsletterBottom35px',
-        cta: {
-          variant: 'underline',
-          align: 'center',
-          color: theme.black,
-          spaceAfter: 'newsletterPadding45px',
-          textOverrides: {
-            fi: 'Tutustu valikoimaan',
-          },
-        },
+      Inside: {
+        color: "#FF2F00",
+        backgroundColor: '#000000',
+        unitBackground: '#FFFFFF',
+        labelColor: '#FFFFFF',
+        type: "timer",
+        showCta: false,
       },
+      timer: timer,
       disableKlarna: ['SI', 'HR'],
     },
   ],
