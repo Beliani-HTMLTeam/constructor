@@ -1,12 +1,28 @@
 import { ImageWithLink } from './ImageWithLink.js';
 import { Space } from './Space.js';
 import { Paragraph } from './Paragraph.js';
+import { CategoryTitle } from './CategoryTitle.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
 // category types that render on their own, without products/tiles/freebies
 const STANDALONE_CATEGORY_TYPES = ['deal_new', 'rowswith3categories'];
+
+const resolveSpaceClass = (value, fallback) => {
+  const raw = value ?? fallback;
+
+  if (raw === 0 || raw === '0' || raw === false || raw === null || raw === undefined) return null;
+  if (typeof raw === 'number') return `newsletterBottom${raw}px`;
+
+  return raw;
+};
+
+const renderSpace = (value, fallback) => {
+  const className = resolveSpaceClass(value, fallback);
+
+  return className ? Space({ insideTr: true, className }) : '';
+};
 
 const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country }) => {
   let html = '';
@@ -42,26 +58,46 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : '';
   const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
 
+  const isCompositeTitle = Boolean(
+    category?.title?.number?.show || category?.title?.paragraph?.show || category?.title?.eyebrow?.show
+  );
+
+  const eyebrowConfig = category?.title?.eyebrow;
+  const eyebrowText = eyebrowConfig?.show
+    ? (eyebrowConfig.text ?? getPhrase(eyebrowConfig.phrase ?? 'KEEP THE LOOK GOING'))
+    : '';
+
+  const TitleBody = isCompositeTitle
+    ? CategoryTitle({
+        title: category.name,
+        config: category.title,
+        paragraphText: queries.paragraphs?.[id],
+        eyebrowText,
+        color,
+        align: category.title.align ?? 'left',
+      })
+    : Paragraph({
+        text: category.name,
+        color: color,
+        background: background,
+        align: category.title?.align ?? 'left',
+        insideTable: true,
+        spanStyle: `${category.title?.styles ?? ''} color: ${category.title?.color ?? color};`,
+        tableContainer: category.title?.container ?? containerClass,
+        className: category.title?.className ?? 'newsletterTitle',
+      });
+
   const TitleElement = category?.title?.show
     ? `
-    ${category.title.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore }) : ''}
-   
+    ${renderSpace(category.title.spaceBefore, null)}
+
     <tr>
       <td>
-        ${Paragraph({
-          text: category.name,
-          color: color,
-          background: background,
-          align: category.title.align ?? 'left',
-          insideTable: true,
-          spanStyle: `${category.title.styles ?? ''} color: ${category.title.color ?? color};`,
-          tableContainer: category.title?.container ?? containerClass,
-          className: category.title.className ?? 'newsletterTitle',
-        })}
+        ${TitleBody}
       </td>
     </tr>
 
-    ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter }) : ''}
+    ${renderSpace(category.title.spaceAfter, null)}
     `
     : '';
 
@@ -76,24 +112,25 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
   const ParagraphElement = category?.paragraph?.show
     ? `
-      ${category.paragraph.spaceBefore ? Space({ insideTr: true, className: category.paragraph.spaceBefore }) : ''}
+      ${renderSpace(category.paragraph.spaceBefore, null)}
 
       <tr>
         <td>
           ${Paragraph({
-            text: queries.paragraphs?.[id] ?? 'Translation not found',
+            text: category.paragraph.text ?? queries.paragraphs?.[id] ?? 'Translation not found',
             align: category.paragraph.align,
             insideTable: true,
-            spanStyle: `color: ${color};`,
+            spanStyle: `${category.paragraph.styles ?? ''} color: ${category.paragraph.color ?? color};`,
+            className: category.paragraph.className ?? 'newsletterParagraph',
             tableContainer: category.paragraph.container ?? containerClass,
           })}
         </td>
       </tr>
 
       
-      ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
+      ${renderSpace(category.paragraph.spaceAfter, null)}
     `
-    : Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' });
+    : renderSpace(category.paragraph?.spaceAfter, 'newsletterBottom35px');
 
   const paragraphPositionRaw = category?.paragraph?.position ?? 'beforeProducts';
   const paragraphPosition =
@@ -109,9 +146,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const ParagraphAfterImg = paragraphPosition === 'afterImg' ? ParagraphElement : '';
   const ParagraphBeforeProducts = paragraphPosition === 'beforeProducts' ? ParagraphElement : '';
   const ParagraphAfterProducts = paragraphPosition === 'afterProducts' ? ParagraphElement : '';
-  const SpaceBeforeProducts = category?.spaceBeforeProducts
-    ? Space({ insideTr: true, className: category.spaceBeforeProducts })
-    : '';
+  const SpaceBeforeProducts = renderSpace(category?.spaceBeforeProducts, null);
 
   const isStandaloneCategory = STANDALONE_CATEGORY_TYPES.includes(String(category.type ?? '').toLowerCase());
 
@@ -148,11 +183,11 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         })
       : '';
 
-  const CTAElement = category.cta
+  const CTAElement = category.cta?.show === false
+    ? ''
+    : category.cta
     ? `
-      ${category.cta.spaceBefore
-        ? Space({ insideTr: true, className: category.cta.spaceBefore })
-        : ''}
+      ${renderSpace(category.cta.spaceBefore, null)}
       ${category.cta.src
         ? ImageWithLink({
             href: ctaHref,
@@ -173,26 +208,38 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
               background: category.cta.containerBackground,
             } : {})
           })}
+
+      ${renderSpace(category.cta.spaceAfter, null)}
       `
     : '';
+
+  const ctaPositionRaw = category?.cta?.position ?? 'afterProducts';
+  const ctaPosition =
+    ctaPositionRaw === 'underCategoryImage' || ctaPositionRaw === 'afterCategoryImage'
+      ? 'afterImg'
+      : ctaPositionRaw === 'above' || ctaPositionRaw === 'beforeCategoryImage'
+        ? 'beforeImg'
+        : ctaPositionRaw === 'underProducts'
+          ? 'afterProducts'
+          : ctaPositionRaw;
+
+  const CTABeforeImg = ctaPosition === 'beforeImg' ? CTAElement : '';
+  const CTAAfterImg = ctaPosition === 'afterImg' ? CTAElement : '';
+  const CTABeforeProducts = ctaPosition === 'beforeProducts' ? CTAElement : '';
+  const CTAAfterProducts = ctaPosition === 'afterProducts' ? CTAElement : '';
 
   return `
 
   <tr>
     <td>
       <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%">
-        ${
-          !category.paddingTop || category.paddingTop > 0
-            ? Space({
-                insideTr: true,
-                className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 60 : 35)}px`,
-              })
-            : ''
-        }
+        ${renderSpace(category.paddingTop, id === 0 ? 60 : 35)}
 
         ${!category.title?.position || category.title?.position === 'beforeImg' ? TitleElement : ''}
 
         ${ParagraphBeforeImg}
+
+        ${CTABeforeImg}
 
         ${ImageElement}
 
@@ -200,17 +247,21 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${category.title?.position === 'afterImg' ? TitleElement : ''}
 
+        ${CTAAfterImg}
+
         ${ParagraphBeforeProducts}
 
         ${SpaceBeforeProducts}
+
+        ${CTABeforeProducts}
 
         ${ProductsElement}
 
         ${ParagraphAfterProducts}
 
-        ${CTAElement}
+        ${CTAAfterProducts}
 
-        ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom80px' })}
+        ${renderSpace(category.spaceAfter, 'newsletterBottom80px')}
 
         ${
           category?.line?.show
