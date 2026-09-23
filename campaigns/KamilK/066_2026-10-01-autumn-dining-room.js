@@ -78,6 +78,7 @@ const categories = [
 		},
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
@@ -127,6 +128,7 @@ const categories = [
 		paddingTop: '35',
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
@@ -180,6 +182,7 @@ const categories = [
 		paddingTop: '35',
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
@@ -234,6 +237,7 @@ const categories = [
 		paddingTop: '35',
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
