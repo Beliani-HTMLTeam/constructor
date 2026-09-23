@@ -14,6 +14,8 @@ export const CategoriesRenderer = async ({
   getCategoryTitle,
   add_utm,
   background,
+  links,
+  type
 }) => {
   // No categories
   if (!categories) {
@@ -35,6 +37,8 @@ export const CategoriesRenderer = async ({
       getCategoryLink,
       getCategoryTitle,
       add_utm,
+      links,
+      type
     });
   }
 

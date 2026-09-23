@@ -9,6 +9,7 @@ export const Grid4TilesRenderer = async ({
   getCategoryLink,
   getCategoryTitle,
   add_utm,
+  links,  type
 }) => {
   return await Categories({
     getPhrase,
@@ -18,6 +19,6 @@ export const Grid4TilesRenderer = async ({
     categories_line,
     queries,
     add_utm,
-    country,
+    country, links,  type
   });
 };

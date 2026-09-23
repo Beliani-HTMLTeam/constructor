@@ -156,7 +156,7 @@ const RegularFridayNslt1Halloween = async ({
     getCategoryTitle,
     getProductById,
     add_utm,
-    background,links:links
+    background,links:links, type:type
   });
 
   let hasSmallTilesCategory = false;

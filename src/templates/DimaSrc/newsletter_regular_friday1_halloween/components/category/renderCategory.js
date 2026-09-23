@@ -25,11 +25,10 @@ export const renderCategory = async (
   getCategoryTitle,
   add_utm,
   lineType = 'white',
-  country, links
+  country, links, type
 ) => {
   console.log('background: ', category);
 
-  const type = getState('template')
 
   const background = category.background || 'white';
   const color = category.color || '#000000';

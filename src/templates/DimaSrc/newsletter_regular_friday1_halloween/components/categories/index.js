@@ -13,8 +13,9 @@ export const CategoriesWrapper = async ({
   getCategoryTitle,
   getProductById,
   add_utm,
-  background, links
+  background, links, type
 }) => {
+  console.log("type and links", type, links)
   // Step 1: Process categories with products
   const processedCategories = await CategoriesProcessor({
     categories,
@@ -46,5 +47,7 @@ export const CategoriesWrapper = async ({
     getCategoryTitle,
     add_utm,
     background,
+    links,
+    type
   });
 };

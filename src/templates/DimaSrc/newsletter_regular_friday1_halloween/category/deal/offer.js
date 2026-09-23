@@ -162,6 +162,8 @@ export const renderOfferSection = ({ queries, renderType, links, getPhrase, show
   const offerItems = resolveOfferRows({ queries, renderType, offerTexts });
   let html = '';
 
+  console.log("render type", renderType)
+
   html += Space({ insideTr: true, className: 'newsletterBottom35px' });
   if (hasSixOffers && renderType === 'landing') {
     html += renderSixOfferLanding({ queries, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel });
