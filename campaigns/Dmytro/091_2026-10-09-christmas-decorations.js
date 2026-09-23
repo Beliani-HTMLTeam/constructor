@@ -60,30 +60,28 @@ const categories = [
   {
     type: 'smallgrid',
     background: '#F6E7E6',
-    paddingTop: 20,
+    paddingTop: 25,
     title: {
       show: true,
       align: 'center',
-      spaceBefore: 'newsletterBottom10px',
-      spaceAfter: 'newsletterBottom10px',
-      color: '#000000',
-      source: 'categoryTitle',
+      spaceAfter: 'newsletterBottom25px',
+      color: '#750000',
+      source: 'Shop by category',
       className: 'newsletterSmallgridCategoryTitle',
     },
+    paragraph: {
+      show: false,
+      spaceAfter: 'newsletterBottom0px',
+    },
+    topTitleColor: "#000000",
     subtitle: {
       show: true,
       align: 'center',
       spaceAfter: 'newsletterBottom10px',
       color: '#750000',
-      source: 'categoryTitle',
-      className: 'newsletterSmallgridCategoryTitle',
     },
-    cta: {
-      show: true,
-      type: 'shopAll',
-      background: '#F6E7E6',
-      color: '#750000',
-    }, 
+    color: "#750000",
+    ctaColor: '#750000',
     products: [
       {
         name: 'Christmas Trees',

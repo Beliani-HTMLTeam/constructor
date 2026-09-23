@@ -28,7 +28,7 @@ export const renderCategory = async (
   country
 ) => {
   console.log('background: ', category);
-  
+
   const type = getState('template').type;
   const background = category.background || 'white';
   const color = category.color || '#000000';
@@ -45,13 +45,13 @@ export const renderCategory = async (
       <tr>
         <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
           ${Paragraph({
-            text: category.name,
-            color: color,
-            background: background,
-            align: category.title?.align || 'center',
-            tableContainer: true,
-            className: 'newsletterTitle',
-          })}
+      text: category.title?.source === 'Shop by category' ? getPhrase('Shop by category') : category.name,
+      color: color,
+      background: background,
+      align: category.title?.align || 'center',
+      tableContainer: true,
+      className: category.title?.className || 'newsletterTitle',
+    })}
         </td>
       </tr>
   
@@ -61,11 +61,11 @@ export const renderCategory = async (
 
   const ImageElement = category.src
     ? ImageWithLink({
-        href: ctaHref,
-        src: category.src,
-        insideTr: true,
-        background: background,
-      })
+      href: ctaHref,
+      src: category.src,
+      insideTr: true,
+      background: background,
+    })
     : '';
 
   const ParagraphElement = category?.paragraph?.show
@@ -75,11 +75,11 @@ export const renderCategory = async (
         <tr>
           <td style="${styles}" class="newsletterContainer">
             ${Paragraph({
-              text: (queries.paragraph && queries.paragraph[id]) || (queries.paragraphs && queries.paragraphs[id]) || 'Translation not found',
-              align: category.paragraph.align || 'left',
-              color: category.paragraph.color || color,
-              tableContainer: true,
-            })}
+      text: (queries.paragraph && queries.paragraph[id]) || (queries.paragraphs && queries.paragraphs[id]) || 'Translation not found',
+      align: category.paragraph.align || 'left',
+      color: category.paragraph.color || color,
+      tableContainer: true,
+    })}
           </td>
         </tr>
   
@@ -91,32 +91,32 @@ export const renderCategory = async (
   const ProductsElement = category.products
     ? category.type === 'unique'
       ? await renderProducts({
-          products: [
-            ...category.products,
-            { href: ctaHref, src: category.src1 },
-            { href: ctaHref, src: category.src2 },
-            { href: ctaHref, src: category.src3 },
-          ],
-          showPrices: category.showPrices || true,
-          showName: category.showName || true,
-          queries,
-          categoryType: category.type,
-          categoryIndex: id,
-          insideContainer: category.insideContainer || false,
+        products: [
+          ...category.products,
+          { href: ctaHref, src: category.src1 },
+          { href: ctaHref, src: category.src2 },
+          { href: ctaHref, src: category.src3 },
+        ],
+        showPrices: category.showPrices || true,
+        showName: category.showName || true,
+        queries,
+        categoryType: category.type,
+        categoryIndex: id,
+        insideContainer: category.insideContainer || false,
 
-        })
+      })
       : category.type === 'grid4tiles'
         ? category4Tiles_Grid({
-            getCategoryLink,
-            getCategoryTitle,
-            products: category.products,
-            insideContainer: true,
-            color,
-            background,
-            add_utm,
-            country
-          })
-        :  category.type === 'small-tiles'
+          getCategoryLink,
+          getCategoryTitle,
+          products: category.products,
+          insideContainer: true,
+          color,
+          background,
+          add_utm,
+          country
+        })
+        : category.type === 'small-tiles'
           ? render({
             tiles: category.tiles,
             color,
@@ -124,21 +124,21 @@ export const renderCategory = async (
             getCategoryTitle,
             country,
             background,
-            }):
-             category.type === 'smallgrid' ?
-                        category3Columns_Grid(category.products, {
-                          color,
-                          background: category.background || '#ffffff',
-                          titleColor: category.title.color,          // matches the red in your screenshot
-                          ctaColor: category.cta.color,
-                          insideContainer: true,
-                          getPhrase,
-                          getCategoryTitle,
-                          getCategoryLink,
-                          shopAllHref: category.href,
-                        })
-                      
-          : await renderProducts({
+          }) :
+          category.type === 'smallgrid' ?
+            category3Columns_Grid(category.products, {
+              color,
+              topTitleColor: category.topTitleColor || '#000000',
+              background: category.background || '#ffffff',
+              titleColor: category.title.color,          // matches the red in your screenshot
+              insideContainer: true,
+              getPhrase,
+              getCategoryTitle,
+              getCategoryLink,
+              shopAllHref: category.href,
+            })
+
+            : await renderProducts({
               products: category.products,
               showPrices: category.showPrices || true,
               priceColor: category.priceColor,
@@ -157,15 +157,14 @@ export const renderCategory = async (
     <tr>
       <td>
         <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%" align="center">
-          ${
-            !category.paddingTop || category.paddingTop > 0
-              ? Space({
-                  insideTr: true,
-                  className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 80 : 35)}px`,
-                  backgroundColor: background,
-                })
-              : ''
-          }
+          ${!category.paddingTop || category.paddingTop > 0
+      ? Space({
+        insideTr: true,
+        className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 80 : 35)}px`,
+        backgroundColor: background,
+      })
+      : ''
+    }
   
           ${TitleElement}
   
@@ -179,51 +178,49 @@ export const renderCategory = async (
   
         
   
-          ${
-            category.cta?.show
-              ? `
+          ${category.cta?.show
+      ? `
                 <tr>
                   <td align="center">
                     ${BulletproofButton({
-                      href: ctaHref,
-                      text: queries.CTA?.[id] || ctaText,
-                      background:
-                        background?.cta?.landing?.background || '#750000',
-                      color:
-                        background?.cta?.landing?.color || '#FFFFFF',
-                      align: 'center',
-                      radius: 4,
-                      fontSize: 14,
-                      fontWeight: 600,
-                      lineHeight: 1.2,
-                      paddingX: 20,
-                      paddingY: 11,
-                    })}
+        href: ctaHref,
+        text: queries.CTA?.[id] || ctaText,
+        background:
+          background?.cta?.landing?.background || '#750000',
+        color:
+          background?.cta?.landing?.color || '#FFFFFF',
+        align: 'center',
+        radius: 4,
+        fontSize: 14,
+        fontWeight: 600,
+        lineHeight: 1.2,
+        paddingX: 20,
+        paddingY: 11,
+      })}
                   </td>
                 </tr>
               `
-              : ''
-          }
+      : ''
+    }
           ${Space({ insideTr: true, className: 'newsletterBottom40px', backgroundColor: background })}
-  
+          ${Space({ insideTr: true, className: 'newsletterBottom60px', backgroundColor: background })}
          
         </table>
       </td>
     </tr>
   
    
-      ${
-        category.line && !category.line?.show
-          ? ''
-          : id < categoriesLength - 1
-            ? `
+      ${category.line && !category.line?.show
+      ? ''
+      : id < categoriesLength - 1
+        ? `
           ${Line({
-            insideTr: true,
-            src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
-            insideContainer: true,
-          })}
+          insideTr: true,
+          src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
+          insideContainer: true,
+        })}
     `
-            : ''
-      }
+        : ''
+    }
     `;
 };

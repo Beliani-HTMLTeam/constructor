@@ -4,10 +4,10 @@ import { Space } from '../components/Space';
 export const render = (
   categories = [],
   {
+    topTitleColor,
     color = '#000000',
     background = '#ffffff',
     titleColor = '#8B0000',
-    ctaColor = '#8B0000',
     insideContainer = true,
     getPhrase = (key) => key,
     getCategoryTitle,
@@ -153,14 +153,14 @@ export const render = (
       <tr>
         <td
           colspan="3"
-          height="10"
+          height="8"
           bgcolor="${background}"
           style="
-            height:10px;
+            height:8px;
             padding:0;
             background-color:${background};
             font-size:0;
-            line-height:10px;
+            line-height:8px;
             mso-line-height-rule:exactly;
           "
         >
@@ -190,7 +190,7 @@ export const render = (
                 class="newsletterSmallgridItemTitle"
                 style="
                   display:block;
-                  color:${titleColor};
+                  color:${topTitleColor};
                   text-align:center;
                   text-decoration:none;
                 "
@@ -235,7 +235,7 @@ export const render = (
                 class="newsletterSmallgridItemTitle"
                 style="
                   display:block;
-                  color:${titleColor};
+                  color:${category.subtitle?.color || titleColor};
                   text-align:center;
                   text-decoration:none;
                 "
@@ -291,7 +291,7 @@ export const render = (
                 class="newsletterSmallgridItemCTA"
                 style="
                   display:inline-block;
-                  color:${ctaColor};
+                  color:${category.ctaColor || titleColor};
                   text-align:center;
                   text-decoration:underline;
                 "
@@ -313,14 +313,14 @@ export const render = (
         <tr>
           <td
             colspan="3"
-            height="35"
+            height="40"
             bgcolor="${background}"
             style="
-              height:35px;
+              height:40px;
               padding:0;
               background-color:${background};
               font-size:0;
-              line-height:35px;
+              line-height:40px;
               mso-line-height-rule:exactly;
             "
           >
