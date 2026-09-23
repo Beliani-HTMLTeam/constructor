@@ -4,13 +4,14 @@ import { Line } from '../components/Line.js';
 
 export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country }) => {
 
-	if (["HR", "SI"].includes(country)) {
-		return ``;
-	}
+  // sorry for that, but we already have banners for HR and SI :)
+	// if (["HR", "SI"].includes(country)) {
+	// 	return ``;
+	// }
 
 	return `
     <!-- Soon Ending Banners -->
-    <table align="center" border="0" cellpadding="0" cellspacing="0" class="newsletterContainer" style="margin: 0 auto; max-width: 650px; color: #000000; background-color:#ffffff;" id="newsletter">
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" class="newsletterContainerFooter20px" style="max-width: 650px; width: 100%; color: #000000; background-color: #ffffff;" id="newsletter">
       ${Line({ insideTr: true })}
       ${Space({ className: 'newsletterBottom35px', insideTr: true })}
 

@@ -12,6 +12,7 @@ let languagesMap = {
   // },
 }
 
+// todo: get timezones and labels from translations api
 export const timezones = {
   "CHDE": "Europe/Zurich",
   "CHFR": "Europe/Zurich",
@@ -33,7 +34,9 @@ export const timezones = {
   "SK": "Europe/Bratislava",
   "BENL": "Europe/Brussels",
   "BEFR": "Europe/Brussels",
-  "RO": "Europe/Bucharest"
+  "RO": "Europe/Bucharest",
+  "HR": "Europe/Zagreb",
+  "SI": "Europe/Ljubljana"
 }
 
 export const labels = {
@@ -57,7 +60,9 @@ export const labels = {
   "SK": ["dní", "hod.", "min.", "s"],
   "BENL": ["dagen", "uren", "minuten", "seconden"],
   "BEFR": ["jours", "h", "min", "s"],
-  "RO": ["zile", "ore", "min", "sec"]
+  "RO": ["zile", "ore", "min", "sec"],
+  "SI": ["dani", "sati", "min.", "s"],
+  "HR": ["dni", "ur", "min.", "s"],
 }
 
 const buildProloTimerScript = ({ deadline, country }) => {
@@ -177,7 +182,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
   return Inside && Inside.type === 'timer'
     ? 
     `
-    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore }) : ''}
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.backgroundColor }) : ''}
 
     ${Timer({
       title: queries?.timer?.[0] ?? 'Translation not found',
@@ -189,6 +194,10 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
       unitBackground: Inside.unitBackground,
       freebies,
       ctaText: shopNow,
+      showCta: Inside.showCta ?? true,
+      spaceTop: Inside.spaceTop,
+      spaceBottom: Inside.spaceBottom,
+      container: Inside.container,
       type: type,
       script: buildProloTimerScript({ deadline: timer.deadline, country }),
     })}

@@ -1,62 +1,71 @@
-// Simple frontend in-memory cache for sheets and static translations
-const sheetCache = new Map();
+class TranslationCache {
+	constructor() {
+		this.sheetCache = new Map();
+		this.staticCache = {
+			header: {},
+			footer: {},
+			templates: {},
+			category_links: {},
+			category_titles: {},
+		};
+		this.queryCache = new Map();
+		this.staticLoader = null;
+	}
 
-const staticCache = {
-  header: {},
-  footer: {},
-  templates: {},
-  category_links: {},
-  category_titles: {},
-};
+	// Dynamic sheets cache
+	getSheet(key) {
+		return this.sheetCache.get(key);
+	}
 
-let staticLoader = null;
+	setSheet(key, data) {
+		this.sheetCache.set(key, data);
+	}
 
-export function getSheet(key) {
-  return sheetCache.get(key);
+	clearSheets() {
+		this.sheetCache.clear();
+	}
+
+	getSheetKeys() {
+		return Array.from(this.sheetCache.keys());
+	}
+
+	// Static translations cache
+	getStatic() {
+		return this.staticCache;
+	}
+
+	setStatic(sheet, data) {
+		this.staticCache[sheet] = data;
+	}
+
+	clearStatic() {
+		Object.keys(this.staticCache).forEach((k) => (this.staticCache[k] = {}));
+	}
+
+	registerStaticLoader(fn) {
+		this.staticLoader = fn;
+	}
+
+	async refreshStatic() {
+		if (!this.staticLoader) throw new Error('No static loader registered');
+		this.clearStatic();
+		await this.staticLoader();
+	}
+
+	// Campaign queries cache
+	getQueries(campaignId, slug) {
+		return this.queryCache.get(`${campaignId}::${slug}`) || {};
+	}
+
+	setQueries(campaignId, slug, queryData) {
+		this.queryCache.set(`${campaignId}::${slug}`, queryData);
+	}
+
+	clearQueries() {
+		this.queryCache.clear();
+	}
 }
 
-export function setSheet(key, data) {
-  sheetCache.set(key, data);
-}
-
-export function clearSheets() {
-  sheetCache.clear();
-}
-
-export function getSheetKeys() {
-  return Array.from(sheetCache.keys());
-}
-
-export function getStatic() {
-  return staticCache;
-}
-
-export function setStatic(sheet, data) {
-  staticCache[sheet] = data;
-}
-
-export function clearStatic() {
-  Object.keys(staticCache).forEach((k) => (staticCache[k] = {}));
-}
-
-export function registerStaticLoader(fn) {
-  staticLoader = fn;
-}
-
-export async function refreshStatic() {
-  if (!staticLoader) throw new Error('No static loader registered');
-  clearStatic();
-  await staticLoader();
-}
-
-export default {
-  getSheet,
-  setSheet,
-  clearSheets,
-  getSheetKeys,
-  getStatic,
-  setStatic,
-  clearStatic,
-  registerStaticLoader,
-  refreshStatic,
-};
+export const translationCache = new TranslationCache();
+export { TranslationCache };
+export default translationCache;

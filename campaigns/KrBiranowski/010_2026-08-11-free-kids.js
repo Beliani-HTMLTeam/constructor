@@ -195,6 +195,8 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       disableFooterCategories: true,
+      disableKlarna: ['SI', 'HR'],
+      disableSoonEnding: ['SI', 'HR'],
     },
   ],
 });

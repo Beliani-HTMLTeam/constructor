@@ -11,7 +11,8 @@ const Product = (
   gapBetweenVertical = true,
   useCategoryLink = false,
   imageAlign = 'center',
-  container = ''
+  container = '',
+  showBottomGap = true
 ) => {
   if (!product || typeof product !== 'object') return '';
 
@@ -22,10 +23,11 @@ const Product = (
   };
 
   const nameGapClass = resolveGapClass(gapBetweenVertical, 'newsletterBottom20px');
-  const bottomGapClass =
-    typeof gapBetweenVertical === 'string'
-      ? gapBetweenVertical
-      : resolveGapClass(gapBetweenVertical, product.spaceAfter ?? 'newsletterBottom35px');
+  const bottomGapClass = showBottomGap
+    ? (typeof gapBetweenVertical === 'string'
+        ? gapBetweenVertical
+        : resolveGapClass(gapBetweenVertical, product.spaceAfter ?? 'newsletterBottom35px'))
+    : '';
 
   let html = `
   <table cellspacing="0" cellpadding="0" border="0" width="100%">`;

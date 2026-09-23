@@ -52,6 +52,7 @@ export const render = ({
               href: href,
               insideTr: true,
               align: 'center',
+              width: item?.width ?? 290,
             });
 
             productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom35px' });
@@ -65,8 +66,9 @@ export const render = ({
               </td>
             </tr>
             `;
-
-            productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom80px' });
+            const lastRow = i + cols >= items.length - 1; 
+            if (!lastRow)
+              productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom80px' });
 
             productsInnerHtml += `</table>`;
           } else {

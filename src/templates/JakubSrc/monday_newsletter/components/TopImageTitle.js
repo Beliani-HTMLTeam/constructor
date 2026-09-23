@@ -30,6 +30,10 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
       <h5 style="color:${color};" class="newsletterTitleH1">${title1}</h5>
       <h4 style="color:${color};" class="newsletterTitleH2">${title2}</h4>
     `,
+    standard_semibold_italic: `
+      <h5 style="color:${color};font-weight:600;font-style:italic;" class="newsletterTitleH1">${title1}</h5>
+      <h4 style="color:${color};" class="newsletterTitleH2">${title2}</h4>
+    `,
     standard_inverted: `
       <h5 style="color:${color};" class="newsletterTitleH2">${title1}</h5>
       <h4 style="color:${color};" class="newsletterTitleH1">${title2}</h4>

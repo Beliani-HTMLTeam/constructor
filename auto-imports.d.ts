@@ -15,3 +15,5 @@ declare global {
   const translateLink: typeof import('@helpers/translateLink.js').translateLink
   const types: typeof import('@utils/types.js').types
 }
+
+}

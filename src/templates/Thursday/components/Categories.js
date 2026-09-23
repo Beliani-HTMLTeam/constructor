@@ -5,6 +5,9 @@ import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
+// category types that render on their own, without products/tiles/freebies
+const STANDALONE_CATEGORY_TYPES = ['deal_new', 'rowswith3categories'];
+
 const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country }) => {
   let html = '';
 
@@ -51,8 +54,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           background: background,
           align: category.title.align ?? 'left',
           insideTable: true,
-          spanStyle: `color: ${color};`,
-          tableContainer: containerClass,
+          spanStyle: `${category.title.styles ?? ''} color: ${category.title.color ?? color};`,
+          tableContainer: category.title?.container ?? containerClass,
           className: category.title.className ?? 'newsletterTitle',
         })}
       </td>
@@ -82,7 +85,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
-            tableContainer: containerClass,
+            tableContainer: category.paragraph.container ?? containerClass,
           })}
         </td>
       </tr>
@@ -110,15 +113,18 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? Space({ insideTr: true, className: category.spaceBeforeProducts })
     : '';
 
+  const isStandaloneCategory = STANDALONE_CATEGORY_TYPES.includes(String(category.type ?? '').toLowerCase());
+
   const ProductsElement =
-    category.products || category.tiles || category.freebies
+    category.products || category.tiles || category.freebies || isStandaloneCategory
       ? await renderBody({
           products: category.products,
           freebies: category.freebies,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
           showNames: category.showNames ?? category.product?.name ?? true,
-          gapBetweenHorizontal: category.gapBetweenHorizontal ?? true,
+          showTileNames: category.showTileNames ?? true,
+          gapBetweenHorizontal: category.product?.gapBetweenHorizontal ?? category.gapBetweenHorizontal ?? true,
           gapBetweenVertical: category.product?.gapBetweenVertical ?? true,
           align: category.product?.align ?? 'left',
           queries,
@@ -138,20 +144,36 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           offerTextOverrides: category.offerTextOverrides,
           category,
           container,
+          add_utm,
         })
       : '';
 
   const CTAElement = category.cta
     ? `
-      ${category.cta.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
-      ${CTA({
-        color: category.color ?? '#000000',
-        href: ctaHref,
-        text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
-        insideTr: true,
-        tdClass: containerClass,
-      })}
-        `
+      ${category.cta.spaceBefore
+        ? Space({ insideTr: true, className: category.cta.spaceBefore })
+        : ''}
+      ${category.cta.src
+        ? ImageWithLink({
+            href: ctaHref,
+            src: typeof category.cta.src === 'object' ? category.cta.src.src : category.cta.src,
+            insideTr: true,
+            tdClass: containerClass,
+          })
+        : CTA({
+            color: category.color ?? '#000000',
+            href: ctaHref,
+            text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
+            insideTr: true,
+            tdClass: containerClass,
+            ...(typeof category.cta === 'object' ? {
+              ...category.cta,
+              bg: category.cta.background ?? category.cta.bg,
+              textColor: category.cta.color ?? category.cta.textColor,
+              background: category.cta.containerBackground,
+            } : {})
+          })}
+      `
     : '';
 
   return `
@@ -212,6 +234,7 @@ const renderBody = async ({
   tiles,
   showPrices,
   showNames,
+  showTileNames,
   gapBetweenHorizontal,
   gapBetweenVertical,
   align = 'left',
@@ -232,6 +255,7 @@ const renderBody = async ({
   offerTextOverrides,
   category,
   container,
+  add_utm,
   alignToSide = false,
 }) => {
   // console.log('produkty ', products);
@@ -247,6 +271,7 @@ const renderBody = async ({
       tiles,
       showPrices,
       showNames,
+      showTileNames,
       gapBetweenHorizontal,
       gapBetweenVertical,
       align,
@@ -266,6 +291,7 @@ const renderBody = async ({
       offerTextOverrides,
       category,
       container,
+      add_utm,
       alignToSide,
     });
   } catch (e) {

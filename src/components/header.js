@@ -31,8 +31,8 @@ export function Header(sections, options) {
     },
     topImage: {
       [types.NEWSLETTER]: {
-        value: (topImage) => `<table align="center" cellspacing="0" cellpadding="0" border="0"
-                    style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
+        value: (topImage) => `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
+                    style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
                             <th>
@@ -54,8 +54,8 @@ export function Header(sections, options) {
           firstCategory,
           secondCategory,
           thirdCategory,
-        }) => `<table align="center" cellspacing="0" cellpadding="0" border="0"
-                    style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
+        }) => `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
+                    style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
                             <th><a
@@ -82,7 +82,7 @@ export function Header(sections, options) {
       [types.NEWSLETTER]: {
         value: (
           assembly
-        ) => `<table align="center" cellspacing="0" cellpadding="0" border="0"  style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
+        ) => `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
                             <td>
@@ -97,7 +97,7 @@ export function Header(sections, options) {
       [types.LANDINGPAGE]: {
         value: (
           assembly
-        ) => `<table align="center" cellspacing="0" cellpadding="0" border="0"  style="margin: 0 auto; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
+        ) => `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
                             <td>

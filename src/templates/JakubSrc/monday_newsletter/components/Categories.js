@@ -4,6 +4,7 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
+import { render as renderCategoryBanner } from './category/category-banner.js';
 import { translateImage } from '@/helpers/translateImage.js';
 import { translateLink } from '@/helpers/translateLink.js';
 
@@ -43,6 +44,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? getCategoryLink(category.cta.href)
     : ctaHref;
 
+  if (category.type === 'category-banner') {
+    return renderCategoryBanner({ category, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type });
+  }
+
   const TitleElement = category?.title?.show
     ? `
     ${category.title.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore }) : ''}
@@ -57,6 +62,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           insideTable: true,
           spanStyle: `color: ${color};`,
           tableContainer: true,
+          uppercase: category?.title?.uppercase ?? false,
           className: category.title.className ?? 'newsletterTitle',
         })}
       </td>
@@ -83,7 +89,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       <tr>
         <td>
           ${Paragraph({
-            text: category.paragraphText ?? queries.paragraphs[id] ?? 'Translation not found',
+            text: category.paragraphText ?? queries?.paragraphs?.[id] ?? 'Translation not found',
             align: category.paragraph.align,
             insideTable: true,
             spanStyle: `color: ${color};`,
@@ -123,6 +129,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
           showNames: category.showNames ?? category.product?.name ?? true,
+          prodSettings: category.product,
           gapBetweenHorizontal: category.gapBetweenHorizontal ?? true,
           gapBetweenVertical: category.product?.gapBetweenVertical ?? true,
           align: category.product?.align ?? 'left',
@@ -142,6 +149,9 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           copyCode: category.copyCode,
           copyCodeWeb: category.copyCodeWeb,
           offerTextOverrides: category.offerTextOverrides,
+          ctaColor: category?.ctaColor ?? '#000000',
+          ctaSettings: category.type === 'deal' ? category.cta : undefined,
+          freebieTextColor: category?.product?.color,
         })
       : '';
  
@@ -159,7 +169,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     `
     : '';
 
-  const CTAElement = category.cta
+  const CTAElement = category.cta && !(category.type === 'deal' && category.cta.variant === 'button')
     ? CTA({
         color: category.color ?? '#000000',
         href: ctaButtonHref,
@@ -175,10 +185,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     <td>
       <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%">
         ${
-          !category.paddingTop || category.paddingTop > 0
+          !category?.paddingTop || category?.paddingTop > 0
             ? Space({
                 insideTr: true,
-                className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 60 : 35)}px`,
+                className: `newsletterBottom${category?.paddingTop ?? (id === 0 ? 60 : 35)}px`,
               })
             : ''
         }
@@ -249,6 +259,10 @@ const renderBody = async ({
   copyCode,
   copyCodeWeb,
   offerTextOverrides,
+  ctaColor = '',
+  ctaSettings = {},
+  prodSettings = {},
+  freebieTextColor = '',
 }) => {
   // console.log('produkty ', products);
 
@@ -263,6 +277,7 @@ const renderBody = async ({
       tiles,
       showPrices,
       showNames,
+      prodSettings,
       gapBetweenHorizontal,
       gapBetweenVertical,
       align,
@@ -282,6 +297,9 @@ const renderBody = async ({
       offerTextOverrides,
       copyCode,
       copyCodeWeb,
+      ctaColor,
+      ctaSettings,
+      freebieTextColor,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

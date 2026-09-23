@@ -19,7 +19,7 @@ const languageToSlug = {
   slovene: 'si',
 };
 
-const slugToLanguage = {
+export const slugToLanguage = {
   pl: 'polish',
   pt: 'portugal',
   es: 'spanish',
@@ -36,6 +36,35 @@ const slugToLanguage = {
   uk: 'english',
   no: 'norsk',
   nl: 'dutch',
+  hr: 'croatian',
+  si: 'slovene',
+  ro: 'romanian',
+  be: 'dutch',
+};
+
+export const countryToLanguage = {
+  chde: 'german',
+  chfr: 'french',
+  uk: 'english',
+  de: 'germanDE',
+  fr: 'french',
+  at: 'germanDE',
+  es: 'spanish',
+  pl: 'polish',
+  nl: 'dutch',
+  pt: 'portugal',
+  it: 'italian',
+  se: 'swedish',
+  hu: 'Hungarian',
+  dk: 'danish',
+  cz: 'czech',
+  fi: 'finnish',
+  no: 'norsk',
+  sk: 'slovak',
+  be: 'dutch',
+  benl: 'dutch',
+  befr: 'french',
+  ro: 'romanian',
   hr: 'croatian',
   si: 'slovene',
 };
@@ -100,5 +129,6 @@ export class Product {
     };
     this.lowPrice = product.saved_params.ShopPrice;
     this.highPrice = product.saved_params.ShopHPrice;
+    this.shop_description = product.shop_description ?? null;
   }
 }

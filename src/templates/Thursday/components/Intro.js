@@ -9,8 +9,13 @@ const Intro = ({
   color = '#000000',
   backgroundColor,
   container,
+  title,
+  paragraph,
+  href,
+  cta,
 }) => {
-  const hasTitleAndParagraph = Array.isArray(text) && text.length > 1;
+  const hasTitleAndParagraph = Array.isArray(text) && (text.length === 2 || text.length === 3);
+  const hasTwoLineTitle = Array.isArray(text) && text.length === 3;
   const hasSingleArrayValue = Array.isArray(text) && text.length === 1;
 
   const normalizeText = (value) => {
@@ -18,12 +23,27 @@ const Intro = ({
     return String(value).trim() === '' ? 'Translation not found' : value;
   };
 
-  const introTitle = hasTitleAndParagraph ? normalizeText(text[0]) : '';
+  const introTitle = hasTitleAndParagraph
+    ? hasTwoLineTitle
+      ? `${normalizeText(text[0])}<br>${normalizeText(text[1])}`
+      : normalizeText(text[0])
+    : '';
   const introParagraph = hasTitleAndParagraph
-    ? normalizeText(text[1])
+    ? normalizeText(text[hasTwoLineTitle ? 2 : 1])
     : hasSingleArrayValue
       ? normalizeText(text[0])
       : normalizeText(text);
+
+  let finalIntroTitle = introTitle;
+  let finalIntroParagraph = introParagraph;
+
+  if (href) {
+    const wrapLink = (content) => `<a href="${href}" target="_blank" style="color: ${color}; text-decoration: none;">${content}</a>`;
+    if (finalIntroTitle) finalIntroTitle = wrapLink(finalIntroTitle);
+    if (finalIntroParagraph) finalIntroParagraph = wrapLink(finalIntroParagraph);
+  }
+
+  const containerClass = typeof container === 'string' ? container : (container ? 'newsletterContainer' : '');
 
   // outlook random white line fixes
   const sectionStyle = `${backgroundColor ? `background-color: ${backgroundColor};` : ''} color: ${color}; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;`;
@@ -31,36 +51,31 @@ const Intro = ({
 
   const IntroTitleElement = hasTitleAndParagraph
     ? `
-    <tr><td>${Paragraph({
-      text: introTitle,
-      align: paragraphAlign,
-      insideTable: true,
-      tableContainer: container || true,
-      className: 'newsletterIntroTitle',
-      spanStyle: `color: ${color};`,
-    })}</td></tr>
+    <tr ${backgroundColor ? `style="background-color: ${backgroundColor};" bgcolor="${backgroundColor}"` : ''}>
+      <td align="${paragraphAlign}" ${containerClass ? `class="${containerClass}"` : ''} ${backgroundColor ? `style="background-color: ${backgroundColor};" bgcolor="${backgroundColor}"` : ''}>
+        <span class="newsletterIntroTitle" style="${title?.styles ? `${title.styles} ` : ''}color: ${color}; display: block; text-align: ${paragraphAlign};">${finalIntroTitle}</span>
+      </td>
+    </tr>
 
-    ${Space({ insideTr: true })}
+    ${Space({ insideTr: true, className: 'newsletterBottom20px', background: backgroundColor })}
     `
     : '';
 
   return `
-    <tr>
-      <td style="${wrapperCellStyle}">
-        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="${sectionStyle}">
-          ${Space({ className: spaceTop, insideTr: true })}
+    <tr ${backgroundColor ? `style="background-color: ${backgroundColor};" bgcolor="${backgroundColor}"` : ''}>
+      <td style="${wrapperCellStyle}" ${backgroundColor ? `bgcolor="${backgroundColor}"` : ''}>
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="${sectionStyle}" ${backgroundColor ? `bgcolor="${backgroundColor}"` : ''}>
+          ${Space({ className: spaceTop, insideTr: true, background: backgroundColor })}
 
           ${IntroTitleElement}
             
-          <tr><td>${Paragraph({
-            text: introParagraph,
-            align: paragraphAlign,
-            insideTable: true,
-            tableContainer: container || true,
-            spanStyle: `color: ${color};`,
-          })}</td></tr>
+          <tr ${backgroundColor ? `style="background-color: ${backgroundColor};" bgcolor="${backgroundColor}"` : ''}>
+            <td align="${paragraphAlign}" ${containerClass ? `class="${containerClass}"` : ''} ${backgroundColor ? `style="background-color: ${backgroundColor};" bgcolor="${backgroundColor}"` : ''}>
+              <span class="newsletterParagraph" style="${paragraph?.styles ? `${paragraph.styles} ` : ''}color: ${color}; display: block; text-align: ${paragraphAlign};">${finalIntroParagraph}</span>
+            </td>
+          </tr>
     
-          ${Space({ className: spaceBottom, insideTr: true })}
+          ${cta || Space({ className: spaceBottom, insideTr: true, background: backgroundColor })}
         </table>
       </td>
     </tr>

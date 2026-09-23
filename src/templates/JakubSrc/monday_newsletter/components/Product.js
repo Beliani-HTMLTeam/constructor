@@ -27,7 +27,7 @@ const Product = (
       : resolveGapClass(gapBetweenVertical, product.spaceAfter ?? 'newsletterBottom35px');
 
   let html = `
-  <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+  <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; box-sizing: border-box;">`;
 
   if (product.src && product.href) {
     html += ImageWithLink({
@@ -43,7 +43,7 @@ const Product = (
       ${nameGapClass ? Space({ insideTr: true, className: nameGapClass }) : ''}
       
       <tr>
-        <td align="${align}" style="text-align: ${align}; color: ${color}" class="newsletterProductTitle">${product.name}</td>
+        <td align="${align}" style="text-align: ${align}; color: ${color}; word-break: break-word; overflow-wrap: break-word;" class="newsletterProductTitle">${product.name}</td>
       </tr>
     `;
   }

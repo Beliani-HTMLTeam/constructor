@@ -135,12 +135,7 @@ const categories = [
     ],
   },
   {
-    name: 'Balcony sets',
-    nameOverrides: {
-      fr: 'Meubles de balcon',
-      chfr: 'Meubles de balcon',
-      befr: 'Meubles de balcon',
-    },
+    name: 'Balcony furniture',
     src: getImageUrl('20260812_Cat30.jpg', true),
     href: 'https://www.beliani.ch/outdoor-furniture/balcony-furniture/',
     background: '#F7EAE9',
@@ -269,14 +264,14 @@ const categories = [
         href: 'https://www.beliani.ch/garden-accessories/fire-pits/',
       },
       {
-        name: 'Outdoor textiles',
+        name: 'Garden accessories',
         src: getImageUrl('20260812_Add3.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/outdoor-textiles/',
+        href: 'https://www.beliani.ch/garden-furniture/garden-accessories/',
       },
       {
-        name: 'Garden accessories',
+        name: 'Outdoor textiles',
         src: getImageUrl('20260812_Add4.png', true),
-        href: 'https://www.beliani.ch/garden-furniture/garden-accessories/',
+        href: 'https://www.beliani.ch/garden-furniture/outdoor-textiles/',
       },
     ],
   },
@@ -314,6 +309,7 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
+      disableKlarna: ['SI', 'HR'],
     },
     {
       background: '#F7EAE9',
@@ -328,6 +324,7 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
+      disableKlarna: ['SI', 'HR'],
     },
   ],
 });
