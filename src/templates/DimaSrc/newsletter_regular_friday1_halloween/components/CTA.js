@@ -18,7 +18,7 @@ const CTA = ({
 
   // prettier-ignore
   html += variant === 'button'
-    ? `<table role="presentation" align="${align}" cellspacing="0" cellpadding="0" border="0" style="width:auto;margin:0 auto;border-collapse:collapse;"><tr><td align="${align}" bgcolor="${bg}" style="background-color:${bg};"><a href="${href}" style="display:inline-block;color:${color} !important;background-color:${bg};text-decoration:none !important;border-style:solid;border-width:${borderWidth};border-color:${borderColor};font-size:16px;line-height:20px;font-weight:600;text-transform:uppercase;"><span style="color:${color};">${text}</span></a></td></tr></table>`
+    ? `<table role="presentation" align="${align}" cellspacing="0" cellpadding="0" border="0" style="width:auto;margin:0 auto;border-collapse:collapse;"><tr><td align="${align}" bgcolor="${bg}" style="background-color:${bg};border-radius:4px;"><a href="${href}" style="display:inline-block;color:${color} !important;background-color:${bg};text-decoration:none !important;border-style:solid;border-width:${borderWidth};border-color:${borderColor};font-size:16px;line-height:20px;font-weight:600;text-transform:uppercase;border-radius:4px;"><span style="color:${color};">${text}</span></a></td></tr></table>`
     : `<a style="color: ${color}; text-decoration: underline;" href="${href}"><span class="newsletterCta">${text}</span></a>`;
 
   if (insideTr) {

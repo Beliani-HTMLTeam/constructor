@@ -28,6 +28,7 @@ const renderOfferRows = (offerItems) => {
 
 const resolveOfferRows = ({ queries, renderType, offerTexts }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
+  const offerDate = Array.isArray(queries?.offer_date) ? queries.offer_date : [];
   const item = (i, fallback) => offerTexts?.[i] ?? offerItems[i] ?? fallback;
 
   if (offerItems.length === 6) {
@@ -45,7 +46,7 @@ const resolveOfferRows = ({ queries, renderType, offerTexts }) => {
     ];
   }
 
-  return [item(0, 'Offer Part 1'), item(1, 'Offer Part 2')];
+  return [item(0, 'Offer Part 1'), item(1, 'Offer Part 2'), item(2, 'Offer Part 3')];
 };
 
 const isSixOffers = (queries) => Array.isArray(queries?.offer) && queries.offer.length === 6;
@@ -101,12 +102,14 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
   let codeRow = queries?.offer_code?.[0] ?? offerItems[2] ?? '';
 
+  console.log("renderCodeElement", renderType)
+
   if (offerItems.length === 6) {
     if (renderType === 'newsletter') {
       return CTA({
         href: links?.TopImageTitle_href,
         text: t('Get codes'),
-    ...ctaSettings,
+        ...ctaSettings,
         color: ctaSettings.color ?? ctaColor ?? '#000000',
         align: 'center',
         insideTr: true,
@@ -128,6 +131,7 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
   }
 
   const codeText = codeRow ?? 'Code: xxxxx';
+  console.log("ctaSettings", ctaSettings)
   if (ctaSettings.variant === 'button') {
     const separator = codeText.indexOf(':');
     const codeValue = (separator >= 0 ? codeText.slice(separator + 1) : codeText).trim();
@@ -165,17 +169,12 @@ export const renderOfferSection = ({ queries, renderType, links, getPhrase, show
   console.log("render type", renderType)
 
   html += Space({ insideTr: true, className: 'newsletterBottom35px' });
-  if (hasSixOffers && renderType === 'landing') {
-    html += renderSixOfferLanding({ queries, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel });
-  } else if (hasSixOffers && renderType === 'newsletter') {
-    html += renderSixOfferNewsletter({ queries, links, t, ctaSettings });
-  } else {
-    html += renderOfferRows(offerItems);
-    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel, ctaColor, toastOptions, ctaSettings });
-    html += Space({ insideTr: true, className: 'newsletterBottom35px' });
-  }
+  html += renderOfferRows(offerItems);
+  html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel, ctaColor, toastOptions, ctaSettings });
+  html += Space({ insideTr: true, className: 'newsletterBottom35px' });
 
   html += renderOfferRow(queries?.offer_date?.[0] ?? 'Offer Date');
+  html += renderOfferRow(queries?.offer_date?.[1] ?? 'Offer Date');
   html += Space({ insideTr: true, className: showChooseFrom ? 'newsletterBottom35px' : 'newsletterBottom0px' });
 
   if (showChooseFrom) {

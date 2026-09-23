@@ -8,6 +8,7 @@ const Timer = ({
   subtitle,
   href,
   src,
+  labelColor,
   color = '#000000',
   background = 'white',
   unitBackground,
@@ -99,7 +100,7 @@ const Timer = ({
               --timer-bg: ${background};
               --timer-unit-bg: ${unitBackground ?? background};
               --timer-numbers: ${color};
-              --timer-label: ${color};
+              --timer-label: ${labelColor ?? color};
             }
           </style>
         </table>

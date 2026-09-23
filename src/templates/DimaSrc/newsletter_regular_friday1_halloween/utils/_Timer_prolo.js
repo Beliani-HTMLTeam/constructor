@@ -212,7 +212,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
       script: buildProloTimerScript({ deadline: timer.deadline, country }),
       isCtaVisible: timer.isCtaVisible ?? true,
       spaceWithoutCTA: timer.spaceWithoutCTA,
-      position: position
+      position: position,labelColor: Inside.labelColor
     })
     : '';
 };

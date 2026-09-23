@@ -9,7 +9,7 @@ import { category4Tiles_Grid } from '../../category/grid4tiles';
 import { render } from '../../category/small-tiles';
 import { render as category3Columns_Grid } from '../../category/smallgrid';
 import { FullWidthTilesRenderer } from '../categories/FullWidthTilesRenderer';
-import {render as dealRenderer} from '../../category/deal';
+import { render as dealRenderer } from '../../category/deal';
 import { getState } from '@/main/state/appState';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
@@ -43,13 +43,13 @@ export const renderCategory = async (
       <tr>
         <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
           ${Paragraph({
-            text: category.title?.source === 'categoryTitle' ? queries[category.title.source] : category.name,
-            color: color,
-            background: background,
-            align: category.title?.align || 'center',
-            tableContainer: true,
-            className: category.title?.className || 'newsletterTitle',
-          })}
+      text: category.title?.source === 'categoryTitle' ? queries[category.title.source] : category.name,
+      color: color,
+      background: background,
+      align: category.title?.align || 'center',
+      tableContainer: true,
+      className: category.title?.className || 'newsletterTitle',
+    })}
         </td>
       </tr>
   
@@ -59,11 +59,11 @@ export const renderCategory = async (
 
   const ImageElement = category.src && category.type !== 'tilesWithoutProducts'
     ? ImageWithLink({
-        href: ctaHref,
-        src: category.src,
-        insideTr: true,
-        background: background,
-      })
+      href: ctaHref,
+      src: category.src,
+      insideTr: true,
+      background: background,
+    })
     : '';
 
   const ParagraphElement = category?.paragraph?.show
@@ -73,10 +73,10 @@ export const renderCategory = async (
         <tr>
           <td style="${styles}" class="newsletterContainer">
             ${Paragraph({
-              text: queries.paragraphs[id] || 'Translation not found',
-              align: category.paragraph.align,
-              tableContainer: true,
-            })}
+      text: queries.paragraphs[id] || 'Translation not found',
+      align: category.paragraph.align,
+      tableContainer: true,
+    })}
           </td>
         </tr>
   
@@ -88,39 +88,39 @@ export const renderCategory = async (
   const ProductsElement = category.products
     ? category.type === 'unique'
       ? await renderProducts({
-          products: [
-            ...category.products,
-            { href: ctaHref, src: category.src1 },
-            { href: ctaHref, src: category.src2 },
-            { href: ctaHref, src: category.src3 },
-          ],
-          showPrices: category.showPrices || true,
-          showName: category.showName || true,
-          queries,
-          categoryType: category.type,
-          categoryIndex: id,
-          insideContainer: category.insideContainer || false,
-        })
+        products: [
+          ...category.products,
+          { href: ctaHref, src: category.src1 },
+          { href: ctaHref, src: category.src2 },
+          { href: ctaHref, src: category.src3 },
+        ],
+        showPrices: category.showPrices || true,
+        showName: category.showName || true,
+        queries,
+        categoryType: category.type,
+        categoryIndex: id,
+        insideContainer: category.insideContainer || false,
+      })
       : category.type === 'grid4tiles'
         ? category4Tiles_Grid({
-            getCategoryLink,
-            getCategoryTitle,
-            products: category.products,
-            insideContainer: true,
-            color,
-            background,
-            add_utm,
-            country
-          })
-        :  category.type === 'small-tiles'
+          getCategoryLink,
+          getCategoryTitle,
+          products: category.products,
+          insideContainer: true,
+          color,
+          background,
+          add_utm,
+          country
+        })
+        : category.type === 'small-tiles'
           ? render({
             tiles: category.tiles,
             color,
             getCategoryLink,
             getCategoryTitle,
             country
-            }) :
-            category.type === 'smallgrid' ?
+          }) :
+          category.type === 'smallgrid' ?
             category3Columns_Grid(category.products, {
               color,
               background: category.background || '#ffffff',
@@ -131,9 +131,9 @@ export const renderCategory = async (
               getCategoryTitle,
               getCategoryLink,
               shopAllHref: category.href,
-            }) 
+            })
 
-          : await renderProducts({
+            : await renderProducts({
               products: category.products,
               showPrices: category.showPrices || true,
               showName: category.showName || true,
@@ -146,80 +146,35 @@ export const renderCategory = async (
               country
             })
     : category.type === 'tilesWithoutProducts'
-    ?
-    FullWidthTilesRenderer({
-      categories: [category],
-      getCategoryLink,
-      getCategoryTitle,
-      background,
-    }) :
-    category.type === 'deal' ? dealRenderer({
-      queries,
-      color,
-      links,
-      getPhrase,
-      renderType: type,
-      categoryHref: ctaHref,
-      country: country})
-          : '';
+      ?
+      FullWidthTilesRenderer({
+        categories: [category],
+        getCategoryLink,
+        getCategoryTitle,
+        background,
+      }) :
+      category.type === 'deal' ? dealRenderer({
+        queries,
+        color,
+        links,
+        getPhrase,
+        renderType: type,
+        categoryHref: ctaHref,
+        country: country, ctaSettings: category.cta, ctaColor: category.cta?.color
+      })
+        : '';
 
   return `
     <tr>
       <td>
         <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%" align="center">
-          ${
-            !category.paddingTop || category.paddingTop > 0
-              ? Space({
-                  insideTr: true,
-                  className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 80 : 35)}px`,
-                  backgroundColor: background,
-                })
-              : ''
-          }
-  
-          ${TitleElement}
-  
-          ${ImageElement}
-
-          ${ParagraphElement}
-  
+          
           ${ProductsElement}
           
-          ${category.cta?.show ? Space({ insideTr: true, className: category.cta?.spaceBefore || 'newsletterBottom35px', backgroundColor: background }) : ''}
-  
-          ${
-            category.cta?.show
-              ? CTA({
-                  href: ctaHref,
-                  text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
-                  insideTr: true,
-                  tdClass: 'newsletterContainer',
-                  color: color,
-                  background: background,
-                })
-              : ''
-          }
-  
-          ${Space({ insideTr: true, className: 'newsletterBottom80px', backgroundColor: background })}
-  
-         
+
         </table>
       </td>
     </tr>
   
-   
-      ${
-        category.line && !category.line?.show
-          ? ''
-          : id < categoriesLength - 1
-            ? `
-          ${Line({
-            insideTr: true,
-            src: lineType === 'white' ? whiteLineSrc : blackLineSrc,
-            insideContainer: true,
-          })}
-    `
-            : ''
-      }
     `;
 };

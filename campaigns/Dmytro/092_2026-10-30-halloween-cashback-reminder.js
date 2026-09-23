@@ -97,7 +97,7 @@ const links = {
 const TopImageTitle_data = {
   color: theme.primaryText,
   backgroundColor: theme.black,
-  type: 'standard_semibold_italic',
+  type: 'twoSameSemiBoldLines',
 };
 
 const timer ={
@@ -143,6 +143,9 @@ const categories = [
       align: 'center',
       priceLowSize: 16,
       priceHighSize: 15
+    },
+    line: {
+      show: false
     }
   },
   ...catData.map((cat, idx) => ({
