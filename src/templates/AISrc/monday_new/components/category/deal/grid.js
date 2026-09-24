@@ -462,7 +462,7 @@ export const renderFreebieGrid = ({
 
   return `
     <tr>
-      <td style="background-color: #ffffff;">
+      <td style="background-color: #FFD6C5;" class="newsletterContainer">
         ${rowsHtml}
       </td>
     </tr>
