@@ -114,7 +114,7 @@ const categories = [
       prodTitleClass: 'newsletterProductTitleSmall',
       prodDescClass: 'newsletterProductDescSmall',
       prodLowPriceClass: 'newsletterProductLowPriceSmall',
-      prodHighPriceClass: 'newsletterProductHigPriceSmall'
+      prodHighPriceClass: 'newsletterProductHighPriceSmall'
     }
   },
 

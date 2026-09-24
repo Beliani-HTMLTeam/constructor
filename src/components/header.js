@@ -1,10 +1,33 @@
 import { types } from '@utils/types.js';
 
+function shouldUseNewHeader(cDate) {
+  const parts = cDate.split('.');
+
+  const day = Number(parts[0]);
+  const month = Number(parts[1]);
+  const year = Number(parts[2]);
+
+  const campaignDate = new Date(year, month - 1, day);
+  const cutoffDate = new Date(2026, 9, 6);
+
+  return campaignDate >= cutoffDate;
+}
+
 export function Header(sections, options) {
   const json_header = {
     advantages: {
       [types.NEWSLETTER]: {
-        value: (advantages) => `<!--[if gte mso 9]>
+        value: (advantages) =>
+          options.newHeader
+            ? `
+				<div style="display:none;max-height:0px;overflow:hidden">
+        ✔️ ${advantages.freeDelivery} ✔️ ${advantages.daysReturn}
+        </div>
+        <div style="display:none;max-height:0px;overflow:hidden">
+          &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;<wbr>&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;<wbr>&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;<wbr>&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;<wbr>&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;<wbr>&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;<wbr>&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+        </div>
+        `
+            : `<!--[if gte mso 9]>
                   <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
                       <v:fill type="tile" color="#ececec">
                   </v:background>
@@ -20,7 +43,10 @@ export function Header(sections, options) {
     },
     paragraph: {
       [types.NEWSLETTER]: {
-        value: (data) => `<p class="newsletterRecommendationHeader">
+        value: (data) =>
+          options.newHeader
+            ? ``
+            : `<p class="newsletterRecommendationHeader">
                   ${data.troubleViewing} <a class="newsletterRecommendationHeaderLink" style="color: #000000;" href="[[newsshowurl]]">${data.troubleViewingHrefText}</a>
                   ${data.addBeliani} <a class="newsletterRecommendationHeaderLink" style="color: #000000;" href="${data.whitelistHref}">${data.whiteList}</a>
               </p>`,
