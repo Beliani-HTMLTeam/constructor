@@ -101,12 +101,12 @@ const CTA = ({
 			const buttonContent = codeValue ? `${transformedText} ${copyIcon}` : transformedText;
 			const buttonHref = codeValue ? '#' : href;
 
-			const effectivePadTop = paddingTop ?? paddingY;
-			const effectivePadBottom = paddingBottom ?? paddingY;
+			const effectivePadTop = paddingTop ?? (paddingY !== null && paddingY !== undefined ? paddingY + 1 : 17);
+			const effectivePadBottom = paddingBottom ?? (paddingY !== null && paddingY !== undefined ? paddingY - 1 : 15);
 			const effectivePadX = paddingX;
 
-			const effectiveMobilePadTop = mobilePaddingTop ?? mobilePaddingY ?? effectivePadTop;
-			const effectiveMobilePadBottom = mobilePaddingBottom ?? mobilePaddingY ?? effectivePadBottom;
+			const effectiveMobilePadTop = mobilePaddingTop ?? (mobilePaddingY !== null && mobilePaddingY !== undefined ? mobilePaddingY + 1 : effectivePadTop);
+			const effectiveMobilePadBottom = mobilePaddingBottom ?? (mobilePaddingY !== null && mobilePaddingY !== undefined ? mobilePaddingY - 1 : effectivePadBottom);
 			const effectiveMobilePadX = mobilePaddingX ?? effectivePadX;
 
 			const effectiveMobileFontSize = mobileFontSize ?? fontSize;
@@ -159,7 +159,7 @@ const CTA = ({
 			const tableAlignAttr = align === 'center' ? 'align="center"' : '';
 			const tableMarginStyle = align === 'left' ? 'margin: 0;' : align === 'right' ? 'margin: 0 0 0 auto;' : 'margin: 0 auto;';
 
-			const vmlRaiseStyle = msoTextRaise ? `mso-text-raise:${msoTextRaise};` : '';
+			const vmlRaiseStyle = `mso-text-raise:${msoTextRaise ?? '2pt'};`;
 
 			html = `
         <table cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; ${tableMarginStyle}">
