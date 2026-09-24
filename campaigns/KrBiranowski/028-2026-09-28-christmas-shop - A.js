@@ -66,7 +66,7 @@ const catData = [
   },
   // Cat 8
   {
-    name: 'Textiles',
+    name: 'Christmas Textiles',
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-textiles/',
     catImg: getImageUrl('20260928_Cat08.jpg', true),
   },
@@ -78,7 +78,7 @@ const catData = [
   },
   // Cat 10
   {
-    name: 'Candle Holders',
+    name: 'Christmas Candle Holders',
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',
     catImg: getImageUrl('20260928_Cat10.jpg', true),
   },
