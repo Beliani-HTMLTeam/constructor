@@ -269,6 +269,11 @@ table {
   line-height: 1.2;
 }
 
+#newsletter .shopByCategoryPeakName {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
 #newsletter .newsletterProductLowPrice {
   font-size: 18px;
   line-height: 1.2;
@@ -328,6 +333,12 @@ table {
 #newsletter .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
+  line-height: 1.2;
+}
+
+#newsletter .shopByCategoryCta {
+  text-decoration: underline;
+  font-size: 18px;
   line-height: 1.2;
 }
 
@@ -751,6 +762,10 @@ table {
     max-width: 100% !important;
   }
 
+  #newsletter .shopByCategoryCta {
+    font-size: 16px;
+  }
+
   .newsletterMarkTitle {
     font-size: 18px;
   }
@@ -817,6 +832,10 @@ table {
   .START_MQ_PRODUCTS {}
   #newsletter .newsletterProductTitle {
     font-size: 18px;
+  }
+
+  #newsletter .shopByCategoryPeakName {
+    font-size: 16px;
   }
 
   #newsletter .newsletterProductLowPrice {

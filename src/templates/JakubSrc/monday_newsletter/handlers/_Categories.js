@@ -112,6 +112,7 @@ export const CategoriesHandler = async ({
   country,
   getPhrase,
   categoryImageTdClass,
+  theme,
 }) => {
   const safeCategories = Array.isArray(categories) ? categories : [];
   if (safeCategories.length === 0) {
@@ -147,5 +148,6 @@ export const CategoriesHandler = async ({
     type,
     country,
     categoryImageTdClass,
+    theme,
   });
 };

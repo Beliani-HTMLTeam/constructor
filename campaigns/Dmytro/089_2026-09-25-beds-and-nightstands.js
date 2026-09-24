@@ -49,7 +49,9 @@ const intro_data = {
   spaceBottom: '0',
 
   cta: {
-    overrides: {},
+    overrides: {
+      FI: 'Tutustu valikoimaan',
+    },
     color: '#750000',
     spaceAfter: 'newsletterBottom35px',
   },
