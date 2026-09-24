@@ -102,6 +102,7 @@ const getColumnStyles = ({ width, columnId, columns, borderColor, borderTop, bor
 		'vertical-align: top;',
 		`width: ${width}px;`,
 		'padding: 0;',
+		'box-sizing: border-box;',
 		isLast ? '' : `border-right: 1px solid ${borderColor};`,
 		borderTop ? `border-top: 1px solid ${borderColor};` : '',
 		borderBottom ? `border-bottom: 1px solid ${borderColor};` : '',
