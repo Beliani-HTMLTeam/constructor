@@ -85,8 +85,8 @@ const links = {
   TopImage_src: translateImage({value: '20261030_img.png'}),
   TopImage_href: translateLink({ value: 'content/lp26-10-30' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-10-22' }),
-  Banner_1_Image: translateImage({ value: '20261022b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-10-14' }),
+  Banner_1_Image: translateImage({ value: '20261014b.png' }),
 
   Banner_2: translateLink({ value: 'content/lp26-10-21' }),
   Banner_2_Image: translateImage({ value: '20261021b.png' }),
