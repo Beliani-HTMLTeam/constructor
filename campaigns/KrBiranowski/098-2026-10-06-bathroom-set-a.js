@@ -1,6 +1,9 @@
 const campaignTranslationsSheet = '2026::Voucher - 06.10.26 - Free Bathroom set';
 
 const theme = {
+  offerBg: '#FFEFD9',
+  offerPrg1Color: '#000000',
+  offerTitleColor: '#750000',
   primary: '#750000',
   primaryText: '#ffffff',
   secondary: '#FBF3F0',

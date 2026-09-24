@@ -50,7 +50,6 @@ const MondayNew = async ({
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
@@ -110,6 +109,14 @@ const MondayNew = async ({
   const isAfterFreebies = introPosition === 'afterFreebies';
   const IntroAfterTopImageElement = isAfterFreebies ? '' : IntroElement;
   const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
+
+  let hasSmallTilesCategory = false;
+  
+  if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
+		hasSmallTilesCategory = true;
+	}
+
+  const FooterElement = Footer({ getFooter, getCategoryLink, hasSmallTilesCategory, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
 
   return `
     ${HeaderElement}

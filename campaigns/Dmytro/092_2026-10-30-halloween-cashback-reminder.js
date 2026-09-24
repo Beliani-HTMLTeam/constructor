@@ -4,6 +4,7 @@ const campaignTranslationsSheet = '2026::Voucher - 30.10.26 - Halloween Cashback
 const theme = {
   primary: '#000000',
   primaryText: '#FF2F00',
+  offerBg: '#FFEFD9',
   secondary: '#FAF1F0',
   secondaryText: '#FFCCB7',
   black: '#000000',
@@ -14,7 +15,6 @@ const theme = {
   toastBg: '#F6E7E6',
   toastText: '#000000',
   ctaBg: '#F6E7E6',
-  offerBg: '#ffffff',
   dealBg: '#FFEBE2',
   freebieColor: '#FFEBE2',
   offerTitleColor: '#750000',

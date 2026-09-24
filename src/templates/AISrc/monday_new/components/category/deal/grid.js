@@ -129,6 +129,7 @@ const resolveFreebieRows = ({ freebies, products, freebiesPerRow }) => {
 };
 
 const renderFreebieCard = ({
+  queries,
   product,
   color,
   freeText,
@@ -151,6 +152,8 @@ const renderFreebieCard = ({
   const freebieBackgroundColor =
     theme?.freebieColor ?? theme?.primary;
 
+    console.log("productDescription", product?.description, queries.freebies_additional[0])
+
   if (!product) {
     return `
       <td
@@ -163,7 +166,7 @@ const renderFreebieCard = ({
   const productName = product.name ?? '';
 
   let productDescription =
-    product?.description?.trim() ?? 'product description not found';
+    product?.description?.trim() ?? queries.freebies_additional[0] ?? 'product description not found';
 
   productDescription = productDescription.replace(
     /(\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm\s+\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm)/gi,
@@ -297,7 +300,17 @@ const renderFreebieCard = ({
                               style="background-color: ${freebieBackgroundColor}; font-size: 0; line-height: 0; mso-line-height-rule: exactly;"
                             ></td>
                           </tr>
-
+                          ${Space({ insideTr: true, className: 'newsletterBottom5px' })}
+                          <tr>
+                          <td class="newsletterContainer40px">
+                          ${ImageWithLink({
+                            href: productHref,
+                            src: product.bottom ?? '',
+                            alt: productName || 'Freebie product',
+                          })}
+                          </td>
+                          </tr>
+                          ${Space({ insideTr: true, className: 'newsletterBottom5px' })}
                           <tr>
                             <td
                               align="${prodSettings?.align ?? 'left'}"
@@ -307,7 +320,7 @@ const renderFreebieCard = ({
                                 class="${prodSettings?.prodTitleClass ?? 'newsletterProductTitleFreebie'}"
                                 style="color: ${textColor} !important;${freebieSize}${freebieBold}"
                               >${productName}</span><br>
-
+                              <span class="newsletterBottom5px" style="display: block;"></span>
                               ${
                                 product?.useDescription
                                   ? `<span
@@ -318,6 +331,7 @@ const renderFreebieCard = ({
                               }
                             </td>
                           </tr>
+                          ${Space({ insideTr: true, className: 'newsletterBottom5px' })}
 
                           ${
                             productSize
@@ -370,6 +384,7 @@ const renderFreebieCard = ({
 };
 
 export const renderFreebieGrid = ({
+  queries,
   freebies,
   products,
   color,
@@ -404,6 +419,7 @@ export const renderFreebieGrid = ({
 
     for (let columnId = 0; columnId < columns; columnId++) {
       rowCells += renderFreebieCard({
+        queries,
         product: row[columnId],
         color,
         freeText,

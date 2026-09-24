@@ -70,6 +70,10 @@ table {
   padding-left: 10px;
 }
 
+#newsletter .newsletterBottom5px {
+  padding-bottom: 5px;
+}
+
 #newsletter .newsletterBottom80px {
   padding-bottom: 80px;
 }
@@ -360,6 +364,7 @@ table {
   letter-spacing: 1.3px;
   line-height: 1.2;
   font-size: 15px;
+  font-weight: 700;
 }
 
 #newsletter .newsletterProductDescSmall {
@@ -369,12 +374,13 @@ table {
 
 #newsletter .newsletterProductLowPriceSmall {
   line-height: 1.2;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 #newsletter .newsletterProductHighPriceSmall {
   font-size: 15px;
-  line-height: 1.2;
+  font-size: 14px;
   text-decoration: line-through;
 }
 
@@ -449,6 +455,10 @@ table {
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
+  #newsletter .newsletterBottom5px {
+    padding-bottom: 2px;
+  }
+
   #newsletter .newsletterFooterCategoryLEFTBottom {
     padding-right: 5px !important;
   }

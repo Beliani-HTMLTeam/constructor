@@ -43,6 +43,7 @@ export const renderOfferSection = ({
     : getPhrase('Gift with purchase')
   const offerPart1 = resolveOfferText(offerTexts?.[1], 1);
   let offerPart2 = resolveOfferText(offerTexts?.[2], 2);
+  console.log("offerPart1, 2",offerTitle, offerPart1, offerPart2)
   const offerDate = queries?.offer_date?.[0] ?? offerItems[4] ?? '';
   const translatedGetCode = t('Get code') || missingTranslation;
   const codeRow = queries?.offer_code?.[0] ?? offerItems[3] ?? '';
@@ -61,7 +62,7 @@ export const renderOfferSection = ({
           : `MISSING CODE`;
 
   if (combineOfferParts) {
-    offerPart2 = `${offerPart2} ${resolveOfferText(offerTexts?.[3], 3)}`;
+    offerPart2 = `${offerPart2}<br/>${resolveOfferText(offerTexts?.[3], 3)}`;
     if (getCodeBtnText !== 'MISSING CODE')
       codeText = codeRow.split(':')[1].trim();
     else
@@ -89,7 +90,7 @@ export const renderOfferSection = ({
 
   html += `
     <tr>
-      <td style="background-color: ${bgColor}; color: ${titleColor};" align="center">
+      <td style="background-color: #FFEFD9; color: ${titleColor};" align="center">
         <table cellspacing="0" cellpadding="0" border="0" width="100%" class="${tdClass}">
           ${Space({ insideTr: true, className: 'newsletterBottom40px' })}
           ${offerTitle ? `

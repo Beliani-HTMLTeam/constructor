@@ -17,6 +17,7 @@ function shouldUseNewAssembly(cDate) {
 
 const Footer = ({
   getFooter,
+  hasSmallTilesCategory,
   getCategoryLink,
   getCategoryTitle,
   queries,
@@ -29,7 +30,7 @@ const Footer = ({
   date,
 }) => {
   const campaignDate = date || selectedCampaign?.date || getState('selectedCampaign')?.date;
-  const newAssembly = shouldUseNewAssembly(campaignDate);
+  const newAssembly = shouldUseNewAssembly(campaignDate);  
 
   const assemblyBanner = newAssembly
     ? {
@@ -54,6 +55,7 @@ const Footer = ({
       exclude: !['PL'].includes(country),
     },
     thousandsMore: {
+      exclude: hasSmallTilesCategory,
       title: getFooter('Title'),
       firstCategory: {
         src: getFooter('Category src 1'),

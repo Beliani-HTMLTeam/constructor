@@ -343,6 +343,10 @@ img {
   text-decoration: line-through;
 }
 
+.newsletterBottom5px {
+  padding-bottom: 5px;
+}
+
 .priceHighSpacer {
   display: none;
 }
@@ -391,9 +395,11 @@ img {
 }
 
 .newsletterProductTitleSmall {
-  letter-spacing: 1.3px;
+  letter-spacing:0px;
   line-height: 1.2;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Open Sans", sans-serif;
 }
 
 .newsletterProductDescSmall {
@@ -403,12 +409,13 @@ img {
 
 .newsletterProductLowPriceSmall {
   line-height: 1.2;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .newsletterProductHighPriceSmall {
   line-height: 1.2;
-  font-size: 15px;
+  font-size: 14px;
   text-decoration: line-through;
 }
 
@@ -494,6 +501,10 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+  .newsletterBottom5px {
+    padding-bottom: 2px;
+  }
+
   .stack-column {
     display: block !important;
     width: 100% !important;

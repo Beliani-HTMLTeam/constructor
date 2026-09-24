@@ -103,6 +103,7 @@ export const render = ({
     const freebieSettings = {...prodSettings}
 
     html += renderFreebieGrid({
+      queries,
       freebies: filteredFreebies,
       products,
       color: '#000000',
@@ -118,16 +119,6 @@ export const render = ({
     const colorBg = theme?.freebieColor ?? theme?.primary ?? '#ffffff';
     const colorText = theme?.black ?? '#000000';
     const colorGray = theme?.gray ?? '#555555';
-
-    html += `
-      <tr>
-        <td class="${tdClass} freebieSubtitle" style="background-color:${colorBg};color:${colorText};" align="${prodSettings.align ?? 'left'}">
-          <span style="${type === 'newsletter' ? 'font-family:\'Open Sans\',Arial,sans-serif;' : ''}font-size:${prodSettings.freebieSize ? prodSettings.freebieSize : 14}px;line-height:1.2;color:${colorText};display:block;">
-            ${freebiesSubtitle}
-          </span>
-        </td>
-      </tr>
-    `;
   }
 
   return html;
