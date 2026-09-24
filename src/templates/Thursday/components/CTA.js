@@ -121,7 +121,7 @@ const CTA = ({
 			const vmlWidth = Math.round(estimatedTextWidth + effectivePadX * 2);
 			
 			const parsedLineHeight = parseInt(lineHeight) || 16;
-			const parsedBorderRadius = parseInt(borderRadius) || 4;
+			const parsedBorderRadius = Number.isNaN(parseInt(borderRadius)) ? 4 : parseInt(borderRadius);
 			
 			const vmlHeight = parsedLineHeight + effectivePadTop + effectivePadBottom;
 			const arcsize = Math.round((parsedBorderRadius / vmlHeight) * 100) + '%';
