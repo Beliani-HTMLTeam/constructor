@@ -182,7 +182,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
   return Inside && Inside.type === 'timer'
     ? 
     `
-    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.backgroundColor }) : ''}
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.spaceBeforeBackground ?? Inside.backgroundColor }) : ''}
 
     ${Timer({
       title: queries?.timer?.[0] ?? 'Translation not found',
