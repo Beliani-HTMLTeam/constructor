@@ -9,7 +9,7 @@
 export {}
 declare global {
   const entities: typeof import('@entities/index.js').entities
-  const getImageUrl: typeof import('@utils/ImageManager.js')['getImageUrl']
+  const getImageUrl: typeof import('@utils/ImageManager.js').getImageUrl
   const templates: typeof import('@templates/index.js').templates
   const translateImage: typeof import('@helpers/translateImage.js').translateImage
   const translateLink: typeof import('@helpers/translateLink.js').translateLink

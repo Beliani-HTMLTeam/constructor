@@ -102,6 +102,7 @@ const getColumnStyles = ({ width, columnId, columns, borderColor, borderTop, bor
 		'vertical-align: top;',
 		`width: ${width}px;`,
 		'padding: 0;',
+		'box-sizing: border-box;',
 		isLast ? '' : `border-right: 1px solid ${borderColor};`,
 		borderTop ? `border-top: 1px solid ${borderColor};` : '',
 		borderBottom ? `border-bottom: 1px solid ${borderColor};` : '',
@@ -504,10 +505,13 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 	html += Space({ insideTr: true, className: category?.spaceAfterDeal ?? 'newsletterBottom35px' });
 
 	if (isNewsletter) {
+		// more than one code in the deal -> plural cta
+		const codesCount = getQueryRows(queries, 'deal_codes').filter((code) => String(code ?? '').trim() !== '').length;
+
 		html += CTA({
 			...ctaDefaults,
 			href: categoryHref,
-			text: getPhrase('Get code'),
+			text: getPhrase(codesCount > 1 ? 'Get codes' : 'Get code'),
 			...(category?.codeCta ?? {}),
 		});
 

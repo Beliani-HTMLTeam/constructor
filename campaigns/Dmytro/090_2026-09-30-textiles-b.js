@@ -276,6 +276,8 @@ const categories = [
       },
       {
         name: 'Kids Textiles and Playmats',
+        overrides: {
+          IT: "Tessili per Bambini"},
         src: getImageUrl('20260930_Add04_B.png', true),
         href: 'https://www.beliani.ch/children-room/kids-duvet-covers-and-sheets/',
       },

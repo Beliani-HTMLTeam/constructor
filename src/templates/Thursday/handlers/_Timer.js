@@ -54,7 +54,7 @@ export const labels = {
   "SE": ["dagar", "h", "min", "s"],
   "HU": ["nap", "óra", "perc", "másodperc"],
   "DK": ["dage", "t", "min", "s"],
-  "CZ": ["dnů", "hours", "min.", "s"],
+  "CZ": ["dnů", "hod.", "min.", "s"],
   "FI": ["päivää", "tuntia", "minuuttia", "sekuntia"],
   "NO": ["dager", "t", "min", "s"],
   "SK": ["dní", "hod.", "min.", "s"],
@@ -182,7 +182,7 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
   return Inside && Inside.type === 'timer'
     ? 
     `
-    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.backgroundColor }) : ''}
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.spaceBeforeBackground ?? Inside.backgroundColor }) : ''}
 
     ${Timer({
       title: queries?.timer?.[0] ?? 'Translation not found',

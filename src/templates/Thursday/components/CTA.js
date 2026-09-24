@@ -33,6 +33,7 @@ const CTA = ({
 	fontSize = '20px',
 	lineHeight = '20px',
 	fontWeight = '700',
+	letterSpacing = null,
 	textTransform = 'uppercase',
 	borderRadius = '4px',
 	fontFamily = "'Open Sans', sans-serif",
@@ -112,11 +113,15 @@ const CTA = ({
 			const effectiveMobileLineHeight = mobileLineHeight ?? lineHeight;
 
 			const textLength = transformedText ? transformedText.length : 0;
-			const estimatedTextWidth = textLength * 12 + (codeValue ? 24 : 0);
-			const vmlWidth = estimatedTextWidth + effectivePadX * 2;
+			const fontSizePx = parseFloat(fontSize) || 20;
+			const perCharWidth = fontSizePx * 0.6;
+			const letterSpacingPx = parseFloat(letterSpacing) || 0;
+			const estimatedTextWidth =
+				textLength * (perCharWidth + letterSpacingPx) + (codeValue ? 24 : 0);
+			const vmlWidth = Math.round(estimatedTextWidth + effectivePadX * 2);
 			
 			const parsedLineHeight = parseInt(lineHeight) || 16;
-			const parsedBorderRadius = parseInt(borderRadius) || 4;
+			const parsedBorderRadius = Number.isNaN(parseInt(borderRadius)) ? 4 : parseInt(borderRadius);
 			
 			const vmlHeight = parsedLineHeight + effectivePadTop + effectivePadBottom;
 			const arcsize = Math.round((parsedBorderRadius / vmlHeight) * 100) + '%';
@@ -125,7 +130,8 @@ const CTA = ({
 			
 			const safeFontSize = fontSize.toString().replace(/[^0-9a-zA-Z]/g, '');
 			const safeMobileFontSize = effectiveMobileFontSize.toString().replace(/[^0-9a-zA-Z]/g, '');
-			const ctaClass = className || `cta-${effectivePadTop}-${effectivePadBottom}-${effectivePadX}-${effectiveMobilePadTop}-${effectiveMobilePadBottom}-${effectiveMobilePadX}-${safeFontSize}-${safeMobileFontSize}`;
+			const safeLetterSpacing = letterSpacing ? String(letterSpacing).replace(/[^0-9a-zA-Z-]/g, '') : '';
+			const ctaClass = className || `cta-${effectivePadTop}-${effectivePadBottom}-${effectivePadX}-${effectiveMobilePadTop}-${effectiveMobilePadBottom}-${effectiveMobilePadX}-${safeFontSize}-${safeMobileFontSize}${safeLetterSpacing ? `-ls${safeLetterSpacing}` : ''}`;
 			const buttonClass = ctaClass;
 
 			const paddingCss = `${effectivePadTop}px ${effectivePadX}px ${effectivePadBottom}px ${effectivePadX}px`;
@@ -137,7 +143,8 @@ const CTA = ({
           .${ctaClass} {
             padding: ${paddingCss};
             font-size: ${fontSize};
-            line-height: ${lineHeight};
+            line-height: ${lineHeight};${letterSpacing ? `
+            letter-spacing: ${letterSpacing};` : ''}
           }
           @media screen and (max-width: 768px) {
             .${ctaClass} {
@@ -160,11 +167,11 @@ const CTA = ({
             <td align="${align}" style="font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;">
               <!--[if gte mso 9]>
               <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${buttonHref}" style="height:${vmlHeight}px;v-text-anchor:middle;width:${vmlWidth}px;" arcsize="${arcsize}" stroke="f" fillcolor="${bgColor}">
-                <center style="color:${btnTextColor};font-family:${vmlFontFamily};font-size:${fontSize};font-weight:${fontWeight};letter-spacing:0px;text-transform: ${textTransform};"><span style="${vmlRaiseStyle}">${transformedText}</span></center>
+                <center style="color:${btnTextColor};font-family:${vmlFontFamily};font-size:${fontSize};font-weight:${fontWeight};letter-spacing:${letterSpacing ?? '0px'};text-transform: ${textTransform};"><span style="${vmlRaiseStyle}">${transformedText}</span></center>
               </v:roundrect>
               <![endif]-->
               <!--[if !mso]><!-->
-                <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-family: ${fontFamily}; font-size: ${fontSize}; line-height: ${lineHeight}; font-weight: ${fontWeight}; text-transform: ${textTransform}; color: ${btnTextColor}; padding: ${paddingCss}; text-decoration: none; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box; width: auto; max-width: 100%; white-space: normal; word-break: break-word;">
+                <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-family: ${fontFamily}; font-size: ${fontSize}; line-height: ${lineHeight}; font-weight: ${fontWeight};${letterSpacing ? ` letter-spacing: ${letterSpacing};` : ''} text-transform: ${textTransform}; color: ${btnTextColor}; padding: ${paddingCss}; text-decoration: none; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box; width: auto; max-width: 100%; white-space: normal; word-break: break-word;">
                   <span style="color: ${btnTextColor}; display: inline-block; line-height: inherit;">${buttonContent}</span>
                 </a>
               <!--<![endif]-->
