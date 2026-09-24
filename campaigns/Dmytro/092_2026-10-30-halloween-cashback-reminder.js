@@ -164,7 +164,7 @@ export default new entities.Campaign({
   name: 'Halloween Cashback Reminder',
   date: '30.10.2026',
   issueCardId: '32873',
-  lpId: '32711',
+  lpId: '32873',
   alarm: {
     isActive: false,
   },
