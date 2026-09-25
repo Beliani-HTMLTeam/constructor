@@ -23,20 +23,22 @@ const links = {
   TopImage_href: translateLink({ value: 'content/lp26-10-16' }),
   Banner_1: translateLink({ value: 'content/lp26-10-09' }),
   Banner_1_Image: translateImage({ value: '20261009b.png' }),
-  Banner_2: translateLink({ value: 'content/lp26-10-10' }),
-  Banner_2_Image: translateImage({ value: '20261010b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-10-08' }),
+  Banner_2_Image: translateImage({ value: '20261008b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-10-13' }),
   Intro_cta_href: "https://www.beliani.ch/children-room/"
 };
 
 const intro_data = {
-  color: "#000000",
+  color: "#750000",
   backgroundColor: "#FFEBE2",
-  alignment: "left",
+  alignment: "center",
   type: "paragraph",
+  ctaBackgroundColor: "#FF2F00",
+  ctaColor: "#FFFFFF",
   cta: {
     overrides: {
-      
+
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -83,7 +85,8 @@ const categories = [
       show: false
     },
     cta: {
-      show: true
+      show: true, background: '#FF2F00',
+      color: '#FFFFFF'
     },
     products: [
       // METZ
@@ -135,7 +138,8 @@ const categories = [
       show: false
     },
     cta: {
-      show: true
+      show: true, background: '#FF2F00',
+      color: '#FFFFFF'
     },
     products: [
       // LENAH
@@ -187,7 +191,8 @@ const categories = [
       show: false
     },
     cta: {
-      show: true
+      show: true, background: '#FF2F00',
+      color: '#FFFFFF'
     },
     products: [
       // SAMBUR
@@ -237,7 +242,9 @@ const categories = [
       show: false
     },
     cta: {
-      show: true
+      show: true,
+      background: '#FF2F00',
+      color: '#FFFFFF'
     },
     products: [
       // TORTIE

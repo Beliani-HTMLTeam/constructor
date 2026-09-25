@@ -73,6 +73,14 @@ img {
   padding-right: 10px;
 }
 
+.newsletterRight1px {
+  padding-right: 1px;
+}
+
+.newsletterLeft1px {
+  padding-left: 1px;
+}
+
 .newsletterMiniContainer {
   padding-left: 10px;
   padding-right: 10px;

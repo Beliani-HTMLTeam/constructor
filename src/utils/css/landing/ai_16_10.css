@@ -190,6 +190,14 @@ table {
   padding-right: 5px;
 }
 
+#newsletter .newsletterRight1px {
+  padding-right: 1px;
+}
+
+#newsletter .newsletterLeft1px {
+  padding-left: 1px;
+}
+
 #newsletter .newsletterRight10px {
   padding-right: 10px;
 }
@@ -265,8 +273,10 @@ table {
 
 .START_PRODUCTS {}
 #newsletter .newsletterProductTitle {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.2;
+  text-align: center;
+  font-weight: 600;
 }
 
 #newsletter .newsletterProductLowPrice {

@@ -10,7 +10,7 @@ export const render = (products, showPrices, showNames, queries, insideContainer
 
     productsInnerHtml += `
     <tr>
-      <td style="color: ${color}; background: ${background}" ${insideContainer ? 'class="newsletterContainer"' : ''}>
+      <td style="color: ${color}; background: ${background}" ${insideContainer ? 'class="newsletterContainer10px"' : ''}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
 
     for (let row = 0; row < totalRows; row++) {
@@ -23,7 +23,7 @@ export const render = (products, showPrices, showNames, queries, insideContainer
         const product = products[productIndex];
 
         // prettier-ignore
-        productsInnerHtml += `<td style="color: ${color}; background: ${background}; width:50%;vertical-align:top;" width="50%" ${(col + 1) % 2 !== 0 ? 'class="newsletterRight5px"' : 'class="newsletterLeft5px"'}>`;
+        productsInnerHtml += `<td style="color: ${color}; background: ${background}; width:50%;vertical-align:top;" width="50%" ${(col + 1) % 2 !== 0 ? 'class="newsletterRight1px"' : 'class="newsletterLeft1px"'}>`;
 
         if (product) {
           productsInnerHtml += Product(product, showPrices, showNames, color, priceColor, productIndex, !isLastRow, !insideContainer);

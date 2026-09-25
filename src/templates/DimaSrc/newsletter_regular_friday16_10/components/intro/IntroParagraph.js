@@ -23,6 +23,8 @@ export const IntroParagraph = ({
     backgroundColor,
     cta,
     additionalSpace,
+    ctaBackgroundColor,
+    ctaColor,
   } = intro;
 
   const introText = text || queries.intro || 'Translation not found';
@@ -48,6 +50,8 @@ export const IntroParagraph = ({
       shopNowPhrase,
       backgroundColor,
       color,
+      ctaBackgroundColor: ctaBackgroundColor,
+      ctaColor: ctaColor,
     }) : ''}
     ${additionalSpace ? Space({ insideTr: true, className: additionalSpace, backgroundColor }) : ''}
   `;

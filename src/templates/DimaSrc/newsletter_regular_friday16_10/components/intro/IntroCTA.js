@@ -1,3 +1,4 @@
+import { BulletproofButton } from '../BulletproofButton';
 import { CTA } from '../CTA';
 import { Space } from '../Space';
 
@@ -13,6 +14,8 @@ export const IntroCTA = ({
   shopNowPhrase,
   backgroundColor,
   color,
+  ctaBackgroundColor,
+  ctaColor,
 }) => {
   if (!cta) return '';
 
@@ -32,13 +35,20 @@ export const IntroCTA = ({
 
   return `
     ${cta.spaceBefore ? Space({ insideTr: true, className: cta.spaceBefore, backgroundColor }) : ''}
-    ${CTA({
+    ${BulletproofButton({
       href: getHref(),
-      text: getText(),
-      background: backgroundColor,
-      color: color,
+      text:  getText(),
+      background:
+      ctaBackgroundColor || backgroundColor || '#000000',
+      color:
+      ctaColor || color || '#FFFFFF',
       align: 'center',
-      insideTr: true,
+      radius: 24,
+      fontSize: 15,
+      fontWeight: 700,
+      lineHeight: 1.2,
+      paddingX: 50,
+      paddingY: 13,
     })}
     ${cta.spaceAfter ? Space({ insideTr: true, className: cta.spaceAfter, backgroundColor }) : ''}
   `;

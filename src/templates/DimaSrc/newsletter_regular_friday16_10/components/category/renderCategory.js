@@ -8,6 +8,7 @@ import { renderProducts } from './renderProducts';
 import { category4Tiles_Grid } from '../../category/grid4tiles';
 import { render } from '../../category/small-tiles';
 import { render as category3Columns_Grid } from '../../category/smallgrid';
+import { BulletproofButton } from '../BulletproofButton';
 
 const whiteLineSrc = 'https://pictureserver.net/static/2026/footer/white_line.jpg';
 const blackLineSrc = 'https://pictureserver.net/static/2026/footer/line.jpg';
@@ -169,14 +170,22 @@ export const renderCategory = async (
   
           ${
             category.cta?.show
-              ? CTA({
-                  href: ctaHref,
-                  text: category.cta?.type === 'shopAll' ? getPhrase('Shop All Categories') : getPhrase('shop now'),
-                  insideTr: true,
-                  tdClass: 'newsletterContainer',
-                  color: color,
-                  background: background,
-                })
+              ? 
+                 BulletproofButton({
+                      href: ctaHref,
+                      text: getPhrase('shop now'),
+                      background:
+                      category.cta.background,
+                      color:
+                      category.cta.color,
+                      align: 'center',
+                      radius: 24,
+                      fontSize: 15,
+                      fontWeight: 700,
+                      lineHeight: 1.2,
+                      paddingX: 50,
+                      paddingY: 13,
+                    })
               : ''
           }
   
