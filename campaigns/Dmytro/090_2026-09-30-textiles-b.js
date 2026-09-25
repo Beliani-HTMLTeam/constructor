@@ -247,6 +247,7 @@ const categories = [
       align: 'center',
       show: true,
       spaceBefore: 'newsletterBottom40px',
+      spaceAfter: 'newsletterBottom35px',
       tdClass: "newsletterContainer40px",
     },
     paragraph: {
