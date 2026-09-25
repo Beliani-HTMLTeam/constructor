@@ -22,6 +22,7 @@ import { AIRegularFridayNslt09_10 } from './DimaSrc/ai_newsletter_regular_friday
 import { HelloweenReminder } from './DimaSrc/ai_newsletter_regular_friday_halloween_reminder/template';
 import { RegularFridayNslt1Halloween } from './DimaSrc/newsletter_regular_friday1_halloween/templates/regularFridayNslt';
 import { MondayNew } from './AISrc/monday_new/template';
+import { RegularFridayNslt16_10 } from './DimaSrc/newsletter_regular_friday16_10/templates/regularFridayNslt';
 
 export const templates = {
   Blackweek,
@@ -47,5 +48,6 @@ export const templates = {
   AIRegularFridayNslt09_10,
   HelloweenReminder,
   RegularFridayNslt1Halloween,
-  MondayNew
+  MondayNew,
+  RegularFridayNslt16_10
 };

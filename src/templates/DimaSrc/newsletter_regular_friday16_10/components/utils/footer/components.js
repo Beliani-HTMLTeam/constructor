@@ -1,8 +1,8 @@
 import { getTrackingUrl, wrapFooterUrl } from "@/utils/getTrackingUrl";
 
 const assembly = ({ getFooter, country }) => ({
-    src: getFooter('Assembly src new'),
-    href: getFooter('Assembly href NEW'),
+  src: getFooter('Assembly src new'),
+  href: getFooter('Assembly href NEW'),
   exclude: ['CHIT'].includes(country),
 });
 

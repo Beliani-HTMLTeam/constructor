@@ -5,6 +5,20 @@
   margin: 0;
 }
 
+#newsletter .newsletterContainerFooter20px,
+#newsletter.newsletterContainerFooter20px,
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#newsletter .newsletterContainerHeader20px,
+#newsletter.newsletterContainerHeader20px,
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 #newsletter .newsletterTitleH2 {
   font-size: 30px;
   line-height: 45px;
@@ -342,6 +356,20 @@ table {
 
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  #newsletter .newsletterContainerFooter20px,
+  #newsletter.newsletterContainerFooter20px,
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #newsletter .newsletterContainerHeader20px,
+  #newsletter.newsletterContainerHeader20px,
+  .newsletterContainerHeader20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
   #newsletter .newsletterSmallgridItemTitle{
     font-size:14px; 
   }

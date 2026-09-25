@@ -26,6 +26,16 @@ img {
   line-height:1.2;
 }
 
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .title-advantages {
   text-align: center;
   font-size: 11px;
@@ -387,6 +397,14 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  .newsletterContainerFooter20px {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .newsletterContainerHeader20px {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
   .newsletterSmallgridItemTitle{
     font-size:14px; 
   }
