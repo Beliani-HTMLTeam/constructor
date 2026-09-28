@@ -1,5 +1,5 @@
 import { TIT_TopImage_Timer_Categories } from "@/templates/AlexSrc/template/TIT_TopImage_Timer_Categories";
-import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday/components/utils/images/translateImage";
+import { DimasTranslateImage } from "@/templates/DimaSrc/newsletter_regular_friday1/utils/translateImage";
 import { FathersDayGG } from "@/templates/FathersDayGG/template/FathersDayGG";
 
 // Campaign generated from form

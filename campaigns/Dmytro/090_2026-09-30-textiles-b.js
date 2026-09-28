@@ -203,6 +203,9 @@ const catData = [
   {
     ...catBase,
     name: 'Blankets & Throws',
+    nameOverrides: {
+      FI: "Torkku- ja päiväpeitot"
+    },
     href: 'https://www.beliani.ch/textiles/blankets-and-throws/',
     src: getImageUrl('20260930_Cat02_B.jpg', true),
     products: prodData[1],
@@ -278,7 +281,8 @@ const categories = [
       {
         name: 'Kids Textiles and Playmats',
         overrides: {
-          IT: "Tessili per Bambini"},
+          IT: "Tessili per Bambini"
+        },
         src: getImageUrl('20260930_Add04_B.png', true),
         href: 'https://www.beliani.ch/children-room/kids-duvet-covers-and-sheets/',
       },
