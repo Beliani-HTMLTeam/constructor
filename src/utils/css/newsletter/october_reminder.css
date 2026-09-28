@@ -22,7 +22,7 @@ img {
   text-decoration:underline; 
   font-family: 'Open Sans', sans-serif; 
   font-size:20px; 
-  font-weight:600; 
+  font-weight:500; 
   line-height:1.2;
 }
 
@@ -33,6 +33,16 @@ img {
   padding-bottom: 10px;
   padding-top: 10px;
   margin: 0;
+}
+
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .title-advantages-item {
@@ -387,6 +397,11 @@ img {
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .newsletterSmallgridItemTitle{
     font-size:14px; 
   }

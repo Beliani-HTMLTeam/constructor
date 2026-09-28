@@ -12,6 +12,7 @@ export const render = (
     getPhrase = (key) => key,
     getCategoryTitle,
     getCategoryLink,
+    country
   } = {}
 ) => {
   if (
@@ -195,7 +196,7 @@ export const render = (
                   text-decoration:none;
                 "
               >
-                ${title}
+                ${category.overrides?.[country] || title}
               </a>
             `;
           },

@@ -136,6 +136,7 @@ export const renderCategory = async (
               getCategoryTitle,
               getCategoryLink,
               shopAllHref: category.href,
+              country: country
             })
 
             : await renderProducts({

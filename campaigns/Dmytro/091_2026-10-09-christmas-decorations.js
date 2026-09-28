@@ -93,6 +93,9 @@ const categories = [
       {
         name: 'Tree Decorations',
         overrides: {
+          CHDE: "Baumschmuck",
+          DE: "Baumschmuck",
+          AT: "Baumschmuck"
         },
        
         src: getImageUrl('20261009Category2.png', true),
@@ -101,6 +104,9 @@ const categories = [
       {
         name: 'Christmas Tree Collars',
         overrides: {
+          CHDE: "Baumkragen",
+          DE: "Baumkragen",
+          AT: "Baumkragen"
         },
         src: getImageUrl('20261009Category3.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-tree-collars/',
@@ -115,6 +121,8 @@ const categories = [
       {
         name: 'LED Decor',
         overrides: {
+          NL: "LED-kerstdecoratie",
+          BENL: "LED-kerstdecoratie",
         },
         src: getImageUrl('20261009Category5.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-outdoor-decor/',
@@ -136,6 +144,8 @@ const categories = [
       {
         name: 'Textiles',
         overrides: {
+          NL: "Kersttextiel",
+          BENL: "Kersttextiel"
         },
         src: getImageUrl('20261009Category8.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-textiles/',
@@ -143,6 +153,9 @@ const categories = [
       {
         name: 'Lights',
         overrides: {
+          CHDE: "Weihnachtslichter",
+          DE: "Weihnachtslichter",
+          AT: "Weihnachtslichter"
         },
         src: getImageUrl('20261009Category9.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-lights/',
@@ -150,6 +163,8 @@ const categories = [
       {
         name: 'Candle Holders',
         overrides: {
+          NL: "Kerstkaarsenhouders",
+          BENL: "Kerstkaarsenhouders"
         },
         src: getImageUrl('20261009Category10.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',
