@@ -38,8 +38,6 @@ const palette = {
 	dark: '#750000',
 	ctaText: '#F6E7E6',
 	timer: '#750000',
-	timerUnit: '#AC6666',
-	timerText: '#FFFFFF',
 };
 
 const timer = {
@@ -49,9 +47,7 @@ const timer = {
 
 const Inside = {
 	type: 'timer',
-	color: palette.timerText,
-	backgroundColor: palette.timer,
-	unitBackground: palette.timerUnit,
+	maincolor: palette.timer,
 	spaceBefore: 'newsletterBottom35px',
 	spaceBeforeBackground: palette.page,
 };

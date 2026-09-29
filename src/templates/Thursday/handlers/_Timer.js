@@ -1,5 +1,6 @@
 import { Timer } from '../components/ProloTimer';
 import { Space } from '../components/Space';
+import { resolveTimerColors } from '../helpers/timerColors.js';
 import languages from "@config/languages"
 
 
@@ -155,16 +156,21 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
     return '';
   }
 
+  const resolvedColors = resolveTimerColors(Inside.maincolor);
+  const backgroundColor = resolvedColors?.backgroundColor ?? Inside.backgroundColor;
+  const color = resolvedColors?.color ?? Inside.color;
+  const unitBackground = resolvedColors?.unitBackground ?? Inside.unitBackground;
+
   const base = (shop?.origin ?? 'https://prologistics.info') + '/timer.gif';
 
   let link = base + `?deadline=${timer.deadline}T23:59:00` +
     `&timezone=${timezones[country]}` +
     // in prolo timer generator pt uses "portugal" instead of portugese
     `&lang=${shop.slug === "PT" ? "portugal" : languagesMap[country]?.title}` +
-    `&bg=${(Inside.unitBackground || Inside.backgroundColor).replace('#', '')}` +
-    `&color=${Inside.color.replace('#', '')}` +
-    `&label=${Inside.color.replace('#', '')}` +
-    `&background=${Inside.backgroundColor.replace('#', '')}`
+    `&bg=${(unitBackground || backgroundColor).replace('#', '')}` +
+    `&color=${color.replace('#', '')}` +
+    `&label=${color.replace('#', '')}` +
+    `&background=${backgroundColor.replace('#', '')}`
   // + `&uid=USER_ID`
 
   let freebies = null;
@@ -182,16 +188,16 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
   return Inside && Inside.type === 'timer'
     ? 
     `
-    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.spaceBeforeBackground ?? Inside.backgroundColor }) : ''}
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.spaceBeforeBackground ?? backgroundColor }) : ''}
 
     ${Timer({
       title: queries?.timer?.[0] ?? 'Translation not found',
       subtitle: queries?.timer?.[1] ?? 'Translation not found',
       href: links?.Timer_href,
       src: link,
-      color: Inside.color,
-      background: Inside.backgroundColor,
-      unitBackground: Inside.unitBackground,
+      color: color,
+      background: backgroundColor,
+      unitBackground: unitBackground,
       freebies,
       ctaText: shopNow,
       showCta: Inside.showCta ?? true,
