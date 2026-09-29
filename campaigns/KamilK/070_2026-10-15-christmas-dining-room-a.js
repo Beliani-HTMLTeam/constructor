@@ -21,7 +21,7 @@ const tableQueries = [
 ];
 
 const links = {
-	TopImage_src: getImageUrl('20261015_Gif.gif', true),
+	TopImage_src: translateImage({ value: '20261015_Gif.gif' }),
 	TopImage_href: translateLink({ value: 'content/lp26-10-15' }),
 
 	Banner_1: translateLink({ value: 'content/lp26-10-08' }),
@@ -45,7 +45,7 @@ const palette = {
 
 const intro = {
 	type: 'paragraph',
-	container: 'newsletterContainer60px',
+	container: 'newsletterContainer',
 	alignment: 'center',
 	color: palette.text,
 	spaceTop: 'newsletterBottom35px',
@@ -105,12 +105,14 @@ const styleCategory = (number, name, href, background, products, overrides = {})
 		position: 'afterImg',
 		align: 'center',
 		color: palette.title,
+		container: 'newsletterContainer',
 		spaceBefore: 'newsletterBottom35px',
 		spaceAfter: 'newsletterBottom20px',
 	},
 
 	paragraph: {
 		show: true,
+		container: 'newsletterContainer',
 		align: 'center',
 		spaceAfter: 'newsletterBottom35px',
 	},
