@@ -1,5 +1,4 @@
 import React from 'react';
-import { StarIcon } from './Icons/index.jsx';
 import { MarqueeLabel } from './Marquee.jsx';
 import { formatTriggerText, isDateBadge } from './utils.js';
 
@@ -20,11 +19,6 @@ export function SelectTrigger({ selectedOption, placeholder, isOpen, disabled, o
         <span className="custom-select-value">
           {selectedOption ? (
             <>
-              {selectedOption.isFavorite && (
-                <span className="custom-select-trigger-star" title="Favorite">
-                  <StarIcon size={13} fill="#f59e0b" stroke="#f59e0b" />
-                </span>
-              )}
               <MarqueeLabel text={formatTriggerText(selectedOption)} className="custom-select-option-label" />
               {selectedOption.badge && !isDateBadge(selectedOption.badge) && (
                 <span className="custom-select-option-badge">{selectedOption.badge}</span>
