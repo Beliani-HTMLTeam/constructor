@@ -37,7 +37,7 @@ const formContent = document.querySelector('.form-content');
   closeBtn.classList.add('close-modal');
 
   const xImg = document.createElement('img');
-  xImg.src = '/icons/ep--close-bold.svg';
+  xImg.src = '/icons/x.svg';
 
   closeBtn.appendChild(xImg);
   closeBtn.addEventListener('click', () => {
