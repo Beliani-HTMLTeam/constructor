@@ -1,10 +1,15 @@
 import { useMemo } from 'react';
+import { getTemplateKey, getLanguageValue } from '@/utils/selectionParams.js';
 
 function parseCampaignDate(dateStr) {
 	if (!dateStr) return new Date(0);
 	const [day, month, year] = dateStr.split('.');
 	return new Date(`${year}-${month}-${day}`);
 }
+
+const getShopLabel = (shop) => (shop.slug.length > 2 ? shop.slug.slice(0, 2) : shop.slug);
+
+const getLanguageLabel = (language) => (/mattress/i.test(language.name) ? `${language.slug} Matt.` : language.slug);
 
 export function useSelectOptions({
 	scopes,
@@ -48,7 +53,7 @@ export function useSelectOptions({
 
 	const templateOptions = useMemo(() => {
 		return (selectedTemplates || []).map((t) => {
-			const val = `${t.type}_${t.name}`;
+			const val = getTemplateKey(t);
 			const lbl = t.name ? t.name : t.type === 'newsletter' ? 'Newsletter' : 'Landing';
 			return {
 				value: val,
@@ -62,8 +67,8 @@ export function useSelectOptions({
 	const shopOptions = useMemo(() => {
 		return (shops || []).map((s) => ({
 			value: s.shopId,
-			label: s.seller,
-			badge: s.slug?.toUpperCase(),
+			label: getShopLabel(s),
+			title: s.seller,
 			original: s,
 		}));
 	}, [shops]);
@@ -71,9 +76,9 @@ export function useSelectOptions({
 	const languageOptions = useMemo(() => {
 		if (!shop || !shop.languages) return [];
 		return shop.languages.map(({ language }) => ({
-			value: `${language.slug}-${language.name}`,
-			label: language.name.charAt(0).toUpperCase() + language.name.slice(1),
-			badge: language.slug?.toUpperCase(),
+			value: getLanguageValue(language),
+			label: getLanguageLabel(language),
+			title: language.name,
 			original: language,
 		}));
 	}, [shop]);

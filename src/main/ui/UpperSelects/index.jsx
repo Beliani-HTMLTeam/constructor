@@ -1,9 +1,12 @@
 import React from 'react';
 import { Select } from '@/main/ui/Select';
+import { SegmentedToggle } from './SegmentedToggle.jsx';
+import { SlugGrid } from './SlugGrid.jsx';
 import { useUpperSelectsState } from './useUpperSelectsState.js';
 import { useFavorites } from './useFavorites.js';
 import { useSelectOptions } from './useSelectOptions.js';
 import { useUpperSelectsHandlers } from './useUpperSelectsHandlers.js';
+import { getTemplateKey } from '@/utils/selectionParams.js';
 
 export function UpperSelects({ onScopeChange }) {
   const { scopes, scope, campaigns, selectedCampaign, selectedTemplates, template, shops, shop, selectedLanguage } =
@@ -34,7 +37,7 @@ export function UpperSelects({ onScopeChange }) {
   const hasCampaign = Boolean(selectedCampaign && selectedCampaign.startId);
   const hasTemplate = Boolean(template);
   const hasShop = Boolean(shop);
-  const currentTemplateKey = template ? `${template.type}_${template.name}` : null;
+  const currentTemplateKey = template ? getTemplateKey(template) : null;
 
   return (
     <div className="group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -66,40 +69,27 @@ export function UpperSelects({ onScopeChange }) {
       )}
 
       {hasCampaign && templateOptions.length > 0 && (
-        <Select
-          id="templates"
-          options={templateOptions}
-          value={currentTemplateKey}
-          onChange={handleTemplateSelect}
-          placeholder="Select Template"
-          placement="auto"
-          zIndex={30}
-        />
+        <SegmentedToggle options={templateOptions} value={currentTemplateKey} onChange={handleTemplateSelect} />
       )}
 
       {hasTemplate && (
-        <Select
-          id="shops"
-          options={shopOptions}
-          value={shop?.shopId || null}
-          onChange={handleShopSelect}
-          placeholder="Select shop"
-          searchable={true}
-          placement="auto"
-          zIndex={20}
-        />
+        <>
+          <div className="picker-divider">Shop</div>
+          <SlugGrid label="Shop" options={shopOptions} value={shop?.shopId || null} onChange={handleShopSelect} />
+        </>
       )}
 
       {hasShop && languageOptions.length > 0 && (
-        <Select
-          id="languages"
-          options={languageOptions}
-          value={selectedLanguage}
-          onChange={handleLanguageSelect}
-          placeholder="Select Language"
-          placement="auto"
-          zIndex={10}
-        />
+        <>
+          <div className="picker-divider">Language</div>
+          <SlugGrid
+            label="Language"
+            minItemWidth={64}
+            options={languageOptions}
+            value={selectedLanguage}
+            onChange={handleLanguageSelect}
+          />
+        </>
       )}
     </div>
   );
