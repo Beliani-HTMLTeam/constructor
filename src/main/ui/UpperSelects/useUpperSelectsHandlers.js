@@ -5,6 +5,7 @@ import { renderTemplate } from '@/main/rendering/templateRenderer.js';
 import { getDOMElements, showElements, hideElements } from '@/utils/domUtils.js';
 import { initCampaigns } from '@/main/initCampaigns.js';
 import { getTemplateKey, getLanguageValue } from '@/utils/selectionParams.js';
+import { saveLastCampaign } from './lastCampaign.js';
 
 // keep the previously chosen template when the new campaign has it, otherwise prefer Newsletter
 function pickTemplate(templates, previousTemplate) {
@@ -105,6 +106,8 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 				mockEvent,
 				currentCampaigns
 			);
+
+			saveLastCampaign(getState('scope'), startId);
 
 			const root = document.querySelector('#app-content');
 			if (root) root.innerHTML = '';

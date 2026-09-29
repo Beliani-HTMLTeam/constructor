@@ -6,6 +6,7 @@ import { useUpperSelectsState } from './useUpperSelectsState.js';
 import { useFavorites } from './useFavorites.js';
 import { useSelectOptions } from './useSelectOptions.js';
 import { useUpperSelectsHandlers } from './useUpperSelectsHandlers.js';
+import { useRestoreSelection } from './useRestoreSelection.js';
 import { getTemplateKey } from '@/utils/selectionParams.js';
 
 export function UpperSelects({ onScopeChange }) {
@@ -32,6 +33,13 @@ export function UpperSelects({ onScopeChange }) {
       selectedTemplates,
       shops,
     });
+
+  useRestoreSelection({
+    scope,
+    selectedCampaign,
+    campaignOptions,
+    selectCampaign: handleCampaignSelect,
+  });
 
   const hasScope = Boolean(scope);
   const hasCampaign = Boolean(selectedCampaign && selectedCampaign.startId);
