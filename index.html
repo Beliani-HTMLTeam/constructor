@@ -54,22 +54,24 @@
           <!--             OPEN NSLT/LP/ISSUE/FIGMA             -->
           <!--                                                  -->
           <div id="campaign_links" class="group">
-            <button style="display: none" class="openCampaign external">
-              Open Newsletter
-              <img src="/icons/external-link.svg" class="svg-icon" />
-            </button>
+            <div class="split-button">
+              <button disabled data-soft-hide data-disabled-hint="Select a language first" class="openCampaign external">
+                Newsletter
+                <img src="/icons/external-link.svg" class="svg-icon" />
+              </button>
 
-            <button style="display: none" class="openContent openLP external">
-              Open Content Page
-              <img src="/icons/external-link.svg" class="svg-icon" />
-            </button>
+              <button disabled data-soft-hide data-disabled-hint="Select a language first" class="openContent openLP external">
+                Content Page
+                <img src="/icons/external-link.svg" class="svg-icon" />
+              </button>
+            </div>
 
-            <button style="display: none" class="openIssue external">
+            <button disabled data-soft-hide data-disabled-hint="Select a campaign first" class="openIssue external">
               Open Issue Card
               <img src="/icons/external-link.svg" class="svg-icon" />
             </button>
 
-            <button class="figmaCard" style="display: none">
+            <button disabled data-soft-hide data-disabled-hint="Select a campaign first" class="figmaCard">
               <img src="/icons/figma.svg" class="svg-icon" />
 
               Figma Template
@@ -79,10 +81,10 @@
           <!--                                                  -->
           <!--                  COPY TEMPLATE                   -->
           <!--                                                  -->
-          <button style="display: none" class="copyTemplate">
+          <button disabled data-soft-hide data-disabled-hint="Select a shop first" class="copyTemplate">
             <img src="/icons/copy.svg" class="svg-icon" />
 
-            Copy Template
+            <span class="copyTemplate__label">Copy Template</span>
           </button>
         </div>
       </div>
@@ -103,7 +105,9 @@
       <div id="purge-select-root"></div>
 
       <button
-        style="display: none"
+        disabled
+        data-soft-hide
+        data-disabled-hint="Select a campaign first"
         class="fab purgeDynamicSpreadsheet"
         type="button"
         aria-label="Purge dynamic spreadsheet"
@@ -113,7 +117,9 @@
       </button>
 
       <button
-        style="display: none"
+        disabled
+        data-soft-hide
+        data-disabled-hint="Select a language first"
         class="fab redirectCheck"
         type="button"
         aria-label="Run redirect check"

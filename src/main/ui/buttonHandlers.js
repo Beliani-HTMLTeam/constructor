@@ -56,10 +56,29 @@ function addLangToLP(html, country) {
   return `<!-- ${lang} -->\n${html}`;
 }
 
+const TEMPLATE_TYPE_LABELS = { newsletter: 'NSLT', landing: 'LP', banner: 'BANNER' };
+const COPIED_FEEDBACK_MS = 2200;
+const PREVIEW_MODE_STORAGE_KEY = 'constructor_preview_mode';
+
 export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
   const { copyTemplate } = elements;
+  const label = copyTemplate?.querySelector('.copyTemplate__label');
+  const defaultLabel = label?.textContent;
+  let resetFeedbackTimer = null;
 
-  copyTemplate?.addEventListener('click', () => {
+  const showCopiedFeedback = (country, templateType) => {
+    const typeLabel = TEMPLATE_TYPE_LABELS[templateType] ?? String(templateType).toUpperCase();
+    label.textContent = `Copied ${country} ${typeLabel}`;
+    copyTemplate.classList.add('is-copied');
+
+    clearTimeout(resetFeedbackTimer);
+    resetFeedbackTimer = setTimeout(() => {
+      label.textContent = defaultLabel;
+      copyTemplate.classList.remove('is-copied');
+    }, COPIED_FEEDBACK_MS);
+  };
+
+  copyTemplate?.addEventListener('click', async () => {
     const html = getState('html');
     if (!html) return toast.error('No HTML to copy. Render template first.');
 
@@ -71,11 +90,17 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     let finalHtml = optimizeHtmlImages(html, getState);
 
     const activeScope = getState('scope');
-		// don't add lang comment to dmytro lps
-    if (template?.type === 'landing' && activeScope !== "Dmytro") finalHtml = addLangToLP(finalHtml, country);
+    // don't add lang comment to dmytro lps
+    if (template?.type === 'landing' && activeScope !== 'Dmytro') finalHtml = addLangToLP(finalHtml, country);
 
-    navigator.clipboard.writeText(finalHtml);
-    toast.success('Template copied to clipboard!');
+    try {
+      await navigator.clipboard.writeText(finalHtml);
+    } catch (error) {
+      console.error(error);
+      return toast.error('Could not copy to clipboard.');
+    }
+
+    showCopiedFeedback(country, template?.type);
 
     const config = getState('config');
     if (!config?.confetti) return;
@@ -86,8 +111,6 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     });
   });
 }
-
-const PREVIEW_MODE_STORAGE_KEY = 'constructor_preview_mode';
 
 function readStoredPreviewMode() {
   try {

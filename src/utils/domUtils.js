@@ -68,9 +68,17 @@ export function populateSelect(selectElement, items, defaultText = 'Select optio
 }
 
 export function toggleElementDisplay(element, show = true) {
-  if (element) {
-    element.style.display = show ? 'inherit' : 'none';
+  if (!element) return;
+
+  // data-soft-hide: disabled instead of hidden, so the layout doesn't jump
+  if (element.hasAttribute('data-soft-hide')) {
+    element.disabled = !show;
+    const hint = element.dataset.disabledHint;
+    if (hint) element.title = show ? '' : hint;
+    return;
   }
+
+  element.style.display = show ? 'inherit' : 'none';
 }
 
 export function showElements(...elements) {

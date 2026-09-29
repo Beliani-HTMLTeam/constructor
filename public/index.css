@@ -158,6 +158,101 @@ body {
   opacity: 1;
   visibility: visible;
 }
+/* panel buttons: disabled + pressed feedback (quick press-in, slow fade back) */
+.container #panel button {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.45s ease, box-shadow 0.45s ease,
+    border-color 0.2s ease;
+}
+
+.container #panel button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.container #panel button:active:not(:disabled) {
+  transition-duration: 0.12s;
+  transform: scale(0.985);
+  background: #f0f0f0;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.container #panel .upper_navigation .external .svg-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.75;
+}
+
+/* Newsletter | Content Page: one capsule, two actions */
+.container #panel .upper_navigation .split-button {
+  display: flex;
+  border: 1px solid rgba(168, 168, 168, 0.25);
+  border-radius: 24px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 36px rgba(191, 191, 191, 0.25);
+  overflow: hidden;
+}
+
+.container #panel .upper_navigation .split-button button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 8px 12px;
+  gap: 6px;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: background-color 0.45s ease;
+}
+
+.container #panel .upper_navigation .split-button button + button {
+  border-left: 1px solid rgba(168, 168, 168, 0.25);
+}
+
+.container #panel .upper_navigation .split-button button:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.container #panel .upper_navigation .split-button button:active:not(:disabled) {
+  transition-duration: 0.12s;
+  transform: none;
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: none;
+}
+
+.container #panel .upper_navigation .split-button .svg-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Copy Template: primary action, turns green after copying */
+.container #panel .upper_navigation .copyTemplate {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+}
+
+.container #panel .upper_navigation .copyTemplate .svg-icon {
+  filter: brightness(0) invert(1);
+}
+
+.container #panel .upper_navigation .copyTemplate:hover:not(:disabled) {
+  background: #575ae6;
+}
+
+.container #panel .upper_navigation .copyTemplate:active:not(:disabled) {
+  background: #5a5dde;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.container #panel .upper_navigation .copyTemplate.is-copied:not(:disabled),
+.container #panel .upper_navigation .copyTemplate.is-copied:hover:not(:disabled),
+.container #panel .upper_navigation .copyTemplate.is-copied:active:not(:disabled) {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
 /* floating tools, bottom-right; outside #panel so `.container #panel button` doesn't apply */
 #floating-tools {
   position: fixed;
