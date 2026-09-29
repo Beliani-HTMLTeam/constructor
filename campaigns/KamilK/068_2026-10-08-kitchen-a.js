@@ -36,8 +36,6 @@ const palette = {
   title: '#FFCCB7',
   text: '#000000',
   timer: '#750000',
-  timerUnit: '#AC6666',
-  timerText: '#FFFFFF',
 };
 
 const timer = {
@@ -47,9 +45,7 @@ const timer = {
 
 const Inside = {
   type: 'timer',
-  color: palette.timerText,
-  backgroundColor: palette.timer,
-  unitBackground: palette.timerUnit,
+  maincolor: palette.timer,
   spaceBefore: 'newsletterBottom35px',
   spaceBeforeBackground: palette.page,
 };
