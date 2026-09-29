@@ -5,6 +5,7 @@ import { getSavedScope, saveSelectedScope } from './utils/scopeStorage';
 import { getDOMElements } from './utils/domUtils';
 import { setState } from './main/state/appState';
 import { initCampaigns } from './main/initCampaigns';
+import { initialUrlParams } from './utils/urlState';
 
 import './toast.jsx'; // Initialize React and Toaster
 import { toast } from 'sonner';
@@ -65,9 +66,8 @@ async function initializeApp() {
   try {
     const scopes = getAvailableScopes();
     const favoriteScope = localStorage.getItem('constructor_favorite_scope');
-    let initialScope = (favoriteScope && scopes.includes(favoriteScope))
-      ? favoriteScope
-      : await getSavedScope();
+    const preferredScope = [initialUrlParams.scope, favoriteScope].find((scope) => scope && scopes.includes(scope));
+    let initialScope = preferredScope ?? (await getSavedScope());
 
     if (!initialScope || !scopes.includes(initialScope)) {
       const envScope = import.meta.env.VITE_SCOPE;
@@ -120,4 +120,3 @@ async function initializeApp() {
 }
 
 initializeApp();
-

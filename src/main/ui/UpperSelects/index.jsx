@@ -26,19 +26,26 @@ export function UpperSelects({ onScopeChange }) {
     favoriteCampaigns,
   });
 
-  const { handleScopeSelect, handleCampaignSelect, handleTemplateSelect, handleShopSelect, handleLanguageSelect } =
-    useUpperSelectsHandlers({
-      onScopeChange,
-      campaigns,
-      selectedTemplates,
-      shops,
-    });
+  const {
+    handleScopeSelect,
+    handleCampaignSelect,
+    handleTemplateSelect,
+    handleShopSelect,
+    handleLanguageSelect,
+    restoreSelection,
+  } = useUpperSelectsHandlers({
+    onScopeChange,
+    campaigns,
+    selectedTemplates,
+    shops,
+  });
 
   useRestoreSelection({
     scope,
     selectedCampaign,
     campaignOptions,
     selectCampaign: handleCampaignSelect,
+    restoreSelection,
   });
 
   const hasScope = Boolean(scope);

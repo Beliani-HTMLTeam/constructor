@@ -10,6 +10,7 @@ import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts/index.js';
 import { renderTemplateHtmlForCountry } from '@/main/rendering/templateRenderer.js';
+import { initialUrlParams } from '@/utils/urlState.js';
 import { PREVIEW_MODE, MOBILE_PREVIEW_WIDTH, setPreviewMode } from '@/main/rendering/preview.js';
 
 import { toast } from 'sonner';
@@ -142,7 +143,8 @@ export function setupPreviewWidthHandler(elements, setState) {
     label.textContent = isMobile ? 'Back to desktop preview' : `Mobile preview (${MOBILE_PREVIEW_WIDTH}px)`;
   };
 
-  let mode = readStoredPreviewMode();
+  const urlMode = initialUrlParams.view;
+  let mode = validModes.includes(urlMode) ? urlMode : readStoredPreviewMode();
   if (!validModes.includes(mode)) mode = PREVIEW_MODE.DESKTOP;
 
   setState('previewMode', mode);

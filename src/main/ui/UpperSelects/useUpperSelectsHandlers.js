@@ -4,7 +4,8 @@ import { selectCampaignHandler, handleSlugChange, handleShopChange } from '@/mai
 import { renderTemplate } from '@/main/rendering/templateRenderer.js';
 import { getDOMElements, showElements, hideElements } from '@/utils/domUtils.js';
 import { initCampaigns } from '@/main/initCampaigns.js';
-import { getTemplateKey, getLanguageValue } from '@/utils/selectionParams.js';
+import { staticTranslations } from '@/api';
+import { getTemplateKey, getLanguageValue, paramToTemplate, paramToLanguage } from '@/utils/selectionParams.js';
 import { saveLastCampaign } from './lastCampaign.js';
 
 // keep the previously chosen template when the new campaign has it, otherwise prefer Newsletter
@@ -223,11 +224,34 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 		[applyShop, handleLanguageSelect]
 	);
 
+	// applies everything to state first and renders once, after static translations are ready
+	const restoreSelection = useCallback(
+		async ({ campaignOption, templateParam, shopSlug, languageParam }) => {
+			handleCampaignSelect(campaignOption.value, campaignOption);
+
+			const template = paramToTemplate(templateParam, getState('selectedTemplates') ?? []);
+			if (template) setState('template', template);
+
+			const shop = (getState('shops') || shops).find((item) => item.slug === shopSlug);
+			if (!shop) return;
+			applyShop(shop.shopId);
+
+			const languageValue = paramToLanguage(languageParam, shop);
+			if (!languageValue) return;
+			applyLanguage(languageValue);
+
+			await staticTranslations.whenReady();
+			render();
+		},
+		[handleCampaignSelect, applyShop, applyLanguage, render, shops]
+	);
+
 	return {
 		handleScopeSelect,
 		handleCampaignSelect,
 		handleTemplateSelect,
 		handleShopSelect,
 		handleLanguageSelect,
+		restoreSelection,
 	};
 }
