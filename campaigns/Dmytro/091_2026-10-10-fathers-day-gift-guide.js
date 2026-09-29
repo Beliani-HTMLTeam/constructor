@@ -110,7 +110,7 @@ const categories = [
     showPrices: false,
     products: [
       {
-        id: '658683',
+        id: '658759',
         src: [getImageUrl('FathersDayGiftGuide/FFGG_Pic10desktop.png', true),
         getImageUrl('FathersDayGiftGuide/FFGG_Pic10mobile.png', false)
         ]
@@ -231,15 +231,15 @@ const categories = [
         src: [getImageUrl('FathersDayGiftGuide/FFGG_Pic33.png', true)
         ]
       },
-      // MANAGUA
+      // NAVAN
       {
-        id: '320630',
+        id: '733650',
         src: [getImageUrl('FathersDayGiftGuide/FFGG_Pic34.png', true)
         ]
       },
-      // ILEN
+      // CHACK
       {
-        id: '502471',
+        id: '569482',
         src: [getImageUrl('FathersDayGiftGuide/FFGG_Pic35.png', true)
         ]
       }
