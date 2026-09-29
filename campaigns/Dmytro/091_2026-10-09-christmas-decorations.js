@@ -145,7 +145,11 @@ const categories = [
         name: 'Textiles',
         overrides: {
           NL: "Kersttextiel",
-          BENL: "Kersttextiel"
+          BENL: "Kersttextiel",
+          CHFR: "Textiles de Noël",
+          BEFR: "Textiles de Noël",
+          FR: "Textiles de Noël",
+
         },
         src: getImageUrl('20261009Category8.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-textiles/',
@@ -155,7 +159,10 @@ const categories = [
         overrides: {
           CHDE: "Weihnachtslichter",
           DE: "Weihnachtslichter",
-          AT: "Weihnachtslichter"
+          AT: "Weihnachtslichter",
+          CHFR: "Lumières de Noël",
+          BEFR: "Lumières de Noël",
+          FR: "Lumières de Noël",
         },
         src: getImageUrl('20261009Category9.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-lights/',
@@ -164,7 +171,10 @@ const categories = [
         name: 'Candle Holders',
         overrides: {
           NL: "Kerstkaarsenhouders",
-          BENL: "Kerstkaarsenhouders"
+          BENL: "Kerstkaarsenhouders",
+          CHFR: "Bougeoirs de Noël",
+          BEFR: "Bougeoirs de Noël",
+          FR: "Bougeoirs de Noël",
         },
         src: getImageUrl('20261009Category10.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',
