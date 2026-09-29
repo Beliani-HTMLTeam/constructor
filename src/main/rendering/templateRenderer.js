@@ -12,7 +12,7 @@ import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
 import { toast } from 'sonner';
 import { decompress } from 'compress-json';
 import { COMPRESSED_PRODUCTS_MARKER } from '@main/ui/manageProducts/constants.js';
-import { dynamicTranslations, translationCache } from '@/api';
+import { dynamicTranslations, translationCache, staticTranslations } from '@/api';
 
 function executeScripts(rootElement) {
   const scripts = Array.from(rootElement.querySelectorAll('script'));
@@ -31,6 +31,11 @@ function executeScripts(rootElement) {
 
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;
+  const renderId = ++latestRenderId;
+  const isStale = () => renderId !== latestRenderId;
+
+  await staticTranslations.whenReady();
+  if (isStale()) return;
 
   const country = getState('country');
   const templateToRender = getState('template');
@@ -72,9 +77,11 @@ export async function renderTemplate(getState, setState) {
         console.log(`Cached queries for campaign ${campaignId}, slug ${country}`);
       }
 
+      if (isStale()) return;
       setState('loading', false);
       setState('queries', queries);
     } catch (error) {
+      if (isStale()) return;
       setState('loading', false);
       console.error(error);
 
@@ -229,6 +236,8 @@ export async function renderTemplate(getState, setState) {
       utm: getTrackingUrl({ type: templateToRender.type, id: ids[country] }),
     });
 
+    if (isStale()) return;
+
     let generatedCtaCss = '';
     if (typeof globalThis !== 'undefined' && globalThis.collectedCtaStyles) {
       generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
@@ -267,6 +276,7 @@ export async function renderTemplate(getState, setState) {
 }
 
 export async function renderTemplateHtmlForCountry({ templateToRender, selectedCampaign, ids, queries }) {
+  await staticTranslations.whenReady();
   const country = getState('country');
 
   const isCompressedProducts = (value) =>
