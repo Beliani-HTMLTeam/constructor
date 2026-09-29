@@ -10,6 +10,7 @@ import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts/index.js';
 import { renderTemplateHtmlForCountry } from '@/main/rendering/templateRenderer.js';
+import { PREVIEW_MODE, MOBILE_PREVIEW_WIDTH, setPreviewMode } from '@/main/rendering/preview.js';
 
 import { toast } from 'sonner';
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
@@ -83,6 +84,52 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
       emojiSize: 20,
       confettiNumber: 80,
     });
+  });
+}
+
+const PREVIEW_MODE_STORAGE_KEY = 'constructor_preview_mode';
+
+function readStoredPreviewMode() {
+  try {
+    return localStorage.getItem(PREVIEW_MODE_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function storePreviewMode(mode) {
+  try {
+    localStorage.setItem(PREVIEW_MODE_STORAGE_KEY, mode);
+  } catch {
+    // storage unavailable, the choice just isn't remembered
+  }
+}
+
+export function setupPreviewWidthHandler(elements, setState) {
+  const { previewWidth } = elements;
+  if (!previewWidth) return;
+
+  const label = previewWidth.querySelector('.fab-label');
+  const validModes = Object.values(PREVIEW_MODE);
+
+  const showMode = (mode) => {
+    const isMobile = mode === PREVIEW_MODE.MOBILE;
+    previewWidth.classList.toggle('is-active', isMobile);
+    previewWidth.setAttribute('aria-pressed', String(isMobile));
+    label.textContent = isMobile ? 'Back to desktop preview' : `Mobile preview (${MOBILE_PREVIEW_WIDTH}px)`;
+  };
+
+  let mode = readStoredPreviewMode();
+  if (!validModes.includes(mode)) mode = PREVIEW_MODE.DESKTOP;
+
+  setState('previewMode', mode);
+  showMode(mode);
+
+  previewWidth.addEventListener('click', () => {
+    mode = mode === PREVIEW_MODE.MOBILE ? PREVIEW_MODE.DESKTOP : PREVIEW_MODE.MOBILE;
+    storePreviewMode(mode);
+    showMode(mode);
+    setPreviewMode(mode);
   });
 }
 

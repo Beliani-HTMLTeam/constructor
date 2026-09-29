@@ -5,9 +5,11 @@ import { getDOMElements } from '@/utils/domUtils.js';
 import { setState, getState } from '@/main/state/appState.js';
 import { UpperSelects } from '@/main/ui/UpperSelects';
 import { PurgeSelect } from '@/main/ui/PurgeSelect';
+import { ProductsBadge } from '@/main/ui/ProductsBadge';
 
 import {
   setupProductsHandler,
+  setupPreviewWidthHandler,
   setupCopyTemplateHandler,
   setupOpenCampaignHandler,
   setupOpenIssueHandler,
@@ -40,6 +42,7 @@ export function initApp({ scopes, initialScope, campaigns, shops, config, onScop
 
   mountReact('upper-selects-root', <UpperSelects onScopeChange={onScopeChange} />);
   mountReact('purge-select-root', <PurgeSelect />);
+  mountReact('products-badge-root', <ProductsBadge />);
 
   // Setup button handlers
   setupButtonListeners(domElements, { campaigns, jsConfetti });
@@ -47,6 +50,7 @@ export function initApp({ scopes, initialScope, campaigns, shops, config, onScop
 
 function setupButtonListeners(elements, { campaigns, jsConfetti }) {
   setupProductsHandler(elements, setState, getState);
+  setupPreviewWidthHandler(elements, setState);
   // setupNewCampaignHandler(elements, campaigns);
   setupCopyTemplateHandler(elements, getState, jsConfetti);
   setupOpenCampaignHandler(elements, getState);

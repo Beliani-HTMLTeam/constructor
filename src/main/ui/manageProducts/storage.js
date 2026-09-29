@@ -3,6 +3,8 @@ import { compress, decompress, trimUndefinedRecursively } from 'compress-json';
 import { COMPRESSED_PRODUCTS_MARKER } from './constants.js';
 import { safeJsonParse } from './json.js';
 
+export const PRODUCTS_CHANGED_EVENT = 'products-changed';
+
 export function getLocalStorageUsageMB(storage = localStorage) {
   try {
     // credits to
@@ -76,6 +78,7 @@ export function readProductsIndex(storage = localStorage) {
 
 export function writeProductsIndex(nextIndex, storage = localStorage) {
   storage.setItem('products', JSON.stringify(nextIndex));
+  window.dispatchEvent(new Event(PRODUCTS_CHANGED_EVENT));
 }
 
 export function estimateUncompressedMb(value) {

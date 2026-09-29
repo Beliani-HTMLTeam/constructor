@@ -5,6 +5,7 @@ import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { computeValue } from '@/helpers/computeValue.js';
 import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
 import { root } from '@/app.jsx';
+import { showPreview } from '@/main/rendering/preview.js';
 import { getState, setState } from '@/main/state/appState';
 
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
@@ -14,20 +15,7 @@ import { decompress } from 'compress-json';
 import { COMPRESSED_PRODUCTS_MARKER } from '@main/ui/manageProducts/constants.js';
 import { dynamicTranslations, translationCache, staticTranslations } from '@/api';
 
-function executeScripts(rootElement) {
-  const scripts = Array.from(rootElement.querySelectorAll('script'));
-
-  scripts.forEach((oldScript) => {
-    const newScript = document.createElement('script');
-
-    for (const attribute of oldScript.attributes) {
-      newScript.setAttribute(attribute.name, attribute.value);
-    }
-
-    newScript.text = oldScript.textContent || '';
-    oldScript.replaceWith(newScript);
-  });
-}
+let latestRenderId = 0;
 
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;
@@ -259,15 +247,13 @@ export async function renderTemplate(getState, setState) {
 
     if (finalHtml.includes('undefined')) {
       if (confirm('Do you want to render template with undefined value?')) {
-        root.innerHTML = finalHtml;
-        executeScripts(root);
+        showPreview(finalHtml, root);
         return;
       } else {
         toast.error('Rendering cancelled. Check campaign file, template or products list for mistakes!');
       }
     } else {
-      root.innerHTML = finalHtml;
-      executeScripts(root);
+      showPreview(finalHtml, root);
     }
   } catch (error) {
     console.log(error);

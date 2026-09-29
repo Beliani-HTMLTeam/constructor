@@ -23,6 +23,7 @@ export function getDOMElements() {
     selectTemplatesWrapper: selectTemplates?.parentElement,
 
     newProducts: document.querySelector('#new_products'),
+    previewWidth: document.querySelector('#preview_width'),
     newCampaign: document.querySelector('#new_campaign'),
     copyTemplate: document.querySelector('.copyTemplate'),
     openCampaign: document.querySelector('.openCampaign'),
