@@ -27,6 +27,7 @@ export async function renderTemplate(getState, setState) {
 
   const country = getState('country');
   const templateToRender = getState('template');
+  console.log("templateToRender", templateToRender)
   const spreadsheet = templateToRender?.translationsSpreadsheet;
   const selectedCampaign = getState('selectedCampaign');
 

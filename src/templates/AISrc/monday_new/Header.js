@@ -1,19 +1,5 @@
 import { Header as HeaderComponent } from '@/components/header.js';
 import { types } from '@utils/types.js';
-import { getState } from '@/main/state/appState';
-
-function shouldUseNewHeader(cDate) {
-  const parts = cDate.split('.');
-
-  const day = Number(parts[0]);
-  const month = Number(parts[1]);
-  const year = Number(parts[2]);
-
-  const campaignDate = new Date(year, month - 1, day);
-  const cutoffDate = new Date(2026, 9, 6);
-
-  return campaignDate >= cutoffDate;
-}
 
 import { getState } from '@/main/state/appState';
 

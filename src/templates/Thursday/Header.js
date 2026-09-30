@@ -70,7 +70,6 @@ const Header = ({ getHeader, country, background, type, id }) => {
       },
     },
     { type, newHeader }
-    { type, newHeader }
   );
 };
 
