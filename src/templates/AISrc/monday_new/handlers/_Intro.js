@@ -22,7 +22,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
   const secondaryLinkHref = intro?.secondaryLink?.href ?? links?.Intro_secondary_href ?? introCta_href;
 
   return Intro({
-    spaceTop: intro?.spaceTop ?? 'newsletterBottom40px',
+    spaceTop: intro?.spaceTop ?? 'newsletterBottom45px',
     spaceBottom: intro?.spaceBottom ?? 'newsletterBottom40px',
     paragraphSpace: intro?.paragraphSpace ?? 'newsletterBottom25px',
     text: introText,

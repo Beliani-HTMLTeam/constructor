@@ -350,7 +350,7 @@ const renderFreebieCard = ({
                                   ? ''
                                   : `<span
                                       class="${prodSettings?.prodHighPriceClass ?? 'newsletterProductHighPrice'}"
-                                      style="color: ${prodSettings?.highPriceColor ?? textColor} !important;${highSize}${priceLineStyle}"
+                                      style="color: ${prodSettings?.highPriceColor ?? textColor} !important;text-decoration:line-through;${highSize}${priceLineStyle}"
                                     >${oldPrice}</span>`
                               }
                             </td>
@@ -437,7 +437,7 @@ export const renderFreebieGrid = ({
       ${Space({
         insideTable: true,
         className: isLastRow
-          ? 'newsletterBottom25px'
+          ? 'newsletterBottom35px'
           : 'newsletterBottom20px',
         bg: freebieBackgroundColor,
       })}
@@ -446,7 +446,7 @@ export const renderFreebieGrid = ({
 
   return `
     <tr>
-      <td style="background-color: #ffffff;">
+      <td class="newsletterContainer" style="background-color: #ffffff;">
         ${rowsHtml}
       </td>
     </tr>

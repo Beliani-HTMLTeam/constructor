@@ -4,7 +4,7 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
-import { render as renderCategoryBanner } from './category/category-banner.js';
+import { render as renderCategoryBanner, getCategoryRowSizes } from './category/category-banner.js';
 import { translateImage } from '@/helpers/translateImage.js';
 import { translateLink } from '@/helpers/translateLink.js';
 
@@ -12,6 +12,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
   let html = '';
 
   if (Array.isArray(categories)) {
+    const sharedRowSizes = getCategoryRowSizes(categories, queries, getPhrase, type);
     for (const category of categories) {
       html += await renderCategory(
         category,
@@ -26,6 +27,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
         country,
         categoryImageTdClass,
         theme,
+        sharedRowSizes,
       );
     }
   }
@@ -33,7 +35,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
   return html;
 };
 
-const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme) => {
+const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme, sharedRowSizes) => {
   const background = category.background ?? 'white';
   const color = category.color ?? '#000000';
 
@@ -46,7 +48,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     : ctaHref;
 
   if (category.type === 'category-banner') {
-    return renderCategoryBanner({ category, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type });
+    return renderCategoryBanner({ category, id, queries, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type, options: category?.options ?? {}, sharedRowSizes });
   }
 
   const TitleElement = category?.title?.show
