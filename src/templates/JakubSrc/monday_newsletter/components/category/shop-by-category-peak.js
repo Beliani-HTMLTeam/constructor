@@ -15,7 +15,7 @@ export const render = ({
 }) => {
   const slug = String(country ?? '').toLowerCase();
   const background = theme.primary ?? '#FFFFFF';
-  const title = getPhrase('Shop by category') ?? queries?.shop_by_category_title ?? 'TRANSLATION NOT FOUND';
+  const title = queries?.shop_by_category_title ?? getPhrase('Shop by category') ?? 'TRANSLATION NOT FOUND';
 
   let rows = '';
   for (let i = 0; i < tiles.length; i += 2) {

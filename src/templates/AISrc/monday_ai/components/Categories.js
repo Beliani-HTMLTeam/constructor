@@ -4,15 +4,13 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
-import { render as renderCategoryBanner, getCategoryRowSizes } from './category/category-banner.js';
 import { translateImage } from '@/helpers/translateImage.js';
 import { translateLink } from '@/helpers/translateLink.js';
 
-const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass, theme = {}, }) => {
+const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass, theme = {}, disableHighPrice = false, }) => {
   let html = '';
 
   if (Array.isArray(categories)) {
-    const sharedRowSizes = getCategoryRowSizes(categories, queries, getPhrase, type);
     for (const category of categories) {
       html += await renderCategory(
         category,
@@ -27,17 +25,20 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
         country,
         categoryImageTdClass,
         theme,
-        sharedRowSizes,
+        disableHighPrice
       );
     }
   }
 
+  console.log('Categories HTML:', categories);
+
   return html;
 };
 
-const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme, sharedRowSizes) => {
-  const background = category.background ?? 'white';
-  const color = category.color ?? '#000000';
+const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme, disableHighPrice = false) => {
+  const isDeal = category.type === 'deal';
+  const background = isDeal ? theme?.dealBg ?? 'transparent' : (category.background ?? theme.white ?? 'white');
+  const color = category.color ?? theme.black ?? '#000000';
 
   const styles = `background: ${background}; color: ${color}; ${category.styles || ''}`;
 
@@ -47,31 +48,26 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? getCategoryLink(category.cta.href)
     : ctaHref;
 
-  if (category.type === 'category-banner') {
-    return renderCategoryBanner({ category, id, queries, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type, options: category?.options ?? {}, sharedRowSizes });
-  }
-
-  const TitleElement = category?.title?.show
+  const TitleElement = category?.title?.show !== false && category.name
     ? `
-    ${category.title.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore }) : ''}
+    ${category.title?.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore }) : ''}
    
     <tr>
-      <td>
+      <td class="${category?.title?.tdClass ?? 'newsletterContainer'}">
         ${Paragraph({
           text: category.name,
           color: color,
           background: background,
-          align: category.title.align ?? 'left',
+          align: category.title?.align ?? 'left',
           insideTable: true,
-          spanStyle: `color: ${color};`,
-          tableContainer: true,
-          uppercase: category?.title?.uppercase ?? false,
-          className: category.title.className ?? 'newsletterTitle',
+          spanStyle: `color: ${category?.title?.color ?? color};`,
+          tableContainer: false,
+          className: category.title?.className ?? 'categoryTitle',
         })}
       </td>
     </tr>
 
-    ${category.title.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter }) : ''}
+    ${category.title?.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter }) : Space({ insideTr: true, className: 'newsletterBottom15px' })}
     `
     : '';
 
@@ -80,7 +76,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         href: ctaHref,
         src: category.src,
         insideTr: true,
-        tdClass: category.tdClass ?? categoryImageTdClass,
+        tdClass: categoryImageTdClass ?? category.tdClass ?? 'newsletterContainer',
         type,
       })
     : '';
@@ -97,14 +93,14 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             insideTable: true,
             spanStyle: `color: ${color};`,
             tableContainer: true,
+            containerClass: category?.paragraph?.tdClass ?? 'newsletterContainer',
           })}
         </td>
       </tr>
 
-
       ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
     `
-    : category.paragraph?.SpaceAfter ? Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' }) : '';
+    : category?.paragraph?.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : '';
 
   const paragraphPositionRaw = category?.paragraph?.position ?? 'beforeProducts';
   const paragraphPosition =
@@ -124,6 +120,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     ? Space({ insideTr: true, className: category.spaceBeforeProducts })
     : '';
 
+  const ctaSrc = typeof category.cta === 'object' && category.cta?.src ? category.cta.src : null;
+  console.log(theme, 'theme in renderCategory');
   const ProductsElement =
     category.products || category.tiles || category.freebies
       ? await renderBody({
@@ -131,8 +129,9 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           freebies: category.freebies,
           tiles: category.tiles,
           showPrices: category.showPrices ?? category.product?.prices ?? true,
-          showNames: category.showNames ?? category.product?.name ?? true,
           prodSettings: category.product,
+          showTileNames: category.showTileNames ?? true,
+          showNames: category.showNames ?? category.product?.name ?? true,
           gapBetweenHorizontal: category.gapBetweenHorizontal ?? true,
           gapBetweenVertical: category.product?.gapBetweenVertical ?? true,
           align: category.product?.align ?? 'left',
@@ -152,14 +151,21 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           copyCode: category.copyCode,
           copyCodeWeb: category.copyCodeWeb,
           offerTextOverrides: category.offerTextOverrides,
-          ctaColor: category?.ctaColor ?? '#000000',
-          ctaSettings: category.type === 'deal' ? category.cta : undefined,
-          freebieTextColor: category?.product?.color,
-          options: category?.options,
-          theme: theme,
+          gridSize: category?.gridSize ?? 'normal',
+          ctaSrc,
+          theme,
+          disableHighPrice,
+          combineOfferParts: category?.combineOfferParts ?? false,
+          ctaSettings: category?.cta ?? {},
+          offerSpaceAfter: category?.offerSpaceAfter ?? '',
+          tdClass: category?.tdClass ?? 'newsletterContainer',
+          displayType: category?.displayType ?? '2col',
+          tileBgColor: category?.tileBgColor,
+          tileTextColor: category?.tileTextColor,
+          
         })
       : '';
- 
+
   const insideBannerElement = category?.insideBanner
     ? `
       ${category.insideBanner?.spaceAfter ? Space({ insideTr: true, className: category.insideBanner?.spaceAfter }) : ''}
@@ -167,33 +173,70 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         href: add_utm(category.insideBanner?.link.href),
         src: category.insideBanner?.image.src,
         insideTr: true,
-        tdClass: category.insideBanner?.tdClass ?? categoryImageTdClass,
+        tdClass: categoryImageTdClass ?? category.insideBanner?.tdClass,
         type,
       }) : ''}
       ${category.insideBanner?.spaceBefore ? Space({ insideTr: true, className: category.insideBanner?.spaceBefore }) : ''}
     `
     : '';
 
-  const CTAElement = category.cta && !(category.type === 'deal' && category.cta.variant === 'button')
-    ? CTA({
-        color: category.color ?? '#000000',
+  // Object-format cta uses categoryButton from queries; fallback is TRANSLATION NOT FOUND (not a phrase)
+  const ctaText = category.ctaText
+    ?? (typeof category.cta === 'object'
+      ? (category.cta?.text ?? (category.cta?.phrase ? getPhrase(category.cta.phrase) : 'TRANSLATION NOT FOUND'))
+      : (category.cta?.phrase ? getPhrase(category.cta.phrase) : (getPhrase('See more') ?? 'TRANSLATION NOT FOUND')));
+  const ctaVariant = typeof category.cta === 'object' && category.cta?.variant ? category.cta.variant : 'maroon';
+
+  // CTAElement only renders for non-deal categories
+  const CTAElement = category.cta && !isDeal
+    ? `
+      ${category?.cta?.spaceAfter ? Space({ insideTr: true, className: category.cta.spaceAfter }) : ''}
+      ${CTA({
+        color: category?.cta?.color ?? category.color ?? '#000000',
         href: ctaButtonHref,
-        text: category.ctaText ?? (category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now')),
+        text: ctaText,
         insideTr: true,
-        tdClass: 'newsletterContainer',
-      })
+        tdClass: category?.cta?.tdClass ?? 'newsletterContainer',
+        variant: ctaVariant,
+        type: type,
+        src: type !== 'landing' ? ctaSrc : null,
+        align: 'center',
+        theme,
+        bg: category?.cta?.bg ?? theme?.ctaBg ?? '#F6E7E6',
+        borderColor: category?.cta?.borderColor ?? '',
+        borderWidth: category?.cta?.borderWidth ?? '',
+        transform: category?.cta?.transform ?? '',
+      })}
+      ${category?.cta?.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
+    `
+    : '';
+  
+  let ctaPos = 'afterProducts';
+
+  if (category?.ctaPosition) ctaPos = category.ctaPosition
+
+  const ConditionElement = (!isDeal && category.showCondition) && queries?.condition
+    ? `
+      ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
+      <tr>
+        <td align="center" class="newsletterContainer" style="text-align: center;">
+          <span class="conditionText" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 11px; color: #777777; line-height: 1.4; display: block;">
+            ${Array.isArray(queries.condition) ? queries.condition.join('<br>') : queries.condition}
+          </span>
+        </td>
+      </tr>
+    `
     : '';
 
   return `
-
   <tr>
     <td>
       <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%">
         ${
-          !category?.paddingTop || category?.paddingTop > 0
+          !isDeal && (!category.paddingTop || category.paddingTop > 0)
             ? Space({
                 insideTr: true,
-                className: `newsletterBottom${category?.paddingTop ?? (id === 0 ? 60 : 35)}px`,
+                className: `newsletterBottom${category.paddingTop ?? (id === 0 ? 45 : 35)}px`,
               })
             : ''
         }
@@ -214,13 +257,17 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${SpaceBeforeProducts}
 
+        ${ctaPos === 'afterParagraph' ? CTAElement : ''}
+
         ${ProductsElement}
 
         ${ParagraphAfterProducts}
 
-        ${CTAElement}
+        ${ConditionElement}
 
-        ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom80px' })}
+        ${(ctaPos === 'afterProducts') ? CTAElement : ''}
+
+        ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom60px', bg: category?.spaceColor ?? '' })}
 
         ${
           category?.line?.show
@@ -234,7 +281,6 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       </table>
     </td>
   </tr>
-
   `;
 };
 
@@ -244,6 +290,7 @@ const renderBody = async ({
   tiles,
   showPrices,
   showNames,
+  prodSettings = {},
   gapBetweenHorizontal,
   gapBetweenVertical,
   align = 'left',
@@ -264,27 +311,29 @@ const renderBody = async ({
   copyCode,
   copyCodeWeb,
   offerTextOverrides,
-  ctaColor = '',
-  ctaSettings = {},
-  prodSettings = {},
-  options = {},
+  ctaSrc,
   theme = {},
-  freebieTextColor = '',
+  disableHighPrice = false,
+  combineOfferParts = false,
+  ctaSettings = {},
+  offerSpaceAfter = '',
+  tdClass = 'newsletterContainer',
+  showTileNames,
+  displayType = '2col',
+  tileBgColor = '',
+  tileTextColor = '',
+  gridSize = 'normal',
 }) => {
-  // console.log('produkty ', products);
-
   const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
 
   try {
     const module = await import(`./category/${categoryTypeStr}.js`);
-    console.log(`Rendering category type "${categoryTypeStr}" using module:`, module);
     return module.render({
       products,
       freebies,
       tiles,
       showPrices,
       showNames,
-      prodSettings,
       gapBetweenHorizontal,
       gapBetweenVertical,
       align,
@@ -304,11 +353,20 @@ const renderBody = async ({
       offerTextOverrides,
       copyCode,
       copyCodeWeb,
-      ctaColor,
-      ctaSettings,
-      options,
+      ctaSrc,
       theme,
-      freebieTextColor,
+      disableHighPrice,
+      type,
+      combineOfferParts,
+      ctaSettings,
+      tdClass,
+      prodSettings,
+      offerSpaceAfter,
+      showTileNames,
+      displayType,
+      tileBgColor,
+      tileTextColor,
+      gridSize,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);
@@ -333,6 +391,7 @@ const renderBody = async ({
       links,
       getPhrase,
       renderType: type,
+      theme,
     });
   }
 };
