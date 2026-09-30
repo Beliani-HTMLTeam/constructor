@@ -45,7 +45,7 @@ export const renderCategory = async (
       <tr>
         <td style="${styles} ${category.title?.align ? `text-align: ${category.title?.align};` : ""}" class="newsletterContainer">
           ${Paragraph({
-      text: category.title?.source === 'Shop by category' ? getPhrase('Shop by category') : category.name,
+      text: category.title?.overrides?.[country] || (category.title?.source === 'Shop by category' ? getPhrase('Shop by category') : category.name),
       color: color,
       background: background,
       align: category.title?.align || 'center',

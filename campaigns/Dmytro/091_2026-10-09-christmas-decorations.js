@@ -45,6 +45,7 @@ const intro_data = {
   type: "paragraph",
   cta: {
     overrides: {
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -67,6 +68,9 @@ const categories = [
       spaceAfter: 'newsletterBottom25px',
       color: '#750000',
       source: 'Shop by category',
+      overrides: {
+        FI: "Selaa kategorioittain"
+      },
       className: 'newsletterSmallgridCategoryTitle',
     },
     paragraph: {
@@ -149,7 +153,7 @@ const categories = [
           CHFR: "Textiles de Noël",
           BEFR: "Textiles de Noël",
           FR: "Textiles de Noël",
-
+          FI: "Joulutekstiilit"
         },
         src: getImageUrl('20261009Category8.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-textiles/',
@@ -175,6 +179,7 @@ const categories = [
           CHFR: "Bougeoirs de Noël",
           BEFR: "Bougeoirs de Noël",
           FR: "Bougeoirs de Noël",
+          FI: "Joulun kynttilänjalat"
         },
         src: getImageUrl('20261009Category10.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',
