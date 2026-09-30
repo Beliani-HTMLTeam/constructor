@@ -78,9 +78,19 @@ const additionalCss = `
 		font-weight: 600;
 	}
 
+	.newsletterContainerProducts60 {
+		padding-left: 60px !important;
+		padding-right: 60px !important;
+	}
+
 	@media screen and (max-width: 768px) {
 		#newsletter .newsletterTitle {
 			font-size: 25px;
+		}
+
+		.newsletterContainerProducts60 {
+			padding-left: 30px !important;
+			padding-right: 30px !important;
 		}
 	}
 `;
@@ -88,7 +98,7 @@ const additionalCss = `
 const styleCategory = (number, name, href, background, products, overrides = {}) => ({
 	paddingTop: number === 0 ? 35 : 0,
 	spaceAfter: 'newsletterBottom80px',
-	container: 'newsletterContainer60px',
+	container: 'newsletterContainerProducts60',
 
 	name,
 	href,
