@@ -1,0 +1,43 @@
+import { Space } from '../components/Space.js';
+import { SoonEndingBanner } from '../components/SoonEndingBanner.js';
+import { Line } from '../components/Line.js';
+
+export const SoonEndingBannersHandler = ({ links, shopLimitedTimeDeals, country }) => {
+
+  // sorry for that, but we already have banners for HR and SI :)
+	// if (["HR", "SI"].includes(country)) {
+	// 	return ``;
+	// }
+
+	return `
+    <!-- Soon Ending Banners -->
+    <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" class="newsletterContainerFooter20px" style="max-width: 650px; width: 100%; color: #000000; background-color: #ffffff;" id="newsletter">
+      ${Line({ insideTr: true })}
+      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
+
+      <tr>
+        <td align="left">
+          <span class="newsletterFooterTitle">${shopLimitedTimeDeals}</span>
+        </td>
+      </tr>
+
+      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
+
+      ${SoonEndingBanner({
+        href: links?.Banner_1,
+        src: links?.Banner_1_Image,
+        orderingId: '1',
+      })}
+
+      ${Space({ className: 'newsletterBottom20px', insideTr: true })}
+
+      ${SoonEndingBanner({
+        href: links?.Banner_2,
+        src: links?.Banner_2_Image,
+        orderingId: '2',
+      })}
+
+      ${Space({ className: 'newsletterBottom35px', insideTr: true })}
+    </table>
+  `;
+};
