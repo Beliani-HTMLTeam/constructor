@@ -16,6 +16,8 @@ export const render = ({
   country,
   offerTextOverrides,
   ctaColor = '',
+  ctaSettings = {},
+  freebieTextColor = '',
 }) => {
   const countrySlug = String(country ?? '').toLowerCase();
   const offerTextOverrideRaw = offerTextOverrides?.[countrySlug];
@@ -71,14 +73,15 @@ export const render = ({
     toastOptions: copyCodeWeb,
     copyCodeColor: copyCodeWebColor ?? copyCodeColor,
     offerTexts,
-    ctaColor
+    ctaColor,
+    ctaSettings,
   });
 
   if (hasDealProducts) {
     html += renderFreebieGrid({
       freebies: filteredFreebies,
       products,
-      color,
+      color: freebieTextColor ?? color,
       freeText: getPhrase('Free'),
       categoryHref,
       freebiesPerRow,

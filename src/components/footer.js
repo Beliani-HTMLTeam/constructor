@@ -328,7 +328,7 @@ export function Footer(sections, options, name) {
                     <tr>
                         <td class="newsletterTopBottomContainer">
                             <a href="${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                <img alt="Klarma" border="0" src="${src}" style="display: block; width: 100%;"/>
+                                <img alt="Klarna" border="0" src="${src}" style="display: block; width: 100%;"/>
                             </a>
                         </td>
                     </tr>
@@ -348,7 +348,7 @@ export function Footer(sections, options, name) {
                 <tr>
                     <td class="newsletterTopBottomContainer">
                     <a href="${href}">
-                        <img alt="Klarma" border="0" src="${src}" style="display: block; width: 100%;"/>
+                        <img alt="Klarna" border="0" src="${src}" style="display: block; width: 100%;"/>
                     </a>
                 </td>
                 </tr>

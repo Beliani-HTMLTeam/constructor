@@ -3,7 +3,9 @@ import nslt_regular from '@css/newsletter/regular.css?inline';
 import nslt_blackweek from '@css/newsletter/blackweek.css?inline';
 import nslt_mattress from '@css/newsletter/mattress.css?inline';
 import nslt_ai_new from '@css/newsletter/ai_new.css?inline';
+import dima_nslt_ai_new from '@css/newsletter/dima_ai_new.css?inline';
 import nslt_ai_new2 from '@css/newsletter/ai_new2.css?inline';
+import nslt_french_days_new from '@css/newsletter/french_days_new.css?inline';
 
 import nslt_ai_11_09 from '@css/newsletter/dimas_handover/ai_11_09.css?inline';
 import nslt_ai_11_09_normal from '@css/newsletter/dimas_handover/ai_11_09_normal.css?inline';
@@ -14,7 +16,9 @@ import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
 import lp_mattress from '@css/landing/mattress.css?inline';
 import lp_ai_new from '@css/landing/ai_new.css?inline';
+import dima_lp_ai_new from '@css/landing/dima_ai_new.css?inline';
 import lp_ai_new2 from '@css/landing/ai_new2.css?inline';
+import lp_french_days_new from '@css/landing/french_days_new.css?inline';
 
 import lp_ai_11_09 from '@css/landing/dimas_handover/ai_11_09.css?inline';
 import lp_ai_11_09_normal from '@css/landing/dimas_handover/ai_11_09_normal.css?inline';
@@ -37,7 +41,9 @@ export const types = {
     NS_MATTRESS: nslt_mattress,
     NS_MD: md_nslt,
     NS_AI_NEW: nslt_ai_new,
+    DIMA_NS_AI_NEW: dima_nslt_ai_new,
     NS_AI_NEW2: nslt_ai_new2,
+    NS_FRENCH_DAYS: nslt_french_days_new,
 
     NS_AI_11_09: nslt_ai_11_09,
     NS_AI_11_09_NORMAL: nslt_ai_11_09_normal,
@@ -49,7 +55,9 @@ export const types = {
     LP_MATTRESS: lp_mattress,
     LP_MD: md_lp,
     LP_AI_NEW: lp_ai_new,
+    DIMA_LP_AI_NEW: dima_lp_ai_new,
     LP_AI_NEW2: lp_ai_new2,
+    LP_FRENCH_DAYS: lp_french_days_new,
 
     LP_AI_11_09: lp_ai_11_09,
     LP_AI_11_09_NORMAL: lp_ai_11_09_normal,

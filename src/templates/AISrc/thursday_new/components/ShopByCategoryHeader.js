@@ -20,7 +20,7 @@ export const ShopByCategoryHeader = ({
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
           <tr>
             <td align="center">
-              <span class="shopByCategoryTitle" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Georgia, serif;' : ''} font-size: 26px; font-weight: bold; color: ${black}; display: block; text-align: center; letter-spacing: 0.5px;">
+              <span class="shopByCategoryTitle" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 26px; font-weight: bold; color: ${black}; display: block; text-align: center; letter-spacing: 0.5px;">
                 ${title}
               </span>
             </td>

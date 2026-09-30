@@ -24,6 +24,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
     paragraphAlign: intro?.alignment,
     color: introColor,
     backgroundColor: intro?.backgroundColor,
+    paragraphSpace: intro?.paragraphSpace ?? 'newsletterBottom25px',
   })}
   ${
     intro.cta

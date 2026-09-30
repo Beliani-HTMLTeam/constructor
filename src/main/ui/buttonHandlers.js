@@ -10,6 +10,8 @@ import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts/index.js';
 import { renderTemplateHtmlForCountry } from '@/main/rendering/templateRenderer.js';
+import { initialUrlParams } from '@/utils/urlState.js';
+import { PREVIEW_MODE, MOBILE_PREVIEW_WIDTH, setPreviewMode } from '@/main/rendering/preview.js';
 
 import { toast } from 'sonner';
 import { optimizeHtmlImages } from '@/helpers/optimizeHtmlImages.js';
@@ -55,10 +57,29 @@ function addLangToLP(html, country) {
   return `<!-- ${lang} -->\n${html}`;
 }
 
+const TEMPLATE_TYPE_LABELS = { newsletter: 'NSLT', landing: 'LP', banner: 'BANNER' };
+const COPIED_FEEDBACK_MS = 2200;
+const PREVIEW_MODE_STORAGE_KEY = 'constructor_preview_mode';
+
 export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
   const { copyTemplate } = elements;
+  const label = copyTemplate?.querySelector('.copyTemplate__label');
+  const defaultLabel = label?.textContent;
+  let resetFeedbackTimer = null;
 
-  copyTemplate?.addEventListener('click', () => {
+  const showCopiedFeedback = (country, templateType) => {
+    const typeLabel = TEMPLATE_TYPE_LABELS[templateType] ?? String(templateType).toUpperCase();
+    label.textContent = `Copied ${country} ${typeLabel}`;
+    copyTemplate.classList.add('is-copied');
+
+    clearTimeout(resetFeedbackTimer);
+    resetFeedbackTimer = setTimeout(() => {
+      label.textContent = defaultLabel;
+      copyTemplate.classList.remove('is-copied');
+    }, COPIED_FEEDBACK_MS);
+  };
+
+  copyTemplate?.addEventListener('click', async () => {
     const html = getState('html');
     if (!html) return toast.error('No HTML to copy. Render template first.');
 
@@ -70,11 +91,17 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
     let finalHtml = optimizeHtmlImages(html, getState);
 
     const activeScope = getState('scope');
-		// don't add lang comment to dmytro lps
-    if (template?.type === 'landing' && activeScope !== "Dmytro") finalHtml = addLangToLP(finalHtml, country);
+    // don't add lang comment to dmytro lps
+    if (template?.type === 'landing' && activeScope !== 'Dmytro') finalHtml = addLangToLP(finalHtml, country);
 
-    navigator.clipboard.writeText(finalHtml);
-    toast.success('Template copied to clipboard!');
+    try {
+      await navigator.clipboard.writeText(finalHtml);
+    } catch (error) {
+      console.error(error);
+      return toast.error('Could not copy to clipboard.');
+    }
+
+    showCopiedFeedback(country, template?.type);
 
     const config = getState('config');
     if (!config?.confetti) return;
@@ -83,6 +110,51 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
       emojiSize: 20,
       confettiNumber: 80,
     });
+  });
+}
+
+function readStoredPreviewMode() {
+  try {
+    return localStorage.getItem(PREVIEW_MODE_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function storePreviewMode(mode) {
+  try {
+    localStorage.setItem(PREVIEW_MODE_STORAGE_KEY, mode);
+  } catch {
+    // storage unavailable, the choice just isn't remembered
+  }
+}
+
+export function setupPreviewWidthHandler(elements, setState) {
+  const { previewWidth } = elements;
+  if (!previewWidth) return;
+
+  const label = previewWidth.querySelector('.fab-label');
+  const validModes = Object.values(PREVIEW_MODE);
+
+  const showMode = (mode) => {
+    const isMobile = mode === PREVIEW_MODE.MOBILE;
+    previewWidth.classList.toggle('is-active', isMobile);
+    previewWidth.setAttribute('aria-pressed', String(isMobile));
+    label.textContent = isMobile ? 'Back to desktop preview' : `Mobile preview (${MOBILE_PREVIEW_WIDTH}px)`;
+  };
+
+  const urlMode = initialUrlParams.view;
+  let mode = validModes.includes(urlMode) ? urlMode : readStoredPreviewMode();
+  if (!validModes.includes(mode)) mode = PREVIEW_MODE.DESKTOP;
+
+  setState('previewMode', mode);
+  showMode(mode);
+
+  previewWidth.addEventListener('click', () => {
+    mode = mode === PREVIEW_MODE.MOBILE ? PREVIEW_MODE.DESKTOP : PREVIEW_MODE.MOBILE;
+    storePreviewMode(mode);
+    showMode(mode);
+    setPreviewMode(mode);
   });
 }
 

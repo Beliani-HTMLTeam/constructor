@@ -687,6 +687,10 @@ table {
 }
 
 @media screen and (max-width: 768px) {
+  .newsletterContainerFooter20px {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
   .newsletter3ProductsLeft {
     padding-left: 10px !important;
   }
@@ -738,4 +742,9 @@ table {
   color: var(--timer-label);
   font-size: clamp(11px, 2vw, 14px);
   margin-top: clamp(2px, 1vw, 4px);
+}
+
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
 }

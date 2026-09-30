@@ -133,6 +133,10 @@ img {
   padding-bottom: 25px;
 }
 
+.newsletterBottom30px {
+  padding-bottom: 30px;
+}
+
 .newsletterBottom35px,
 .newsletterBottomIntro35px {
   padding-bottom: 35px;
@@ -144,6 +148,14 @@ img {
 
 .newsletterBottom45px {
   padding-bottom: 45px;
+}
+
+.newsletterPadding45px {
+  padding-bottom: 45px;
+}
+
+.newsletterBottom50px {
+  padding-bottom: 50px;
 }
 
 .newsletterBottom60px {
@@ -274,6 +286,12 @@ img {
   line-height: 1.2;
 }
 
+.shopByCategoryPeakName {
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+}
+
 .newsletterProductLowPrice {
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
@@ -345,6 +363,13 @@ img {
 .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
+  line-height: 1.2;
+  font-family: "Open Sans", sans-serif;
+}
+
+.shopByCategoryCta {
+  text-decoration: underline;
+  font-size: 18px;
   line-height: 1.2;
   font-family: "Open Sans", sans-serif;
 }
@@ -693,6 +718,10 @@ img {
     padding-bottom: 20px;
   }
 
+  .newsletterBottom30px {
+    padding-bottom: 15px;
+  }
+
   .newsletterBottom35px {
     padding-bottom: 20px;
   }
@@ -707,6 +736,14 @@ img {
 
   .newsletterBottom45px {
     padding-bottom: 30px;
+  }
+
+  .newsletterPadding45px {
+    padding-bottom: 35px;
+  }
+
+  .newsletterBottom50px {
+    padding-bottom: 35px;
   }
 
   .newsletterBottom60px {
@@ -764,6 +801,14 @@ img {
     max-width: 100%;
   }
 
+  .shopByCategoryTitle {
+    font-size: 16px;
+  }
+
+  .shopByCategoryCta {
+    font-size: 16px;
+  }
+
   .newsletterMarkTitle {
     font-size: 18px;
   }
@@ -812,6 +857,10 @@ img {
   .START_MQ_PRODUCTS {}
   .newsletterProductTitle {
     font-size: 18px;
+  }
+
+  .shopByCategoryPeakName {
+    font-size: 16px;
   }
 
   .newsletter3ProductsLeft .newsletterProductTitle,
@@ -1001,6 +1050,10 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+	.hideMobile {
+    display: none !important;
+  }
+	
   .newsletter3ProductsLeft {
     padding-left: 10px;
   }
@@ -1050,5 +1103,14 @@ img {
   .newsletter3ProdsPeakCenter .newsletterProductTitle,
   .newsletter3ProdsPeakRight .newsletterProductTitle {
     font-size: 16px !important;
+  }
+}
+/* Category-only banners: mobile fallback for email clients without clamp(). */
+@media screen and (max-width: 600px) {
+  #newsletter .categoryBannerTitle {
+    font-size: 25px !important;
+  }
+  #newsletter .categoryBannerCta {
+    font-size: 18px !important;
   }
 }

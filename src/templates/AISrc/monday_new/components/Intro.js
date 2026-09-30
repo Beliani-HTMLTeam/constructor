@@ -56,7 +56,7 @@ const Intro = ({
     ? `
     <tr>
       <td align="${paragraphAlign}"${containerClass ? ` class=${containerClass}` : ''}>
-        <span class="${titleClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; color: ${textColor}; display: block; text-align: ${paragraphAlign};">
+        <span class="${titleClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; color: ${textColor}; text-align: ${paragraphAlign};">
           ${introTitle}
         </span>
       </td>
@@ -69,7 +69,7 @@ const Intro = ({
     ? `
     <tr>
       <td align="${paragraphAlign}"${containerClass ? ` class=${containerClass}` : ''}>
-        <span class="${paragraphClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.2; color: ${textColor}; display: block; text-align: ${paragraphAlign};">
+        <span class="${paragraphClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.2; color: ${textColor}; text-align: ${paragraphAlign};">
           ${introParagraph}
         </span>
       </td>

@@ -151,6 +151,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           copyCode: category.copyCode,
           copyCodeWeb: category.copyCodeWeb,
           offerTextOverrides: category.offerTextOverrides,
+          gridSize: category?.gridSize ?? 'normal',
           ctaSrc,
           theme,
           disableHighPrice,
@@ -321,6 +322,7 @@ const renderBody = async ({
   displayType = '2col',
   tileBgColor = '',
   tileTextColor = '',
+  gridSize = 'normal',
 }) => {
   const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
 
@@ -364,6 +366,7 @@ const renderBody = async ({
       displayType,
       tileBgColor,
       tileTextColor,
+      gridSize,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

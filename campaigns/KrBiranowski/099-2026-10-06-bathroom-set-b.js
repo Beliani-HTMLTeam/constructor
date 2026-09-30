@@ -208,6 +208,9 @@ const categories = [
     freebiesSize: 'large',
     combineOfferParts: true,
     freebies: prodData[0],
+    product: {
+      color: theme.white,
+    },
   },
 
   // main
@@ -317,6 +320,7 @@ const categories = [
     product: {
       prices: true,
       name: true,
+
     },
     products: prodData[4],
   },

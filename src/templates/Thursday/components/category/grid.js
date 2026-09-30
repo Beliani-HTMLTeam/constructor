@@ -19,6 +19,63 @@ export const render = ({
   let productsInnerHtml = '';
   const containerClass = insideContainer ? (container ?? 'newsletterContainer') : '';
 
+  const productStyle = category?.product ?? null;
+
+  const boxed = Boolean(productStyle?.background || productStyle?.border);
+
+  const styleForRow = (rowProducts) => {
+    if (!productStyle?.prices?.reserveHighPrice) return productStyle;
+    if (rowProducts.some((product) => product?.highPrice)) return productStyle;
+
+    return { ...productStyle, prices: { ...productStyle.prices, reserveHighPrice: false } };
+  };
+
+  if (Array.isArray(products) && boxed) {
+    const cols = 2;
+
+    const outerPct = productStyle.containerInsetPct ?? 3;
+    const gapPct = productStyle.gapPct ?? 3;
+    const colPct = Math.round(((100 - outerPct * 2 - gapPct * (cols - 1)) / cols) * 100) / 100;
+
+    const spacer = (pct) =>
+      `<td width="${pct}%" style="width: ${pct}%; font-size: 0; line-height: 0;"></td>`;
+
+    productsInnerHtml += `
+    <tr>
+      <td style="color: ${color}">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+
+    for (let i = 0; i < products.length; i += cols) {
+      const rowStyle = styleForRow(products.slice(i, i + cols));
+
+      productsInnerHtml += `<tr>${spacer(outerPct)}`;
+
+      for (let c = 0; c < cols; c++) {
+        const product = products[i + c];
+        const imageAlign = alignToSide ? (c === 0 ? 'right' : 'left') : 'center';
+
+        if (c > 0) productsInnerHtml += spacer(gapPct);
+
+        productsInnerHtml += `<td style="color: ${color}; width: ${colPct}%;" width="${colPct}%" valign="top" align="${imageAlign}">`;
+
+        const isLastRow = i + cols >= products.length;
+        const showBottomGap = productStyle.hideLastBottomGap ? !isLastRow : true;
+
+        if (product) {
+          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container, showBottomGap, rowStyle);
+        }
+
+        productsInnerHtml += '</td>';
+      }
+
+      productsInnerHtml += `${spacer(outerPct)}</tr>`;
+    }
+
+    productsInnerHtml += '</table></td></tr>';
+
+    return productsInnerHtml;
+  }
+
   if (Array.isArray(products)) {
     const cols = 2;
     productsInnerHtml += `
@@ -27,6 +84,8 @@ export const render = ({
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
 
     for (let i = 0; i < products.length; i += cols) {
+      const rowStyle = styleForRow(products.slice(i, i + cols));
+
       productsInnerHtml += '<tr>';
 
       for (let c = 0; c < cols; c++) {
@@ -44,7 +103,7 @@ export const render = ({
         const showBottomGap = category?.product?.hideLastBottomGap ? !isLastRow : true;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container, showBottomGap);
+          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container, showBottomGap, rowStyle);
         }
 
         productsInnerHtml += '</td>';

@@ -5,6 +5,7 @@ const Intro = ({
   text = 'Translation not found',
   spaceTop = 'newsletterBottom35px',
   spaceBottom = 'newsletterBottom35px',
+  paragraphSpace = 'newsletterBottom25px',
   paragraphAlign = 'center',
   color = '#000000',
   backgroundColor,
@@ -59,7 +60,7 @@ const Intro = ({
             spanStyle: `color: ${color};`,
           })}</td></tr>
     
-          ${Space({ className: spaceBottom, insideTr: true })}
+          ${paragraphSpace === false ? '' : Space({ insideTr: true, className: paragraphSpace ?? 'newsletterBottom25px' })}
         </table>
       </td>
     </tr>

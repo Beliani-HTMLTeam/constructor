@@ -26,7 +26,7 @@ const Product = (
     typeof gapBetweenVertical === 'string'
       ? gapBetweenVertical
       : resolveGapClass(gapBetweenVertical, product?.settings?.spaceAfter ?? product.spaceAfter ?? 'newsletterBottom35px');
-  const productBackground = product?.settings?.background ?? '';
+  const productBackground = product?.settings?.insideColor ?? product?.settings?.background ?? '';
 
   let html = `
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"${productBackground ? ` bgcolor="${productBackground}"` : ''} style="border:0;mso-border-alt:none;border-collapse:collapse;border-spacing:0;mso-table-lspace:0pt;mso-table-rspace:0pt;${productBackground ? `background-color:${productBackground};` : ''}">`;

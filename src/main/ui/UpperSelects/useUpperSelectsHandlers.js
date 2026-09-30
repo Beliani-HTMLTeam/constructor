@@ -4,6 +4,22 @@ import { selectCampaignHandler, handleSlugChange, handleShopChange } from '@/mai
 import { renderTemplate } from '@/main/rendering/templateRenderer.js';
 import { getDOMElements, showElements, hideElements } from '@/utils/domUtils.js';
 import { initCampaigns } from '@/main/initCampaigns.js';
+import { staticTranslations } from '@/api';
+import { getTemplateKey, getLanguageValue, paramToTemplate, paramToLanguage } from '@/utils/selectionParams.js';
+import { saveLastCampaign } from './lastCampaign.js';
+
+// keep the previously chosen template when the new campaign has it, otherwise prefer Newsletter
+function pickTemplate(templates, previousTemplate) {
+	const sameType = templates.filter((template) => template.type === previousTemplate?.type);
+
+	return (
+		sameType.find((template) => template.name === previousTemplate.name) ??
+		sameType[0] ??
+		templates.find((template) => template.type === 'newsletter') ??
+		templates[0] ??
+		null
+	);
+}
 
 export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemplates, shops }) {
 	const render = useCallback(() => {
@@ -92,23 +108,33 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 				currentCampaigns
 			);
 
+			saveLastCampaign(getState('scope'), startId);
+
 			const root = document.querySelector('#app-content');
 			if (root) root.innerHTML = '';
 
-			setState('template', null);
-			setState('shop', null);
+			const availableTemplates = templates ?? [];
+			const previousShop = getState('shop');
+
+			setState('template', pickTemplate(availableTemplates, getState('template')));
+			setState('shop', previousShop ?? null);
 			setState('selectedLanguage', null);
 			setState('country', '');
 			setState('name', '');
 			setState('html', '');
 
-			setState('selectedTemplates', templates || []);
+			setState('selectedTemplates', availableTemplates);
 			setState('selectedCampaign', currentSelectedCampaign);
 			setState('optimizeImg', currentSelectedCampaign.optimizeImg || false);
 
 			const actionEls = getActionElements();
 			showElements(actionEls.openIssue, actionEls.openFigma, actionEls.purgeDynamicSpreadsheet);
-			hideElements(actionEls.openCampaign, actionEls.openLP, actionEls.copyTemplate, actionEls.redirectCheck);
+			hideElements(actionEls.openCampaign, actionEls.openLP, actionEls.redirectCheck);
+			if (previousShop) {
+				showElements(actionEls.copyTemplate);
+			} else {
+				hideElements(actionEls.copyTemplate);
+			}
 		},
 		[campaigns, getActionElements]
 	);
@@ -116,11 +142,11 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 	const handleTemplateSelect = useCallback(
 		(templateKey) => {
 			if (!templateKey || templateKey === 'default') return;
+			const currentTemplate = getState('template');
+			if (currentTemplate && getTemplateKey(currentTemplate) === templateKey) return;
 
 			const currentSelectedTemplates = getState('selectedTemplates') || selectedTemplates;
-			const foundTemplate = currentSelectedTemplates.find(
-				(t) => `${t.type}_${t.name}` === templateKey
-			);
+			const foundTemplate = currentSelectedTemplates.find((template) => getTemplateKey(template) === templateKey);
 
 			if (!foundTemplate) return;
 
@@ -138,10 +164,38 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 		[selectedTemplates, getActionElements, render]
 	);
 
-	const handleShopSelect = useCallback(
-		(shopId) => {
-			if (!shopId || shopId === 'default') return;
+	const applyLanguage = useCallback(
+		(languageVal) => {
+			setState('selectedLanguage', languageVal);
+			const mockEvent = { target: { value: languageVal } };
+			handleSlugChange(mockEvent);
 
+			const actionEls = getActionElements();
+			const currentTemplate = getState('template');
+			showElements(actionEls.openLP, actionEls.redirectCheck);
+
+			if (currentTemplate?.type !== 'banner') {
+				showElements(actionEls.openCampaign);
+			}
+		},
+		[getActionElements]
+	);
+
+	const handleLanguageSelect = useCallback(
+		(languageVal) => {
+			if (!languageVal || languageVal === 'default') {
+				setState('selectedLanguage', null);
+				return;
+			}
+
+			applyLanguage(languageVal);
+			render();
+		},
+		[applyLanguage, render]
+	);
+
+	const applyShop = useCallback(
+		(shopId) => {
 			const currentShops = getState('shops') || shops;
 			const mockEvent = { target: { value: shopId } };
 			handleShopChange(mockEvent, currentShops);
@@ -157,28 +211,39 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 		[shops, getActionElements]
 	);
 
-	const handleLanguageSelect = useCallback(
-		(languageVal) => {
-			if (!languageVal || languageVal === 'default') {
-				setState('selectedLanguage', null);
-				return;
-			}
+	const handleShopSelect = useCallback(
+		(shopId) => {
+			if (!shopId || shopId === 'default') return;
+			if (getState('shop')?.shopId === shopId) return;
 
-			setState('selectedLanguage', languageVal);
-			const mockEvent = { target: { value: languageVal } };
-			handleSlugChange(mockEvent);
+			applyShop(shopId);
 
-			const actionEls = getActionElements();
-			const currentTemplate = getState('template');
-			showElements(actionEls.openLP, actionEls.redirectCheck);
+			const firstLanguage = getState('shop')?.languages?.[0]?.language;
+			if (firstLanguage) handleLanguageSelect(getLanguageValue(firstLanguage));
+		},
+		[applyShop, handleLanguageSelect]
+	);
 
-			if (currentTemplate?.type !== 'banner') {
-				showElements(actionEls.openCampaign);
-			}
+	// applies everything to state first and renders once, after static translations are ready
+	const restoreSelection = useCallback(
+		async ({ campaignOption, templateParam, shopSlug, languageParam }) => {
+			handleCampaignSelect(campaignOption.value, campaignOption);
 
+			const template = paramToTemplate(templateParam, getState('selectedTemplates') ?? []);
+			if (template) setState('template', template);
+
+			const shop = (getState('shops') || shops).find((item) => item.slug === shopSlug);
+			if (!shop) return;
+			applyShop(shop.shopId);
+
+			const languageValue = paramToLanguage(languageParam, shop);
+			if (!languageValue) return;
+			applyLanguage(languageValue);
+
+			await staticTranslations.whenReady();
 			render();
 		},
-		[getActionElements, render]
+		[handleCampaignSelect, applyShop, applyLanguage, render, shops]
 	);
 
 	return {
@@ -187,5 +252,6 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 		handleTemplateSelect,
 		handleShopSelect,
 		handleLanguageSelect,
+		restoreSelection,
 	};
 }

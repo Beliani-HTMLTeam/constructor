@@ -148,6 +148,10 @@ table {
   padding-bottom: 25px;
 }
 
+#newsletter .newsletterBottom30px {
+  padding-bottom: 30px;
+}
+
 #newsletter .newsletterBottom35px,
 #newsletter .newsletterBottomIntro35px {
   padding-bottom: 35px;
@@ -157,8 +161,16 @@ table {
   padding-bottom: 40px;
 }
 
+#newsletter .newsletterPadding45px {
+  padding-bottom: 45px;
+}
+
 #newsletter .newsletterBottom45px {
   padding-bottom: 45px;
+}
+
+#newsletter .newsletterBottom50px {
+  padding-bottom: 50px;
 }
 
 #newsletter .newsletterBottom60px {
@@ -257,6 +269,11 @@ table {
   line-height: 1.2;
 }
 
+#newsletter .shopByCategoryPeakName {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
 #newsletter .newsletterProductLowPrice {
   font-size: 18px;
   line-height: 1.2;
@@ -331,6 +348,12 @@ table {
 #newsletter .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
+  line-height: 1.2;
+}
+
+#newsletter .shopByCategoryCta {
+  text-decoration: underline;
+  font-size: 18px;
   line-height: 1.2;
 }
 
@@ -741,8 +764,16 @@ table {
     padding-bottom: 20px;
   }
 
+  #newsletter .newsletterBottom30px {
+    padding-bottom: 15px;
+  }
+
   #newsletter .newsletterBottom35px {
     padding-bottom: 20px;
+  }
+
+  #newsletter .newsletterPadding45px {
+    padding-bottom: 35px;
   }
 
   #newsletter .newsletterBottomIntro35px {
@@ -755,6 +786,10 @@ table {
 
   #newsletter .newsletterBottom45px {
     padding-bottom: 30px;
+  }
+
+  #newsletter .newsletterBottom50px {
+    padding-bottom: 35px;
   }
 
   #newsletter .newsletterBottom60px {
@@ -802,6 +837,10 @@ table {
   .newsletterCtaLink {
     width: auto !important;
     max-width: 100% !important;
+  }
+
+  #newsletter .shopByCategoryCta {
+    font-size: 16px;
   }
 
   .newsletterMarkTitle {
@@ -870,6 +909,10 @@ table {
   .START_MQ_PRODUCTS {}
   #newsletter .newsletterProductTitle {
     font-size: 18px;
+  }
+
+  #newsletter .shopByCategoryPeakName {
+    font-size: 16px;
   }
 
   #newsletter .newsletterProductLowPrice {
@@ -1085,5 +1128,15 @@ table {
 @media screen and (max-width: 370px) {
   .newsletterProductTitleFreebie {
     font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #newsletter .categoryBannerTitle {
+    font-size: 25px;
+  }
+
+  #newsletter .categoryBannerCta {
+    font-size: 18px;
   }
 }

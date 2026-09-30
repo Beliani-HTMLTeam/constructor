@@ -1,7 +1,7 @@
 import { Paragraph } from '../../Paragraph.js';
 import { CTA } from '../../CTA.js';
 import { Space } from '../../Space.js';
-import { buildCopyElement, CopyCodeCTA, CopyCodeWebNotification } from '../../CopyCodeCTA.js';
+import { buildCopyElement, CopyCodeCTA, CopyCodeWebNotification, CopyCodeButton } from '../../CopyCodeCTA.js';
 
 const renderOfferRow = (text, className = 'newsletterParagraph') => {
   return `<tr><td>${Paragraph({
@@ -72,7 +72,7 @@ const renderSixOfferLanding = ({ queries, showCopyCode = false, showCopyCodeWeb 
   return html;
 };
 
-const renderSixOfferNewsletter = ({ queries, links, t }) => {
+const renderSixOfferNewsletter = ({ queries, links, t, ctaSettings = {} }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
   const offers = [offerItems[0] ?? 'Offer Part 1', offerItems[1] ?? 'Offer Part 2', offerItems[2] ?? 'Offer Part 3'];
 
@@ -85,7 +85,8 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
   html += CTA({
     href: links?.TopImageTitle_href,
     text: t('Get codes'),
-    color: '#000000',
+    ...ctaSettings,
+    color: ctaSettings.color ?? '#000000',
     align: 'center',
     insideTr: true,
   });
@@ -94,7 +95,7 @@ const renderSixOfferNewsletter = ({ queries, links, t }) => {
   return html;
 };
 
-const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel, ctaColor = '', toastOptions = {} }) => {
+const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, copyCodeLabel, ctaColor = '', toastOptions = {}, ctaSettings = {} }) => {
   const offerItems = Array.isArray(queries?.offer) ? queries.offer : [];
   let codeRow = queries?.offer_code?.[0] ?? offerItems[2] ?? '';
 
@@ -103,7 +104,8 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
       return CTA({
         href: links?.TopImageTitle_href,
         text: t('Get codes'),
-        color: ctaColor ?? '#000000',
+    ...ctaSettings,
+        color: ctaSettings.color ?? ctaColor ?? '#000000',
         align: 'center',
         insideTr: true,
       });
@@ -116,13 +118,19 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
     return CTA({
       href: links?.TopImageTitle_href,
       text: t('Get code'),
-      color: ctaColor ?? '#000000',
+      ...ctaSettings,
+      color: ctaSettings.color ?? ctaColor ?? '#000000',
       align: 'center',
       insideTr: true,
     });
   }
 
   const codeText = codeRow ?? 'Code: xxxxx';
+  if (ctaSettings.variant === 'button') {
+    const separator = codeText.indexOf(':');
+    const codeValue = (separator >= 0 ? codeText.slice(separator + 1) : codeText).trim();
+    return CopyCodeButton({ ...ctaSettings, text: codeText, codeValue, label: copyCodeLabel });
+  }
   if (showCopyCodeWeb) {
     const ctaToastBg = toastOptions?.toastBg ?? '#ffe0d4';
     const ctaToastText = toastOptions?.toastText ?? toastOptions?.primary ?? '#750000';
@@ -145,7 +153,7 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
   return renderOfferRow(codeText);
 };
 
-export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, offerTexts, ctaColor = '', toastOptions = {} }) => {
+export const renderOfferSection = ({ queries, renderType, links, getPhrase, showChooseFrom = true, showCopyCode = false, showCopyCodeWeb = false, copyCodeColor, offerTexts, ctaColor = '', toastOptions = {}, ctaSettings = {} }) => {
   const t = getPhrase;
   const copyCodeLabel = getPhrase?.('Copy code') || 'Code copied';
   const hasSixOffers = isSixOffers(queries);
@@ -156,10 +164,10 @@ export const renderOfferSection = ({ queries, renderType, links, getPhrase, show
   if (hasSixOffers && renderType === 'landing') {
     html += renderSixOfferLanding({ queries, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel });
   } else if (hasSixOffers && renderType === 'newsletter') {
-    html += renderSixOfferNewsletter({ queries, links, t });
+    html += renderSixOfferNewsletter({ queries, links, t, ctaSettings });
   } else {
     html += renderOfferRows(offerItems);
-    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel, ctaColor, toastOptions });
+    html += renderCodeElement({ renderType, queries, links, t, showCopyCode, showCopyCodeWeb, copyCodeColor, copyCodeLabel, ctaColor, toastOptions, ctaSettings });
     html += Space({ insideTr: true, className: 'newsletterBottom35px' });
   }
 

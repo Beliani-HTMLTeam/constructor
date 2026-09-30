@@ -73,7 +73,7 @@ export function renderListView({ body, subtitle, campaigns, openEditorView }) {
   });
   const visibilityIcon = document.createElement('img');
   visibilityIcon.className = 'svg-icon';
-  visibilityIcon.src = showAll ? '/icons/mdi--hide.svg' : '/icons/mdi--show.svg';
+  visibilityIcon.src = showAll ? '/icons/eye-off.svg' : '/icons/eye.svg';
   visibilityBtn.appendChild(visibilityIcon);
   visibilityBtn.classList.toggle('products-modal-icon-btn-active', showAll);
   const visibilityTitle = showAll

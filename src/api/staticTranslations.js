@@ -7,6 +7,7 @@ class StaticTranslationsService {
 		this.cache = cache;
 		this.client = client;
 		this.data = cache.getStatic();
+		this.initPromise = null;
 	}
 
 	get header() {
@@ -33,7 +34,21 @@ class StaticTranslationsService {
 		return Object.values(this.data).some((sheet) => Object.keys(sheet).length > 0);
 	}
 
-	async init({ force = false } = {}) {
+	// isLoaded() is true as soon as the first sheet arrives, so rendering has to wait for the whole init
+	whenReady() {
+		return this.initPromise ?? Promise.resolve();
+	}
+
+	init({ force = false } = {}) {
+		if (!force && this.initPromise) return this.initPromise;
+
+		this.initPromise = this._load({ force }).finally(() => {
+			this.initPromise = null;
+		});
+		return this.initPromise;
+	}
+
+	async _load({ force = false } = {}) {
 		if (this.isLoaded() && !force) {
 			console.log('Static translations already loaded, skipping initialization');
 			return;
@@ -58,7 +73,8 @@ class StaticTranslationsService {
 
 		const delayedPromise = Promise.all([loadPromise, new Promise((resolve) => setTimeout(resolve, 1000))]);
 
-		await toast.promise(delayedPromise, {
+		// toast.promise() returns { unwrap }, not the promise, so it can't be awaited
+		toast.promise(delayedPromise, {
 			loading: 'Initializing static translations...',
 			success: () => {
 				console.log('Static translations initialized.');
@@ -66,6 +82,7 @@ class StaticTranslationsService {
 			},
 			error: 'Failed to load translations',
 		});
+		await delayedPromise.catch((error) => console.error('Static translations failed to load', error));
 	}
 
 	clear() {
@@ -82,6 +99,7 @@ export { StaticTranslationsService };
 
 // Self-register loader and warm up on import
 staticTranslations.cache.registerStaticLoader(async () => await staticTranslations.refresh());
-await staticTranslations.init();
+// not awaited: the UI shows up right away, rendering waits for whenReady()
+staticTranslations.init();
 
 export default staticTranslations;

@@ -1,5 +1,6 @@
 import { Timer } from '../components/Timer';
 import { Space } from '../components/Space';
+import { resolveTimerColors } from '../helpers/timerColors.js';
 import languages from "@config/languages"
 
 const buildProloTimerScript = ({ deadline, timezone, timerLabels }) => {

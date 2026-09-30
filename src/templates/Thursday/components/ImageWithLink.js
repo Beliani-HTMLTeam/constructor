@@ -9,7 +9,8 @@ const ImageWithLink = ({
   tdClass,
   insideTable = false,
   tableContainer = false,
-  targetBlank = false
+  targetBlank = false,
+  width = null,
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
   const tableContainerClass =
@@ -17,7 +18,10 @@ const ImageWithLink = ({
 
   let html = '';
 
-  html += `<a target="${targetBlank ? '_blank' : '_self'}" href="${href}"><img src="${src}" alt="${alt}" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
+  const widthAttr = width ? ` width="${parseInt(width, 10)}"` : '';
+  const widthStyle = width ? ' max-width: 100%; height: auto;' : ' max-width: 100%;';
+
+  html += `<a target="${targetBlank ? '_blank' : '_self'}" href="${href}"><img src="${src}" alt="${alt}"${widthAttr} style="vertical-align: ${imgVAlign};${widthStyle}" loading="lazy"></a>`;
 
   if (insideTr) {
     html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}>${html}</td></tr>`;

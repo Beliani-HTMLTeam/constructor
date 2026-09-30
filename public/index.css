@@ -88,6 +88,7 @@ body {
 .container #app-content {
 	background: #ececec;
   min-height: 100%;
+  font-family: "Poppins", sans-serif;
 }
 
 .select-wrapper {
@@ -157,4 +158,252 @@ body {
 #loader.loader-visible {
   opacity: 1;
   visibility: visible;
+}
+/* panel buttons: disabled + pressed feedback (quick press-in, slow fade back) */
+.container #panel button {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.45s ease, box-shadow 0.45s ease,
+    border-color 0.2s ease;
+}
+
+.container #panel button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.container #panel button:active:not(:disabled) {
+  transition-duration: 0.12s;
+  transform: scale(0.985);
+  background: #f0f0f0;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.container #panel .upper_navigation .external .svg-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.75;
+}
+
+/* Newsletter | Content Page: one capsule, two actions */
+.container #panel .upper_navigation .split-button {
+  display: flex;
+  border: 1px solid rgba(168, 168, 168, 0.25);
+  border-radius: 24px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 36px rgba(191, 191, 191, 0.25);
+  overflow: hidden;
+}
+
+.container #panel .upper_navigation .split-button button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 8px 12px;
+  gap: 6px;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: background-color 0.45s ease;
+}
+
+.container #panel .upper_navigation .split-button button + button {
+  border-left: 1px solid rgba(168, 168, 168, 0.25);
+}
+
+.container #panel .upper_navigation .split-button button:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.container #panel .upper_navigation .split-button button:active:not(:disabled) {
+  transition-duration: 0.12s;
+  transform: none;
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: none;
+}
+
+.container #panel .upper_navigation .split-button .svg-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Copy Template: primary action, turns green after copying */
+.container #panel .upper_navigation .copyTemplate {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+}
+
+.container #panel .upper_navigation .copyTemplate .svg-icon {
+  filter: brightness(0) invert(1);
+}
+
+.container #panel .upper_navigation .copyTemplate:hover:not(:disabled) {
+  background: #575ae6;
+}
+
+.container #panel .upper_navigation .copyTemplate:active:not(:disabled) {
+  background: #5a5dde;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.container #panel .upper_navigation .copyTemplate.is-copied:not(:disabled),
+.container #panel .upper_navigation .copyTemplate.is-copied:hover:not(:disabled),
+.container #panel .upper_navigation .copyTemplate.is-copied:active:not(:disabled) {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
+/* floating tools, bottom-right; outside #panel so `.container #panel button` doesn't apply */
+#floating-tools {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+#floating-tools .fab,
+#floating-tools .purge-fab .custom-select-trigger {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  gap: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  border: 1px solid rgba(168, 168, 168, 0.25);
+  border-radius: 50%;
+  background: #f9f9f9;
+  box-shadow: 0 4px 36px rgba(191, 191, 191, 0.35);
+  cursor: pointer;
+  transition: background-color 0.45s ease, box-shadow 0.45s ease;
+}
+
+#floating-tools .fab:hover:not(:disabled),
+#floating-tools .purge-fab .custom-select-trigger:hover {
+  box-shadow: 0 8px 28px rgba(191, 191, 191, 0.55);
+}
+
+/* no transform on the button itself: it would create a stacking context and lift the label above the button */
+#floating-tools .fab:active:not(:disabled),
+#floating-tools .purge-fab .custom-select-trigger:active {
+  transition-duration: 0.12s;
+  background: #ececec;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* disabled = dimmed colors instead of opacity, so the label underneath doesn't show through */
+#floating-tools .fab:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+  background: #f3f3f3;
+  border-color: rgba(168, 168, 168, 0.15);
+}
+
+#floating-tools .fab.is-active {
+  background: #6366f1;
+  border-color: #6366f1;
+}
+
+#floating-tools .fab .svg-icon,
+#floating-tools .purge-fab .svg-icon {
+  opacity: 0.75;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s;
+}
+
+#floating-tools .fab:active:not(:disabled) .svg-icon,
+#floating-tools .purge-fab .custom-select-trigger:active .svg-icon {
+  transition-duration: 0.12s;
+  transform: scale(0.88);
+}
+
+#floating-tools .fab:disabled .svg-icon {
+  opacity: 0.3;
+}
+
+#floating-tools .fab.is-active .svg-icon {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+/* label slides out to the left from under the button (its right end is hidden below the round button) */
+#floating-tools .fab-label {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  padding: 3px 30px 3px 9px;
+  border-radius: 8px;
+  background: #6366f1;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
+  line-height: 1.4;
+  white-space: nowrap;
+  pointer-events: none;
+  clip-path: inset(0 0 0 100%);
+  opacity: 0;
+  transition: clip-path 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+}
+
+#floating-tools .fab:hover .fab-label,
+#floating-tools .fab:focus-visible .fab-label,
+#floating-tools .purge-fab .custom-select-trigger:hover .fab-label,
+#floating-tools .purge-fab .custom-select-trigger:focus-visible .fab-label,
+#floating-tools .purge-fab.is-open .fab-label {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+#floating-tools .fab:disabled .fab-label {
+  background: #b4b6f5;
+}
+
+#floating-tools .purge-fab {
+  width: 44px;
+}
+
+#floating-tools .purge-fab .custom-select-arrow {
+  display: none;
+}
+
+#floating-tools .purge-fab .custom-select-dropdown {
+  left: auto;
+  right: 0;
+  width: 220px;
+}
+
+#floating-tools .fab-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  border-radius: 9px;
+  background: #6366f1;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* mobile preview iframe */
+.container #app-content .preview-frame {
+  display: block;
+  margin: 0 auto;
+  border: 0;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 8px 30px rgba(0, 0, 0, 0.08);
 }

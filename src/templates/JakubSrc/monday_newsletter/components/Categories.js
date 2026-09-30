@@ -4,10 +4,11 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
+import { render as renderCategoryBanner } from './category/category-banner.js';
 import { translateImage } from '@/helpers/translateImage.js';
 import { translateLink } from '@/helpers/translateLink.js';
 
-const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass }) => {
+const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass, theme = {}, }) => {
   let html = '';
 
   if (Array.isArray(categories)) {
@@ -23,7 +24,8 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
         links,
         type,
         country,
-        categoryImageTdClass
+        categoryImageTdClass,
+        theme,
       );
     }
   }
@@ -31,7 +33,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
   return html;
 };
 
-const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass) => {
+const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme) => {
   const background = category.background ?? 'white';
   const color = category.color ?? '#000000';
 
@@ -42,6 +44,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const ctaButtonHref = (typeof category.cta === 'object' && category.cta?.href)
     ? getCategoryLink(category.cta.href)
     : ctaHref;
+
+  if (category.type === 'category-banner') {
+    return renderCategoryBanner({ category, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type });
+  }
 
   const TitleElement = category?.title?.show
     ? `
@@ -96,7 +102,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
       ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
     `
-    : Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' });
+    : category.paragraph?.SpaceAfter ? Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' }) : '';
 
   const paragraphPositionRaw = category?.paragraph?.position ?? 'beforeProducts';
   const paragraphPosition =
@@ -145,6 +151,10 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           copyCodeWeb: category.copyCodeWeb,
           offerTextOverrides: category.offerTextOverrides,
           ctaColor: category?.ctaColor ?? '#000000',
+          ctaSettings: category.type === 'deal' ? category.cta : undefined,
+          freebieTextColor: category?.product?.color,
+          options: category?.options,
+          theme: theme,
         })
       : '';
  
@@ -162,7 +172,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     `
     : '';
 
-  const CTAElement = category.cta
+  const CTAElement = category.cta && !(category.type === 'deal' && category.cta.variant === 'button')
     ? CTA({
         color: category.color ?? '#000000',
         href: ctaButtonHref,
@@ -253,7 +263,11 @@ const renderBody = async ({
   copyCodeWeb,
   offerTextOverrides,
   ctaColor = '',
+  ctaSettings = {},
   prodSettings = {},
+  options = {},
+  theme = {},
+  freebieTextColor = '',
 }) => {
   // console.log('produkty ', products);
 
@@ -289,6 +303,10 @@ const renderBody = async ({
       copyCode,
       copyCodeWeb,
       ctaColor,
+      ctaSettings,
+      options,
+      theme,
+      freebieTextColor,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

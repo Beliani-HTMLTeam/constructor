@@ -83,9 +83,19 @@ img {
   padding-right: 20px;
 }
 
+.col2imgGap.newsletterContainer {
+  width: 20px;
+  height: 20px;
+}
+
 .newsletterContainer15px {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.col2imgGap.newsletterContainer15px {
+  width: 15px;
+  height: 15px;
 }
 
 .newsletterContainer60px {
@@ -93,9 +103,19 @@ img {
   padding-right: 60px;
 }
 
+.col2imgGap.newsletterContainer60px {
+  width: 60px;
+  height: 60px;
+}
+
 .newsletterContainer25px {
   padding-left: 25px;
   padding-right: 25px;
+}
+
+.col2imgGap.newsletterContainer25px {
+  width: 25px;
+  height: 25px;
 }
 
 .newsletterContainer30px {
@@ -103,9 +123,19 @@ img {
   padding-right: 30px;
 }
 
+.col2imgGap.newsletterContainer30px {
+  width: 30px;
+  height: 30px;
+}
+
 .newsletterContainer40px {
   padding-left: 40px;
   padding-right: 40px;
+}
+
+.col2imgGap.newsletterContainer40px {
+  width: 40px;
+  height: 40px;
 }
 
 .newsletterContainer55px {
@@ -113,9 +143,19 @@ img {
   padding-right: 55px;
 }
 
+.col2imgGap.newsletterContainer55px {
+  width: 55px;
+  height: 55px;
+}
+
 .newsletterContainerFree {
   padding-left: 124px;
   padding-right: 124px;
+}
+
+.col2imgGap.newsletterContainerFree {
+  width: 124px;
+  height: 124px;
 }
 
 .categoryImage {
@@ -155,12 +195,17 @@ img {
   padding-bottom: 10px;
 }
 
-.newsletterBottom15px {
+.newsletterBottom15px,
+.newsletterBottom15pxSame {
   padding-bottom: 15px;
 }
 
 .newsletterBottom45px {
   padding-bottom: 45px;
+}
+
+.newsletterBottom50px {
+  padding-bottom: 50px;
 }
 
 .newsletterBottom20px {
@@ -169,6 +214,10 @@ img {
 
 .newsletterBottom25px {
   padding-bottom: 25px;
+}
+
+.newsletterBottom30px {
+  padding-bottom: 30px;
 }
 
 .newsletterBottom35px {
@@ -490,6 +539,10 @@ img {
     padding-right: 5px !important;
   }
 
+  .categoryTitle {
+    font-size: 25px !important;
+  }
+
   .newsletterBottom40px {
     padding-bottom: 25px;
   }
@@ -580,7 +633,7 @@ img {
 
   .newsletterProductHighPrice {
     font-size: 12px !important;
-    display: block;
+    display: block !important;
   }
 
   .priceHighSpacer {
@@ -628,9 +681,19 @@ img {
     padding-right: 10px;
   }
 
+  .col2imgGap.newsletterContainer {
+    width: 10px;
+    height: 10px;
+  }
+
   .newsletterContainer15px {
     padding-left: 15px;
     padding-right: 15px;
+  }
+
+  .col2imgGap.newsletterContainer15px {
+    width: 15px;
+    height: 15px;
   }
 
   .newsletterContainer25px {
@@ -638,9 +701,19 @@ img {
     padding-right: 10px;
   }
 
+  .col2imgGap.newsletterContainer25px {
+    width: 10px;
+    height: 10px;
+  }
+
   .newsletterContainer30px {
     padding-left: 15px;
     padding-right: 15px;
+  }
+
+  .col2imgGap.newsletterContainer30px {
+    width: 15px;
+    height: 15px;
   }
 
   .newsletterContainer40px {
@@ -648,9 +721,19 @@ img {
     padding-right: 15px;
   }
 
+  .col2imgGap.newsletterContainer40px {
+    width: 15px;
+    height: 15px;
+  }
+
   .newsletterContainer55px {
     padding-left: 25px;
     padding-right: 25px;
+  }
+
+  .col2imgGap.newsletterContainer55px {
+    width: 25px;
+    height: 25px;
   }
 
   .newsletterMiniContainer {
@@ -669,6 +752,11 @@ img {
     padding-right: 62px;
   }
 
+  .col2imgGap.newsletterContainerFree {
+    width: 62px;
+    height: 62px;
+  }
+
   .newsletterFreebieContainer {
     padding-left: 10px;
     padding-right: 0px !important;
@@ -680,6 +768,10 @@ img {
 
   .newsletterBottom25px {
     padding-bottom: 20px;
+  }
+
+  .newsletterBottom30px {
+    padding-bottom: 15px;
   }
 
   .newsletterBottom35px {
@@ -758,8 +850,16 @@ img {
     padding-bottom: 10px;
   }
 
+  .newsletterBottom15pxSame {
+    padding-bottom: 15px;
+  }
+
   .newsletterBottom45px {
     padding-bottom: 30px;
+  }
+
+  .newsletterBottom50px {
+    padding-bottom: 35px;
   }
 
   .newsletterBottom20px {

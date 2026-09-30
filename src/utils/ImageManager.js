@@ -57,7 +57,7 @@ export function getImageVersion(imageName) {
  *   - string/number: używa konkretnej wersji
  * @returns {string} - Pełny URL obrazu z parametrem wersji
  */
-export function getImageUrl(imageName, version) {
+export function getImageUrl(imageName, version = true) {
   // Aktualizacja roku w konfiguracji
   const updatedConfig = updateConfigWithCurrentYear(config);
 

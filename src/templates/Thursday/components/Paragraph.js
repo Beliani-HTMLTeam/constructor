@@ -31,7 +31,7 @@ const Paragraph = ({
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr><td style="text-align: ${align};" ${tableContainerClass ? ` class="${tableContainerClass}"` : ''}>${html}</td></tr></table>`;
+    html = `<table ${tableAttributes} style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><tr><td style="text-align: ${align};" ${tableContainerClass ? ` class="${tableContainerClass}"` : ''}>${html}</td></tr></table>`;
   }
 
   return html;

@@ -329,6 +329,16 @@ img {
   padding-right: 20px !important;
 }
 
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .newsletterConditions {
   color: black;
   font-family: "Open Sans", sans-serif;
@@ -553,6 +563,16 @@ img {
 
   .newsletterFooterTitle {
     font-size: 18px;
+  }
+
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .newsletterContainerHeader20px {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .newsletterProductTitleFreebie {
