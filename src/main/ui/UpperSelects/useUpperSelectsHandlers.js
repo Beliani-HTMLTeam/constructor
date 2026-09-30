@@ -34,6 +34,7 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 			openCampaign,
 			openLP,
 			copyTemplate,
+			downloadEml,
 			redirectCheck,
 		} = getDOMElements();
 
@@ -44,6 +45,7 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 			openCampaign,
 			openLP,
 			copyTemplate,
+			downloadEml,
 			redirectCheck,
 		};
 	}, []);
@@ -58,6 +60,7 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 				actionEls.openCampaign,
 				actionEls.openLP,
 				actionEls.copyTemplate,
+				actionEls.downloadEml,
 				actionEls.redirectCheck
 			);
 
@@ -197,6 +200,7 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 	const applyShop = useCallback(
 		(shopId) => {
 			const currentShops = getState('shops') || shops;
+			const currentTemplate = getState('template');
 			const mockEvent = { target: { value: shopId } };
 			handleShopChange(mockEvent, currentShops);
 
@@ -206,6 +210,13 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 
 			const actionEls = getActionElements();
 			showElements(actionEls.copyTemplate);
+
+			if (currentTemplate?.type !== 'landing') {
+				showElements(actionEls.downloadEml);
+			} else {
+				hideElements(actionEls.downloadEml);
+			}
+
 			hideElements(actionEls.openLP, actionEls.openCampaign, actionEls.redirectCheck);
 		},
 		[shops, getActionElements]

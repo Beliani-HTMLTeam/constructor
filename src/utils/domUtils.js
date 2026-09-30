@@ -26,6 +26,7 @@ export function getDOMElements() {
     previewWidth: document.querySelector('#preview_width'),
     newCampaign: document.querySelector('#new_campaign'),
     copyTemplate: document.querySelector('.copyTemplate'),
+    downloadEml: document.querySelector('.downloadEml'),
     openCampaign: document.querySelector('.openCampaign'),
     openIssue: document.querySelector('.openIssue'),
     openFigma: document.querySelector('.figmaCard'),

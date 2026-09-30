@@ -253,6 +253,33 @@ body {
   border-color: #16a34a;
 }
 
+/* Download EML: */
+.container #panel .upper_navigation .downloadEml {
+  background: #A763F1;
+  border-color: #A763F1;
+  color: #ffffff;
+}
+
+.container #panel .upper_navigation .downloadEml .svg-icon {
+  filter: brightness(0) invert(1);
+}
+
+.container #panel .upper_navigation .downloadEml:hover:not(:disabled) {
+  background: #9659DC;
+}
+
+.container #panel .upper_navigation .downloadEml:active:not(:disabled) {
+  background: #9659DC;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.container #panel .upper_navigation .downloadEml.is-copied:not(:disabled),
+.container #panel .upper_navigation .downloadEml.is-copied:hover:not(:disabled),
+.container #panel .upper_navigation .downloadEml.is-copied:active:not(:disabled) {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
 /* floating tools, bottom-right; outside #panel so `.container #panel button` doesn't apply */
 #floating-tools {
   position: fixed;
