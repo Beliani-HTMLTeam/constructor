@@ -40,6 +40,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, countrySl
     showCta,
     disableLine: intro?.disableLine ?? false,
     ctaSettings: intro?.cta,
-    containerClass: intro?.containerClass
+    containerClass: intro?.containerClass,
+    options: intro?.options
   });
 };

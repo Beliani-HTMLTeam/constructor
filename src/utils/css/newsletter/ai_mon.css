@@ -8,6 +8,23 @@ img {
   -ms-interpolation-mode: bicubic;
 }
 
+@media screen and (max-width: 600px) {
+  #newsletter .categoryRowMobile14 { 
+    font-size: 13px !important;
+    padding-right: 0 !important;
+  }
+  #newsletter .categoryRowMobile15 { font-size: 15px !important; }
+  #newsletter .categoryRowMobile16 { font-size: 16px !important; }
+  #newsletter .categoryRowMobile17 { font-size: 17px !important; }
+  #newsletter .categoryRowMobile18 { font-size: 18px !important; }
+  #newsletter .categoryRowMobile19 { font-size: 19px !important; }
+  #newsletter .categoryRowMobile20 { font-size: 20px !important; }
+  #newsletter .categoryRowMobile21 { font-size: 21px !important; }
+  #newsletter .categoryRowMobile22 { font-size: 22px !important; }
+  #newsletter .categoryRowMobile23 { font-size: 23px !important; }
+  #newsletter .categoryRowMobile24 { font-size: 24px !important; }
+}
+
 .title-advantages {
   text-align: center;
   font-size: 11px;
@@ -67,11 +84,19 @@ img {
   font-weight: 400;
 }
 .newsletterAdditionalCategoryTitle {
-  font-size: 27px;
+  font-size: 20px;
   font-family: "Open Sans", sans-serif;
-  line-height: 1.25;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.newsletterAdditionalCategoryCta {
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
   text-decoration: underline;
 }
+
 .newsletterMarkTitleSpace {
   padding-bottom: 25px;
 }
@@ -164,7 +189,7 @@ img {
 }
 
 .newsletterCta {
-  font-size: 20px;
+  font-size: 15px;
   line-height: 1.2;
   font-family: "Open Sans", sans-serif;
 }
@@ -509,7 +534,11 @@ img {
   }
 
   .newsletterAdditionalCategoryTitle {
-    font-size: 16px !important;
+    font-size: 18px !important;
+  }
+
+  .newsletterAdditionalCategoryCta {
+    font-size: 18px !important;
   }
 
   .product-img {
@@ -659,8 +688,12 @@ img {
     font-size: 25px;
   }
 
+  #newsletter .introHeader {
+    font-size: 12px !important;
+  }
+
   #newsletter .introTitle {
-    font-size: 28px !important;
+    font-size: 30px !important;
   }
 
   .newsletterIntroTitle {
@@ -937,8 +970,15 @@ img {
   font-family: 'Open Sans', Arial, sans-serif;
 }
 
+.introHeader {
+  font-size: 12px;
+  line-height: 1.2;
+  font-family: 'Open Sans', Arial, sans-serif;
+  letter-spacing: 2px;
+}
+
 .introTitle {
-  font-size: 35px;
+  font-size: 36px;
   line-height: 1.2;
   font-family: 'Open Sans', Arial, sans-serif;
 }
@@ -992,6 +1032,15 @@ img {
   color: #555555;
   text-align: center;
   font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.categoryTitle {
+  font-size: 30px;
+  color: #000000;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .conditionText {

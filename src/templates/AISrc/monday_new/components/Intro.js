@@ -126,7 +126,7 @@ const Intro = ({
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="${sectionStyle}">
           ${!disableLine ? `
             <tr>
-              <td align="center">
+              <td class="newsletterContainer" align="center">
                 <img loading="lazy" src="https://pictureserver.net/static/2026/line_black.jpg" style="display:block; max-width: 100%;"  alt="Line separator">
               </td>
             </tr>

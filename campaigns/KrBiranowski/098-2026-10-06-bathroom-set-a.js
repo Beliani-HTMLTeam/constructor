@@ -155,10 +155,6 @@ const tableQueries = [
     tableRange: '30',
   },
   {
-    name: 'freebies_subtitle',
-    tableRange: '31',
-  },
-  {
     name: 'intro',
     tableRange: '32:33',
   },
@@ -204,7 +200,7 @@ const categories = [
     type: 'deal',
     background: theme.white,
     color: theme.primary,
-    spaceAfter: 'newsletterBottom45px',
+    spaceAfter: false,
     offerSpaceAfter: 'newsletterBottom40px',
     cta: {
       variant: 'cream',
@@ -400,7 +396,7 @@ const categories = [
 
 export default new entities.Campaign({
   startId: '47476',
-  name: 'Monday - Free Bathroom Set - A',
+  name: 'Monday - Free Bathroom Set',
   date: '06.10.2026',
   issueCardId: '525572',
   lpId: '32094',
@@ -482,6 +478,7 @@ export default new entities.Campaign({
         },
       },
       disableTopImageTitle: true,
+      disableKlarna: ['SI', 'HR'],
     },
   ],
 });

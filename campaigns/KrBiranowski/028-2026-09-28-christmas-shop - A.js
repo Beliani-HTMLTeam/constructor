@@ -31,6 +31,13 @@ const catData = [
   // Cat 2
   {
     name: 'Tree Decorations',
+    nameOverrides: {
+      uk: 'Tree Decorations',
+      pl: 'Ozdoby',
+      chde: 'Baumschmuck',
+      at: 'Baumschmuck',
+      de: 'Baumschmuck',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-tree-decorations/',
     catImg: getImageUrl('20260928_Cat02.jpg', true),
   },
@@ -43,42 +50,72 @@ const catData = [
   // Cat 4
   {
     name: 'Decorations',
+    nameOverrides: {
+      uk: 'Decorations',
+      pl: 'Dekoracje',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/decorations/',
     catImg: getImageUrl('20260928_Cat04.jpg', true),
   },
   // Cat 5
   {
     name: 'LED Decor',
+    nameOverrides: {
+      uk: 'LED Décor',
+      pl: 'Dekoracje z LED',
+      nl: 'LED-kerstdecoratie',
+      benl: 'LED-kerstdecoratie',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-outdoor-decor/',
     catImg: getImageUrl('20260928_Cat05.jpg', true),
   },
   // Cat 6
   {
     name: 'Wreaths',
+    nameOverrides: {
+      uk: 'Wreaths',
+      pl: 'Wieńce',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-wreaths/',
     catImg: getImageUrl('20260928_Cat06.jpg', true),
   },
   // Cat 7
   {
     name: 'Garlands',
+    nameOverrides: {
+      uk: 'Garlands',
+      pl: 'Girlandy',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-garland/',
     catImg: getImageUrl('20260928_Cat07.jpg', true),
   },
   // Cat 8
   {
     name: 'Christmas Textiles',
+    nameOverrides: {
+      uk: 'Textiles',
+      pl: 'Tekstylia',
+      de: 'Weihnachtstextilien',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-textiles/',
     catImg: getImageUrl('20260928_Cat08.jpg', true),
   },
   // Cat 9
   {
     name: 'Lights',
+    nameOverrides: {
+      es: 'Iluminación de Navidad',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-lights/',
     catImg: getImageUrl('20260928_Cat09.jpg', true),
   },
   // Cat 10
   {
     name: 'Christmas Candle Holders',
+    nameOverrides: {
+      uk: 'Candle Holders',
+      pl: 'Świeczniki',
+    },
     href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',
     catImg: getImageUrl('20260928_Cat10.jpg', true),
   },
@@ -195,6 +232,7 @@ const categories = [
   ...catData.map((cat, idx) => ({
     ...catObj,
     name: cat.name,
+    nameOverrides: cat.nameOverrides,
     src: cat.catImg,
     href: cat.href,
     ...(idx === catData.length - 1 ? { line: undefined } : {}),
@@ -233,6 +271,7 @@ export default new entities.Campaign({
       disableTopImageTitle: true,
       shopByCategory: false,
       theme,
+      disableFooterCategories: true,
       intro: {
         color: theme.black,
         backgroundColor: theme.primary,
@@ -254,7 +293,6 @@ export default new entities.Campaign({
           },
         },
       },
-      disableFooterCategories: true,
     },
     {
       background: theme.primary,
