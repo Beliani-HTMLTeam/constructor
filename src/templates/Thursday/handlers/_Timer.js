@@ -154,10 +154,13 @@ export const TimerHandler = async ({
 					if (finalHref && typeof add_utm === 'function') {
 						finalHref = add_utm(finalHref);
 					}
+					const phraseTitle = product.titlePhrase
+						? `${getPhrase(product.titlePhrase) ?? product.titlePhrase} ${productData.name ?? ''}`.trim()
+						: null;
 					return {
 						...product,
 						...productData,
-						description: productData.description || product.description,
+						description: phraseTitle || productData.description || product.description,
 						src: imgSrc || productData.src,
 						href: finalHref,
 					};
