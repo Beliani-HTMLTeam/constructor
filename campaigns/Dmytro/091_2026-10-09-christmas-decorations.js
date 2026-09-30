@@ -179,7 +179,8 @@ const categories = [
           CHFR: "Bougeoirs de Noël",
           BEFR: "Bougeoirs de Noël",
           FR: "Bougeoirs de Noël",
-          FI: "Joulun kynttilänjalat"
+          FI: "Joulun kynttilänjalat",
+          PT: "Castiçais de Natal"
         },
         src: getImageUrl('20261009Category10.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',

@@ -25,7 +25,7 @@ const Timer = ({
     <tr>
       <td>
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="color: ${color}; background-color: ${background};">
-          ${position === 'outsideTopImageTitle' && title && subtitle ? Space({ insideTr: true, className: 'newsletterBottom10px' }) : ''}
+          ${title && subtitle ? Space({ insideTr: true, className: 'newsletterBottom10px' }) : ''}
           
           <tr>
             <td align="center" class="newsletterContainer">
