@@ -28,8 +28,8 @@ const theme = {
 const prodData = [
   [
     [
-      { id: '316914', src: getImageUrl('20261013freebie_1.gif', true), bottom: getImageUrl('20261013freebie1_color.png', true), useDescription: true },
-      { id: '316914', src: getImageUrl('20261013freebie_2.gif', true), bottom: getImageUrl('20261013freebie2_color.png', true), useDescription: true },
+      { id: '845753', src: getImageUrl('20261013freebie_1.gif', true), bottom: getImageUrl('20261013freebie1_color.png', true), linkOverride: 'https://www.beliani.ch/bean-bags/bean-bag-covers/' },
+      { id: '845855', src: getImageUrl('20261013freebie_2.gif', true), bottom: getImageUrl('20261013freebie2_color.png', true),linkOverride: 'https://www.beliani.ch/bean-bags/bean-bag-covers/', exclude: ['DK'] },
     ],
   ]
 ];
@@ -114,7 +114,8 @@ const categories = [
       prodTitleClass: 'newsletterProductTitleSmall',
       prodDescClass: 'newsletterProductDescSmall',
       prodLowPriceClass: 'newsletterProductLowPriceSmall',
-      prodHighPriceClass: 'newsletterProductHighPriceSmall'
+      prodHighPriceClass: 'newsletterProductHighPriceSmall',
+      linkTo: "category"
     }
   },
 

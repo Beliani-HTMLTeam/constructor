@@ -141,6 +141,7 @@ const renderFreebieCard = ({
   disableHighPrice = false,
   prodSettings = {},
   gridSize = 'normal',
+  getCategoryLink,
 }) => {
   const width = getCellWidth(columns);
   const cellPadding = getCellPadding(columns, columnId, isCentered);
@@ -174,7 +175,7 @@ const renderFreebieCard = ({
   );
 
   const productSize = product.size ?? '';
-  const productHref = product.href ?? fallbackHref ?? '#';
+  const productHref = getCategoryLink(product.linkOverride) ?? product.href ?? fallbackHref ?? '#';
   const productSrc = getProductSrc(product);
   const oldPrice = product.lowPrice ?? product.highPrice ?? '';
 
@@ -329,6 +330,14 @@ const renderFreebieCard = ({
                                     >${productDescription}</span>`
                                   : ''
                               }
+                              ${
+                                queries?.freebies_additional?.length > 0
+                                  ? `<span
+                                      class="${prodSettings?.prodDescClass ?? 'newsletterProductTitleFreebie'}"
+                                      style="color: ${textColor} !important;${descSize}"
+                                    >${queries.freebies_additional[0]}</span>`
+                                  : ''
+                              }
                             </td>
                           </tr>
                           ${Space({ insideTr: true, className: 'newsletterBottom5px' })}
@@ -395,6 +404,8 @@ export const renderFreebieGrid = ({
   disableHighPrice = false,
   prodSettings = {},
   gridSize = 'normal',
+  country,
+  getCategoryLink
 }) => {
   console.log(prodSettings);
 
@@ -418,6 +429,9 @@ export const renderFreebieGrid = ({
     let rowCells = '';
 
     for (let columnId = 0; columnId < columns; columnId++) {
+      if (row[columnId].exclude && row[columnId].exclude.includes(country)) {
+        continue;
+      }
       rowCells += renderFreebieCard({
         queries,
         product: row[columnId],
@@ -431,6 +445,8 @@ export const renderFreebieGrid = ({
         disableHighPrice,
         prodSettings,
         gridSize,
+        country,
+        getCategoryLink
       });
     }
 

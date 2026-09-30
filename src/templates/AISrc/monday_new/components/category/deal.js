@@ -26,6 +26,7 @@ export const render = ({
   offerSpaceAfter = '',
   tdClass = 'newsletterContainer',
   gridSize = 'normal',
+  getCategoryLink
 }) => {
   const countrySlug = String(country ?? '').toLowerCase();
   const offerTextOverrideRaw = offerTextOverrides?.[countrySlug];
@@ -113,7 +114,9 @@ export const render = ({
       theme,
       disableHighPrice,
       prodSettings: freebieSettings,
-      gridSize
+      gridSize,
+      country,
+      getCategoryLink
     });
 
     const colorBg = theme?.freebieColor ?? theme?.primary ?? '#ffffff';
