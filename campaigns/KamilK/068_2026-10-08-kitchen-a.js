@@ -26,7 +26,7 @@ const links = {
   Banner_1: translateLink({ value: 'content/lp26-09-30' }),
   Banner_1_Image: translateImage({ value: '20260930b.png' }),
 
-  Timer_href: translateLink({ value: 'content/lp26-10-06' }),
+  Timer_href: translateLink({ value: 'content/lp26-10-06-ta' }),
 
   Intro_cta_href: 'https://www.beliani.ch/kitchen/',
 };
@@ -67,7 +67,7 @@ const intro = {
   cta: {
     ...underlineCta,
     align: 'center',
-    phrase: 'Shop now',
+    phrase: 'Shop now First',
     spaceBefore: 'newsletterBottom35px',
     spaceAfter: 'newsletterBottom80px',
   },

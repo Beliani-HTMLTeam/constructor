@@ -103,6 +103,11 @@ export const TimerHandler = async ({
 		return '';
 	}
 
+	const resolvedColors = resolveTimerColors(Inside.maincolor);
+	const backgroundColor = resolvedColors?.backgroundColor ?? Inside.backgroundColor;
+	const color = resolvedColors?.color ?? Inside.color;
+	const unitBackground = resolvedColors?.unitBackground ?? Inside.unitBackground;
+
 	const timezone = getPhrase('timer-timezone');
 	const timerLabels = [
 		getPhrase('timer-days'),
@@ -119,10 +124,10 @@ export const TimerHandler = async ({
 		`&timezone=${timezone}` +
 		// in prolo timer generator pt uses "portugal" instead of portugese
 		`&lang=${shop?.slug === 'PT' ? 'portugal' : languages[country]?.title}` +
-		`&bg=${(Inside.unitBackground || Inside.backgroundColor).replace('#', '')}` +
-		`&color=${Inside.color.replace('#', '')}` +
-		`&label=${Inside.color.replace('#', '')}` +
-		`&background=${Inside.backgroundColor.replace('#', '')}`;
+		`&bg=${(unitBackground || backgroundColor).replace('#', '')}` +
+		`&color=${color.replace('#', '')}` +
+		`&label=${color.replace('#', '')}` +
+		`&background=${backgroundColor.replace('#', '')}`;
 	// + `&uid=USER_ID`
 
 	const fetchProduct = getProductById || getProductId;
@@ -193,16 +198,16 @@ export const TimerHandler = async ({
 
 	return Inside && Inside.type === 'timer'
 		? `
-    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore }) : ''}
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.spaceBeforeBackground ?? backgroundColor }) : ''}
 
     ${Timer({
 			title: queries?.timer?.[0] ?? 'Translation not found',
 			subtitle: queries?.timer?.[1] ?? 'Translation not found',
 			href: links?.Timer_href,
 			src: link,
-			color: Inside.color,
-			background: Inside.backgroundColor,
-			unitBackground: Inside.unitBackground,
+			color,
+			background: backgroundColor,
+			unitBackground,
 			freebies,
 			freebiesTitle,
 			freebiesBackground: timer?.freebiesBackground,
