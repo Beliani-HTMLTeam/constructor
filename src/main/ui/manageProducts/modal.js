@@ -21,7 +21,7 @@ export function ensureCloseButton(modal, header) {
   closeBtn.classList.add('close-modal');
 
   const closeIconImg = document.createElement('img');
-  closeIconImg.src = '/icons/ep--close-bold.svg';
+  closeIconImg.src = '/icons/x.svg';
   closeBtn.appendChild(closeIconImg);
 
   closeBtn.addEventListener('click', () => {

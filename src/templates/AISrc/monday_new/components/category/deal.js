@@ -63,11 +63,9 @@ export const render = ({
     (Array.isArray(freebies) && freebies.length > 0) || (Array.isArray(freebies?.rows) && freebies.rows.length > 0);
   const hasDealProducts = hasProducts || hasFreebiesRows;
 
-  // Prefer row 31 (freebies_subtitle) over the generic phrase
   let chooseFromHeader = queries?.freebies_title?.[0] ?? getPhrase?.('Choose from:') ?? 'TRANSLATION NOT FOUND';
   chooseFromHeader = chooseFromHeader.toUpperCase();
 
-  const freebiesSubtitle = queries?.freebies_subtitle?.[0] ?? 'TRANSLATION NOT FOUND';
   let html = '';
 
   html += renderOfferSection({

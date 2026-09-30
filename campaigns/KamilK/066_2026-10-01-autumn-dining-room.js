@@ -78,6 +78,7 @@ const categories = [
 		},
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
@@ -127,6 +128,7 @@ const categories = [
 		paddingTop: '35',
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
@@ -180,6 +182,7 @@ const categories = [
 		paddingTop: '35',
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
@@ -234,6 +237,7 @@ const categories = [
 		paddingTop: '35',
 		title: {
 			show: true,
+			spaceBefore: 'newsletterBottom35px',
 			spaceAfter: 'newsletterBottom35px',
 			align: 'center',
 		},
@@ -320,9 +324,7 @@ export default new entities.Campaign({
 				}
 			},
 			Inside: {
-				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				unitBackground: '#FFF5F1',
+				maincolor: '#F6E7E6',
 				type: 'timer',
 			},
 		},
@@ -353,9 +355,7 @@ export default new entities.Campaign({
 				}
 			},
 			Inside: {
-				color: '#000000',
-				backgroundColor: '#F6E7E6',
-				unitBackground: '#FFF5F1',
+				maincolor: '#F6E7E6',
 				type: 'timer',
 			},
 		},

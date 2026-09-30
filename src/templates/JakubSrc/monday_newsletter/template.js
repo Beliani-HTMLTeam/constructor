@@ -25,6 +25,7 @@ const Monday = async ({
   TopImageTitle_data,
   topImage_data,
   conditionOverrides,
+  theme,
 
   getHeader,
   getFooter,
@@ -39,6 +40,7 @@ const Monday = async ({
   disableKlarna,
   categoryImageTdClass,
 }) => {
+  const themeData = { ...theme };
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
   const countrySlug = String(country ?? '').toLowerCase();
@@ -85,6 +87,7 @@ const Monday = async ({
     country,
     getPhrase,
     categoryImageTdClass,
+    theme: themeData,
   };
 
   const CategoriesBeforeIntroElement = await CategoriesHandler({

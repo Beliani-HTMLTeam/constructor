@@ -58,9 +58,9 @@ const CTA = ({
       html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaCreamBg}; color: ${color ?? ctaCreamText} !important;">${buttonContent}</a>`;
     } else if (variant === 'underline' || variant === 'plain') {
       const responsiveCode = variant === 'plain' && codeValue;
-      const codeStyle = responsiveCode ? 'display:inline-block;position:relative;text-align:center;font-size:22px;font-size:clamp(14px, 3.5vw, 22px);line-height:1.25;max-width:calc(100% - 48px);' : '';
+      const codeStyle = responsiveCode ? 'display:inline-flex;align-items:center;justify-content:center;text-align:center;font-size:22px;font-size:clamp(14px, 3.5vw, 22px);line-height:1.25;max-width:calc(100% - 48px);' : '';
       const label = responsiveCode ? `<span style="min-width:0;overflow-wrap:anywhere;">${text}</span>` : text;
-      const positionedCopyIcon = responsiveCode ? `<span style="position:absolute;left:100%;top:50%;transform:translateY(-50%);display:inline-flex;line-height:0;">${copyIcon}</span>` : copyIcon;
+      const positionedCopyIcon = responsiveCode ? `<span style="display:inline-flex;line-height:0;">${copyIcon}</span>` : copyIcon;
       html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLink" style="color: ${color};${variant === 'plain' ? 'text-decoration:none !important;' : ''}${codeStyle}">${label}${responsiveCode ? '' : ' '}${positionedCopyIcon}</a>`;
     } else {
       html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaMaroonBg}; color: ${color ?? ctaMaroonText} !important;">${text} ${copyIcon}</a>`;

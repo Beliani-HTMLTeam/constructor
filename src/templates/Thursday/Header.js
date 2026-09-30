@@ -1,5 +1,4 @@
 import { Header as HeaderComponent } from '@/components/header.js';
-import { types } from '@utils/types.js';
 import { getState } from '@/main/state/appState';
 
 function shouldUseNewHeader(cDate) {
@@ -18,7 +17,7 @@ function shouldUseNewHeader(cDate) {
 const Header = ({ getHeader, country, background, type, id }) => {
   const campaignDate = getState('selectedCampaign')?.date;
   const newHeader = shouldUseNewHeader(campaignDate);
-  // Always use NEWSLETTER type for header component so Beliani top logo and header categories render in both LP and NSLT
+
   return HeaderComponent(
     {
       id,
@@ -70,6 +69,7 @@ const Header = ({ getHeader, country, background, type, id }) => {
         exclude: true,
       },
     },
+    { type, newHeader }
     { type, newHeader }
   );
 };

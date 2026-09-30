@@ -18,7 +18,7 @@
     <!--               OPEN HAMBURGER MENU                -->
     <!--                                                  -->
     <div class="hamburger-menu">
-      <img src="/icons/hamburger.svg" class="svg-icon" />
+      <img src="/icons/menu.svg" class="svg-icon" />
     </div>
 
     <!-- SLIGHTLY DARKEN BACKGROUND OVERLAY FOR HAMBURGER -->
@@ -30,7 +30,7 @@
         <!--                CLOSE MENU BUTTON                 -->
         <!--                                                  -->
         <div class="menu-close">
-          <img src="/icons/close.svg" class="svg-icon" />
+          <img src="/icons/x.svg" class="svg-icon" />
         </div>
 
         <div class="upper_navigation">
@@ -51,36 +51,27 @@
           <div id="upper-selects-root"></div>
 
           <!--                                                  -->
-          <!--            ADD PRODUCTS/CLEAR STORAGE            -->
-          <!--                                                  -->
-          <!-- Object.keys(localStorage).map(k => (localStorage.getItem(k) ?? '').length * 2 / 1024 / 1024).reduce((a, b) => a + b);        -->
-          <div id="products_management" class="group">
-            <button id="new_products">
-              <img src="/icons/add-products.svg" class="svg-icon" />
-              Manage Products
-            </button>
-          </div>
-
-          <!--                                                  -->
           <!--             OPEN NSLT/LP/ISSUE/FIGMA             -->
           <!--                                                  -->
           <div id="campaign_links" class="group">
-            <button style="display: none" class="openCampaign external">
-              Open Newsletter
-              <img src="/icons/external-link.svg" class="svg-icon" />
-            </button>
+            <div class="split-button">
+              <button disabled data-soft-hide data-disabled-hint="Select a language first" class="openCampaign external">
+                Newsletter
+                <img src="/icons/external-link.svg" class="svg-icon" />
+              </button>
 
-            <button style="display: none" class="openContent openLP external">
-              Open Content Page
-              <img src="/icons/external-link.svg" class="svg-icon" />
-            </button>
+              <button disabled data-soft-hide data-disabled-hint="Select a language first" class="openContent openLP external">
+                Content Page
+                <img src="/icons/external-link.svg" class="svg-icon" />
+              </button>
+            </div>
 
-            <button style="display: none" class="openIssue external">
+            <button disabled data-soft-hide data-disabled-hint="Select a campaign first" class="openIssue external">
               Open Issue Card
               <img src="/icons/external-link.svg" class="svg-icon" />
             </button>
 
-            <button class="figmaCard" style="display: none">
+            <button disabled data-soft-hide data-disabled-hint="Select a campaign first" class="figmaCard">
               <img src="/icons/figma.svg" class="svg-icon" />
 
               Figma Template
@@ -90,27 +81,10 @@
           <!--                                                  -->
           <!--                  COPY TEMPLATE                   -->
           <!--                                                  -->
-          <button style="display: none" class="copyTemplate">
-            <img src="/icons/copy-template.svg" class="svg-icon" />
+          <button disabled data-soft-hide data-disabled-hint="Select a shop first" class="copyTemplate">
+            <img src="/icons/copy.svg" class="svg-icon" />
 
-            Copy Template
-          </button>
-        </div>
-
-        <!--                                                  -->
-        <!--                    PURGE TOOL                    -->
-        <!--                                                  -->
-        <div class="group">
-          <div id="purge-select-root"></div>
-
-          <button class="purgeDynamicSpreadsheet external" style="width: 100%; display: none">
-            <span style="width: 100%">Purge dynamic spreadsheet</span>
-            <img src="/icons/external-link.svg" class="svg-icon" />
-          </button>
-
-          <button class="redirectCheck" style="width: 100%; display: none">
-            <span style="width: 100%">Run redirect check</span>
-            <img src="/icons/redirect.svg" class="svg-icon" />
+            <span class="copyTemplate__label">Copy Template</span>
           </button>
         </div>
       </div>
@@ -124,6 +98,46 @@
           <img height="48" src="/icons/loader.svg" />
         </div>
       </div>
+    </div>
+
+    <!-- outside #panel, so they stay visible when the mobile menu is closed -->
+    <div id="floating-tools">
+      <div id="purge-select-root"></div>
+
+      <button
+        disabled
+        data-soft-hide
+        data-disabled-hint="Select a campaign first"
+        class="fab purgeDynamicSpreadsheet"
+        type="button"
+        aria-label="Purge dynamic spreadsheet"
+      >
+        <span class="fab-label">Purge dynamic spreadsheet</span>
+        <img src="/icons/database-backup.svg" class="svg-icon" />
+      </button>
+
+      <button
+        disabled
+        data-soft-hide
+        data-disabled-hint="Select a language first"
+        class="fab redirectCheck"
+        type="button"
+        aria-label="Run redirect check"
+      >
+        <span class="fab-label">Run redirect check</span>
+        <img src="/icons/waypoints.svg" class="svg-icon" />
+      </button>
+
+      <button id="preview_width" class="fab" type="button" aria-label="Toggle mobile preview" aria-pressed="false">
+        <span class="fab-label">Mobile preview (390px)</span>
+        <img src="/icons/smartphone.svg" class="svg-icon" />
+      </button>
+
+      <button id="new_products" class="fab" type="button" aria-label="Manage Products">
+        <span class="fab-label">Manage Products</span>
+        <img src="/icons/shopping-cart.svg" class="svg-icon" />
+        <span id="products-badge-root"></span>
+      </button>
     </div>
 
     <div id="formModal" class="modal-backdrop" style="display: none">

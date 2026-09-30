@@ -6,7 +6,6 @@ import { ThreeCategoriesUnderLP } from '@/templates/MichalTemporary/ThreeCategor
 import { FridayEolProducts } from './FridayEolProducts';
 import { Categories2Columns } from './MichalTemporary/Categories2Columns';
 import { Monday } from '@/templates/JakubSrc/monday_newsletter/template.js';
-import { Friday } from './DimaSrc/friday_newsletter/template';
 import { RegularFridayNslt1 } from './DimaSrc/newsletter_regular_friday1/templates/regularFridayNslt';
 import { AIRegularFridayNslt1 } from './DimaSrc/ai_newsletter_regular_friday1/templates/regularFridayNslt';
 import { AIWednesday } from './DimaSrc/AIWednesday/template';
@@ -32,22 +31,15 @@ export const templates = {
   ThreeCategoriesUnder,
   ThreeCategoriesUnderLP,
   Categories2Columns,
-  Friday,
   RegularFridayNslt1,
   Monday,
-  AIRegularFridayNslt1,
-  AIRegularFridayNslt2,
-  AIRegularFridayNslt2Chat,
-  AIRegularFridayNslt_03_09,
-  AIWednesday,
-  AdventCalendar2026,
+  MondayNew,
+  MondayNewV2,
+  ThursdayNew,
+  FrenchDaysNew,
   AINewsletter1109,
   AIRegularFridayNslt11_09_normal,
   AIRegularFridayNslt_18_09,
-  AIRegularFridayNslt25_09,
-  AIRegularFridayNslt09_10,
-  HelloweenReminder,
-  RegularFridayNslt1Halloween,
-  MondayNew,
-  RegularFridayNslt16_10
+  AIRegularFridayNslt25_09, 
+  MondayNewAI
 };

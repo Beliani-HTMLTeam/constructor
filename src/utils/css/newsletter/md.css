@@ -9,6 +9,16 @@ img {
     -ms-interpolation-mode: bicubic;
 }
 
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.newsletterContainerHeader20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .title-advantages{
   text-align: center;
   font-size: 11px;
@@ -322,6 +332,15 @@ padding-bottom: 70px;
 }
 /*============================================================ Media Queries ============================================================*/
 @media screen and (max-width: 768px) {
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .newsletterContainerHeader20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
   .newsletterBottom10px {
     padding-bottom: 5px !important;

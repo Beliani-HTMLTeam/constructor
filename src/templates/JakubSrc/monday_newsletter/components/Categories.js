@@ -4,14 +4,15 @@ import { Paragraph } from './Paragraph.js';
 import { toast } from 'sonner';
 import { CTA } from './CTA.js';
 import { Line } from './Line.js';
-import { render as renderCategoryBanner } from './category/category-banner.js';
+import { render as renderCategoryBanner, getCategoryRowSizes } from './category/category-banner.js';
 import { translateImage } from '@/helpers/translateImage.js';
 import { translateLink } from '@/helpers/translateLink.js';
 
-const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass }) => {
+const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass, theme = {}, }) => {
   let html = '';
 
   if (Array.isArray(categories)) {
+    const sharedRowSizes = getCategoryRowSizes(categories, queries, getPhrase, type);
     for (const category of categories) {
       html += await renderCategory(
         category,
@@ -24,7 +25,9 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
         links,
         type,
         country,
-        categoryImageTdClass
+        categoryImageTdClass,
+        theme,
+        sharedRowSizes,
       );
     }
   }
@@ -32,7 +35,7 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
   return html;
 };
 
-const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass) => {
+const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme, sharedRowSizes) => {
   const background = category.background ?? 'white';
   const color = category.color ?? '#000000';
 
@@ -45,7 +48,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     : ctaHref;
 
   if (category.type === 'category-banner') {
-    return renderCategoryBanner({ category, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type });
+    return renderCategoryBanner({ category, id, queries, href: ctaHref, ctaHref: ctaButtonHref, getPhrase, renderType: type, options: category?.options ?? {}, sharedRowSizes });
   }
 
   const TitleElement = category?.title?.show
@@ -101,7 +104,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
       ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
     `
-    : Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' });
+    : category.paragraph?.SpaceAfter ? Space({ insideTr: true, className: category.paragraph?.spaceAfter ?? 'newsletterBottom35px' }) : '';
 
   const paragraphPositionRaw = category?.paragraph?.position ?? 'beforeProducts';
   const paragraphPosition =
@@ -152,6 +155,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           ctaColor: category?.ctaColor ?? '#000000',
           ctaSettings: category.type === 'deal' ? category.cta : undefined,
           freebieTextColor: category?.product?.color,
+          options: category?.options,
+          theme: theme,
         })
       : '';
  
@@ -262,6 +267,8 @@ const renderBody = async ({
   ctaColor = '',
   ctaSettings = {},
   prodSettings = {},
+  options = {},
+  theme = {},
   freebieTextColor = '',
 }) => {
   // console.log('produkty ', products);
@@ -299,6 +306,8 @@ const renderBody = async ({
       copyCodeWeb,
       ctaColor,
       ctaSettings,
+      options,
+      theme,
       freebieTextColor,
     });
   } catch (e) {

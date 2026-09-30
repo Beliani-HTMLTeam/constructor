@@ -13,6 +13,14 @@ export function PurgeSelect() {
 			value={selectedValue}
 			onChange={handlePurgeSelect}
 			placeholder="Select Purge"
+			ariaLabel="Select tabs to purge"
+			className="purge-fab"
+			renderTrigger={() => (
+				<>
+					<span className="fab-label">Select tabs to purge</span>
+					<img src="/icons/database-zap.svg" className="svg-icon" alt="" />
+				</>
+			)}
 			searchable={false}
 			placement="top"
 			zIndex={15}

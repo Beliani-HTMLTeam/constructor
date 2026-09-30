@@ -15,6 +15,21 @@ function shouldUseNewHeader(cDate) {
   return campaignDate >= cutoffDate;
 }
 
+import { getState } from '@/main/state/appState';
+
+function shouldUseNewHeader(cDate) {
+  const parts = cDate.split('.');
+
+  const day = Number(parts[0]);
+  const month = Number(parts[1]);
+  const year = Number(parts[2]);
+
+  const campaignDate = new Date(year, month - 1, day);
+  const cutoffDate = new Date(2026, 9, 6);
+
+  return campaignDate >= cutoffDate;
+}
+
 const Header = ({ getHeader, country, background, type, id }) => {
   const campaignDate = getState('selectedCampaign')?.date;
   const newHeader = shouldUseNewHeader(campaignDate);
@@ -75,3 +90,4 @@ const Header = ({ getHeader, country, background, type, id }) => {
 };
 
 export { Header };
+

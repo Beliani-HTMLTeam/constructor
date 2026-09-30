@@ -269,6 +269,21 @@ table {
   line-height: 1.2;
 }
 
+#newsletter .categoryPeakName {
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+#newsletter .categoryPeakSubtitle {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+#newsletter .shopByCategoryPeakName {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
 #newsletter .newsletterProductLowPrice {
   font-size: 18px;
   line-height: 1.2;
@@ -328,6 +343,12 @@ table {
 #newsletter .newsletterCta {
   text-decoration: underline;
   font-size: 20px;
+  line-height: 1.2;
+}
+
+#newsletter .shopByCategoryCta {
+  text-decoration: underline;
+  font-size: 18px;
   line-height: 1.2;
 }
 
@@ -751,6 +772,10 @@ table {
     max-width: 100% !important;
   }
 
+  #newsletter .shopByCategoryCta {
+    font-size: 16px;
+  }
+
   .newsletterMarkTitle {
     font-size: 18px;
   }
@@ -817,6 +842,18 @@ table {
   .START_MQ_PRODUCTS {}
   #newsletter .newsletterProductTitle {
     font-size: 18px;
+  }
+
+  #newsletter .categoryPeakName {
+    font-size: 22px;
+  }
+
+  #newsletter .categoryPeakSubtitle {
+    font-size: 20px;
+  }
+
+  #newsletter .shopByCategoryPeakName {
+    font-size: 16px;
   }
 
   #newsletter .newsletterProductLowPrice {
@@ -957,6 +994,23 @@ table {
   #newsletter .newsletterProductTitleFreebie {
     font-size: 12px;
   }
+}
+
+@media screen and (max-width: 600px) {
+  #newsletter .categoryRowMobile14 { 
+    font-size: 13px !important;
+    padding-right: 0 !important;
+  }
+  #newsletter .categoryRowMobile15 { font-size: 15px !important; }
+  #newsletter .categoryRowMobile16 { font-size: 16px !important; }
+  #newsletter .categoryRowMobile17 { font-size: 17px !important; }
+  #newsletter .categoryRowMobile18 { font-size: 18px !important; }
+  #newsletter .categoryRowMobile19 { font-size: 19px !important; }
+  #newsletter .categoryRowMobile20 { font-size: 20px !important; }
+  #newsletter .categoryRowMobile21 { font-size: 21px !important; }
+  #newsletter .categoryRowMobile22 { font-size: 22px !important; }
+  #newsletter .categoryRowMobile23 { font-size: 23px !important; }
+  #newsletter .categoryRowMobile24 { font-size: 24px !important; }
 }
 
 .smallCategoryTilesLEFT {
