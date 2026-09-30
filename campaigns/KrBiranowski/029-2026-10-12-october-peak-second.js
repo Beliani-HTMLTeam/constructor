@@ -87,6 +87,9 @@ const catData = [
   // Cat 12
   {
     name: 'Accessories',
+    nameOverride: {
+      fi: 'Sisustustarvikkeet',
+    },
     src: getImageUrl('20261012_Cat12.png', true),
     href: 'https://www.beliani.ch/home-accessories/accessories-decor/',
   },

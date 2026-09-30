@@ -494,6 +494,10 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+  .hideMobile {
+    display: none !important;
+  }
+
   .stack-column {
     display: block !important;
     width: 100% !important;
