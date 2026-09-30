@@ -9,6 +9,7 @@ import { Monday } from '@/templates/JakubSrc/monday_newsletter/template.js';
 import { Friday } from './DimaSrc/friday_newsletter/template';
 import { RegularFridayNslt1 } from './DimaSrc/newsletter_regular_friday1/templates/regularFridayNslt';
 import { MondayNew } from './AISrc/monday_new/template.js';
+import { MondayAI } from './AISrc/monday_ai/template.js';
 import { MondayNewV2 } from './AISrc/monday_new_v2/template.js';
 import { ThursdayNew } from './AISrc/thursday_new/template.js';
 import { FrenchDaysNew } from './AISrc/french_days/template.js';
@@ -32,6 +33,7 @@ export const templates = {
   Monday,
   MondayNew,
   MondayNewV2,
+  MondayAI,
   ThursdayNew,
   FrenchDaysNew,
   AINewsletter1109,
