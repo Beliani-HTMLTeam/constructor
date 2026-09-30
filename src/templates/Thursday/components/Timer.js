@@ -3,8 +3,9 @@ import { ImageWithLink } from './ImageWithLink.js';
 import { Paragraph } from './Paragraph.js';
 import { CTA } from './CTA.js';
 
-const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText }) => {
+const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText, lineColor }) => {
 	if (!product) return '';
+	const lineStyle = lineColor ? ` style="border-bottom: 1px solid ${lineColor};"` : '';
 	const productHref = product.href;
 	const productSrc = typeof product.src === 'object' && product.src !== null ? product.src.src : product.src;
 	const rawTitle = (product.description?.trim() || product.name || '').trim();
@@ -15,13 +16,13 @@ const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeC
 	const oldPrice = product.highPrice || product.lowPrice || '';
 
 	return `
-        <td width="96" valign="middle" align="center" class="${isLast ? 'freebieImageTdLast' : 'freebieImageTd'}">
+        <td width="96" valign="middle" align="center" class="${isLast ? 'freebieImageTdLast' : 'freebieImageTd'}"${lineStyle}>
           <a href="${productHref}" target="_blank">
             <img src="${productSrc}" alt="${product.name || ''}" width="96" height="96" class="freebieImage" />
           </a>
         </td>
 
-        <td valign="middle" align="left" class="${isLast ? 'freebieTitleTdLast' : 'freebieTitleTd'}">
+        <td valign="middle" align="left" class="${isLast ? 'freebieTitleTdLast' : 'freebieTitleTd'}"${lineStyle}>
           <a href="${productHref}" target="_blank" style="text-decoration: none; color: ${freebiesTextColor};">
             <span class="newsletterProductTitleFreebie" style="color: ${freebiesTextColor};">${productTitle}</span>
           </a>
@@ -34,7 +35,7 @@ const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeC
           <!--<![endif]-->
         </td>
 
-        <td valign="middle" align="right" class="${isLast ? 'freebiePriceDesktopTdLast' : 'freebiePriceDesktopTd'}">
+        <td valign="middle" align="right" class="${isLast ? 'freebiePriceDesktopTdLast' : 'freebiePriceDesktopTd'}"${lineStyle}>
           ${oldPrice ? `<div class="freebieOldPriceDesktop">${oldPrice}</div>` : ''}
           <div class="freebieLowPriceDesktop" style="color: ${freebiesFreeColor};">${freeText}</div>
         </td>
@@ -109,6 +110,7 @@ const renderFreebiesList = ({
 	freebiesTextColor = '#000000',
 	freeText = 'FREE',
 	columns = 1,
+	lineColors,
 }) => {
 	if (!Array.isArray(freebies) || freebies.length === 0) return '';
 
@@ -138,7 +140,7 @@ const renderFreebiesList = ({
 				const isLast = index === freebies.length - 1;
 				return `
         <tr>
-          ${renderSingleFreebie({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText })}
+          ${renderSingleFreebie({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText, lineColor: lineColors?.[index] })}
         </tr>
       `;
 			})
@@ -182,6 +184,7 @@ const Timer = ({
 	freebiesTextColor = '#000000',
 	freeText = 'FREE',
 	freebiesColumns = 1,
+	freebiesLineColors,
 	ctaText,
 	type,
 	script = '',
@@ -276,6 +279,7 @@ const Timer = ({
 				freebiesTextColor,
 				freeText,
 				columns: freebiesColumns,
+				lineColors: freebiesLineColors,
 			})
 			: ''
 		}
