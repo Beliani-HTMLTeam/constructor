@@ -23,26 +23,27 @@ const links = {
   Banner_2_Image: translateImage({ value: '20260930b.png' }),
 };
 
-// const additionalCss = `
-// .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
-// .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-// @media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}}
-// `;
+const additionalCss = `
+.newsletterTitle{font-size: 28px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
+.newsletterProductTitle{font-size: 15px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 700;}
+@media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}}
+`;
 
-// const additionalCssLp = `
-// #newsletter .campaignEyebrow{font-size:12px;font-family:"Poppins",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
-// #newsletter .campaignHeadline{font-size:53px;font-family:"Poppins",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-// @media screen and (max-width:768px){#newsletter .campaignHeadline{font-size:32px!important}#newsletter .campaignInset{width:10px!important}#newsletter .campaignTileLink{padding:10px!important}}
-// `;
+const additionalCssLp = `
+#newsletter .campaignEyebrow{font-size:12px;font-family:"Poppins",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
+#newsletter .campaignHeadline{font-size:53px;font-family:"Poppins",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
+@media screen and (max-width:768px){#newsletter .campaignHeadline{font-size:32px!important}#newsletter .campaignInset{width:10px!important}#newsletter .campaignTileLink{padding:10px!important}}
+`;
 
 const palette = {
   accent: '#FF2F00',
   dark: '#750000',
   text: '#000000',
-  page: '#F2E6E6',
-  intro: '#FECD8C',
+  page: '#FFFFFF',
+  body: '#F6E7E6',
   box: '#FFFFFF',
   boxBorder: '#FFCCB7',
+  price: '#750000'
 };
 
 const button = {
@@ -50,14 +51,15 @@ const button = {
   align: 'left',
   variant: 'button',
   background: palette.dark,
-  fontSize: '14px',
-  lineHeight: '14px',
+  fontSize: '15px',
+  lineHeight: '16px',
   fontWeight: '700',
   letterSpacing: '0',
   paddingX: 45,
-  paddingY: 16,
+  paddingY: 15,
   mobilePaddingX: 24,
   mobilePaddingY: 14,
+  borderRadius: '0px',
 };
 
 const merge = (base, patch = {}) =>
@@ -72,12 +74,10 @@ const merge = (base, patch = {}) =>
 const productCategory = (number, name, href, products, overrides) => merge({
   paddingTop: 0,
   spaceAfter: 'newsletterBottom35px',
-
   name,
   href,
   src: getImageUrl(`20261007_Cat${number - 1}0.jpg`),
 
-  background: palette.page,
   color: palette.text,
 
   type: 'grid',
@@ -86,55 +86,57 @@ const productCategory = (number, name, href, products, overrides) => merge({
 
   title: {
     show: true,
-    color: palette.dark,
-    position: 'beforeImg',
-    align: 'left',
-    spaceAfter: 'newsletterBottom20px',
+    color: palette.text,
+    position: 'afterImg',
+    align: 'center',
+    spaceAfter: 0,
 
     number: {
-      show: true,
-      text: String(number).padStart(2, '0'),
+      show: false,
       color: palette.accent,
       className: 'newsletterTitle',
     },
 
-    paragraph: { show: true, color: palette.text },
+    paragraph: { show: true, color: palette.text, spaceBefore: 'newsletterBottom30px' },
   },
 
   cta: {
     ...button,
     position: 'afterImg',
-    color: '#F6E7E6',
-    spaceBefore: 'newsletterBottom20px',
-    spaceAfter: 'newsletterBottom20px',
+    color: '#FFFFFF',
+    spaceBefore: 'newsletterBottom30px',
+    spaceAfter: 'newsletterBottom30px',
+    align: 'center',
   },
 
   product: {
     align: 'left',
 
-    background: palette.box,
-    border: `1px solid ${palette.boxBorder}`,
-    imageWidth: 262,
-    insetX: 15,
-    insetClass: 'campaignInset',
+    imageWidth: 319,
     spaceClass: 'newsletterBottom15px',
 
-    gapBetweenVertical: 'newsletterBottom15px',
-    gapBetweenHorizontal: 10,
+    gapBetweenVertical: 'newsletterBottom10px',
+    gapBetweenHorizontal: 5,
+    containerInsetPct: 0,
+    gapPct: 1,
     hideLastBottomGap: true,
+    spaceBetweenVertical: 'newsletterBottom35px',
+
+    outlineFilledPadding: number % 2 === 0 ? 20 : null,
+    productsBg: number % 2 === 0 ? palette.body : palette.page,
 
     prices: {
-      lowColor: palette.accent,
-      layout: 'stacked',
+      lowColor: palette.price,
+      highColor: palette.price,
       reserveHighPrice: 17,
     },
 
-    title: { color: palette.dark },
+    title: { color: palette.text },
   },
 
   products: Object.values(products).map((id, i) => ({
     id,
-    src: getImageUrl(`20261021_Pic${number}${i + 1}.png`),
+    src: getImageUrl(`20261021_Cat${number}${i + 1}_A.png`),
   })),
 }, overrides);
 
@@ -150,50 +152,13 @@ const categories = [
     paragraph: { show: false, spaceAfter: 0 },
   },
 
-  // intro
-  {
-    paddingTop: 0,
-    spaceAfter: 0,
-    // href: translateLink({ value: 'content/lp26-10-07' }), LINK Z CATEGORY_LINKS
-    container: 'newsletterContainer',
-    color: palette.dark,
-    background: palette.intro,
-
-    name: 'NEW MOOD, SAME ROOM',
-    title: {
-      show: true,
-      align: 'left',
-      color: palette.accent,
-      className: 'campaignEyebrow',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom20px',
-    },
-
-    paragraph: {
-      show: true,
-      align: 'left',
-      color: palette.dark,
-      className: 'campaignHeadline',
-      spaceAfter: 'newsletterBottom20px',
-    },
-
-    cta: {
-      ...button,
-      color: '#FFCCB7',
-      phrase: 'Shop now First',
-      spaceAfter: 'newsletterBottom35px',
-      textTransform: 'uppercase',
-      tdClass: 'newsletterContainer',
-    },
-  },
-
   // sale banner
   {
-    paddingTop: 35,
+    paddingTop: 0,
     spaceAfter: 'newsletterBottom35px',
     background: palette.page,
     src: translateImage({ value: '20261007_InsideGif.gif' }),
-    href: translateLink({ value: 'content/lp26-10-21' }),
+    href: translateLink({ value: 'content/lp26-10-05' }),
     title: { show: false },
     paragraph: { show: false, spaceAfter: 0 },
   },
@@ -203,21 +168,21 @@ const categories = [
     MONTLAUR: 588168,
     SAUVIAN: 661137,
     AYETTE: 335418,
-  }),
+  }, {src: '', container: '', product: {spaceBetweenVertical: 'newsletterBottom50px'}}),
 
   productCategory(2, 'Storage', 'https://www.beliani.ch/bedroom-furniture/storage/', {
     GLASTONBURY: 607763,
     FEDRY: 360934,
     NIVO: 525110,
     KEITH: 571256,
-  }),
+  }, { container: 'newsletterContainer10px', title: {spaceBefore: 'newsletterBottom35px'}}),
 
   productCategory(3, 'Bedside Tables', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     DORRIGO: 839313,
     GLASTONBURY: 607518,
     BLYTHE: 600881,
     SALTON: 562694,
-  }),
+  }, {container: '', title: {spaceBefore: 'newsletterBottom35px'}, product: {spaceBetweenVertical: 'newsletterBottom50px'}}),
 
   productCategory(4, 'Table & Bedside Lamps', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
     LUCHETTI: 358668,
@@ -225,7 +190,9 @@ const categories = [
     BETWA: 620010,
     SIGI: 723347,
   }, {
+    container: 'newsletterContainer10px',
     spaceAfter: 'newsletterBottom80px',
+    title: {spaceBefore: 'newsletterBottom35px'}
   }),
 
   // "This may also interest you"
@@ -240,6 +207,8 @@ const categories = [
     type: 'categorytiles',
     cta: false,
     paragraph: { show: false, spaceAfter: 0 },
+
+    showTileNames: false,
 
     title: {
       show: true,
@@ -262,6 +231,7 @@ const categories = [
       insetX: 15,
       rowSpace: 'newsletterBottom20px',
       label: {
+       
         color: palette.dark,
         className: 'newsletterProductTitle campaignTileLink',
         styles: 'font-weight: 500;',
@@ -321,7 +291,7 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      // additionalCss: additionalCss,
+      additionalCss: additionalCss,
     },
 
     {
@@ -339,7 +309,7 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      // additionalCss: additionalCssLp,
+      additionalCss: additionalCssLp,
     }
   ]
 })
