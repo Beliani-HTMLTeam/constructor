@@ -20,6 +20,8 @@ export function isWhiteWrapperCampaign(campaignDate) {
 export function getWrapperForCampaign(wrapper, campaignDate) {
   if (!wrapper) return wrapper;
 
+  console.log("getWrapperForCampaign", campaignDate, isWhiteWrapperCampaign(campaignDate))
+
   return isWhiteWrapperCampaign(campaignDate) ? wrapper.replaceAll('#ececec', '#ffffff') : wrapper;
 }
 

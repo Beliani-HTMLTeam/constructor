@@ -214,8 +214,8 @@ export async function FathersDayGG({
       {
         id,
         assembly: {
-          src: ['AT', 'PL', 'FR', 'UK'].includes(country) ? getFooter('Delivery src') : getFooter('Asembly src'),
-          href: getFooter('Asembly href'),
+          src: getFooter('Assembly src new'),
+          href: getFooter('Assembly href NEW'),
           exclude: ['CHIT'].includes(country),
         },
         workBanner: {
