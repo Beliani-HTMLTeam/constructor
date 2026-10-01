@@ -167,7 +167,7 @@ export function setupDownloadEmlHandler(elements, getState) {
 
         const writable = await handle.createWritable();
         await writable.write(blob);
-        await writable.clise();
+        await writable.close();
       } catch (error) {
         if (error.name === "AbortError") {
           console.warn(`User cancelled saving prompt for: ${filename}.`)
