@@ -1,4 +1,3 @@
-import { resolveThursdayCss } from './newsletterStyles.js';
 import { Footer } from './Footer.js';
 import { Header } from './Header.js';
 
@@ -165,7 +164,5 @@ const Thursday = async ({
     ${FooterElement}
   `;
 };
-
-Thursday.resolveCss = resolveThursdayCss;
 
 export { Thursday };
