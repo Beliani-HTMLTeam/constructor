@@ -26,7 +26,7 @@ const Prices = ({ high, low = '', color, align = 'left', theme = {}, settings = 
   if (high) {
     html += `<span style="color:${highPriceColor};font-size:${highFontSize}px;line-height:${highLineHeight}px;" class="${settings?.prodHighClass ?? 'newsletterProductHighPrice'}">${high}</span>`;
   } else {
-    html += `<span style="display:none;font-size:${highFontSize}px;line-height:${highLineHeight}px;height:${highLineHeight}px;color:transparent;user-select:none;text-decoration:none;" class="${settings?.prodHighClass ?? 'newsletterProductHighPrice'}">&nbsp;</span>`;
+    html += `<span style="display:none;font-size:${highFontSize}px;line-height:${highLineHeight}px;color:transparent;user-select:none;text-decoration:none;" class="${settings?.prodHighClass ?? 'newsletterProductHighPrice'}">&nbsp;</span>`;
   }
 
   html += `</td></tr>`;

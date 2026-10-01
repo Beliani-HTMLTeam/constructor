@@ -200,11 +200,11 @@ const links = {
   // TopImage_src: catData[0].catImg,
   // TopImage_href: translateLink({ value: catData[0].href }),
 
-  Banner_1: translateLink({ value: 'content/lp26-08-28' }),
-  Banner_1_Image: translateImage({ value: '20260828b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-10-01' }),
+  Banner_1_Image: translateImage({ value: '20261001b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-09-02' }),
-  Banner_2_Image: translateImage({ value: '20260902b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-10-07' }),
+  Banner_2_Image: translateImage({ value: '20261007b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -395,7 +395,7 @@ export default new entities.Campaign({
         disableLine: true,
         containerClass: 'newsletterContainer40px',
         options: {
-          linkedType: 'cta', // all, cta, title, paragraph
+          useLinks: ["header", "title", "paragraph", "cta"], // cta, title, paragraph
 
           align: 'left',
 
@@ -444,7 +444,7 @@ export default new entities.Campaign({
         disableLine: true,
         containerClass: 'newsletterContainer40px',
         options: {
-          linkedType: 'cta', // all, cta, title, paragraph
+          useLinks: ["header", "title", "paragraph", "cta"], // cta, title, paragraph
 
           align: 'left',
           headerColor: theme.secondaryText,

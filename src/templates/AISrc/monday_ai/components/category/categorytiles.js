@@ -150,6 +150,7 @@ export const render = ({
                   </a>
                 </td>
               </tr>
+              ${Space({ insideTr: true, className: 'newsletterBottom5px'})}
               <tr>
                 <td align="left">
                   <a class="newsletterAdditionalCategoryCta" href="${href}" style="color: ${tileTextColor ?? color}; font-weight: 700;">
