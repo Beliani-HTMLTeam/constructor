@@ -144,20 +144,39 @@ export function setupDownloadEmlHandler(elements, getState) {
       "",
       finalHtml
     ].join('\r\n');
-    
+
     const blob = new Blob([eml], {
       type: "message/rfc822",
     });
 
-    const url = URL.createObjectURL(blob);
+    const filename = `${campaign.name.replaceAll(' ', '_')}.eml`;
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${campaign.name}.eml`;
+    const saveFile = async () => {
+      try {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: filename,
+          types: [
+            {
+              description: 'EML file',
+              accept: {
+                'message/rfc822': ['.eml']
+              }
+            }
+          ]
+        });
 
-    link.click();
+        const writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.clise();
+      } catch (error) {
+        if (error.name === "AbortError") {
+          console.warn(`User cancelled saving prompt for: ${filename}.`)
+        }
+      }
+  
+    };
 
-    URL.revokeObjectURL(url);
+    saveFile();
   })
 }
 
