@@ -153,7 +153,8 @@ const categories = [
           CHFR: "Textiles de Noël",
           BEFR: "Textiles de Noël",
           FR: "Textiles de Noël",
-          FI: "Joulutekstiilit"
+          FI: "Joulutekstiilit", 
+          HU: "Karácsonyi textíliák"
         },
         src: getImageUrl('20261009Category8.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-textiles/',
@@ -167,6 +168,7 @@ const categories = [
           CHFR: "Lumières de Noël",
           BEFR: "Lumières de Noël",
           FR: "Lumières de Noël",
+          HU: "Karácsonyi fényfüzérek"
         },
         src: getImageUrl('20261009Category9.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-lights/',
@@ -180,7 +182,8 @@ const categories = [
           BEFR: "Bougeoirs de Noël",
           FR: "Bougeoirs de Noël",
           FI: "Joulun kynttilänjalat",
-          PT: "Castiçais de Natal"
+          PT: "Castiçais de Natal",
+          HU: "Karácsonyi gyertyatarók"
         },
         src: getImageUrl('20261009Category10.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-candle-holders/',
