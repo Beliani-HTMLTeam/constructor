@@ -1,6 +1,6 @@
-import { getImageUrl } from '../../src/utils/ImageManager.js';
-import { translateImage } from '../../src/helpers/translateImage.js';
-import { translateLink } from '../../src/helpers/translateLink.js';
+import { getImageUrl } from '../../../src/utils/ImageManager.js';
+import { translateImage } from '../../../src/helpers/translateImage.js';
+import { translateLink } from '../../../src/helpers/translateLink.js';
 // import { templates, types, entities } from '../../src/components/index.js';
 
 const campaignTranslationsSheet = '2026::23.07.26 - Mirrors';

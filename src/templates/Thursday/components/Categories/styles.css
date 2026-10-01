@@ -1,0 +1,22 @@
+.newsletterAdditionalCategoryTitle {
+  font-size: 27px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+  text-decoration: underline;
+}
+
+.newsletterTitleOfferPart {
+  font-size: 30px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+}
+@media screen and (max-width: 768px) {
+
+  .newsletterAdditionalCategoryTitle {
+    font-size: 16px !important;
+  }
+
+  .newsletterTitleOfferPart {
+    font-size: 25px;
+  }
+}

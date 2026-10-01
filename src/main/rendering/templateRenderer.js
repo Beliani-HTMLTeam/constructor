@@ -231,7 +231,13 @@ export async function renderTemplate(getState, setState) {
       generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
     }
 
-    const effectiveCss = (templateToRender.css ?? '') + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
+    const templateCss = templateToRender.template.resolveCss?.({
+      css: templateToRender.css ?? '',
+      html,
+      type: templateToRender.type,
+      wrapper: templateToRender.wrapper,
+    }) ?? (templateToRender.css ?? '');
+    const effectiveCss = templateCss + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
     const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
 
     const wrappedHtml = templateToRender.wrapper
@@ -349,7 +355,13 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
     generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
   }
 
-  const effectiveCss = (templateToRender.css ?? '') + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
+  const templateCss = templateToRender.template.resolveCss?.({
+    css: templateToRender.css ?? '',
+    html,
+    type: templateToRender.type,
+    wrapper: templateToRender.wrapper,
+  }) ?? (templateToRender.css ?? '');
+  const effectiveCss = templateCss + (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
   const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
   return templateToRender.wrapper
     ? wrapTemplate(getWrapperForCampaign(templateToRender.wrapper, selectedCampaign.date), { style: getWrapperCssForCampaign(effectiveCss, selectedCampaign.date), html })

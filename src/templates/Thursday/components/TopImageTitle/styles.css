@@ -1,0 +1,24 @@
+.newsletterMarkTitle {
+  font-size: 25px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1;
+  margin-bottom: 0px;
+}
+
+.newsletterMarkTitleSpace {
+  padding-bottom: 25px;
+}
+@media screen and (max-width: 768px) {
+
+  .newsletterMarkTitle {
+    font-size: 18px;
+  }
+
+  .newsletterMarkTitleSpace {
+    padding-bottom: 18px;
+  }
+
+  .newsletterMarkTitleAlign {
+    text-align: left;
+  }
+}

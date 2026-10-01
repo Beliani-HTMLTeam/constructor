@@ -1,0 +1,54 @@
+.newsletterTitle {
+  font-size: 30px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.newsletterTitleAditional {
+  font-size: 30px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.newsletterAditionalTitle {
+  font-size: 30px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.newsletterParagraph {
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+}
+
+.newsletterParagraph b {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+@media screen and (max-width: 768px) {
+
+  .newsletterTitle {
+    font-size: 25px;
+  }
+
+  .newsletterTitleAditional {
+    font-size: 25px;
+  }
+
+  .newsletterAditionalTitle {
+    font-size: 25px;
+  }
+
+  .newsletterParagraph {
+    font-size: 16px;
+  }
+
+  .newsletterParagraph b {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+}

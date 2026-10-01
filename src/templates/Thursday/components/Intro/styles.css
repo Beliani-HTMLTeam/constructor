@@ -1,0 +1,12 @@
+.newsletterIntroTitle {
+  font-size: 35px;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.2;
+  font-weight: 600;
+}
+@media screen and (max-width: 768px) {
+
+  .newsletterIntroTitle {
+    font-size: 28px;
+  }
+}

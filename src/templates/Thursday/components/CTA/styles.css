@@ -1,0 +1,36 @@
+.newsletterCtaBtn {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.newsletterCtaLink {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.newsletterCta {
+  text-decoration: underline;
+  font-size: 20px;
+  line-height: 1.2;
+  font-family: "Open Sans", sans-serif;
+}
+
+.newsletterFreebieCta {
+  text-decoration: underline;
+  font-size: 18px;
+  line-height: 1.2;
+  font-family: "Open Sans", sans-serif;
+}
+@media screen and (max-width: 768px) {
+  .newsletterCtaLink {
+    width: auto;
+    max-width: 100%;
+  }
+}
