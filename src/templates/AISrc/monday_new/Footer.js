@@ -34,7 +34,7 @@ const Footer = ({
 
   const assemblyBanner = newAssembly
     ? {
-        src: getFooter('Assembly src new'),
+        src: getFooter('Assembly src new') + '?ver=100',
         href: getFooter('Assembly href NEW'),
       }
     : {
@@ -102,7 +102,7 @@ const Footer = ({
     klarna: {
       src: getFooter('Klarna src'),
       href: getFooter('Klarna href'),
-      //exclude: ["HU"].includes(country),
+      exclude: ["HU", "SI", "HR"].includes(country),
     },
 
     socials: {
