@@ -17,6 +17,298 @@ import { dynamicTranslations, translationCache, staticTranslations } from '@/api
 
 let latestRenderId = 0;
 
+const purgeCss = (html, css) => {
+  const used = extractUsedSelectors(html);
+  css = css.replace(/\/\*[\s\S]*?\*\//g, '');
+
+  const result = processCss(css, used);
+  return result.replace(/\n\s*\n\s*\n/, '\n\n').trim();
+};
+
+const extractUsedSelectors = (html) => {
+  const tags = new Set();
+  const classes = new Set();
+  const ids = new Set();
+  const attributes = new Set();
+
+  for (const match of html.matchAll(/<([a-zA-Z][\w:-]*)\b/g)) {
+    tags.add(match[1].toLowerCase());
+  }
+
+  for (const match of html.matchAll(/\bclass\s*=\s*["']([^"']*)["']/gi)) {
+    for (const cls of match[1].split(/\s+/)) {
+      if (cls) classes.add(cls);
+    }
+  }
+
+  for (const match of html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)) {
+    ids.add(match[1]);
+  }
+
+  for (const match of html.matchAll(/\s([a-zA-Z_:][\w:.-]*)(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/g)) {
+    attributes.add(match[1].toLowerCase());
+  }
+
+  return {
+    tags,
+    classes,
+    ids,
+    attributes,
+  };
+};
+
+const processCss = (css, used) => {
+  let output = '';
+  let i = 0;
+
+  while (i < css.length) {
+    if (/\s/.test(css[i])) {
+      output += css[i];
+      i++;
+      continue;
+    }
+
+    const openBrace = findNextOutsideQuotes(css, '{', i);
+    const semicolon = findNextOutsideQuotes(css, ';', i);
+
+    if (openBrace === -1 && semicolon === -1) {
+      output += css.slice(i);
+      break;
+    }
+
+    if (semicolon !== -1 && (openBrace === -1 || semicolon < openBrace)) {
+      output += css.slice(i, semicolon + 1);
+      i = semicolon + 1;
+      continue;
+    }
+
+    const header = css.slice(i, openBrace).trim();
+
+    const closeBrace = findMatchingBrace(css, openBrace);
+
+    if (closeBrace === -1) {
+      output += css.slice(i);
+      break;
+    }
+
+    const body = css.slice(openBrace + 1, closeBrace);
+
+    if (header.startsWith('@')) {
+      if (/^@font-face\b/i.test(header)) {
+        output += css.slice(i, closeBrace + 1);
+        i = closeBrace + 1;
+        continue;
+      }
+
+      if (/^@(-webkit-)?keyframes\b/i.test(header)) {
+        output += css.slice(i, closeBrace + 1);
+        i = closeBrace + 1;
+        continue;
+      }
+
+      if (/^@(media|supports|container|layer|document|scope)\b/i.test(header)) {
+        const cleanedBody = processCss(body, used);
+
+        if (cleanedBody.trim()) {
+          output += css.slice(i, openBrace + 1) + cleanedBody + '}';
+        }
+
+        i = closeBrace + 1;
+        continue;
+      }
+
+      output += css.slice(i, closeBrace + 1);
+
+      i = closeBrace + 1;
+      continue;
+    }
+
+    if (selectorIsUsed(header, used)) {
+      output += css.slice(i, openBrace + 1) + body + '}';
+    }
+
+    i = closeBrace + 1;
+  }
+
+  return output;
+};
+
+const selectorIsUsed = (selector, used) => {
+  const selectors = splitSelectors(selector);
+
+  for (const s of selectors) {
+    const clean = s.trim();
+
+    if (!clean) continue;
+
+    if (clean === '*') {
+      return true;
+    }
+
+    if (/:root\b/.test(clean)) {
+      return true;
+    }
+
+    const ids = clean.match(/#[a-zA-Z_-][\w-]*/g) || [];
+
+    for (const id of ids) {
+      if (used.ids.has(id.slice(1))) {
+        return true;
+      }
+    }
+
+    const classes = clean.match(/\.[a-zA-Z_-][\w-]*/g) || [];
+
+    for (const cls of classes) {
+      if (used.classes.has(cls.slice(1))) {
+        return true;
+      }
+    }
+
+    const tags = clean.match(/(^|[\s>+~])([a-zA-Z][\w-]*)/g) || [];
+
+    for (const tag of tags) {
+      const name = tag.replace(/^[\s>+~]+/, '').toLowerCase();
+
+      if (used.tags.has(name)) {
+        return true;
+      }
+    }
+
+    const attrs = clean.match(/\[\s*([a-zA-Z_:][\w:.-]*)/g) || [];
+
+    for (const attr of attrs) {
+      const name = attr.replace(/[\[\s]/g, '').toLowerCase();
+
+      if (used.attributes.has(name)) {
+        return true;
+      }
+    }
+
+    if (
+      /:(hover|active|focus|focus-within|focus-visible|visited|checked|disabled|enabled|selected|target|before|after)\b/i.test(
+        clean
+      )
+    ) {
+      if (ids.length || classes.length || tags.length) {
+        return true;
+      }
+    }
+
+    const nested = clean.match(/:(?:has|is|where|not)\(([^()]*)\)/g) || [];
+
+    for (const n of nested) {
+      if (selectorIsUsed(n.replace(/^:[^(]+\(/, '').replace(/\)$/, ''), used)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
+
+const splitSelectors = (selector) => {
+  const result = [];
+
+  let start = 0;
+  let depthParen = 0;
+  let depthBracket = 0;
+  let quote = null;
+
+  for (let i = 0; i < selector.length; i++) {
+    const char = selector[i];
+
+    if (quote) {
+      if (char === quote && selector[i - 1] !== '\\') {
+        quote = null;
+      }
+
+      continue;
+    }
+
+    if (char === '"' || char === "'") {
+      quote = char;
+      continue;
+    }
+
+    if (char === '(') depthParen++;
+    if (char === ')') depthParen--;
+
+    if (char === '[') depthBracket++;
+    if (char === ']') depthBracket--;
+
+    if (char === ',' && depthParen === 0 && depthBracket === 0) {
+      result.push(selector.slice(start, i));
+      start = i + 1;
+    }
+  }
+
+  result.push(selector.slice(start));
+
+  return result;
+};
+
+const findNextOutsideQuotes = (str, char, start) => {
+  let quote = null;
+
+  for (let i = start; i < str.length; i++) {
+    const c = str[i];
+
+    if (quote) {
+      if (c === quote && str[i - 1] !== '\\') {
+        quote = null;
+      }
+
+      continue;
+    }
+
+    if (c === '"' || c === "'") {
+      quote = c;
+      continue;
+    }
+
+    if (c === char) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+const findMatchingBrace = (str, openIndex) => {
+  let depth = 1;
+  let quote = null;
+
+  for (let i = openIndex + 1; i < str.length; i++) {
+    const c = str[i];
+
+    if (quote) {
+      if (c === quote && str[i - 1] !== '\\') {
+        quote = null;
+      }
+
+      continue;
+    }
+
+    if (c === '"' || c === "'") {
+      quote = c;
+      continue;
+    }
+
+    if (c === '{') depth++;
+
+    if (c === '}') {
+      depth--;
+
+      if (depth === 0) {
+        return i;
+      }
+    }
+  }
+
+  return -1;
+};
+
 export async function renderTemplate(getState, setState) {
   if (!getState('country')) return;
   const renderId = ++latestRenderId;
@@ -122,9 +414,9 @@ export async function renderTemplate(getState, setState) {
 
   const decompressIfNeeded = (value) => {
     if (!value) return value;
-    
+
     if (!isCompressedProducts(value)) return value;
-    
+
     try {
       return decompress(value.payload);
     } catch {
@@ -137,7 +429,7 @@ export async function renderTemplate(getState, setState) {
 
     // check if normalization is needed
     const needsNormalize = arr.some((p) => p && typeof p === 'object' && 'saved_params' in p);
-    
+
     return needsNormalize ? normalizeProducts(arr) : arr;
   };
 
@@ -151,12 +443,11 @@ export async function renderTemplate(getState, setState) {
 
     try {
       const rawIndex = localStorage.getItem('products');
-    
+
       parsedIndex = rawIndex ? JSON.parse(rawIndex) : [];
     } catch {
       parsedIndex = [];
     }
-
 
     // cast to string to avoid type issues
     const campaignEntry = Array.isArray(parsedIndex)
@@ -211,7 +502,8 @@ export async function renderTemplate(getState, setState) {
       getPhrase: handlers.getPhrase,
       add_utm: (link) =>
         templateToRender.type == 'newsletter'
-          ? link + `${link.includes('?') ? '&' : '?'}utm_source=newsletter&utm_medium=email&utm_campaign=${ids[country]}`
+          ? link +
+            `${link.includes('?') ? '&' : '?'}utm_source=newsletter&utm_medium=email&utm_campaign=${ids[country]}`
           : link,
       getCampaignData: (key) => {
         if (key in slugData) {
@@ -231,14 +523,27 @@ export async function renderTemplate(getState, setState) {
       generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
     }
 
-    const effectiveCss = (templateToRender.css ?? '') +(templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
-    const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? styleTags(effectiveCss) + html : html;
+    let effectiveCss =
+      (templateToRender.css ?? '') +
+      (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') +
+      (generatedCtaCss ? '\n' + generatedCtaCss : '');
+    const withStylesOrNo =
+      'css' in templateToRender || templateToRender.additionalCss || generatedCtaCss
+        ? styleTags(effectiveCss) + html
+        : html;
+    
+    let cleaned = '';
+    
+    if (templateToRender?.optimizeCss)
+      cleaned = purgeCss(html, effectiveCss);
+    else
+      cleaned = effectiveCss;
 
     const wrappedHtml = templateToRender.wrapper
       ? wrapTemplate(getWrapperForCampaign(templateToRender.wrapper, selectedCampaign.date), {
-        style: getWrapperCssForCampaign(effectiveCss, selectedCampaign.date),
-        html: html,
-      })
+          style: getWrapperCssForCampaign(cleaned, selectedCampaign.date),
+          html: html,
+        })
       : withStylesOrNo;
 
     const finalHtml = optimizeHtmlImages(wrappedHtml, getState);
@@ -275,7 +580,11 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
   const decompressIfNeeded = (value) => {
     if (!value) return value;
     if (!isCompressedProducts(value)) return value;
-    try { return decompress(value.payload); } catch { return []; }
+    try {
+      return decompress(value.payload);
+    } catch {
+      return [];
+    }
   };
 
   const ensureNormalizedProducts = (value) => {
@@ -294,7 +603,9 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
     try {
       const rawIndex = localStorage.getItem('products');
       parsedIndex = rawIndex ? JSON.parse(rawIndex) : [];
-    } catch { parsedIndex = []; }
+    } catch {
+      parsedIndex = [];
+    }
     const campaignEntry = Array.isArray(parsedIndex)
       ? parsedIndex.find((item) => String(item?.campaign_id) === String(selectedCampaign.startId))
       : null;
@@ -349,9 +660,18 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
     generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
   }
 
-  const effectiveCss = (templateToRender.css ?? '') +(templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
-  const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? styleTags(effectiveCss) + html : html;
+  const effectiveCss =
+    (templateToRender.css ?? '') +
+    (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') +
+    (generatedCtaCss ? '\n' + generatedCtaCss : '');
+  const withStylesOrNo =
+    'css' in templateToRender || templateToRender.additionalCss || generatedCtaCss
+      ? styleTags(effectiveCss) + html
+      : html;
   return templateToRender.wrapper
-    ? wrapTemplate(getWrapperForCampaign(templateToRender.wrapper, selectedCampaign.date), { style: getWrapperCssForCampaign(effectiveCss, selectedCampaign.date), html })
+    ? wrapTemplate(getWrapperForCampaign(templateToRender.wrapper, selectedCampaign.date), {
+        style: getWrapperCssForCampaign(effectiveCss, selectedCampaign.date),
+        html,
+      })
     : withStylesOrNo;
 }
