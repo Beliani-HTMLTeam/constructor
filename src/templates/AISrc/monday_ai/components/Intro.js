@@ -35,6 +35,17 @@ const Intro = ({
     return String(value).trim();
   };
 
+  const getAnchorUse = (elem, content, { href = ctaHref, style = ''} = {}) => {
+    if (!options?.useLinks?.includes(elem) || !href)
+      return content;
+
+    return (`
+    <a href="${href}" style="display:block;width:100%;text-decoration:none;${style}">
+      ${content}
+    </a>
+    `);
+  };
+
   const introHeader = hasTitleAndParagraph ? normalizeText(text[0] ?? 'TRANSLATION NOT FOUND') : '';
   const introTitle = hasTitleAndParagraph ? normalizeText(text[1] ?? 'TRANSLATION NOT FOUND') : '';
   const introParagraph = hasTitleAndParagraph
@@ -84,17 +95,21 @@ const Intro = ({
     ? `
     <tr>
       <td align="${optionsObj?.align.split(':')[1].replace(';','')}"${containerClass ? ` class=${containerClass}` : ''}>
+      ${getAnchorUse('header', (`
         <span class="${optionsObj?.headerClass}" style="${type === 'newsletter' ? "font-family:'Open Sans',Arial,sans-serif;" : ''}line-height:1.2;${joinTexts('headerColor', 'headerWeight')}text-align:${paragraphAlign};">
           ${introHeader}
-        </span>
+        </span>`)
+      )}
       </td>
     </tr>
     ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
     <tr>
       <td align="${optionsObj?.align.split(':')[1].replace(';','')}"${containerClass ? ` class=${containerClass}` : ''}>
-        <span class="${optionsObj?.titleClass}" style="${type === 'newsletter' ? "font-family:'Open Sans',Arial,sans-serif;" : ''}line-height:1.2;${joinTexts('titleColor', 'titleWeight')}text-align:${paragraphAlign};">
+      ${getAnchorUse('title', 
+        (`<span class="${optionsObj?.titleClass}" style="${type === 'newsletter' ? "font-family:'Open Sans',Arial,sans-serif;" : ''}line-height:1.2;${joinTexts('titleColor', 'titleWeight')}text-align:${paragraphAlign};">
           ${introTitle}
-        </span>
+        </span>`)
+      )}
       </td>
     </tr>
     ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
@@ -105,9 +120,11 @@ const Intro = ({
     ? `
     <tr>
       <td align="${optionsObj?.align.split(':')[1].replace(';','')}"${containerClass ? ` class=${containerClass}` : ''}>
-        <span class="${paragraphClass}" style="${type === 'newsletter' ? "font-family: 'Open Sans', Arial, sans-serif;" : ''} font-size: 16px; line-height: 1.2; color: ${textColor}; text-align: ${paragraphAlign};">
+      ${getAnchorUse('paragraph',
+        (`<span class="${paragraphClass}" style="${type === 'newsletter' ? "font-family:'Open Sans',Arial,sans-serif;" : ''}line-height:1.2;color:${textColor};text-align:${paragraphAlign};">
           ${introParagraph}
-        </span>
+        </span>`)
+      )}
       </td>
     </tr>
     ${paragraphSpace === false ? '' : Space({ insideTr: true, className: paragraphSpace ?? 'newsletterBottom25px' })}
@@ -119,7 +136,7 @@ const Intro = ({
       ?
       Space({ insideTr: true, className: 'newsletterBottom15px' }) +
       CTA({
-        disableLink: options?.linkedType !== 'cta',
+        disableLink: !options?.useLinks.includes('cta'),
         href: ctaHref,
         text: ctaText,
         variant: btnVariant,
@@ -147,7 +164,7 @@ const Intro = ({
         ${
           type === 'newsletter'
             ? CTA({
-                disableLink: options?.linkedType !== 'cta',
+                disableLink: !options?.useLinks.includes('cta'),
                 href: secondaryLinkHref,
                 text: secondaryLinkText,
                 variant: 'cream',
@@ -161,7 +178,6 @@ const Intro = ({
     </tr>
     `
       : '';
-    
 
   let html =
   `
@@ -179,15 +195,9 @@ const Intro = ({
     }
     ${spaceTop === false ? '' : Space({ className: spaceTop || 'newsletterBottom35px', insideTr: true })}
 
-    ${options?.linkedType === 'title'
-      ? `<a href="${ctaHref}" style="text-decoration:none;">${IntroTitleElement}</a>`
-      : IntroTitleElement
-    }
+    ${IntroTitleElement}
       
-    ${options?.linkedType === 'paragraph'
-      ? `<a href="${ctaHref}" style="text-decoration:none;">${IntroParagraphElement}</a>`
-      : IntroParagraphElement
-    }
+    ${IntroParagraphElement}
 
     ${showCta ? CTAElement : ''}
 
@@ -199,10 +209,7 @@ const Intro = ({
   return `
     <tr>
       <td style="${wrapperCellStyle}">
-        ${options?.linkedType == 'all'
-          ? `<a href="${ctaHref}" style="text-decoration:none;">${html}</a>`
-          : html
-        }
+        ${html}
       </td>
     </tr>
   `;
