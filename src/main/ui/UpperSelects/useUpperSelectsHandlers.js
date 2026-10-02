@@ -162,6 +162,12 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 				showElements(actionEls.openCampaign);
 			}
 
+			if (foundTemplate?.type !== 'landing') {
+				showElements(actionEls.downloadEml);
+			} else {
+				hideElements(actionEls.downloadEml);
+			}
+
 			render();
 		},
 		[selectedTemplates, getActionElements, render]

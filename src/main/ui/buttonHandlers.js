@@ -168,6 +168,8 @@ export function setupDownloadEmlHandler(elements, getState) {
         const writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
+
+        toast.success("Campgain has been saved to the file.")
       } catch (error) {
         if (error.name === "AbortError") {
           console.warn(`User cancelled saving prompt for: ${filename}.`)
