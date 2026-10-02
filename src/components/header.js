@@ -68,7 +68,7 @@ export function Header(sections, options) {
                         <tr>
                           <td class="newsletterContainer60px" align="center">
                             <a href="${topImage.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}">
-                              <img src="https://pictureserver.net/static/header/header2_logo.png" alt="Beliani" style="display:block; max-width: 100%;" />
+                              <img src="https://pictureserver.net/static/header/header2_logo.png" alt="Beliani" width="${HEADER_CATEGORIES_WIDTH}" style="display:block; border:0; width:100%; max-width:${HEADER_CATEGORIES_WIDTH}px; height:auto;" />
                             </a>
                           </td>
                         </tr>
