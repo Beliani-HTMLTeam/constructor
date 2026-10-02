@@ -28,7 +28,7 @@ const links = {
   Banner_1_Image: translateImage({ value: '20260930b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-10-01' }),
   Banner_2_Image: translateImage({ value: '20261001b.png' }),
-  Timer_href: translateLink({ value: 'content/lp26-10-06' }),
+  Timer_href: translateLink({ value: 'content/lp26-10-06-ta' }),
   Intro_cta_href: "https://www.beliani.ch/christmas-shop/christmas-accessories/"
 };
 
