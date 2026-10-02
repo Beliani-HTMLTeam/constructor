@@ -1,9 +1,36 @@
 const startDate = new Date(2026, 9, 12);
 
+const STYLE_CHUNK_SIZE = 8000;
+
+// splits css into several <style> tags so a single tag stays small for Gmail
+export function styleTags(css, chunkSize = STYLE_CHUNK_SIZE) {
+  const chunks = [];
+  let current = '';
+  let depth = 0;
+  let start = 0;
+
+  for (let i = 0; i < css.length; i++) {
+    if (css[i] === '{') depth++;
+    else if (css[i] === '}' && --depth === 0) {
+      const block = css.slice(start, i + 1);
+      start = i + 1;
+      if (current && current.length + block.length > chunkSize) {
+        chunks.push(current);
+        current = '';
+      }
+      current += block;
+    }
+  }
+  current += css.slice(start);
+  if (current.trim()) chunks.push(current);
+
+  return chunks.map((chunk) => `<style>${chunk}</style>`).join('');
+}
+
 export function wrapTemplate(campaign, data) {
   const document = new DOMParser().parseFromString(campaign, 'text/html');
   document.body.innerHTML = data.html;
-  document.head.innerHTML += '<style>' + data.style + '</style>';
+  document.head.innerHTML += styleTags(data.style);
   const doctype = new XMLSerializer().serializeToString(document.doctype);
   return doctype + document.documentElement.outerHTML;
 }

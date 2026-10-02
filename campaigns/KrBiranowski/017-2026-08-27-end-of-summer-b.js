@@ -313,7 +313,7 @@ export default new entities.Campaign({
       color: theme.black,
       template: templates.Thursday,
 
-      css: types.CSS.NS,
+      css: types.CSS.NS_THURSDAY,
       name: 'Newsletter',
       type: types.NEWSLETTER,
       translationsSpreadsheet: campaignTranslationsSheet,
@@ -352,7 +352,7 @@ export default new entities.Campaign({
       color: theme.black,
       template: templates.Thursday,
 
-      css: types.CSS.LP,
+      css: types.CSS.LP_THURSDAY,
       name: 'Landing',
       type: types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,

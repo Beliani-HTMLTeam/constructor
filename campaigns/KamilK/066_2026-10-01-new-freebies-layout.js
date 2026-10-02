@@ -385,7 +385,7 @@ const timer = {
 	freebiesTitleColor: '#000000',
 	freebiesFreeColor: '#000000',
 	freebiesTextColor: '#000000',
-	freebiesLineColors: ['#ECE7E0', '#F6E7E6', '#FFFFFF', '#E3CCCC', '#ECE7E0'],
+	freebiesLineColors: ['#E3CCCC', '#E3CCCC', '#E3CCCC', '#E3CCCC', '#E3CCCC'],
 	deadline: '2026-10-04',
 }
 
@@ -407,7 +407,7 @@ export default new entities.Campaign({
 			name: 'Newsletter',
 			type: types.NEWSLETTER,
 			template: templates.Thursday, // User should change this
-			css: types.CSS.NS,
+			css: types.CSS.NS_THURSDAY,
 			additionalCss: freebiesCss,
 			translationsSpreadsheet: campaignTranslationsSheet,
 			background: '#FFF5F1',
@@ -440,7 +440,7 @@ export default new entities.Campaign({
 			name: 'Landing',
 			type: types.LANDINGPAGE,
 			template: templates.Thursday, // User should change this
-			css: types.CSS.LP,
+			css: types.CSS.LP_THURSDAY,
 			additionalCss: freebiesCssLp,
 			background: '#FFF5F1',
 			color: '#000000',

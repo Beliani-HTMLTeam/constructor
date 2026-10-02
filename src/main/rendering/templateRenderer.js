@@ -1,6 +1,6 @@
 import { addParams } from '@/helpers/getQueryLink.js';
 import { TemplateHandlers } from '@/main/handlers/handlers.js';
-import { wrapTemplate, getWrapperForCampaign, getWrapperCssForCampaign } from '@/helpers/wrapTemplate.js';
+import { wrapTemplate, styleTags, getWrapperForCampaign, getWrapperCssForCampaign } from '@/helpers/wrapTemplate.js';
 import { normalizeProducts } from '@/utils/normalizeProducts.js';
 import { computeValue } from '@/helpers/computeValue.js';
 import { getTrackingUrl } from '@/utils/getTrackingUrl.js';
@@ -232,7 +232,7 @@ export async function renderTemplate(getState, setState) {
     }
 
     const effectiveCss = (templateToRender.css ?? '') +(templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
-    const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
+    const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? styleTags(effectiveCss) + html : html;
 
     const wrappedHtml = templateToRender.wrapper
       ? wrapTemplate(getWrapperForCampaign(templateToRender.wrapper, selectedCampaign.date), {
@@ -350,7 +350,7 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
   }
 
   const effectiveCss = (templateToRender.css ?? '') +(templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') + (generatedCtaCss ? '\n' + generatedCtaCss : '');
-  const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? `<style>${effectiveCss}</style>` + html : html;
+  const withStylesOrNo = ('css' in templateToRender || templateToRender.additionalCss || generatedCtaCss) ? styleTags(effectiveCss) + html : html;
   return templateToRender.wrapper
     ? wrapTemplate(getWrapperForCampaign(templateToRender.wrapper, selectedCampaign.date), { style: getWrapperCssForCampaign(effectiveCss, selectedCampaign.date), html })
     : withStylesOrNo;

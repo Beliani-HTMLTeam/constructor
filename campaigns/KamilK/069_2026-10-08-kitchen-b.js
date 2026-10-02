@@ -186,7 +186,7 @@ export default new entities.Campaign({
 			name: 'Newsletter',
 			type: types.NEWSLETTER,
 			template: templates.Thursday,
-			css: types.CSS.NS,
+			css: types.CSS.NS_THURSDAY,
 			translationsSpreadsheet: campaignTranslationsSheet,
 
 			background: palette.page,
@@ -206,7 +206,7 @@ export default new entities.Campaign({
 			name: 'Landing',
 			type: types.LANDINGPAGE,
 			template: templates.Thursday,
-			css: types.CSS.LP,
+			css: types.CSS.LP_THURSDAY,
 			translationsSpreadsheet: campaignTranslationsSheet,
 
 			background: palette.page,

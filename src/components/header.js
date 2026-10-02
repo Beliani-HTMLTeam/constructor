@@ -1,5 +1,20 @@
 import { types } from '@utils/types.js';
 
+// bim bim patapim header container width
+const HEADER_CATEGORIES_WIDTH = 312;
+const HEADER_IMAGES_URL = 'https://pictureserver.net/static/header/';
+
+function headerCategoryCell(category, campaignId) {
+  const width = Number(category.width);
+  const percent = ((width / HEADER_CATEGORIES_WIDTH) * 100).toFixed(2);
+
+  return `<td width="${width}" style="width:${percent}%; font-size:0; line-height:0;">
+            <a href="${category.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${campaignId}">
+              <img src="${HEADER_IMAGES_URL}${category.src}" alt="${category.alt}" width="${width}" height="30" style="display:block; border:0; width:100%; max-width:${width}px; height:auto;" />
+            </a>
+          </td>`;
+}
+
 export function Header(sections, options) {
   const json_header = {
     advantages: {
@@ -44,7 +59,23 @@ export function Header(sections, options) {
     },
     topImage: {
       [types.NEWSLETTER]: {
-        value: (topImage) => `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
+        value: (topImage) =>
+          options.newHeaderLayout
+            ? `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
+                    style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff; ">
+                    <tbody>
+                        <tr><td class="newsletterBottom35px"></td></tr>
+                        <tr>
+                          <td class="newsletterContainer60px" align="center">
+                            <a href="${topImage.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${sections.id}">
+                              <img src="https://pictureserver.net/static/header/header2_logo.png" alt="Beliani" style="display:block; max-width: 100%;" />
+                            </a>
+                          </td>
+                        </tr>
+                        <tr><td class="newsletterBottom10px"></td></tr>
+                    </tbody>
+                </table>`
+            : `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
                     style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
@@ -63,11 +94,29 @@ export function Header(sections, options) {
     },
     categories: {
       [types.NEWSLETTER]: {
-        value: ({
-          firstCategory,
-          secondCategory,
-          thirdCategory,
-        }) => `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
+        value: ({ firstCategory, secondCategory, thirdCategory }) =>
+          options.newHeaderLayout
+            ? `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
+        style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff;">
+      <tbody>
+        <tr>
+          <td class="newsletterContainer60px" align="center">
+            <!--[if mso]><table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" width="${HEADER_CATEGORIES_WIDTH}"><tr><td width="${HEADER_CATEGORIES_WIDTH}"><![endif]-->
+            <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 auto; width: 100%; max-width: ${HEADER_CATEGORIES_WIDTH}px; table-layout: fixed;">
+              <tr>
+                ${headerCategoryCell(firstCategory, sections.id)}
+                ${headerCategoryCell(secondCategory, sections.id)}
+                ${headerCategoryCell(thirdCategory, sections.id)}
+              </tr>
+            </table>
+            <!--[if mso]></td></tr></table><![endif]-->
+          </td>
+        </tr>
+
+        <tr><td class="newsletterBottom35px"></td></tr>
+      </tbody>
+      </table>`
+            : `<table align="center" cellspacing="0" cellpadding="0" border="0" width="100%"
                     style="margin: 0 auto; max-width: 650px; width: 100%; background-color:#ffffff; padding-top: 0em; padding-bottom: 0em; ">
                     <tbody>
                         <tr>
