@@ -13,7 +13,8 @@ const Product = (
   imageAlign = 'center',
   container = '',
   showBottomGap = true,
-  productStyle = null
+  productStyle = null, 
+  isLastRow = false
 ) => {
   if (!product || typeof product !== 'object') return '';
 
@@ -86,7 +87,7 @@ const Product = (
     return `
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
     ${inner}
-    ${bottomGapClass ? Space({ insideTr: true, className: bottomGapClass }) : ''}
+    ${!isLastRow ?( productStyle?.spaceBetweenVertical  ? Space({ insideTr: true, className: productStyle.spaceBetweenVertical }) : bottomGapClass ? Space({ insideTr: true, className: bottomGapClass }) : '') : ''}
   </table>`;
   }
 
