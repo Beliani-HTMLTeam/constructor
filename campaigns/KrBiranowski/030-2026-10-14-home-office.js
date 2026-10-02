@@ -17,7 +17,7 @@ const theme = {
   ctaPrimaryText: '#ffffff',
   ctaSecondary: '#750000',
   ctaSecondaryText: '#ffffff',
-  addColor: '#FBEFEC',
+  addColor: '#FFCCB7',
   catText: '#750000',
 };
 
@@ -300,20 +300,18 @@ const categories = [
     tileTextColor: theme.titleText,
     paddingTop: 0,
     showTileNames: true,
-    tdClass: 'newsletterContainer40px',
+    tdClass: 'newsletterContainer',
     title: {
       className: 'newsletterAditionalTitle',
-      align: 'center',
+      align: 'left',
+      color: theme.titleText,
       show: true,
       spaceBefore: 'newsletterBottom40px',
-      // spaceAfter: 'newsletterBottom35px',
-      tdClass: 'newsletterContainer40px',
+      spaceAfter: 'newsletterBottom35px',
+      tdClass: 'newsletterContainer',
     },
     paragraph: {
       show: false,
-      align: 'center',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
     },
     tiles: [
       {
@@ -393,10 +391,9 @@ export default new entities.Campaign({
           borderWidth: '15px 45px',
         },
         disableLine: true,
-        containerClass: 'newsletterContainer40px',
+        containerClass: 'newsletterContainer',
         options: {
-          useLinks: ["header", "title", "paragraph", "cta"], // cta, title, paragraph
-
+          useLinks: ["header", "title", "paragraph", "cta"],
           align: 'left',
 
           headerColor: theme.secondaryText,
@@ -442,9 +439,9 @@ export default new entities.Campaign({
           borderWidth: '6px 20px',
         },
         disableLine: true,
-        containerClass: 'newsletterContainer40px',
+        containerClass: 'newsletterContainer',
         options: {
-          useLinks: ["header", "title", "paragraph", "cta"], // cta, title, paragraph
+          useLinks: ["header", "title", "paragraph", "cta"],
 
           align: 'left',
           headerColor: theme.secondaryText,
