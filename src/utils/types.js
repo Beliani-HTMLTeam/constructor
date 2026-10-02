@@ -1,4 +1,5 @@
 import nslt_thursday from '@css/newsletter/thursday.css?inline';
+import nslt_friday from '@css/newsletter/friday.css?inline';
 import nslt_regular from '@css/newsletter/regular.css?inline';
 import nslt_blackweek from '@css/newsletter/blackweek.css?inline';
 import nslt_mattress from '@css/newsletter/mattress.css?inline';
@@ -9,6 +10,7 @@ import nslt_ai_new2 from '@css/newsletter/ai_new2.css?inline';
 import nslt_french_days_new from '@css/newsletter/french_days_new.css?inline';
 
 import lp_thursday from '@css/landing/thursday.css?inline';
+import lp_friday from '@css/landing/friday.css?inline';
 import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
 import lp_mattress from '@css/landing/mattress.css?inline';
@@ -30,6 +32,7 @@ export const types = {
   CSS: {
     NS: nslt_regular,
     NS_THURSDAY: nslt_thursday,
+    NS_FRIDAY: nslt_friday,
     NS_BLACK_WEEK: nslt_blackweek,
     NS_MATTRESS: nslt_mattress,
     NS_MD: md_nslt,
@@ -41,6 +44,7 @@ export const types = {
 
     LP: lp_regular,
     LP_THURSDAY: lp_thursday,
+    LP_FRIDAY: lp_friday,
     LP_BLACK_WEEK: lp_blackwek,
     LP_MATTRESS: lp_mattress,
     LP_MD: md_lp,
