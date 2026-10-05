@@ -289,7 +289,7 @@ export default new entities.Campaign({
       name: 'Newsletter',
       type: types.NEWSLETTER,
       template: templates.Friday,
-      css: types.CSS.NS_FRIDAY,
+      css: types.CSS.NS_FOOTER,
       translationsSpreadsheet: campaignTranslationsSheet,
 
       background: '#F2E6E6',

@@ -53,5 +53,5 @@ export function getWrapperForCampaign(wrapper, campaignDate) {
 }
 
 export function getWrapperCssForCampaign(css, campaignDate) {
-  return isWhiteWrapperCampaign(campaignDate) ? css + '\n.newsletterFooterCompanyDetails { background: #ffffff !important; }' : css;
+  return isWhiteWrapperCampaign(campaignDate) ? css + '\n.newsletterFooterCompanyDetails { background: #FFCCB7 !important; }' : css;
 }

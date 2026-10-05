@@ -1,6 +1,7 @@
 import { Footer as FooterComponent } from '@/components/footer.js';
 import { wrapFooterUrl } from "@/utils/getTrackingUrl";
 import { getState } from '@/main/state/appState';
+import {Space} from "./components/Space.js";
 
 function shouldUseNewAssembly(cDate) {
   const parts = cDate.split('.');
@@ -29,7 +30,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
         href: getFooter('Asembly href'),
       };
 
-  return FooterComponent(
+  const FooterElement = FooterComponent(
     {
       id,
       assembly: {
@@ -159,6 +160,18 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
     },
     { type }
   );
+
+  return `
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="width: 100%; max-width: 650px;">
+  ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFCCB7' })}
+    <tr>
+      <td style="width: 100%; max-width: 100%; background-color: #FFCCB7;">
+        ${FooterElement}
+      </td>
+    </tr>
+    ${Space({ className: 'newsletterBottom15px',  insideTr: true, background: '#FFCCB7' })}
+  </table>
+  `
 };
 
 export { Footer };

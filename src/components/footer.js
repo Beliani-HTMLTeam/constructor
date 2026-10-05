@@ -676,7 +676,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ conditionsTitle, conditionsText }) => {
           return `
-        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff; line-height: 10px; mso-line-height-rule: exactly;">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7; line-height: 10px; mso-line-height-rule: exactly;">
             <tbody>
                 <tr>
                     <td>
@@ -684,8 +684,8 @@ export function Footer(sections, options, name) {
                     </td>
                 </tr>
                 <tr>
-                    <td class="newsletterTopBottomContainer" align="left">
-                        <span class="newsletterConditions" style="color: #000000;">${conditionsTitle} ${
+                    <td class="newsletterTopBottomContainer" align="center">
+                        <span class="newsletterConditions" style="color: #750000; text-align: center;">${conditionsTitle} ${
             conditionsText.length === 2
               ? conditionsText[0] + ' ' + conditionsText[1]
               : conditionsText.length === 3
@@ -701,7 +701,7 @@ export function Footer(sections, options, name) {
       },
       [types.LANDINGPAGE]: {
         value: ({ conditionsTitle, conditionsText }) => `
-        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;" id="newsletter">
             <tbody>
                 <tr>
                     <td>
@@ -741,15 +741,12 @@ export function Footer(sections, options, name) {
           vat,
         }) => {
           return `
-        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%;" id="newsletter">
+        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;" id="newsletter">
             <tbody>
                 <tr>
                     <td align="center" class="newsletterFooterCompanyDetails">
-                        <span style="color: #000000;text-align: center; font-size:11px;">
-                            <b><font style="font-size: 11px;">${title}</font></b>
-                            <br />${address}<br />${mobileNumber} ${emailAddress}
-                            <a href="${mailTo}">${email}</a>
-                            <br />${commercialRegister}<br />${vat}
+                        <span style="color: #000000;text-align: center; font-size:13px;">
+                            ${address} | ${commercialRegister}
                         </span>
                     </td>
                 </tr>

@@ -1,5 +1,6 @@
 import nslt_thursday from '@css/newsletter/thursday.css?inline';
 import nslt_friday from '@css/newsletter/friday.css?inline';
+import nslt_footer from '@css/newsletter/friday-footer.css?inline';
 import nslt_regular from '@css/newsletter/regular.css?inline';
 import nslt_blackweek from '@css/newsletter/blackweek.css?inline';
 import nslt_mattress from '@css/newsletter/mattress.css?inline';
@@ -41,6 +42,8 @@ export const types = {
     DIMA_NS_AI_NEW: dima_nslt_ai_new,
     NS_AI_NEW2: nslt_ai_new2,
     NS_FRENCH_DAYS: nslt_french_days_new,
+
+    NS_FOOTER: nslt_footer,
 
     LP: lp_regular,
     LP_THURSDAY: lp_thursday,
