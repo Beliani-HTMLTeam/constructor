@@ -214,6 +214,7 @@ export default new entities.Campaign({
 			color: palette.text,
 
 			wrapper: types.WRAPPER,
+			optimizeCss: true,
 
 			categories: categories,
 			links: links,
