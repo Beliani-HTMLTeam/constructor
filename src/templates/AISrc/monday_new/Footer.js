@@ -34,7 +34,7 @@ const Footer = ({
 
   const assemblyBanner = newAssembly
     ? {
-        src: getFooter('Assembly src new') + '?ver=100',
+        src: getFooter('Assembly src new') + '?ver=1000',
         href: getFooter('Assembly href NEW'),
       }
     : {
