@@ -19,6 +19,10 @@ export function styleTags(css, chunkSize = STYLE_CHUNK_SIZE) {
         current = '';
       }
       current += block;
+      if (/^\s*@media\b/i.test(block)) {
+        chunks.push(current);
+        current = '';
+      }
     }
   }
   current += css.slice(start);
