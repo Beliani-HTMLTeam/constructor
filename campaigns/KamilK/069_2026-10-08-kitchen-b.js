@@ -38,10 +38,31 @@ const palette = {
 	dark: '#750000',
 	ctaText: '#F6E7E6',
 	timer: '#750000',
+	freebies: {
+		background: '#D6B3B3',
+		title: '#000000',
+		free: '#000000',
+		text: '#000000',
+		lines: '#ECE7E0',
+	},
 };
 
 const timer = {
-	freebies: getImageUrl('20261008free.png', true),
+	freebies: [
+		// SHELL
+		{
+			id: 316914,
+			titlePhrase: 'Bathroom Set',
+			src: getImageUrl('20261008_free01.png', true),
+		},
+		// TELMA
+		{
+			id: 320374,
+			titlePhrase: 'Bathroom Set',
+			src: getImageUrl('20261008_free02.png', true),
+		},
+	],
+	colors: palette.freebies,
 	deadline: '2026-10-11',
 };
 
