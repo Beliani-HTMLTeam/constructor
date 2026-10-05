@@ -7,6 +7,12 @@ td {
 img {
   -ms-interpolation-mode: bicubic;
 }
+
+.newsletterContainer30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 .title-advantages {
   text-align: center;
   font-size: 11px;
@@ -449,6 +455,8 @@ img {
   line-height: 1.2;
 }
 
+
+
 .newsletterFooterCompanyDetails {
   vertical-align: middle;
   padding-top: 20px;
@@ -490,6 +498,10 @@ img {
   padding-left: 25px !important;
 }
 @media screen and (max-width: 768px) {
+  .newsletterContainer30px {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
   .br {
     display: contents;

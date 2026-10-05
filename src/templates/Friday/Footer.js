@@ -3,39 +3,25 @@ import { wrapFooterUrl } from "@/utils/getTrackingUrl";
 import { getState } from '@/main/state/appState';
 import {Space} from "./components/Space.js";
 
-function shouldUseNewAssembly(cDate) {
-  const parts = cDate.split('.');
-
-  const day = Number(parts[0]);
-  const month = Number(parts[1]);
-  const year = Number(parts[2]);
-
-  const campaignDate = new Date(year, month - 1, day);
-  const cutoffDate = new Date(2026, 8, 14);
-
-  return campaignDate > cutoffDate;
-}
-
 const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date }) => {
   const campaignDate = date || selectedCampaign?.date || getState('selectedCampaign')?.date;
-  const newAssembly = shouldUseNewAssembly(campaignDate);
 
-  const assemblyBanner = newAssembly
-    ? {
+  const assemblyBanner =  {
         src: getFooter('Assembly src new'),
         href: getFooter('Assembly href NEW'),
       }
-    : {
-        src: ['AT', 'PL', 'FR', 'UK'].includes(country) ? getFooter('Delivery src') : getFooter('Asembly src'),
-        href: getFooter('Asembly href'),
-      };
 
   const FooterElement = FooterComponent(
     {
       id,
-      assembly: {
-        ...assemblyBanner,
-        exclude: ['CHIT'].includes(country),
+      seeYouSoon: {
+        src: getFooter('See you soon src'),
+        href: getFooter('See you soon href'),
+      },
+
+      deliveryBanner: {
+        src: getFooter('Delivery src'),
+        href: getFooter('Delivery href'),
       },
 
       workBanner: {

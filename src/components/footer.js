@@ -1,31 +1,30 @@
 import { types } from '@utils/types.js';
 import { Line } from '@components/Line.js';
+import {Space} from "../components/Space.js";
 
 export function Footer(sections, options, name) {
   //   console.log(name);
   const id = sections.id;
   const json_footer = {
-    assembly: {
+    seeYouSoon: {
       [types.NEWSLETTER]: {
         value: ({ src, href }) => {
           return `
-        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;">
             <tbody>
+            ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#fff' })}
                 <tr>
-                    <td class="newsletterBottom35px" >
-                        ${Line()}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    <td class="newsletterContainer30px" style="background-color: #fff;">
                         <a href="${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                            <img loading="lazy" alt="service banner" src="${src}" style="display: block; width: 100%;">
+                            <img loading="lazy" alt="See you soon" src="${src}" style="display: block; width: 100%;">
                         </a>
                     </td>
                 </tr>
+                ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#fff' })}
                 <tr>
-                    <td class="newsletterBottom35px" >
-                    </td>
+                <td class="newsletterContainer30px" style="background-color: #fff;">
+                ${Line()}
+                </td>
                 </tr>
             </tbody>
         </table>
@@ -52,6 +51,7 @@ export function Footer(sections, options, name) {
                     <td class="newsletterBottom35px" >
                     </td>
                 </tr>
+                
             </tbody>
         </table>
         `,
@@ -84,11 +84,67 @@ export function Footer(sections, options, name) {
                             <td class="newsletterBottom35px" >
                             </td>
                         </tr>
+                        <tr>
+                        <td>
+                        ${Line()}
+                        </td>
+                        </tr>
                     </tbody>
                 </table>
             `;
         },
       },
+    },
+    deliveryBanner :{
+        [types.NEWSLETTER]: {
+            value: ({ href, src }) => {
+                return `
+                <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;" id="newsletter">
+                <tbody>
+                ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#fff' })}
+                    <tr>
+                        <td class="newsletterContainer40px" style="background-color: #fff;">
+                            <a href="${href}">
+                                <img loading="lazy" alt="work banner" src="${src}" style="display: block; width: 100%;">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="newsletterBottom35px" >
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            `
+            },
+        },
+        [types.LANDINGPAGE]: {
+            value: ({ href, src }) => {
+                return `
+                <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
+                    <tbody>
+                        <tr>
+                            <td class="newsletterBottom35px" >
+                                ${Line()}
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>
+                                <a href="${href}">
+                                    <img loading="lazy" alt="work banner" src="${src}" style="display: block; width: 100%;">
+                                </a>    
+                        </td>
+                        </tr>
+                        <tr>
+
+                            <td class="newsletterBottom35px" >
+                            </td>
+                        </tr>   
+                    </tbody>
+                </table>
+                `
+            },  
+        },
     },
     thousandsMore: {
       [types.NEWSLETTER]: {

@@ -1,26 +1,34 @@
-import { isAllowToRender } from '@helpers/optimizeImage.js';
-import { getState } from '@main/state/appState';
+const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTable = false, background, style = {} }) => {
+  const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
+  let styleAttrib = '';
 
-export const Space = isAllowToRender((props) => {
-  const country = getState('country');
-  for (const item of props?.renderOn || []) {
-    if (country in item) {
-      props[item.field] = item[country];
+  const bg = background || style?.bg;
+  if (bg) {
+    styleAttrib += `background-color: ${bg};`;
+  }
+
+  if (style?.rounded) {
+    styleAttrib += style.rounded;
+  }
+
+  let html = `<td class="${className}" ${styleAttrib ? `style="${styleAttrib}"` : ''} ${bg ? `bgcolor="${bg}"` : ''}></td>`;
+
+  if (insideTr) {
+    html = `<tr ${bg ? `style="background-color: ${bg};" bgcolor="${bg}"` : ''}>${html}</tr>`;
+  }
+
+  if (insideTable) {
+    if (insideTr) {
+      throw new Error(
+        'Cannot have both insideTr and insideTable set to true - its handled automatically.'
+      );
     }
+
+    // prettier-ignore
+    html = `<table ${tableAttributes} style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; ${bg ? `background-color: ${bg};` : ''}" ${bg ? `bgcolor="${bg}"` : ''}><tr>${html}</tr></table>`;
   }
 
-  if (props?.className === null) {
-    return '';
-  }
+  return html;
+};
 
-  return `
-  <table cellspacing="0" cellpadding="0" border="0" width="100%">
-    <tbody>
-        <tr>
-            <td class="${props?.className || 'newsletterBottom35px'}">
-            </td>
-        </tr>
-    </tbody>
-  </table>
-  `;
-});
+export { Space };
