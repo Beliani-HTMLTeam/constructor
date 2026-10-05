@@ -118,6 +118,8 @@ const categories = [
       {
         name: 'Decorations',
         overrides: {
+          UK: "Decorations",
+          PL: "Dekoracje"
         },
         src: getImageUrl('20261009Category4.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/decorations/',
@@ -127,6 +129,8 @@ const categories = [
         overrides: {
           NL: "LED-kerstdecoratie",
           BENL: "LED-kerstdecoratie",
+          UK: "LED Décor",
+          PL: "Dekoracje z LED"
         },
         src: getImageUrl('20261009Category5.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-outdoor-decor/',
@@ -134,6 +138,8 @@ const categories = [
       {
         name: 'Wreaths',
         overrides: {
+          UK: "Wreaths",
+          PL: "Wieńce"
         },
         src: getImageUrl('20261009Category6.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-wreaths/',
@@ -141,6 +147,8 @@ const categories = [
       {
         name: 'Garlands',
         overrides: {
+          UK: "Garlands",
+          PL: "Girlandy"
         },
         src: getImageUrl('20261009Category7.png', true),
         href: 'https://www.beliani.ch/christmas-shop/christmas-accessories/christmas-garland/',
