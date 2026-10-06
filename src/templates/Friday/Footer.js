@@ -101,7 +101,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
 
       socials: {
         title: getFooter('Socials Title'),
-        subtitle: getFooter('Socials Title'),
+        subtitle: getFooter('Stay up to date'),
         instagram: {
           src: getFooter('Instagram src new'),
           href: getFooter('Instagram href'),

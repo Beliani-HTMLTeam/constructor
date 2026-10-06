@@ -155,8 +155,8 @@ const categories = [
 
 
 export default new entities.Campaign({
-  startId: 49049,
-  lpId: 33068,
+  startId: 49280,
+  lpId: 33216,
   issueCardId: 541930,
   version: 'new',
   name: 'Footer',
@@ -187,7 +187,7 @@ export default new entities.Campaign({
       name: 'Landing',
       type: types.LANDINGPAGE,
       template: templates.Friday,
-      css: types.CSS.LP_FRIDAY,
+      css: types.CSS.LP_FOOTER,
       translationsSpreadsheet: campaignTranslationsSheet,
 
       background: '#F2E6E6',

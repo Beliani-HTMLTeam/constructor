@@ -11,6 +11,8 @@ import nslt_ai_new2 from '@css/newsletter/ai_new2.css?inline';
 import nslt_french_days_new from '@css/newsletter/french_days_new.css?inline';
 
 import lp_thursday from '@css/landing/thursday.css?inline';
+import lp_footer from '@css/landing/friday-footer.css?inline';
+
 import lp_friday from '@css/landing/friday.css?inline';
 import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
@@ -44,6 +46,7 @@ export const types = {
     NS_FRENCH_DAYS: nslt_french_days_new,
 
     NS_FOOTER: nslt_footer,
+    LP_FOOTER: lp_footer,
 
     LP: lp_regular,
     LP_THURSDAY: lp_thursday,
