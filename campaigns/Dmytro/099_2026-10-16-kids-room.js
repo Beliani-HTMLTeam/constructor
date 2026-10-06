@@ -38,7 +38,7 @@ const intro_data = {
   ctaColor: "#FFFFFF",
   cta: {
     overrides: {
-
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
