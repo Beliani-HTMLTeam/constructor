@@ -257,7 +257,7 @@ export function Footer(sections, options, name) {
           seventhCategory,
           eigthCategory,
         }) => `
-        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;" id="newsletter">
         <tbody>
           <tr>
             <td>
@@ -290,23 +290,92 @@ export function Footer(sections, options, name) {
           `,
       },
     },
+    advantages: {
+        [types.NEWSLETTER]: {
+          value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
+            return `
+          <table cellspacing="0" class="newsletterContainerFooter20px" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;" >
+              <tbody>
+                  <!-- ADVANTAGES -->
+                  <tr>
+                      <td class="newsletterContainer30px" style="background-color: #ffffff;">
+                          <table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff;">
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <a
+                                              href="${
+                                                firstAdvantage.href
+                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
+                                              <img loading="lazy" src="${firstAdvantage.src}"
+                                                  alt="Advantages" style="display: block; width: 100%;"  border="0" />
+                                          </a>
+                                      </td>
+                                 
+                                      <td>
+                                          <a
+                                              href="${
+                                                secondAdvantage.href
+                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
+                                              <img loading="lazy" src="${secondAdvantage.src}"
+                                                  alt="Advantages" style="display: block; width: 100%;"  border="0" />
+                                          </a>
+                                      </td>
+                                 
+                                      <td>
+                                          <a
+                                              href="${
+                                                thirdAdvantage.href
+                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
+                                              <img loading="lazy" src="${thirdAdvantage.src}"
+                                                  alt="Advantages" style="display: block; width: 100%;"  border="0" />
+                                          </a>
+                                      </td>
+                                  
+                                      <td>
+                                          <a
+                                              href="${
+                                                fourthAdvantage.href
+                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
+                                              <img loading="lazy" src="${fourthAdvantage.src}"
+                                                  alt="Advantages" style="display: block; width: 100%;"  border="0" />
+                                          </a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </td>
+                  </tr> ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
+                              </tbody>
+          </table>
+                  `;
+          },
+        },
+        [types.LANDINGPAGE]: {
+          value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => '',
+        },
+      },
     klarna: {
       [types.NEWSLETTER]: {
         value: ({ href, src }) => {
           return `
-        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
+        <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;">
             <tbody>
                     <tr>
-                        <td>${Line()}</td>
+                        <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
+                            ${Line()}
+                        </td>
                     </tr>
+                    ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
                   <!--KLARNA-->
                     <tr>
-                        <td class="newsletterTopBottomContainer">
+                        <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
                             <a href="${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
                                 <img alt="Klarna" border="0" src="${src}" style="display: block; width: 100%;"/>
                             </a>
                         </td>
                     </tr>
+                    ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
             </tbody>
         </table>
         `;
@@ -316,9 +385,12 @@ export function Footer(sections, options, name) {
         value: ({ href, src }) => `
         <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
             <tbody>
-                <tr>
-                    <td>${Line()}</td>
-                </tr>
+            <tr>
+            <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
+                ${Line()}
+            </td>
+        </tr>
+        ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
                 <!--KLARNA-->
                 <tr>
                     <td class="newsletterTopBottomContainer">
@@ -327,6 +399,7 @@ export function Footer(sections, options, name) {
                     </a>
                 </td>
                 </tr>
+                ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
             </tbody>
         </table>
         `,
@@ -334,17 +407,12 @@ export function Footer(sections, options, name) {
     },
     socials: {
       [types.NEWSLETTER]: {
-        value: ({ title, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => {
+        value: ({ title, subtitle, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }) => {
           return `
-            <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
+            <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;">
             <tbody>
                 <tr>
-                    <td>
-                        ${Line()}
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
+                    <td align="center" class="newsletterContainer30px" style="background-color: #FFFFFF;">
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tbody>
                                 <tr>
@@ -352,11 +420,19 @@ export function Footer(sections, options, name) {
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tbody>
                                                 <tr>
-                                                    <td class="newsletterTopBottomContainer">
+                                                    <td>
                                                         <span class="newsletterFooterTitle">
                                                               ${title}
                                                         </span>
+                                                      
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                <td>
+                                                <span class="newsletterFooterSubtitle">
+                                                      ${subtitle}
+                                                </span>
+                                                </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -415,20 +491,7 @@ export function Footer(sections, options, name) {
                                                                 alt="Pinterest">
                                                         </a>
                                                     </td>
-                                                    ${
-                                                      Xsocial
-                                                        ? `
-                                                        <td class="newsletterSocialIcon">
-                                                            <a
-                                                                href="${Xsocial.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                                                <img loading="lazy" src="${Xsocial.src}"
-                                                                    border="0" style="display:block; max-width: 100%;"
-                                                                    alt="X">
-                                                            </a>
-                                                        </td>   
-                                                        `
-                                                        : ''
-                                                    }
+                                                    
                                                     ${
                                                       Tiktok
                                                         ? `
@@ -443,6 +506,20 @@ export function Footer(sections, options, name) {
                                                         `
                                                         : ''
                                                     }
+                                                    ${
+                                                        Xsocial
+                                                          ? `
+                                                          <td class="newsletterSocialIcon">
+                                                              <a
+                                                                  href="${Xsocial.href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
+                                                                  <img loading="lazy" src="${Xsocial.src}"
+                                                                      border="0" style="display:block; max-width: 100%;"
+                                                                      alt="X">
+                                                              </a>
+                                                          </td>   
+                                                          `
+                                                          : ''
+                                                      }
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -452,6 +529,7 @@ export function Footer(sections, options, name) {
                         </table>
                     </td>
                 </tr>
+                ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
                             </tbody>
         </table>
                 `;
@@ -574,90 +652,13 @@ export function Footer(sections, options, name) {
         `,
       },
     },
-    advantages: {
-      [types.NEWSLETTER]: {
-        value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
-          return `
-        <table cellspacing="0" class="newsletterContainerFooter20px" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" >
-            <tbody>
-                <tr>
-                    <td>
-                        ${Line()}
-                    </td>
-                </tr>
-                <!-- ADVANTAGES -->
-                <tr>
-                    <td class="newsletterTopBottomContainer">
-                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5;">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a
-                                            href="${
-                                              firstAdvantage.href
-                                            }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                            <img loading="lazy" src="${firstAdvantage.src}"
-                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a
-                                            href="${
-                                              secondAdvantage.href
-                                            }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                            <img loading="lazy" src="${secondAdvantage.src}"
-                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a
-                                            href="${
-                                              thirdAdvantage.href
-                                            }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                            <img loading="lazy" src="${thirdAdvantage.src}"
-                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a
-                                            href="${
-                                              fourthAdvantage.href
-                                            }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                            <img loading="lazy" src="${fourthAdvantage.src}"
-                                                alt="Advantages" style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                            </tbody>
-        </table>
-                `;
-        },
-      },
-      [types.LANDINGPAGE]: {
-        value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => '',
-      },
-    },
+
     conditions: {
       [types.NEWSLETTER]: {
         value: ({ conditionsTitle, conditionsText }) => {
           return `
         <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7; line-height: 10px; mso-line-height-rule: exactly;">
             <tbody>
-                <tr>
-                    <td>
-                        ${Line()}
-                    </td>
-                </tr>
                 <tr>
                     <td class="newsletterTopBottomContainer" align="center">
                         <span class="newsletterConditions" style="color: #750000; text-align: center;">${conditionsTitle} ${

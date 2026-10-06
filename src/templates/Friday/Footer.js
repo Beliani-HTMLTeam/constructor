@@ -73,9 +73,27 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
           name: getCategoryTitle('Rugs'),
         },
       },
+      advantages: {
+        firstAdvantage: {
+          src: getFooter('Advantages src 1 new'),
+          href: getFooter('Advantages href 1'),
+        },
+        secondAdvantage: {
+          src: getFooter('Advantages src 2 new'),
+          href: getFooter('Advantages href 2'),
+        },
+        thirdAdvantage: {
+          src: getFooter('Advantages src 3 new'),
+          href: getFooter('Advantages href 3'),
+        },
+        fourthAdvantage: {
+          src: getFooter('Advantages src 4 new'),
+          href: getFooter('Advantages href 4'),
+        },
+      },
 
       klarna: {
-        src: getFooter('Klarna src'),
+        src: getFooter('Klarna src new'),
         href: getFooter('Klarna href'),
 				exclude: ['HR', 'SI'].includes(country),
         //exclude: ["HU"].includes(country),
@@ -83,51 +101,34 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
 
       socials: {
         title: getFooter('Socials Title'),
+        subtitle: getFooter('Socials Title'),
         instagram: {
-          src: getFooter('Instagram src'),
+          src: getFooter('Instagram src new'),
           href: getFooter('Instagram href'),
         },
         facebook: {
-          src: getFooter('Facebook src'),
+          src: getFooter('Facebook src new'),
           href: getFooter('Facebook href'),
         },
         youtube: {
-          src: getFooter('Youtube src'),
+          src: getFooter('Youtube src new'),
           href: getFooter('Youtube href'),
         },
         pinterest: {
-          src: getFooter('Pinterest src'),
+          src: getFooter('Pinterest src new'),
           href: getFooter('Pinterest href'),
         },
         Xsocial: {
-          src: getFooter('X src'),
+          src: getFooter('X src new'),
           href: getFooter('X href'),
         },
         Tiktok: {
-          src: getFooter('Tiktok src'),
+          src: getFooter('Tiktok src new'),
           href: getFooter('Tiktok href'),
         },
       },
 
-      advantages: {
-        firstAdvantage: {
-          src: getFooter('Advantages src 1'),
-          href: getFooter('Advantages href 1'),
-        },
-        secondAdvantage: {
-          src: getFooter('Advantages src 2'),
-          href: getFooter('Advantages href 2'),
-        },
-        thirdAdvantage: {
-          src: getFooter('Advantages src 3'),
-          href: getFooter('Advantages href 3'),
-        },
-        fourthAdvantage: {
-          src: getFooter('Advantages src 4'),
-          href: getFooter('Advantages href 4'),
-        },
-      },
-
+     
       conditions: {
         conditionsTitle: getFooter('Conditions title'),
         conditionsText: queries.condition || [getFooter('Conditions_description'), getFooter('Conditions_unsubscribe')],

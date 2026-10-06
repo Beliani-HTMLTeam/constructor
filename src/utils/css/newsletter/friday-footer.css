@@ -473,7 +473,15 @@ img {
   text-align: left;
   color: #000000;
   font-family: "Open Sans", sans-serif;
-  font-size: 20px;
+  font-size: 22px;
+}
+
+.newsletterFooterSubtitle {
+  text-align: left;
+  color: #750000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .newsletterFooterCategoryLEFT {
@@ -495,7 +503,7 @@ img {
 }
 
 .newsletterSocialIcon {
-  padding-left: 25px !important;
+  padding-left: 20px !important;
 }
 .thousandsMoreTitle {
   display: block;
@@ -858,7 +866,7 @@ img {
     font-weight: 600;
   }
   .newsletterFooterTitle {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .newsletterFooterCategoryLEFT {
@@ -1016,7 +1024,7 @@ img {
 }
 
 .newsletterSocialIcon {
-  width: 38px;
+  width: 28px;
   padding-right: 5px;
   padding-left: 5px;
   font-size: 0;
