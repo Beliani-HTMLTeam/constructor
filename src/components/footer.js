@@ -3,14 +3,60 @@ import { Line } from '@components/Line.js';
 import {Space} from "../components/Space.js";
 
 
+// ─── Class names per type ───────────────────────────────────────────────────
+// NEWSLETTER  -> the normal classes from the newsletter CSS.
+// LANDINGPAGE -> the new "footer…" classes from landing.css (no #newsletter id needed).
+const CLASSES = {
+  [types.NEWSLETTER]: {
+    frame: 'newsletterContainerFooter20px',
+    container30: 'newsletterContainer30px',
+    container40: 'newsletterContainer40px',
+    bottom15: 'newsletterBottom15px',
+    bottom20: 'newsletterBottom20px',
+    bottom30: 'newsletterBottom30px',
+    bottom35: 'newsletterBottom35px',
+    thousandsTitle: 'thousandsMoreTitle',
+    thousandsRowGap: 'thousandsMoreRowGap',
+    thousandsPair: 'thousandsMorePair', // + LEFT / RIGHT
+    thousandsCellLeft: 'thousandsMoreBtnCellLEFT',
+    thousandsCellRight: 'thousandsMoreBtnCellRIGHT',
+    socialCol: 'footer',
+    socialTitle: 'newsletterFooterTitle',
+    socialSubtitle: 'newsletterFooterSubtitle',
+    socialIcon: 'newsletterSocialIcon',
+    conditions: 'newsletterConditions',
+  },
+  [types.LANDINGPAGE]: {
+    frame: 'footerFrame',
+    container30: 'footerContainer30px',
+    container40: 'footerContainer40px',
+    bottom15: 'footerBottom15px',
+    bottom20: 'footerBottom20px',
+    bottom30: 'footerBottom30px',
+    bottom35: 'footerBottom35px',
+    thousandsTitle: 'footerThousandsTitle',
+    thousandsRowGap: 'footerThousandsRowGap',
+    thousandsPair: 'footerThousandsPair', // + LEFT / RIGHT
+    thousandsCellLeft: 'footerThousandsCellLEFT',
+    thousandsCellRight: 'footerThousandsCellRIGHT',
+    socialCol: '',
+    socialTitle: 'footerSocialTitle',
+    socialSubtitle: 'footerSocialSubtitle',
+    socialIcon: 'footerSocialIcon',
+    conditions: 'footerConditions',
+  },
+};
+ 
+const cls = (name) => (name ? ` class="${name}"` : '');
+ 
 // Outlook (Word rendering engine) ignores `padding` on <table>, so the peach side frame
-// must come from padding on a <td>. Every section (newsletter AND landing page) is wrapped in this:
-// peach outer table -> peach <td> with the 20px side padding -> inner table with the section rows.
-const peachFrame = (rows, { id = '', style = '' } = {}) => `
+// must come from padding on a <td>. Every section is wrapped in this:
+// peach outer table -> peach <td> with the side padding -> inner table with the section rows.
+const peachFrame = (c, rows, { id = '', style = '' } = {}) => `
   <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="#FFCCB7"${id ? ` id="${id}"` : ''} style="max-width: 650px; width: 100%; background-color: #FFCCB7;${style}">
     <tbody>
       <tr>
-        <td class="newsletterContainerFooter20px" bgcolor="#FFCCB7" style="background-color: #FFCCB7;">
+        <td${cls(c.frame)} bgcolor="#FFCCB7" style="background-color: #FFCCB7;">
           <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;${style}">
             <tbody>
               ${rows}
@@ -21,15 +67,12 @@ const peachFrame = (rows, { id = '', style = '' } = {}) => `
     </tbody>
   </table>`;
  
-// Landing page sections keep id="newsletter" (as before) in case LP styles/scripts target it.
-const frameOptions = (isLP, extra = {}) => (isLP ? { id: 'newsletter', ...extra } : extra);
- 
 // Classic Outlook ignores CSS width on <img> and renders images at their natural pixel size,
 // which stretches the white panel into the peach frame. The width attribute caps them in Outlook;
 // other clients still use the CSS width: 100%.
 // 650 (newsletter) - 2 x 20 (peach frame) - 2 x inner padding
-const NL_IMG_WIDTH_30 = 650 - 40 - 60; // 550 – newsletterContainer30px
-const NL_IMG_WIDTH_40 = 650 - 40 - 80; // 530 – newsletterContainer40px
+const NL_IMG_WIDTH_30 = 650 - 40 - 60; // 550 – 30px inner padding
+const NL_IMG_WIDTH_40 = 650 - 40 - 80; // 530 – 40px inner padding
 // Social icons: Outlook ignores display:block on <img>, so the icons sit on a text line and get
 // cropped to an inherited exact line-height. Each icon cell gets an "at-least" line-height
 // (the line grows to fit the icon) and a pixel width so Outlook doesn't guess the size.
@@ -55,42 +98,42 @@ const thousandsMoreTile = (category, width) => `
  
 // Two tiles side by side. On mobile each pair becomes its own full-width row,
 // so the grid goes from 4 columns (desktop) to 2 columns (mobile).
-const thousandsMorePair = (left, right, side, width) => `
-  <td class="thousandsMorePair${side}" width="50%" valign="top">
+const thousandsMorePair = (c, left, right, side, width) => `
+  <td class="${c.thousandsPair}${side}" width="50%" valign="top">
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
       <tbody>
         <tr>
-          <td class="thousandsMoreBtnCellLEFT" width="50%" valign="top">${thousandsMoreTile(left, width)}</td>
-          <td class="thousandsMoreBtnCellRIGHT" width="50%" valign="top">${thousandsMoreTile(right, width)}</td>
+          <td class="${c.thousandsCellLeft}" width="50%" valign="top">${thousandsMoreTile(left, width)}</td>
+          <td class="${c.thousandsCellRight}" width="50%" valign="top">${thousandsMoreTile(right, width)}</td>
         </tr>
       </tbody>
     </table>
   </td>`;
  
-const thousandsMoreRow = (categories, isLast, width) => `
+const thousandsMoreRow = (c, categories, isLast, width) => `
   <tr>
-    <td${isLast ? '' : ' class="thousandsMoreRowGap"'}>
+    <td${isLast ? '' : cls(c.thousandsRowGap)}>
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
         <tbody>
           <tr>
-            ${thousandsMorePair(categories[0], categories[1], 'LEFT', width)}
-            ${thousandsMorePair(categories[2], categories[3], 'RIGHT', width)}
+            ${thousandsMorePair(c, categories[0], categories[1], 'LEFT', width)}
+            ${thousandsMorePair(c, categories[2], categories[3], 'RIGHT', width)}
           </tr>
         </tbody>
       </table>
     </td>
   </tr>`;
  
-const thousandsMoreGrid = (categories, width) => `
+const thousandsMoreGrid = (c, categories, width) => `
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tbody>
-      ${thousandsMoreRow(categories.slice(0, 4), false, width)}
-      ${thousandsMoreRow(categories.slice(4, 8), true, width)}
+      ${thousandsMoreRow(c, categories.slice(0, 4), false, width)}
+      ${thousandsMoreRow(c, categories.slice(4, 8), true, width)}
     </tbody>
   </table>`;
  
-const socialIcon = (item, alt, href) => `
-  <td class="newsletterSocialIcon" valign="middle" style="line-height: ${SOCIAL_ICON_SIZE}px; mso-line-height-rule: at-least;">
+const socialIcon = (c, item, alt, href) => `
+  <td class="${c.socialIcon}" valign="middle" style="line-height: ${SOCIAL_ICON_SIZE}px; mso-line-height-rule: at-least;">
     <a href="${href}">
       <img loading="lazy" src="${item.src}" width="${SOCIAL_ICON_SIZE}" border="0" style="display:block; max-width: 100%; vertical-align: middle;" alt="${alt}">
     </a>
@@ -99,64 +142,72 @@ const socialIcon = (item, alt, href) => `
 export function Footer(sections, options, name) {
   //   console.log(name);
   const id = sections.id;
+  const NL = CLASSES[types.NEWSLETTER];
+  const LP = CLASSES[types.LANDINGPAGE];
  
   // Newsletter links get the UTM parameters, landing page links stay clean (as before).
   const track = (href, isLP) =>
     isLP ? href : `${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}`;
  
-  // ─── Shared builders: the landing page uses the same markup/styles as the newsletter ───
-  const seeYouSoon = ({ src, href }, isLP) =>
-    peachFrame(`
-            ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#fff' })}
+  // ─── Shared builders: same markup for both types, only the class names differ ───
+  const seeYouSoon = ({ src, href }, isLP) => {
+    const c = isLP ? LP : NL;
+    return peachFrame(c, `
+            ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                 <tr>
-                    <td class="newsletterContainer30px" style="background-color: #fff;">
+                    <td class="${c.container30}" style="background-color: #fff;">
                         <a href="${track(href, isLP)}">
                             <img loading="lazy" alt="See you soon" src="${src}" width="${NL_IMG_WIDTH_30}" style="display: block; width: 100%; max-width: 100%; height: auto;">
                         </a>
                     </td>
                 </tr>
-                ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#fff' })}
+                ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                 <tr>
-                <td class="newsletterContainer30px" style="background-color: #fff;">
+                <td class="${c.container30}" style="background-color: #fff;">
                 ${Line()}
                 </td>
                 </tr>
-        `, frameOptions(isLP));
+        `);
+  };
  
   // Landing page only (empty in the newsletter) – same style as seeYouSoon: image, then a line.
-  const workBanner = ({ src, href }) =>
-    peachFrame(`
-            ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#fff' })}
+  const workBanner = ({ src, href }) => {
+    const c = LP;
+    return peachFrame(c, `
+            ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                 <tr>
-                    <td class="newsletterContainer30px" style="background-color: #fff;">
+                    <td class="${c.container30}" style="background-color: #fff;">
                         <a href="${href}">
                             <img loading="lazy" alt="work banner" src="${src}" width="${NL_IMG_WIDTH_30}" style="display: block; width: 100%; max-width: 100%; height: auto;">
                         </a>
                     </td>
                 </tr>
-                ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#fff' })}
+                ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                 <tr>
-                <td class="newsletterContainer30px" style="background-color: #fff;">
+                <td class="${c.container30}" style="background-color: #fff;">
                 ${Line()}
                 </td>
                 </tr>
-        `, frameOptions(true));
+        `);
+  };
  
-  const deliveryBanner = ({ src, href }) =>
-    peachFrame(`
-                ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#fff' })}
+  const deliveryBanner = ({ src, href }, isLP) => {
+    const c = isLP ? LP : NL;
+    return peachFrame(c, `
+                ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                     <tr>
-                        <td class="newsletterContainer40px" style="background-color: #fff;">
+                        <td class="${c.container40}" style="background-color: #fff;">
                             <a href="${href}">
                                 <img loading="lazy" alt="work banner" src="${src}" width="${NL_IMG_WIDTH_40}" style="display: block; width: 100%; max-width: 100%; height: auto;">
                             </a>
                         </td>
                     </tr>
                     <tr>
-                        <td class="newsletterBottom35px" style="background-color: #fff;">
+                        <td class="${c.bottom35}" style="background-color: #fff;">
                         </td>
                     </tr>
-            `, { id: 'newsletter' });
+            `, isLP ? {} : { id: 'newsletter' });
+  };
  
   const thousandsMore = (
     {
@@ -171,25 +222,27 @@ export function Footer(sections, options, name) {
       eigthCategory,
     },
     isLP
-  ) =>
-    peachFrame(`
+  ) => {
+    const c = isLP ? LP : NL;
+    return peachFrame(c, `
             <tr>
-              <td  class="newsletterContainer30px" style="background-color: #ffffff;">
+              <td class="${c.container30}" style="background-color: #ffffff;">
                 ${Line()}
               </td>
             </tr>
-            ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#ffffff' })}
+            ${Space({ className: c.bottom30, insideTr: true, background: '#ffffff' })}
             <tr>
-              <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
-                <span class="thousandsMoreTitle" style="color: #750000; font-weight: 700;">
+              <td class="${c.container30}" style="background-color: #FFFFFF;">
+                <span class="${c.thousandsTitle}" style="color: #750000; font-weight: 700;">
                   ${title}
                 </span>
               </td>
             </tr>
-            ${Space({ className: 'newsletterBottom20px', insideTr: true, background: '#FFFFFF' })}
+            ${Space({ className: c.bottom20, insideTr: true, background: '#FFFFFF' })}
             <tr>
-              <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
+              <td class="${c.container30}" style="background-color: #FFFFFF;">
                 ${thousandsMoreGrid(
+                  c,
                   [
                     firstCategory,
                     secondCategory,
@@ -204,41 +257,45 @@ export function Footer(sections, options, name) {
                 )}
               </td>
             </tr>
-            ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#FFFFFF' })}
-                `, frameOptions(isLP));
+            ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
+                `);
+  };
  
-  const klarna = ({ href, src }, isLP) =>
-    peachFrame(`
+  const klarna = ({ href, src }, isLP) => {
+    const c = isLP ? LP : NL;
+    return peachFrame(c, `
                     <tr>
-                        <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
+                        <td class="${c.container30}" style="background-color: #FFFFFF;">
                             ${Line()}
                         </td>
                     </tr>
-                    ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#FFFFFF' })}
+                    ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
                   <!--KLARNA-->
                     <tr>
-                        <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
+                        <td class="${c.container30}" style="background-color: #FFFFFF;">
                             <a href="${track(href, isLP)}">
                                 <img alt="Klarna" border="0" src="${src}" width="${NL_IMG_WIDTH_30}" style="display: block; width: 100%; max-width: 100%; height: auto;"/>
                             </a>
                         </td>
                     </tr>
-                    ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#FFFFFF' })}
-        `, frameOptions(isLP));
+                    ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
+        `);
+  };
  
-  const socials = ({ title, subtitle, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }, isLP) =>
-    peachFrame(`
+  const socials = ({ title, subtitle, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }, isLP) => {
+    const c = isLP ? LP : NL;
+    return peachFrame(c, `
                 <tr>
-                    <td align="center" class="newsletterContainer30px" style="background-color: #FFFFFF;">
+                    <td align="center" class="${c.container30}" style="background-color: #FFFFFF;">
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tbody>
                                 <tr>
-                                    <td align="left" class="footer">
+                                    <td align="left"${cls(c.socialCol)}>
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <span class="newsletterFooterTitle">
+                                                        <span class="${c.socialTitle}">
                                                               ${title}
                                                         </span>
                                                     </td>
@@ -248,7 +305,7 @@ export function Footer(sections, options, name) {
                                                     ? `
                                                 <tr>
                                                 <td>
-                                                <span class="newsletterFooterSubtitle">
+                                                <span class="${c.socialSubtitle}">
                                                       ${subtitle}
                                                 </span>
                                                 </td>
@@ -258,20 +315,20 @@ export function Footer(sections, options, name) {
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td align="right" class="footer" style="padding-right:5px; vertical-align: middle;">
+                                    <td align="right"${cls(c.socialCol)} style="padding-right:5px; vertical-align: middle;">
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tbody>
                                                 <tr>
-                                                    ${socialIcon(instagram, 'Instagram', track(instagram.href, isLP))}
-                                                    ${socialIcon(facebook, 'Facebook', track(facebook.href, isLP))}
+                                                    ${socialIcon(c, instagram, 'Instagram', track(instagram.href, isLP))}
+                                                    ${socialIcon(c, facebook, 'Facebook', track(facebook.href, isLP))}
                                                     ${
                                                       youtube && youtube.href && youtube.src
-                                                        ? socialIcon(youtube, 'YouTube', track(youtube.href, isLP))
+                                                        ? socialIcon(c, youtube, 'YouTube', track(youtube.href, isLP))
                                                         : ''
                                                     }
-                                                    ${socialIcon(pinterest, 'Pinterest', track(pinterest.href, isLP))}
-                                                    ${Tiktok ? socialIcon(Tiktok, 'Tik-Tok', track(Tiktok.href, isLP)) : ''}
-                                                    ${Xsocial ? socialIcon(Xsocial, 'X', track(Xsocial.href, isLP)) : ''}
+                                                    ${socialIcon(c, pinterest, 'Pinterest', track(pinterest.href, isLP))}
+                                                    ${Tiktok ? socialIcon(c, Tiktok, 'Tik-Tok', track(Tiktok.href, isLP)) : ''}
+                                                    ${Xsocial ? socialIcon(c, Xsocial, 'X', track(Xsocial.href, isLP)) : ''}
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -281,24 +338,27 @@ export function Footer(sections, options, name) {
                         </table>
                     </td>
                 </tr>
-                ${Space({ className: 'newsletterBottom30px', insideTr: true, background: '#FFFFFF' })}
-                `, frameOptions(isLP));
+                ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
+                `);
+  };
  
   // Same style for both; the text picked from conditionsText stays as it was per type.
-  const conditions = (conditionsTitle, text, isLP) =>
-    peachFrame(`
-            ${Space({ className: 'newsletterBottom15px', insideTr: true, background: '#FFCCB7' })}
+  const conditions = (conditionsTitle, text, isLP) => {
+    const c = isLP ? LP : NL;
+    return peachFrame(c, `
+            ${Space({ className: c.bottom15, insideTr: true, background: '#FFCCB7' })}
                 <tr>
                     <td align="center">
-                        <span class="newsletterConditions" style="color: #750000; text-align: center;">${conditionsTitle} ${text}</span>
+                        <span class="${c.conditions}" style="color: #750000; text-align: center;">${conditionsTitle} ${text}</span>
                     </td>
                 </tr>
             ${
               // The newsletter gets its bottom space from companyDetails (rendered right after),
               // which is empty on the landing page – so the LP closes the frame with its own spacer.
-              isLP ? Space({ className: 'newsletterBottom15px', insideTr: true, background: '#FFCCB7' }) : ''
+              isLP ? Space({ className: c.bottom15, insideTr: true, background: '#FFCCB7' }) : ''
             }
-        `, frameOptions(isLP, { style: ' line-height: 10px; mso-line-height-rule: exactly;' }));
+        `, { style: ' line-height: 10px; mso-line-height-rule: exactly;' });
+  };
  
   const json_footer = {
     seeYouSoon: {
@@ -310,8 +370,8 @@ export function Footer(sections, options, name) {
       [types.LANDINGPAGE]: { value: (data) => workBanner(data) },
     },
     deliveryBanner: {
-      [types.NEWSLETTER]: { value: (data) => deliveryBanner(data) },
-      [types.LANDINGPAGE]: { value: (data) => deliveryBanner(data) },
+      [types.NEWSLETTER]: { value: (data) => deliveryBanner(data, false) },
+      [types.LANDINGPAGE]: { value: (data) => deliveryBanner(data, true) },
     },
     thousandsMore: {
       [types.NEWSLETTER]: { value: (data) => thousandsMore(data, false) },
@@ -321,14 +381,14 @@ export function Footer(sections, options, name) {
         [types.NEWSLETTER]: {
           value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
             const aw = advantageWidths([firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage], NL_IMG_WIDTH_30);
-            return peachFrame(`
+            return peachFrame(NL, `
                   <!-- ADVANTAGES -->
                   <!-- Outlook: images render at natural size (the 4 slices are ~552px together, wider than the
                        550px column), so Outlook gets 20px side padding and a shrink-to-fit centered table.
                        Other clients keep the 30px padding and the full-width table. -->
                   <tr>
                       <!--[if mso]><td bgcolor="#ffffff" style="background-color: #ffffff; padding: 0px 20px 0px 20px;"><![endif]-->
-                      <!--[if !mso]><!--><td class="newsletterContainer30px" style="background-color: #ffffff;"><!--<![endif]-->
+                      <!--[if !mso]><!--><td class="${NL.container30}" style="background-color: #ffffff;"><!--<![endif]-->
                           <!--[if mso]><table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff;"><![endif]-->
                           <!--[if !mso]><!--><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff;"><!--<![endif]-->
                               <tbody>
@@ -376,7 +436,7 @@ export function Footer(sections, options, name) {
                               </tbody>
                           </table>
                       </td>
-                  </tr> ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
+                  </tr> ${Space({ className: NL.bottom30, insideTr: true, background: '#FFFFFF' })}
                   `);
           },
         },
@@ -529,3 +589,4 @@ export function Footer(sections, options, name) {
     </tbody>
   </table>`;
 }
+ 

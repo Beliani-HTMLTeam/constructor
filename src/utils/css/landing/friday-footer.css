@@ -77,7 +77,6 @@ table {
   padding-right: 20px;
 }
  
-/* Footer: added from the newsletter CSS */
 #newsletter .newsletterContainer30px {
   padding-left: 30px;
   padding-right: 30px;
@@ -137,7 +136,7 @@ table {
   padding-bottom: 25px;
 }
  
- .newsletterBottom30px {
+.newsletterBottom30px {
   padding-bottom: 30px;
 }
  
@@ -501,7 +500,6 @@ table {
   padding-right: 10px;
 }
  
-/* Footer: updated to match the newsletter (font-family left out – the LP uses Poppins) */
 #newsletter .newsletterConditions {
   color: #750000;
   font-size: 11px;
@@ -525,13 +523,6 @@ table {
   font-size: 18px;
   line-height: 24px;
   font-weight: 700;
-}
- 
-#newsletter .newsletterFooterSubtitle {
-  text-align: left;
-  color: #750000;
-  font-size: 13px;
-  font-weight: 400;
 }
  
 #newsletter .newsletterFooterCategoryLEFT {
@@ -560,38 +551,6 @@ table {
   line-height: 0;
   text-align: center;
   vertical-align: middle;
-}
- 
-/* See thousands more – added from the newsletter CSS */
-#newsletter .thousandsMoreTitle {
-  display: block;
-  text-align: left;
-  color: #750000;
-  font-size: 22px;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-}
- 
-#newsletter .thousandsMoreRowGap {
-  padding-bottom: 18px;
-}
- 
-/* 10px gap between every tile: 5px + 5px */
-#newsletter .thousandsMorePairLEFT {
-  padding-right: 5px;
-}
- 
-#newsletter .thousandsMorePairRIGHT {
-  padding-left: 5px;
-}
- 
-#newsletter .thousandsMoreBtnCellLEFT {
-  padding-right: 5px;
-}
- 
-#newsletter .thousandsMoreBtnCellRIGHT {
-  padding-left: 5px;
 }
  
 @media screen and (max-width: 768px) {
@@ -669,7 +628,7 @@ table {
     padding-bottom: 20px;
   }
  
-  #newsletter .newsletterBottom30px {
+  .newsletterBottom30px {
     padding-bottom: 15px;
   }
  
@@ -921,41 +880,6 @@ table {
     padding-left: 13px !important;
   }
  
-  /* See thousands more – 4 columns -> 2 columns */
-  #newsletter .thousandsMoreTitle {
-    font-size: 20px;
-  }
- 
-  #newsletter .thousandsMoreRowGap {
-    padding-bottom: 10px;
-  }
- 
-  #newsletter .thousandsMorePairLEFT {
-    display: block !important;
-    width: 100% !important;
-    padding-right: 0 !important;
-    padding-bottom: 10px !important;
-  }
- 
-  #newsletter .thousandsMorePairRIGHT {
-    display: block !important;
-    width: 100% !important;
-    padding-left: 0 !important;
-  }
-}
- 
-/* Footer – small screens, same as the newsletter */
-@media only screen and (max-width: 650px) {
-  #newsletter .newsletterFooterTitle {
-    font-size: 16px !important;
-    line-height: 21px !important;
-  }
- 
-  #newsletter .newsletterSocialIcon {
-    width: 22px !important;
-    padding-right: 3px !important;
-    padding-left: 3px !important;
-  }
 }
  
 @media screen and (max-width: 570px) {
@@ -973,6 +897,180 @@ table {
 @media screen and (max-width: 370px) {
   .newsletterProductTitleFreebie {
     font-size: 12px;
+  }
+}
+ 
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTER (Footer.js) – no id scope, no font-family (the LP uses Poppins), every class starts with "footer"
+   ═══════════════════════════════════════════════════════════════════════════ */
+ 
+/* Peach side frame (on a <td> – Outlook ignores padding on <table>) */
+.footerFrame {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+ 
+/* White panel inner padding */
+.footerContainer30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+ 
+.footerContainer40px {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+ 
+/* Vertical spacers (Space component) */
+.footerBottom15px {
+  padding-bottom: 15px;
+}
+ 
+.footerBottom20px {
+  padding-bottom: 20px;
+}
+ 
+.footerBottom30px {
+  padding-bottom: 30px;
+}
+ 
+.footerBottom35px {
+  padding-bottom: 35px;
+}
+ 
+/* See thousands more */
+.footerThousandsTitle {
+  display: block;
+  text-align: left;
+  color: #750000;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+ 
+.footerThousandsRowGap {
+  padding-bottom: 18px;
+}
+ 
+/* 10px gap between every tile: 5px + 5px */
+.footerThousandsPairLEFT {
+  padding-right: 5px;
+}
+ 
+.footerThousandsPairRIGHT {
+  padding-left: 5px;
+}
+ 
+.footerThousandsCellLEFT {
+  padding-right: 5px;
+}
+ 
+.footerThousandsCellRIGHT {
+  padding-left: 5px;
+}
+ 
+/* Follow us */
+.footerSocialTitle {
+  text-align: left;
+  color: #750000;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+ 
+.footerSocialSubtitle {
+  text-align: left;
+  color: #750000;
+  font-size: 13px;
+  font-weight: 400;
+}
+ 
+.footerSocialIcon {
+  width: 28px;
+  padding-left: 20px;
+  padding-right: 5px;
+  font-size: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+ 
+/* Conditions */
+.footerConditions {
+  color: #750000;
+  font-size: 11px;
+  line-height: 1.2;
+}
+ 
+@media screen and (max-width: 768px) {
+  .footerFrame {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+ 
+  .footerContainer30px {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+ 
+  .footerContainer40px {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+ 
+  .footerBottom15px {
+    padding-bottom: 10px !important;
+  }
+ 
+  .footerBottom20px {
+    padding-bottom: 10px !important;
+  }
+ 
+  .footerBottom30px {
+    padding-bottom: 15px !important;
+  }
+ 
+  .footerBottom35px {
+    padding-bottom: 20px !important;
+  }
+ 
+  .footerThousandsTitle {
+    font-size: 20px !important;
+  }
+ 
+  .footerThousandsRowGap {
+    padding-bottom: 10px !important;
+  }
+ 
+  /* 4 columns -> 2 columns: each pair becomes its own row */
+  .footerThousandsPairLEFT {
+    display: block !important;
+    width: 100% !important;
+    padding-right: 0 !important;
+    padding-bottom: 10px !important;
+  }
+ 
+  .footerThousandsPairRIGHT {
+    display: block !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+ 
+  .footerSocialIcon {
+    padding-left: 13px !important;
+  }
+}
+ 
+@media screen and (max-width: 650px) {
+  .footerSocialTitle {
+    font-size: 16px !important;
+    line-height: 21px !important;
+  }
+ 
+  .footerSocialIcon {
+    width: 22px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
   }
 }
  
