@@ -56,42 +56,42 @@ const Footer = ({
     thousandsMore: {
       title: getFooter('Title'),
       firstCategory: {
-        src: getFooter('Category src 1'),
+        src: getFooter('Category src new 1'),
         href: wrapFooterUrl(getFooter('Category href 1')),
         name: getCategoryTitle('Sofas'),
       },
       secondCategory: {
-        src: getFooter('Category src 2'),
+        src: getFooter('Category src new 2'),
         href: wrapFooterUrl(getFooter('Category href 2')),
         name: getCategoryTitle('Beds'),
       },
       thirdCategory: {
-        src: getFooter('Category src 3'),
+        src: getFooter('Category src new 3'),
         href: wrapFooterUrl(getFooter('Category href 3')),
         name: getCategoryTitle('Coffee Tables'),
       },
       foutrthCategory: {
-        src: getFooter('Category src 4'),
+        src: getFooter('Category src new 4'),
         href: wrapFooterUrl(getFooter('Category href 4')),
         name: getCategoryTitle('Chairs'),
       },
       fifthCategory: {
-        src: getFooter('Category src 5'),
+        src: getFooter('Category src new 5'),
         href: wrapFooterUrl(getFooter('Category href 5')),
         name: getCategoryTitle('Armchairs'),
       },
       sixthCategory: {
-        src: getFooter('Category src 6'),
+        src: getFooter('Category src new 6'),
         href: wrapFooterUrl(getFooter('Category href 6')),
         name: getCategoryTitle('Storage'),
       },
       seventhCategory: {
-        src: getFooter('Category src 7'),
+        src: getFooter('Category src new 7'),
         href: wrapFooterUrl(getFooter('Category href 7')),
         name: getCategoryTitle('Lighting'),
       },
       eigthCategory: {
-        src: getFooter('Category src 8'),
+        src: getFooter('Category src new 8'),
         href: wrapFooterUrl(getFooter('Category href 8')),
         name: getCategoryTitle('Rugs'),
       },

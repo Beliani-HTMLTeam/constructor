@@ -488,6 +488,84 @@ img {
 .newsletterSocialIcon {
   padding-left: 25px !important;
 }
+
+.thousandsMoreTitle {
+  display: block;
+  text-align: left;
+  color: #750000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+ 
+.thousandsMoreTitleCell {
+  padding-bottom: 20px;
+}
+ 
+.thousandsMoreTitleCellTop {
+  padding-top: 35px;
+}
+ 
+.thousandsMoreRowGap {
+  padding-bottom: 18px;
+}
+ 
+/* 10px gap between every button: 5px + 5px */
+.thousandsMorePairLEFT {
+  padding-right: 5px;
+}
+ 
+.thousandsMorePairRIGHT {
+  padding-left: 5px;
+}
+ 
+.thousandsMoreBtnCellLEFT {
+  padding-right: 5px;
+}
+ 
+.thousandsMoreBtnCellRIGHT {
+  padding-left: 5px;
+}
+ 
+/* ─── Add inside @media screen and (max-width: 768px) ───────────────────── */
+@media screen and (max-width: 768px) {
+  .thousandsMoreTitle {
+    font-size: 20px;
+  }
+ 
+  .thousandsMoreTitleCell {
+    padding-bottom: 12px;
+  }
+ 
+  .thousandsMoreTitleCellTop {
+    padding-top: 20px;
+  }
+ 
+  .thousandsMoreRowGap {
+    padding-bottom: 10px;
+  }
+ 
+  /* 4 columns -> 2 columns: each pair becomes its own row */
+  .thousandsMorePairLEFT {
+    display: block !important;
+    width: 100% !important;
+    padding-right: 0 !important;
+    padding-bottom: 10px !important;
+  }
+ 
+  .thousandsMorePairRIGHT {
+    display: block !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+ 
+  .thousandsMoreBtnLink {
+    font-size: 13px !important;
+    line-height: 18px !important;
+    padding: 10px 6px !important;
+  }
+}
 @media screen and (max-width: 768px) {
 
   .br {

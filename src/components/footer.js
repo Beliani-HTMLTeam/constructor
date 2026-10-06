@@ -2,6 +2,55 @@ import { types } from '@utils/types.js';
 import { Line } from '@components/Line.js';
 import {Space} from "../components/Space.js";
 
+const thousandsMoreButton = (category) => `
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tbody>
+      <tr>
+        <td class="thousandsMoreBtn" align="center" valign="middle" bgcolor="#750000" style="background-color: #750000; border-radius: 22px; mso-padding-alt: 12px 8px;">
+          <a href="${category.href}" class="thousandsMoreBtnLink" style="display: block; padding: 12px 8px; font-family: 'Open Sans', sans-serif; font-size: 14px; line-height: 20px; font-weight: 600; color: #ffffff; text-decoration: none; text-align: center; border-radius: 22px;">
+            ${category.name}
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>`;
+ 
+// Two buttons side by side. On mobile each pair becomes its own full-width row,
+// so the grid goes from 4 columns (desktop) to 2 columns (mobile).
+const thousandsMorePair = (left, right, side) => `
+  <td class="thousandsMorePair${side}" width="50%" valign="top">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+      <tbody>
+        <tr>
+          <td class="thousandsMoreBtnCellLEFT" width="50%" valign="top">${thousandsMoreButton(left)}</td>
+          <td class="thousandsMoreBtnCellRIGHT" width="50%" valign="top">${thousandsMoreButton(right)}</td>
+        </tr>
+      </tbody>
+    </table>
+  </td>`;
+ 
+const thousandsMoreRow = (categories, isLast) => `
+  <tr>
+    <td${isLast ? '' : ' class="thousandsMoreRowGap"'}>
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tbody>
+          <tr>
+            ${thousandsMorePair(categories[0], categories[1], 'LEFT')}
+            ${thousandsMorePair(categories[2], categories[3], 'RIGHT')}
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>`;
+ 
+const thousandsMoreGrid = (categories) => `
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+    <tbody>
+      ${thousandsMoreRow(categories.slice(0, 4), false)}
+      ${thousandsMoreRow(categories.slice(4, 8), true)}
+    </tbody>
+  </table>`;
+
 export function Footer(sections, options, name) {
   //   console.log(name);
   const id = sections.id;
@@ -110,7 +159,7 @@ export function Footer(sections, options, name) {
                         </td>
                     </tr>
                     <tr>
-                        <td class="newsletterBottom35px" >
+                        <td class="newsletterBottom35px" style="background-color: #fff;">
                         </td>
                     </tr>
                 </tbody>
@@ -160,109 +209,38 @@ export function Footer(sections, options, name) {
           eigthCategory,
         }) => {
           return `
-        <table cellspacing="0" class="newsletterContainerFooter20px" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;">
-            <tbody>
-                <tr>
-                    <td>
-                        ${Line()}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="newsletterTopBottomContainer">
-                        <span class="newsletterFooterTitle">
-                            ${title}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="newsletterBottom35px">
-                        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
-                            <tbody>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFT">
-                                        <a
-                                            href="${firstCategory.href}">
-                                            <img loading="lazy" src="${firstCategory.src}" alt="${
-            firstCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHT">
-                                        <a
-                                            href="${secondCategory.href}">
-                                            <img loading="lazy" src="${secondCategory.src}" alt="${
-            secondCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFT">
-                                        <a
-                                            href="${thirdCategory.href}">
-                                            <img loading="lazy" src="${thirdCategory.src}" alt="${
-            thirdCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHT">
-                                        <a
-                                            href="${foutrthCategory.href}">
-                                            <img loading="lazy" src="${foutrthCategory.src}" alt="${
-            foutrthCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFT">
-                                        <a
-                                            href="${fifthCategory.href}">
-                                            <img loading="lazy" src="${fifthCategory.src}" alt="${
-            fifthCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHT">
-                                        <a
-                                            href="${sixthCategory.href}">
-                                            <img loading="lazy" src="${sixthCategory.src}" alt="${
-            sixthCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFTBottom">
-                                        <a
-                                            href="${seventhCategory.href}">
-                                            <img loading="lazy" src="${seventhCategory.src}" alt="${
-            seventhCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHTBottom">
-                                        <a
-                                            href="${eigthCategory.href}">
-                                            <img loading="lazy" src="${eigthCategory.src}" alt="${
-            eigthCategory.name
-          }"
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                            </tbody>
+          <table cellspacing="0" class="newsletterContainerFooter20px" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;">
+          <tbody>
+            <tr>
+              <td  class="newsletterContainer30px" style="background-color: #ffffff;">
+                ${Line()}
+              </td>
+            </tr>
+            ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#ffffff' })}
+            <tr>
+              <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
+                <span class="thousandsMoreTitle" style="color: #750000; font-weight: 700;">
+                  ${title}
+                </span>
+              </td>
+            </tr>
+            ${Space({ className: 'newsletterBottom20px',  insideTr: true, background: '#FFFFFF' })}
+            <tr>
+              <td class="newsletterContainer30px" style="background-color: #FFFFFF;">
+                ${thousandsMoreGrid([
+                  firstCategory,
+                  secondCategory,
+                  thirdCategory,
+                  foutrthCategory,
+                  fifthCategory,
+                  sixthCategory,
+                  seventhCategory,
+                  eigthCategory,
+                ])}
+              </td>
+            </tr>
+            ${Space({ className: 'newsletterBottom30px',  insideTr: true, background: '#FFFFFF' })}
+          </tbody>
         </table>
                 `;
         },
@@ -280,94 +258,35 @@ export function Footer(sections, options, name) {
           eigthCategory,
         }) => `
         <table class="newsletterContainerFooter20px" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #ffffff;" id="newsletter">
-            <tbody>
-                <tr>
-                    <td>
-                        ${Line()}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="newsletterTopBottomContainer">
-                        <span class="newsletterFooterTitle">
-                            ${title}
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="newsletterBottom35px">
-                        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
-                            <tbody>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFT">
-                                        <a
-                                            href="${firstCategory.href}">
-                                            <img loading="lazy" src="${firstCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHT">
-                                        <a
-                                            href="${secondCategory.href}">
-                                            <img loading="lazy" src="${secondCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFT">
-                                        <a
-                                            href="${thirdCategory.href}">
-                                            <img loading="lazy" src="${thirdCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHT">
-                                        <a
-                                            href="${foutrthCategory.href}">
-                                            <img loading="lazy" src="${foutrthCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFT">
-                                        <a
-                                            href="${fifthCategory.href}">
-                                            <img loading="lazy" src="${fifthCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHT">
-                                        <a
-                                            href="${sixthCategory.href}">
-                                            <img loading="lazy" src="${sixthCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="newsletterFooterCategoryLEFTBottom">
-                                        <a
-                                            href="${seventhCategory.href}">
-                                            <img loading="lazy" src="${seventhCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                    <td class="newsletterFooterCategoryRIGHTBottom">
-                                        <a
-                                            href="${eigthCategory.href}">
-                                            <img loading="lazy" src="${eigthCategory.src}" alt=""
-                                                style="display: block; width: 100%;"  border="0" />
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-
-                            </tbody>
-        </table>
+        <tbody>
+          <tr>
+            <td>
+              ${Line()}
+            </td>
+          </tr>
+          <tr>
+            <td class="thousandsMoreTitleCellTop thousandsMoreTitleCell">
+              <span class="thousandsMoreTitle" style="color: #750000; font-weight: 700;">
+                ${title}
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="newsletterBottom35px">
+              ${thousandsMoreGrid([
+                firstCategory,
+                secondCategory,
+                thirdCategory,
+                foutrthCategory,
+                fifthCategory,
+                sixthCategory,
+                seventhCategory,
+                eigthCategory,
+              ])}
+            </td>
+          </tr>
+        </tbody>
+      </table>
           `,
       },
     },
