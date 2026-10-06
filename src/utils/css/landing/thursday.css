@@ -333,6 +333,12 @@ table {
   color: #000000;
 }
 
+@media screen and (min-width: 769px) {
+  #newsletter .freebiesContainer--list .newsletterProductTitleFreebie {
+    font-size: 20px;
+  }
+}
+
 .newsletterFreebiesTitle {
   font-size: 18px;
   line-height: 1.0;

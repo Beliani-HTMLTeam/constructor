@@ -314,6 +314,7 @@ export default new entities.Campaign({
       // TopImage_data: TopImage_data,
 
       wrapper: types.WRAPPER,
+      optimizeCss: true,
 
       categories: categories,
       links: links,

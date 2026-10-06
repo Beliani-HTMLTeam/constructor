@@ -337,6 +337,8 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
+      optimizeCss: true,
+
     },
     {
       background: '#F6E7E6',

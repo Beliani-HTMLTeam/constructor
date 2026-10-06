@@ -29,7 +29,7 @@ const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeC
 
           <!--[if !mso]><!-->
           <div class="freebiePriceMobile">
-            ${oldPrice ? `<span class="freebieOldPriceMobile freebieOldPriceMobileSingleColumn">${oldPrice}</span>` : ''}
+            ${oldPrice ? `<span class="freebieOldPriceMobile freebieOldPriceMobileSingleColumn" style="color: ${freebiesTextColor};">${oldPrice}</span>` : ''}
             <span class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</span>
           </div>
           <!--<![endif]-->
@@ -68,7 +68,7 @@ const renderSingleFreebie2col = ({ product, isLast, freebiesTextColor, freebiesF
               <span class="newsletterProductTitleFreebie freebieTileMobileTitle" style="color: ${freebiesTextColor};">${productTitle}</span>
             </a>
             <div class="freebieTileMobilePrice">
-              ${oldPrice ? `<div class="freebieOldPriceMobile">${oldPrice}</div>` : ''}
+              ${oldPrice ? `<div class="freebieOldPriceMobile" style="color: ${freebiesTextColor};">${oldPrice}</div>` : ''}
               <div class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</div>
             </div>
           </div>
@@ -81,7 +81,7 @@ const renderSingleFreebie2col = ({ product, isLast, freebiesTextColor, freebiesF
           </a>
           <!--[if !mso]><!-->
           <div class="freebiePriceMobile">
-            ${oldPrice ? `<span class="freebieOldPriceMobile">${oldPrice}</span>` : ''}
+            ${oldPrice ? `<span class="freebieOldPriceMobile" style="color: ${freebiesTextColor};">${oldPrice}</span>` : ''}
             <span class="freebieLowPriceMobile" style="color: ${freebiesFreeColor};">${freeText}</span>
           </div>
           <!--<![endif]-->
@@ -140,7 +140,7 @@ const renderFreebiesList = ({
 				const isLast = index === freebies.length - 1;
 				return `
         <tr>
-          ${renderSingleFreebie({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText, lineColor: lineColors?.[index] })}
+          ${renderSingleFreebie({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText, lineColor: Array.isArray(lineColors) ? lineColors[index] : lineColors })}
         </tr>
       `;
 			})
@@ -149,13 +149,13 @@ const renderFreebiesList = ({
 
 	return `
     <tr>
-      <td class="freebiesContainer" style="background-color: ${freebiesBackground};">
+      <td class="freebiesContainer freebiesContainer--list" style="background-color: ${freebiesBackground};">
         <table cellspacing="0" cellpadding="0" border="0" width="100%">
           ${freebiesTitle
 		? `
           <tr>
             <td colspan="${columns === 2 ? 7 : 3}" align="left" class="newsletterBottom10px">
-              <span class="newsletterFreebiesTitle" style="color: ${freebiesTitleColor};">${freebiesTitle}</span>
+              <span class="newsletterFreebiesTitle" style="color: ${freebiesTitleColor}; font-family: 'Open Sans', sans-serif; font-size: 20px; line-height: 1.2; font-weight: 400;">${freebiesTitle}</span>
             </td>
           </tr>
           `
@@ -240,6 +240,7 @@ const Timer = ({
 
           ${CTA({
 						className: 'newsletterFreebieCta',
+						spanStyle: hasProductList ? 'font-size: 20px; line-height: 1.2; text-decoration: underline;' : '',
 						href: href,
 						text: ctaText,
 						color: color,

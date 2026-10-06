@@ -55,7 +55,7 @@ const intro = {
 		fontWeight: '400',
 		color: palette.text,
 		align: 'center',
-		phrase: 'Shop now',
+		phrase: 'Shop now First',
 		spaceBefore: 'newsletterBottom35px',
 	},
 };
@@ -200,6 +200,7 @@ export default new entities.Campaign({
 			color: palette.text,
 
 			wrapper: types.WRAPPER,
+			optimizeCss: true,
 
 			categories: categories,
 			links: links,

@@ -302,6 +302,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       additionalCss: additionalCss,
+      optimizeCss: true,
     },
 
     {

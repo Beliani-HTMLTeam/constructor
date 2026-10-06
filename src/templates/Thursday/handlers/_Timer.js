@@ -185,7 +185,11 @@ export const TimerHandler = async ({
 			const enriched = await Promise.all(
 				timer.freebies.map((product) => enrichProductEntry(product))
 			);
-			freebies = enriched.filter(Boolean);
+			// freebies link to the timer LP, not to product pages
+			freebies = enriched.filter(Boolean).map((product) => ({
+				...product,
+				href: links?.Timer_href ?? product.href,
+			}));
 		} else if (typeof timer.freebies === 'string') {
 			freebies = timer.freebies;
 		} else if (timer.freebies?.src && !timer.freebies.id) {
@@ -198,6 +202,17 @@ export const TimerHandler = async ({
 
 	let freeText = getPhrase('Free')
 	const freebiesTitle = getPhrase('Your free gifts');
+
+	// new layout = freebies given as products (array); old one = single image
+	const hasProductList = Array.isArray(freebies) && freebies.length > 0;
+	const ctaText = hasProductList ? getPhrase(timer?.cta?.phrase ?? 'See more') : shopNow;
+	const colors = timer?.colors ?? {
+		background: timer?.freebiesBackground,
+		title: timer?.freebiesTitleColor,
+		free: timer?.freebiesFreeColor,
+		text: timer?.freebiesTextColor,
+		lines: timer?.freebiesLineColors,
+	};
 
 	return Inside && Inside.type === 'timer'
 		? `
@@ -213,14 +228,14 @@ export const TimerHandler = async ({
 			unitBackground,
 			freebies,
 			freebiesTitle,
-			freebiesBackground: timer?.freebiesBackground,
-			freebiesTitleColor: timer?.freebiesTitleColor,
-			freebiesFreeColor: timer?.freebiesFreeColor,
-			freebiesTextColor: timer?.freebiesTextColor,
+			freebiesBackground: colors.background,
+			freebiesTitleColor: colors.title,
+			freebiesFreeColor: colors.free,
+			freebiesTextColor: colors.text,
 			freebiesColumns: timer?.columns ?? 1,
-			freebiesLineColors: timer?.freebiesLineColors,
+			freebiesLineColors: colors.lines,
 			freeText,
-			ctaText: shopNow,
+			ctaText,
 			type: type,
 			script: buildProloTimerScript({ deadline: timer.deadline, timezone, timerLabels }),
 		})}
