@@ -270,7 +270,7 @@ export function Footer(sections, options, name) {
                         </td>
                     </tr>
                     ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
-                  <!--KLARNA-->
+ 
                     <tr>
                         <td class="${c.container30}" style="background-color: #FFFFFF;">
                             <a href="${track(href, isLP)}">
@@ -381,16 +381,20 @@ export function Footer(sections, options, name) {
         [types.NEWSLETTER]: {
           value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
             const aw = advantageWidths([firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage], NL_IMG_WIDTH_30);
+            // No conditional comments here on purpose: the build minifier rewrites
+            // <!--[if !mso]><!--> … <!--<![endif]--> so the markup inside gets commented out everywhere.
+            // One structure works for every client instead:
+            // - The image table has no width: it shrinks to fit the images and is centered.
+            //   Browsers/Gmail/Apple Mail: the slices (≈552px together) are wider than the 550px column,
+            //   so the table takes the full column and the width:100% images scale down proportionally.
+            //   Outlook: images keep their natural size, centered.
+            // - mso-padding-alt gives Outlook 20px side padding (570px room) so the ≈552px of images
+            //   fit without pushing the white panel into the peach frame. Other clients ignore it
+            //   and use the normal 30px class padding.
             return peachFrame(NL, `
-                  <!-- ADVANTAGES -->
-                  <!-- Outlook: images render at natural size (the 4 slices are ~552px together, wider than the
-                       550px column), so Outlook gets 20px side padding and a shrink-to-fit centered table.
-                       Other clients keep the 30px padding and the full-width table. -->
                   <tr>
-                      <!--[if mso]><td bgcolor="#ffffff" style="background-color: #ffffff; padding: 0px 20px 0px 20px;"><![endif]-->
-                      <!--[if !mso]><!--><td class="${NL.container30}" style="background-color: #ffffff;"><!--<![endif]-->
-                          <!--[if mso]><table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff;"><![endif]-->
-                          <!--[if !mso]><!--><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff;"><!--<![endif]-->
+                      <td class="${NL.container30}" bgcolor="#ffffff" style="background-color: #ffffff; mso-padding-alt: 0px 20px 0px 20px;">
+                          <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; background-color: #ffffff;">
                               <tbody>
                                   <tr>
                                       <td valign="top">
