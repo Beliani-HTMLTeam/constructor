@@ -190,6 +190,21 @@ table {
   padding-left: 20px;
 }
 
+#newsletter .newsletter3ProductsLeft {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+#newsletter .newsletter3ProductsCenter {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#newsletter .newsletter3ProductsRight {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
 #newsletter .newsletterTitle {
   font-size: 30px;
   line-height: 1.4;
@@ -655,6 +670,19 @@ table {
 
   #newsletter .newsletterLeft20px {
     padding-left: 10px;
+  }
+
+  #newsletter .newsletter3ProductsLeft {
+    padding-left: 10px;
+  }
+
+  #newsletter .newsletter3ProductsCenter {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  #newsletter .newsletter3ProductsRight {
+    padding-right: 10px;
   }
 
   #newsletter .newsletterRight5px {
