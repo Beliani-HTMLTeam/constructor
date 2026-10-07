@@ -1035,6 +1035,7 @@ img {
 
 .blackWeekCtaBorder {
   border-style: solid;
+  border-radius: 8px;
   border-width: 10px 0px;
 }
 
