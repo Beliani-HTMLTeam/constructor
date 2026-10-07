@@ -171,6 +171,8 @@ table {
   padding-right: 5px;
 }
  
+
+
 #newsletter .newsletterRight10px {
   padding-right: 10px;
 }
@@ -554,6 +556,13 @@ table {
 }
  
 @media screen and (max-width: 768px) {
+  .footerFrame table.footerThousandsGrid,
+table.footerThousandsGrid {
+  width: 66.67% !important;
+  max-width: 66.67% !important;
+  margin: 0 auto !important;
+}
+
   .br {
     display: contents;
   }

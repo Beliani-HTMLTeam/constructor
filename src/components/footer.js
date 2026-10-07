@@ -16,6 +16,7 @@ const CLASSES = {
     bottom30: 'newsletterBottom30px',
     bottom35: 'newsletterBottom35px',
     thousandsTitle: 'thousandsMoreTitle',
+    thousandsGrid: 'thousandsMoreGrid',
     thousandsRowGap: 'thousandsMoreRowGap',
     thousandsPair: 'thousandsMorePair', // + LEFT / RIGHT
     thousandsCellLeft: 'thousandsMoreBtnCellLEFT',
@@ -35,6 +36,7 @@ const CLASSES = {
     bottom30: 'footerBottom30px',
     bottom35: 'footerBottom35px',
     thousandsTitle: 'footerThousandsTitle',
+    thousandsGrid: 'footerThousandsGrid',
     thousandsRowGap: 'footerThousandsRowGap',
     thousandsPair: 'footerThousandsPair', // + LEFT / RIGHT
     thousandsCellLeft: 'footerThousandsCellLEFT',
@@ -90,6 +92,30 @@ const advantageWidths = (items, total) => {
   return ws.map((w) => Math.floor(w * scale));
 };
  
+// One advantage slice. `side` says which outer edge of its mobile row the slice sits on:
+// on mobile the CSS rounds the LEFT corners of the first slice in a row and the RIGHT corners of the second,
+// so each 2-slice row looks like a complete rounded box (the cut edges get rounded too).
+const advantageCell = (item, href, width, side) => `
+  <td valign="top">
+    <a href="${href}">
+      <img loading="lazy" src="${item.src}" alt="Advantages" class="advantagesImg${side}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
+    </a>
+  </td>`;
+ 
+// Two slices side by side. Desktop: both pairs sit in one row (4 slices, no gaps).
+// Mobile: each pair becomes its own full-width row (2 x 2).
+const advantagesPair = (pairClass, left, right) => `
+  <td class="advantagesPair ${pairClass}" valign="top">
+    <table class="advantagesPairTable" role="presentation" cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+        <tr>
+          ${left}
+          ${right}
+        </tr>
+      </tbody>
+    </table>
+  </td>`;
+ 
 // Category tile image. `width` is only passed for the newsletter (Outlook ignores CSS widths on <img>).
 const thousandsMoreTile = (category, width) => `
   <a href="${category.href}">
@@ -124,8 +150,9 @@ const thousandsMoreRow = (c, categories, isLast, width) => `
     </td>
   </tr>`;
  
+// The grid class lets mobile CSS shrink the whole grid (tiles 1/3 smaller, centered).
 const thousandsMoreGrid = (c, categories, width) => `
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+  <table${cls(c.thousandsGrid)} role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tbody>
       ${thousandsMoreRow(c, categories.slice(0, 4), false, width)}
       ${thousandsMoreRow(c, categories.slice(4, 8), true, width)}
@@ -196,9 +223,9 @@ export function Footer(sections, options, name) {
     return peachFrame(c, `
                 ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                     <tr>
-                        <td class="${c.container40}" style="background-color: #fff;">
+                        <td class="${c.container30}" style="background-color: #fff;">
                             <a href="${href}">
-                                <img loading="lazy" alt="work banner" src="${src}" width="${NL_IMG_WIDTH_40}" style="display: block; width: 100%; max-width: 100%; height: auto;">
+                                <img loading="lazy" alt="work banner" src="${src}" width="${NL_IMG_WIDTH_30}" style="display: block; width: 100%; max-width: 100%; height: auto;">
                             </a>
                         </td>
                     </tr>
@@ -380,7 +407,9 @@ export function Footer(sections, options, name) {
     advantages: {
         [types.NEWSLETTER]: {
           value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
-            const aw = advantageWidths([firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage], NL_IMG_WIDTH_30);
+            const items = [firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage];
+            const aw = advantageWidths(items, NL_IMG_WIDTH_30);
+            const cell = (i, side) => advantageCell(items[i], track(items[i].href, false), aw[i], side);
             // No conditional comments here on purpose: the build minifier rewrites
             // <!--[if !mso]><!--> … <!--<![endif]--> so the markup inside gets commented out everywhere.
             // One structure works for every client instead:
@@ -391,51 +420,17 @@ export function Footer(sections, options, name) {
             // - mso-padding-alt gives Outlook 20px side padding (570px room) so the ≈552px of images
             //   fit without pushing the white panel into the peach frame. Other clients ignore it
             //   and use the normal 30px class padding.
+            // - Desktop: 1 row of 4 slices (two pairs side by side, no gaps).
+            //   Mobile (≤768px): each pair becomes its own row -> 2 x 2, with a vertical gap only,
+            //   and the cut edges of the slices get rounded corners (see advantages* classes in the CSS).
             return peachFrame(NL, `
                   <tr>
                       <td class="${NL.container30}" bgcolor="#ffffff" style="background-color: #ffffff; mso-padding-alt: 0px 20px 0px 20px;">
-                          <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; background-color: #ffffff;">
+                          <table class="advantagesTable" role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; background-color: #ffffff;">
                               <tbody>
                                   <tr>
-                                      <td valign="top">
-                                          <a
-                                              href="${
-                                                firstAdvantage.href
-                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                              <img loading="lazy" src="${firstAdvantage.src}"
-                                                  alt="Advantages"${aw[0] ? ` width="${aw[0]}"` : ''} style="display: block; width: 100%; max-width: 100%; height: auto;"  border="0" />
-                                          </a>
-                                      </td>
- 
-                                      <td valign="top">
-                                          <a
-                                              href="${
-                                                secondAdvantage.href
-                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                              <img loading="lazy" src="${secondAdvantage.src}"
-                                                  alt="Advantages"${aw[1] ? ` width="${aw[1]}"` : ''} style="display: block; width: 100%; max-width: 100%; height: auto;"  border="0" />
-                                          </a>
-                                      </td>
- 
-                                      <td valign="top">
-                                          <a
-                                              href="${
-                                                thirdAdvantage.href
-                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                              <img loading="lazy" src="${thirdAdvantage.src}"
-                                                  alt="Advantages"${aw[2] ? ` width="${aw[2]}"` : ''} style="display: block; width: 100%; max-width: 100%; height: auto;"  border="0" />
-                                          </a>
-                                      </td>
- 
-                                      <td valign="top">
-                                          <a
-                                              href="${
-                                                fourthAdvantage.href
-                                              }?utm_source=newsletter&utm_medium=email&utm_campaign=${id}">
-                                              <img loading="lazy" src="${fourthAdvantage.src}"
-                                                  alt="Advantages"${aw[3] ? ` width="${aw[3]}"` : ''} style="display: block; width: 100%; max-width: 100%; height: auto;"  border="0" />
-                                          </a>
-                                      </td>
+                                      ${advantagesPair('advantagesPairFirst', cell(0, 'LEFT'), cell(1, 'RIGHT'))}
+                                      ${advantagesPair('advantagesPairSecond', cell(2, 'LEFT'), cell(3, 'RIGHT'))}
                                   </tr>
                               </tbody>
                           </table>

@@ -460,7 +460,8 @@ img {
 .newsletterFooterCompanyDetails {
   vertical-align: middle;
   padding-top: 10px;
-  padding-right: 0px;
+  padding-right: 15px;
+  padding-left: 15px;
   padding-bottom: 15px;
   font-size: 11px;
   font-family: "Open Sans", sans-serif !important;
@@ -584,9 +585,51 @@ img {
   }
 }
 @media screen and (max-width: 768px) {
+  .thousandsMoreGrid {
+    width: 66.67% !important;
+    margin: 0 auto !important;
+  }
   .newsletterContainer30px {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.advantagesTable {
+  width: 100% !important;
+}
+
+.advantagesPair {
+  display: block !important;
+  width: 100% !important;
+}
+
+.advantagesPairFirst {
+  padding-bottom: 10px !important;
+}
+
+.advantagesPairTable {
+  width: 100% !important;
+}
+
+.advantagesTable {
+  width: 66.67% !important;
+  margin: 0 auto !important;
+}
+
+.advantagesImgLEFT {
+  border-radius: 9px 0 0 9px !important;
+}
+
+.advantagesImgRIGHT {
+  border-radius: 0 9px 9px 0 !important;
+}
+
+.advantagesImgLEFT {
+  border-radius: 13px 0 0 13px !important;
+}
+
+.advantagesImgRIGHT {
+  border-radius: 0 13px 13px 0 !important;
 }
 
   .br {
