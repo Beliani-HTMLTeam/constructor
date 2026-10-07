@@ -38,11 +38,9 @@ const tableQueries = [
 ];
 
 const links = {
-  // Intro_cta_href: 'https://www.beliani.ch/bathroom-furniture/',
   TopImageTitle_href: translateLink({ value: 'content/lp26-11-09' }),
   TopImageTitle_src: translateImage({ value: '20260923_01.png' }),
 
-  // TopImage_src: translateImage({ value: '20260923_topImage.png' }),
   TopImage_src: translateImage({ value: '20261109_topImage.jpg' }),
   TopImage_href: translateLink({ value: 'content/lp26-11-09' }),
 

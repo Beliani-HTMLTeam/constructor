@@ -80,6 +80,10 @@ const catData = [
   },
   {
     name: 'Lighting',
+    nameOverrides: {
+      nl: 'Bureaulampen',
+      benl: 'Bureaulampen',
+    },
     href: 'https://www.beliani.ch/office-furniture/office-lamps/',
     src: getImageUrl('20261014_Cat04.jpg', true),
     ctaPosition: 'afterProducts',
@@ -328,6 +332,9 @@ const categories = [
         name: 'Bookcases & Shelving Units',
         src: getImageUrl('20261014_Add03.png', true),
         href: 'https://www.beliani.ch/office-furniture/storage/bookcases-and-shelves/',
+        nameOverrides: {
+          fi: 'Kirjahyllyt ja hyllyköt',
+        },
       },
       {
         name: 'Office Accessories',
@@ -389,6 +396,9 @@ export default new entities.Campaign({
           bg: theme.ctaPrimary,
           borderColor: theme.ctaPrimary,
           borderWidth: '15px 45px',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
         },
         disableLine: true,
         containerClass: 'newsletterContainer',
@@ -437,6 +447,9 @@ export default new entities.Campaign({
           bg: theme.ctaPrimary,
           borderColor: theme.ctaPrimary,
           borderWidth: '6px 20px',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
         },
         disableLine: true,
         containerClass: 'newsletterContainer',

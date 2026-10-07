@@ -1244,7 +1244,7 @@ img {
     font-size: 16px !important;
   }
 }
-/* Category-only banners: mobile fallback for email clients without clamp(). */
+
 @media screen and (max-width: 600px) {
   #newsletter .categoryBannerTitle {
     font-size: 25px !important;
