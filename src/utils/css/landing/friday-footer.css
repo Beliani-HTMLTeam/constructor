@@ -556,6 +556,8 @@ table {
 }
  
 @media screen and (max-width: 768px) {
+  img.footerDesktopImg { display: none !important; }
+  div.footerMobileImg { display: block !important; max-height: none !important; overflow: visible !important; }
   .footerFrame table.footerThousandsGrid,
 table.footerThousandsGrid {
   width: 66.67% !important;

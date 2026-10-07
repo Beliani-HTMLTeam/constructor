@@ -34,41 +34,49 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
         title: getFooter('Title'),
         firstCategory: {
           src: getFooter('Category src 1 new'),
+          mobileSrc: getFooter('Category src 1 new mb'),
           href: wrapFooterUrl(getFooter('Category href 1')),
           name: getCategoryTitle('Sofas'),
         },
         secondCategory: {
           src: getFooter('Category src 2 new'),
+          mobileSrc: getFooter('Category src 2 new mb'),
           href: wrapFooterUrl(getFooter('Category href 2')),
           name: getCategoryTitle('Beds'),
         },
         thirdCategory: {
           src: getFooter('Category src 3 new'),
+          mobileSrc: getFooter('Category src 3 new mb'),
           href: wrapFooterUrl(getFooter('Category href 3')),
           name: getCategoryTitle('Coffee Tables'),
         },
         foutrthCategory: {
           src: getFooter('Category src 4 new'),
+          mobileSrc: getFooter('Category src 4 new mb'),
           href: wrapFooterUrl(getFooter('Category href 4')),
           name: getCategoryTitle('Chairs'),
         },
         fifthCategory: {
           src: getFooter('Category src 5 new'),
+          mobileSrc: getFooter('Category src 5 new mb'),
           href: wrapFooterUrl(getFooter('Category href 5')),
           name: getCategoryTitle('Armchairs'),
         },
         sixthCategory: {
           src: getFooter('Category src 6 new'),
+          mobileSrc: getFooter('Category src 6 new mb'),
           href: wrapFooterUrl(getFooter('Category href 6')),
           name: getCategoryTitle('Storage'),
         },
         seventhCategory: {
           src: getFooter('Category src 7 new'),
+          mobileSrc: getFooter('Category src 7 new mb'),
           href: wrapFooterUrl(getFooter('Category href 7')),
           name: getCategoryTitle('Lighting'),
         },
         eigthCategory: {
           src: getFooter('Category src 8 new'),
+          mobileSrc: getFooter('Category src 8 new mb'),
           href: wrapFooterUrl(getFooter('Category href 8')),
           name: getCategoryTitle('Rugs'),
         },
@@ -76,18 +84,22 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
       advantages: {
         firstAdvantage: {
           src: getFooter('Advantages src 1 new'),
+          mobileSrc: getFooter('Advantages src 1 new mb'),
           href: getFooter('Advantages href 1'),
         },
         secondAdvantage: {
           src: getFooter('Advantages src 2 new'),
+          mobileSrc: getFooter('Advantages src 2 new mb'),
           href: getFooter('Advantages href 2'),
         },
         thirdAdvantage: {
           src: getFooter('Advantages src 3 new'),
+          mobileSrc: getFooter('Advantages src 3 new mb'),
           href: getFooter('Advantages href 3'),
         },
         fourthAdvantage: {
           src: getFooter('Advantages src 4 new'),
+          mobileSrc: getFooter('Advantages src 4 new mb'),
           href: getFooter('Advantages href 4'),
         },
       },

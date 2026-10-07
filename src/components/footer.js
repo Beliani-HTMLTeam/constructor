@@ -2,7 +2,6 @@ import { types } from '@utils/types.js';
 import { Line } from '@components/Line.js';
 import {Space} from "../components/Space.js";
 
-
 // ─── Class names per type ───────────────────────────────────────────────────
 // NEWSLETTER  -> the normal classes from the newsletter CSS.
 // LANDINGPAGE -> the new "footer…" classes from landing.css (no #newsletter id needed).
@@ -17,6 +16,8 @@ const CLASSES = {
     bottom35: 'newsletterBottom35px',
     thousandsTitle: 'thousandsMoreTitle',
     thousandsGrid: 'thousandsMoreGrid',
+    desktopImg: 'newsletterDesktopImg',
+    mobileImg: 'newsletterMobileImg',
     thousandsRowGap: 'thousandsMoreRowGap',
     thousandsPair: 'thousandsMorePair', // + LEFT / RIGHT
     thousandsCellLeft: 'thousandsMoreBtnCellLEFT',
@@ -37,6 +38,8 @@ const CLASSES = {
     bottom35: 'footerBottom35px',
     thousandsTitle: 'footerThousandsTitle',
     thousandsGrid: 'footerThousandsGrid',
+    desktopImg: 'footerDesktopImg',
+    mobileImg: 'footerMobileImg',
     thousandsRowGap: 'footerThousandsRowGap',
     thousandsPair: 'footerThousandsPair', // + LEFT / RIGHT
     thousandsCellLeft: 'footerThousandsCellLEFT',
@@ -48,9 +51,9 @@ const CLASSES = {
     conditions: 'footerConditions',
   },
 };
- 
+
 const cls = (name) => (name ? ` class="${name}"` : '');
- 
+
 // Outlook (Word rendering engine) ignores `padding` on <table>, so the peach side frame
 // must come from padding on a <td>. Every section is wrapped in this:
 // peach outer table -> peach <td> with the side padding -> inner table with the section rows.
@@ -68,7 +71,7 @@ const peachFrame = (c, rows, { id = '', style = '' } = {}) => `
       </tr>
     </tbody>
   </table>`;
- 
+
 // Classic Outlook ignores CSS width on <img> and renders images at their natural pixel size,
 // which stretches the white panel into the peach frame. The width attribute caps them in Outlook;
 // other clients still use the CSS width: 100%.
@@ -80,7 +83,20 @@ const NL_IMG_WIDTH_40 = 650 - 40 - 80; // 530 – 40px inner padding
 // (the line grows to fit the icon) and a pixel width so Outlook doesn't guess the size.
 const SOCIAL_ICON_SIZE = 28;
 const NL_THOUSANDS_TILE_WIDTH = Math.floor((NL_IMG_WIDTH_30 - 3 * 10) / 4); // 130 – 4 tiles, 10px gaps
- 
+
+// Desktop + mobile version of one image (no conditional comments – minifier-safe).
+// - Desktop image: visible by default everywhere (Outlook only ever shows this one).
+// - Mobile image: hidden by default (display:none + mso-hide:all for Outlook) inside a wrapper.
+// - At ≤768px the CSS hides the desktop image (c.desktopImg) and shows the mobile wrapper (c.mobileImg).
+// Without a mobileSrc only the desktop image is output, so it simply stays visible on mobile.
+const responsiveImg = (c, { src, mobileSrc }, { alt = '', width, extraClass = '' } = {}) => {
+  const classes = (...names) => names.filter(Boolean).join(' ');
+  const desktopClass = classes(mobileSrc ? c.desktopImg : '', extraClass);
+  const desktop = `<img loading="lazy" src="${src}" alt="${alt}"${width ? ` width="${width}"` : ''} border="0"${cls(desktopClass)} style="display: block; width: 100%; max-width: 100%; height: auto;" />`;
+  if (!mobileSrc) return desktop;
+  return `${desktop}<div class="${c.mobileImg}" style="display: none; mso-hide: all; max-height: 0; overflow: hidden;"><img loading="lazy" src="${mobileSrc}" alt="${alt}" border="0"${cls(extraClass)} style="display: block; width: 100%; max-width: 100%; height: auto; mso-hide: all;" /></div>`;
+};
+
 // The 4 advantage images are slices of one rounded box and do NOT have equal natural widths,
 // so each must keep its own proportion (forcing 25% each made the slices different heights).
 // Outlook still needs a pixel width per image: when the data gives each slice's natural `width`,
@@ -91,17 +107,17 @@ const advantageWidths = (items, total) => {
   const scale = Math.min(1, total / ws.reduce((a, b) => a + b, 0));
   return ws.map((w) => Math.floor(w * scale));
 };
- 
+
 // One advantage slice. `side` says which outer edge of its mobile row the slice sits on:
 // on mobile the CSS rounds the LEFT corners of the first slice in a row and the RIGHT corners of the second,
 // so each 2-slice row looks like a complete rounded box (the cut edges get rounded too).
-const advantageCell = (item, href, width, side) => `
+const advantageCell = (c, item, href, width, side) => `
   <td valign="top">
     <a href="${href}">
-      <img loading="lazy" src="${item.src}" alt="Advantages" class="advantagesImg${side}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
+      ${responsiveImg(c, item, { alt: 'Advantages', width, extraClass: `advantagesImg${side}` })}
     </a>
   </td>`;
- 
+
 // Two slices side by side. Desktop: both pairs sit in one row (4 slices, no gaps).
 // Mobile: each pair becomes its own full-width row (2 x 2).
 const advantagesPair = (pairClass, left, right) => `
@@ -115,13 +131,13 @@ const advantagesPair = (pairClass, left, right) => `
       </tbody>
     </table>
   </td>`;
- 
-// Category tile image. `width` is only passed for the newsletter (Outlook ignores CSS widths on <img>).
-const thousandsMoreTile = (category, width) => `
+
+// Category tile (desktop + mobile image). `width` is only passed for the newsletter (Outlook ignores CSS widths on <img>).
+const thousandsMoreTile = (c, category, width) => `
   <a href="${category.href}">
-    <img loading="lazy" src="${category.src}" alt="${category.name || ''}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
+    ${responsiveImg(c, category, { alt: category.name || '', width })}
   </a>`;
- 
+
 // Two tiles side by side. On mobile each pair becomes its own full-width row,
 // so the grid goes from 4 columns (desktop) to 2 columns (mobile).
 const thousandsMorePair = (c, left, right, side, width) => `
@@ -129,13 +145,13 @@ const thousandsMorePair = (c, left, right, side, width) => `
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
       <tbody>
         <tr>
-          <td class="${c.thousandsCellLeft}" width="50%" valign="top">${thousandsMoreTile(left, width)}</td>
-          <td class="${c.thousandsCellRight}" width="50%" valign="top">${thousandsMoreTile(right, width)}</td>
+          <td class="${c.thousandsCellLeft}" width="50%" valign="top">${thousandsMoreTile(c, left, width)}</td>
+          <td class="${c.thousandsCellRight}" width="50%" valign="top">${thousandsMoreTile(c, right, width)}</td>
         </tr>
       </tbody>
     </table>
   </td>`;
- 
+
 const thousandsMoreRow = (c, categories, isLast, width) => `
   <tr>
     <td${isLast ? '' : cls(c.thousandsRowGap)}>
@@ -149,33 +165,34 @@ const thousandsMoreRow = (c, categories, isLast, width) => `
       </table>
     </td>
   </tr>`;
- 
+
 // The grid class lets mobile CSS shrink the whole grid (tiles 1/3 smaller, centered).
-const thousandsMoreGrid = (c, categories, width) => `
-  <table${cls(c.thousandsGrid)} role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+// `shrinkOnMobile = false` leaves the class off, so on mobile the tiles use the full width (10px gaps).
+const thousandsMoreGrid = (c, categories, width, shrinkOnMobile = true) => `
+  <table${cls(shrinkOnMobile ? c.thousandsGrid : '')} role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tbody>
       ${thousandsMoreRow(c, categories.slice(0, 4), false, width)}
       ${thousandsMoreRow(c, categories.slice(4, 8), true, width)}
     </tbody>
   </table>`;
- 
+
 const socialIcon = (c, item, alt, href) => `
   <td class="${c.socialIcon}" valign="middle" style="line-height: ${SOCIAL_ICON_SIZE}px; mso-line-height-rule: at-least;">
     <a href="${href}">
       <img loading="lazy" src="${item.src}" width="${SOCIAL_ICON_SIZE}" border="0" style="display:block; max-width: 100%; vertical-align: middle;" alt="${alt}">
     </a>
   </td>`;
- 
+
 export function Footer(sections, options, name) {
   //   console.log(name);
   const id = sections.id;
   const NL = CLASSES[types.NEWSLETTER];
   const LP = CLASSES[types.LANDINGPAGE];
- 
+
   // Newsletter links get the UTM parameters, landing page links stay clean (as before).
   const track = (href, isLP) =>
     isLP ? href : `${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}`;
- 
+
   // ─── Shared builders: same markup for both types, only the class names differ ───
   const seeYouSoon = ({ src, href }, isLP) => {
     const c = isLP ? LP : NL;
@@ -196,7 +213,7 @@ export function Footer(sections, options, name) {
                 </tr>
         `);
   };
- 
+
   // Landing page only (empty in the newsletter) – same style as seeYouSoon: image, then a line.
   const workBanner = ({ src, href }) => {
     const c = LP;
@@ -217,7 +234,7 @@ export function Footer(sections, options, name) {
                 </tr>
         `);
   };
- 
+
   const deliveryBanner = ({ src, href }, isLP) => {
     const c = isLP ? LP : NL;
     return peachFrame(c, `
@@ -235,7 +252,7 @@ export function Footer(sections, options, name) {
                     </tr>
             `, isLP ? {} : { id: 'newsletter' });
   };
- 
+
   const thousandsMore = (
     {
       title,
@@ -251,6 +268,21 @@ export function Footer(sections, options, name) {
     isLP
   ) => {
     const c = isLP ? LP : NL;
+    const categories = [
+      firstCategory,
+      secondCategory,
+      thirdCategory,
+      foutrthCategory,
+      fifthCategory,
+      sixthCategory,
+      seventhCategory,
+      eigthCategory,
+    ];
+    // Mobile images for every tile (newsletter AND landing page): no 1/3 shrink on mobile –
+    // the mobile tiles fill the full width, 2 per row, with the normal 10px gaps.
+    // Without mobile images the desktop tiles are shrunk to 2/3 width on mobile instead.
+    const hasAllMobileImgs = categories.every((cat) => cat && cat.mobileSrc);
+    const shrinkOnMobile = !hasAllMobileImgs;
     return peachFrame(c, `
             <tr>
               <td class="${c.container30}" style="background-color: #ffffff;">
@@ -268,26 +300,13 @@ export function Footer(sections, options, name) {
             ${Space({ className: c.bottom20, insideTr: true, background: '#FFFFFF' })}
             <tr>
               <td class="${c.container30}" style="background-color: #FFFFFF;">
-                ${thousandsMoreGrid(
-                  c,
-                  [
-                    firstCategory,
-                    secondCategory,
-                    thirdCategory,
-                    foutrthCategory,
-                    fifthCategory,
-                    sixthCategory,
-                    seventhCategory,
-                    eigthCategory,
-                  ],
-                  isLP ? null : NL_THOUSANDS_TILE_WIDTH
-                )}
+                ${thousandsMoreGrid(c, categories, isLP ? null : NL_THOUSANDS_TILE_WIDTH, shrinkOnMobile)}
               </td>
             </tr>
             ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
                 `);
   };
- 
+
   const klarna = ({ href, src }, isLP) => {
     const c = isLP ? LP : NL;
     return peachFrame(c, `
@@ -297,7 +316,7 @@ export function Footer(sections, options, name) {
                         </td>
                     </tr>
                     ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
- 
+
                     <tr>
                         <td class="${c.container30}" style="background-color: #FFFFFF;">
                             <a href="${track(href, isLP)}">
@@ -308,7 +327,7 @@ export function Footer(sections, options, name) {
                     ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
         `);
   };
- 
+
   const socials = ({ title, subtitle, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }, isLP) => {
     const c = isLP ? LP : NL;
     return peachFrame(c, `
@@ -368,7 +387,7 @@ export function Footer(sections, options, name) {
                 ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
                 `);
   };
- 
+
   // Same style for both; the text picked from conditionsText stays as it was per type.
   const conditions = (conditionsTitle, text, isLP) => {
     const c = isLP ? LP : NL;
@@ -386,7 +405,7 @@ export function Footer(sections, options, name) {
             }
         `, { style: ' line-height: 10px; mso-line-height-rule: exactly;' });
   };
- 
+
   const json_footer = {
     seeYouSoon: {
       [types.NEWSLETTER]: { value: (data) => seeYouSoon(data, false) },
@@ -409,7 +428,7 @@ export function Footer(sections, options, name) {
           value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
             const items = [firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage];
             const aw = advantageWidths(items, NL_IMG_WIDTH_30);
-            const cell = (i, side) => advantageCell(items[i], track(items[i].href, false), aw[i], side);
+            const cell = (i, side) => advantageCell(NL, items[i], track(items[i].href, false), aw[i], side);
             // No conditional comments here on purpose: the build minifier rewrites
             // <!--[if !mso]><!--> … <!--<![endif]--> so the markup inside gets commented out everywhere.
             // One structure works for every client instead:
@@ -451,7 +470,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: { value: (data) => socials(data, false) },
       [types.LANDINGPAGE]: { value: (data) => socials(data, true) },
     },
- 
+
     conditions: {
       [types.NEWSLETTER]: {
         value: ({ conditionsTitle, conditionsText }) =>
@@ -523,16 +542,16 @@ export function Footer(sections, options, name) {
       },
     },
   };
- 
+
   let html = '';
   for (const section in sections) {
     const elem = sections[section];
     if (typeof elem !== 'object') continue;
- 
+
     if (section in json_footer) {
       if (!('exclude' in elem)) {
         const conditionalSections = {};
- 
+
         for (const key in elem) {
           const element = elem[key] || '';
           if (elem[key] === undefined) {
@@ -542,7 +561,7 @@ export function Footer(sections, options, name) {
             conditionalSections[key] = element;
             continue;
           }
- 
+
           if (!element.exclude) {
             conditionalSections[key] = element;
           }
@@ -552,7 +571,7 @@ export function Footer(sections, options, name) {
       }
       if (!elem.exclude) {
         const conditionalSections = {};
- 
+
         for (const key in elem) {
           const element = elem[key] || '';
           if (elem[key] === undefined) {
@@ -562,7 +581,7 @@ export function Footer(sections, options, name) {
             conditionalSections[key] = element;
             continue;
           }
- 
+
           if (!element.exclude) {
             conditionalSections[key] = element;
           }
@@ -588,4 +607,3 @@ export function Footer(sections, options, name) {
     </tbody>
   </table>`;
 }
- 

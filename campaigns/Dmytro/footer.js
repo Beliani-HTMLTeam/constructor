@@ -276,8 +276,8 @@ const categories = [
 ];
 
 export default new entities.Campaign({
-  startId: 49280,
-  lpId: 33216,
+  startId: 49345,
+  lpId: 33239,
   issueCardId: 541930,
   version: 'new',
   name: 'Footer',
