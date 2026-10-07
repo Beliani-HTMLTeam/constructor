@@ -8,8 +8,10 @@ export const render = ({
   getPhrase,
   renderType = 'newsletter',
   ctaHref = '#',
+  catHref = 'https://www.beliani.ch/',
   theme = {},
   tdClass = 'newsletterContainer',
+  getCategoryLink,
 }) => {
   const cardEntries = Object.entries(queries ?? {})
     .filter(([key]) => /^card_\d+$/i.test(key))
@@ -47,6 +49,19 @@ export const render = ({
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
   `;
 
+  const wrapInAnchor = (content, href, textColor) => {
+    if (renderType === 'landing')
+      return content;
+    
+    href = href ?? "#"
+    
+    return (`
+    <a href="${href}" style="display:block;width:100%;text-decoration:none;color:${textColor};">
+      ${content}
+    </a>
+    `)
+  }
+
   for (let i = 0; i < cardEntries.length; i++) {
     html += `<tr>`;
 
@@ -80,15 +95,16 @@ export const render = ({
           })
         : '';
 
-    html += `
+      html += `
       <td width=100%" valign="top" style="width: 100%;">
+        ${wrapInAnchor(`
         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${cardBg}" class="blackWeekCard">
           <tbody>
           ${Space({ insideTr: true, className: 'newsletterBottom45px' })}
             ${labelText ? `
             <tr>
               <td align="center" class="blackWeekTitle" style="color: ${textColor};">
-                ${labelText}
+                ${wrapInAnchor(labelText, ctaHref?.href, textColor)}
               </td>
             </tr>
             ` : ''}
@@ -97,7 +113,7 @@ export const render = ({
             ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
             <tr>
               <td align="center" class="blackWeekDiscount" style="color: ${discountColor};">
-                ${discountText}
+              ${wrapInAnchor(discountText, ctaHref?.href, discountColor)}
               </td>
             </tr>
             ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
@@ -106,7 +122,7 @@ export const render = ({
             ${subtitleText ? `
             <tr>
               <td align="center" class="blackWeekSubtitle" style="color: ${textColor};">
-                ${subtitleText}
+              ${wrapInAnchor(subtitleText, ctaHref?.href, textColor)}
               </td>
             </tr>
             ` : ''}
@@ -127,9 +143,9 @@ export const render = ({
             }
             ${Space({ insideTr: true, className: 'newsletterBottom45px' })}
           </tbody>
-        </table>
+        </table>`, ctaHref?.href ?? "#", textColor)}
       </td>
-    `;
+    `
 
     html += `</tr>`;
 
@@ -139,20 +155,18 @@ export const render = ({
 
   html += Space({ insideTr: true, className: 'newsletterBottom35px' });
 
-  if (renderType !== 'landing') {
-    html += `
-    <tr>
-      <td class="blackWeekCta" width="100%" align="center" style="background: ${ctaBg}; color: ${ctaText};">
-        
-        <a href="${ctaHref?.href ?? '#'}" class="blackWeekCtaBorder" style="display: block; width: 100%; text-decoration: none; color: ${ctaText}; border-color: ${ctaBg};">
-          ${getPhrase('Get codes')}
-        </a>
-        
-      </td>
-    </tr>
-    ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-    `
-  }
+  html += `
+  <tr>
+    <td class="blackWeekCta" width="100%" align="center" style="background: ${ctaBg}; color: ${ctaText};">
+      
+      <a href="${renderType !== 'landing' ? ctaHref?.href ?? '#' : getCategoryLink(catHref)}" class="blackWeekCtaBorder" style="display: block; width: 100%; text-decoration: none; color: ${ctaText}; border-color: ${ctaBg};">
+        ${renderType !== 'landing' ? getPhrase('Get codes') : getPhrase('Shop now')}
+      </a>
+      
+    </td>
+  </tr>
+  ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
+  `
 
   html += `
     <tr>
