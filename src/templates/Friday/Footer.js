@@ -131,12 +131,12 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
      
       conditions: {
         conditionsTitle: getFooter('Conditions title'),
-        conditionsText: queries.condition || [getFooter('Conditions_description'), getFooter('Conditions_unsubscribe')],
+        conditionsText: queries.condition || [getFooter('Conditions_description'), getFooter('Conditions_unsubscribe new')],
       },
 
       companyDetails: {
         title: getFooter('Company Details'),
-        address: getFooter('Address'),
+        address: getFooter('Address new'),
         mobileNumber: getFooter('Mobile number'),
         emailAddress: getFooter('Email address'),
         mailTo: getFooter('Mail to'),
