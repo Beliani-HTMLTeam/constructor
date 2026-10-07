@@ -16,6 +16,9 @@ import { FrenchDaysNew } from './AISrc/french_days/template.js';
 import { MondayNewAI } from './DimaSrc/monday_new/template.js';
 import { Friday } from './Friday/template.js';
 
+// Black Week
+import { BlackWeekFirst } from './AISrc/black_week_first/template.js';
+
 export const templates = {
   Blackweek,
   AdventCalendar,
@@ -32,5 +35,8 @@ export const templates = {
   ThursdayNew,
   FrenchDaysNew,
   MondayNewAI,
-  Friday
+  Friday,
+
+  // Black Week
+  BlackWeekFirst,
 };
