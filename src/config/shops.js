@@ -328,7 +328,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.CZ,
-        tableColumn: 'Al',
+        tableColumn: 'AL',
       },
       {
         language: LANGUAGES.SK,
