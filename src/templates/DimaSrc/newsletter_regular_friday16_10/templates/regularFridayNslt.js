@@ -65,9 +65,10 @@ const RegularFridayNslt16_10 = async ({
   getProductById,
   add_utm,
   date,
-  disableTopImageTitle
+  disableTopImageTitle,
+  freebiesOverrides,
 }) => {
-  console.log("shop and country", shop, country, timerData)
+  console.log("shop and country", shop, country, timerData, freebiesOverrides)
   // ogólne części kampanii
   const selectCampaign = getState('selectedCampaign');
 
@@ -144,7 +145,7 @@ const RegularFridayNslt16_10 = async ({
     shopNowPhrase,
   });
 
-   const TimerElement = TimerHandler({ Inside, queries, links, timer: timerData, shopNow: shopNowPhrase, country, type, shop });
+   const TimerElement = TimerHandler({ Inside, queries, links, timer: { ...timerData, freebies: freebiesOverrides[country] || timerData.freebies }, shopNow: shopNowPhrase, country, type, shop });
 
   const CategoriesElement = await CategoriesWrapper({
     categories,

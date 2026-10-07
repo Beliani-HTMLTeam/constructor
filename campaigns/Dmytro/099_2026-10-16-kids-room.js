@@ -310,6 +310,9 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       disableTopImageTitle: true,
+      freebiesOverrides: {
+        DK: getImageUrl('20261016freeDK.png', true),
+      }
     },
     {
       name: "Landing",
@@ -335,6 +338,9 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       disableTopImageTitle: true,
+      freebiesOverrides: {
+        DK: getImageUrl('20261016freeDK.png', true),
+      }
     },
   ],
 });
