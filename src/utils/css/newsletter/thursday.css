@@ -156,6 +156,21 @@ img {
   padding-left: 20px;
 }
 
+.newsletter3ProductsLeft {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.newsletter3ProductsCenter {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.newsletter3ProductsRight {
+  padding-left: 5px;
+  padding-right: 10px;
+}
+
 .newsletterLeft02px {
   padding-left: 20px;
 }
@@ -601,6 +616,19 @@ img {
 
   .newsletterLeft20px {
     padding-left: 10px;
+  }
+
+  .newsletter3ProductsLeft {
+    padding-left: 10px;
+  }
+
+  .newsletter3ProductsCenter {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .newsletter3ProductsRight {
+    padding-right: 10px;
   }
 
   .newsletterLeft02px {
