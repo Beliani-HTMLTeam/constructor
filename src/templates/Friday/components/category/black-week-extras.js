@@ -37,6 +37,29 @@ const getCodeValue = (text) => {
 	return (parts.length > 1 ? parts.slice(1).join(':') : raw).trim();
 };
  
+const escapeAttr = (value) =>
+	String(value ?? '')
+		.replace(/&/g, '&amp;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;');
+ 
+// click anywhere on a box -> clicks the copy icon of that box, so the copy + toast are
+// exactly the ones from buildCopyIcon. a click on the icon itself is left alone (no double copy).
+// only single quotes inside - it lives in a double quoted attribute
+const BOX_COPY_HANDLER = [
+	'(function(box,e){',
+	"var wrap=box.querySelector('[data-copy-icon]');",
+	'if(!wrap||wrap.contains(e.target))return;',
+	"var target=wrap.querySelector('[onclick],button,a,[role=button]')||wrap.firstElementChild||wrap;",
+	'target.click();',
+	'})(this,event)',
+].join('');
+ 
+// enter / space copy too, the box is focusable
+const BOX_KEY_HANDLER = "if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}";
+ 
 const stripTags = (text) =>
 	String(text ?? '')
 		.replace(/<br\s*\/?>/gi, ' ')
@@ -137,35 +160,60 @@ const getGridSizes = ({ totalWidth, gap }) => {
 	};
 };
  
-const renderGapCell = ({ gap, gapPercent }) =>
-	`<td width="${gap}" style="width: ${gapPercent}%; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
+// classes for the mobile css (campaign additionalCss) - below 768px the boxes go one under another:
+// cell -> display block, full width; gapCol -> turns into the vertical space between the two boxes of a row
+const DEFAULT_GRID_CLASSES = {
+	table: 'newsletterDealGrid',
+	cell: 'newsletterDealCell',
+	gapCol: 'newsletterDealGapCol',
+	gapRow: 'newsletterDealGapRow',
+	empty: 'newsletterDealEmpty',
+};
  
-const renderGapRow = ({ gap }) => `
-          <tr>
+const renderGapCell = ({ gap, gapPercent, classes }) =>
+	`<td class="${classes.gapCol}" width="${gap}" style="width: ${gapPercent}%; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
+ 
+const renderGapRow = ({ gap, classes }) => `
+          <tr class="${classes.gapRow}">
             <td colspan="${DEAL_COLUMNS * 2 - 1}" height="${gap}" style="height: ${gap}px; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>
           </tr>`;
  
 // shared 2x2 table, renderCell draws the content of one box
-const renderGrid = ({ items, totalWidth, gap, containerClass, rowClass, renderCell, cellStyles = '' }) => {
+// cellStyles / cellAttrs can be a string or a function of the item (eg. only copyable boxes get a pointer)
+const renderGrid = ({
+	items,
+	totalWidth,
+	gap,
+	containerClass,
+	rowClass,
+	renderCell,
+	cellStyles = '',
+	cellAttrs = '',
+	gridClasses = DEFAULT_GRID_CLASSES,
+}) => {
 	if (items.length === 0) return '';
  
+	const classes = { ...DEFAULT_GRID_CLASSES, ...gridClasses };
 	const { cellWidth, cellPercent, gapPercent } = getGridSizes({ totalWidth, gap });
  
 	let rows = '';
  
 	chunk(items, DEAL_COLUMNS).forEach((row, rowIndex) => {
-		if (rowIndex > 0) rows += renderGapRow({ gap });
+		if (rowIndex > 0) rows += renderGapRow({ gap, classes });
  
 		let cells = '';
  
 		for (let col = 0; col < DEAL_COLUMNS; col++) {
-			if (col > 0) cells += renderGapCell({ gap, gapPercent });
- 
 			const item = row[col];
  
+			// no gap before an empty cell, so nothing is left over on mobile
+			if (col > 0) cells += renderGapCell({ gap, gapPercent, classes: item ? classes : { gapCol: classes.empty } });
+ 
+			const styles = item ? (typeof cellStyles === 'function' ? cellStyles(item) : cellStyles) : 'padding: 0;';
+			const attrs = item ? (typeof cellAttrs === 'function' ? cellAttrs(item) : cellAttrs) : '';
+ 
 			cells += `
-            <td width="${cellWidth}" align="center" valign="top" style="width: ${cellPercent}%; vertical-align: top; ${item ? cellStyles : 'padding: 0;'
-				}">
+            <td class="${item ? classes.cell : classes.empty}" width="${cellWidth}" align="center" valign="top" style="width: ${cellPercent}%; vertical-align: top; ${styles}"${attrs ? ` ${attrs}` : ''}>
               ${item ? renderCell(item, cellWidth) : '&nbsp;'}
             </td>`;
 		}
@@ -178,7 +226,7 @@ const renderGrid = ({ items, totalWidth, gap, containerClass, rowClass, renderCe
 	return `
     <tr${rowClass ? ` class="${rowClass}"` : ''}>
       <td${containerClass ? ` class="${containerClass}"` : ''} align="center">
-        <table cellspacing="0" cellpadding="0" border="0" width="${totalWidth}" style="width: 100%; max-width: ${totalWidth}px; table-layout: fixed; border-collapse: collapse;">
+        <table class="${classes.table}" cellspacing="0" cellpadding="0" border="0" width="${totalWidth}" style="width: 100%; max-width: ${totalWidth}px; table-layout: fixed; border-collapse: collapse;">
           ${rows}
         </table>
       </td>
@@ -201,7 +249,7 @@ const renderImageGrid = ({ tiers, images, href, ...gridProps }) =>
 	});
  
 // landing page: the same boxes in html, with the code under every tier
-const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSpacing, toast, showCopyIcon, ...gridProps }) => {
+const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSpacing, toast, ...gridProps }) => {
 	const { cellWidth } = getGridSizes({ totalWidth: gridProps.totalWidth, gap: gridProps.gap });
  
 	const fitStyle = getFitStyle({
@@ -228,32 +276,49 @@ const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSp
 			: `<div><span class="${className}" style="color: ${colors.text};">${text}</span></div>`;
 	};
  
-	return renderGrid({
-		...gridProps,
-		items: tiers.map((tier, i) => ({ tier, code: codes[i] ?? codes[0] ?? '' })),
-		cellStyles: `background-color: ${colors.box}; border-radius: ${box.radius}px; padding: ${box.paddingY}px ${box.paddingX}px; box-sizing: border-box;`,
-		renderCell: ({ tier, code }) => `
-              <div style="text-align: center;">
-                ${order.map((name) => renderLine(tier, name)).join('')}
-                ${isEmpty(code)
-				? ''
-				: `
+	// "CODE: XXX" -> "XXX" is what gets copied, placeholders included
+	const items = tiers.map((tier, i) => {
+		const code = codes[i] ?? codes[0] ?? '';
+		const codeValue = isEmpty(code) ? '' : getCodeValue(code);
+ 
+		return { tier, code, codeValue, copyable: !isEmpty(codeValue) };
+	});
+ 
+	const boxStyles = `background-color: ${colors.box}; border-radius: ${box.radius}px; padding: ${box.paddingY}px ${box.paddingX}px; box-sizing: border-box;`;
+ 
+	// same code line + copy icon as before
+	const renderCode = ({ code, codeValue, copyable }) =>
+		isEmpty(code)
+			? ''
+			: `
                 <div style="padding-top: ${codeSpacing}px;">
                   <span class="${classes.code}" style="color: ${colors.value}; display: inline-flex; align-items: center; white-space: nowrap;">
                     ${code}
-                    ${showCopyIcon
-					? buildCopyIcon({
-						codeValue: getCodeValue(code),
-						color: colors.value,
-						toastBg: toast.background,
-						toastText: toast.color,
-						label: toast.label,
-					})
-					: ''
-				}
-                  </span>
-                </div>`
+                    ${copyable
+				? `<span data-copy-icon style="display: inline-flex; align-items: center;">${buildCopyIcon({
+					codeValue,
+					color: colors.value,
+					toastBg: toast.background,
+					toastText: toast.color,
+					label: toast.label,
+				})}</span>`
+				: ''
 			}
+                  </span>
+                </div>`;
+ 
+	return renderGrid({
+		...gridProps,
+		items,
+		cellStyles: ({ copyable }) => (copyable ? `${boxStyles} cursor: pointer;` : boxStyles),
+		cellAttrs: ({ copyable, codeValue }) =>
+			copyable
+				? `data-code="${escapeAttr(codeValue)}" role="button" tabindex="0" onclick="${BOX_COPY_HANDLER}" onkeydown="${BOX_KEY_HANDLER}"`
+				: '',
+		renderCell: (item) => `
+              <div style="text-align: center;">
+                ${order.map((name) => renderLine(item.tier, name)).join('')}
+                ${renderCode(item)}
               </div>`,
 	});
 };
@@ -381,6 +446,8 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		gap: category?.dealGap ?? 10,
 		containerClass: category?.dealGridContainer ?? containerClass,
 		rowClass: category?.dealRowClass,
+		// targeted by the mobile css, override per campaign if needed
+		gridClasses: { ...DEFAULT_GRID_CLASSES, ...(category?.dealGridClasses ?? {}) },
 	};
  
 	const images = isNewsletter ? resolveDealImages({ category, tiers, country }) : [];
@@ -407,10 +474,10 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 				min: category?.dealFit?.min ?? 24,
 			},
 			codeSpacing: category?.dealCodeSpacing ?? 8,
-			showCopyIcon: category?.showCopyIcon ?? false,
 			toast: {
 				background: category?.copyToast?.background ?? colors.value,
 				color: category?.copyToast?.color ?? '#ffffff',
+				// same phrase the french days template uses, eg. "Code kopiert"
 				label: category?.copyToast?.label ?? getPhrase('Copy code'),
 			},
 		});
@@ -445,3 +512,4 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
  
 	return html;
 };
+ 

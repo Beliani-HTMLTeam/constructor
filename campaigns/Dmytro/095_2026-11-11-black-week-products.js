@@ -1,18 +1,25 @@
-const campaignTranslationsSheet = '2026::07.10.26 - Living room';
+const campaignTranslationsSheet = '2026::Voucher - 11.11.26 - Black Week product categories';
 
 const tableQueries = [
-  {
-    tableRange: '19:25',
-    name: 'paragraphs',
-  },
-  {
-    tableRange: '28:34',
-    name: 'categoryLinks',
-  },
-  {
-		tableRange: '15:16',
-		name: 'timer',
-		tableName: '2026::Voucher - 06.10.26 - Free Bathroom set',
+	{
+		// THE MORE YOU SPEND, THE MORE YOU SAVE - 1 row
+		tableRange: '45',
+		name: 'deal_title',
+	},
+	{
+		// 4 boxes x 4 rows (EXTRA / 20% / OFF / when you spend min. €2500) - 16 rows, in order 20, 15, 10, 5
+		tableRange: '20:39',
+		name: 'deal_img',
+	},
+	{
+		// CODE: XXX - 4 rows, same order as the boxes
+		tableRange: '40:43',
+		name: 'deal_codes',
+	},
+	{
+		// Limited-time offer. Valid until 29/11/2026 - 1 row
+		tableRange: '44',
+		name: 'deal_condition',
 	},
 ];
 
@@ -38,9 +45,8 @@ const additionalCss = `
 `;
 
 const additionalCssLp = `
-#newsletter .campaignEyebrow{font-size:12px;font-family:"Poppins",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
-#newsletter .campaignHeadline{font-size:53px;font-family:"Poppins",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-@media screen and (max-width:768px){#newsletter .campaignHeadline{font-size:32px!important}#newsletter .campaignInset{width:10px!important}#newsletter .campaignTileLink{padding:10px!important}}
+#newsletter .newsletterDealTierLabel{font-size:12px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:12px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:14px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:13px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
+@media screen and (max-width:768px){#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}}
 `;
 
 const palette = {
@@ -70,123 +76,133 @@ const button = {
 
 const categories = [
 	{
-		background: '#FF2F00',
+		// section background - also the text colour of the GET CODES button
+		background: '#000000',
 		color: '#000000',
-		type: 'deal_new',
+		type: 'black-week-extras',
 		textColor: '#FFFFFF',
 		href: translateLink({ value: 'content/lp26-11-11' }),
-		copyToast: {
+
+		// newsletter only - one image per box, same order as the tiers in deal_img (20, 15, 10, 5)
+		// on the landing page the boxes are rendered as html
+		dealImgs: [
+			translateImage({ value: '_black_week_extra_20.png' }),
+			translateImage({ value: '_black_week_extra_15.png' }),
+			translateImage({ value: '_black_week_extra_10.png' }),
+			translateImage({ value: '_black_week_extra_5.png' }),
+		],
+    dealTierLines: 5,
+    copyToast: {
 			background: '#750000',
 			color: '#FFFFFF',
 		},
-		// newsletter only - on the landing page the deal is rendered as text
-		dealImg: translateImage({ value: '_20261002_deal.png' }),
-		// french shops put the discount after the description
-		rowOrder: {
-			default: ['row1', 'row2', 'row3'],
-			'fr,chfr,befr': ['row1', 'row3', 'row2'],
-		},
+		// landing page boxes
+		dealBoxColor: '#FFF3E6',
+		dealBoxTextColor: '#000000',
+		dealValueColor: '#FF2F00',
+
+		// grid - inner width of newsletterContainer, gap between the boxes
+		dealWidth: 560,
+		dealGap: 10,
+
 		paddingTop: 0,
-		// top padding of the deal block - space before the deal header
 		paragraph: { spaceAfter: 'newsletterBottom40px' },
-		spaceAfterHeader: 'newsletterBottom20px',
-		spaceAfterTitle: 'newsletterBottom20px',
-		spaceBeforeDeal: 'newsletterBottom35px',
-		spaceAfterDeal: 'newsletterBottom35px',
+		spaceBeforeDeal: 'newsletterBottom20px',
+		spaceAfterDeal: 'newsletterBottom20px',
 		spaceAfterCodeCta: 'newsletterBottom20px',
 		// bottom padding of the deal block
 		spaceAfterConditions: 'newsletterBottom40px',
 		dealTitle: { styles: 'font-size: 34px; font-weight: 700;' },
 		spaceAfter: 0,
 	},
-	{
-		background: '#F6E7E6',
-		color: '#000000',
-		type: 'rowswith3categories',
-		paddingTop: 0,
-		showTileText: true,
-		tileNameColor: '#750000',
-		tileCtaColor: '#000000',
-		spaceBetweenRows: 'newsletterBottom35px',
-		spaceAfter: 'newsletterBottom60px',
-		heading: {
-			phrase: 'Shop by category',
-			align: 'center',
-			spaceAfter: 'newsletterBottom35px',
-		},
-		categories:
-			[
-				[
-					{
-						name: "Sofas",
-						href: 'https://www.beliani.ch/sofas/',
-						src: getImageUrl('20261002_Sofas.png', true),
-					},
-					{
-						name: "Beds",
-						href: 'https://www.beliani.ch/beds/',
-						src: getImageUrl('20261002_Beds.png', true),
-					},
-					{
-						name: "Armchairs",
-						href: 'https://www.beliani.ch/armchairs/',
-						src: getImageUrl('20261002_Armchairs.png', true),
-					},
+	// {
+	// 	background: '#F6E7E6',
+	// 	color: '#000000',
+	// 	type: 'rowswith3categories',
+	// 	paddingTop: 0,
+	// 	showTileText: true,
+	// 	tileNameColor: '#750000',
+	// 	tileCtaColor: '#000000',
+	// 	spaceBetweenRows: 'newsletterBottom35px',
+	// 	spaceAfter: 'newsletterBottom60px',
+	// 	heading: {
+	// 		phrase: 'Shop by category',
+	// 		align: 'center',
+	// 		spaceAfter: 'newsletterBottom35px',
+	// 	},
+	// 	categories:
+	// 		[
+	// 			[
+	// 				{
+	// 					name: "Sofas",
+	// 					href: 'https://www.beliani.ch/sofas/',
+	// 					src: getImageUrl('20261002_Sofas.png', true),
+	// 				},
+	// 				{
+	// 					name: "Beds",
+	// 					href: 'https://www.beliani.ch/beds/',
+	// 					src: getImageUrl('20261002_Beds.png', true),
+	// 				},
+	// 				{
+	// 					name: "Armchairs",
+	// 					href: 'https://www.beliani.ch/armchairs/',
+	// 					src: getImageUrl('20261002_Armchairs.png', true),
+	// 				},
 
-				],
-				[
-					{
-						name: "Tables",
-						href: 'https://www.beliani.ch/tables/',
-						src: getImageUrl('20261002_Tables.png', true),
-					},
-					{
-						name: "Chairs",
-						href: 'https://www.beliani.ch/chairs/',
-						src: getImageUrl('20261002_Chairs.png', true),
-					},
-					{
-						name: "Storage",
-						href: 'https://www.beliani.ch/storage/',
-						src: getImageUrl('20261002_Storage.png', true),
-					},
-				],
-				[
-					{
-						name: "Desks",
-						href: 'https://www.beliani.ch/desks/',
-						src: getImageUrl('20261002_Desks.png', true),
-					},
-					{
-						name: "Kids",
-						href: 'https://www.beliani.ch/children-room/',
-						src: getImageUrl('20261002_Kids.png', true),
-					},
-					{
-						name: "Lighting",
-						href: 'https://www.beliani.ch/lighting/',
-						src: getImageUrl('20261002_Lighting.png', true),
-					},
-				],
-				[
-					{
-						name: "Bathtubs",
-						href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-						src: getImageUrl('20261002_Bathtubs.png', true),
-					},
-					{
-						name: "Rugs",
-						href: 'https://www.beliani.ch/rugs/',
-						src: getImageUrl('20261002_Rugs.png', true),
-					},
-					{
-						name: "Accessories",
-						href: 'https://www.beliani.ch/accessories-decor/',
-						src: getImageUrl('20261002_Accessories.png', true),
-					},
-				],
-			]
-	},
+	// 			],
+	// 			[
+	// 				{
+	// 					name: "Tables",
+	// 					href: 'https://www.beliani.ch/tables/',
+	// 					src: getImageUrl('20261002_Tables.png', true),
+	// 				},
+	// 				{
+	// 					name: "Chairs",
+	// 					href: 'https://www.beliani.ch/chairs/',
+	// 					src: getImageUrl('20261002_Chairs.png', true),
+	// 				},
+	// 				{
+	// 					name: "Storage",
+	// 					href: 'https://www.beliani.ch/storage/',
+	// 					src: getImageUrl('20261002_Storage.png', true),
+	// 				},
+	// 			],
+	// 			[
+	// 				{
+	// 					name: "Desks",
+	// 					href: 'https://www.beliani.ch/desks/',
+	// 					src: getImageUrl('20261002_Desks.png', true),
+	// 				},
+	// 				{
+	// 					name: "Kids",
+	// 					href: 'https://www.beliani.ch/children-room/',
+	// 					src: getImageUrl('20261002_Kids.png', true),
+	// 				},
+	// 				{
+	// 					name: "Lighting",
+	// 					href: 'https://www.beliani.ch/lighting/',
+	// 					src: getImageUrl('20261002_Lighting.png', true),
+	// 				},
+	// 			],
+	// 			[
+	// 				{
+	// 					name: "Bathtubs",
+	// 					href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
+	// 					src: getImageUrl('20261002_Bathtubs.png', true),
+	// 				},
+	// 				{
+	// 					name: "Rugs",
+	// 					href: 'https://www.beliani.ch/rugs/',
+	// 					src: getImageUrl('20261002_Rugs.png', true),
+	// 				},
+	// 				{
+	// 					name: "Accessories",
+	// 					href: 'https://www.beliani.ch/accessories-decor/',
+	// 					src: getImageUrl('20261002_Accessories.png', true),
+	// 				},
+	// 			],
+	// 		]
+	// },
 ];
 
 export default new entities.Campaign({

@@ -313,6 +313,8 @@ const renderBody = async ({
 
   const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
 
+  console.log(`Rendering category type: ${categoryTypeStr} (category name: ${category?.name ?? 'N/A'})`);
+
   try {
     const module = await import(`./category/${categoryTypeStr}.js`);
 
