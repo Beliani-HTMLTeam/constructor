@@ -8,6 +8,7 @@ import nslt_ai_mon from '@css/newsletter/ai_mon.css?inline';
 import dima_nslt_ai_new from '@css/newsletter/dima_ai_new.css?inline';
 import nslt_ai_new2 from '@css/newsletter/ai_new2.css?inline';
 import nslt_french_days_new from '@css/newsletter/french_days_new.css?inline';
+import nslt_blackweek2 from '@css/newsletter/blackweek2.css?inline';
 
 import lp_thursday from '@css/landing/thursday.css?inline';
 import lp_friday from '@css/landing/friday.css?inline';
@@ -19,6 +20,7 @@ import lp_ai_mon from '@css/landing/ai_mon.css?inline';
 import dima_lp_ai_new from '@css/landing/dima_ai_new.css?inline';
 import lp_ai_new2 from '@css/landing/ai_new2.css?inline';
 import lp_french_days_new from '@css/landing/french_days_new.css?inline';
+import lp_blackweek2 from '@css/landing/blackweek2.css?inline';
 
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
@@ -41,6 +43,7 @@ export const types = {
     DIMA_NS_AI_NEW: dima_nslt_ai_new,
     NS_AI_NEW2: nslt_ai_new2,
     NS_FRENCH_DAYS: nslt_french_days_new,
+    NS_BLACK_WEEK2: nslt_blackweek2,
 
     LP: lp_regular,
     LP_THURSDAY: lp_thursday,
@@ -53,6 +56,7 @@ export const types = {
     DIMA_LP_AI_NEW: dima_lp_ai_new,
     LP_AI_NEW2: lp_ai_new2,
     LP_FRENCH_DAYS: lp_french_days_new,
+    LP_BLACK_WEEK2: lp_blackweek2,
 
     CGB: {
       DESKTOP: cgb_desktop,
