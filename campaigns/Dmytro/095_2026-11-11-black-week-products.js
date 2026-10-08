@@ -24,8 +24,11 @@ const tableQueries = [
 ];
 
 const links = {
-	TopImage_src: translateImage({ value: '20261008_Pic.png' }),
-	TopImage_href: translateLink({ value: 'content/lp26-10-08-tb' }),
+	TopImageTitle_src: translateImage({ value: '20261111_topImage.png' }),
+	TopImageTitle_href: translateLink({ value: 'content/lp26-11-11' }),
+
+	TopImage_src: translateImage({ value: '20261111_shopNow.png' }),
+	TopImage_href: "Home Page",
 
 	Banner_1: translateLink({ value: 'content/lp26-09-24' }),
 	Banner_1_Image: translateImage({ value: '20260924b.png' }),
@@ -107,7 +110,7 @@ const categories = [
 
 		paddingTop: 0,
 		paragraph: { spaceAfter: 'newsletterBottom40px' },
-		spaceBeforeDeal: 'newsletterBottom20px',
+		spaceBeforeDeal: 'newsletterBottom35px',
 		spaceAfterDeal: 'newsletterBottom20px',
 		spaceAfterCodeCta: 'newsletterBottom20px',
 		// bottom padding of the deal block
