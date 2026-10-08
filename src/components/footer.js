@@ -88,28 +88,13 @@ const advantageWidths = (items, total) => {
   return ws.map((w) => Math.floor(w * scale));
 };
  
-// One advantage slice. `side` says which outer edge of its mobile row the slice sits on:
-// on mobile the CSS rounds the LEFT corners of the first slice in a row and the RIGHT corners of the second,
-// so each 2-slice row looks like a complete rounded box (the cut edges get rounded too).
-const advantageCell = (item, href, width, side) => `
+// One advantage slice. No classes on purpose: the mobile CSS would turn the row into 2 x 2 –
+// this version keeps the desktop row of 4 on every screen size.
+const advantageCell = (item, href, width) => `
   <td valign="top">
     <a href="${href}">
-      <img loading="lazy" src="${item.src}" alt="Advantages" class="advantagesImg${side}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
+      <img loading="lazy" src="${item.src}" alt="Advantages"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
     </a>
-  </td>`;
- 
-// Two slices side by side. Desktop: both pairs sit in one row (4 slices, no gaps).
-// Mobile: each pair becomes its own full-width row (2 x 2).
-const advantagesPair = (pairClass, left, right) => `
-  <td class="advantagesPair ${pairClass}" valign="top">
-    <table class="advantagesPairTable" role="presentation" cellspacing="0" cellpadding="0" border="0">
-      <tbody>
-        <tr>
-          ${left}
-          ${right}
-        </tr>
-      </tbody>
-    </table>
   </td>`;
  
 // Category tile image. `width` is only passed for the newsletter (Outlook ignores CSS widths on <img>).
@@ -408,7 +393,7 @@ export function Footer(sections, options, name) {
           value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
             const items = [firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage];
             const aw = advantageWidths(items, NL_IMG_WIDTH_30);
-            const cell = (i, side) => advantageCell(items[i], track(items[i].href, false), aw[i], side);
+            const cell = (i) => advantageCell(items[i], track(items[i].href, false), aw[i]);
             // No conditional comments here on purpose: the build minifier rewrites
             // <!--[if !mso]><!--> … <!--<![endif]--> so the markup inside gets commented out everywhere.
             // One structure works for every client instead:
@@ -419,17 +404,17 @@ export function Footer(sections, options, name) {
             // - mso-padding-alt gives Outlook 20px side padding (570px room) so the ≈552px of images
             //   fit without pushing the white panel into the peach frame. Other clients ignore it
             //   and use the normal 30px class padding.
-            // - Desktop: 1 row of 4 slices (two pairs side by side, no gaps).
-            //   Mobile (≤768px): each pair becomes its own row -> 2 x 2, with a vertical gap only,
-            //   and the cut edges of the slices get rounded corners (see advantages* classes in the CSS).
+            // - 1 row of 4 slices on every screen size (same as desktop, the slices just scale down on mobile).
             return peachFrame(NL, `
                   <tr>
                       <td class="${NL.container30}" bgcolor="#ffffff" style="background-color: #ffffff; mso-padding-alt: 0px 20px 0px 20px;">
-                          <table class="advantagesTable" role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; background-color: #ffffff;">
+                          <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; background-color: #ffffff;">
                               <tbody>
                                   <tr>
-                                      ${advantagesPair('advantagesPairFirst', cell(0, 'LEFT'), cell(1, 'RIGHT'))}
-                                      ${advantagesPair('advantagesPairSecond', cell(2, 'LEFT'), cell(3, 'RIGHT'))}
+                                      ${cell(0)}
+                                      ${cell(1)}
+                                      ${cell(2)}
+                                      ${cell(3)}
                                   </tr>
                               </tbody>
                           </table>
