@@ -202,7 +202,10 @@ const categories = [
   }, {
     container: 'newsletterContainer10px',
     spaceAfter: 'newsletterBottom10px',
-    title: {spaceBefore: 'newsletterBottom35px'}
+    title: {spaceBefore: 'newsletterBottom35px'},
+    overrides: {
+      FI: "Pöytävalaisimet"
+    }
   }),
 
   // "This may also interest you"

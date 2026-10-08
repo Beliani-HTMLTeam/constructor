@@ -211,6 +211,9 @@ const categories = [
   },
   {
     name: 'Table & Bedside Lamps',
+    overrides: {
+      FI: "Pöytävalaisimet"
+    },
     src: getImageUrl('20261021_Cat04_B.jpg', true),
     href: 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/',
     background: '#750000',
