@@ -84,22 +84,22 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
       advantages: {
         firstAdvantage: {
           src: getFooter('Advantages src 1 new'),
-          mobileSrc: getFooter('Advantages src 1 new mb'),
+          mobileSrc: getFooter('Advantages src 1 new mb alt'),
           href: getFooter('Advantages href 1'),
         },
         secondAdvantage: {
           src: getFooter('Advantages src 2 new'),
-          mobileSrc: getFooter('Advantages src 2 new mb'),
+          mobileSrc: getFooter('Advantages src 2 new mb alt'),
           href: getFooter('Advantages href 2'),
         },
         thirdAdvantage: {
           src: getFooter('Advantages src 3 new'),
-          mobileSrc: getFooter('Advantages src 3 new mb'),
+          mobileSrc: getFooter('Advantages src 3 new mb alt'),
           href: getFooter('Advantages href 3'),
         },
         fourthAdvantage: {
           src: getFooter('Advantages src 4 new'),
-          mobileSrc: getFooter('Advantages src 4 new mb'),
+          mobileSrc: getFooter('Advantages src 4 new mb alt'),
           href: getFooter('Advantages href 4'),
         },
       },
