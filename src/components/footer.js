@@ -16,9 +16,7 @@ const CLASSES = {
     bottom30: 'newsletterBottom30px',
     bottom35: 'newsletterBottom35px',
     thousandsTitle: 'thousandsMoreTitle',
-    thousandsGrid: 'thousandsMoreGrid',
     thousandsRowGap: 'thousandsMoreRowGap',
-    thousandsPair: 'thousandsMorePair', // + LEFT / RIGHT
     thousandsCellLeft: 'thousandsMoreBtnCellLEFT',
     thousandsCellRight: 'thousandsMoreBtnCellRIGHT',
     socialCol: 'footer',
@@ -36,9 +34,7 @@ const CLASSES = {
     bottom30: 'footerBottom30px',
     bottom35: 'footerBottom35px',
     thousandsTitle: 'footerThousandsTitle',
-    thousandsGrid: 'footerThousandsGrid',
     thousandsRowGap: 'footerThousandsRowGap',
-    thousandsPair: 'footerThousandsPair', // + LEFT / RIGHT
     thousandsCellLeft: 'footerThousandsCellLEFT',
     thousandsCellRight: 'footerThousandsCellRIGHT',
     socialCol: '',
@@ -122,10 +118,13 @@ const thousandsMoreTile = (category, width) => `
     <img loading="lazy" src="${category.src}" alt="${category.name || ''}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
   </a>`;
  
-// Two tiles side by side. On mobile each pair becomes its own full-width row,
-// so the grid goes from 4 columns (desktop) to 2 columns (mobile).
+// Two tiles side by side. The grid keeps the desktop layout on every screen size:
+// 4 columns x 2 rows, tiles simply scale down on mobile.
+// The pair cells have NO class on purpose – the mobile CSS (…PairLEFT / …PairRIGHT) would stack them
+// into 2 columns. The 5px half-gap between the pairs is inline instead, so it still applies everywhere
+// (inline also beats the shop's `.b-content.static-content table td { padding: 0 }` on the landing page).
 const thousandsMorePair = (c, left, right, side, width) => `
-  <td class="${c.thousandsPair}${side}" width="50%" valign="top">
+  <td width="50%" valign="top" style="padding-${side === 'LEFT' ? 'right' : 'left'}: 5px;">
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
       <tbody>
         <tr>
@@ -150,9 +149,9 @@ const thousandsMoreRow = (c, categories, isLast, width) => `
     </td>
   </tr>`;
  
-// The grid class lets mobile CSS shrink the whole grid (tiles 1/3 smaller, centered).
+// No grid class: the grid is not shrunk on mobile, it keeps the full width like on desktop.
 const thousandsMoreGrid = (c, categories, width) => `
-  <table${cls(c.thousandsGrid)} role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tbody>
       ${thousandsMoreRow(c, categories.slice(0, 4), false, width)}
       ${thousandsMoreRow(c, categories.slice(4, 8), true, width)}
