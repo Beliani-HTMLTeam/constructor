@@ -7,7 +7,7 @@ import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
 // category types that render on their own, without products/tiles/freebies
-const STANDALONE_CATEGORY_TYPES = ['deal_new', 'rowswith3categories'];
+const STANDALONE_CATEGORY_TYPES = ['deal_new', 'rowswith3categories', 'rowswith2categories'];
 
 const resolveSpaceClass = (value, fallback) => {
   const raw = value ?? fallback;
