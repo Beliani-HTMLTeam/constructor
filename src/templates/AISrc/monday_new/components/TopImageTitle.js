@@ -1,6 +1,6 @@
 import { Space } from './Space.js';
 
-const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type, renderType }) => {
+const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type, renderType, className = '', }) => {
   const keywords = ['retrò', 'retró', 'rétro', '%', 'halloween', 'retro'];
 
   function includesKeywords(title) {
@@ -12,6 +12,8 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
 
     return false;
   }
+
+  console.log(className);
 
   const templates = {
     up_to: `
@@ -42,7 +44,7 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
       <h4 style="color:${color};" class="newsletterTitleH1">${title1}</h4>
     `,
     singleLineBold: `
-    <h4 style="color:${color};" class="${includesKeywords(title1) ? 'newsletterTitleH2BoldBigger' : 'newsletterTitleH1Bold'}">${title1}</h4>
+    <h4 style="color:${color};" class="${includesKeywords(title1) ? className ?? 'newsletterTitleH2BoldBigger' : className ?? 'newsletterTitleH1Bold'}">${title1}</h4>
     `,
     halloween: `
       <h4 style="color:${color};" class="${String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title1}</h4>

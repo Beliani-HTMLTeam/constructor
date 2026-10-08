@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = 'Voucher - 26.10.26 - Halloween Cashback';
+const campaignTranslationsSheet = '2026::Voucher - 26.10.26 - Halloween Cashback';
 
 const data = {
   startNSLTId: '49152',
@@ -8,14 +8,14 @@ const data = {
 };
 
 const theme = {
-  primary: '#F6E7E6',
+  primary: '#750000',
   primaryText: '#ffffff',
-  secondary: '#FFEFD9',
+  secondary: '#750000',
   secondaryText: '#FFCCB7',
-  offerBg: '#FFEFD9',
+  offerBg: '#750000',
   offerTitleColor: '#750000',
-  offerPrg1Color: '#000000',
-  offerPrg2Color: '#000000',
+  offerPrg1Color: '#ffffff',
+  offerPrg2Color: '#ffffff',
   introBg: '#FFE6DB',
   black: '#000000',
   white: '#ffffff',
@@ -24,8 +24,8 @@ const theme = {
   introBg: '#750000',
   toastBg: '#F6E7E6',
   toastText: '#000000',
-  ctaPrimary: '#750000',
-  ctaPrimaryText: '#ffffff',
+  ctaPrimary: '#FFCCB7',
+  ctaPrimaryText: '#750000',
   ctaSecondary: '#F6E7E6',
   ctaSecondaryText: '#000000',
   addColor: '#FBEFEC',
@@ -33,6 +33,10 @@ const theme = {
 };
 
 const tableQueries = [
+  {
+    name: 'TopImageTitle',
+    tableRange: '22',
+  },
   {
     name: 'offer',
     tableRange: '25:26',
@@ -163,7 +167,7 @@ const tilesData = [
     },
     {
       name: 'Bathroom Fittings',
-      src: translateImage({ value: '20261026_bathroom-fittings.png' }),
+      src: translateImage({ value: '20261026_fittings.png' }),
       href: 'https://www.beliani.ch/bathroom-furniture/bathroom-fittings/'
     },
     {
@@ -175,12 +179,12 @@ const tilesData = [
   [
     {
       name: 'Mirrors',
-      src: translateImage({ value: '20261026_hallway-mirrors.png' }),
+      src: translateImage({ value: '20261026_mirrors.png' }),
       href: 'https://www.beliani.ch/hallway/mirrors/'
     },
     {
       name: 'Hallway seating',
-      src: translateImage({ value: '20261026_hallway-seating.png' }),
+      src: translateImage({ value: '20261026_seating.png' }),
       href: 'https://www.beliani.ch/hallway/hallway-seating/'
     },
     {
@@ -190,7 +194,7 @@ const tilesData = [
     },
     {
       name: 'Lighting',
-      src: translateImage({ value: '20261026_hallway-lighting.png' }),
+      src: translateImage({ value: '20261026_lighting.png' }),
       href: 'https://www.beliani.ch/hallway/lighting/'
     },
   ],
@@ -199,16 +203,16 @@ const tilesData = [
 const links = {
   Intro_cta_href: 'https://www.beliani.ch/sofas/',
   TopImageTitle_href: translateLink({ value: 'content/lp26-10-26' }),
-  TopImageTitle_src: translateImage({ value: '20260909_01.png' }),
+  TopImageTitle_src: translateImage({ value: '20261026_01.png' }),
 
-  TopImage_src: translateImage({ value: '20261026_Gif.gif' }),
+  TopImage_src: translateImage({ value: '20261026_topImage.jpg' }),
   TopImage_href: translateLink({ value: 'content/lp26-10-26' }),
 
-  Banner_1: translateLink({ value: 'content/lp26-09-10' }),
-  Banner_1_Image: translateImage({ value: '20260910b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-10-14' }),
+  Banner_1_Image: translateImage({ value: '20261014b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-09-11' }),
-  Banner_2_Image: translateImage({ value: '20260911b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-10-21' }),
+  Banner_2_Image: translateImage({ value: '20261021b.png' }),
 };
 
 let sheetDate = campaignTranslationsSheet.match(/(\d{1,2})\.(\d{1,2})\.(\d{1,4})/);
@@ -222,20 +226,30 @@ if (sheetDate !== lpLinkDate)
 
 const TopImageTitle_data = {
   color: theme.white,
-  backgroundColor: theme.primary,
-  type: 'standard',
+  backgroundColor: theme.black,
+  type: 'singleLineBold',
+  className: 'newsletterTitleBold',
 };
 
 const catObj = {
-  name: '',
   background: theme.primary,
-  color: theme.black,
+  color: theme.white,
   type: 'categorytiles',
   tileBgColor: theme.white,
   tileTextColor: theme.tileText,
   displayType: '2col-img', // 4col, 2col-img, 2col
   showTileNames: false, // Disable tile names
-  cta: false,
+  line: {
+    show: true,
+    insideContainer: 'newsletterContainer',
+    src: 'https://pictureserver.net/static/2026/footer/white_line.jpg'
+  },
+  cta: {
+    show: true,
+    spaceAfter: 'newsletterBottom35px',
+    variant: 'underline',
+    phrase: 'Shop all categories',
+  },
   paddingTop: 0, // Space before the category element
   spaceAfter: 'newsletterBottom80px', // Space after the category element
   tdClass: 'newsletterContainer', // Category container
@@ -243,10 +257,10 @@ const catObj = {
   title: {
     show: true,
     align: 'center',
-    spaceBefore: 'newsletterBottom35px', // Space before the title element
+    spaceBefore: 'newsletterBottom40px', // Space before the title element
     className: 'newsletterAditionalTitle', // Custom title class
     tdClass: 'newsletterContainer', // Title container
-    spaceAfter: 'newsletterBottom0px'
+    spaceAfter: 'newsletterBottom35px',
   },
 
   paragraph: {
@@ -258,6 +272,10 @@ const catObj = {
   product: {
     align: 'center',
   },
+
+  tile: {
+    bottomTileSpace: 'newsletterBottom20px',
+  }
 }
 
 const categories = [
@@ -269,10 +287,11 @@ const categories = [
     },
     paddingTop: '0',
     type: 'deal',
+    displayType: 'offerWithSubtitle',
     background: theme.primary,
-    color: theme.black,
+    color: theme.white,
     offerSpaceAfter: 'newsletterBottom40px',
-    spaceAfter: 'newsletterBottom45px',
+    spaceAfter: 'newsletterBottom40px',
     spaceColor: theme.primary,
     cta: {
       variant: 'maroon',
@@ -284,6 +303,7 @@ const categories = [
       tdClass: 'newsletterContainer40px',
       borderColor: theme.ctaPrimary,
       borderWidth: '15px 45px',
+      letterSpacing: '2px',
       transform: 'uppercase',
     },
     freebiesSize: 'large',
@@ -295,9 +315,9 @@ const categories = [
       align: 'center',
       priceLowSize: 16,
       priceHighSize: 15,
-      lowPriceColor: theme.tileText,
-      highPriceColor: theme.tileText,
-      color: theme.black,
+      lowPriceColor: theme.white,
+      highPriceColor: theme.white,
+      color: theme.white,
     },
   },
 
@@ -305,6 +325,7 @@ const categories = [
     ...catObj,
     ...cat,
     tiles: tilesData[idx],
+    ...(idx === catData.length - 1 ? { line: undefined} : {}),
   }))
 ];
 
@@ -346,30 +367,10 @@ export default new entities.Campaign({
       categories: categories,
       links: links,
       tableQueries: tableQueries,
-      disableTopImageTitle: true,
+      disableTopImageTitle: false,
       shopByCategory: false,
       optimizeCss: true,
       theme,
-      intro: {
-        color: theme.black,
-        backgroundColor: theme.secondary,
-        alignment: 'left',
-        position: 'afterFreebies',
-        secondaryLink: false,
-        disableLine: true,
-        spaceTop: 'newsletterBottom35px',
-        spaceBottom: 'newsletterBottom45px',
-        containerClass: 'newsletterContainer',
-        paragraphSpace: 'newsletterBottom35px',
-        cta: {
-          variant: 'underline',
-          align: 'center',
-          color: theme.black,
-          textOverrides: {
-            fi: 'Tutustu valikoimaan',
-          },
-        },
-      },
       footerOverride: footerData,
     },
     {
@@ -387,29 +388,10 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
       shopByCategory: false,
       theme,
-      intro: {
-        color: theme.black,
-        backgroundColor: theme.secondary,
-        alignment: 'left',
-        position: 'afterFreebies',
-        secondaryLink: false,
-        disableLine: true,
-        spaceTop: 'newsletterBottom35px',
-        spaceBottom: 'newsletterBottom45px',
-        containerClass: 'newsletterContainer',
-        paragraphSpace: 'newsletterBottom35px',
-        cta: {
-          variant: 'underline',
-          align: 'center',
-          color: theme.black,
-          textOverrides: {
-            fi: 'Tutustu valikoimaan',
-          },
-        },
-      },
-      disableTopImageTitle: true,
+      disableTopImageTitle: false,
       disableKlarna: ['HR', 'SI'],
       footerOverride: footerData,
+      disableSoonEnding: true,
     },
   ],
 });

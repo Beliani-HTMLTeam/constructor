@@ -22,6 +22,7 @@ export const render = ({
   displayType = '2col',
   tileBgColor = '',
   tileTextColor,
+  tileSettings = {},
 }) => {
   let productsInnerHtml = '';
 
@@ -75,7 +76,7 @@ export const render = ({
       for (let i = 0; i < items.length; i += cols) {
         if (i > 0) {
           //productsInnerHtml += `<tr><td colspan="3" class="${gapClass}" style="${gapStyle}"></td></tr>`;
-          productsInnerHtml += Space({ insideTr: true, className: 'newsletterBottom70px' });
+          productsInnerHtml += Space({ insideTr: true, className: tileSettings?.bottomTileSpace ?? 'newsletterBottom70px' });
         }
         productsInnerHtml += '<tr>';
 

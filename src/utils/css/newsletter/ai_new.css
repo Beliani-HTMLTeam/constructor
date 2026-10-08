@@ -651,6 +651,10 @@ img {
     box-sizing: border-box !important;
   }
 
+  .secondaryLink {
+    font-size: 16px;
+  }
+
   .newsletterTitle {
     font-size: 25px;
   }
@@ -944,8 +948,8 @@ img {
 }
 
 .introRedParagraph {
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.2;
   color: #ffffff;
   font-family: 'Open Sans', Arial, sans-serif;
 }
@@ -1011,6 +1015,10 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+  .introRedParagraph {
+    font-size: 15px;
+  }
+
   .smallCategoryTilesLEFT {
     padding-right: 3px;
   }

@@ -422,30 +422,37 @@ table {
   padding-left: 20px;
 }
 
+#newsletter .newsletterTitleBold {
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 1.2;
+  margin:0;
+}
+
 #newsletter .newsletterTitleH1Bold {
   font-weight: 600;
   font-size: 45px;
   line-height: 53px;
   margin:0;
- }
+}
 
-  #newsletter .newsletterTitleH2BoldBigger {
-    font-weight: 600;
-    font-size: 65px;
-    line-height: 66px;
-    margin:0;
-  }
+#newsletter .newsletterTitleH2BoldBigger {
+  font-weight: 600;
+  font-size: 65px;
+  line-height: 66px;
+  margin:0;
+}
 
-  #newsletter .newsletterContainerWithPaddingBottom20px {
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+#newsletter .newsletterContainerWithPaddingBottom20px {
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
-  #newsletter .newsletterParagraph b {
-    font-size: 18px !important;
-    font-weight:600 !important;
-  }
+#newsletter .newsletterParagraph b {
+  font-size: 18px !important;
+  font-weight:600 !important;
+}
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
@@ -812,6 +819,10 @@ table {
     font-size: 16px;
   }
 
+  #newsletter .secondaryLink {
+    font-size: 16px !important;
+  }
+
   #newsletter .threeProduct {
     padding-left: 5px;
     padding-right: 5px;
@@ -822,13 +833,17 @@ table {
     padding-left: 10px;
   }
 
+  #newsletter .newsletterTitleBold {
+    font-size: 20px;
+  }
+
   #newsletter .newsletterTitleH1Bold {
     font-weight: 600;
     font-size: 29px;
     line-height: 35px;
-   }
+  }
 
-   #newsletter .newsletterTitleH2BoldBigger {
+  #newsletter .newsletterTitleH2BoldBigger {
     font-weight: 600;
     font-size: 43px;
     line-height: 44px;
@@ -894,6 +909,10 @@ table {
 }
 
 @media screen and (max-width: 768px) {
+  .introRedParagraph {
+    font-size: 15px !important;
+  }
+
   .newsletter3ProductsLeft {
     padding-left: 10px !important;
   }
@@ -968,10 +987,9 @@ table {
 }
 
 .introRedParagraph {
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.2;
   color: #ffffff;
-  margin-bottom: 24px;
 }
 
 .introParagraph {
@@ -1001,7 +1019,7 @@ table {
   margin-top: 14px;
 }
 
-.secondaryLink {
+#newsletter .secondaryLink {
   font-size: 20px;
   text-decoration: underline !important;
   display: inline-flex;
