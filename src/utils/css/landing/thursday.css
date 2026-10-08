@@ -352,6 +352,10 @@ table {
   #newsletter .freebiesContainer--list .newsletterProductTitleFreebie {
     font-size: 20px;
   }
+
+  #newsletter .freebiesContainer--list .newsletterProductTitleFreebie2col {
+    font-size: 16px;
+  }
 }
 
 .newsletterFreebiesTitle {
