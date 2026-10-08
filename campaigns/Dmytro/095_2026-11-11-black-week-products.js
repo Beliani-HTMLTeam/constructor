@@ -24,6 +24,7 @@ const tableQueries = [
 ];
 
 const links = {
+	TopImageTitle_type: 'image',
 	TopImageTitle_src: translateImage({ value: '20261111_topImage.png' }),
 	TopImageTitle_href: translateLink({ value: 'content/lp26-11-11' }),
 
@@ -42,14 +43,16 @@ const links = {
 };
 
 const additionalCss = `
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
 @media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}}
 `;
 
 const additionalCssLp = `
-#newsletter .newsletterDealTierLabel{font-size:12px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:12px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:14px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:13px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
-@media screen and (max-width:768px){#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}}
+#newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}
+#newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:20px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
+@media screen and (max-width:768px){#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}}
 `;
 
 const palette = {
@@ -60,7 +63,10 @@ const palette = {
 	intro: '#FECD8C',
 	box: '#FFFFFF',
 	boxBorder: '#FFCCB7',
+  toastBg: '#ffe0d4',
 };
+
+
 
 const button = {
 	show: true,
@@ -96,8 +102,8 @@ const categories = [
 		],
 		dealTierLines: 5,
 		copyToast: {
-			background: '#750000',
-			color: '#FFFFFF',
+			background: palette.toastBg,
+			color: '#000000',
 		},
 		// landing page boxes
 		dealBoxColor: '#FFF3E6',
@@ -112,7 +118,7 @@ const categories = [
 		paragraph: { spaceAfter: 'newsletterBottom40px' },
 		spaceBeforeDeal: 'newsletterBottom35px',
 		spaceAfterDeal: 'newsletterBottom20px',
-		spaceAfterCodeCta: 'newsletterBottom20px',
+		spaceAfterCodeCta: 'newsletterBottom35px',
 		// bottom padding of the deal block
 		spaceAfterConditions: 0,
 		dealTitle: { styles: 'font-size: 34px; font-weight: 700;' },

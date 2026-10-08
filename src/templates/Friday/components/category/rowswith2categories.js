@@ -43,7 +43,14 @@ const getLayout = ({ totalWidth, containerPadding, gap, columns }) => {
 	const widths = new Array(columns).fill(tile);
 	widths[columns - 1] = inner - gap * (columns - 1) - tile * (columns - 1);
  
-	return { inner, widths, gap };
+	// Same widths as % of the row, so the tiles shrink with the screen in every client except Outlook
+	// (Outlook uses the pixel `width` attributes). The last column takes the rounding rest -> sums to 100%.
+	const pct = (px) => Math.floor((px / inner) * 100 * 1000) / 1000;
+	const widthsPct = widths.map(pct);
+	const gapPct = pct(gap);
+	widthsPct[columns - 1] = +(100 - gapPct * (columns - 1) - widthsPct.slice(0, -1).reduce((a, b) => a + b, 0)).toFixed(3);
+ 
+	return { inner, widths, gap, widthsPct, gapPct };
 };
  
 // The data may still be prepared in rows of 3 (or any size). All items are taken in order
@@ -137,8 +144,9 @@ export const render = ({
  
 		for (let columnId = 0; columnId < columns; columnId++) {
 			const item = row[columnId];
-			const width = layout.widths[columnId];
-			const gapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}" style="width: ${layout.gap}px; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
+			const width = layout.widths[columnId]; // px – width attribute (Outlook) + image width
+			const widthPct = `${layout.widthsPct[columnId]}%`; // % – CSS width, scales with the screen
+			const gapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}" style="width: ${layout.gapPct}%; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
  
 			if (columnId > 0) {
 				imgCells += gapHtml;
@@ -150,10 +158,10 @@ export const render = ({
  
 			// Empty cell keeps the column width when the last row is not full (odd number of items)
 			if (!item) {
-				imgCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;"></td>`;
+				imgCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${widthPct}; padding: 0; vertical-align: top;"></td>`;
 				if (showText) {
-					nameCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;"></td>`;
-					ctaCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;"></td>`;
+					nameCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${widthPct}; padding: 0; vertical-align: top;"></td>`;
+					ctaCells += `<td class="newsletterCategoryTile" width="${width}" style="width: ${widthPct}; padding: 0; vertical-align: top;"></td>`;
 				}
 				continue;
 			}
@@ -163,21 +171,24 @@ export const render = ({
 			const src = getSrc(item);
  
 			imgCells += `
-				<td class="newsletterCategoryTile" width="${width}" style="width: ${width}px; padding: 0; vertical-align: top;" align="center">
+				<td class="newsletterCategoryTile" width="${width}" style="width: ${widthPct}; padding: 0; vertical-align: top;" align="center">
 					<a href="${href}" style="text-decoration: none; display: block; line-height: 0;"><img src="${src}" alt="${name}" width="${width}" style="display: block; width: 100%; max-width: ${width}px; vertical-align: top;" loading="lazy"></a>
 				</td>
 			`;
  
 			if (showText && textInRow) {
-				// One line: name (left) + CTA (right) in a nested full-width table – Outlook-safe, no floats/flex
+				// One line: name (left) + CTA (right) in a nested full-width table – Outlook-safe, no floats/flex.
+				// All text cells of a row share the row height. The cell is middle-aligned, so when one tile's
+				// name wraps to 2+ lines the neighbour's name + CTA are centred in that taller row too –
+				// every name and "Shop now" in the row stays on the same middle line.
 				nameCells += `
-					<td class="newsletterCategoryTile" width="${width}" valign="top" style="width: ${width}px; padding: 10px 0 0 0; vertical-align: top;">
+					<td class="newsletterCategoryTile" width="${width}" valign="middle" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: middle;">
 						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
 							<tr>
-								<td class="frenchDaysCategoryName" align="left" valign="middle" style="padding: 0 8px 0 0; text-align: left; vertical-align: middle; font-size: 20px; font-size: clamp(14px, 3.6vw, 20px); font-weight: 400; line-height: 1.25; overflow-wrap: anywhere; color: ${nameColor ?? '#750000'}; font-weight: 600;">
+								<td class="frenchDaysCategoryName" align="left" valign="middle" style="padding: 0 8px 0 0; text-align: left; vertical-align: middle; font-size: clamp(14px, 3.6vw, 20px); font-weight: 400; line-height: 1.25; overflow-wrap: anywhere; color: ${nameColor ?? '#750000'}; font-weight: 600;">
 									<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
 								</td>
-								<td align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; font-size: 20px; line-height: 1.25;">
+								<td align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; line-height: 1.25;">
 									<a href="${href}" class="frenchDaysCategoryCta" style="font-size: 20px; font-size: clamp(14px, 3.6vw, 20px); line-height: 1.25; white-space: nowrap; color: ${ctaColor ?? '#000000'}; text-decoration: underline; font-weight: 600;">${ctaText}</a>
 								</td>
 							</tr>
@@ -186,13 +197,13 @@ export const render = ({
 				`;
 			} else if (showText) {
 				nameCells += `
-					<td class="newsletterCategoryTile frenchDaysCategoryName" width="${width}" valign="top" align="center" style="width: ${width}px; padding-top: 16px; font-size: 20px; font-size: clamp(14px, 3.6vw, 20px); font-weight: 700; line-height: 1.25; vertical-align: top; overflow-wrap: anywhere; color: ${nameColor ?? '#750000'};">
+					<td class="newsletterCategoryTile frenchDaysCategoryName" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 16px; font-size: clamp(14px, 3.6vw, 20px); font-weight: 700; line-height: 1.25; vertical-align: top; overflow-wrap: anywhere; color: ${nameColor ?? '#750000'};">
 						<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
 					</td>
 				`;
  
 				ctaCells += `
-					<td class="newsletterCategoryTile" width="${width}" valign="top" align="center" style="width: ${width}px; padding-top: 6px; font-size: 16px; line-height: 1.25; vertical-align: top;">
+					<td class="newsletterCategoryTile" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 6px; font-size: 16px; line-height: 1.25; vertical-align: top;">
 						<a href="${href}" class="frenchDaysCategoryCta" style="font-size: 16px; font-size: clamp(12px, 3.2vw, 16px); line-height: 1.25; overflow-wrap: anywhere; color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
 					</td>
 				`;

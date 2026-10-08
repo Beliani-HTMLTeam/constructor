@@ -301,6 +301,7 @@ const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSp
 					toastBg: toast.background,
 					toastText: toast.color,
 					label: toast.label,
+					className: 'blackWeekCopyImg',
 				})}</span>`
 				: ''
 			}
@@ -342,6 +343,7 @@ const renderConditions = ({ queries, color, containerClass, styles = '', spaceBe
 			text: conditions[i],
 			align: 'center',
 			spanStyle: `color: ${color}; ${styles}`,
+			className: 'blackWeekCondition',
 		})}
         </td>
       </tr>
@@ -383,15 +385,15 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		insideTr: true,
 		align: 'center',
 		tdClass: containerClass,
-		fontSize: '16px',
-		lineHeight: '16px',
+		fontSize: '20px',
+		lineHeight: '20px',
 		mobileFontSize: '16px',
 		mobileLineHeight: '16px',
-		paddingX: 30,
+		paddingX: 75,
 		paddingY: 14,
 		paddingTop: 15,
 		paddingBottom: 13,
-		mobilePaddingX: 30,
+		mobilePaddingX: 40,
 		mobilePaddingY: 14,
 		mobilePaddingTop: 15,
 		mobilePaddingBottom: 13,

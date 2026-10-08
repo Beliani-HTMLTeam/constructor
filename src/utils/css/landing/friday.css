@@ -75,7 +75,6 @@ table {
   padding-right: 30px;
 }
 
-
 #newsletter .newsletterContainerFooter20px,
 #newsletter.newsletterContainerFooter20px,
 .newsletterContainerFooter20px {
@@ -265,6 +264,11 @@ table {
   text-decoration: underline;
   font-size: 20px;
   line-height: 1.2;
+}
+
+#newsletter .blackWeekCopyImg {
+  width: 25px;
+  height: 25px;
 }
 
 #newsletter .newsletterFreebieCta {
@@ -577,6 +581,12 @@ table {
     padding-right: 25px;
   }
 
+  #newsletter.newsletterContainer30px,
+#newsletter .newsletterContainer30px {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
   #newsletter .newsletterContainer40px,
   .newsletterContainer40px {
     padding-left: 20px !important;
@@ -645,6 +655,12 @@ table {
   #newsletter .newsletterBottom80px {
     padding-bottom: 50px;
   }
+
+  #newsletter .blackWeekCopyImg {
+    width: 20px;
+    height: 20px;
+  }
+  
   #newsletter .newsletterLeft5px {
     padding-left: 2px;
   }
