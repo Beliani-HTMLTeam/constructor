@@ -299,6 +299,10 @@ img {
   .freebiesContainer--list .newsletterProductTitleFreebie {
     font-size: 20px;
   }
+
+  .freebiesContainer--list .newsletterProductTitleFreebie2col {
+    font-size: 16px;
+  }
 }
 
 .newsletterFreebiesTitle {

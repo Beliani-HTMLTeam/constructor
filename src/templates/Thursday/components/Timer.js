@@ -77,7 +77,7 @@ const renderSingleFreebie2col = ({ product, isLast, freebiesTextColor, freebiesF
 
         <td valign="middle" align="left" class="${titleClass}">
           <a href="${productHref}" target="_blank" style="text-decoration: none; color: ${freebiesTextColor};">
-            <span class="newsletterProductTitleFreebie" style="color: ${freebiesTextColor};">${productTitle}</span>
+            <span class="newsletterProductTitleFreebie newsletterProductTitleFreebie2col" style="color: ${freebiesTextColor};">${productTitle}</span>
           </a>
           <!--[if !mso]><!-->
           <div class="freebiePriceMobile">
