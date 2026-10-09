@@ -1,25 +1,29 @@
-const campaignTranslationsSheet = '2026::Voucher - 11.11.26 - Black Week product categories';
+const campaignTranslationsSheet = '2026::Voucher - 13.11.26 - Black Week room by room';
 
 const tableQueries = [
 	{
 		// THE MORE YOU SPEND, THE MORE YOU SAVE - 1 row
-		tableRange: '45',
+		tableRange: '48',
 		name: 'deal_title',
 	},
 	{
 		// 4 boxes x 4 rows (EXTRA / 20% / OFF / when you spend min. €2500) - 16 rows, in order 20, 15, 10, 5
-		tableRange: '20:39',
+		tableRange: '23:42',
 		name: 'deal_img',
 	},
 	{
 		// CODE: XXX - 4 rows, same order as the boxes
-		tableRange: '40:43',
+		tableRange: '43:46',
 		name: 'deal_codes',
 	},
 	{
 		// Limited-time offer. Valid until 29/11/2026 - 1 row
-		tableRange: '44',
+		tableRange: '47',
 		name: 'deal_condition',
+	},
+	{
+		tableRange: '49',
+		name: "category_title"
 	},
 	{
 		tableRange: '50:52',
@@ -29,26 +33,25 @@ const tableQueries = [
 
 const links = {
 	TopImageTitle_type: 'image',
-	TopImageTitle_src: translateImage({ value: '20261111_topImage.png' }),
-	TopImageTitle_href: translateLink({ value: 'content/lp26-11-11' }),
+	TopImageTitle_src: translateImage({ value: '20261113_topImage.png' }),
+	TopImageTitle_href: translateLink({ value: 'content/lp26-11-13' }),
 
-	TopImage_src: translateImage({ value: '20261111_shopNow.png' }),
+	TopImage_src: translateImage({ value: '20261113_shopNow.png' }),
 	TopImage_href: "Home Page",
 
-	Banner_1: translateLink({ value: 'content/lp26-09-24' }),
-	Banner_1_Image: translateImage({ value: '20260924b.png' }),
+	Banner_1: translateLink({ value: 'content/lp26-11-06' }),
+	Banner_1_Image: translateImage({ value: '20261106b.png' }),
 
-	Banner_2: translateLink({ value: 'content/lp26-09-30' }),
-	Banner_2_Image: translateImage({ value: '20260930b.png' }),
-
-	Intro_cta_href: "https://www.beliani.ch",
+	Banner_2: translateLink({ value: 'content/lp26-11-05' }),
+	Banner_2_Image: translateImage({ value: '20261105b.png' }),
 };
 
 const additionalCss = `
+.categoryListName{font-size:30px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:700}.categoryListCta{font-size:30px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:700}
 .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-@media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:26px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+@media screen and (max-width:768px){.categoryListName{font-size:18px;}.categoryListCta{font-size:18px;}.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:26px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -63,9 +66,10 @@ const additionalCss = `
 `;
 
 const additionalCssLp = `
+#newsletter .categoryListName{font-size:30px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .categoryListCta{font-size:30px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:700}
 #newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}
 #newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:20px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
-@media screen and (max-width:768px){#newsletter .newsletterTitle{font-size:26px;}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}#newsletter .blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+@media screen and (max-width:768px){#newsletter .categoryListName{font-size:18px;}#newsletter .categoryListCta{font-size:18px;}#newsletter .newsletterTitle{font-size:26px;}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}#newsletter .blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -87,7 +91,7 @@ const palette = {
 	intro: '#FECD8C',
 	box: '#FFFFFF',
 	boxBorder: '#FFCCB7',
-  toastBg: '#ffe0d4',
+	toastBg: '#ffe0d4',
 };
 
 
@@ -150,106 +154,73 @@ const categories = [
 	{
 		background: '#000000',
 		color: '#ffffff',
-		type: 'rowswith2categories',
+		type: 'rowswith1category',
 		paddingTop: 0,
 		showTileText: true,
 		tileNameColor: '#ffffff',
 		tileCtaColor: '#ffffff',
-		spaceBetweenRows: 'newsletterBottom40px',
-		spaceAfter: 'newsletterBottom60px',
+		spaceBetweenRows: 'newsletterBottom80px',
+		spaceAfter: 'newsletterBottom80px',
 		container: 'newsletterContainer30px',
+		tileCtaUnderline: true,
 		containerPadding: 30,
 		tileGap: 15,
 		tileTextLayout: 'inRow',
 		heading: {
-			phrase: 'Shop by category',
+			phrase: 'Room by room, all reduced',
 			align: 'center',
 			spaceAfter: 'newsletterBottom20px',
 			styles: 'text-transform: uppercase; font-weight: 700;'
 		},
 		categories:
 			[
-				[
-					{
-						name: "Sofas",
-						href: 'https://www.beliani.ch/sofas/',
-						src: getImageUrl('20261111Category1.png', true),
-					},
-					{
-						name: "Beds",
-						href: 'https://www.beliani.ch/beds/',
-						src: getImageUrl('20261111Category2.png', true),
-					},
-				],
-				[{
-					name: "Armchairs",
-					href: 'https://www.beliani.ch/armchairs/',
-					src: getImageUrl('20261111Category3.png', true),
+				{
+					name: "Living Room",
+					href: 'https://www.beliani.ch/living-room-furniture/',
+					src: getImageUrl('20261113Category1.png', true),
 				},
 				{
-					name: "Chairs",
-					href: 'https://www.beliani.ch/chairs/',
-					src: getImageUrl('20261111Category4.png', true),
-				},
-				],
-				[
-					{
-						name: "Tables",
-						href: 'https://www.beliani.ch/tables/',
-						src: getImageUrl('20261111Category5.png', true),
-					},
-					{
-						name: "Storage",
-						href: 'https://www.beliani.ch/storage/',
-						src: getImageUrl('20261111Category6.png', true),
-					},
-				],
-				[
-					{
-						name: "Textiles",
-						href: 'https://www.beliani.ch/textiles/',
-						src: getImageUrl('20261111Category7.png', true),
-					},
-					{
-						name: "Lighting",
-						href: 'https://www.beliani.ch/lighting/',
-						src: getImageUrl('20261111Category8.png', true),
-					},
-				],
-				[
-					{
-						name: "Baths",
-						href: 'https://www.beliani.ch/bathtubs-hot-tubs/',
-						src: getImageUrl('20261111Category9.png', true),
-					},
-					{
-						name: "Desks",
-						href: 'https://www.beliani.ch/office-furniture/desks-eng/',
-						src: getImageUrl('20261111Category10.png', true),
-					}
-				],
-				[{
-					name: "Rugs",
-					href: 'https://www.beliani.ch/rugs/',
-					src: getImageUrl('20261111Category11.png', true),
+					name: "Bedroom",
+					href: 'https://www.beliani.ch/bedroom-furniture/',
+					src: getImageUrl('20261113Category2.png', true),
 				},
 				{
-					name: "Accessories",
-					href: 'https://www.beliani.ch/accessories-decor/',
-					src: getImageUrl('20261111Category12.png', true),
-				},]
+					name: "Dining Room",
+					href: 'https://www.beliani.ch/dining-room-furniture/',
+					src: getImageUrl('20261113Category3.png', true),
+				},
+				{
+					name: "Bathroom",
+					href: 'https://www.beliani.ch/bathroom-furniture/',
+					src: getImageUrl('20261113Category4.png', true),
+				},
+				{
+					name: "Kitchen",
+					href: 'https://www.beliani.ch/kitchen/',
+					src: getImageUrl('20261113Category5.png', true),
+				},
+				{
+					name: "Home Office",
+					href: 'https://www.beliani.ch/office-furniture/',
+					src: getImageUrl('20261113Category6.png', true),
+				},
+				{
+					name: "Kids Room",
+					href: 'https://www.beliani.ch/children-room/',
+					src: getImageUrl('20261113Category7.png', true),
+				},
 			]
 	},
 ];
 
 export default new entities.Campaign({
-	startId: 49184,
-	lpId: 33149,
-	issueCardId: 545778,
+	startId: 49441,
+	lpId: 33288,
+	issueCardId: 545782,
 	version: 'new',
-	name: 'Black Week Products',
-	date: '11.11.2026',
-	figmaUrl: 'https://www.figma.com/design/ogPlLDdBauWF2k9pC2xvTX/2026.11.11---Black-Week-product-categories?node-id=13249-712&t=W3EO2Eswp9yNWkTx-1',
+	name: 'Black Week Room by Room',
+	date: '13.11.2026',
+	figmaUrl: 'https://www.figma.com/design/Al0C6jLpUWQ4oQC339bE5s/2026.11.13---Black-Week-room-by-room?node-id=13249-712&t=GIiIGIXV62r8SjnR-1',
 	templates: [
 		{
 			name: 'Newsletter',
