@@ -1,4 +1,4 @@
-const campaignTranslationsSheet = '2026::Voucher - 13.11.26 - Black Week room by room';
+const campaignTranslationsSheet = '2026::Voucher - 20.11.26 - Black Week room by room';
 
 const tableQueries = [
 	{
@@ -33,17 +33,17 @@ const tableQueries = [
 
 const links = {
 	TopImageTitle_type: 'image',
-	TopImageTitle_src: translateImage({ value: '20261113_topImage.png' }),
-	TopImageTitle_href: translateLink({ value: 'content/lp26-11-13' }),
+	TopImageTitle_src: translateImage({ value: '20261120_topImage.png' }),
+	TopImageTitle_href: translateLink({ value: 'content/lp26-11-20' }),
 
-	TopImage_src: translateImage({ value: '20261113_shopNow.png' }),
+	TopImage_src: translateImage({ value: '20261120_shopNow.png' }),
 	TopImage_href: "Home Page",
 
-	Banner_1: translateLink({ value: 'content/lp26-11-06' }),
-	Banner_1_Image: translateImage({ value: '20261106b.png' }),
+	Banner_1: translateLink({ value: 'content/lp26-11-13' }),
+	Banner_1_Image: translateImage({ value: '20261113b.png' }),
 
-	Banner_2: translateLink({ value: 'content/lp26-11-05' }),
-	Banner_2_Image: translateImage({ value: '20261105b.png' }),
+	Banner_2: translateLink({ value: 'content/lp26-11-12' }),
+	Banner_2_Image: translateImage({ value: '20261112b.png' }),
 };
 
 const additionalCss = `
@@ -118,7 +118,7 @@ const categories = [
 		color: '#000000',
 		type: 'black-week-extras',
 		textColor: '#FFFFFF',
-		href: translateLink({ value: 'content/lp26-11-13' }),
+		href: translateLink({ value: 'content/lp26-11-20' }),
 
 		// newsletter only - one image per box, same order as the tiers in deal_img (20, 15, 10, 5)
 		// on the landing page the boxes are rendered as html
@@ -177,50 +177,50 @@ const categories = [
 				{
 					name: "Living Room",
 					href: 'https://www.beliani.ch/living-room-furniture/',
-					src: getImageUrl('20261113Category1.png', true),
+					src: getImageUrl('20261120Category1.png', true),
 				},
 				{
 					name: "Bedroom",
 					href: 'https://www.beliani.ch/bedroom-furniture/',
-					src: getImageUrl('20261113Category2.png', true),
+					src: getImageUrl('20261120Category2.png', true),
 				},
 				{
 					name: "Dining Room",
 					href: 'https://www.beliani.ch/dining-room-furniture/',
-					src: getImageUrl('20261113Category3.png', true),
+					src: getImageUrl('20261120Category3.png', true),
 				},
 				{
 					name: "Bathroom",
 					href: 'https://www.beliani.ch/bathroom-furniture/',
-					src: getImageUrl('20261113Category4.png', true),
+					src: getImageUrl('20261120Category4.png', true),
 				},
 				{
 					name: "Kitchen",
 					href: 'https://www.beliani.ch/kitchen/',
-					src: getImageUrl('20261113Category5.png', true),
+					src: getImageUrl('20261120Category5.png', true),
 				},
 				{
 					name: "Home Office",
 					href: 'https://www.beliani.ch/office-furniture/',
-					src: getImageUrl('20261113Category6.png', true),
+					src: getImageUrl('20261120Category6.png', true),
 				},
 				{
 					name: "Kids Room",
 					href: 'https://www.beliani.ch/children-room/',
-					src: getImageUrl('20261113Category7.png', true),
+					src: getImageUrl('20261120Category7.png', true),
 				},
 			]
 	},
 ];
 
 export default new entities.Campaign({
-	startId: 49441,
-	lpId: 33288,
-	issueCardId: 545782,
+	startId: 49409,
+	lpId: 33267,
+	issueCardId: 545783,
 	version: 'new',
-	name: 'Black Week Room by Room',
-	date: '13.11.2026',
-	figmaUrl: 'https://www.figma.com/design/Al0C6jLpUWQ4oQC339bE5s/2026.11.13---Black-Week-room-by-room?node-id=13249-712&t=GIiIGIXV62r8SjnR-1',
+	name: 'Black Week Room by Room 2',
+	date: '20.11.2026',
+	figmaUrl: 'https://www.figma.com/design/yYow1jUHZSOOx9VcpwLVj6/2026.11.20---Black-Week-room-by-room?node-id=15001-6454&t=TJUOdiDZNhhQuq2D-1',
 	templates: [
 		{
 			name: 'Newsletter',
