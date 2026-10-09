@@ -43,16 +43,38 @@ const links = {
 };
 
 const additionalCss = `
-.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-@media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}}
+@media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:26px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+	font-size: 40px !important;
+	font-size: clamp(32px, 12.5vw, 35px) !important;
+}
+#newsletter .frenchDaysCategoryName {
+	font-size: 14px !important;
+	font-size: clamp(14px, 3.6vw, 20px) !important;
+}
+#newsletter .frenchDaysCategoryCta {
+	font-size: 12px !important;
+	font-size: clamp(12px, 3.2vw, 16px) !important;
+}}
 `;
 
 const additionalCssLp = `
-#newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}
+#newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}
 #newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:20px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
-@media screen and (max-width:768px){#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}}
+@media screen and (max-width:768px){#newsletter .newsletterTitle{font-size:26px;}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}#newsletter .blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+	font-size: 40px !important;
+	font-size: clamp(32px, 12.5vw, 35px) !important;
+}
+#newsletter .frenchDaysCategoryName {
+	font-size: 14px !important;
+	font-size: clamp(14px, 3.6vw, 20px) !important;
+}
+#newsletter .frenchDaysCategoryCta {
+	font-size: 12px !important;
+	font-size: clamp(12px, 3.2vw, 16px) !important;
+}}
 `;
 
 const palette = {
@@ -121,7 +143,6 @@ const categories = [
 		spaceAfterCodeCta: 'newsletterBottom35px',
 		// bottom padding of the deal block
 		spaceAfterConditions: 0,
-		dealTitle: { styles: 'font-size: 34px; font-weight: 700;' },
 		spaceAfter: 0,
 	},
 	{

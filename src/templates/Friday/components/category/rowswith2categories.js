@@ -177,19 +177,20 @@ export const render = ({
 			`;
  
 			if (showText && textInRow) {
-				// One line: name (left) + CTA (right) in a nested full-width table – Outlook-safe, no floats/flex.
-				// All text cells of a row share the row height. The cell is middle-aligned, so when one tile's
-				// name wraps to 2+ lines the neighbour's name + CTA are centred in that taller row too –
-				// every name and "Shop now" in the row stays on the same middle line.
+				// Desktop: name (left, takes all free width) + CTA (right edge) in one line.
+				// Mobile (<=768px, categoryTiles.css): name and CTA stack, smaller font – so a long name
+				// never pushes the tile wider than its column.
+				// Fixed px only: Gmail ignores clamp()/vw and would fall back to the biggest size.
+				// The cell is middle-aligned, so when one tile's name wraps the neighbour stays centred.
 				nameCells += `
-					<td class="newsletterCategoryTile" width="${width}" valign="middle" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: middle;">
+					<td class="newsletterCategoryTile categoryTileText" width="${width}" valign="middle" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: middle;">
 						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
 							<tr>
-								<td class="frenchDaysCategoryName" align="left" valign="middle" style="padding: 0 8px 0 0; text-align: left; vertical-align: middle; font-size: clamp(14px, 3.6vw, 20px); font-weight: 400; line-height: 1.25; overflow-wrap: anywhere; color: ${nameColor ?? '#750000'}; font-weight: 600;">
+								<td class="frenchDaysCategoryName categoryTileInRowName" width="100%" align="left" valign="middle" style="padding: 0 8px 0 0; text-align: left; vertical-align: middle; font-size: 20px; font-weight: 600; line-height: 1.25; word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
 									<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
 								</td>
-								<td align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; line-height: 1.25;">
-									<a href="${href}" class="frenchDaysCategoryCta" style="font-size: 20px; font-size: clamp(14px, 3.6vw, 20px); line-height: 1.25; white-space: nowrap; color: ${ctaColor ?? '#000000'}; text-decoration: underline; font-weight: 600;">${ctaText}</a>
+								<td class="categoryTileInRowCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; font-weight: 600;">
+									<a href="${href}" class="frenchDaysCategoryCta" style="white-space: nowrap; color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
 								</td>
 							</tr>
 						</table>
@@ -197,14 +198,14 @@ export const render = ({
 				`;
 			} else if (showText) {
 				nameCells += `
-					<td class="newsletterCategoryTile frenchDaysCategoryName" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 16px; font-size: clamp(14px, 3.6vw, 20px); font-weight: 700; line-height: 1.25; vertical-align: top; overflow-wrap: anywhere; color: ${nameColor ?? '#750000'};">
+					<td class="newsletterCategoryTile frenchDaysCategoryName categoryTileStackedName" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 16px; font-size: 20px; font-weight: 700; line-height: 1.25; vertical-align: top; word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
 						<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
 					</td>
 				`;
  
 				ctaCells += `
-					<td class="newsletterCategoryTile" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 6px; font-size: 16px; line-height: 1.25; vertical-align: top;">
-						<a href="${href}" class="frenchDaysCategoryCta" style="font-size: 16px; font-size: clamp(12px, 3.2vw, 16px); line-height: 1.25; overflow-wrap: anywhere; color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
+					<td class="newsletterCategoryTile categoryTileStackedCta" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 6px; font-size: 16px; line-height: 1.25; vertical-align: top; word-break: break-word; overflow-wrap: break-word;">
+						<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
 					</td>
 				`;
 			}
