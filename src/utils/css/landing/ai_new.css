@@ -869,6 +869,28 @@ table {
   }
 }
 
+table.newsletterFreebieSingle img {
+  display: block !important;
+  margin: 0 auto !important;
+  width: auto !important;
+  max-width: 220px !important;
+  height: auto !important;
+}
+
+table.newsletterFreebieSingle td.newsletterContainer40px img {
+  max-width: 160px !important;
+}
+
+@media only screen and (max-width: 620px) {
+  table.newsletterFreebieSingle { width: 180px !important; max-width: 180px !important; }
+  table.newsletterFreebieSingle img {
+    max-width: 180px !important;
+  }
+  table.newsletterFreebieSingle td.newsletterContainer40px img {
+    max-width: 130px !important;
+  }
+}
+
 @media screen and (max-width: 570px) {
   #newsletter .newsletterProductTitleFreebie {
     font-size: 16px;

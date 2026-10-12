@@ -83,6 +83,16 @@ img {
   padding-right: 20px;
 }
 
+table.newsletterFreebieSingle td.newsletterContainer40px img {
+  text-align: center;
+  max-width: 160px !important;
+}
+
+table.newsletterFreebieSingle td.newsletterContainer40px a{
+  text-align: center;
+  max-width: 160px !important;
+}
+
 .col2imgGap.newsletterContainer {
   width: 20px;
   height: 20px;
@@ -501,6 +511,9 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+  table.newsletterFreebieSingle td.newsletterContainer40px {
+    text-align: center;
+  }
   .newsletterBottom5px {
     padding-bottom: 2px;
   }
@@ -916,6 +929,16 @@ img {
   .newsletterProductTitleWithPaddingLeft {
     font-size: 18px;
     padding-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  table.newsletterFreebieSingle { width: 180px !important; max-width: 180px !important; }
+  table.newsletterFreebieSingle img {
+    max-width: 180px !important;
+  }
+  table.newsletterFreebieSingle td.newsletterContainer40px img {
+    max-width: 130px !important;
   }
 }
 

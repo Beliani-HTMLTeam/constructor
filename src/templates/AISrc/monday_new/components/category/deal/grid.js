@@ -1,35 +1,39 @@
 import { ImageWithLink } from '../../ImageWithLink.js';
 import { Space } from '../../Space.js';
 
+// Fixed card width when a row has only one freebie (desktop, px).
+// Mobile width is controlled by the .newsletterFreebieSingle media query rule.
+const SINGLE_FREEBIE_WIDTH = { normal: 220, small: 170 };
+ 
 const getProductSrc = (product) => {
   if (!product?.src) return '';
   return typeof product.src === 'object' ? product.src.src : product.src;
 };
-
+ 
 const normalizeColumns = (value) => {
   if (value === 1 || value === 3) return value;
   return 2;
 };
-
+ 
 const getCellWidth = (columns) => {
   if (columns === 1) return '100%';
   if (columns === 3) return '33.333333333333336%';
   return '50%';
 };
-
+ 
 const getCellPadding = (columns, columnId, isCentered = false) => {
   if (columns === 1) return 'padding-left: 100px; padding-right: 100px;';
   if (columns !== 2) return '';
   if (isCentered) return columnId === 0 ? 'padding-right: 5px;' : 'padding-left: 5px;';
   return columnId === 0 ? 'padding-left: 80px;' : 'padding-right: 80px;';
 };
-
+ 
 const getInnerTablePadding = (columns, columnId) => {
   if (columns === 3) return 'padding-right: 6px; padding-left: 6px;';
   if (columns !== 2) return '';
   return columnId === 0 ? 'padding-right: 5px;' : 'padding-left: 5px;';
 };
-
+ 
 const getAlignConfig = (columns, columnId, isCentered = false) => {
   if (columns === 3) {
     if (columnId === 0) {
@@ -40,11 +44,11 @@ const getAlignConfig = (columns, columnId, isCentered = false) => {
     }
     return { outerTableAlign: 'center', contentTdAlign: 'center', innerCardAlign: 'center' };
   }
-
+ 
   if (columns !== 2) {
     return { outerTableAlign: 'center', contentTdAlign: 'center', innerCardAlign: 'center' };
   }
-
+ 
   // For centered remainder rows (e.g. 2 leftover from a 5-item 3-col grid)
   if (isCentered) {
     return {
@@ -53,21 +57,21 @@ const getAlignConfig = (columns, columnId, isCentered = false) => {
       innerCardAlign: columnId === 0 ? 'right' : 'left',
     };
   }
-
+ 
   // Normal 2-col full-width row
   if (columnId === 0) {
     return { outerTableAlign: 'center', contentTdAlign: 'center', innerCardAlign: 'right' };
   }
   return { outerTableAlign: 'left', contentTdAlign: 'left', innerCardAlign: 'left' };
 };
-
+ 
 const getRowsFromFreebiesConfig = (freebies) => {
   const configuredRows = Array.isArray(freebies?.rows)
     ? freebies.rows
     : Array.isArray(freebies)
       ? freebies
       : [];
-
+ 
   // Determine the dominant column count across all rows so we know
   // whether a 2-item row is a "full" 2-col row or a centered remainder.
   const dominantColumns = (() => {
@@ -80,15 +84,15 @@ const getRowsFromFreebiesConfig = (freebies) => {
     for (const c of counts) freq[c] = (freq[c] ?? 0) + 1;
     return Number(Object.entries(freq).sort((a, b) => b[1] - a[1] || b[0] - a[0])[0][0]);
   })();
-
+ 
   const rows = [];
-
+ 
   for (const row of configuredRows) {
     if (!Array.isArray(row) || row.length === 0) continue;
-
+ 
     const totalItems = row.length;
     let columnsPerRow = 3;
-
+ 
     if (totalItems === 4) {
       columnsPerRow = 2;
     } else if (totalItems === 2) {
@@ -96,7 +100,7 @@ const getRowsFromFreebiesConfig = (freebies) => {
     } else if (totalItems === 1) {
       columnsPerRow = 1;
     }
-
+ 
     for (let i = 0; i < totalItems; i += columnsPerRow) {
       const slice = row.slice(i, i + columnsPerRow);
       // Centered when: this slice has 2 items but the dominant grid is 3-col
@@ -104,30 +108,30 @@ const getRowsFromFreebiesConfig = (freebies) => {
       rows.push({ items: slice, isCentered });
     }
   }
-
+ 
   return rows;
 };
-
+ 
 const getRowsFromProductsList = (products, freebiesPerRow) => {
   const productList = Array.isArray(products) ? products : [];
   const columns = normalizeColumns(freebiesPerRow);
   const rows = [];
-
+ 
   for (let i = 0; i < productList.length; i += columns) {
     rows.push({ items: productList.slice(i, i + columns), isCentered: false });
   }
-
+ 
   return rows;
 };
-
+ 
 const resolveFreebieRows = ({ freebies, products, freebiesPerRow }) => {
   const rowsFromConfig = getRowsFromFreebiesConfig(freebies);
-
+ 
   if (rowsFromConfig.length > 0) return rowsFromConfig;
-
+ 
   return getRowsFromProductsList(products, freebiesPerRow);
 };
-
+ 
 const renderFreebieCard = ({
   queries,
   product,
@@ -147,14 +151,14 @@ const renderFreebieCard = ({
   const cellPadding = getCellPadding(columns, columnId, isCentered);
   const innerPadding = getInnerTablePadding(columns, columnId);
   const alignConfig = getAlignConfig(columns, columnId, isCentered);
-
+ 
   const textColor = theme?.black ?? '#000000';
   const priceColor = theme?.primary ?? '#000000';
   const freebieBackgroundColor =
     theme?.freebieColor ?? theme?.primary;
-
+ 
     console.log("productDescription", product?.description, queries.freebies_additional[0])
-
+ 
   if (!product) {
     return `
       <td
@@ -163,22 +167,22 @@ const renderFreebieCard = ({
       ></td>
     `;
   }
-
+ 
   const productName = product.name ?? '';
-
+ 
   let productDescription =
     product?.description?.trim() ?? queries.freebies_additional[0] ?? 'product description not found';
-
+ 
   productDescription = productDescription.replace(
     /(\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm\s+\d+(?:[.,]\d+)?(?:\/\d+(?:[.,]\d+)?)?\s*cm)/gi,
     '<span style="display:inline-block;">$1</span>'
   );
-
+ 
   const productSize = product.size ?? '';
   const productHref = getCategoryLink(product.linkOverride) ?? product.href ?? fallbackHref ?? '#';
   const productSrc = getProductSrc(product);
   const oldPrice = product.lowPrice ?? product.highPrice ?? '';
-
+ 
   // Give both prices the same whole-point line box in Word-based Outlook.
   const priceFontSize = Math.max(
     Number.parseFloat(prodSettings.priceLowSize) || 18,
@@ -186,28 +190,28 @@ const renderFreebieCard = ({
   );
   const priceLineHeight = Math.ceil((priceFontSize * 1.2) / 4) * 4;
   const priceLineStyle = `mso-line-height-rule: exactly; line-height: ${priceLineHeight}px;`;
-
+ 
   // sizes
   const freebieSize = prodSettings.freebieSize
     ? `font-size: ${prodSettings.freebieSize}px;`
     : '';
-
+ 
   const freebieBold = prodSettings.freebieBold
     ? `font-weight: ${prodSettings.freebieBold};`
     : '';
-
+ 
   const descSize = prodSettings.descSize
     ? `font-size: ${prodSettings.descSize}px;`
     : '';
-
+ 
   const lowSize = prodSettings.priceLowSize
     ? `font-size: ${prodSettings.priceLowSize}px;`
     : '';
-
+ 
   const highSize = prodSettings.priceHighSize
     ? `font-size: ${prodSettings.priceHighSize}px;`
     : '';
-
+ 
   let FREEBIE_CARD_MAX_WIDTH = 285;
   console.log(gridSize);
   switch (gridSize) {
@@ -219,8 +223,17 @@ const renderFreebieCard = ({
       FREEBIE_CARD_MAX_WIDTH = 285;
       break;
   }
-  
-
+ 
+  // Single freebie in a row: use a fixed, narrower card so it doesn't blow up
+  // to full width (max-width alone is ignored by Outlook and some mobile clients).
+  const isSingle = columns === 1;
+  if (isSingle) {
+    FREEBIE_CARD_MAX_WIDTH = SINGLE_FREEBIE_WIDTH[gridSize] ?? SINGLE_FREEBIE_WIDTH.normal;
+  }
+  const cardWidthAttr = isSingle ? `width="${FREEBIE_CARD_MAX_WIDTH}"` : '';
+  const cardWidthStyle = isSingle ? `width: ${FREEBIE_CARD_MAX_WIDTH}px; ` : '';
+  const singleClass = isSingle ? 'class="newsletterFreebieSingle"' : '';
+ 
   return `
     <td
       style="vertical-align: top; width: ${width}; background-color: ${freebieBackgroundColor};"
@@ -240,17 +253,20 @@ const renderFreebieCard = ({
               style="background-color: ${freebieBackgroundColor};"
             >
               <table
+                ${singleClass}
+                ${cardWidthAttr}
                 cellspacing="0"
                 cellpadding="0"
                 border="0"
                 align="${alignConfig.innerCardAlign}"
-                style="max-width: ${FREEBIE_CARD_MAX_WIDTH}px; background-color: ${freebieBackgroundColor}; border: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                style="${cardWidthStyle}max-width: ${FREEBIE_CARD_MAX_WIDTH}px; background-color: ${freebieBackgroundColor}; border: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
               >
                 <tbody>
                   <tr>
                     <td
+                      ${cardWidthAttr}
                       align="center"
-                      style="background-color: ${freebieBackgroundColor};"
+                      style="${cardWidthStyle}background-color: ${freebieBackgroundColor};"
                     >
                       ${
                         productSrc
@@ -278,10 +294,8 @@ const renderFreebieCard = ({
                           : ''
                       }
                     </td>
-
-                    <td style="background-color: ${freebieBackgroundColor};"></td>
                   </tr>
-
+ 
                   <tr>
                     <td
                       align="center"
@@ -341,7 +355,7 @@ const renderFreebieCard = ({
                             </td>
                           </tr>
                           ${Space({ insideTr: true, className: 'newsletterBottom5px' })}
-
+ 
                           ${
                             productSize
                               ? `<tr>
@@ -357,7 +371,7 @@ const renderFreebieCard = ({
                                 </tr>`
                               : ''
                           }
-
+ 
                           <tr>
                             <td
                               align="${prodSettings?.align ?? 'left'}"
@@ -367,7 +381,7 @@ const renderFreebieCard = ({
                                 class="${prodSettings?.prodLowPriceClass ?? 'newsletterProductLowPrice'}"
                                 style="color: ${prodSettings?.lowPriceColor ?? priceColor} !important;${lowSize}${priceLineStyle}"
                               >${freeText} </span>
-
+ 
                               ${
                                 disableHighPrice
                                   ? ''
@@ -391,7 +405,7 @@ const renderFreebieCard = ({
     </td>
   `;
 };
-
+ 
 export const renderFreebieGrid = ({
   queries,
   freebies,
@@ -408,26 +422,26 @@ export const renderFreebieGrid = ({
   getCategoryLink
 }) => {
   console.log(prodSettings);
-
+ 
   const rows = resolveFreebieRows({
     freebies,
     products,
     freebiesPerRow,
   });
-
+ 
   if (!Array.isArray(rows) || rows.length === 0) return '';
-
+ 
   const freebieBackgroundColor =
     theme?.freebieColor ?? theme?.primary;
-
+ 
   let rowsHtml = '';
-
+ 
   for (let rowId = 0; rowId < rows.length; rowId++) {
     const { items: row, isCentered } = rows[rowId];
     const columns = normalizeColumns(row.length);
     const isLastRow = rowId === rows.length - 1;
     let rowCells = '';
-
+ 
     for (let columnId = 0; columnId < columns; columnId++) {
       if (row[columnId].exclude && row[columnId].exclude.includes(country)) {
         continue;
@@ -449,7 +463,7 @@ export const renderFreebieGrid = ({
         getCategoryLink
       });
     }
-
+ 
     rowsHtml += `
       <table
         cellspacing="0"
@@ -465,7 +479,7 @@ export const renderFreebieGrid = ({
           </tr>
         </tbody>
       </table>
-
+ 
       ${Space({
         insideTable: true,
         className: isLastRow
@@ -475,7 +489,7 @@ export const renderFreebieGrid = ({
       })}
     `;
   }
-
+ 
   return `
     <tr>
       <td style="background-color: #FFD6C5;" class="newsletterContainer">
@@ -484,3 +498,4 @@ export const renderFreebieGrid = ({
     </tr>
   `;
 };
+ 
