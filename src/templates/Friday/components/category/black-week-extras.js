@@ -5,7 +5,7 @@ import { buildCopyIcon } from '../CopyCodeCTA.js';
 
 // one tier = 4 lines of the "deal_img" query: EXTRA / 20% / OFF / when you spend min. €2500
 const DEAL_TIER_LINES = 4;
-// 2x2 grid - fits on mobile too, so there is no separate mobile layout
+// 2x2 grid on desktop AND mobile (the boxes only shrink)
 const DEAL_COLUMNS = 2;
 // index (inside a tier) of the discount line - used for the image name and the font fitting
 const VALUE_LINE = 1;
@@ -160,8 +160,9 @@ const getGridSizes = ({ totalWidth, gap }) => {
 	};
 };
  
-// classes for the mobile css (campaign additionalCss) - below 768px the boxes go one under another:
-// cell -> display block, full width; gapCol -> turns into the vertical space between the two boxes of a row
+// grid classes. cell / gapCol / empty are the ones the mobile css uses to put the boxes one under
+// another - they are only printed with `dealMobileStack: true`. by default the cells get no class,
+// so no css can break the 2x2 and the grid stays 2x2 on mobile, it only shrinks (% widths).
 const DEFAULT_GRID_CLASSES = {
 	table: 'newsletterDealGrid',
 	cell: 'newsletterDealCell',
@@ -170,11 +171,13 @@ const DEFAULT_GRID_CLASSES = {
 	empty: 'newsletterDealEmpty',
 };
  
-const renderGapCell = ({ gap, gapPercent, classes }) =>
-	`<td class="${classes.gapCol}" width="${gap}" style="width: ${gapPercent}%; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
+const classAttr = (name) => (name ? ` class="${name}"` : '');
+ 
+const renderGapCell = ({ gap, gapPercent, className }) =>
+	`<td${classAttr(className)} width="${gap}" style="width: ${gapPercent}%; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
  
 const renderGapRow = ({ gap, classes }) => `
-          <tr class="${classes.gapRow}">
+          <tr${classAttr(classes.gapRow)}>
             <td colspan="${DEAL_COLUMNS * 2 - 1}" height="${gap}" style="height: ${gap}px; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>
           </tr>`;
  
@@ -190,11 +193,16 @@ const renderGrid = ({
 	cellStyles = '',
 	cellAttrs = '',
 	gridClasses = DEFAULT_GRID_CLASSES,
+	stackOnMobile = false,
 }) => {
 	if (items.length === 0) return '';
  
 	const classes = { ...DEFAULT_GRID_CLASSES, ...gridClasses };
 	const { cellWidth, cellPercent, gapPercent } = getGridSizes({ totalWidth, gap });
+ 
+	// stacking classes only when stacking is wanted
+	const cellClass = (item) => (stackOnMobile ? (item ? classes.cell : classes.empty) : '');
+	const gapClass = (item) => (stackOnMobile ? (item ? classes.gapCol : classes.empty) : '');
  
 	let rows = '';
  
@@ -206,14 +214,13 @@ const renderGrid = ({
 		for (let col = 0; col < DEAL_COLUMNS; col++) {
 			const item = row[col];
  
-			// no gap before an empty cell, so nothing is left over on mobile
-			if (col > 0) cells += renderGapCell({ gap, gapPercent, classes: item ? classes : { gapCol: classes.empty } });
+			if (col > 0) cells += renderGapCell({ gap, gapPercent, className: gapClass(item) });
  
 			const styles = item ? (typeof cellStyles === 'function' ? cellStyles(item) : cellStyles) : 'padding: 0;';
 			const attrs = item ? (typeof cellAttrs === 'function' ? cellAttrs(item) : cellAttrs) : '';
  
 			cells += `
-            <td class="${item ? classes.cell : classes.empty}" width="${cellWidth}" align="center" valign="top" style="width: ${cellPercent}%; vertical-align: top; ${styles}"${attrs ? ` ${attrs}` : ''}>
+            <td${classAttr(cellClass(item))} width="${cellWidth}" align="center" valign="top" style="width: ${cellPercent}%; vertical-align: top; ${styles}"${attrs ? ` ${attrs}` : ''}>
               ${item ? renderCell(item, cellWidth) : '&nbsp;'}
             </td>`;
 		}
@@ -448,8 +455,9 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		gap: category?.dealGap ?? 10,
 		containerClass: category?.dealGridContainer ?? containerClass,
 		rowClass: category?.dealRowClass,
-		// targeted by the mobile css, override per campaign if needed
 		gridClasses: { ...DEFAULT_GRID_CLASSES, ...(category?.dealGridClasses ?? {}) },
+		// false (default): 2x2 on mobile too. true: the old one-under-another mobile layout
+		stackOnMobile: category?.dealMobileStack ?? false,
 	};
  
 	const images = isNewsletter ? resolveDealImages({ category, tiers, country }) : [];
@@ -514,4 +522,3 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
  
 	return html;
 };
- 
