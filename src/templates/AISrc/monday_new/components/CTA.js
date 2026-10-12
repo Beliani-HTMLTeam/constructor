@@ -21,6 +21,7 @@ const CTA = ({
   borderWidth = '',
   borderColor = '',
   transform = '',
+  letterSpacing = '',
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -55,11 +56,11 @@ const CTA = ({
   } else if (type === 'landing') {
     if (variant === 'cream') {
       const buttonContent = codeValue ? `${text} ${copyIcon}` : text;
-      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaCreamBg}; color: ${color ?? ctaCreamText} !important;${transform ? `text-transform:${transform};` : ''}">${buttonContent}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaCreamBg}; color: ${color ?? ctaCreamText} !important;letter-spacing:${letterSpacing ? letterSpacing : '1.2'};">${buttonContent}</a>`;
     } else if (variant === 'underline') {
       html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLink" style="color: ${color};${transform ? `text-transform:${transform};` : ''}">${text} ${copyIcon}</a>`;
     } else {
-      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaMaroonBg}; color: ${color ?? ctaMaroonText} !important;${transform ? `text-transform:${transform};` : ''}">${text} ${copyIcon}</a>`;
+      html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bg ?? ctaMaroonBg}; color: ${color ?? ctaMaroonText} !important;letter-spacing:${letterSpacing ? letterSpacing : '1.2'};">${text} ${copyIcon}</a>`;
     }
   } else {
     if (variant === 'underline') {
@@ -74,7 +75,7 @@ const CTA = ({
         <table cellspacing="0" cellpadding="0" border="0" align="${align}" style="margin: 0 auto;">
           <tr>
             <td align="center" bgcolor="${bgColor}" style="background-color: ${bgColor}; border-radius: 4px;">
-              <a href="${href}" class="newsletterCtaBtn" target="_blank" style="font-size:16px;font-weight:600;color:${textColor}!important;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:1.2;max-width:100%;box-sizing:border-box;border-style:solid;border-radius:5px;border-width:${borderWidth};border-color:${borderColor};">
+              <a href="${href}" class="newsletterCtaBtn" target="_blank" style="font-size:16px;font-weight:600;color:${textColor}!important;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:${letterSpacing ? letterSpacing : '1.2'};max-width:100%;box-sizing:border-box;border-style:solid;border-radius:5px;border-width:${borderWidth};border-color:${borderColor};">
                 <span style="color: ${textColor} !important;${transform ? `text-transform:${transform};` : ''};vertical-align: middle;">${text}</span>
               </a>
             </td>

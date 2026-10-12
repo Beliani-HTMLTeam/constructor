@@ -55,7 +55,7 @@ const intro = {
 		fontWeight: '400',
 		color: palette.text,
 		align: 'center',
-		phrase: 'Shop now',
+		phrase: 'Shop now First',
 		spaceBefore: 'newsletterBottom35px',
 	},
 };
@@ -78,9 +78,19 @@ const additionalCss = `
 		font-weight: 600;
 	}
 
+	.newsletterContainerProducts60 {
+		padding-left: 60px !important;
+		padding-right: 60px !important;
+	}
+
 	@media screen and (max-width: 768px) {
 		#newsletter .newsletterTitle {
 			font-size: 25px;
+		}
+
+		.newsletterContainerProducts60 {
+			padding-left: 30px !important;
+			padding-right: 30px !important;
 		}
 	}
 `;
@@ -88,7 +98,7 @@ const additionalCss = `
 const styleCategory = (number, name, href, background, products, overrides = {}) => ({
 	paddingTop: number === 0 ? 35 : 0,
 	spaceAfter: 'newsletterBottom80px',
-	container: 'newsletterContainer60px',
+	container: 'newsletterContainerProducts60',
 
 	name,
 	href,
@@ -182,7 +192,7 @@ export default new entities.Campaign({
 			name: 'Newsletter',
 			type: types.NEWSLETTER,
 			template: templates.Thursday,
-			css: types.CSS.NS,
+			css: types.CSS.NS_THURSDAY,
 			additionalCss: additionalCss,
 			translationsSpreadsheet: campaignTranslationsSheet,
 
@@ -190,6 +200,7 @@ export default new entities.Campaign({
 			color: palette.text,
 
 			wrapper: types.WRAPPER,
+			optimizeCss: true,
 
 			categories: categories,
 			links: links,
@@ -203,7 +214,7 @@ export default new entities.Campaign({
 			name: 'Landing',
 			type: types.LANDINGPAGE,
 			template: templates.Thursday,
-			css: types.CSS.LP,
+			css: types.CSS.LP_THURSDAY,
 			additionalCss: additionalCss,
 			translationsSpreadsheet: campaignTranslationsSheet,
 

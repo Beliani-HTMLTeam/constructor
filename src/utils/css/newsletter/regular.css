@@ -559,6 +559,70 @@ img {
   font-weight: 600;
 }
 
+.freebieImgTd2col {
+  width: 96px;
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.freebieImgTd2colLast {
+  width: 96px;
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.freebieTileMobile {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+}
+
+.freebieTitleTd2col {
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+  vertical-align: middle;
+}
+
+.freebieTitleTd2colLast {
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  vertical-align: middle;
+}
+
+.frebiePriceTd2col {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+  vertical-align: middle;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.frebiePriceTd2colLast {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  vertical-align: middle;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.freebieGapTd2col {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .START_FOOTER {}
 .newsletterFooter {
   padding-left: 20px !important;
@@ -992,6 +1056,61 @@ img {
     overflow: visible !important;
   }
 
+  .freebieImgTd2col,
+  .freebieImgTd2colLast {
+    width: 50% !important;
+    padding: 10px 5px !important;
+    vertical-align: top !important;
+    text-align: center !important;
+  }
+
+  .freebieTitleTd2col,
+  .freebieTitleTd2colLast,
+  .frebiePriceTd2col,
+  .frebiePriceTd2colLast {
+    display: none !important;
+    width: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+
+  .freebieGapTd2col {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .freebieTileMobile {
+    display: block !important;
+    max-height: none !important;
+    font-size: inherit !important;
+    line-height: 1.3 !important;
+    overflow: visible !important;
+    text-align: center !important;
+    padding-top: 6px;
+  }
+
+  .freebieTileMobileTitle {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    display: block;
+  }
+
+  .freebieTileMobilePrice {
+    padding-top: 3px;
+  }
+
+  .freebieTileMobilePrice .freebieOldPriceMobile {
+    font-size: 11px !important;
+  }
+
+  .freebieTileMobilePrice .freebieLowPriceMobile {
+    font-size: 12px !important;
+    font-weight: 600;
+  }
+
   .START_MQ_FOOTER {}
   .newsletterFooterTitle {
     font-size: 18px;
@@ -1036,23 +1155,6 @@ img {
   .newsletterProductTitleFreebie {
     font-size: 12px;
   }
-}
-
-@media screen and (max-width: 600px) {
-  #newsletter .categoryRowMobile14 { 
-    font-size: 13px !important;
-    padding-right: 0 !important;
-  }
-  #newsletter .categoryRowMobile15 { font-size: 15px !important; }
-  #newsletter .categoryRowMobile16 { font-size: 16px !important; }
-  #newsletter .categoryRowMobile17 { font-size: 17px !important; }
-  #newsletter .categoryRowMobile18 { font-size: 18px !important; }
-  #newsletter .categoryRowMobile19 { font-size: 19px !important; }
-  #newsletter .categoryRowMobile20 { font-size: 20px !important; }
-  #newsletter .categoryRowMobile21 { font-size: 21px !important; }
-  #newsletter .categoryRowMobile22 { font-size: 22px !important; }
-  #newsletter .categoryRowMobile23 { font-size: 23px !important; }
-  #newsletter .categoryRowMobile24 { font-size: 24px !important; }
 }
 
 .smallCategoryTilesLEFT {
@@ -1142,7 +1244,7 @@ img {
     font-size: 16px !important;
   }
 }
-/* Category-only banners: mobile fallback for email clients without clamp(). */
+
 @media screen and (max-width: 600px) {
   #newsletter .categoryBannerTitle {
     font-size: 25px !important;

@@ -13,7 +13,7 @@ export default [
       },
       {
         language: LANGUAGES.CHIT,
-        tableColumn: 'AV',
+        tableColumn: 'AB',
       },
       {
         language: LANGUAGES.CHFR,
@@ -259,7 +259,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.SE,
-        tableColumn: 'AH',
+        tableColumn: 'AJ',
       },
       {
         language: LANGUAGES.UK,
@@ -282,7 +282,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.HU,
-        tableColumn: 'AN',
+        tableColumn: 'AP',
       },
       {
         language: LANGUAGES.UK,
@@ -305,7 +305,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.DK,
-        tableColumn: 'AB',
+        tableColumn: 'AD',
       },
       {
         language: LANGUAGES.UK,
@@ -328,7 +328,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.CZ,
-        tableColumn: 'AJ',
+        tableColumn: 'AL',
       },
       {
         language: LANGUAGES.SK,
@@ -355,7 +355,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.FI,
-        tableColumn: 'AF',
+        tableColumn: 'AH',
       },
       {
         language: LANGUAGES.SE,
@@ -382,7 +382,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.NO,
-        tableColumn: 'AD',
+        tableColumn: 'AF',
       },
       {
         language: LANGUAGES.UK,
@@ -405,7 +405,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.SK,
-        tableColumn: 'AL',
+        tableColumn: 'AN',
       },
       {
         language: LANGUAGES.CZ,
@@ -436,11 +436,11 @@ export default [
     languages: [
       {
         language: LANGUAGES.BENL,
-        tableColumn: 'AR',
+        tableColumn: 'AT',
       },
       {
         language: LANGUAGES.BEFR,
-        tableColumn: 'AP',
+        tableColumn: 'AR',
       },
       {
         language: LANGUAGES.UK,
@@ -463,7 +463,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.RO,
-        tableColumn: 'AT',
+        tableColumn: 'AV',
       },
       {
         language: LANGUAGES.UK,
@@ -486,7 +486,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.SI,
-        tableColumn: 'AX',
+        tableColumn: 'AZ',
       },
       {
         language: LANGUAGES.UK,
@@ -509,7 +509,7 @@ export default [
     languages: [
       {
         language: LANGUAGES.HR,
-        tableColumn: 'AZ',
+        tableColumn: 'AX',
       },
       {
         language: LANGUAGES.UK,

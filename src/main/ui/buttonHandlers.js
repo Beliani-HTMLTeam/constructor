@@ -113,6 +113,75 @@ export function setupCopyTemplateHandler(elements, getState, jsConfetti) {
   });
 }
 
+export function setupDownloadEmlHandler(elements, getState) {
+  const { downloadEml } = elements;
+
+  downloadEml?.addEventListener('click', () => {
+    const html = getState('html');
+    if (!html) return toast.error('No HTML to create file from.');
+
+    const campaign = getState('selectedCampaign');
+    if (!campaign?.name)
+      return toast.error('Select campaign first');
+
+    const language = getState('selectedLanguage');
+    if (!language) return toast.error('Select language to download eml.');
+
+    const template = getState('template');
+    const country = getState('country');
+    let finalHtml = optimizeHtmlImages(html, getState);
+
+    const activeScope = getState('scope');
+
+    if (template?.type === 'landing') return toast.error('Works only for newsletters');
+
+    let eml = [
+      "From: test@example.com",
+      "To: test@example.com",
+      "Subject: Outlook HTML test",
+      "MIME-Version: 1.0",
+      "Content-Type: text/html; charset=UTF-8",
+      "",
+      finalHtml
+    ].join('\r\n');
+
+    const blob = new Blob([eml], {
+      type: "message/rfc822",
+    });
+
+    const filename = `${campaign.name.replaceAll(' ', '_')}.eml`;
+
+    const saveFile = async () => {
+      try {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: filename,
+          types: [
+            {
+              description: 'EML file',
+              accept: {
+                'message/rfc822': ['.eml']
+              }
+            }
+          ]
+        });
+
+        const writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+
+        toast.success("Campgain has been saved to the file.")
+      } catch (error) {
+        if (error.name === "AbortError") {
+          console.warn(`User cancelled saving prompt for: ${filename}.`)
+        }
+      }
+  
+    };
+
+    saveFile();
+  })
+}
+
 function readStoredPreviewMode() {
   try {
     return localStorage.getItem(PREVIEW_MODE_STORAGE_KEY);

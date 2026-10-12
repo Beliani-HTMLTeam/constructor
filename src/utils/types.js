@@ -1,3 +1,5 @@
+import nslt_thursday from '@css/newsletter/thursday.css?inline';
+import nslt_friday from '@css/newsletter/friday.css?inline';
 import nslt_regular from '@css/newsletter/regular.css?inline';
 import nslt_blackweek from '@css/newsletter/blackweek.css?inline';
 import nslt_mattress from '@css/newsletter/mattress.css?inline';
@@ -14,8 +16,13 @@ import nslt_ai_25_09 from '@css/newsletter/ai_25_09.css?inline';
 import nslt_ai_09_10 from '@css/newsletter/ai_09_10.css?inline';
 import nslt_ai_16_10 from '@css/newsletter/ai_16_10.css?inline';
 import nslt_ai_new from '@css/newsletter/ai_new.css?inline';
-import nslt_october_reminder from '@css/newsletter/october_reminder.css?inline';
+import nslt_ai_mon from '@css/newsletter/ai_mon.css?inline';
+import dima_nslt_ai_new from '@css/newsletter/dima_ai_new.css?inline';
+import nslt_ai_new2 from '@css/newsletter/ai_new2.css?inline';
+import nslt_french_days_new from '@css/newsletter/french_days_new.css?inline';
 
+import lp_thursday from '@css/landing/thursday.css?inline';
+import lp_friday from '@css/landing/friday.css?inline';
 import lp_regular from '@css/landing/regular.css?inline';
 import lp_blackwek from '@css/landing/blackweek.css?inline';
 import lp_mattress from '@css/landing/mattress.css?inline';
@@ -26,13 +33,10 @@ import lp_ai_16_10 from '@css/landing/ai_16_10.css?inline';
 import lp_ai_04_09_chat from '@css/landing/ai_04_09_chat.css?inline';
 import lp_ai_03_09 from '@css/landing/ai_03_09.css?inline';
 import lp_ai_new from '@css/landing/ai_new.css?inline';
-import lp_advent2026 from '@css/landing/advent2026.css?inline';
-import lp_ai_11_09 from '@css/landing/ai_11_09.css?inline';
-import lp_ai_11_09_normal from '@css/landing/ai_11_09_normal.css?inline';
-import lp_ai_18_09 from '@css/landing/ai_18_09.css?inline';
-import lp_ai_25_09 from '@css/landing/ai_25_09.css?inline';
-import lp_ai_09_10 from '@css/landing/ai_09_10.css?inline';
-import lp_october_reminder from '@css/landing/october_reminder.css?inline';
+import lp_ai_mon from '@css/landing/ai_mon.css?inline';
+import dima_lp_ai_new from '@css/landing/dima_ai_new.css?inline';
+import lp_ai_new2 from '@css/landing/ai_new2.css?inline';
+import lp_french_days_new from '@css/landing/french_days_new.css?inline';
 
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
@@ -45,6 +49,8 @@ export const types = {
   LANDINGPAGE: 'landing',
   CSS: {
     NS: nslt_regular,
+    NS_THURSDAY: nslt_thursday,
+    NS_FRIDAY: nslt_friday,
     NS_BLACK_WEEK: nslt_blackweek,
     NS_MATTRESS: nslt_mattress,
     NS_MD: md_nslt,
@@ -62,8 +68,14 @@ export const types = {
     NS_AI_16_10: nslt_ai_16_10,
     NS_OCTOBER_REMINDER: nslt_october_reminder,
     NS_AI_NEW: nslt_ai_new,
+    NS_AI_MON: nslt_ai_mon,
+    DIMA_NS_AI_NEW: dima_nslt_ai_new,
+    NS_AI_NEW2: nslt_ai_new2,
+    NS_FRENCH_DAYS: nslt_french_days_new,
 
     LP: lp_regular,
+    LP_THURSDAY: lp_thursday,
+    LP_FRIDAY: lp_friday,
     LP_BLACK_WEEK: lp_blackwek,
     LP_MATTRESS: lp_mattress,
     LP_MD: md_lp,
@@ -80,7 +92,10 @@ export const types = {
     LP_AI_09_10: lp_ai_09_10,
     LP_AI_16_10: lp_ai_16_10,
     LP_AI_NEW: lp_ai_new,
-    LP_OCTOBER_REMINDER: lp_october_reminder,
+    LP_AI_MON: lp_ai_mon,
+    DIMA_LP_AI_NEW: dima_lp_ai_new,
+    LP_AI_NEW2: lp_ai_new2,
+    LP_FRENCH_DAYS: lp_french_days_new,
 
     CGB: {
       DESKTOP: cgb_desktop,

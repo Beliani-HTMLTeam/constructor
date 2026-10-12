@@ -11,6 +11,7 @@ import {
   setupProductsHandler,
   setupPreviewWidthHandler,
   setupCopyTemplateHandler,
+  setupDownloadEmlHandler,
   setupOpenCampaignHandler,
   setupOpenIssueHandler,
   setupOpenFigmaHandler,
@@ -53,6 +54,7 @@ function setupButtonListeners(elements, { campaigns, jsConfetti }) {
   setupPreviewWidthHandler(elements, setState);
   // setupNewCampaignHandler(elements, campaigns);
   setupCopyTemplateHandler(elements, getState, jsConfetti);
+  setupDownloadEmlHandler(elements, getState);
   setupOpenCampaignHandler(elements, getState);
   setupOpenIssueHandler(elements, getState);
   setupOpenFigmaHandler(elements, getState);

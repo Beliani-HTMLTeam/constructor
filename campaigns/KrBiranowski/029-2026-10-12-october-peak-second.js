@@ -205,6 +205,7 @@ export default new entities.Campaign({
       disableTopImageTitle: true,
       shopByCategory: false,
       theme,
+      optimizeCss: true,
       intro: {
         color: theme.black,
         backgroundColor: theme.primary,

@@ -8,23 +8,6 @@ img {
   -ms-interpolation-mode: bicubic;
 }
 
-@media screen and (max-width: 600px) {
-  #newsletter .categoryRowMobile14 { 
-    font-size: 13px !important;
-    padding-right: 0 !important;
-  }
-  #newsletter .categoryRowMobile15 { font-size: 15px !important; }
-  #newsletter .categoryRowMobile16 { font-size: 16px !important; }
-  #newsletter .categoryRowMobile17 { font-size: 17px !important; }
-  #newsletter .categoryRowMobile18 { font-size: 18px !important; }
-  #newsletter .categoryRowMobile19 { font-size: 19px !important; }
-  #newsletter .categoryRowMobile20 { font-size: 20px !important; }
-  #newsletter .categoryRowMobile21 { font-size: 21px !important; }
-  #newsletter .categoryRowMobile22 { font-size: 22px !important; }
-  #newsletter .categoryRowMobile23 { font-size: 23px !important; }
-  #newsletter .categoryRowMobile24 { font-size: 24px !important; }
-}
-
 .title-advantages {
   text-align: center;
   font-size: 11px;
@@ -214,6 +197,10 @@ img {
 
 .newsletterTop55px {
   padding-top: 55px;
+}
+
+.newsletterBottom5px {
+  padding-bottom: 5px;
 }
 
 .newsletterBottom10px {
@@ -538,7 +525,7 @@ img {
   }
 
   .newsletterAdditionalCategoryCta {
-    font-size: 18px !important;
+    font-size: 14px !important;
   }
 
   .product-img {
@@ -688,12 +675,16 @@ img {
     font-size: 25px;
   }
 
-  #newsletter .introHeader {
+  .introHeader {
     font-size: 12px !important;
   }
 
-  #newsletter .introTitle {
+  .introTitle {
     font-size: 30px !important;
+  }
+
+  .introParagraph {
+    font-size: 14px !important;
   }
 
   .newsletterIntroTitle {
@@ -798,6 +789,10 @@ img {
     padding-left: 10px;
     padding-right: 0px !important;
   }
+
+  .newsletterBottom5px {
+		padding-bottom: 2px;
+	}
 
 	.newsletterBottom10px {
 		padding-bottom: 4px;
@@ -991,8 +986,8 @@ img {
 }
 
 .introParagraph {
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.2;
   font-family: 'Open Sans', Arial, sans-serif;
 }
 

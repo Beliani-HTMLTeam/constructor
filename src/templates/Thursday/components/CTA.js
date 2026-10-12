@@ -39,6 +39,7 @@ const CTA = ({
 	fontFamily = "'Open Sans', sans-serif",
 	mobileFontSize = null,
 	mobileLineHeight = null,
+	spanStyle = '',
 }) => {
 	const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -182,7 +183,7 @@ const CTA = ({
 		} else {
 			// default: text variant
 			const textClass = className || 'newsletterCta';
-			html = `<a style="color: ${color ?? '#000000'}; text-decoration: none;" href="${href}"><span class="${textClass}">${text}</span></a>`;
+			html = `<a style="color: ${color ?? '#000000'}; text-decoration: none;" href="${href}"><span class="${textClass}"${spanStyle ? ` style="${spanStyle}"` : ''}>${text}</span></a>`;
 		}
 	}
 

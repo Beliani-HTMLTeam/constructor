@@ -26,7 +26,7 @@ const links = {
   Banner_1: translateLink({ value: 'content/lp26-09-30' }),
   Banner_1_Image: translateImage({ value: '20260930b.png' }),
 
-  Timer_href: translateLink({ value: 'content/lp26-10-06' }),
+  Timer_href: translateLink({ value: 'content/lp26-10-06-ta' }),
 
   Intro_cta_href: 'https://www.beliani.ch/kitchen/',
 };
@@ -36,10 +36,31 @@ const palette = {
   title: '#FFCCB7',
   text: '#000000',
   timer: '#750000',
+  freebies: {
+    background: '#D6B3B3',
+    title: '#000000',
+    free: '#000000',
+    text: '#000000',
+    lines: '#ECE7E0',
+  },
 };
 
 const timer = {
-  freebies: getImageUrl('20261008free.png', true),
+  freebies: [
+    // SHELL
+    {
+      id: 316914,
+      titlePhrase: 'Bathroom Set',
+      src: getImageUrl('20261008_free01.png', true),
+    },
+    // TELMA
+    {
+      id: 320374,
+      titlePhrase: 'Bathroom Set',
+      src: getImageUrl('20261008_free02.png', true),
+    },
+  ],
+  colors: palette.freebies,
   deadline: '2026-10-11',
 };
 
@@ -67,7 +88,7 @@ const intro = {
   cta: {
     ...underlineCta,
     align: 'center',
-    phrase: 'Shop now',
+    phrase: 'Shop now First',
     spaceBefore: 'newsletterBottom35px',
     spaceAfter: 'newsletterBottom80px',
   },
@@ -169,13 +190,14 @@ export default new entities.Campaign({
       name: 'Newsletter',
       type: types.NEWSLETTER,
       template: templates.Thursday,
-      css: types.CSS.NS,
+      css: types.CSS.NS_THURSDAY,
       translationsSpreadsheet: campaignTranslationsSheet,
 
       background: palette.page,
       color: palette.text,
 
       wrapper: types.WRAPPER,
+      optimizeCss: true,
 
       categories: categories,
       links: links,
@@ -189,7 +211,7 @@ export default new entities.Campaign({
       name: 'Landing',
       type: types.LANDINGPAGE,
       template: templates.Thursday,
-      css: types.CSS.LP,
+      css: types.CSS.LP_THURSDAY,
       translationsSpreadsheet: campaignTranslationsSheet,
 
       background: palette.page,

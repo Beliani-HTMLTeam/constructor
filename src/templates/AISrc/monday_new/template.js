@@ -117,6 +117,13 @@ const MondayNew = async ({
 	}
 
   const FooterElement = Footer({ getFooter, getCategoryLink, hasSmallTilesCategory, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
+  let disableSE = false;
+
+  if (typeof disableSoonEnding === "boolean" && disableSoonEnding)
+    disableSE = true;
+
+  if (typeof disableSoonEnding === "object")
+    disableSE = disableSoonEnding?.includes(country);
 
   return `
     ${HeaderElement}
@@ -137,7 +144,7 @@ const MondayNew = async ({
 
     </table>
 
-    ${!disableSoonEnding?.includes(country) ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
+    ${!disableSE ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
 
     ${FooterElement}
   `;

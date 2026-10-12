@@ -7,7 +7,7 @@ import { CTA } from './CTA.js';
 import { Line } from './Line.js';
 
 // category types that render on their own, without products/tiles/freebies
-const STANDALONE_CATEGORY_TYPES = ['deal_new', 'rowswith3categories'];
+const STANDALONE_CATEGORY_TYPES = ['deal_new', 'rowswith3categories', 'rowswith2categories'];
 
 const resolveSpaceClass = (value, fallback) => {
   const raw = value ?? fallback;
@@ -312,6 +312,8 @@ const renderBody = async ({
   // console.log('produkty ', products);
 
   const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
+
+  console.log(`Rendering category type: ${categoryTypeStr} (category name: ${category?.name ?? 'N/A'})`);
 
   try {
     const module = await import(`./category/${categoryTypeStr}.js`);

@@ -21,6 +21,9 @@ import { RegularFridayNslt16_10 } from './DimaSrc/newsletter_regular_friday16_10
 import { MondayNewAI } from './DimaSrc/monday_new/template';
 import { MondayNew } from './AISrc/monday_new/template';
 
+// Black Week
+import { BlackWeekFirst } from './AISrc/black_week_first/template.js';
+
 export const templates = {
   Blackweek,
   AdventCalendar,

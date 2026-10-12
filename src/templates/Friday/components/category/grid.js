@@ -1,4 +1,5 @@
 import { Product } from '../Product.js';
+import { Space } from '../Space.js';
 
 export const render = ({
   products,
@@ -20,6 +21,8 @@ export const render = ({
   const containerClass = insideContainer ? (container ?? 'newsletterContainer') : '';
 
   const productStyle = category?.product ?? null;
+
+  console.log('productStyle', productStyle, category?.product);
 
   const boxed = Boolean(productStyle?.background || productStyle?.border);
 
@@ -79,8 +82,9 @@ export const render = ({
   if (Array.isArray(products)) {
     const cols = 2;
     productsInnerHtml += `
+    ${productStyle?.outlineFilledPadding ? Space({ insideTr: true, className: `newsletterBottom${productStyle.outlineFilledPadding}px`, background: productStyle.productsBg }) : ''}
     <tr>
-      <td style="color: ${color}" ${containerClass ? `class="${containerClass}"` : ''}>
+      <td style="color: ${color}; ${productStyle?.productsBg ? `background: ${productStyle.productsBg};` : ''}" ${containerClass ? `class="${containerClass}"` : ''}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
 
     for (let i = 0; i < products.length; i += cols) {
@@ -103,7 +107,7 @@ export const render = ({
         const showBottomGap = category?.product?.hideLastBottomGap ? !isLastRow : true;
 
         if (product) {
-          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container, showBottomGap, rowStyle);
+          productsInnerHtml += Product(product, showPrices, showNames, color, align, gapBetweenVertical, false, imageAlign, container, showBottomGap, rowStyle, isLastRow);
         }
 
         productsInnerHtml += '</td>';
@@ -113,6 +117,8 @@ export const render = ({
     }
 
     productsInnerHtml += '</td></tr></table>';
+
+    productsInnerHtml += productStyle?.outlineFilledPadding ? Space({ insideTr: true, className: `newsletterBottom${productStyle.outlineFilledPadding}px`, background: productStyle.productsBg }) : '';
   }
 
   return productsInnerHtml;

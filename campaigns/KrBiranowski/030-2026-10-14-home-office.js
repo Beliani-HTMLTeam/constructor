@@ -17,7 +17,7 @@ const theme = {
   ctaPrimaryText: '#ffffff',
   ctaSecondary: '#750000',
   ctaSecondaryText: '#ffffff',
-  addColor: '#FBEFEC',
+  addColor: '#FFCCB7',
   catText: '#750000',
 };
 
@@ -80,6 +80,10 @@ const catData = [
   },
   {
     name: 'Lighting',
+    nameOverrides: {
+      nl: 'Bureaulampen',
+      benl: 'Bureaulampen',
+    },
     href: 'https://www.beliani.ch/office-furniture/office-lamps/',
     src: getImageUrl('20261014_Cat04.jpg', true),
     ctaPosition: 'afterProducts',
@@ -200,11 +204,11 @@ const links = {
   // TopImage_src: catData[0].catImg,
   // TopImage_href: translateLink({ value: catData[0].href }),
 
-  Banner_1: translateLink({ value: 'content/lp26-08-28' }),
-  Banner_1_Image: translateImage({ value: '20260828b.png' }),
+  Banner_1: translateLink({ value: 'content/lp26-10-01' }),
+  Banner_1_Image: translateImage({ value: '20261001b.png' }),
 
-  Banner_2: translateLink({ value: 'content/lp26-09-02' }),
-  Banner_2_Image: translateImage({ value: '20260902b.png' }),
+  Banner_2: translateLink({ value: 'content/lp26-10-07' }),
+  Banner_2_Image: translateImage({ value: '20261007b.png' }),
 };
 
 const TopImageTitle_data = {
@@ -300,20 +304,18 @@ const categories = [
     tileTextColor: theme.titleText,
     paddingTop: 0,
     showTileNames: true,
-    tdClass: 'newsletterContainer40px',
+    tdClass: 'newsletterContainer',
     title: {
       className: 'newsletterAditionalTitle',
-      align: 'center',
+      align: 'left',
+      color: theme.titleText,
       show: true,
       spaceBefore: 'newsletterBottom40px',
-      // spaceAfter: 'newsletterBottom35px',
-      tdClass: 'newsletterContainer40px',
+      spaceAfter: 'newsletterBottom35px',
+      tdClass: 'newsletterContainer',
     },
     paragraph: {
       show: false,
-      align: 'center',
-      spaceBefore: 'newsletterBottom35px',
-      spaceAfter: 'newsletterBottom35px',
     },
     tiles: [
       {
@@ -330,6 +332,9 @@ const categories = [
         name: 'Bookcases & Shelving Units',
         src: getImageUrl('20261014_Add03.png', true),
         href: 'https://www.beliani.ch/office-furniture/storage/bookcases-and-shelves/',
+        nameOverrides: {
+          fi: 'Kirjahyllyt ja hyllyköt',
+        },
       },
       {
         name: 'Office Accessories',
@@ -391,12 +396,14 @@ export default new entities.Campaign({
           bg: theme.ctaPrimary,
           borderColor: theme.ctaPrimary,
           borderWidth: '15px 45px',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
         },
         disableLine: true,
-        containerClass: 'newsletterContainer40px',
+        containerClass: 'newsletterContainer',
         options: {
-          linkedType: 'cta', // all, cta, title, paragraph
-
+          useLinks: ["header", "title", "paragraph", "cta"],
           align: 'left',
 
           headerColor: theme.secondaryText,
@@ -440,11 +447,14 @@ export default new entities.Campaign({
           bg: theme.ctaPrimary,
           borderColor: theme.ctaPrimary,
           borderWidth: '6px 20px',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
         },
         disableLine: true,
-        containerClass: 'newsletterContainer40px',
+        containerClass: 'newsletterContainer',
         options: {
-          linkedType: 'cta', // all, cta, title, paragraph
+          useLinks: ["header", "title", "paragraph", "cta"],
 
           align: 'left',
           headerColor: theme.secondaryText,

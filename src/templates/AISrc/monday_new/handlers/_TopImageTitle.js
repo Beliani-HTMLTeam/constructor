@@ -12,6 +12,7 @@ export const TopImageTitleHandler = ({ links, queries, TopImageTitle_data, type,
         backgroundColor: TopImageTitle_data?.backgroundColor,
         type: TopImageTitle_data?.type,
         renderType: type,
+        className: TopImageTitle_data?.className ?? '',
       })
     : '';
 };

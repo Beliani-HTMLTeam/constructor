@@ -12,6 +12,7 @@ export const TopImageTitleHandler = ({ links, queries, TopImageTitle_data, type 
         type: TopImageTitle_data?.type,
         renderType: type,
         container: TopImageTitle_data?.container,
+        links: links,
       })
     : '';
 };

@@ -48,6 +48,10 @@ const Friday = async ({
   const shopNow = getPhrase('Shop now');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
+
+  if(links?.TopImage_href == 'Home Page') {
+    links.TopImage_href = getCategoryLink('https://www.beliani.ch');
+  }
   const TopImageElement = TopImageHandler({ links, TopImage_data });
 
   const introCta_href = getIntroCtaHref({

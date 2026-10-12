@@ -60,7 +60,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           background: background,
           align: category.title?.align ?? 'left',
           insideTable: true,
-          spanStyle: `color: ${color}; font-size: 30px;`,
+          spanStyle: `color: ${color};`,
           tableContainer: false,
           className: category.title?.className ?? 'categoryTitle',
         })}
@@ -161,7 +161,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           displayType: category?.displayType ?? '2col',
           tileBgColor: category?.tileBgColor,
           tileTextColor: category?.tileTextColor,
-          
+          tileSettings: category?.tile,
         })
       : '';
 
@@ -322,6 +322,7 @@ const renderBody = async ({
   tileBgColor = '',
   tileTextColor = '',
   gridSize = 'normal',
+  tileSettings = {},
 }) => {
   const categoryTypeStr = categoryType ? categoryType.toLowerCase() : 'default';
 
@@ -366,6 +367,7 @@ const renderBody = async ({
       tileBgColor,
       tileTextColor,
       gridSize,
+      tileSettings,
     });
   } catch (e) {
     toast.error(`Category type "${categoryType}" not found. Falling back to default renderer.`);

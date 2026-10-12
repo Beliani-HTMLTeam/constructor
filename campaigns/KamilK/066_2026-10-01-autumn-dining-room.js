@@ -300,7 +300,7 @@ export default new entities.Campaign({
 			name: 'Newsletter',
 			type: types.NEWSLETTER,
 			template: templates.Thursday, // User should change this
-			css: types.CSS.NS,
+			css: types.CSS.NS_THURSDAY,
 			translationsSpreadsheet: campaignTranslationsSheet,
 			background: '#FFF5F1',
 			color: '#000000',
@@ -332,7 +332,7 @@ export default new entities.Campaign({
 			name: 'Landing',
 			type: types.LANDINGPAGE,
 			template: templates.Thursday, // User should change this
-			css: types.CSS.LP,
+			css: types.CSS.LP_THURSDAY,
 			background: '#FFF5F1',
 			color: '#000000',
 			translationsSpreadsheet: campaignTranslationsSheet,
