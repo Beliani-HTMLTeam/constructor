@@ -66,6 +66,7 @@ export const types = {
     DIMA_LP_AI_NEW: dima_lp_ai_new,
     LP_AI_NEW2: lp_ai_new2,
     LP_FRENCH_DAYS: lp_french_days_new,
+    LP_OCTOBER_REMINDER: lp_october_reminder,
 
     CGB: {
       DESKTOP: cgb_desktop,
