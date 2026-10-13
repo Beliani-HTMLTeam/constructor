@@ -108,6 +108,9 @@ img {
   line-height: 1.2;
 }
  
+.newsletterNewFooterConditions a {
+  color: #750000 !important;
+  }
 /* Company details */
 .newsletterNewFooterCompanyDetails {
   vertical-align: middle;

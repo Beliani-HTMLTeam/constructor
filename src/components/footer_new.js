@@ -45,6 +45,33 @@ const CLASSES = {
 
 const cls = (name) => (name ? ` class="${name}"` : '');
 
+const URL_RE = /\b((?:https?:\/\/)?www\.[\w-]+(?:\.[\w-]+)+(?:\/[^\s<]*)?)/gi;
+
+const linkStyle = (color) => `color: ${color}; text-decoration: none;`;
+
+const styleLinks = (html, color) =>
+  String(html ?? '')
+    .split(/(<a\b[\s\S]*?<\/a>)/gi)
+    .map((part) => {
+      if (/^<a\b/i.test(part)) {
+        return part.replace(/^<a\b([^>]*)>/i, (tag, attrs) => {
+          const style = attrs.match(/\bstyle\s*=\s*(["'])([\s\S]*?)\1/i);
+          if (style) {
+            const rest = style[2].trim().replace(/;?$/, ';');
+            return tag.replace(style[0], `style=${style[1]}${rest} color: ${color};${style[1]}`);
+          }
+          return `<a${attrs} style="${linkStyle(color)}">`;
+        });
+      }
+      return part.replace(URL_RE, (url) => {
+        const clean = url.replace(/[.,;:!?)]+$/, ''); // a full stop at the end of a sentence is not part of the address
+        const tail = url.slice(clean.length);
+        const href = /^https?:\/\//i.test(clean) ? clean : `https://${clean}`;
+        return `<a href="${href}" style="${linkStyle(color)}">${clean}</a>${tail}`;
+      });
+    })
+    .join('');
+
 const peachFrame = (c, rows, { id = '', style = '' } = {}) => `
   <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="#FFCCB7"${id ? ` id="${id}"` : ''} style="max-width: 650px; width: 100%; background-color: #FFCCB7;${style}">
     <tbody>
@@ -332,7 +359,7 @@ export function Footer(sections, options, name) {
             ${Space({ className: c.bottom15, insideTr: true, background: '#FFCCB7' })}
                 <tr>
                     <td align="center">
-                        <span class="${c.conditions}" style="color: #750000; text-align: center;">${conditionsTitle} ${text}</span>
+                    <span class="${c.conditions}" style="color: #750000; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, '#750000')}</span>
                     </td>
                 </tr>
             ${
