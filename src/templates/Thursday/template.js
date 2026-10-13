@@ -1,4 +1,4 @@
-import { Footer } from './Footer.js';
+import { Footer, shouldUseNewFooter } from './Footer.js';
 import { Header } from './Header.js';
 
 // handlers:
@@ -86,12 +86,16 @@ const Thursday = async ({
   const safeCategories = Array.isArray(categories) ? categories : [];
   const freebiesIndex = safeCategories.findIndex((category) => String(category?.type).toLowerCase() === 'deal');
 
-  const categoriesBeforeIntro =
-    introPosition === 'afterFreebies' && freebiesIndex >= 0
-      ? safeCategories.slice(0, freebiesIndex + 1)
-      : safeCategories;
-  const categoriesAfterIntro =
-    introPosition === 'afterFreebies' && freebiesIndex >= 0 ? safeCategories.slice(freebiesIndex + 1) : [];
+  // afterFirstCategory: intro goes right under categories[0] (e.g. top image rendered as a category)
+  const introSplitIndex =
+    introPosition === 'afterFirstCategory' && safeCategories.length > 0
+      ? 0
+      : introPosition === 'afterFreebies'
+        ? freebiesIndex
+        : -1;
+
+  const categoriesBeforeIntro = introSplitIndex >= 0 ? safeCategories.slice(0, introSplitIndex + 1) : safeCategories;
+  const categoriesAfterIntro = introSplitIndex >= 0 ? safeCategories.slice(introSplitIndex + 1) : [];
 
   const categoriesSharedProps = {
     getProductById,
@@ -114,10 +118,10 @@ const Thursday = async ({
     ...categoriesSharedProps,
   });
 
-  const isAfterFreebies = introPosition === 'afterFreebies';
+  const isAfterFreebies = introPosition === 'afterFreebies' || introPosition === 'afterFirstCategory';
   const isAfterTimer = introPosition === 'afterTimer' && hasTimer;
   const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer ? '' : IntroElement;
-  const IntroAfterFreebiesElement = introPosition === 'afterFreebies' ? IntroElement : '';
+  const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
   const IntroAfterTimerBeforeCategoriesElement =
     isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
   const IntroAfterTimerAfterCategoriesElement =
@@ -159,7 +163,7 @@ const Thursday = async ({
     </table>
 
 
-    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
+    ${shouldUseNewFooter(date || selectedCampaign?.date) ? '' : SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
       
     ${FooterElement}
   `;
