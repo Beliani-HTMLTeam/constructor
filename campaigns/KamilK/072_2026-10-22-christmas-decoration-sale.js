@@ -39,7 +39,6 @@ const palette = {
 	page: '#F6E7E6',
 	text: '#000000',
 	title: '#000000',
-	timer: '#FF2F00',
 };
 
 const intro = {
@@ -65,7 +64,7 @@ const timer = {
 
 const Inside = {
 	type: 'timer',
-	maincolor: palette.timer,
+	theme: 'Happy Red',
 	spaceBefore: 'newsletterBottom35px',
 	spaceBeforeBackground: palette.page,
 };

@@ -40,7 +40,6 @@ const palette = {
 	altPage: '#F6E7E6',
 	text: '#000000',
 	title: '#000000',
-	timer: '#FD9000',
 };
 
 const intro = {
@@ -61,13 +60,13 @@ const intro = {
 };
 
 const timer = {
-	freebies: getImageUrl('20261015free.png', true),
+	freebies: translateImage({ value: '20261015free.png' }),
 	deadline: '2026-10-18',
 };
 
 const Inside = {
 	type: 'timer',
-	maincolor: palette.timer,
+	theme: 'Warm Yellow',
 	spaceBefore: 'newsletterBottom35px',
 	spaceBeforeBackground: palette.page,
 };

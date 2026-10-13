@@ -1,6 +1,6 @@
 import { Timer } from '../components/Timer';
 import { Space } from '../components/Space';
-import { resolveTimerColors } from '../helpers/timerColors.js';
+import { resolveTimerTheme } from '../helpers/timerColors.js';
 import languages from "@config/languages"
 
 const buildProloTimerScript = ({ deadline, timezone, timerLabels }) => {
@@ -103,10 +103,10 @@ export const TimerHandler = async ({
 		return '';
 	}
 
-	const resolvedColors = resolveTimerColors(Inside.maincolor);
-	const backgroundColor = resolvedColors?.backgroundColor ?? Inside.backgroundColor;
-	const color = resolvedColors?.color ?? Inside.color;
-	const unitBackground = resolvedColors?.unitBackground ?? Inside.unitBackground;
+	const theme = resolveTimerTheme(Inside.theme ?? timer?.theme);
+	const backgroundColor = theme?.backgroundColor ?? Inside.backgroundColor;
+	const color = theme?.color ?? Inside.color;
+	const unitBackground = theme?.unitBackground ?? Inside.unitBackground;
 
 	const timezone = getPhrase('timer-timezone');
 	const timerLabels = [
@@ -206,12 +206,23 @@ export const TimerHandler = async ({
 	// new layout = freebies given as products (array); old one = single image
 	const hasProductList = Array.isArray(freebies) && freebies.length > 0;
 	const ctaText = hasProductList ? getPhrase(timer?.cta?.phrase ?? 'See more') : shopNow;
-	const colors = timer?.colors ?? {
-		background: timer?.freebiesBackground,
-		title: timer?.freebiesTitleColor,
-		free: timer?.freebiesFreeColor,
-		text: timer?.freebiesTextColor,
-		lines: timer?.freebiesLineColors,
+	const colors = {
+		background: theme?.freebiesBackground,
+		title: theme?.freebiesTextColor,
+		free: theme?.freebiesFreeColor,
+		text: theme?.freebiesTextColor,
+		lines: theme?.freebiesLineColor,
+		...Object.fromEntries(
+			Object.entries(
+				timer?.colors ?? {
+					background: timer?.freebiesBackground,
+					title: timer?.freebiesTitleColor,
+					free: timer?.freebiesFreeColor,
+					text: timer?.freebiesTextColor,
+					lines: timer?.freebiesLineColors,
+				}
+			).filter(([, value]) => value !== undefined)
+		),
 	};
 
 	return Inside && Inside.type === 'timer'
