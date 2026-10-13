@@ -348,7 +348,8 @@ export function Footer(sections, options, name) {
     },
     workBanner: {
       [types.NEWSLETTER]: { value: () => `` },
-      [types.LANDINGPAGE]: { value: (data) => workBanner(data) },
+      // [types.LANDINGPAGE]: { value: (data) => workBanner(data) },
+      [types.LANDINGPAGE]: { value: (data) => `` },
     },
     deliveryBanner: {
       [types.NEWSLETTER]: { value: (data) => deliveryBanner(data, false) },
