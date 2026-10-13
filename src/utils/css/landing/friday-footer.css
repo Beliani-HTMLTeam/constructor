@@ -137,7 +137,7 @@ table {
 }
  
 .newsletterBottom30px {
-  padding-bottom: 30px;
+  padding-bottom: 30px !important;
 }
  
 #newsletter .newsletterBottom35px {
@@ -638,7 +638,7 @@ table.footerThousandsGrid {
   }
  
   .newsletterBottom30px {
-    padding-bottom: 15px;
+    padding-bottom: 15px !important;
   }
  
   #newsletter .newsletterBottom35px {
