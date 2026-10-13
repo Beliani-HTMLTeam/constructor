@@ -15,7 +15,37 @@ import { decompress } from 'compress-json';
 import { COMPRESSED_PRODUCTS_MARKER } from '@main/ui/manageProducts/constants.js';
 import { dynamicTranslations, translationCache, staticTranslations } from '@/api';
 
+import footerNewsletterCss from '@css/newsletter/footer.css?inline';
+import footerLandingCss from '@css/landing/footer.css?inline';
+
 let latestRenderId = 0;
+
+// Only campaigns AFTER this date get the footer css (21.10.2026 itself does not).
+const FOOTER_CSS_CUTOFF = new Date(2026, 9, 21); // months are 0-based: 9 = October
+
+const isAfterFooterCutoff = (cDate) => {
+  const [day, month, year] = String(cDate ?? '').split('.').map(Number);
+
+  // no / broken date -> old behaviour, no footer css
+  if (!day || !month || !year) return false;
+
+  return new Date(year, month - 1, day) >= FOOTER_CSS_CUTOFF;
+};
+
+const FOOTER_CSS = [
+  { marker: /\bnewsletterNew(?:Footer\w*|SocialIcon)\b/, css: footerNewsletterCss },
+  { marker: /\bfooter(?:Frame|Container30px|Container40px|Thousands\w*|Social\w*|Conditions)\b/, css: footerLandingCss },
+];
+
+const getFooterCss = (html, campaignDate) =>
+  !isAfterFooterCutoff(campaignDate)
+    ? ''
+    : FOOTER_CSS.filter(({ marker }) => marker.test(html))
+        .map(({ css }) => css)
+        .join('\n');
+
+const buildEffectiveCss = ({ templateToRender, footerCss, generatedCtaCss }) =>
+  [templateToRender.css ?? '', footerCss, templateToRender.additionalCss, generatedCtaCss].filter(Boolean).join('\n');
 
 const purgeCss = (html, css) => {
   const used = extractUsedSelectors(html);
@@ -523,14 +553,13 @@ export async function renderTemplate(getState, setState) {
       generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
     }
 
-    let effectiveCss =
-      (templateToRender.css ?? '') +
-      (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') +
-      (generatedCtaCss ? '\n' + generatedCtaCss : '');
+    const footerCss = getFooterCss(html, selectedCampaign.date);
+
+    const effectiveCss = buildEffectiveCss({ templateToRender, footerCss, generatedCtaCss });
     const withStylesOrNo =
-      'css' in templateToRender || templateToRender.additionalCss || generatedCtaCss
-        ? styleTags(effectiveCss) + html
-        : html;
+    'css' in templateToRender || templateToRender.additionalCss || generatedCtaCss || footerCss
+      ? styleTags(effectiveCss) + html
+      : html;
     
     let cleaned = '';
     
@@ -660,14 +689,14 @@ export async function renderTemplateHtmlForCountry({ templateToRender, selectedC
     generatedCtaCss = Array.from(globalThis.collectedCtaStyles).join('\n');
   }
 
-  const effectiveCss =
-    (templateToRender.css ?? '') +
-    (templateToRender.additionalCss ? '\n' + templateToRender.additionalCss : '') +
-    (generatedCtaCss ? '\n' + generatedCtaCss : '');
-  const withStylesOrNo =
-    'css' in templateToRender || templateToRender.additionalCss || generatedCtaCss
+  const footerCss = getFooterCss(html, selectedCampaign.date);
+
+  let effectiveCss = buildEffectiveCss({ templateToRender, footerCss, generatedCtaCss });
+ const withStylesOrNo =
+    'css' in templateToRender || templateToRender.additionalCss || generatedCtaCss || footerCss
       ? styleTags(effectiveCss) + html
       : html;
+
   return templateToRender.wrapper
     ? wrapTemplate(getWrapperForCampaign(templateToRender.wrapper, selectedCampaign.date), {
         style: getWrapperCssForCampaign(effectiveCss, selectedCampaign.date),

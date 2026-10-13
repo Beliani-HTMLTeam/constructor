@@ -1,40 +1,25 @@
-import { Footer as FooterComponent } from '@/components/footer.js';
+import { Footer as FooterComponent } from '@/components/footer_new.js';
 import { wrapFooterUrl } from "@/utils/getTrackingUrl";
 import { getState } from '@/main/state/appState';
-
-function shouldUseNewAssembly(cDate) {
-  const parts = cDate.split('.');
-
-  const day = Number(parts[0]);
-  const month = Number(parts[1]);
-  const year = Number(parts[2]);
-
-  const campaignDate = new Date(year, month - 1, day);
-  const cutoffDate = new Date(2026, 8, 14);
-
-  return campaignDate > cutoffDate;
-}
+import {Space} from "./components/Space.js";
 
 const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date }) => {
-  const campaignDate = date || selectedCampaign?.date || getState('selectedCampaign')?.date;
-  const newAssembly = shouldUseNewAssembly(campaignDate);
-
-  const assemblyBanner = newAssembly
-    ? {
+  const assemblyBanner =  {
         src: getFooter('Assembly src new'),
         href: getFooter('Assembly href NEW'),
       }
-    : {
-        src: ['AT', 'PL', 'FR', 'UK'].includes(country) ? getFooter('Delivery src') : getFooter('Asembly src'),
-        href: getFooter('Asembly href'),
-      };
 
-  return FooterComponent(
+  const FooterElement = FooterComponent(
     {
       id,
-      assembly: {
-        ...assemblyBanner,
-        exclude: ['CHIT'].includes(country),
+      seeYouSoon: {
+        src: getFooter('See you soon src'),
+        href: getFooter('See you soon href'),
+      },
+
+      deliveryBanner: {
+        src: getFooter('Delivery src'),
+        href: getFooter('Delivery href'),
       },
 
       workBanner: {
@@ -46,119 +31,131 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
 				exclude: hasSmallTilesCategory,
         title: getFooter('Title'),
         firstCategory: {
-          src: getFooter('Category src 1'),
+          src: getFooter('Category src 1 new'),
           href: wrapFooterUrl(getFooter('Category href 1')),
           name: getCategoryTitle('Sofas'),
         },
         secondCategory: {
-          src: getFooter('Category src 2'),
+          src: getFooter('Category src 2 new'),
           href: wrapFooterUrl(getFooter('Category href 2')),
           name: getCategoryTitle('Beds'),
         },
         thirdCategory: {
-          src: getFooter('Category src 3'),
+          src: getFooter('Category src 3 new'),
           href: wrapFooterUrl(getFooter('Category href 3')),
           name: getCategoryTitle('Coffee Tables'),
         },
         foutrthCategory: {
-          src: getFooter('Category src 4'),
+          src: getFooter('Category src 4 new'),
           href: wrapFooterUrl(getFooter('Category href 4')),
           name: getCategoryTitle('Chairs'),
         },
         fifthCategory: {
-          src: getFooter('Category src 5'),
+          src: getFooter('Category src 5 new'),
           href: wrapFooterUrl(getFooter('Category href 5')),
           name: getCategoryTitle('Armchairs'),
         },
         sixthCategory: {
-          src: getFooter('Category src 6'),
+          src: getFooter('Category src 6 new'),
           href: wrapFooterUrl(getFooter('Category href 6')),
           name: getCategoryTitle('Storage'),
         },
         seventhCategory: {
-          src: getFooter('Category src 7'),
+          src: getFooter('Category src 7 new'),
           href: wrapFooterUrl(getFooter('Category href 7')),
           name: getCategoryTitle('Lighting'),
         },
         eigthCategory: {
-          src: getFooter('Category src 8'),
+          src: getFooter('Category src 8 new'),
           href: wrapFooterUrl(getFooter('Category href 8')),
           name: getCategoryTitle('Rugs'),
         },
       },
+      advantages: {
+        firstAdvantage: {
+          src: getFooter('Advantages src 1 new'),
+          href: getFooter('Advantages href 1'),
+        },
+        secondAdvantage: {
+          src: getFooter('Advantages src 2 new'),
+          href: getFooter('Advantages href 2'),
+        },
+        thirdAdvantage: {
+          src: getFooter('Advantages src 3 new'),
+          href: getFooter('Advantages href 3'),
+        },
+        fourthAdvantage: {
+          src: getFooter('Advantages src 4 new'),
+          href: getFooter('Advantages href 4'),
+        },
+      },
 
       klarna: {
-        src: getFooter('Klarna src'),
+        src: getFooter('Klarna src new'),
         href: getFooter('Klarna href'),
 				exclude: ['HR', 'SI'].includes(country),
         //exclude: ["HU"].includes(country),
       },
 
       socials: {
-        title: getFooter('Socials Title'),
+        title: getFooter('Stay up to date'),
         instagram: {
-          src: getFooter('Instagram src'),
+          src: getFooter('Instagram src new'),
           href: getFooter('Instagram href'),
         },
         facebook: {
-          src: getFooter('Facebook src'),
+          src: getFooter('Facebook src new'),
           href: getFooter('Facebook href'),
         },
         youtube: {
-          src: getFooter('Youtube src'),
+          src: getFooter('Youtube src new'),
           href: getFooter('Youtube href'),
         },
         pinterest: {
-          src: getFooter('Pinterest src'),
+          src: getFooter('Pinterest src new'),
           href: getFooter('Pinterest href'),
         },
         Xsocial: {
-          src: getFooter('X src'),
+          src: getFooter('X src new'),
           href: getFooter('X href'),
         },
         Tiktok: {
-          src: getFooter('Tiktok src'),
+          src: getFooter('Tiktok src new'),
           href: getFooter('Tiktok href'),
         },
       },
 
-      advantages: {
-        firstAdvantage: {
-          src: getFooter('Advantages src 1'),
-          href: getFooter('Advantages href 1'),
-        },
-        secondAdvantage: {
-          src: getFooter('Advantages src 2'),
-          href: getFooter('Advantages href 2'),
-        },
-        thirdAdvantage: {
-          src: getFooter('Advantages src 3'),
-          href: getFooter('Advantages href 3'),
-        },
-        fourthAdvantage: {
-          src: getFooter('Advantages src 4'),
-          href: getFooter('Advantages href 4'),
-        },
-      },
-
+     
       conditions: {
         conditionsTitle: getFooter('Conditions title'),
-        conditionsText: queries.condition || [getFooter('Conditions_description'), getFooter('Conditions_unsubscribe')],
+        conditionsText: queries.condition || [getFooter('Conditions_description'), getFooter('Conditions_unsubscribe new')],
       },
 
       companyDetails: {
         title: getFooter('Company Details'),
-        address: getFooter('Address'),
+        address: getFooter('Address new'),
         mobileNumber: getFooter('Mobile number'),
         emailAddress: getFooter('Email address'),
         mailTo: getFooter('Mail to'),
         email: getFooter('Email'),
-        commercialRegister: getFooter('Commercial register'),
+        commercialRegister: getFooter('Commercial register new'),
         vat: getFooter('VAT'),
       },
     },
     { type }
   );
+
+  return `
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="width: 100%; max-width: 650px;">
+  ${Space({ className: type === 'newsletter' ? 'newsletterBottom30px' : 'footerBottom30px',  insideTr: true, background: '#FFCCB7' })}
+    <tr>
+      <td style="width: 100%; max-width: 100%; background-color: #FFCCB7;">
+        ${FooterElement}
+      </td>
+    </tr>
+    ${Space({ className: type === 'newsletter' ? 'newsletterBottom15px' : 'footerBottom15px',  insideTr: true, background: '#FFCCB7' })}
+  </table>
+  `
 };
 
 export { Footer };

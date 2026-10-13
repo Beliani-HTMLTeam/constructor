@@ -148,9 +148,6 @@ const Friday = async ({
 
       ${IntroAfterTimerAfterCategoriesElement}
     </table>
-
-
-    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
       
     ${FooterElement}
   `;
