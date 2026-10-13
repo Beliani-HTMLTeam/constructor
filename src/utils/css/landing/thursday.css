@@ -348,19 +348,10 @@ table {
   color: #000000;
 }
 
-@media screen and (min-width: 769px) {
-  #newsletter .freebiesContainer--list .newsletterProductTitleFreebie {
-    font-size: 20px;
-  }
-
-  #newsletter .freebiesContainer--list .newsletterProductTitleFreebie2col {
-    font-size: 16px;
-  }
-}
 
 .newsletterFreebiesTitle {
-  font-size: 18px;
-  line-height: 1.0;
+  font-size: 20px;
+  line-height: 1.2;
   font-weight: 400;
 }
 
@@ -917,4 +908,16 @@ table {
   .newsletterProductTitleFreebie {
     font-size: 12px;
   }
+}
+
+#newsletter .freebiesContainer--list .newsletterProductTitleFreebie {
+  font-size: 20px;
+}
+
+#newsletter .freebiesContainer--list .newsletterProductTitleFreebie2col {
+  font-size: 16px;
+}
+
+#newsletter .freebiesContainer--list .freebieTileMobileTitle {
+  font-size: 16px !important;
 }

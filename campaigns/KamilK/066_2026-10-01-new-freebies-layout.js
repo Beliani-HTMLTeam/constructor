@@ -277,29 +277,7 @@ const categories = [
 	},
 ];
 
-const freebiesCss = `
-	.newsletterFreebiesTitle {
-		font-size: 20px !important;
-		font-weight: 400 !important;
-		color: #000000 !important;
-	}
-
-	.newsletterProductTitleFreebie {
-		font-weight: 400 !important;
-	}
-
-	@media screen and (min-width: 769px) {
-		.newsletterProductTitleFreebie {
-			font-size: 20px !important;
-		}
-	}
-
-	.freebieOldPriceMobile {
-		color: #000000 !important;
-	}
-`;
-
-const freebiesCssLp = freebiesCss + `
+const freebiesCssLp = `
 	.freebiesContainer {
 		padding: 24px 40px !important;
 	}
@@ -381,11 +359,7 @@ const timer = {
 			src: getImageUrl('20261001_free05.png', true),
 		},
 	],
-	freebiesBackground: '#F8F2F2',
-	freebiesTitleColor: '#000000',
-	freebiesFreeColor: '#000000',
-	freebiesTextColor: '#000000',
-	freebiesLineColors: ['#E3CCCC', '#E3CCCC', '#E3CCCC', '#E3CCCC', '#E3CCCC'],
+	theme: 'Subtle Peach',
 	deadline: '2026-10-04',
 }
 
@@ -408,7 +382,6 @@ export default new entities.Campaign({
 			type: types.NEWSLETTER,
 			template: templates.Thursday, // User should change this
 			css: types.CSS.NS_THURSDAY,
-			additionalCss: freebiesCss,
 			translationsSpreadsheet: campaignTranslationsSheet,
 			background: '#FFF5F1',
 			color: '#000000',
@@ -432,7 +405,6 @@ export default new entities.Campaign({
 				}
 			},
 			Inside: {
-				maincolor: '#F6E7E6',
 				type: 'timer',
 			},
 		},
@@ -464,7 +436,6 @@ export default new entities.Campaign({
 				}
 			},
 			Inside: {
-				maincolor: '#F6E7E6',
 				type: 'timer',
 			},
 		},

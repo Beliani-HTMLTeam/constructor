@@ -37,14 +37,7 @@ const palette = {
 	accent: '#FF2F00',
 	dark: '#750000',
 	ctaText: '#F6E7E6',
-	timer: '#750000',
-	freebies: {
-		background: '#D6B3B3',
-		title: '#000000',
-		free: '#000000',
-		text: '#000000',
-		lines: '#ECE7E0',
-	},
+	timer: 'Cozy Brown',
 };
 
 const timer = {
@@ -62,13 +55,12 @@ const timer = {
 			src: getImageUrl('20261008_free02.png', true),
 		},
 	],
-	colors: palette.freebies,
 	deadline: '2026-10-11',
 };
 
 const Inside = {
 	type: 'timer',
-	maincolor: palette.timer,
+	theme: palette.timer,
 	spaceBefore: 'newsletterBottom35px',
 	spaceBeforeBackground: palette.page,
 };
