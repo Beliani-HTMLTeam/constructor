@@ -140,7 +140,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
         emailAddress: getFooter('Email address'),
         mailTo: getFooter('Mail to'),
         email: getFooter('Email'),
-        commercialRegister: getFooter('Commercial register'),
+        commercialRegister: getFooter('Commercial register new'),
         vat: getFooter('VAT'),
       },
     },

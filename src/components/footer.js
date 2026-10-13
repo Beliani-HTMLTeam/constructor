@@ -208,7 +208,7 @@ export function Footer(sections, options, name) {
                 ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                     <tr>
                         <td class="${c.container30}" style="background-color: #fff;">
-                            <a href="${href}">
+                            <a href="${track(href, isLP)}">
                                 <img loading="lazy" alt="work banner" src="${src}" width="${NL_IMG_WIDTH_30}" style="display: block; width: 100%; max-width: 100%; height: auto;">
                             </a>
                         </td>
