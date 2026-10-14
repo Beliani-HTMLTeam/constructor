@@ -1,9 +1,9 @@
-import { Footer as FooterComponent } from '@/components/footer_new.js';
+import { FOOTER_THEMES, Footer as FooterComponent } from '@/components/footer_new.js';
 import { wrapFooterUrl } from "@/utils/getTrackingUrl";
 import { getState } from '@/main/state/appState';
 import {Space} from "./components/Space.js";
 
-const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date }) => {
+const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date, theme = 'peach' }) => {
   const assemblyBanner =  {
         src: getFooter('Assembly src new'),
         href: getFooter('Assembly href NEW'),
@@ -142,18 +142,18 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
         vat: getFooter('VAT'),
       },
     },
-    { type }
+    { type, theme }
   );
 
   return `
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="width: 100%; max-width: 650px;">
-  ${Space({ className: type === 'newsletter' ? 'newsletterBottom30px' : 'footerBottom30px',  insideTr: true, background: '#FFCCB7' })}
+  ${Space({ className: type === 'newsletter' ? 'newsletterBottom30px' : 'footerBottom30px',  insideTr: true, background: FOOTER_THEMES[theme].frame || '#FFCCB7' })}
     <tr>
       <td style="width: 100%; max-width: 100%; background-color: #FFCCB7;">
         ${FooterElement}
       </td>
     </tr>
-    ${Space({ className: type === 'newsletter' ? 'newsletterBottom15px' : 'footerBottom15px',  insideTr: true, background: '#FFCCB7' })}
+    ${Space({ className: type === 'newsletter' ? 'newsletterBottom15px' : 'footerBottom15px',  insideTr: true, background: FOOTER_THEMES[theme].frame ||  '#FFCCB7' })}
   </table>
   `
 };

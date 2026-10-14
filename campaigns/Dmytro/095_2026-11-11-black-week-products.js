@@ -22,7 +22,7 @@ const tableQueries = [
 		name: 'deal_condition',
 	},
 	{
-		tableRange: '50:52',
+		tableRange: '46:47',
 		name: "condition"
 	}
 ];
@@ -269,6 +269,8 @@ export default new entities.Campaign({
 			links: links,
 			tableQueries: tableQueries,
 			additionalCss: additionalCss,
+
+			footer_theme: 'black',
 		},
 
 		{
@@ -287,6 +289,8 @@ export default new entities.Campaign({
 			links: links,
 			tableQueries: tableQueries,
 			additionalCss: additionalCssLp,
+
+			footer_theme: 'black',
 		}
 	]
 })

@@ -2,6 +2,14 @@ import { types } from '@utils/types.js';
 import { Line } from '@components/Line.js';
 import { Space_new as Space } from "../components/Space_new.js";
 
+export const FOOTER_THEMES = {
+  peach: { frame: '#FFCCB7', legal: '#750000' },
+  black: { frame: '#000000', legal: '#FFFFFF' },
+};
+ 
+export const getFooterTheme = (theme) => FOOTER_THEMES[theme] ?? FOOTER_THEMES.peach;
+ 
+
 const CLASSES = {
   [types.NEWSLETTER]: {
     frame: 'newsletterContainerFooter20px',
@@ -42,13 +50,13 @@ const CLASSES = {
     companyDetails: 'footerCompanyDetails',
   },
 };
-
+ 
 const cls = (name) => (name ? ` class="${name}"` : '');
-
+ 
 const URL_RE = /\b((?:https?:\/\/)?www\.[\w-]+(?:\.[\w-]+)+(?:\/[^\s<]*)?)/gi;
-
+ 
 const linkStyle = (color) => `color: ${color}; text-decoration: none;`;
-
+ 
 const styleLinks = (html, color) =>
   String(html ?? '')
     .split(/(<a\b[\s\S]*?<\/a>)/gi)
@@ -71,12 +79,14 @@ const styleLinks = (html, color) =>
       });
     })
     .join('');
-
-const peachFrame = (c, rows, { id = '', style = '' } = {}) => `
-  <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="#FFCCB7"${id ? ` id="${id}"` : ''} style="max-width: 650px; width: 100%; background-color: #FFCCB7;${style}">
+ 
+// Outer frame around every section (peach or black – `bg` comes from the theme).
+// Outlook ignores padding on <table>, so the side frame is padding on a <td>.
+const peachFrame = (c, rows, { id = '', style = '', bg = FOOTER_THEMES.peach.frame } = {}) => `
+  <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${bg}"${id ? ` id="${id}"` : ''} style="max-width: 650px; width: 100%; background-color: ${bg};${style}">
     <tbody>
       <tr>
-        <td${cls(c.frame)} bgcolor="#FFCCB7" style="background-color: #FFCCB7;">
+        <td${cls(c.frame)} bgcolor="${bg}" style="background-color: ${bg};">
           <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;${style}">
             <tbody>
               ${rows}
@@ -86,34 +96,34 @@ const peachFrame = (c, rows, { id = '', style = '' } = {}) => `
       </tr>
     </tbody>
   </table>`;
-
+ 
 const NL_IMG_WIDTH_30 = 650 - 40 - 60; // 550 – 30px inner padding
 const NL_IMG_WIDTH_40 = 650 - 40 - 80; // 530 – 40px inner padding
-
+ 
 const SOCIAL_ICON_SIZE = 28;
 const NL_THOUSANDS_TILE_WIDTH = Math.floor((NL_IMG_WIDTH_30 - 3 * 10) / 4);
-
+ 
 const advantageWidths = (items, total) => {
   const ws = items.map((i) => Number(i && i.width));
   if (ws.some((w) => !w)) return items.map(() => null);
   const scale = Math.min(1, total / ws.reduce((a, b) => a + b, 0));
   return ws.map((w) => Math.floor(w * scale));
 };
-
-
+ 
+ 
 const advantageCell = (item, href, width) => `
   <td valign="top">
     <a href="${href}">
       <img loading="lazy" src="${item.src}" alt="Advantages"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
     </a>
   </td>`;
-
+ 
 const thousandsMoreTile = (category, width) => `
   <a href="${category.href}">
     <img loading="lazy" src="${category.src}" alt="${category.name || ''}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
   </a>`;
-
-
+ 
+ 
 const thousandsMorePair = (c, left, right, side, width) => `
   <td width="50%" valign="top" style="padding-${side === 'LEFT' ? 'right' : 'left'}: 5px;">
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -125,7 +135,7 @@ const thousandsMorePair = (c, left, right, side, width) => `
       </tbody>
     </table>
   </td>`;
-
+ 
 const thousandsMoreRow = (c, categories, isLast, width) => `
   <tr>
     <td${isLast ? '' : cls(c.thousandsRowGap)}>
@@ -139,7 +149,7 @@ const thousandsMoreRow = (c, categories, isLast, width) => `
       </table>
     </td>
   </tr>`;
-
+ 
 const thousandsMoreGrid = (c, categories, width) => `
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tbody>
@@ -147,27 +157,33 @@ const thousandsMoreGrid = (c, categories, width) => `
       ${thousandsMoreRow(c, categories.slice(4, 8), true, width)}
     </tbody>
   </table>`;
-
+ 
 const socialIcon = (c, item, alt, href) => `
   <td class="${c.socialIcon}" valign="middle" style="line-height: ${SOCIAL_ICON_SIZE}px; mso-line-height-rule: at-least;">
     <a href="${href}">
       <img loading="lazy" src="${item.src}" width="${SOCIAL_ICON_SIZE}" border="0" style="display:block; max-width: 100%; vertical-align: middle;" alt="${alt}">
     </a>
   </td>`;
-
+ 
 export function Footer(sections, options, name) {
   const id = sections.id;
   const NL = CLASSES[types.NEWSLETTER];
   const LP = CLASSES[types.LANDINGPAGE];
-
+ 
+  // options.theme: 'peach' (default) | 'black'
+  const theme = getFooterTheme(options?.theme);
+ 
+  // every section frame in the theme colour
+  const frame = (c, rows, opts = {}) => peachFrame(c, rows, { ...opts, bg: theme.frame });
+ 
   // UTM parameters
   const track = (href, isLP) =>
     isLP ? href : `${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}`;
-
+ 
   // ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
   const seeYouSoon = ({ src, href }, isLP) => {
     const c = isLP ? LP : NL;
-    return peachFrame(c, `
+    return frame(c, `
                 <tr>
                     <td style="background-color: #fff;">
                         <a href="${track(href, isLP)}">
@@ -183,10 +199,10 @@ export function Footer(sections, options, name) {
                 </tr>
         `);
   };
-
+ 
   const workBanner = ({ src, href }) => {
     const c = LP;
-    return peachFrame(c, `
+    return frame(c, `
             ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                 <tr>
                     <td class="${c.container30}" style="background-color: #fff;">
@@ -203,10 +219,10 @@ export function Footer(sections, options, name) {
                 </tr>
         `);
   };
-
+ 
   const deliveryBanner = ({ src, href }, isLP) => {
     const c = isLP ? LP : NL;
-    return peachFrame(c, `
+    return frame(c, `
                 ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
                     <tr>
                         <td class="${c.container30}" style="background-color: #fff;">
@@ -221,7 +237,7 @@ export function Footer(sections, options, name) {
                     </tr>
             `, isLP ? {} : { id: 'newsletter' });
   };
-
+ 
   const thousandsMore = (
     {
       title,
@@ -237,7 +253,7 @@ export function Footer(sections, options, name) {
     isLP
   ) => {
     const c = isLP ? LP : NL;
-    return peachFrame(c, `
+    return frame(c, `
             <tr>
               <td class="${c.container30}" style="background-color: #ffffff;">
                 ${Line("https://pictureserver.net/static/footer/new_footer_line.png")}
@@ -273,10 +289,10 @@ export function Footer(sections, options, name) {
             ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
                 `);
   };
-
+ 
   const klarna = ({ href, src }, isLP) => {
     const c = isLP ? LP : NL;
-    return peachFrame(c, `
+    return frame(c, `
                     <tr>
                         <td class="${c.container30}" style="background-color: #FFFFFF;">
                             ${Line("https://pictureserver.net/static/footer/new_footer_line.png")}
@@ -294,10 +310,10 @@ export function Footer(sections, options, name) {
                     ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
         `);
   };
-
+ 
   const socials = ({ title, subtitle, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }, isLP) => {
     const c = isLP ? LP : NL;
-    return peachFrame(c, `
+    return frame(c, `
                 <tr>
                     <td align="center" class="${c.container30}" style="background-color: #FFFFFF;">
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -352,22 +368,23 @@ export function Footer(sections, options, name) {
                 ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
                 `);
   };
-
+ 
+  // conditions sit on the frame -> theme text colour (peach: #750000, black: white)
   const conditions = (conditionsTitle, text, isLP) => {
     const c = isLP ? LP : NL;
-    return peachFrame(c, `
-            ${Space({ className: c.bottom15, insideTr: true, background: '#FFCCB7' })}
+    return frame(c, `
+            ${Space({ className: c.bottom15, insideTr: true, background: theme.frame })}
                 <tr>
                     <td align="center">
-                    <span class="${c.conditions}" style="color: #750000; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, '#750000')}</span>
+                    <span class="${c.conditions}" style="color: ${theme.legal}; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
                     </td>
                 </tr>
             ${
-      isLP ? Space({ className: c.bottom15, insideTr: true, background: '#FFCCB7' }) : ''
+      isLP ? Space({ className: c.bottom15, insideTr: true, background: theme.frame }) : ''
       }
         `, { style: ' line-height: 10px; mso-line-height-rule: exactly;' });
   };
-
+ 
   const json_footer = {
     seeYouSoon: {
       [types.NEWSLETTER]: { value: (data) => seeYouSoon(data, false) },
@@ -392,7 +409,7 @@ export function Footer(sections, options, name) {
           const items = [firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage];
           const aw = advantageWidths(items, NL_IMG_WIDTH_30);
           const cell = (i) => advantageCell(items[i], track(items[i].href, false), aw[i]);
-          return peachFrame(NL, `
+          return frame(NL, `
                   <tr>
                       <td class="${NL.container30}" bgcolor="#ffffff" style="background-color: #ffffff; mso-padding-alt: 0px 20px 0px 20px;">
                           <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; background-color: #ffffff;">
@@ -422,7 +439,7 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: { value: (data) => socials(data, false) },
       [types.LANDINGPAGE]: { value: (data) => socials(data, true) },
     },
-
+ 
     conditions: {
       [types.NEWSLETTER]: {
         value: ({ conditionsTitle, conditionsText }) =>
@@ -465,12 +482,13 @@ export function Footer(sections, options, name) {
           commercialRegister,
           vat,
         }) => {
+          // sits on the frame -> theme background + text colour (inline, so the class background can't show through)
           return `
-        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: #FFCCB7;" id="newsletter">
+        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${theme.frame}" style="max-width: 650px; width: 100%; background-color: ${theme.frame};" id="newsletter">
             <tbody>
                 <tr>
-                    <td align="center" class="${NL.companyDetails}">
-                        <span style="color: #750000;text-align: center; font-size:13px;">
+                    <td align="center" class="${NL.companyDetails}" bgcolor="${theme.frame}" style="background-color: ${theme.frame}; color: ${theme.legal};">
+                        <span style="color: ${theme.legal};text-align: center; font-size:13px;">
                             ${address} | ${commercialRegister}
                         </span>
                     </td>
@@ -494,16 +512,16 @@ export function Footer(sections, options, name) {
       },
     },
   };
-
+ 
   let html = '';
   for (const section in sections) {
     const elem = sections[section];
     if (typeof elem !== 'object') continue;
-
+ 
     if (section in json_footer) {
       if (!('exclude' in elem)) {
         const conditionalSections = {};
-
+ 
         for (const key in elem) {
           const element = elem[key] || '';
           if (elem[key] === undefined) {
@@ -513,7 +531,7 @@ export function Footer(sections, options, name) {
             conditionalSections[key] = element;
             continue;
           }
-
+ 
           if (!element.exclude) {
             conditionalSections[key] = element;
           }
@@ -523,7 +541,7 @@ export function Footer(sections, options, name) {
       }
       if (!elem.exclude) {
         const conditionalSections = {};
-
+ 
         for (const key in elem) {
           const element = elem[key] || '';
           if (elem[key] === undefined) {
@@ -533,7 +551,7 @@ export function Footer(sections, options, name) {
             conditionalSections[key] = element;
             continue;
           }
-
+ 
           if (!element.exclude) {
             conditionalSections[key] = element;
           }
@@ -547,10 +565,10 @@ export function Footer(sections, options, name) {
  
   if (!html) return html;
   return `
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="#FFCCB7" style="max-width: 650px; width: 100%; background-color: #FFCCB7;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${theme.frame}" style="max-width: 650px; width: 100%; background-color: ${theme.frame};">
     <tbody>
       <tr>
-        <td bgcolor="#FFCCB7" style="background-color: #FFCCB7;">
+        <td bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
           ${html}
         </td>
       </tr>
