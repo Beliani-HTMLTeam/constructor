@@ -117,7 +117,7 @@ export const renderCategory = async (
             country
             }) :
             category.type === 'smallgrid' ?
-            category3Columns_Grid(category.products, {
+            category3Columns_Grid(category.products, country,{
               color,
               background: category.background || '#ffffff',
               titleColor: category.title.color,          // matches the red in your screenshot

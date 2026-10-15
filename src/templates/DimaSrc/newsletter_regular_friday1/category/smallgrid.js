@@ -3,6 +3,7 @@ import { Space } from '../components/Space';
 
 export const render = (
   categories = [],
+  country,
   {
     color = '#000000',
     background = '#ffffff',
@@ -29,8 +30,9 @@ export const render = (
   const shopNowText = getPhrase('Shop now');
 
   const resolveTitle = (category) =>
-    typeof getCategoryTitle === 'function'
-      ? getCategoryTitle(category.name)
+    category.overrides?.[country] ?  category.overrides[country]
+      :
+       getCategoryTitle(category.name) ?  getCategoryTitle(category.name)
       : category.name;
 
   const resolveHref = (category) =>
@@ -109,6 +111,7 @@ export const render = (
         ${renderGridCells(
           rowCategories,
           (category) => {
+            console.log('renderGridCells category', { category }, country);
             const href = resolveHref(category);
             const title = resolveTitle(category);
 
@@ -193,6 +196,7 @@ export const render = (
                   color:${titleColor};
                   text-align:center;
                   text-decoration:none;
+                  word-break: break-word;
                 "
               >
                 ${title}

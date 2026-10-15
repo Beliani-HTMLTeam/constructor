@@ -47,6 +47,7 @@ const intro_data = {
   type: "paragraph",
   cta: {
     overrides: {
+      FI: "Tutustu valikoimaan"
     },
     spaceAfter: 'newsletterBottom35px',
   }
@@ -162,6 +163,7 @@ const categories = [
       {
         name: 'Accessories',
         overrides: {
+          FI: "Sisustustarvikkeet"
         },
         src: getImageUrl('20261023Category12.png', true),
         href: 'https://www.beliani.ch/home-accessories/accessories-decor/',
