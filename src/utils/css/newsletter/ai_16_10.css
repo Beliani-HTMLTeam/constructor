@@ -227,6 +227,10 @@ img {
   padding-bottom: 25px;
 }
 
+.newsletterProductPrices{
+  text-align: center;
+}
+
 .newsletterTitle {
   font-size: 30px;
   font-family: "Open Sans", sans-serif;
