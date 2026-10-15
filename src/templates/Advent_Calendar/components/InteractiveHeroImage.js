@@ -1,30 +1,117 @@
 // ============================================================
-// Fully responsive Interactive Advent Calendar (4 doors)
+// Fully responsive Interactive Advent Calendar
 // Landing Page only
+// Popups come from the reusable ./advent-popup components
 // ============================================================
+import {
+  AdventPopupStyles,
+  AdventPopupScript,
+  AdventPopups,
+  AdventConditionsBox,
+} from './advent-popup/index.js';
+ 
 export function InteractiveHeroImage({ type }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
-   
+ 
   const adventBase = 'https://pictureserver.net/static/2026/';
   const adventImages = [
-    `${adventBase}uk_all_closed.webp`, // 0 - all closed
-    `${adventBase}uk_open_1.webp`,     // 1
-    `${adventBase}uk_open_2.webp`,     // 2
-    `${adventBase}uk_open_3.webp`,     // 3
+    `${adventBase}advent_all_closed.webp`, // 0 - all closed
+    `${adventBase}advent_open_1.webp`,     // 1
+    `${adventBase}advent_open_2.webp`,     // 2
+    `${adventBase}advent_open_3.webp`,     // 3
+    `${adventBase}advent_open_4.webp`,     // 4
+    `${adventBase}advent_open_5.webp`,     // 5
+    `${adventBase}advent_open_6.webp`,     // 6
+    `${adventBase}advent_open_7.webp`,     // 7
+    `${adventBase}advent_open_8.webp`,     // 8
+    `${adventBase}advent_open_9.webp`,     // 9
+    `${adventBase}advent_open_10.webp`,    // 10
+    `${adventBase}advent_open_11.webp`,    // 11
+    `${adventBase}advent_open_12.webp`,    // 12
+    `${adventBase}advent_open_13.webp`,    // 13
+    `${adventBase}advent_open_14.webp`,    // 14
+    `${adventBase}advent_open_15.webp`,    // 15
+    `${adventBase}advent_open_16.webp`,    // 16
+    `${adventBase}advent_open_17.webp`,    // 17
+    `${adventBase}advent_open_18.webp`,    // 18
+    `${adventBase}advent_open_19.webp`,    // 19
+    `${adventBase}advent_open_20.webp`,    // 20
   ];
-   
-  // ===== Popup per door (key = door number) =====
-  // img  = popup image shown over the page
-  // link = where the popup image leads (opens in a new tab)
-  const adventPopups = {
-    1: { img: `${adventBase}uk_advent_popup_1.webp`, link: 'https://www.beliani.co.uk/', alt: 'Deal of the day' },
-    2: { img: `${adventBase}uk_advent_popup_2.webp`, link: 'https://www.beliani.co.uk/', alt: 'Deal of the day' },
-    3: { img: `${adventBase}uk_advent_popup_3.webp`, link: 'https://www.beliani.co.uk/', alt: 'Deal of the day' },
+ 
+  // ===== Shared popup texts (translate per country) =====
+  const popupTexts = {
+    onlyToday: 'Only today',
+    seeConditions: 'See conditions',
+    shopNow: 'Shop now',          // used by type 'special'
+    conditionsTitle: 'Conditions:',
+    copied: 'Copied!',
   };
-   
+ 
+  // ===== Popup per door (key = door number) =====
+  // type: 'percent' | 'free' | 'buy4pay3' | 'cashback' | 'upto' | 'discount' | 'special'
+  //  imageDesktop / imageMobile : popup images (plain rectangles, curve is drawn by CSS)
+  //  link       : image + texts become a link (opens in new tab)
+  //  headline   : 'special' only – "One day.<br />One special deal."
+  //  pre        : line above the title ("Extra", "Textiles", "Today only:")
+  //  title      : main deal (<br /> for a line break)
+  //  subtitle   : "when you spend min. £200"
+  //  code       : "Code: xxx" (or an array) -> copy button
+  //  conditions : text shown below the calendar after "See conditions"
+  // Full prop list of each type: ./advent-popup/<Type>Popup.js
+  const adventPopups = {
+    1: {
+      type: 'upto',
+      imageDesktop: `${adventBase}advent_popup_1_d.webp`,
+      imageMobile: `${adventBase}advent_popup_1_m.webp`,
+      link: 'https://www.beliani.co.uk/textiles/',
+      pre: 'Textiles',
+      title: 'up to<br />50% OFF',
+      conditions: 'All items are subject to availability. All prices are subject to change without notification.',
+    },
+    2: {
+      type: 'free',
+      imageDesktop: `${adventBase}advent_popup_2_d.webp`,
+      imageMobile: `${adventBase}advent_popup_2_m.webp`,
+      title: 'Free table lamp',
+      subtitle: 'when you spend min. £300',
+      code: 'Code: 02advent26uk',
+      conditions: 'Receive a free table lamp ... (conditions text)',
+    },
+    3: {
+      type: 'cashback',
+      imageDesktop: `${adventBase}advent_popup_1_d.webp`,
+      imageMobile: `${adventBase}advent_popup_1_m.webp`,
+      title: '£50<br />cashback',
+      subtitle: 'when you shop for min. £150',
+      code: 'Code: 03advent26uk',
+      conditions: 'Use the code 03advent26uk ... (conditions text)',
+    },
+    18: {
+      type: 'percent',
+      imageDesktop: `${adventBase}advent_popup_18_d.webp`,
+      imageMobile: `${adventBase}advent_popup_18_m.webp`,
+      pre: 'Extra',
+      title: '10% OFF',
+      subtitle: 'when you spend £500',
+      code: 'Code: 18advent26uk',
+      conditions: '...',
+    },
+    19: {
+      type: 'upto',
+      imageDesktop: `${adventBase}advent_popup_19_d.webp`,
+      imageMobile: `${adventBase}advent_popup_19_m.webp`,
+      link: 'https://www.beliani.co.uk/rugs/',
+      pre: 'Rugs',
+      title: 'Up to<br />50% OFF',
+      conditions: '...',
+    },
+  };
+ 
   const InteractiveTopImage = `
     <tr>
       <td align="center" style="padding:0; line-height:0; font-size:0;">
+        ${AdventPopupStyles()}
+ 
         <div id="advent-wrapper" style="
           position: relative;
           display: block;
@@ -49,174 +136,334 @@ export function InteractiveHeroImage({ type }) {
               pointer-events: none;
             "
           />
-   
+ 
           <!-- ========== CLICKABLE DOORS (percentage based = fully responsive) ========== -->
-   
-          <!-- Door 1 (top box - 01) -->
+ 
+          <!-- Door 1 -->
           <div class="advent-door" data-door="1" style="
-          position: absolute;
-          left: 53%;
-          top: 12%;
-          width: 22%;
-          height: 14%;
-          cursor: pointer;
-          z-index: 10;
+            position: absolute;
+            left: 52%;
+            top: 5%;
+            width: 16%;
+            height: 12%;
+            cursor: pointer;
+            z-index: 10;
           " title="Open door 1"></div>
-   
           <!-- Door 2 -->
           <div class="advent-door" data-door="2" style="
             position: absolute;
-            left: 42%;
-            top: 26%;
-            width: 20%;
-            height: 13%;
+            left: 44%;
+            top: 17%;
+            width: 15%;
+            height: 12%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 2"></div>
-   
           <!-- Door 3 -->
           <div class="advent-door" data-door="3" style="
             position: absolute;
-            left: 62%;
-            top: 26%;
-            width: 22%;
-            height: 13%;
+            left: 59%;
+            top: 17%;
+            width: 17%;
+            height: 12%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 3"></div>
+          <!-- Door 4 -->
+          <div class="advent-door" data-door="4" style="
+            position: absolute;
+            left: 46%;
+            top: 37%;
+            width: 10%;
+            height: 7%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 4"></div>
+          <!-- Door 5 -->
+          <div class="advent-door" data-door="5" style="
+            position: absolute;
+            left: 46%;
+            top: 30%;
+            width: 10%;
+            height: 7%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 5"></div>
+          <!-- Door 6 -->
+          <div class="advent-door" data-door="6" style="
+            position: absolute;
+            left: 68%;
+            top: 32%;
+            width: 7%;
+            height: 8%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 6"></div>
+          <!-- Door 7 -->
+          <div class="advent-door" data-door="7" style="
+            position: absolute;
+            left: 57%;
+            top: 30%;
+            width: 11%;
+            height: 14%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 7"></div>
+          <!-- Door 8 -->
+          <div class="advent-door" data-door="8" style="
+            position: absolute;
+            left: 21%;
+            top: 46%;
+            width: 24%;
+            height: 12%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 8"></div>
+          <!-- Door 9 -->
+          <div class="advent-door" data-door="9" style="
+            position: absolute;
+            left: 59%;
+            top: 46%;
+            width: 17%;
+            height: 13%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 9"></div>
+          <!-- Door 10 -->
+          <div class="advent-door" data-door="10" style="
+            position: absolute;
+            left: 46%;
+            top: 44%;
+            width: 12%;
+            height: 14%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 10"></div>
+          <!-- Door 11 -->
+          <div class="advent-door" data-door="11" style="
+            position: absolute;
+            left: 29%;
+            top: 63%;
+            width: 6%;
+            height: 6%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 11"></div>
+          <!-- Door 12 -->
+          <div class="advent-door" data-door="12" style="
+            position: absolute;
+            left: 59%;
+            top: 17%;
+            width: 17%;
+            height: 12%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 12"></div>
+          <!-- Door 13 -->
+          <div class="advent-door" data-door="13" style="
+            position: absolute;
+            left: 6%;
+            top: 80%;
+            width: 17%;
+            height: 11%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 13"></div>
+          <!-- Door 14 -->
+          <div class="advent-door" data-door="14" style="
+            position: absolute;
+            left: 42%;
+            top: 58%;
+            width: 17%;
+            height: 11%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 14"></div>
+          <!-- Door 15 -->
+          <div class="advent-door" data-door="15" style="
+            position: absolute;
+            left: 60%;
+            top: 59%;
+            width: 16%;
+            height: 10%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 15"></div>
+          <!-- Door 16 -->
+          <div class="advent-door" data-door="16" style="
+            position: absolute;
+            left: 6%;
+            top: 70%;
+            width: 17%;
+            height: 10%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 16"></div>
+          <!-- Door 17 -->
+          <div class="advent-door" data-door="17" style="
+            position: absolute;
+            left: 59%;
+            top: 80%;
+            width: 18%;
+            height: 11%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 17"></div>
+          <!-- Door 18 -->
+          <div class="advent-door" data-door="18" style="
+            position: absolute;
+            left: 42%;
+            top: 69%;
+            width: 17%;
+            height: 11%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 18"></div>
+          <!-- Door 19 -->
+          <div class="advent-door" data-door="19" style="
+            position: absolute;
+            left: 24%;
+            top: 70%;
+            width: 17%;
+            height: 10%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 19"></div>
+          <!-- Door 20 -->
+          <div class="advent-door" data-door="20" style="
+            position: absolute;
+            left: 78%;
+            top: 70%;
+            width: 17%;
+            height: 10%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 20"></div>
+          <!-- Door 21 -->
+          <div class="advent-door" data-door="21" style="
+            position: absolute;
+            left: 24%;
+            top: 80%;
+            width: 17%;
+            height: 10%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 21"></div>
+          <!-- Door 22 -->
+          <div class="advent-door" data-door="22" style="
+            position: absolute;
+            left: 59%;
+            top: 70%;
+            width: 18%;
+            height: 10%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 22"></div>
+          <!-- Door 23 -->
+          <div class="advent-door" data-door="23" style="
+            position: absolute;
+            left: 42%;
+            top: 80%;
+            width: 17%;
+            height: 11%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 23"></div>
+          <!-- Door 24 -->
+          <div class="advent-door" data-door="24" style="
+            position: absolute;
+            left: 78%;
+            top: 80%;
+            width: 17%;
+            height: 11%;
+            cursor: pointer;
+            z-index: 10;
+          " title="Open door 24"></div>
         </div>
       </td>
     </tr>
-   
+ 
+    <!-- ========== CONDITIONS + POPUP TEMPLATES ========== -->
+    <tr>
+      <td align="center" style="padding:0;">
+        ${AdventConditionsBox()}
+        ${AdventPopups({ popups: adventPopups, texts: popupTexts })}
+        ${AdventPopupScript()}
+      </td>
+    </tr>
+ 
     <script>
     (function () {
       var images = ${JSON.stringify(adventImages)};
-      var popups = ${JSON.stringify(adventPopups)};
+ 
       var img = document.getElementById('advent-img');
       var doors = document.querySelectorAll('.advent-door');
       if (!img || !doors.length) return;
-   
+ 
+      // ===== Analytics =====
+      function track(action, label, value) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'custom_event',
+          eventCategory: 'AdventCalendar',
+          eventAction: action,
+          eventLabel: label,
+          eventValue: value,
+          eventOption: '',
+          eventID: ''
+        });
+      }
+      if (!window.__adventPageViewSent) {
+        window.__adventPageViewSent = true;
+        track('View', 'Page', '');
+      }
+ 
+      function openPopup(doorNum) {
+        if (window.AdventPopup) window.AdventPopup.open(doorNum);
+      }
+ 
       // ===== Date logic =====
       // All closed:  1 Dec 2026 00:00 → 23:59:59
       // open_1:      2 Dec 2026 00:00 → 23:59:59
       // open_2:      3 Dec 2026 00:00 → 23:59:59
-      // open_3:      4 Dec 2026 00:00 → 23:59:59
-      // open_4:      5 Dec 2026 00:00 → 23:59:59
+      // ...
       var start = new Date(2026, 11, 1); // 1 December 2026
       var now = new Date();
       var msPerDay = 24 * 60 * 60 * 1000;
-   
+ 
       var maxAllowed = Math.floor((now - start) / msPerDay);
       if (maxAllowed < 0) maxAllowed = 0;
       if (maxAllowed >= images.length) maxAllowed = images.length - 1;
-   
+ 
       var current = maxAllowed;
       img.src = images[current];
-   
-      // ===== Preload popup images (no flash on open) =====
-      Object.keys(popups).forEach(function (k) {
-        var pre = new Image();
-        pre.src = popups[k].img;
-      });
-   
-      // ===== Popup overlay (built once, appended to <body>) =====
-      var overlay = document.getElementById('advent-popup');
-      var isNew = !overlay;
-   
-      if (isNew) {
-        overlay = document.createElement('div');
-        overlay.id = 'advent-popup';
-        overlay.setAttribute('role', 'dialog');
-        overlay.setAttribute('aria-modal', 'true');
-        overlay.style.cssText = [
-          'position:fixed',
-          'inset:0',
-          'top:0', 'right:0', 'bottom:0', 'left:0',
-          'z-index:99999',
-          'display:none',
-          'align-items:center',
-          'justify-content:center',
-          'padding:16px',
-          'box-sizing:border-box',
-          'background:rgba(0,0,0,0.6)',
-          'opacity:0',
-          'transition:opacity .3s ease',
-          'cursor:pointer'
-        ].join(';');
-   
-        overlay.innerHTML =
-          '<a id="advent-popup-link" href="#" target="_blank" rel="noopener" ' +
-            'style="display:block;line-height:0;cursor:pointer;">' +
-            '<img id="advent-popup-img" src="" alt="" style="' +
-              'display:block;' +
-              'width:auto;height:auto;' +
-              'max-width:min(570px, 92vw);' +
-              'max-height:88vh;' +
-              'border:0;border-radius:8px;' +
-              'box-shadow:0 10px 40px rgba(0,0,0,.35);' +
-              'transform:scale(.9);' +
-              'transition:transform .3s cubic-bezier(.175,.885,.32,1.275);' +
-            '" />' +
-          '</a>';
-   
-        document.body.appendChild(overlay);
-      }
-   
-      var popupLink = document.getElementById('advent-popup-link');
-      var popupImg = document.getElementById('advent-popup-img');
-      var closeTimer = null;
-   
-      function openPopup(doorNum) {
-        var p = popups[doorNum];
-        if (!p) return;
-        clearTimeout(closeTimer);
-   
-        popupImg.src = p.img;
-        popupImg.alt = p.alt || '';
-        popupLink.href = p.link;
-   
-        overlay.style.display = 'flex';
-        void overlay.offsetWidth; // force reflow so the fade-in runs
-        overlay.style.opacity = '1';
-        popupImg.style.transform = 'scale(1)';
-        document.documentElement.style.overflow = 'hidden'; // lock page scroll
-      }
-   
-      function closePopup() {
-        overlay.style.opacity = '0';
-        popupImg.style.transform = 'scale(.9)';
-        document.documentElement.style.overflow = '';
-        closeTimer = setTimeout(function () {
-          overlay.style.display = 'none';
-        }, 300);
-      }
-   
-      if (isNew) {
-        // Click anywhere outside the image → close
-        overlay.addEventListener('click', function (e) {
-          if (!popupLink.contains(e.target)) closePopup();
-        });
-   
-        // Esc key → close
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && overlay.style.display === 'flex') closePopup();
-        });
-      }
-   
+ 
       // ===== Click logic =====
       // - next door: opens the door (image swap) + shows its popup
       // - already opened doors: show their popup again
       // - future doors: not clickable
+      var TEST_DOORS = [18, 19];
+
       function updateDoors() {
         doors.forEach(function (door) {
           var doorNum = parseInt(door.dataset.door, 10);
           var isNext = doorNum === current + 1 && doorNum < images.length;
           var isOpened = doorNum <= current;
-   
-          if (isNext || isOpened) {
+          var isTest = TEST_DOORS.indexOf(doorNum) !== -1;   // TEST ONLY
+
+          if (isNext || isOpened || isTest) {
             door.style.pointerEvents = 'auto';
             door.style.cursor = 'pointer';
             door.onclick = function () {
+              track('Click', 'Page', 'PopUp');
+
+              // TEST ONLY: show that door's image + popup, keep the real progress
+              if (isTest && !isNext && !isOpened) {
+                if (images[doorNum]) img.src = images[doorNum];
+                setTimeout(function () { openPopup(doorNum); }, 400);
+                return;
+              }
+
               if (isNext) {
                 current = doorNum;
                 img.src = images[current];
@@ -234,14 +481,14 @@ export function InteractiveHeroImage({ type }) {
           }
         });
       }
-   
+ 
       updateDoors();
-   
+ 
       // Prevent image dragging on mobile
       img.addEventListener('dragstart', function (e) { e.preventDefault(); });
     })();
     </script>
   `;
-   
+ 
   return InteractiveTopImage;
-  }
+}
