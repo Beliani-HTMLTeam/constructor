@@ -9,7 +9,6 @@ export const FOOTER_THEMES = {
  
 export const getFooterTheme = (theme) => FOOTER_THEMES[theme] ?? FOOTER_THEMES.peach;
  
-
 const CLASSES = {
   [types.NEWSLETTER]: {
     frame: 'newsletterContainerFooter20px',
@@ -80,14 +79,12 @@ const styleLinks = (html, color) =>
     })
     .join('');
  
-// Outer frame around every section (peach or black – `bg` comes from the theme).
-// Outlook ignores padding on <table>, so the side frame is padding on a <td>.
-const peachFrame = (c, rows, { id = '', style = '', bg = FOOTER_THEMES.peach.frame } = {}) => `
-  <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${bg}"${id ? ` id="${id}"` : ''} style="max-width: 650px; width: 100%; background-color: ${bg};${style}">
+const frameTable = (c, rows, { id = '', bg = FOOTER_THEMES.peach.frame } = {}) => `
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${bg}"${id ? ` id="${id}"` : ''} style="max-width: 650px; width: 100%; background-color: ${bg}; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
     <tbody>
       <tr>
         <td${cls(c.frame)} bgcolor="${bg}" style="background-color: ${bg};">
-          <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;${style}">
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
             <tbody>
               ${rows}
             </tbody>
@@ -170,17 +167,14 @@ export function Footer(sections, options, name) {
   const NL = CLASSES[types.NEWSLETTER];
   const LP = CLASSES[types.LANDINGPAGE];
  
-  // options.theme: 'peach' (default) | 'black'
   const theme = getFooterTheme(options?.theme);
  
-  // every section frame in the theme colour
-  const frame = (c, rows, opts = {}) => peachFrame(c, rows, { ...opts, bg: theme.frame });
+  const frame = (c, rows) => rows;
  
   // UTM parameters
   const track = (href, isLP) =>
     isLP ? href : `${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}`;
  
-  // ${Space({ className: c.bottom30, insideTr: true, background: '#fff' })}
   const seeYouSoon = ({ src, href }, isLP) => {
     const c = isLP ? LP : NL;
     return frame(c, `
@@ -235,7 +229,7 @@ export function Footer(sections, options, name) {
                         <td class="${c.bottom35}" style="background-color: #fff;">
                         </td>
                     </tr>
-            `, isLP ? {} : { id: 'newsletter' });
+            `);
   };
  
   const thousandsMore = (
@@ -369,10 +363,13 @@ export function Footer(sections, options, name) {
                 `);
   };
  
-  // conditions sit on the frame -> theme text colour (peach: #750000, black: white)
   const conditions = (conditionsTitle, text, isLP) => {
     const c = isLP ? LP : NL;
-    return frame(c, `
+    return `
+            <tr>
+              <td bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; line-height: 10px; mso-line-height-rule: exactly; border-collapse: collapse;">
+                  <tbody>
             ${Space({ className: c.bottom15, insideTr: true, background: theme.frame })}
                 <tr>
                     <td align="center">
@@ -382,7 +379,11 @@ export function Footer(sections, options, name) {
             ${
       isLP ? Space({ className: c.bottom15, insideTr: true, background: theme.frame }) : ''
       }
-        `, { style: ' line-height: 10px; mso-line-height-rule: exactly;' });
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+        `;
   };
  
   const json_footer = {
@@ -482,10 +483,7 @@ export function Footer(sections, options, name) {
           commercialRegister,
           vat,
         }) => {
-          // sits on the frame -> theme background + text colour (inline, so the class background can't show through)
           return `
-        <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${theme.frame}" style="max-width: 650px; width: 100%; background-color: ${theme.frame};" id="newsletter">
-            <tbody>
                 <tr>
                     <td align="center" class="${NL.companyDetails}" bgcolor="${theme.frame}" style="background-color: ${theme.frame}; color: ${theme.legal};">
                         <span style="color: ${theme.legal};text-align: center; font-size:13px;">
@@ -493,8 +491,6 @@ export function Footer(sections, options, name) {
                         </span>
                     </td>
                 </tr>
-            </tbody>
-        </table>
                 `;
         },
       },
@@ -564,14 +560,16 @@ export function Footer(sections, options, name) {
   }
  
   if (!html) return html;
-  return `
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${theme.frame}" style="max-width: 650px; width: 100%; background-color: ${theme.frame};">
-    <tbody>
-      <tr>
-        <td bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
-          ${html}
-        </td>
-      </tr>
-    </tbody>
-  </table>`;
+ 
+  const spacer = (className) =>
+    className ? Space({ className, insideTr: true, background: theme.frame }) : '';
+ 
+  const isLPType = options.type === types.LANDINGPAGE;
+ 
+  return frameTable(
+    isLPType ? LP : NL,
+    `${spacer(options.spaceTop)}${html}${spacer(options.spaceBottom)}`,
+    { bg: theme.frame, id: isLPType ? '' : 'newsletter' }
+  );
 }
+ 
