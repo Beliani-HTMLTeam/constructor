@@ -15,27 +15,27 @@ export function InteractiveHeroImage({ type }) {
  
   const adventBase = 'https://pictureserver.net/static/2026/';
   const adventImages = [
-    `${adventBase}advent_all_closed.webp`, // 0 - all closed
-    `${adventBase}advent_open_1.webp`,     // 1
-    `${adventBase}advent_open_2.webp`,     // 2
-    `${adventBase}advent_open_3.webp`,     // 3
-    `${adventBase}advent_open_4.webp`,     // 4
-    `${adventBase}advent_open_5.webp`,     // 5
-    `${adventBase}advent_open_6.webp`,     // 6
-    `${adventBase}advent_open_7.webp`,     // 7
-    `${adventBase}advent_open_8.webp`,     // 8
-    `${adventBase}advent_open_9.webp`,     // 9
-    `${adventBase}advent_open_10.webp`,    // 10
-    `${adventBase}advent_open_11.webp`,    // 11
-    `${adventBase}advent_open_12.webp`,    // 12
-    `${adventBase}advent_open_13.webp`,    // 13
-    `${adventBase}advent_open_14.webp`,    // 14
-    `${adventBase}advent_open_15.webp`,    // 15
-    `${adventBase}advent_open_16.webp`,    // 16
-    `${adventBase}advent_open_17.webp`,    // 17
-    `${adventBase}advent_open_18.webp`,    // 18
-    `${adventBase}advent_open_19.webp`,    // 19
-    `${adventBase}advent_open_20.webp`,    // 20
+    `${adventBase}advent_all_closed.webp?ver=11`, // 0 - all closed
+    `${adventBase}advent_open_1.webp?ver=11`,     // 1
+    `${adventBase}advent_open_2.webp?ver=11`,     // 2
+    `${adventBase}advent_open_3.webp?ver=11`,     // 3
+    `${adventBase}advent_open_4.webp?ver=11`,     // 4
+    `${adventBase}advent_open_5.webp?ver=11`,     // 5
+    `${adventBase}advent_open_6.webp?ver=11`,     // 6
+    `${adventBase}advent_open_7.webp?ver=11`,     // 7
+    `${adventBase}advent_open_8.webp?ver=11`,     // 8
+    `${adventBase}advent_open_9.webp?ver=11`,     // 9
+    `${adventBase}advent_open_10.webp?ver=11`,    // 10
+    `${adventBase}advent_open_11.webp?ver=11`,    // 11
+    `${adventBase}advent_open_12.webp?ver=11`,    // 12
+    `${adventBase}advent_open_13.webp?ver=11`,    // 13
+    `${adventBase}advent_open_14.webp?ver=11`,    // 14
+    `${adventBase}advent_open_15.webp?ver=11`,    // 15
+    `${adventBase}advent_open_16.webp?ver=11`,    // 16
+    `${adventBase}advent_open_17.webp?ver=11`,    // 17
+    `${adventBase}advent_open_18.webp?ver=11`,    // 18
+    `${adventBase}advent_open_19.webp?ver=11`,    // 19
+    `${adventBase}advent_open_20.webp?ver=11`,    // 20
   ];
  
   // ===== Shared popup texts (translate per country) =====
@@ -88,8 +88,8 @@ export function InteractiveHeroImage({ type }) {
     },
     18: {
       type: 'percent',
-      imageDesktop: `${adventBase}advent_popup_18_d.webp`,
-      imageMobile: `${adventBase}advent_popup_18_m.webp`,
+      imageDesktop: `${adventBase}advent_popup_2_d.webp`,
+      imageMobile: `${adventBase}advent_popup_2_m.webp`,
       pre: 'Extra',
       title: '10% OFF',
       subtitle: 'when you spend £500',
@@ -98,8 +98,8 @@ export function InteractiveHeroImage({ type }) {
     },
     19: {
       type: 'upto',
-      imageDesktop: `${adventBase}advent_popup_19_d.webp`,
-      imageMobile: `${adventBase}advent_popup_19_m.webp`,
+      imageDesktop: `${adventBase}advent_popup_1_d.webp`,
+      imageMobile: `${adventBase}advent_popup_1_m.webp`,
       link: 'https://www.beliani.co.uk/rugs/',
       pre: 'Rugs',
       title: 'Up to<br />50% OFF',
@@ -142,10 +142,10 @@ export function InteractiveHeroImage({ type }) {
           <!-- Door 1 -->
           <div class="advent-door" data-door="1" style="
             position: absolute;
-            left: 52%;
-            top: 5%;
-            width: 16%;
-            height: 12%;
+            left: 50%;
+            top: 11%;
+            width: 14%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 1"></div>
@@ -153,19 +153,19 @@ export function InteractiveHeroImage({ type }) {
           <div class="advent-door" data-door="2" style="
             position: absolute;
             left: 44%;
-            top: 17%;
-            width: 15%;
-            height: 12%;
+            top: 22%;
+            width: 12%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 2"></div>
           <!-- Door 3 -->
           <div class="advent-door" data-door="3" style="
             position: absolute;
-            left: 59%;
-            top: 17%;
-            width: 17%;
-            height: 12%;
+            left: 56%;
+            top: 22%;
+            width: 14%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 3"></div>
@@ -312,20 +312,20 @@ export function InteractiveHeroImage({ type }) {
           <!-- Door 18 -->
           <div class="advent-door" data-door="18" style="
             position: absolute;
-            left: 42%;
+            left: 43%;
             top: 69%;
-            width: 17%;
-            height: 11%;
+            width: 15%;
+            height: 9%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 18"></div>
           <!-- Door 19 -->
           <div class="advent-door" data-door="19" style="
             position: absolute;
-            left: 24%;
-            top: 70%;
-            width: 17%;
-            height: 10%;
+            left: 27%;
+            top: 69%;
+            width: 15%;
+            height: 9%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 19"></div>
@@ -442,14 +442,20 @@ export function InteractiveHeroImage({ type }) {
       // - next door: opens the door (image swap) + shows its popup
       // - already opened doors: show their popup again
       // - future doors: not clickable
-      var TEST_DOORS = [18, 19];
+      var TEST_DOORS = [18, 19];   // opened in this order: 19 unlocks after 18
+      var testOpened = {};
 
       function updateDoors() {
         doors.forEach(function (door) {
           var doorNum = parseInt(door.dataset.door, 10);
           var isNext = doorNum === current + 1 && doorNum < images.length;
           var isOpened = doorNum <= current;
-          var isTest = TEST_DOORS.indexOf(doorNum) !== -1;   // TEST ONLY
+
+          // TEST ONLY: first test door is always clickable,
+          // the next one only after the previous test door was opened
+          var testIdx = TEST_DOORS.indexOf(doorNum);
+          var isTest = testIdx !== -1 &&
+                       (testIdx === 0 || testOpened[TEST_DOORS[testIdx - 1]]);
 
           if (isNext || isOpened || isTest) {
             door.style.pointerEvents = 'auto';
@@ -457,9 +463,11 @@ export function InteractiveHeroImage({ type }) {
             door.onclick = function () {
               track('Click', 'Page', 'PopUp');
 
-              // TEST ONLY: show that door's image + popup, keep the real progress
+              // TEST ONLY: open out of order without changing the real progress
               if (isTest && !isNext && !isOpened) {
+                testOpened[doorNum] = true;
                 if (images[doorNum]) img.src = images[doorNum];
+                updateDoors();   // unlocks the next test door (19)
                 setTimeout(function () { openPopup(doorNum); }, 400);
                 return;
               }
