@@ -22,6 +22,9 @@ import lp_ai_new2 from '@css/landing/ai_new2.css?inline';
 import lp_french_days_new from '@css/landing/french_days_new.css?inline';
 import lp_blackweek2 from '@css/landing/blackweek2.css?inline';
 
+import nslt_advent_calendar_2026 from '@css/newsletter/advent2026.css?inline';
+import lp_advent_calendar_2026 from '@css/landing/advent2026.css?inline';
+
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
 
@@ -45,6 +48,8 @@ export const types = {
     NS_FRENCH_DAYS: nslt_french_days_new,
     NS_BLACK_WEEK2: nslt_blackweek2,
 
+    NS_ADVENT_CALENDAR_2026: nslt_advent_calendar_2026,
+
     LP: lp_regular,
     LP_THURSDAY: lp_thursday,
     LP_FRIDAY: lp_friday,
@@ -57,6 +62,8 @@ export const types = {
     LP_AI_NEW2: lp_ai_new2,
     LP_FRENCH_DAYS: lp_french_days_new,
     LP_BLACK_WEEK2: lp_blackweek2,
+
+    LP_ADVENT_CALENDAR_2026: lp_advent_calendar_2026,
 
     CGB: {
       DESKTOP: cgb_desktop,
