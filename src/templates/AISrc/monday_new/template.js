@@ -1,4 +1,4 @@
-import { Footer } from './Footer.js';
+import { Footer, shouldUseNewFooter } from './Footer.js';
 import { Header } from './Header.js';
 
 import { TopImageTitleHandler } from './handlers/_TopImageTitle.js';
@@ -43,6 +43,7 @@ const MondayNew = async ({
   disableTopImageTitle = false,
   disableHighPrice = false,
   footerOverride = {},
+  footer_theme = 'peach'
 }) => {
   const themeData = {...theme};
 
@@ -50,7 +51,7 @@ const MondayNew = async ({
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date, theme: footer_theme, });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
@@ -118,6 +119,9 @@ const MondayNew = async ({
 
   if (typeof disableSoonEnding === "object")
     disableSE = disableSoonEnding?.includes(country);
+
+  if (shouldUseNewFooter(date || selectedCampaign?.date))
+    disableSE = true;
 
   return `
     ${HeaderElement}

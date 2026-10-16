@@ -11,7 +11,7 @@ const Prices = ({ high, low = '', color, align = 'left', theme = {}, settings = 
   const background = settings?.insideColor ?? settings?.background ?? '';
   const priceFontSize = Number.parseFloat(settings?.priceLowSize) || 18;
   const priceLineHeight = Math.ceil((priceFontSize * 1.2) / 4) * 4;
-  const exactLineHeight = `line-height:${priceLineHeight}px;mso-line-height-rule:exactly;`;
+  const exactLineHeight = `line-height:${priceLineHeight}px;`;
 
   const highFontSize = Number.parseFloat(settings?.priceHighSize) || 14;
   const highLineHeight = Math.ceil((highFontSize * 1.2) / 4) * 4;

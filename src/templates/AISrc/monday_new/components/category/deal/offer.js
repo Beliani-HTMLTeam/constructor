@@ -13,6 +13,7 @@ export const renderOfferSection = ({
   combineOfferParts = false,
   ctaSettings = {},
   prodSettings = {},
+  offerSettings = {},
   offerSpaceAfter = '',
   displayType = '',
   tdClass = 'newsletterContainer'
@@ -32,19 +33,18 @@ export const renderOfferSection = ({
     return value;
   };
 
-  // Translation table mapping:
-  // Row 25: Offer title (e.g. Gift with purchase) -> offerItems[0]
-  // Row 26: Offer part 1 (e.g. Get a free lamp) -> offerItems[1]
-  // Row 27: Offer part 2 (e.g. Choose one of four designs...) -> offerItems[2]
-  // Row 28: Code: xxx -> offerItems[3]
-  // Row 29: Offer date with variable -> queries.offer_date[0] / offerItems[4]
-  // Row 30: Get Code -> queries.get_code[0] / offerItems[5]
-  const offerTitle = offerTexts?.[0]
+  const titleFromSheet = prodSettings?.titleFromSheet ?? false;
+  const offerTitle = titleFromSheet
     ? resolveOfferText(offerTexts?.[0], 0)
-    : getPhrase('Gift with purchase')
-  let offerPart1 = resolveOfferText(offerTexts?.[1], 1);
-  let offerPart2 = resolveOfferText(offerTexts?.[2], 2);
+    : getPhrase('Gift with purchase');
+
+  let offset = titleFromSheet ? 0 : 1;
+
+  let offerPart1 = resolveOfferText(offerTexts?.[1 - offset], 1 - offset);
+  let offerPart2 = resolveOfferText(offerTexts?.[2 - offset], 2 - offset);
+
   let offerSubtitle = queries?.offer_subtitle?.[0] ?? missingTranslation;
+
   const offerDate = queries?.offer_date?.[0] ?? offerItems[4] ?? '';
   const translatedGetCode = t('Get code') || missingTranslation;
   const codeRow = queries?.offer_code?.[0] ?? offerItems[3] ?? '';
@@ -85,7 +85,6 @@ export const renderOfferSection = ({
   const textColor = theme?.offerPrg1Color ?? '#ffffff';
   const secondaryTextColor = theme?.offerPrg2Color ?? '#FFCCB7';
 
-  // Extract clean code value (e.g. "FreeLamp26")
   const codeValue = typeof codeText === 'string' && codeText.includes(':')
     ? codeText.split(/:\s+/).slice(1).join(': ').trim()
     : codeText || '';
@@ -98,7 +97,7 @@ export const renderOfferSection = ({
         <table cellspacing="0" cellpadding="0" border="0" width="100%" class="${tdClass}">
           ${displayType !== 'offerWithSubtitle'
             ? `
-              ${Space({ insideTr: true, className: 'newsletterBottom40px' })}
+              ${offerSettings?.titleSpaceBefore ? Space({ insideTr: true, className: offerSettings?.titleSpaceBefore }) : ''}
               ${offerTitle ? `
                 <tr>
                   <td align="center">
@@ -107,7 +106,7 @@ export const renderOfferSection = ({
                     </span>
                   </td>
                 </tr>
-                ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
+                ${offerSettings?.titleSpaceAfter ? Space({ insideTr: true, className: offerSettings?.titleSpaceAfter }) : ''}
               ` : ''}
 
               ${offerPart1 ? `
@@ -118,7 +117,7 @@ export const renderOfferSection = ({
                     </span>
                   </td>
                 </tr>
-                ${Space({ insideTr: true, className: 'newsletterBottom15px' })}
+                ${offerSettings?.mainTitleSpaceAfter ? Space({ insideTr: true, className: offerSettings?.mainTitleSpaceAfter }) : ''}
               ` : ''}
 
               ${offerPart2 ? `
@@ -129,7 +128,7 @@ export const renderOfferSection = ({
                     </span>
                   </td>
                 </tr>
-                ${Space({ insideTr: true, className: ctaSettings?.spaceBefore ?? 'newsletterBottom15px' })}
+                ${offerSettings?.textSpaceAfter ? Space({ insideTr: true, className: offerSettings?.textSpaceAfter }) : ''}
               ` : ''}`
             : `
               ${offerPart1 ? `
@@ -189,7 +188,7 @@ export const renderOfferSection = ({
                     </span>
                   </td>
                 </tr>
-                ${Space({ insideTr: true, className: offerSpaceAfter ?? '' })}
+                ${Space({ insideTr: true, className: offerSettings?.dateSpaceAfter ?? offerSpaceAfter ?? '' })}
               ` : ''}`
             : `
               ${Space({ insideTr: true, className: 'newsletterBottom35px' })}

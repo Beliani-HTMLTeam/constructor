@@ -24,6 +24,7 @@ export const render = ({
   displayType = '',
   ctaSettings = {},
   prodSettings = {},
+  offerSettings = {},
   offerSpaceAfter = '',
   tdClass = 'newsletterContainer',
   gridSize = 'normal',
@@ -77,9 +78,10 @@ export const render = ({
     ctaSrc,
     theme,
     combineOfferParts,
-    ctaSettings,
     displayType,
+    ctaSettings,
     prodSettings,
+    offerSettings,
     tdClass,
     offerSpaceAfter,
   });
@@ -90,7 +92,7 @@ export const render = ({
     const dealColorText = theme?.black ?? '#000000';
 
     html += `
-      ${Space({ insideTr: true, className: 'newsletterBottom40px', bg: dealColorBg })}
+      ${Space({ insideTr: true, className: 'newsletterBottom35px', bg: dealColorBg })}
       <tr>
         <td style="background-color: ${dealColorBg}; color: ${dealColorText};" class=${tdClass} align="center">
           <span style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; color: ${dealColorText}; display: block; text-align: center;">
@@ -98,6 +100,7 @@ export const render = ({
           </span>
         </td>
       </tr>
+      ${Space({ insideTr: true, className: 'newsletterBottom35px', bg: dealColorBg })}
     `;
 
     const freebieSettings = {...prodSettings}
@@ -112,6 +115,7 @@ export const render = ({
       theme,
       disableHighPrice,
       prodSettings: freebieSettings,
+      queries,
       gridSize
     });
 
