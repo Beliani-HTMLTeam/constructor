@@ -84,14 +84,12 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     content.appendChild(tpl.content.cloneNode(true));
     overlay.classList.remove('is-closing');
     overlay.classList.add('is-open');
-    document.documentElement.style.overflow = 'hidden';
     return true;
   }
  
   function close() {
     if (!overlay || !overlay.classList.contains('is-open')) return;
     overlay.classList.add('is-closing');
-    document.documentElement.style.overflow = '';
     closeTimer = setTimeout(function () {
       overlay.classList.remove('is-open', 'is-closing');
       content.innerHTML = '';
