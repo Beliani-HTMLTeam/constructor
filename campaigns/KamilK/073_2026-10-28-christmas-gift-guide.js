@@ -168,7 +168,7 @@ const categories = [
 	giftCategory(1, 'For Host', 'https://www.beliani.ch/gift-guide/gift-guide-host/', {
 		products: gridProducts(1, [731218, 802607, 642481, 468056, 804056, 585586]),
 
-		src: getImageUrl(`20261028_Cat10.png`, true),
+		src: getImageUrl(`20261028_Cat10b.png`, true),
 	}),
 
 	giftCategory(2, 'For Design Lover', 'https://www.beliani.ch/gift-guide/for-design-lover/', {
@@ -186,17 +186,17 @@ const categories = [
 		tiles: [
 			{
 				src: getImageUrl('20261028_Cat41.png', true),
-				href: 'https://www.beliani.ch/gift-guide/gifts-under-50-fr/',
+				href: 'https://www.beliani.ch/gift-guide/gifts-under-50-fr/sort_highest_price/',
 				name: 'Under 50 francs',
 			},
 			{
 				src: getImageUrl('20261028_Cat42.png', true),
-				href: 'https://www.beliani.ch/gift-guide/gifts-under-150-fr/',
+				href: 'https://www.beliani.ch/gift-guide/gifts-under-150-fr/sort_highest_price/',
 				name: 'Under 150 francs',
 			},
 			{
 				src: getImageUrl('20261028_Cat43.png', true),
-				href: 'https://www.beliani.ch/gift-guide/gifts-under-250-fr/',
+				href: 'https://www.beliani.ch/gift-guide/gifts-under-250-fr/sort_highest_price/',
 				name: 'Under 250 francs',
 			},
 		],
