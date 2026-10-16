@@ -37,7 +37,7 @@ const links = {
 };
 
 const palette = {
-	page: '#FFF2ED',
+	page: '#FCF7F6',
 	text: '#000000',
 	title: '#000000',
 };
@@ -82,38 +82,15 @@ const additionalCss = `
 		padding-right: 15px;
 	}
 
-	#newsletter .newsletterLeft10px {
-		padding-left: 10px;
-	}
-
-	#newsletter .newsletterBottom10px {
-		padding-bottom: 10px;
-	}
-
-	#newsletter .newsletter3ProductsLeft {
-		width: 33.85% !important;
-		padding-left: 15px;
-		padding-right: 5px;
-	}
-
-	#newsletter .newsletter3ProductsCenter {
-		width: 32.31% !important;
-		padding-left: 5px;
-		padding-right: 5px;
-	}
-
-	#newsletter .newsletter3ProductsRight {
-		width: 33.85% !important;
-		padding-left: 5px;
-		padding-right: 15px;
-	}
-
 	@media screen and (max-width: 768px) {
 		#newsletter .newsletterProductTitle {
 			font-size: 16px !important;
 		}
 	}
 `;
+
+// px values from Figma: 15px walls, 10px between products, big 410x530, small 200x260 images
+const layout = { gap: 10, padding: 15, bigWidth: 410, bigHeight: 530, smallWidth: 200, smallHeight: 260 };
 
 const cta = {
 	variant: 'underline',
@@ -130,14 +107,14 @@ const product = {
 };
 
 const bigWithTwo = (number, name, href, imageSide, [first, second]) => ({
-	paddingTop: number === 0 ? 35 : 0,
+	paddingTop: number === 0 ? 60 : 0,
 	spaceAfter: 0,
 
 	name,
 	href,
 	type: '1big-2vertical',
 	imageSide,
-	gapBetweenHorizontal: 'newsletterLeft10px',
+	layout,
 	cta: false,
 
 	background: palette.page,
@@ -147,7 +124,7 @@ const bigWithTwo = (number, name, href, imageSide, [first, second]) => ({
 		show: true,
 		align: 'center',
 		color: palette.title,
-		spaceAfter: 'newsletterBottom20px',
+		spaceAfter: 'newsletterBottom35px',
 	},
 
 	paragraph: {
@@ -157,7 +134,7 @@ const bigWithTwo = (number, name, href, imageSide, [first, second]) => ({
 		spaceAfter: 'newsletterBottom35px',
 	},
 
-	product: { ...product, gapBetweenVertical: 'newsletterBottom10px' },
+	product,
 
 	products: [
 		{ id: first, src: getImageUrl(`20261029_Cat${number}0.jpg`, true), useCategoryLink: true },
@@ -166,13 +143,15 @@ const bigWithTwo = (number, name, href, imageSide, [first, second]) => ({
 	],
 });
 
-const threeProducts = (number, name, href, ids) => ({
+const threeProducts = (number, name, href, ids, imageSide) => ({
 	paddingTop: 0,
 	spaceAfter: 'newsletterBottom80px',
 
 	name,
 	href,
 	type: '3prods',
+	imageSide,
+	layout,
 
 	background: palette.page,
 	color: palette.text,
@@ -182,7 +161,7 @@ const threeProducts = (number, name, href, ids) => ({
 
 	cta: { ...cta, spaceBefore: 'newsletterBottom35px' },
 
-	product: { ...product, gapBetweenVertical: false },
+	product,
 
 	products: ids.map((id, i) => ({
 		id,
@@ -195,16 +174,16 @@ const NEW_URL = 'https://www.beliani.ch/new/';
 
 const categories = [
 	bigWithTwo(0, 'Living Room', NEW_URL, 'right', [839461, 603218]),
-	threeProducts(0, 'Living Room', NEW_URL, [839838, 840196, 831271]),
+	threeProducts(0, 'Living Room', NEW_URL, [839838, 840196, 831271], 'right'),
 
 	bigWithTwo(1, 'Bedroom', NEW_URL, 'left', [845116, 820394]),
-	threeProducts(1, 'Bedroom', NEW_URL, [816764, 817019, 828018]),
+	threeProducts(1, 'Bedroom', NEW_URL, [816764, 817019, 828018], 'left'),
 
 	bigWithTwo(2, 'Dining Room', NEW_URL, 'right', [844653, 833872]),
-	threeProducts(2, 'Dining Room', NEW_URL, [677998, 817632, 843653]),
+	threeProducts(2, 'Dining Room', NEW_URL, [677998, 817632, 843653], 'right'),
 
 	bigWithTwo(3, 'Christmas Decorations', NEW_URL, 'left', [842746, 842577]),
-	threeProducts(3, 'Christmas Decorations', NEW_URL, [842703, 665831, 845073]),
+	threeProducts(3, 'Christmas Decorations', NEW_URL, [842703, 665831, 845073], 'left'),
 ];
 
 export default new entities.Campaign({
