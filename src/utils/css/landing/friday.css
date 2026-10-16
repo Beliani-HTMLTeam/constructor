@@ -69,6 +69,12 @@ table {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+#newsletter .newsletterContainer35px {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
 #newsletter.newsletterContainer30px,
 #newsletter .newsletterContainer30px {
   padding-left: 30px;
@@ -579,6 +585,11 @@ table {
   #newsletter .newsletterContainer55px {
     padding-left: 25px;
     padding-right: 25px;
+  }
+
+  #newsletter .newsletterContainer35px {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   #newsletter.newsletterContainer30px,

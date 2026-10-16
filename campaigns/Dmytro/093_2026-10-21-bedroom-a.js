@@ -31,8 +31,8 @@ const additionalCss = `
 `;
 
 const additionalCssLp = `
-#newsletter .newsletterTitleOverride{font-size: 28px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
-#newsletter .newsletterProductTitleOverride{font-size: 15px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 700; padding-left: 10px;}
+#newsletter .newsletterTitleOverride{font-size: 28px; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
+#newsletter .newsletterProductTitleOverride{font-size: 15px; line-height: 1.2; text-transform: uppercase; font-weight: 700; padding-left: 10px;}
 #newsletter .newsletterProductPriceLeft {padding-left: 10px;}
 @media screen and (max-width: 768px) {
 #newsletter  .newsletterTitleOverride{font-size: 20px;}

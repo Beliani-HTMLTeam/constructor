@@ -67,9 +67,20 @@ img {
   padding-right: 10px;
 }
 
+.newsletterContainer15px {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
 .newsletterContainer30px {
   padding-left: 30px;
   padding-right: 30px;
+}
+
+.newsletterContainer35px {
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 .newsletterContainerWithPaddingBottom20px {
@@ -264,7 +275,7 @@ img {
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 24px;
-  padding-bottom: 24px;
+  padding-bottom: 0px;
 }
 
 .freebieImage {
@@ -503,6 +514,11 @@ img {
     padding-right: 10px;
   }
 
+  .newsletterContainer15px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .newsletterContainerFooter20px {
     padding-left: 10px;
     padding-right: 10px;
@@ -529,6 +545,11 @@ img {
   }
 
   .newsletterContainer30px {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .newsletterContainer35px {
     padding-left: 15px;
     padding-right: 15px;
   }

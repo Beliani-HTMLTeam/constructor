@@ -51,6 +51,8 @@ const Friday = async ({
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
 
+  const TopImageTitleAfterTopImageElement = TopImageTitle_data?.position === 'afterTopImage' ? TopImageTitleElement : '';
+  const TopImageTitleBeforeTopImageElement = TopImageTitle_data?.position !== 'afterTopImage' ? TopImageTitleElement : '';
   if(links?.TopImage_href == 'Home Page') {
     links.TopImage_href = getCategoryLink('https://www.beliani.ch');
   }
@@ -66,7 +68,20 @@ const Friday = async ({
 
   const introCtaText = intro?.cta?.phrase ? getPhrase(intro?.cta?.phrase) : shopNow;
   const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText, getCategoryLink, links });
-  const TimerElement = TimerHandler({ Inside, queries, links, timer, shopNow, country, type, shop });
+  const TimerElement = await TimerHandler({
+    Inside,
+    queries,
+    links,
+    timer,
+    shopNow,
+    country,
+    type,
+    shop,
+    getProductById,
+    getCategoryLink,
+    getPhrase,
+    add_utm,
+  });
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
 
@@ -130,9 +145,11 @@ const Friday = async ({
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" ${background ? `bgcolor="${background}"` : ''} id="newsletter">
       ${TimerAtTop}
 
-      ${TopImageTitleElement}
+      ${TopImageTitleBeforeTopImageElement}
 
       ${TopImageElement}
+
+      ${TopImageTitleAfterTopImageElement}
 
       ${IntroAfterTopImageElement}
 

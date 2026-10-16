@@ -44,7 +44,7 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
     halloween: `
       <h4 style="color:${color};" class="${String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title1}</h4>
       <h4 style="color:${color};" class="${String(title2).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title2}</h4>
-    `,
+    `
   };
 
   if (renderType === 'landing') {

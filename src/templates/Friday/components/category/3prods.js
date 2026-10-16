@@ -9,10 +9,12 @@ export const render = ({
   align = 'left',
   queries,
   insideContainer = true,
+  container,
   color,
   id,
   imageSide,
   categoryHref,
+  category
 }) => {
   let productsInnerHtml = '';
 
@@ -20,11 +22,13 @@ export const render = ({
 
   const columns = 3;
 
+  const productStyle = category?.product ?? null;
+
   // ${insideContainer ? 'class="newsletterContainer"' : ''}
 
   productsInnerHtml += `
     <tr>
-      <td style="color: ${color}" >
+      <td style="color: ${color}" ${insideContainer ? `class="${container || 'newsletterContainer'}"` : ''}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
 
   for (let prodId = 0; prodId < products.length; prodId += columns) {
@@ -57,7 +61,8 @@ export const render = ({
           align,
           gapBetweenVertical,
           product?.useCategoryLink,
-          productImageAlign
+          productImageAlign,
+          container, false, productStyle
         );
       }
 
