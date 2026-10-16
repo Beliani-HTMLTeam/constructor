@@ -140,11 +140,19 @@ const MondayNew = async ({
 
       ${CategoriesAfterIntroElement}
 
+      <tr>
+        <td valign="top" style="padding:0;border:0;">
+          ${!disableSE
+            ? SoonEndingBannersHandler({
+                links,
+                shopLimitedTimeDeals,
+                country,
+              })
+            : ''}
+          ${FooterElement}
+        </td>
+      </tr>
     </table>
-
-    ${!disableSE ? SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country }) : ''}
-
-    ${FooterElement}
   `;
 };
 

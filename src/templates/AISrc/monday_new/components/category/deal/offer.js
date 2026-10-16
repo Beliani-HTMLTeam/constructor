@@ -101,7 +101,7 @@ export const renderOfferSection = ({
               ${offerTitle ? `
                 <tr>
                   <td align="center">
-                    <span style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; text-transform: uppercase; letter-spacing: 2px; color: ${titleColor}; display: block; text-align: center;">
+                    <span style="${renderType === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; text-transform: uppercase; letter-spacing: 2px; color: ${titleColor}; display: block; text-align: center;font-weight: 600;">
                       ${offerTitle}
                     </span>
                   </td>

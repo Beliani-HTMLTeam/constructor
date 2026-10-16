@@ -92,6 +92,7 @@ const Intro = ({
           color: ctaSettings?.color ?? '#000000',
           bg: ctaSettings?.bg ?? theme?.secondary ?? '#ffe0d4',
           alwaysRenderAsImage: false,
+          transform: ctaSettings?.transform ?? '',
           theme,
           borderColor: ctaSettings?.borderColor ?? '',
           borderWidth: ctaSettings?.borderWidth ?? '',
