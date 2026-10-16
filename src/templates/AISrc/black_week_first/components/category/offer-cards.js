@@ -79,6 +79,8 @@ export const render = ({
     const subtitleText = lines[2] ?? `${cardEntries[i][0]} subtitle not found`;
     const codeText = lines[3] ?? `CODE: XXX`;
 
+    const hasPercentLabel = labelText.includes("%")
+
     const rawCode = String(codeText).trim();
     const code = (rawCode.split(':')[1] ?? rawCode).trim();
     const codeButton =
@@ -103,7 +105,11 @@ export const render = ({
           ${Space({ insideTr: true, className: 'newsletterBottom45px' })}
             ${labelText ? `
             <tr>
-              <td align="center" class="blackWeekTitle" style="color: ${textColor};">
+              <td align="center" class="${!hasPercentLabel
+                ? "blackWeekTitle"
+                : "blackWeekDiscount"}" style="color: ${!hasPercentLabel
+                ? textColor
+                : discountColor};">
                 ${wrapInAnchor(labelText, ctaHref?.href, textColor)}
               </td>
             </tr>
@@ -112,7 +118,11 @@ export const render = ({
             ${discountText ? `
             ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
             <tr>
-              <td align="center" class="blackWeekDiscount" style="color: ${discountColor};">
+              <td align="center" class="${!hasPercentLabel
+                ? "blackWeekDiscount"
+                : "blackWeekTitle"}" style="color: ${!hasPercentLabel
+                ? discountColor
+                : textColor};">
               ${wrapInAnchor(discountText, ctaHref?.href, discountColor)}
               </td>
             </tr>
