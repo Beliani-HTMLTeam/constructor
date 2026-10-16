@@ -47,8 +47,16 @@ const Thursday = async ({
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNow = getPhrase('Shop now');
 
-  const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ links, TopImage_data });
+  const resolveShopHref = (href) =>
+    typeof href === 'string' && /^https?:\/\//.test(href) && !href.includes('/content/') ? String(getCategoryLink(href)) : href;
+  const resolvedLinks = {
+    ...links,
+    ...(links?.TopImage_href && { TopImage_href: resolveShopHref(links.TopImage_href) }),
+    ...(links?.TopImageTitle_href && { TopImageTitle_href: resolveShopHref(links.TopImageTitle_href) }),
+  };
+
+  const TopImageTitleElement = TopImageTitleHandler({ links: resolvedLinks, queries, TopImageTitle_data, type });
+  const TopImageElement = TopImageHandler({ links: resolvedLinks, TopImage_data });
 
   const introCta_href = getIntroCtaHref({
     links,
@@ -126,14 +134,14 @@ const Thursday = async ({
     isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
   const IntroAfterTimerAfterCategoriesElement =
     isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
-		
-	let hasSmallTilesCategory = false;
 
-	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
-		hasSmallTilesCategory = true;
-	}
+  let hasSmallTilesCategory = false;
 
-	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
+  if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
+    hasSmallTilesCategory = true;
+  }
+
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
 
   return `
     ${HeaderElement}

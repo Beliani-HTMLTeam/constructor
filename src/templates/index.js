@@ -18,6 +18,7 @@ import { Friday } from './Friday/template.js';
 
 // Black Week
 import { BlackWeekFirst } from './AISrc/black_week_first/template.js';
+import { AdventCalendar2026 } from './Advent_Calendar/template.js'
 
 export const templates = {
   Blackweek,
@@ -39,4 +40,5 @@ export const templates = {
 
   // Black Week
   BlackWeekFirst,
+  AdventCalendar2026,
 };

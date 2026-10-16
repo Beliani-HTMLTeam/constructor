@@ -90,6 +90,7 @@ const productCategory = (number, name, href, products) => ({
 	color: palette.text,
 
 	type: '3prods',
+	layout: { gap: 10, padding: 10 },
 
 	title: {
 		show: true,
@@ -113,6 +114,7 @@ const productCategory = (number, name, href, products) => ({
 		fontWeight: '400',
 		color: palette.text,
 		align: 'center',
+		spaceBefore: 'newsletterBottom35px',
 	},
 
 	product: {
