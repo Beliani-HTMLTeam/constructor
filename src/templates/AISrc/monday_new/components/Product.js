@@ -78,7 +78,7 @@ const Product = (
             lowSize: product?.settings?.priceLowSize,
             highSize: product?.settings?.priceHighSize,
             settings: product?.settings,
-            align,
+            align: product?.settings?.priceAlign ?? align,
             theme,
           })}
         </td>

@@ -23,6 +23,7 @@ import { MondayNew } from './AISrc/monday_new/template';
 
 // Black Week
 import { BlackWeekFirst } from './AISrc/black_week_first/template.js';
+import { AdventCalendar2026 } from './Advent_Calendar/template.js'
 
 export const templates = {
   Blackweek,

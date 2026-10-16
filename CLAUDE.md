@@ -52,3 +52,27 @@ Global app state is a simple pub/sub store: `getState`/`setState` in [src/main/s
 Defined in both [vite.config.js](vite.config.js) and [jsconfig.json](jsconfig.json) (keep in sync when adding new ones): `@`, `@api`, `@components`, `@config`, `@entities`, `@helpers`, `@main`, `@data` (→ `src/main/data`), `@handlers` (→ `src/main/handlers`), `@services`, `@templates`, `@utils`, `@css` (→ `src/utils/css`).
 
 Note: `jsconfig.json`'s `@services` points at `src/old-api/services` while `vite.config.js`'s points at `src/services` — these currently disagree.
+
+## Date-gated header / footer / wrapper (Thursday + Friday newsletters)
+
+Campaign `date` (`dd.mm.yyyy`) decides which layout renders. Cutoffs are inclusive (`>=`); older campaigns keep the old look.
+
+- **New header top image** — from `06.10.2026` (`shouldUseNewHeader` in `src/templates/{Thursday,Friday}/Header.js`, sheet key `Top image src new`).
+- **New header category layout** — from `12.10.2026` (same function, second cutoff; `Header Category N ... new` keys).
+- **White wrapper** (`#ececec` → `#ffffff`) — from `12.10.2026` (`isWhiteWrapperCampaign` in [src/helpers/wrapTemplate.js](src/helpers/wrapTemplate.js)).
+- **New footer (by Dmytro)** — from `21.10.2026` (`shouldUseNewFooter` in [src/templates/Thursday/Footer.js](src/templates/Thursday/Footer.js); uses [src/components/footer_new.js](src/components/footer_new.js) and `... new` footer sheet keys). Friday uses it unconditionally. The matching footer CSS (`src/utils/css/{newsletter,landing}/footer.css`) is injected by `templateRenderer.js` with the same `21.10.2026` cutoff (`FOOTER_CSS_CUTOFF`) — keep both cutoffs in sync.
+
+## Previewing a live campaign (agent / browser)
+
+With `bun run dev` running, open the app on localhost (`:5500`) and select the campaign via GET params (read in [src/utils/urlState.js](src/utils/urlState.js), mapping helpers in [src/utils/selectionParams.js](src/utils/selectionParams.js)):
+
+- `scope` — folder under `campaigns/`, e.g. `KamilK`
+- `campaign` — campaign `startId` (numeric field in the campaign file, e.g. `49505` — not the filename number)
+- `template` — template type, e.g. `newsletter` / `landing`
+- `shop` — shop slug
+- `lang` — language key from [src/config/languages.js](src/config/languages.js), e.g. `UK`, `BENL`, `CHFR_Mattress`
+- `view` — `mobile` for mobile preview (omit for desktop)
+
+Example: `http://localhost:5500/?scope=KamilK&campaign=49505&template=newsletter&shop=<slug>&lang=UK`. The URL is kept in sync with the UI, so selecting things in the UI and copying the URL also works.
+
+**Wait before reading the render:** `staticTranslations` must finish loading first (`staticTranslations.whenReady()` in `templateRenderer.js`); until then the output is empty/incomplete. If it takes longer than ~10 seconds, reload the page.

@@ -38,6 +38,8 @@ const Friday = async ({
   getPhrase,
   getProductById,
   add_utm,
+
+  footer_theme
 }) => {
   // console.log(categories);
 
@@ -120,7 +122,7 @@ const Friday = async ({
 		hasSmallTilesCategory = true;
 	}
 
-	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
+	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date, theme: footer_theme });
 
   return `
     ${HeaderElement}
@@ -148,9 +150,6 @@ const Friday = async ({
 
       ${IntroAfterTimerAfterCategoriesElement}
     </table>
-
-
-    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
       
     ${FooterElement}
   `;

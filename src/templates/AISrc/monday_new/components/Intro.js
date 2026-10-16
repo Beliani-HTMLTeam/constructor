@@ -22,6 +22,7 @@ const Intro = ({
   showCta = true,
   disableLine = false,
   ctaSettings = {},
+  options = {},
 }) => {
   const resolvedBg = backgroundColor ?? theme.introBg ?? '#750000';
   const resolvedColor = color ?? theme.introText ?? '#ffffff';
@@ -48,7 +49,6 @@ const Intro = ({
   const sectionStyle = `background-color: ${resolvedBg}; color: ${textColor}; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;`;
   const wrapperCellStyle = `padding: 0; margin: 0; background-color: ${resolvedBg};`;
 
-  // Only use Red CSS classes on red background; on light backgrounds those classes force white text
   const titleClass = isRedBlock ? 'introRedTitle' : 'introTitle';
   const paragraphClass = isRedBlock ? 'introRedParagraph' : 'introParagraph';
 
@@ -56,7 +56,7 @@ const Intro = ({
     ? `
     <tr>
       <td align="${paragraphAlign}"${containerClass ? ` class=${containerClass}` : ''}>
-        <span class="${titleClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; color: ${textColor}; text-align: ${paragraphAlign};">
+        <span class="${options?.titleClass ?? titleClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} line-height: 1.2; color: ${textColor}; text-align: ${paragraphAlign};">
           ${introTitle}
         </span>
       </td>
@@ -69,7 +69,7 @@ const Intro = ({
     ? `
     <tr>
       <td align="${paragraphAlign}"${containerClass ? ` class=${containerClass}` : ''}>
-        <span class="${paragraphClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.2; color: ${textColor}; text-align: ${paragraphAlign};">
+        <span class="${options?.paragraphClass ?? paragraphClass}" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 16px; line-height: 1.2; color: ${textColor}; text-align: ${paragraphAlign};">
           ${introParagraph}
         </span>
       </td>
@@ -90,7 +90,9 @@ const Intro = ({
           src: ctaSrc,
           align: paragraphAlign,
           color: ctaSettings?.color ?? '#000000',
-          alwaysRenderAsImage: type === 'newsletter' && btnVariant !== 'underline',
+          bg: ctaSettings?.bg ?? theme?.secondary ?? '#ffe0d4',
+          alwaysRenderAsImage: false,
+          transform: ctaSettings?.transform ?? '',
           theme,
           borderColor: ctaSettings?.borderColor ?? '',
           borderWidth: ctaSettings?.borderWidth ?? '',

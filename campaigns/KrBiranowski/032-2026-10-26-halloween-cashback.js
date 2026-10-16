@@ -391,7 +391,6 @@ export default new entities.Campaign({
       disableTopImageTitle: false,
       disableKlarna: ['HR', 'SI'],
       footerOverride: footerData,
-      disableSoonEnding: true,
     },
   ],
 });

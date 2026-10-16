@@ -576,6 +576,7 @@ table {
     width: 100% !important;
     text-align: center !important;
     box-sizing: border-box !important;
+    border-width: 10px 20px !important;
   }
 
   #newsletter .newsletterFooterCategoryLEFT {
@@ -644,6 +645,10 @@ table {
 
   #newsletter .introTitle {
     font-size: 28px !important;
+  }
+
+  #newsletter .introTitleNormal {
+    font-size: 24px !important;
   }
 
   #newsletter .newsletterTitleOfferPart {
@@ -867,6 +872,10 @@ table {
   #newsletter .categoryTitle {
     font-size: 25px !important;
   }
+
+  #newsletter .categoryTitleNormal {
+    font-size: 19px !important;
+  }
 }
 
 table.newsletterFreebieSingle img {
@@ -1018,8 +1027,21 @@ table.newsletterFreebieSingle td.newsletterContainer40px img {
   letter-spacing: 0.5px;
 }
 
+.introTitleNormal {
+  font-size: 28px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
 .introRedParagraph {
   font-size: 18px;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.introParagraphNormal {
+  font-size: 16px;
   line-height: 1.2;
   color: #ffffff;
 }
@@ -1059,7 +1081,7 @@ table.newsletterFreebieSingle td.newsletterContainer40px img {
   gap: 4px;
 }
 
-.shopByCategoryTitle {
+#newsletter .shopByCategoryTitle {
   font-size: 26px;
   font-weight: 700;
   color: #000000;
@@ -1077,11 +1099,20 @@ table.newsletterFreebieSingle td.newsletterContainer40px img {
 }
 
 .categoryTitle {
-  font-size: 25px;
+  font-size: 30px;
   color: #000000;
   margin-bottom: 12px;
   letter-spacing: 0.3px;
   line-height: 1.2;
+}
+
+.categoryTitleNormal {
+  font-size: 24px;
+  color: #000000;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 .conditionText {

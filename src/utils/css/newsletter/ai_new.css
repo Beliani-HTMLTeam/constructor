@@ -326,6 +326,25 @@ table.newsletterFreebieSingle td.newsletterContainer40px a{
   font-weight: 600;
 }
 
+.categoryTitle {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+.categoryTitleNormal {
+  font-family: "Open Sans", sans-serif;
+  font-size: 24px;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
 .newsletterProductTitle {
   font-size: 20px;
   font-family: "Open Sans", sans-serif;
@@ -570,6 +589,10 @@ table.newsletterFreebieSingle td.newsletterContainer40px a{
     font-size: 25px !important;
   }
 
+  .categoryTitleNormal {
+    font-size: 19px !important;
+  }
+
   .newsletterBottom40px {
     padding-bottom: 25px;
   }
@@ -672,6 +695,7 @@ table.newsletterFreebieSingle td.newsletterContainer40px a{
     width: 100% !important;
     text-align: center !important;
     box-sizing: border-box !important;
+    border-width: 10px 20px !important;
   }
 
   .secondaryLink {
@@ -686,8 +710,12 @@ table.newsletterFreebieSingle td.newsletterContainer40px a{
     font-size: 25px;
   }
 
-  #newsletter .introTitle {
+  .introTitle {
     font-size: 28px !important;
+  }
+
+  .introTitleNormal {
+    font-size: 24px !important;
   }
 
   .newsletterIntroTitle {
@@ -977,6 +1005,19 @@ table.newsletterFreebieSingle td.newsletterContainer40px a{
 .introTitle {
   font-size: 35px;
   line-height: 1.2;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.introTitleNormal {
+  font-size: 28px;
+  line-height: 1.2;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.introParagraphNormal {
+  font-size: 16px;
+  line-height: 1.2;
+  color: #ffffff;
   font-family: 'Open Sans', Arial, sans-serif;
 }
 

@@ -1,0 +1,187 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   NEW FOOTER (footer_new.js) – NEWSLETTER
+   Attached by renderTemplate only when the new footer is in the html.
+   Self-contained: everything the footer uses is here, also the containers / spacings
+   it shares with the rest of the newsletter (same values as in regular.css).
+   ═══════════════════════════════════════════════════════════════════════════ */
+ 
+/* Outlook resets */
+table,
+td {
+  mso-table-lspace: 0pt;
+  mso-table-rspace: 0pt;
+}
+ 
+img {
+  -ms-interpolation-mode: bicubic;
+}
+ 
+/* Peach side frame */
+.newsletterContainerFooter20px {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+ 
+/* White panel inner padding */
+.newsletterContainer30px {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+ 
+.newsletterContainer40px {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+ 
+/* Vertical spacers (Space component) */
+.newsletterBottom15px {
+  padding-bottom: 15px;
+}
+ 
+.newsletterBottom20px {
+  padding-bottom: 20px;
+}
+ 
+.newsletterBottom30px {
+  padding-bottom: 30px;
+}
+ 
+.newsletterBottom35px {
+  padding-bottom: 35px;
+}
+ 
+/* See thousands more */
+.thousandsMoreTitle {
+  display: block;
+  text-align: left;
+  color: #750000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+ 
+.thousandsMoreRowGap {
+  padding-bottom: 18px;
+}
+ 
+.thousandsMoreBtnCellLEFT {
+  padding-right: 5px;
+}
+ 
+.thousandsMoreBtnCellRIGHT {
+  padding-left: 5px;
+}
+ 
+/* Follow us */
+.newsletterNewFooterTitle {
+    color: #750000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+}
+ 
+.newsletterFooterSubtitle {
+  text-align: left;
+  color: #750000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+ 
+.newsletterNewSocialIcon {
+  width: 28px;
+  padding-left: 20px !important;
+  padding-right: 5px;
+  font-size: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+ 
+/* Conditions */
+.newsletterNewFooterConditions {
+  color: #750000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  line-height: 1.2;
+}
+ 
+/* .newsletterNewFooterConditions a {
+  color: #750000 !important;
+  } */
+/* Company details */
+.newsletterNewFooterCompanyDetails {
+  vertical-align: middle;
+  padding: 10px 15px 15px 15px;
+  font-size: 10px;
+  line-height: 15px;
+  font-family: "Open Sans", sans-serif !important;
+  color: #750000;
+  background: #FFCCB7;
+  text-align: center;
+  width: 100%;
+}
+ 
+.newsletterNewFooterCompanyDetails a {
+  color: #750000;
+  text-decoration: underline;
+}
+ 
+@media screen and (max-width: 768px) {
+  .newsletterContainerFooter20px {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+ 
+  .newsletterContainer30px {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+ 
+  .newsletterContainer40px {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+ 
+  .newsletterBottom15px {
+    padding-bottom: 10px;
+  }
+ 
+  .newsletterBottom20px {
+    padding-bottom: 10px;
+  }
+ 
+  .newsletterBottom30px {
+    padding-bottom: 15px;
+  }
+ 
+  .newsletterBottom35px {
+    padding-bottom: 20px;
+  }
+ 
+  .thousandsMoreTitle {
+    font-size: 20px;
+  }
+ 
+  .thousandsMoreRowGap {
+    padding-bottom: 10px;
+  }
+ 
+  .newsletterNewSocialIcon {
+    padding-left: 13px !important;
+  }
+}
+ 
+@media screen and (max-width: 650px) {
+  .newsletterNewSocialIcon {
+    width: 22px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+  }
+  .newsletterFooterTitle {
+    font-size: 16px !important;
+    line-height: 21px !important;
+  }
+}

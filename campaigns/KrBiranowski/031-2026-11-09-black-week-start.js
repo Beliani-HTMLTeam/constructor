@@ -89,6 +89,7 @@ export default new entities.Campaign({
     {
       background: theme.primary,
       color: theme.black,
+      footer_theme: 'black',
       template: templates.BlackWeekFirst,
 
       css: types.CSS.NS_BLACK_WEEK2,
@@ -110,6 +111,7 @@ export default new entities.Campaign({
     {
       background: theme.primary,
       color: theme.black,
+      footer_theme: 'black',
       template: templates.BlackWeekFirst,
 
       css: types.CSS.LP_BLACK_WEEK2,

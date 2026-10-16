@@ -28,6 +28,9 @@ import lp_october_reminder from '@css/landing/october_reminder.css?inline';
 
 import lp_advent2026 from '@css/landing/advent2026.css?inline';
 
+import nslt_advent_calendar_2026 from '@css/newsletter/advent2026.css?inline';
+import lp_advent_calendar_2026 from '@css/landing/advent2026.css?inline';
+
 import cgb_desktop from '@css/cgb/desktop.css?inline';
 import cgb_mobile from '@css/cgb/mobile.css?inline';
 
@@ -53,6 +56,8 @@ export const types = {
     NS_AI_NEW2: nslt_ai_new2,
     NS_FRENCH_DAYS: nslt_french_days_new,
 
+    NS_ADVENT_CALENDAR_2026: nslt_advent_calendar_2026,
+
     LP: lp_regular,
     LP_THURSDAY: lp_thursday,
     LP_FRIDAY: lp_friday,
@@ -67,6 +72,8 @@ export const types = {
     LP_AI_NEW2: lp_ai_new2,
     LP_FRENCH_DAYS: lp_french_days_new,
     LP_OCTOBER_REMINDER: lp_october_reminder,
+
+    LP_ADVENT_CALENDAR_2026: lp_advent_calendar_2026,
 
     CGB: {
       DESKTOP: cgb_desktop,

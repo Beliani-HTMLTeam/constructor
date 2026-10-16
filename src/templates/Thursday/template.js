@@ -1,4 +1,4 @@
-import { Footer } from './Footer.js';
+import { Footer, shouldUseNewFooter } from './Footer.js';
 import { Header } from './Header.js';
 
 // handlers:
@@ -47,8 +47,16 @@ const Thursday = async ({
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNow = getPhrase('Shop now');
 
-  const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ links, TopImage_data });
+  const resolveShopHref = (href) =>
+    typeof href === 'string' && /^https?:\/\//.test(href) && !href.includes('/content/') ? String(getCategoryLink(href)) : href;
+  const resolvedLinks = {
+    ...links,
+    ...(links?.TopImage_href && { TopImage_href: resolveShopHref(links.TopImage_href) }),
+    ...(links?.TopImageTitle_href && { TopImageTitle_href: resolveShopHref(links.TopImageTitle_href) }),
+  };
+
+  const TopImageTitleElement = TopImageTitleHandler({ links: resolvedLinks, queries, TopImageTitle_data, type });
+  const TopImageElement = TopImageHandler({ links: resolvedLinks, TopImage_data });
 
   const introCta_href = getIntroCtaHref({
     links,
@@ -86,12 +94,16 @@ const Thursday = async ({
   const safeCategories = Array.isArray(categories) ? categories : [];
   const freebiesIndex = safeCategories.findIndex((category) => String(category?.type).toLowerCase() === 'deal');
 
-  const categoriesBeforeIntro =
-    introPosition === 'afterFreebies' && freebiesIndex >= 0
-      ? safeCategories.slice(0, freebiesIndex + 1)
-      : safeCategories;
-  const categoriesAfterIntro =
-    introPosition === 'afterFreebies' && freebiesIndex >= 0 ? safeCategories.slice(freebiesIndex + 1) : [];
+  // afterFirstCategory: intro goes right under categories[0] (e.g. top image rendered as a category)
+  const introSplitIndex =
+    introPosition === 'afterFirstCategory' && safeCategories.length > 0
+      ? 0
+      : introPosition === 'afterFreebies'
+        ? freebiesIndex
+        : -1;
+
+  const categoriesBeforeIntro = introSplitIndex >= 0 ? safeCategories.slice(0, introSplitIndex + 1) : safeCategories;
+  const categoriesAfterIntro = introSplitIndex >= 0 ? safeCategories.slice(introSplitIndex + 1) : [];
 
   const categoriesSharedProps = {
     getProductById,
@@ -114,22 +126,22 @@ const Thursday = async ({
     ...categoriesSharedProps,
   });
 
-  const isAfterFreebies = introPosition === 'afterFreebies';
+  const isAfterFreebies = introPosition === 'afterFreebies' || introPosition === 'afterFirstCategory';
   const isAfterTimer = introPosition === 'afterTimer' && hasTimer;
   const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer ? '' : IntroElement;
-  const IntroAfterFreebiesElement = introPosition === 'afterFreebies' ? IntroElement : '';
+  const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
   const IntroAfterTimerBeforeCategoriesElement =
     isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
   const IntroAfterTimerAfterCategoriesElement =
     isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
-		
-	let hasSmallTilesCategory = false;
 
-	if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
-		hasSmallTilesCategory = true;
-	}
+  let hasSmallTilesCategory = false;
 
-	const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
+  if (categories.find((cat) => cat?.type === 'small-tiles' && !cat?.tiles?.dimensions)) {
+    hasSmallTilesCategory = true;
+  }
+
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
 
   return `
     ${HeaderElement}
@@ -159,7 +171,7 @@ const Thursday = async ({
     </table>
 
 
-    ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
+    ${shouldUseNewFooter(date || selectedCampaign?.date) ? '' : SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
       
     ${FooterElement}
   `;
