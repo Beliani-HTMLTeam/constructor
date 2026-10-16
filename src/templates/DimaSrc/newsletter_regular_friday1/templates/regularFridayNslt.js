@@ -201,10 +201,6 @@ const RegularFridayNslt1 = async ({
       ${timerData && timerData.position === 'afterTilesCategories' ? TimerElement : ''}
     
     </table>
-
-
-    ${soonEndingBanners ?
-      SoonEndingBanners({ links, getPhrase }) : ''}
       
     ${FooterElement}
   `;

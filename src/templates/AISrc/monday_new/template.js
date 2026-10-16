@@ -118,7 +118,7 @@ const MondayNew = async ({
 		hasSmallTilesCategory = true;
 	}
 
-  const FooterElement = Footer({ getFooter, getCategoryLink, hasSmallTilesCategory, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
+  // const FooterElement = Footer({ getFooter, getCategoryLink, hasSmallTilesCategory, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date });
   let disableSE = false;
 
   if (typeof disableSoonEnding === "boolean" && disableSoonEnding)
