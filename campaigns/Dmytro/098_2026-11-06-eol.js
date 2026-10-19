@@ -53,7 +53,7 @@ const additionalCss = `
     padding-right: 5px !important;
   }
 .newsletterTitleOverride{font-size: 34px;}
-.newsletterProductTitleOverride{font-size: 17px; }
+.newsletterProductTitleOverride{font-size: 15px; }
 .newsletterProductPriceLeft {padding-left: 5px;}
 }
 `;
@@ -79,7 +79,7 @@ const additionalCssLp = `
 #newsletter .newsletterProductPriceLeft {padding-left: 10px;}
 @media screen and (max-width: 768px) {
 #newsletter  .newsletterTitleOverride{font-size: 34px;}
-#newsletter  .newsletterProductTitleOverride{font-size: 17px; }
+#newsletter  .newsletterProductTitleOverride{font-size: 15px; }
 #newsletter  .newsletterProductPriceLeft {padding-left: 5px;}
 }
 `;
@@ -267,7 +267,7 @@ const categories = [
   }),
 
   productCategory(4, 'Tables', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
-    ORBEY: 615939,
+    EMPORIA: 179197,
     POZZA: 675442,
     LANDER: 556654,
     MERCED: 310487,
