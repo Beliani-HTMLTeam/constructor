@@ -1,3 +1,15 @@
+// ============================================================
+// AdventPopupScript – browser runtime for the popup templates.
+// Include once per page, after the <template data-adv-popup> tags.
+//
+// Exposes:
+//   window.AdventPopup.open(id)  -> opens <template data-adv-popup="id">
+//   window.AdventPopup.close()
+//   window.AdventPopup.has(id)   -> true if that popup exists
+//
+// Handles: grey overlay, click outside / X / Esc to close, copy code,
+// "See conditions" (fills the AdventConditionsBox), dataLayer events.
+// ============================================================
 export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar' } = {}) {
   const opts = JSON.stringify({ conditionsBoxId, trackingCategory });
  
@@ -79,7 +91,8 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     ensureOverlay();
     clearTimeout(closeTimer);
     current = id;
-    content.className = 'adv-pop__content adv-pop--' + (tpl.getAttribute('data-layout') || 'deal');
+    content.className = 'adv-pop__content adv-pop--' + (tpl.getAttribute('data-layout') || 'deal') +
+      (tpl.getAttribute('data-text') === 'left' ? ' adv-pop--text-left' : '');
     content.innerHTML = '';
     content.appendChild(tpl.content.cloneNode(true));
     overlay.classList.remove('is-closing');
@@ -133,9 +146,12 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   function preload() {
     var tpls = document.querySelectorAll('template[data-adv-popup]');
     Array.prototype.forEach.call(tpls, function (tpl) {
-      Array.prototype.forEach.call(tpl.content.querySelectorAll('img'), function (im) {
-        var pre = new Image();
-        pre.src = im.getAttribute('src');
+      // background images (data-preload="desktop mobile") + any <img>
+      Array.prototype.forEach.call(tpl.content.querySelectorAll('[data-preload], img'), function (el) {
+        var srcs = (el.getAttribute('data-preload') || el.getAttribute('src') || '').split(' ');
+        srcs.forEach(function (src) {
+          if (src) { var pre = new Image(); pre.src = src; }
+        });
       });
     });
   }

@@ -24,7 +24,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow }) => {
       ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
       ${CTA({
         href: introCta_href,
-        text: "Open Today’s deal  →",
+        text: "Open Today’s deal",
         color: ctaColor,
         backgroundColor: intro?.cta?.backgroundColor ?? '#750000',
         align: 'center',

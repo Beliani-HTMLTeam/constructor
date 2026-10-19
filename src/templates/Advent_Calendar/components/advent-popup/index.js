@@ -10,6 +10,7 @@ export { PercentOffPopup, FreeGiftPopup, Buy4Pay3Popup, CashbackPopup, UpToPopup
 export { AdventPopupShell, StandardPopup, PopupText, PopupCodes, PopupFooter, AdventConditionsBox, DEFAULT_POPUP_TEXTS } from './parts.js';
 export { AdventPopupStyles } from './styles.js';
 export { AdventPopupScript } from './script.js';
+export { AdventConfettiScript } from './confetti.js';
  
 // type name -> component
 export const ADVENT_POPUP_TYPES = {
