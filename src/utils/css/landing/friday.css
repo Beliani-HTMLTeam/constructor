@@ -911,3 +911,15 @@ table {
     font-size: 12px;
   }
 }
+
+#newsletter .freebiesContainer--list .newsletterProductTitleFreebie {
+  font-size: 20px;
+}
+
+#newsletter .freebiesContainer--list .newsletterProductTitleFreebie2col {
+  font-size: 16px;
+}
+
+#newsletter .freebiesContainer--list .freebieTileMobileTitle {
+  font-size: 16px !important;
+}

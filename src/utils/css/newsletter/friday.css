@@ -275,7 +275,7 @@ img {
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 24px;
-  padding-bottom: 0px;
+  padding-bottom: 24px;
 }
 
 .freebieImage {
@@ -296,10 +296,11 @@ img {
   color: #000000;
 }
 
+
 .newsletterFreebiesTitle {
-  font-size: 11px;
+  font-size: 20px;
   font-family: "Open Sans", sans-serif;
-  line-height: 1.0;
+  line-height: 1.2;
   font-weight: 400;
 }
 
@@ -840,4 +841,16 @@ img {
   .newsletterProductTitleFreebie {
     font-size: 12px;
   }
+}
+
+.freebiesContainer--list .newsletterProductTitleFreebie {
+  font-size: 20px;
+}
+
+.freebiesContainer--list .newsletterProductTitleFreebie2col {
+  font-size: 16px;
+}
+
+.freebiesContainer--list .freebieTileMobileTitle {
+  font-size: 16px !important;
 }
