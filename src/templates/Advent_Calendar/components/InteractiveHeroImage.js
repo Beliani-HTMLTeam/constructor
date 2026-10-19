@@ -6,8 +6,8 @@
 import {
   AdventPopupStyles,
   AdventPopupScript,
-  AdventPopups,
-  AdventConditionsBox,
+  AdventPopups, 
+  AdventConfettiScript,
 } from './advent-popup/index.js';
  
 export function InteractiveHeroImage({ type }) {
@@ -49,61 +49,89 @@ export function InteractiveHeroImage({ type }) {
  
   // ===== Popup per door (key = door number) =====
   // type: 'percent' | 'free' | 'buy4pay3' | 'cashback' | 'upto' | 'discount' | 'special'
-  //  imageDesktop / imageMobile : popup images (plain rectangles, curve is drawn by CSS)
-  //  link       : image + texts become a link (opens in new tab)
-  //  headline   : 'special' only – "One day.<br />One special deal."
-  //  pre        : line above the title ("Extra", "Textiles", "Today only:")
+  //  imageDesktop / imageMobile : full background images (desktop ~1934x960, mobile ~514x920)
+  //  link       : background + texts become a link (opens in new tab)
+  //  pre        : line above the title ("Extra", "Christmas Accessories")
   //  title      : main deal (<br /> for a line break)
   //  subtitle   : "when you spend min. £200"
-  //  code       : "Code: xxx" (or an array) -> copy button
+  //  code       : "Code: xxx" -> copy button
+  //  mobile     : { pre, title, subtitle, code } – different texts on mobile ('' hides it)
   //  conditions : text shown below the calendar after "See conditions"
-  // Full prop list of each type: ./advent-popup/<Type>Popup.js
+  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=10`;
+
   const adventPopups = {
+    // 01.12 Tuesday – Up to 50% off Christmas Accessories
     1: {
       type: 'upto',
-      imageDesktop: `${adventBase}advent_popup_1_d.webp`,
-      imageMobile: `${adventBase}advent_popup_1_m.webp`,
-      link: 'https://www.beliani.co.uk/textiles/',
-      pre: 'Textiles',
-      title: 'up to<br />50% OFF',
+      imageDesktop: popupImg(1, 'd'),
+      imageMobile: popupImg(1, 'm'),
+      link: 'https://www.beliani.co.uk/christmas-shop/christmas-accessories/',
+      pre: 'Christmas<br />Accessories',
+      title: 'Up to<br />50% OFF',
       conditions: 'All items are subject to availability. All prices are subject to change without notification.',
     },
+
+    // 02.12 Wednesday – Extra 10% off, minimum spend £500
     2: {
-      type: 'free',
-      imageDesktop: `${adventBase}advent_popup_2_d.webp`,
-      imageMobile: `${adventBase}advent_popup_2_m.webp`,
-      title: 'Free table lamp',
-      subtitle: 'when you spend min. £300',
+      type: 'percent',
+      imageDesktop: popupImg(2, 'd'),
+      imageMobile: popupImg(2, 'm'),
+      pre: 'Extra',
+      title: '10% OFF',
+      subtitle: 'when you spend £500',
       code: 'Code: 02advent26uk',
-      conditions: 'Receive a free table lamp ... (conditions text)',
+      conditions: 'Add selected product(s) to your basket ... (conditions text)',
     },
+
+    // 03.12 Thursday – Up to 50% off Kid's Room
     3: {
-      type: 'cashback',
-      imageDesktop: `${adventBase}advent_popup_1_d.webp`,
-      imageMobile: `${adventBase}advent_popup_1_m.webp`,
-      title: '£50<br />cashback',
-      subtitle: 'when you shop for min. £150',
-      code: 'Code: 03advent26uk',
-      conditions: 'Use the code 03advent26uk ... (conditions text)',
+      type: 'upto',
+      imageDesktop: popupImg(3, 'd'),
+      imageMobile: popupImg(3, 'm'),
+      link: 'https://www.beliani.co.uk/children-room/',
+      pre: "Kid's Room",
+      title: 'Up to<br />50% OFF',
+      conditions: 'All items are subject to availability. All prices are subject to change without notification.',
     },
+
+    // 04.12 Friday – Freebie
+    4: {
+      type: 'free',
+      imageDesktop: popupImg(4, 'd'),
+      imageMobile: popupImg(4, 'm'),
+      title: 'Free XXX',
+      subtitle: 'when you spend min. £XX',
+      code: 'Code: 04advent26uk',
+      mobile: {
+        subtitle: 'when you spend £XX',      // shorter line on mobile
+      },
+      conditions: 'Receive a free XXX ... (conditions text)',
+    },
+
+    // 18.12 – test door (Extra 10% off)
     18: {
       type: 'percent',
-      imageDesktop: `${adventBase}advent_popup_2_d.webp`,
-      imageMobile: `${adventBase}advent_popup_2_m.webp`,
+      imageDesktop: popupImg(2, 'd'),
+      imageMobile: popupImg(2, 'm'),
       pre: 'Extra',
       title: '10% OFF',
       subtitle: 'when you spend £500',
       code: 'Code: 18advent26uk',
       conditions: '...',
     },
+
+    // 19.12 Saturday – Freebie
     19: {
-      type: 'upto',
-      imageDesktop: `${adventBase}advent_popup_1_d.webp`,
-      imageMobile: `${adventBase}advent_popup_1_m.webp`,
-      link: 'https://www.beliani.co.uk/rugs/',
-      pre: 'Rugs',
-      title: 'Up to<br />50% OFF',
-      conditions: '...',
+      type: 'free',
+      imageDesktop: popupImg(19, 'd'),
+      imageMobile: popupImg(19, 'm'),
+      title: 'Free XXX',
+      subtitle: 'when you spend min. £XX',
+      code: 'Code: 19advent26uk',
+      mobile: {
+        subtitle: 'when you spend £XX',
+      },
+      conditions: 'Receive a free XXX ... (conditions text)',
     },
   };
  
@@ -386,9 +414,9 @@ export function InteractiveHeroImage({ type }) {
     <!-- ========== CONDITIONS + POPUP TEMPLATES ========== -->
     <tr>
       <td align="center" style="padding:0;">
-        ${AdventConditionsBox()}
         ${AdventPopups({ popups: adventPopups, texts: popupTexts })}
         ${AdventPopupScript()}
+        ${AdventConfettiScript({zIndex: 9999})}
       </td>
     </tr>
  
@@ -460,8 +488,9 @@ export function InteractiveHeroImage({ type }) {
           if (isNext || isOpened || isTest) {
             door.style.pointerEvents = 'auto';
             door.style.cursor = 'pointer';
-            door.onclick = function () {
+            door.onclick = function (e) {
               track('Click', 'Page', 'PopUp');
+              if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
 
               // TEST ONLY: open out of order without changing the real progress
               if (isTest && !isNext && !isOpened) {

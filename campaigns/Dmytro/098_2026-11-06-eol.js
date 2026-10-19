@@ -16,6 +16,10 @@ const tableQueries = [
   {
     tableRange: '24:30',
     name: 'categoryLinks',
+  }, 
+  {
+    tableRange: "36:37",
+    name: "timer"
   }
 ];
 
@@ -26,6 +30,8 @@ const links = {
 
   TopImage_src: getImageUrl('20261106_gif.gif', true),
 	TopImage_href: translateLink({ value: 'content/lp26-11-06' }),
+  Timer_href: translateLink({ value: 'content/lp26-11-02' }),
+
 };
 
 const additionalCss = `
@@ -47,7 +53,7 @@ const additionalCss = `
     padding-right: 5px !important;
   }
 .newsletterTitleOverride{font-size: 34px;}
-.newsletterProductTitleOverride{font-size: 17px; }
+.newsletterProductTitleOverride{font-size: 15px; }
 .newsletterProductPriceLeft {padding-left: 5px;}
 }
 `;
@@ -73,7 +79,7 @@ const additionalCssLp = `
 #newsletter .newsletterProductPriceLeft {padding-left: 10px;}
 @media screen and (max-width: 768px) {
 #newsletter  .newsletterTitleOverride{font-size: 34px;}
-#newsletter  .newsletterProductTitleOverride{font-size: 17px; }
+#newsletter  .newsletterProductTitleOverride{font-size: 15px; }
 #newsletter  .newsletterProductPriceLeft {padding-left: 5px;}
 }
 `;
@@ -94,25 +100,25 @@ const timer = {
 	freebies: [
 		// ANDIRIN
 		{
-			id: 229265,
+			id: 257987,
 			titlePhrase: 'Decorative Cushions',
 			src: getImageUrl('20261106freebie1.png', true),
 		},
 		// PADRE
 		{
-			id: 251828,
+			id: 232377,
 			titlePhrase: 'Candle Holder',
 			src: getImageUrl('20261106freebie2.png', true),
 		},
 		// FLORETTA
 		{
-			id: 336136,
+			id: 367111,
 			titlePhrase: 'Neon LED Signs',
 			src: getImageUrl('20261106freebie3.png', true),
 		},
 		// PONTIVY
 		{
-			id: 571807,
+			id: 232794,
 			titlePhrase: 'Decorative Tray',
 			src: getImageUrl('20261106freebie4.png', true),
 		}
@@ -150,7 +156,7 @@ const button = {
   mobilePaddingX: 24,
   mobilePaddingY: 13,
   borderRadius: '4px',
-  textTransform: '',
+  textTransform: 'none',
 };
 
 const merge = (base, patch = {}) =>
@@ -240,7 +246,7 @@ const categories = [
     VINTERBRO: 442853,
     TAMRE: 618747,
   }, {
-    type: "3prods", container: 'newsletterContainer', paddingTop: 'newsletterBottom80px'
+    type: "3prods", paddingTop: 'newsletterBottom80px'
   }),
 
   productCategory(2, 'Beds', 'https://www.beliani.ch/bedroom-furniture/storage/', {
@@ -257,11 +263,11 @@ const categories = [
     APATE: 649516,
     KINNO: 607821,
   },{
-    type: "3prods", container: 'newsletterContainer', paddingTop: 'newsletterBottom80px'
+    type: "3prods"
   }),
 
   productCategory(4, 'Tables', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
-    ORBEY: 615939,
+    EMPORIA: 179197,
     POZZA: 675442,
     LANDER: 556654,
     MERCED: 310487,
@@ -274,7 +280,7 @@ const categories = [
     LUANA: 407196,
     ARTESIA: 670151,
   },{
-    type: "3prods",  container: 'newsletterContainer', paddingTop: 'newsletterBottom80px'
+    type: "3prods"
   }),
 
   productCategory(6, 'Lighting', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
@@ -291,7 +297,7 @@ const categories = [
     GERZE: 379010,
     FENER: 376699,
   },{
-    type: "3prods",  container: 'newsletterContainer', paddingTop: 'newsletterBottom80px'
+    type: "3prods"
   })
 ];
 
@@ -326,12 +332,12 @@ export default new entities.Campaign({
 				backgroundColor: '#FFF5F1', // unused
 				alignment: 'center',
 				type: 'paragraph',
-				cta: {
+        cta: {
+          ...button,
 					phrase: 'Shop now',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
-          textTransform: '',
-          overrides: intro_cta_overrides,
+					overrides: intro_cta_overrides,
 				}
 			},
 			Inside: {
@@ -366,10 +372,10 @@ export default new entities.Campaign({
 				alignment: 'center',
 				type: 'paragraph',
 				cta: {
+          ...button,
 					phrase: 'Shop now',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
-          textTransform: '',
 					overrides: intro_cta_overrides,
 				}
 			},

@@ -21,7 +21,7 @@ const tableQueries = [
 ];
 
 const links = {
-  TopImage_src: translateImage({value: '_advent_gif.gif'}),
+  TopImage_src: getImageUrl('uk_advent_img.png'),
   TopImage_src_lp: translateImage({value: '_advent_lp.png'}),
   TopImage_href: translateLink({ value: 'content/advent-calendar' }),
   Banner_1: translateLink({ value: 'content/lp26-08-28' }),
@@ -50,10 +50,11 @@ const intro_data = {
   backgroundColor: "#F7EAE9",
   alignment: "center",
   type: "paragraph",
+  spaceTop: "newsletterBottom20px",
   spaceBottom: "newsletterBottom25px",
-  container: "newsletterContainer95px",
+  container: "newsletterContainer40px",
   cta: {
-    spaceAfter: "newsletterBottom40px",
+    spaceAfter: "newsletterBottom35px",
     color: "#FFF4E6",
     backgroundColor: "#750000",
   }

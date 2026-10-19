@@ -1,10 +1,9 @@
 #newsletter .newsletterTitleH1 {
-  font-size: 52px;
+  font-size: 56px;
   line-height: 1.2;
   font-weight: 600;
   letter-spacing: -0.5px;
   margin: 0;
-  text-transform: uppercase;
 }
 
 #newsletter .newsletterContainer95px {
@@ -121,10 +120,9 @@ table {
 }
 
 #newsletter .newsletterCta {
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.2;
   font-weight: 600;
-  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
@@ -170,13 +168,17 @@ table {
 }
 
 #newsletter .newsletterParagraph {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.2;
 }
 .newsletterMarkTitle {
   font-size: 25px;
   line-height: 1;
 }
+
+.adv-cond { box-sizing: border-box; }
+.adv-cond .adv-cond__title { padding: 20px 20px 0; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #000; }
+.adv-cond .adv-cond__text  { padding: 0 20px 20px; font-size: 14px; line-height: 1.6; }
 .newsletterMarkTitleSpace {
   padding-bottom: 25px;
 }

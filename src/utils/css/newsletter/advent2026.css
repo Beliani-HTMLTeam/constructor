@@ -16,12 +16,11 @@ img {
 }
 
 .newsletterTitleH1 {
-  font-size: 52px;
+  font-size: 56px;
   line-height: 1.2;
   font-weight: 600;
   letter-spacing: -0.5px;
   margin: 0;
-  text-transform: uppercase;
 }
 
 .title-advantages {
@@ -116,11 +115,10 @@ img {
 }
 
 .newsletterCta {
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.2;
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
-  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
@@ -202,7 +200,7 @@ img {
   padding-right: 20px;
 }
 .newsletterParagraph {
-  font-size: 15px;
+  font-size: 18px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
 }
