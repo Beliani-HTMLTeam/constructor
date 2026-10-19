@@ -79,11 +79,11 @@ const styleLinks = (html, color) =>
     })
     .join('');
  
-const frameTable = (c, rows, { id = '', bg = FOOTER_THEMES.peach.frame } = {}) => `
+const frameTable = (c, rows, { id = '', bg = FOOTER_THEMES.peach.frame, bottomClass = '' } = {}) => `
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" bgcolor="${bg}"${id ? ` id="${id}"` : ''} style="max-width: 650px; width: 100%; background-color: ${bg}; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
     <tbody>
       <tr>
-        <td${cls(c.frame)} bgcolor="${bg}" style="background-color: ${bg};">
+        <td${cls([c.frame, bottomClass].filter(Boolean).join(' '))} bgcolor="${bg}" style="background-color: ${bg};">
           <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
             <tbody>
               ${rows}
@@ -100,21 +100,27 @@ const NL_IMG_WIDTH_40 = 650 - 40 - 80; // 530 – 40px inner padding
 const SOCIAL_ICON_SIZE = 28;
 const NL_THOUSANDS_TILE_WIDTH = Math.floor((NL_IMG_WIDTH_30 - 3 * 10) / 4);
  
-const advantageWidths = (items, total) => {
-  const ws = items.map((i) => Number(i && i.width));
-  if (ws.some((w) => !w)) return items.map(() => null);
-  const scale = Math.min(1, total / ws.reduce((a, b) => a + b, 0));
-  return ws.map((w) => Math.floor(w * scale));
-};
- 
- 
-const advantageCell = (item, href, width) => `
-  <td valign="top">
+const ADVANTAGE_WIDTHS = [141, 134, 134, 141];
+// outlook
+const ADVANTAGE_BG = '#F6E7E6';
+const ADVANTAGE_FILL_BG = [true, false, false, false];
+const ADVANTAGE_HEIGHT = 112;
+const ADVANTAGES_WIDTH = ADVANTAGE_WIDTHS.reduce((sum, w) => sum + w, 0);
+
+const advantageCell = (item, href, i) => {
+  const width = ADVANTAGE_WIDTHS[i];
+  const percent = ((width / ADVANTAGES_WIDTH) * 100).toFixed(2);
+
+  const fill = ADVANTAGE_FILL_BG[i];
+
+  return `
+  <td width="${width}" valign="top"${fill ? ` bgcolor="${ADVANTAGE_BG}"` : ''} style="width: ${percent}%; font-size: 0; line-height: 0;${fill ? ` background-color: ${ADVANTAGE_BG};` : ''}">
     <a href="${href}">
-      <img loading="lazy" src="${item.src}" alt="Advantages"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
+      <img loading="lazy" src="${item.src}" alt="Advantages" width="${width}" height="${ADVANTAGE_HEIGHT}" border="0" style="display: block; border: 0; width: 100%; max-width: ${width}px; height: auto;" />
     </a>
   </td>`;
- 
+};
+
 const thousandsMoreTile = (category, width) => `
   <a href="${category.href}">
     <img loading="lazy" src="${category.src}" alt="${category.name || ''}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
@@ -408,12 +414,11 @@ export function Footer(sections, options, name) {
       [types.NEWSLETTER]: {
         value: ({ firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage }) => {
           const items = [firstAdvantage, secondAdvantage, thirdAdvantage, fourthAdvantage];
-          const aw = advantageWidths(items, NL_IMG_WIDTH_30);
-          const cell = (i) => advantageCell(items[i], track(items[i].href, false), aw[i]);
+          const cell = (i) => advantageCell(items[i], track(items[i].href, false), i);
           return frame(NL, `
                   <tr>
                       <td class="${NL.container30}" bgcolor="#ffffff" style="background-color: #ffffff; mso-padding-alt: 0px 20px 0px 20px;">
-                          <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; background-color: #ffffff;">
+                          <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 auto; width: 100%; max-width: ${ADVANTAGES_WIDTH}px; table-layout: fixed; background-color: #ffffff;">
                               <tbody>
                                   <tr>
                                       ${cell(0)}
@@ -560,16 +565,16 @@ export function Footer(sections, options, name) {
   }
  
   if (!html) return html;
- 
+
   const spacer = (className) =>
     className ? Space({ className, insideTr: true, background: theme.frame }) : '';
- 
+
   const isLPType = options.type === types.LANDINGPAGE;
- 
+  const c = isLPType ? LP : NL;
+
   return frameTable(
-    isLPType ? LP : NL,
+    c,
     `${spacer(options.spaceTop)}${html}${spacer(options.spaceBottom)}`,
-    { bg: theme.frame, id: isLPType ? '' : 'newsletter' }
+    { bg: theme.frame, id: isLPType ? '' : 'newsletter', bottomClass: options.bottomSpace ? c.bottom15 : '' }
   );
 }
- 
