@@ -242,6 +242,7 @@ const productCategory = (number, name, href, products, overrides) => merge({
 
 const categories = [
   productCategory(1, 'Sofas', 'https://www.beliani.ch/bedroom-furniture/beds/', {
+    LEIREN: 428030,
     EVJA: 232046,
     VINTERBRO: 442853,
     TAMRE: 618747,
@@ -250,6 +251,7 @@ const categories = [
   }),
 
   productCategory(2, 'Beds', 'https://www.beliani.ch/bedroom-furniture/storage/', {
+    GONFARON: 610528,
     ORBEY1: 615939,
     ZEN: 521610,
     MELLE: 187191,
@@ -259,6 +261,7 @@ const categories = [
   }),
 
   productCategory(3, 'Armchairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
+    AYLO: 590543,
     DALBY: 458928,
     APATE: 649516,
     KINNO: 607821,
@@ -276,6 +279,7 @@ const categories = [
   }),
 
   productCategory(5, 'Chairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
+    SKYE: 504459,
     KOBUK: 430797,
     LUANA: 407196,
     ARTESIA: 670151,
@@ -284,6 +288,7 @@ const categories = [
   }),
 
   productCategory(6, 'Lighting', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
+    LUCINDA: 576107,
     APAYAO: 581973,
     JAVARI: 399266,
     KABOMPO: 497934,
@@ -293,6 +298,8 @@ const categories = [
   }),
 
   productCategory(7, 'Rugs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
+    TACETTIN: 366197,
+    FABILOS: 414717,
     MUGLA: 351291,
     GERZE: 379010,
     FENER: 376699,
