@@ -201,7 +201,8 @@ export default new entities.Campaign({
       },
       disableFooterCategories: true,
       timer: timer,
-      footer_theme: 'black'
+      footer_theme: 'black',
+      optimizeCss: true,
     },
     {
       background: theme.primary,
@@ -230,7 +231,7 @@ export default new entities.Campaign({
       },
       timer: timer,
       disableKlarna: ['SI', 'HR'],
-      footer_theme: 'black'
+      footer_theme: 'black',
     },
   ],
 });
