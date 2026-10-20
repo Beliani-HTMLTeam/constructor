@@ -1,8 +1,7 @@
 import { Header as HeaderComponent } from '@/components/header.js';
-import { types } from '@utils/types.js';
 import { getState } from '@/main/state/appState';
 
-function shouldUseNewHeader(cDate) {
+function shouldUseNewHeader(cDate, cutoffDate = new Date(2026, 9, 6)) {
   const parts = cDate.split('.');
 
   const day = Number(parts[0]);
@@ -10,7 +9,6 @@ function shouldUseNewHeader(cDate) {
   const year = Number(parts[2]);
 
   const campaignDate = new Date(year, month - 1, day);
-  const cutoffDate = new Date(2026, 9, 6);
 
   return campaignDate >= cutoffDate;
 }
@@ -18,7 +16,8 @@ function shouldUseNewHeader(cDate) {
 const Header = ({ getHeader, country, background, type, id }) => {
   const campaignDate = getState('selectedCampaign')?.date;
   const newHeader = shouldUseNewHeader(campaignDate);
-  // Always use NEWSLETTER type for header component so Beliani top logo and header categories render in both LP and NSLT
+  const newHeaderLayout = shouldUseNewHeader(campaignDate, new Date(2026, 9, 12));
+
   return HeaderComponent(
     {
       id,
@@ -34,43 +33,46 @@ const Header = ({ getHeader, country, background, type, id }) => {
         whiteList: getHeader('Whitelist'),
         whitelistHref: getHeader('Whitelist href'),
       },
-
+      
       topImage: {
         src: newHeader ? getHeader('Top image src new') : getHeader('Top image src'),
         href: getHeader('Top image href'),
       },
-
+      
       categories: {
         firstCategory: {
-          src: getHeader('Header Category 1 src'),
-          href: getHeader('Header Category 1 href'),
-          alt: getHeader('Header Category 1 alt'),
+          src: getHeader(newHeaderLayout ? 'Header Category 1 src new' : 'Header Category 1 src'),
+          href: getHeader(newHeaderLayout ? 'Header Category 1 href new' : 'Header Category 1 href'),
+          alt: getHeader(newHeaderLayout ? 'Header Category 1 alt new' : 'Header Category 1 alt'),
+          width: newHeaderLayout ? getHeader('Header Category 1 width new') : '',
         },
         secondCategory: {
-          src: getHeader('Header Category 2 src'),
-          href: getHeader('Header Category 2 href'),
-          alt: getHeader('Header Category 2 alt'),
+          src: getHeader(newHeaderLayout ? 'Header Category 2 src new' : 'Header Category 2 src'),
+          href: getHeader(newHeaderLayout ? 'Header Category 2 href new' : 'Header Category 2 href'),
+          alt: getHeader(newHeaderLayout ? 'Header Category 2 alt new' : 'Header Category 2 alt'),
+          width: newHeaderLayout ? getHeader('Header Category 2 width new') : '',
         },
         thirdCategory: {
-          src: getHeader('Header Category 3 src'),
-          href: getHeader('Header Category 3 href'),
-          alt: getHeader('Header Category 3 alt'),
+          src: getHeader(newHeaderLayout ? 'Header Category 3 src new' : 'Header Category 3 src'),
+          href: getHeader(newHeaderLayout ? 'Header Category 3 href new' : 'Header Category 3 href'),
+          alt: getHeader(newHeaderLayout ? 'Header Category 3 alt new' : 'Header Category 3 alt'),
+          width: newHeaderLayout ? getHeader('Header Category 3 width new') : '',
         },
       },
-
+      
       assembly: {
         src: ['AT', 'PL', 'FR', 'UK'].includes(country)
           ? ['#FFCCB7'].includes(background)
             ? getHeader('Header delivery_cosy src')
             : getHeader('Header delivery src')
           : ['#FBF4F3'].includes(background)
-            ? getHeader('Header asembly src')
-            : getHeader('Header asembly_cosy src'),
+          ? getHeader('Header asembly src')
+          : getHeader('Header asembly_cosy src'),
         href: getHeader('Header asembly href'),
         exclude: true,
       },
     },
-    { type, newHeader }
+    { type, newHeader, newHeaderLayout }
   );
 };
 

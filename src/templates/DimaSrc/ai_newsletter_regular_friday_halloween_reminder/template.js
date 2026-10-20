@@ -132,12 +132,14 @@ const HelloweenReminder = async ({
       ${IntroAfterFreebiesElement}
 
       ${CategoriesAfterIntroElement}
-
+<tr>
+        <td valign="top" style="padding:0;border:0;">
+          ${FooterElement}
+        </td>
+      </tr>
     </table>
 
-    ${disableSE ? '' : SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
-
-    ${FooterElement}
+   
   `;
 };
 

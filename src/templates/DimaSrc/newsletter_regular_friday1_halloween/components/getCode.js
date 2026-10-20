@@ -1,14 +1,15 @@
 import { CopyCodeCTA, CopyCodeWebNotification } from "./CopyCodeCTA";
 
 export function GetCode({ type, code = '', link, color, showCopyCode = false,  copyCodeColor, copyCodeLabel }) {
-  console.log('getCode', code);
+  console.log('lol', code);
 
   const codeString = typeof code === 'string' ? code : String(code || '');
 
   let copyCodeHtml = '';
   if (showCopyCode && type === 'landing') {
     const codeValue = codeString.split(/:\s+/).slice(1).join(': ').trim() || codeString;
-    copyCodeHtml = CopyCodeWebNotification({ text: codeString, codeValue, color: copyCodeColor, label: copyCodeLabel });
+    const updatedCode = codeString.split(/:\s+/).slice(0, 1).join(': ').trim().toUpperCase() + ': ' + codeValue;
+    copyCodeHtml = CopyCodeWebNotification({ text: updatedCode, codeValue, color: copyCodeColor, label: copyCodeLabel });
   } else {
     copyCodeHtml = codeString
   }

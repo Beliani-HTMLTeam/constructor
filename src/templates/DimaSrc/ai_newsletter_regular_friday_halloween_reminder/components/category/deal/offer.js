@@ -136,8 +136,9 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
     const ctaToastText = toastOptions?.toastText ?? toastOptions?.primary ?? '#750000';
 
     const codeValue = codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText;
+    const copyUpperCaseLabel = copyCodeLabel.charAt(0).toUpperCase() + copyCodeLabel.slice(1);
     const copyIcon = codeValue ? buildCopyElement({
-      text: codeText,
+      text: copyUpperCaseLabel,
       codeValue,
       color: ctaColor,
       toastBg: ctaToastBg,

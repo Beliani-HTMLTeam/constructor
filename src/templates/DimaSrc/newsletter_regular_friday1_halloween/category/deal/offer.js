@@ -135,15 +135,17 @@ const renderCodeElement = ({ renderType, queries, links, t, showCopyCode = false
   if (ctaSettings.variant === 'button') {
     const separator = codeText.indexOf(':');
     const codeValue = (separator >= 0 ? codeText.slice(separator + 1) : codeText).trim();
-    return CopyCodeButton({ ...ctaSettings, text: codeText, codeValue, label: copyCodeLabel });
+    const copyUpperCase =  codeText.split(/:\s+/).slice(0, 1).join(': ').toUpperCase().trim() + ': ' + (codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText);
+    return CopyCodeButton({ ...ctaSettings, text: copyUpperCase, codeValue, label: copyCodeLabel });
   }
   if (showCopyCodeWeb) {
     const ctaToastBg = toastOptions?.toastBg ?? '#ffe0d4';
     const ctaToastText = toastOptions?.toastText ?? toastOptions?.primary ?? '#750000';
 
     const codeValue = codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText;
+    const copyUpperCase =  codeText.split(/:\s+/).slice(0, 1).join(': ').toUpperCase().trim() + ': ' + (codeText.split(/:\s+/).slice(1).join(': ').trim() || codeText);
     const copyIcon = codeValue ? buildCopyElement({
-      text: codeText,
+      text: copyUpperCase,
       codeValue,
       color: ctaColor,
       toastBg: ctaToastBg,

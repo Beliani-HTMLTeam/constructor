@@ -64,7 +64,8 @@ const RegularFridayNslt1Halloween = async ({
   getPhrase,
   getProductById,
   add_utm,
-  date 
+  date ,
+  footer_theme
 }) => {
   console.log("shop and country", shop, country, timerData)
   // ogólne części kampanii
@@ -165,7 +166,7 @@ const RegularFridayNslt1Halloween = async ({
 		hasSmallTilesCategory = true;
 	}
 
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectCampaign, date  });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectCampaign, date, theme:footer_theme  });
 
   return `
     ${HeaderElement}
@@ -200,13 +201,12 @@ const RegularFridayNslt1Halloween = async ({
 
       ${timerData && timerData.position === 'afterTilesCategories' ? TimerElement : ''}
     
-    </table>
-
-
-    ${soonEndingBanners ?
-      SoonEndingBanners({ links, getPhrase }) : ''}
-      
-    ${FooterElement}
+    <tr>
+    <td valign="top" style="padding:0;border:0;">
+      ${FooterElement}
+    </td>
+  </tr>
+</table>
   `;
 };
 

@@ -27,14 +27,14 @@ export function FullWidthTiles({ tiles, getCategoryLink, getCategoryTitle }) {
   return rows.join('');
 }
 
-function renderTile({category, getCategoryLink, getCategoryTitle,}) {
+function renderTile({category, getCategoryLink, getCategoryTitle}) {
   return `
   <td width="100%" valign="top">
   <table cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
         <td>
-          <a href="${getCategoryLink(category.href)}">
-              <img alt="${getCategoryTitle(category.name)}" src="${
+          <a href="${category.href}">
+              <img alt="${category.name}" src="${
                 category.src && category.src.src ? category.src.src : category.src
               }" style="width:100%; max-width: 100%; display:block;" loading="lazy">
           </a>

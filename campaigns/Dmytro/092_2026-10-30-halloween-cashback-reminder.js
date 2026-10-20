@@ -74,7 +74,7 @@ const tableQueries = [
   },
   {
     name: 'condition',
-    tableRange: '42:44',
+    tableRange: '41:43',
   },
 ];
 
@@ -134,6 +134,7 @@ const categories = [
       color: '#FFFFFF',
       borderWidth: '13px 45px',
       borderColor: '#FF2F00',
+      borderRadius: '4px',
     },
     gridSize: 'small',
     combineOfferParts: false,
@@ -163,7 +164,7 @@ export default new entities.Campaign({
   startId: '48729',
   name: 'Halloween Cashback Reminder',
   date: '30.10.2026',
-  issueCardId: '32873',
+  issueCardId: '538267',
   lpId: '32873',
   alarm: {
     isActive: false,
@@ -200,6 +201,7 @@ export default new entities.Campaign({
       },
       disableFooterCategories: true,
       timer: timer,
+      footer_theme: 'black'
     },
     {
       background: theme.primary,
@@ -228,6 +230,7 @@ export default new entities.Campaign({
       },
       timer: timer,
       disableKlarna: ['SI', 'HR'],
+      footer_theme: 'black'
     },
   ],
 });
