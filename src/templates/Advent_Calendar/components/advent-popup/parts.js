@@ -4,13 +4,14 @@
 // the runtime (AdventPopupScript) clones it into the overlay.
 // Text props accept HTML (e.g. "Up to<br />50% OFF").
 // ============================================================
+import { buildCopyIcon } from '../CopyCodeCTA.js'; // adjust the path to your CopyCodeCTA.js
 
 export const DEFAULT_POPUP_TEXTS = {
   onlyToday: 'Only Today',
   seeConditions: 'See conditions',
   shopNow: 'Shop now',
   conditionsTitle: 'Conditions:',
-  copied: 'Copied!',
+  copied: 'Code copied',   // notification text after copying
   close: 'Close',
   copy: 'Copy',
 };
@@ -21,8 +22,6 @@ export const attr = (v = '') =>
 
 const ICON_CLOSE =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M4 3 20 21M20 3 4 21"/></svg>';
-const ICON_COPY =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 
 function linkOrDiv(link, cls, inner) {
   return link
@@ -74,8 +73,17 @@ function codesBlock(code, texts, extraCls = '') {
         (c) =>
           `<div class="adv-pop__code">` +
           `<span>${c.label}: <span class="adv-pop__code-value">${c.value}</span></span>` +
-          `<button type="button" class="adv-pop__copy" data-code="${attr(c.value)}" data-copied="${attr(texts.copied)}" aria-label="${attr(texts.copy + ' ' + c.value)}">${ICON_COPY}</button>` +
-          `<span class="adv-pop__copied" aria-live="polite"></span>` +
+          // shared copy icon: icon switches to "ok" + slide-in notification
+          `<span class="adv-pop__copy-wrap">` +
+          buildCopyIcon({
+            codeValue: c.value,
+            color: '#750000',
+            toastBg: '#750000',
+            toastText: '#ffffff',
+            label: texts.copied,
+            className: 'adv-pop__copy-icon',
+          }) +
+          `</span>` +
           `</div>`
       )
       .join('') +

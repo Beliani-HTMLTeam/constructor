@@ -30,6 +30,7 @@ const links = {
   Banner_2_Image: translateImage({ value: '20260827b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-08-31' }),
   columnsImage_src: translateImage({ value: '_advent_cols.png' }),
+  columnsImage_href: translateLink({ value: 'content/advent-calendar' }),
   daily_deals_src: translateImage({ value: '_advent_footer.png' }),
   daily_deals_href: translateLink({ value: 'content/advent-calendar' }),
   Intro_cta_href: translateLink({ value: 'content/advent-calendar' }),

@@ -93,10 +93,11 @@ const AdventCalendar2026 = async ({
   };
 
   const columnsImage = ImageWithLink({
-    href: '#',
+    href: links?.columnsImage_href,
     src: links?.columnsImage_src,
     insideTr: true,
     alt: 'Advantages',
+    tdClass: "newsletterContainer40px",
   });
 
   const dailyDealsImage = ImageWithLink({
@@ -104,6 +105,8 @@ const AdventCalendar2026 = async ({
     src: links?.daily_deals_src,
     insideTr: true,
     alt: 'Daily Deals',
+    
+    tdClass: "newsletterContainer40px",
   });
 
   const isAfterFreebies = introPosition === 'afterFreebies';

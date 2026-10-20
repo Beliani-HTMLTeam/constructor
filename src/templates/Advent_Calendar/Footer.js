@@ -146,7 +146,7 @@ const Footer = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country
   );
 
   return `
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="width: 100%; max-width: 650px;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="width: 100%; max-width: 650px; background-color: ${FOOTER_THEMES[theme].frame || '#FFCCB7'}">
   ${Space({ className: type === 'newsletter' ? 'newsletterBottom30px' : 'footerBottom30px',  insideTr: true, background: FOOTER_THEMES[theme].frame || '#FFCCB7' })}
     <tr>
       <td style="width: 100%; max-width: 100%; background-color: #FFCCB7;">

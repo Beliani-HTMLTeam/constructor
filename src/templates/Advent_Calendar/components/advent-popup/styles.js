@@ -167,18 +167,13 @@ export function AdventPopupStyles() {
     line-height: 1.25;
   }
   .adv-pop__code-value { -webkit-user-select: text; user-select: text; }
-  .adv-pop__copy {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px;
-    border: 0;
-    background: none;
-    color: var(--pop-color);
-    cursor: pointer;
-  }
-  .adv-pop__copy svg { width: 0.85em; height: 0.85em; display: block; }
-  .adv-pop__copied { font-size: 0.7em; opacity: .85; }
+  /* copy icon from CopyCodeCTA.js (buildCopyIcon) */
+  .adv-pop__copy-wrap { display: inline-flex; align-items: center; }
+  .adv-pop__copy-wrap button { margin-left: 0 !important; font-size: inherit !important; }
+  .adv-pop__copy-icon { width: 0.75em; height: 0.75em; }   /* scales with the code text */
+
+  /* its slide-in notification must sit above the popup overlay (99999) */
+  [data-copy-notif] { z-index: 100001 !important; }
 
   /* Footer */
   .adv-pop__footer {
@@ -216,27 +211,38 @@ export function AdventPopupStyles() {
      ===================================================== */
   @media screen and (max-width: 600px) {
     .adv-pop__content {
-      /* mobile font sizes (cqw of 257) */
-      --fs-head: 7;       /* 18px */
-      --fs-pre: 11.67;    /* 30px */
-      --fs-title: 11.67;  /* 30px */
-      --fs-sub: 7;        /* 18px */
-      --fs-body: 7;       /* 18px */
-      --fs-today: 7;      /* 18px */
-      --fs-cond: 4.67;    /* 12px */
-      --fs-cta: 4.67;     /* 12px */
+      /* mobile font sizes in px (exact design sizes) –
+         they only shrink on screens narrower than the 257px design */
+      --m-head: 18;
+      --m-pre: 30;
+      --m-title: 30;
+      --m-sub: 18;
+      --m-body: 18;     /* code */
+      --m-today: 18;    /* Only Today */
+      --m-cond: 12;     /* See conditions */
+      --m-cta: 12;      /* Shop now */
       --gap-pre: 1.5cqw;
       --gap-sub: 3cqw;
       --gap-foot: 6cqw;
       --gap-foot-items: 4cqw;
 
       flex-direction: column;
-      width: min(300px, 100%, calc((100vh - 32px) * 0.5587));
+      width: min(257px, 100%, calc((100vh - 32px) * 0.5587));   /* max 257 x 460 */
       aspect-ratio: 257 / 460;
     }
-    .adv-pop--percent { --fs-pre: 11.67; --fs-title: 13.62; --lh-title: 1.15; --gap-pre: 1.5cqw; }  /* 30 / 35 */
-    .adv-pop--upto    { --fs-pre: 11.67; --fs-title: 13.62; --lh-title: 1.2;  --gap-pre: 2cqw; }    /* 30 / 35 */
-    .adv-pop--special { --fs-pre: 6.2;   --fs-title: 12.4;  --fs-sub: 6.2; --gap-pre: 0.5cqw; --gap-sub: 0; }
+    .adv-pop--percent { --m-pre: 30; --m-title: 35; --lh-title: 1.15; --gap-pre: 1.5cqw; }
+    .adv-pop--upto    { --m-pre: 30; --m-title: 35; --lh-title: 1.2;  --gap-pre: 2cqw; }
+    .adv-pop--special { --m-pre: 16; --m-title: 32; --m-sub: 16; --gap-pre: 0.5cqw; --gap-sub: 0; }
+
+    /* px size, scaled down only below 257px popup width */
+    .adv-pop__headline { font-size: min(calc(var(--m-head)  * 1px), calc(var(--m-head)  * 100cqw / 257)); }
+    .adv-pop__pre      { font-size: min(calc(var(--m-pre)   * 1px), calc(var(--m-pre)   * 100cqw / 257)); }
+    .adv-pop__title    { font-size: min(calc(var(--m-title) * 1px), calc(var(--m-title) * 100cqw / 257)); }
+    .adv-pop__subtitle { font-size: min(calc(var(--m-sub)   * 1px), calc(var(--m-sub)   * 100cqw / 257)); }
+    .adv-pop__code     { font-size: min(calc(var(--m-body)  * 1px), calc(var(--m-body)  * 100cqw / 257)); }
+    .adv-pop__today    { font-size: min(calc(var(--m-today) * 1px), calc(var(--m-today) * 100cqw / 257)); }
+    .adv-pop__cond     { font-size: min(calc(var(--m-cond)  * 1px), calc(var(--m-cond)  * 100cqw / 257)); }
+    .adv-pop__cta      { font-size: min(calc(var(--m-cta)   * 1px), calc(var(--m-cta)   * 100cqw / 257)); }
 
     .adv-pop__bg {
       background-image: var(--bg-m, var(--bg-d));
