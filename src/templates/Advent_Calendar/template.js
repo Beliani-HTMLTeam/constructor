@@ -12,6 +12,8 @@ import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 import { Space } from './components/Space.js';
 import { ImageWithLink } from './components/ImageWithLink.js';
 
+import { AdventConditionsBox } from './components/advent-popup/index.js';
+
 const AdventCalendar2026 = async ({
   links,
   queries,
@@ -91,10 +93,11 @@ const AdventCalendar2026 = async ({
   };
 
   const columnsImage = ImageWithLink({
-    href: '#',
+    href: links?.columnsImage_href,
     src: links?.columnsImage_src,
     insideTr: true,
     alt: 'Advantages',
+    tdClass: "newsletterContainer40px",
   });
 
   const dailyDealsImage = ImageWithLink({
@@ -102,6 +105,8 @@ const AdventCalendar2026 = async ({
     src: links?.daily_deals_src,
     insideTr: true,
     alt: 'Daily Deals',
+    
+    tdClass: "newsletterContainer40px",
   });
 
   const isAfterFreebies = introPosition === 'afterFreebies';
@@ -122,7 +127,7 @@ const AdventCalendar2026 = async ({
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
 
     <tr><td><table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: ${TopImageTitle_data.backgroundColor}; color: ${TopImageTitle_data.color}; text-align: center;">
-    ${Space({ insideTr: true })}
+    ${Space({ insideTr: true, className: "newsletterBottom35px" })}
     
     <tr>
       <td style="color: ${TopImageTitle_data.color}; text-align: center;" class="newsletterContainer40px">
@@ -138,15 +143,18 @@ const AdventCalendar2026 = async ({
 
   ${columnsImage}
 
+  ${Space({ insideTr: true, className: "newsletterBottom35px" })}
+
   ${dailyDealsImage}
+  ${Space({ insideTr: true, className: 'newsletterBottom80px' })}
 
     </table>
 
+    ${type !== 'newsletter' ? AdventConditionsBox({ maxWidth: 650 }) : ''}
 
-    
-    ${FooterElement}
+    ${type === 'newsletter' ? FooterElement : ''}
     `;
-  };
-  // ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
+};
+// ${SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
 
 export { AdventCalendar2026 };

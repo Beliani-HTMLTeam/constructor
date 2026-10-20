@@ -29,6 +29,7 @@ const Thursday = async ({
   timer,
   TopImageTitle_data,
   TopImage_data,
+  footer_theme,
 
   // functions passed:
   getHeader,
@@ -128,7 +129,9 @@ const Thursday = async ({
 
   const isAfterFreebies = introPosition === 'afterFreebies' || introPosition === 'afterFirstCategory';
   const isAfterTimer = introPosition === 'afterTimer' && hasTimer;
-  const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer ? '' : IntroElement;
+  const isBeforeTopImage = introPosition === 'beforeTopImage';
+  const IntroBeforeTopImageElement = isBeforeTopImage ? IntroElement : '';
+  const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer || isBeforeTopImage ? '' : IntroElement;
   const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
   const IntroAfterTimerBeforeCategoriesElement =
     isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
@@ -141,13 +144,15 @@ const Thursday = async ({
     hasSmallTilesCategory = true;
   }
 
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date, theme: footer_theme });
 
   return `
     ${HeaderElement}
 
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" ${background ? `bgcolor="${background}"` : ''} id="newsletter">
       ${TimerAtTop}
+
+      ${IntroBeforeTopImageElement}
 
       ${TopImageTitleElement}
 
