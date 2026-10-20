@@ -57,7 +57,7 @@ const intro = {
 		fontWeight: '400',
 		color: palette.text,
 		align: 'center',
-		phrase: 'Shop now',
+		phrase: 'Shop now First',
 		spaceBefore: 'newsletterBottom35px',
 		spaceAfter: 'newsletterBottom35px',
 	},
@@ -143,7 +143,7 @@ const gridProducts = (number, ids) =>
 const categories = [
 	{
 		src: getImageUrl('20261028_Pic.png'),
-		href: 'https://www.beliani.ch/gift-guide/gift-guide-homebody/',
+		href: 'https://www.beliani.ch/gift-guide/',
 		container: 'newsletterContainer55px',
 		tdClass: 'newsletterContainer55px',
 		background: palette.page,

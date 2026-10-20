@@ -1,5 +1,5 @@
 import { Footer as FooterComponent } from '@/components/footer.js';
-import { Footer as NewFooterComponent } from '@/components/footer_new.js';
+import { Footer as NewFooterComponent, FOOTER_THEMES } from '@/components/footer_new.js';
 import { Space } from './components/Space.js';
 import { wrapFooterUrl } from "@/utils/getTrackingUrl";
 import { getState } from '@/main/state/appState';
@@ -171,7 +171,9 @@ function shouldUseNewFooter(cDate) {
   return new Date(year, month - 1, day) >= NEW_FOOTER_FROM;
 }
 
-const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date }) => {
+const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date, theme = 'peach' }) => {
+  const frameColor = (FOOTER_THEMES[theme] ?? FOOTER_THEMES.peach).frame;
+
   const assemblyBanner =  {
         src: getFooter('Assembly src new'),
         href: getFooter('Assembly href NEW'),
@@ -241,19 +243,19 @@ const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, coun
       },
       advantages: {
         firstAdvantage: {
-          src: getFooter('Advantages src 1 new'),
+          src: getFooter('Advantages src 1 new x2'),
           href: getFooter('Advantages href 1'),
         },
         secondAdvantage: {
-          src: getFooter('Advantages src 2 new'),
+          src: getFooter('Advantages src 2 new x2'),
           href: getFooter('Advantages href 2'),
         },
         thirdAdvantage: {
-          src: getFooter('Advantages src 3 new'),
+          src: getFooter('Advantages src 3 new x2'),
           href: getFooter('Advantages href 3'),
         },
         fourthAdvantage: {
-          src: getFooter('Advantages src 4 new'),
+          src: getFooter('Advantages src 4 new x2'),
           href: getFooter('Advantages href 4'),
         },
       },
@@ -310,18 +312,17 @@ const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, coun
         vat: getFooter('VAT'),
       },
     },
-    { type }
+    { type, theme, bottomSpace: true }
   );
 
   return `
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="width: 100%; max-width: 650px;">
-  ${Space({ className: type === 'newsletter' ? 'newsletterBottom30px' : 'footerBottom30px',  insideTr: true, background: '#FFCCB7' })}
+  ${Space({ className: type === 'newsletter' ? 'newsletterBottom30px' : 'footerBottom30px',  insideTr: true, background: frameColor })}
     <tr>
-      <td style="width: 100%; max-width: 100%; background-color: #FFCCB7;">
+      <td bgcolor="${frameColor}" style="width: 100%; max-width: 100%; background-color: ${frameColor}; font-size: 0; line-height: 0; mso-line-height-rule: exactly;">
         ${FooterElement}
       </td>
     </tr>
-    ${Space({ className: type === 'newsletter' ? 'newsletterBottom15px' : 'footerBottom15px',  insideTr: true, background: '#FFCCB7' })}
   </table>
   `
 };

@@ -1,75 +1,9 @@
-import { Timer } from '../components/ProloTimer';
+import { Timer } from '../components/Timer';
 import { Space } from '../components/Space';
-import { resolveTimerColors } from '../helpers/timerColors.js';
+import { resolveTimerTheme } from '../helpers/timerColors.js';
 import languages from "@config/languages"
 
-
-let languagesMap = {
-  ...languages,
-  // "HU":
-  // {
-  //   ...languages.HU,
-  //   title: "hungarian"
-  // },
-}
-
-// todo: get timezones and labels from translations api
-export const timezones = {
-  "CHDE": "Europe/Zurich",
-  "CHFR": "Europe/Zurich",
-  "FR": "Europe/Paris",
-  "DE": "Europe/Berlin",
-  "UK": "Europe/London",
-  "AT": "Europe/Vienna",
-  "ES": "Europe/Madrid",
-  "PL": "Europe/Warsaw",
-  "NL": "Europe/Amsterdam",
-  "PT": "Europe/Lisbon",
-  "IT": "Europe/Rome",
-  "SE": "Europe/Stockholm",
-  "HU": "Europe/Budapest",
-  "DK": "Europe/Copenhagen",
-  "CZ": "Europe/Prague",
-  "FI": "Europe/Helsinki",
-  "NO": "Europe/Oslo",
-  "SK": "Europe/Bratislava",
-  "BENL": "Europe/Brussels",
-  "BEFR": "Europe/Brussels",
-  "RO": "Europe/Bucharest",
-  "HR": "Europe/Zagreb",
-  "SI": "Europe/Ljubljana"
-}
-
-export const labels = {
-  "CHDE": ["Tage", "Std.", "Min.", "Sek."],
-  "CHFR": ["jours", "h", "min", "s"],
-  "FR": ["jours", "h", "min", "s"],
-  "DE": ["Tage", "Std.", "Min.", "Sek."],
-  "UK": ["days", "h", "m", "s"],
-  "AT": ["Tage", "Std.", "Min.", "Sek."],
-  "ES": ["días", "h", "min", "s"],
-  "PL": ["dni", "h", "min", "s"],
-  "NL": ["dagen", "uren", "minuten", "seconden"],
-  "PT": ["Dias", "h", "min", "s"],
-  "IT": ["giorni", "h", "m", "s"],
-  "SE": ["dagar", "h", "min", "s"],
-  "HU": ["nap", "óra", "perc", "másodperc"],
-  "DK": ["dage", "t", "min", "s"],
-  "CZ": ["dnů", "hod.", "min.", "s"],
-  "FI": ["päivää", "tuntia", "minuuttia", "sekuntia"],
-  "NO": ["dager", "t", "min", "s"],
-  "SK": ["dní", "hod.", "min.", "s"],
-  "BENL": ["dagen", "uren", "minuten", "seconden"],
-  "BEFR": ["jours", "h", "min", "s"],
-  "RO": ["zile", "ore", "min", "sec"],
-  "SI": ["dani", "sati", "min.", "s"],
-  "HR": ["dni", "ur", "min.", "s"],
-}
-
-const buildProloTimerScript = ({ deadline, country }) => {
-  const timerLabels = labels[country] ?? labels.UK;
-  const timezone = timezones[country];
-
+const buildProloTimerScript = ({ deadline, timezone, timerLabels }) => {
   const wallClock = `${deadline}T23:59:00`;
 
   function wallClockToUtcMs(wc, tz) {
@@ -150,44 +84,149 @@ const buildProloTimerScript = ({ deadline, country }) => {
   `;
 };
 
-export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, type, shop }) => {
-
+export const TimerHandler = async ({
+  Inside,
+  queries,
+  links,
+  timer,
+  shopNow,
+  country,
+  type,
+  shop,
+  getProductById,
+  getProductId,
+  getCategoryLink,
+  getPhrase,
+  add_utm,
+}) => {
   if (!Inside || Inside.type !== 'timer' || !timer?.deadline) {
     return '';
   }
 
-  const resolvedColors = resolveTimerColors(Inside.maincolor);
-  const backgroundColor = resolvedColors?.backgroundColor ?? Inside.backgroundColor;
-  const color = resolvedColors?.color ?? Inside.color;
-  const unitBackground = resolvedColors?.unitBackground ?? Inside.unitBackground;
+  const theme = resolveTimerTheme(Inside.theme ?? timer?.theme);
+  const backgroundColor = theme?.backgroundColor ?? Inside.backgroundColor;
+  const color = theme?.color ?? Inside.color;
+  const unitBackground = theme?.unitBackground ?? Inside.unitBackground;
+
+  const timezone = getPhrase('timer-timezone');
+  const timerLabels = [
+    getPhrase('timer-days'),
+    getPhrase('timer-hours'),
+    getPhrase('timer-minutes'),
+    getPhrase('timer-seconds'),
+  ];
 
   const base = (shop?.origin ?? 'https://prologistics.info') + '/timer.gif';
 
-  let link = base + `?deadline=${timer.deadline}T23:59:00` +
-    `&timezone=${timezones[country]}` +
+  let link =
+    base +
+    `?deadline=${timer.deadline}T23:59:00` +
+    `&timezone=${timezone}` +
     // in prolo timer generator pt uses "portugal" instead of portugese
-    `&lang=${shop.slug === "PT" ? "portugal" : languagesMap[country]?.title}` +
+    `&lang=${shop?.slug === 'PT' ? 'portugal' : languages[country]?.title}` +
     `&bg=${(unitBackground || backgroundColor).replace('#', '')}` +
     `&color=${color.replace('#', '')}` +
     `&label=${color.replace('#', '')}` +
-    `&background=${backgroundColor.replace('#', '')}`
+    `&background=${backgroundColor.replace('#', '')}`;
   // + `&uid=USER_ID`
+
+  const fetchProduct = getProductById || getProductId;
+
+  const enrichProductEntry = async (product) => {
+    try {
+      if (!product) return null;
+      if (typeof product === 'string') return product;
+
+      let normalizedHref =
+        product.href && typeof getCategoryLink === 'function' ? getCategoryLink(product.href) : product.href;
+      if (normalizedHref && typeof add_utm === 'function') {
+        normalizedHref = add_utm(normalizedHref);
+      }
+
+      const imgSrc =
+        typeof product.src === 'object' && product.src !== null ? product.src.src : product.src;
+
+      if (product.id && typeof fetchProduct === 'function') {
+        const useDescription = product.useDescription ?? timer?.useDescription ?? true;
+        const productData = await fetchProduct(product.id, imgSrc, { useDescription, ...product?.options });
+        if (productData) {
+          let finalHref = normalizedHref || productData.href;
+          if (finalHref && typeof add_utm === 'function') {
+            finalHref = add_utm(finalHref);
+          }
+          const phraseTitle = product.titlePhrase
+            ? `${getPhrase(product.titlePhrase) ?? product.titlePhrase} ${productData.name ?? ''}`.trim()
+            : null;
+          return {
+            ...product,
+            ...productData,
+            description: phraseTitle || productData.description || product.description,
+            src: imgSrc || productData.src,
+            href: finalHref,
+          };
+        }
+      }
+
+      return {
+        ...product,
+        src: imgSrc,
+        href: normalizedHref || product.href,
+      };
+    } catch (err) {
+      console.error('getProductById error for freebie in TimerHandler', product, err);
+      return null;
+    }
+  };
 
   let freebies = null;
 
   if (timer?.freebies) {
-
-    if (typeof timer.freebies === 'string') {
+    if (Array.isArray(timer.freebies)) {
+      const enriched = await Promise.all(
+        timer.freebies.map((product) => enrichProductEntry(product))
+      );
+      // freebies link to the timer LP, not to product pages
+      freebies = enriched.filter(Boolean).map((product) => ({
+        ...product,
+        href: links?.Timer_href ?? product.href,
+      }));
+    } else if (typeof timer.freebies === 'string') {
       freebies = timer.freebies;
-    }
-    else {
-      freebies = timer.freebies.src;
+    } else if (timer.freebies?.src && !timer.freebies.id) {
+      freebies = typeof timer.freebies.src === 'object' ? timer.freebies.src.src : timer.freebies.src;
+    } else if (timer.freebies?.id) {
+      const enriched = await enrichProductEntry(timer.freebies);
+      freebies = enriched ? [enriched] : null;
     }
   }
 
+  let freeText = getPhrase('Free')
+  const freebiesTitle = getPhrase('Your free gifts');
+
+  // new layout = freebies given as products (array); old one = single image
+  const hasProductList = Array.isArray(freebies) && freebies.length > 0;
+  const ctaText = hasProductList ? getPhrase(timer?.cta?.phrase ?? 'See more') : shopNow;
+  const colors = {
+    background: theme?.freebiesBackground,
+    title: theme?.freebiesTextColor,
+    free: theme?.freebiesFreeColor,
+    text: theme?.freebiesTextColor,
+    lines: theme?.freebiesLineColor,
+    ...Object.fromEntries(
+      Object.entries(
+        timer?.colors ?? {
+          background: timer?.freebiesBackground,
+          title: timer?.freebiesTitleColor,
+          free: timer?.freebiesFreeColor,
+          text: timer?.freebiesTextColor,
+          lines: timer?.freebiesLineColors,
+        }
+      ).filter(([, value]) => value !== undefined)
+    ),
+  };
+
   return Inside && Inside.type === 'timer'
-    ? 
-    `
+    ? `
     ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.spaceBeforeBackground ?? backgroundColor }) : ''}
 
     ${Timer({
@@ -195,17 +234,21 @@ export const TimerHandler = ({ Inside, queries, links, timer, shopNow, country, 
       subtitle: queries?.timer?.[1] ?? 'Translation not found',
       href: links?.Timer_href,
       src: link,
-      color: color,
+      color,
       background: backgroundColor,
-      unitBackground: unitBackground,
+      unitBackground,
       freebies,
-      ctaText: shopNow,
-      showCta: Inside.showCta ?? true,
-      spaceTop: Inside.spaceTop,
-      spaceBottom: Inside.spaceBottom,
-      container: Inside.container,
+      freebiesTitle,
+      freebiesBackground: colors.background,
+      freebiesTitleColor: colors.title,
+      freebiesFreeColor: colors.free,
+      freebiesTextColor: colors.text,
+      freebiesColumns: timer?.columns ?? 1,
+      freebiesLineColors: colors.lines,
+      freeText,
+      ctaText,
       type: type,
-      script: buildProloTimerScript({ deadline: timer.deadline, country }),
+      script: buildProloTimerScript({ deadline: timer.deadline, timezone, timerLabels }),
     })}
       `
     : '';

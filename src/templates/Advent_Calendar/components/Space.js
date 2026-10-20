@@ -1,12 +1,20 @@
-const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTable = false }) => {
+const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTable = false, background, style = {} }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
+  let styleAttrib = '';
 
-  let html = '';
+  const bg = background || style?.bg;
+  if (bg) {
+    styleAttrib += `background-color: ${bg};`;
+  }
 
-  html += `<td class="${className}"></td>`;
+  if (style?.rounded) {
+    styleAttrib += style.rounded;
+  }
+
+  let html = `<td class="${className}" ${styleAttrib ? `style="${styleAttrib}"` : ''} ${bg ? `bgcolor="${bg}"` : ''}></td>`;
 
   if (insideTr) {
-    html = `<tr>${html}</tr>`;
+    html = `<tr ${bg ? `style="background-color: ${bg};" bgcolor="${bg}"` : ''}>${html}</tr>`;
   }
 
   if (insideTable) {
@@ -17,7 +25,7 @@ const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTab
     }
 
     // prettier-ignore
-    html = `<table ${tableAttributes}><tr>${html}</tr></table>`;
+    html = `<table ${tableAttributes} style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; ${bg ? `background-color: ${bg};` : ''}" ${bg ? `bgcolor="${bg}"` : ''}><tr>${html}</tr></table>`;
   }
 
   return html;

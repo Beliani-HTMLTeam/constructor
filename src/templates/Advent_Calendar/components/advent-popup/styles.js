@@ -1,14 +1,23 @@
+// ============================================================
+// AdventPopupStyles – all CSS for the advent popups.
+// Include once per page (inside the LP markup).
+//
+// 2026 design: the image is the BACKGROUND of the whole popup,
+// dark-red text sits on top of it
+//   desktop 967 x 480 – text in the right half (or left: textSide)
+//   mobile  257 x 460 – text at the top, scene at the bottom
+// ============================================================
 export function AdventPopupStyles() {
   return `
 <style>
   /* =====================================================
-     POPUP
      Every size is in cqw (= 1% of the popup width), so the
-     popup scales 1:1 with the design (desktop 967 x 480,
-     mobile 257 wide) on any screen.
+     popup scales 1:1 with the design on any screen.
+     Desktop: 1cqw = 9.67px at full size (967px)
+     Mobile:  1cqw = 2.57px at design size (257px)
      ===================================================== */
   .adv-pop, .adv-pop * { box-sizing: border-box; }
- 
+
   .adv-pop {
     display: none;
     position: fixed;
@@ -26,47 +35,66 @@ export function AdventPopupStyles() {
   .adv-pop.is-closing { animation: advPopFadeOut .3s ease-out forwards; }
   .adv-pop a { color: inherit; text-decoration: none; }
   .adv-pop button:focus-visible,
-  .adv-pop a:focus-visible { outline: 2px solid #F6E7E6; outline-offset: 2px; }
- 
-  /* ---------- Box (desktop 967 x 480) ---------- */
+  .adv-pop a:focus-visible { outline: 2px solid #750000; outline-offset: 2px; }
+
+  /* ---------- Box ---------- */
   .adv-pop__content {
-    /* desktop font sizes in cqw (967px design width) */
-    --fs-body: 2.6;     /* 25px  */
-    --fs-head: 5.2;     /* 50px  */
-    --fs-pre: 4.9;
-    --fw-pre: 600;
-    --fs-title: 5.15;   /* 50px  */
+    --pop-color: #750000;
+    --pop-bg: #F6E7E6;
+
+    /* desktop font sizes (cqw of 967) */
+    --fs-head: 5.17;    /* 50px */
+    --fs-pre: 4.14;     /* 40px */
+    --fw-pre: 400;
+    --fs-title: 5.17;   /* 50px */
     --lh-title: 1.2;
-    --fs-sub: 2.6;
-    --fs-cta: 1.85;     /* 18px  */
-    --gap-pre: 0.3cqw;
-    --gap-sub: 1.6cqw;
+    --fs-sub: 2.585;    /* 25px */
+    --fs-body: 2.585;   /* 25px – code */
+    --fs-today: 2.585;  /* 25px – Only Today */
+    --fs-cond: 2.585;   /* 25px – See conditions */
+    --fs-cta: 1.86;     /* 18px – Shop now */
+    --gap-pre: 1cqw;
+    --gap-sub: 2cqw;
     --gap-foot: 2.6cqw;
- 
+    --gap-foot-items: 2cqw;
+
     position: relative;
     display: flex;
     flex-direction: row;
+    align-items: stretch;
     width: min(967px, 100%, calc((100vh - 32px) * 2.0146));
     aspect-ratio: 967 / 480;
     overflow: hidden;
-    background: #750000;
-    color: #F6E7E6;
+    background-color: var(--pop-bg);
+    color: var(--pop-color);
     border-radius: 8px;
     font-family: Poppins, sans-serif;
-    text-align: left;
+    text-align: center;
     container-type: inline-size;
     animation: advPopOpen .4s cubic-bezier(.175, .885, .32, 1.275);
   }
   .adv-pop.is-closing .adv-pop__content {
     animation: advPopClose .4s cubic-bezier(.6, -.28, .735, .045) forwards;
   }
- 
+
   /* per type – desktop */
-  .adv-pop--percent { --fs-pre: 4.9;  --fw-pre: 600; --fs-title: 10.2; --lh-title: 1.02; }
-  .adv-pop--upto    { --fs-pre: 4.15; --fw-pre: 400; --fs-title: 7.15; --lh-title: 1.14; --gap-pre: 3.2cqw; --gap-foot: 3cqw; }
-  .adv-pop--special { --fs-pre: 3.1;  --fw-pre: 400; --fs-title: 6.1;  --lh-title: 1.05; --fs-sub: 3.1; --gap-pre: 0.2cqw; --gap-sub: 0; }
- 
-  /* ---------- Close (thin dark-red X on the image) ---------- */
+  .adv-pop--percent { --fs-pre: 5.17; --fw-pre: 600; --fs-title: 9.31; --lh-title: 1.05; --gap-pre: 0.4cqw; }  /* 50 / 90 */
+  .adv-pop--upto    { --fs-pre: 4.14; --fw-pre: 400; --fs-title: 5.17; --lh-title: 1.22; --gap-pre: 1.6cqw; }  /* 40 / 50 */
+  .adv-pop--special { --fs-pre: 3.1;  --fw-pre: 400; --fs-title: 6.2;  --lh-title: 1.05; --fs-sub: 3.1; --gap-pre: 0.2cqw; --gap-sub: 0; }
+
+  /* ---------- Background image (whole popup) ---------- */
+  .adv-pop__bg {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 0;
+    display: block;
+    background-image: var(--bg-d);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  /* ---------- Close (thin dark-red X) ---------- */
   .adv-pop__close {
     position: absolute;
     top: 6px; right: 10px;
@@ -78,42 +106,31 @@ export function AdventPopupStyles() {
     justify-content: center;
     border: 0;
     background: none;
-    color: #750000;
+    color: var(--pop-color);
     cursor: pointer;
   }
   .adv-pop__close svg { width: 24px; height: 24px; display: block; }
- 
-  /* ---------- Image (right, curved left edge) ---------- */
-  .adv-pop__img {
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 54%;
-    display: block;
-    -webkit-clip-path: ellipse(100% 92% at 100% 46%);
-            clip-path: ellipse(100% 92% at 100% 46%);
-  }
-  .adv-pop__img img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 0;
-  }
-  .adv-pop__m { display: none !important; }
- 
-  /* ---------- Text (left) ---------- */
+
+  /* ---------- Text column (right half, centered) ---------- */
   .adv-pop__deal {
     position: relative;
     z-index: 1;
-    width: 48%;
+    width: 49%;
+    margin-left: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    padding: 2.6cqw 1cqw 2.6cqw 4.4cqw;
+    align-items: center;
+    padding: 3cqw 2cqw;
+    pointer-events: none;           /* empty text area -> click goes to the background link */
   }
-  .adv-pop__container { display: flex; flex-direction: column; align-items: inherit; max-width: 100%; }
- 
+  .adv-pop__deal a,
+  .adv-pop__deal button,
+  .adv-pop__code-value { pointer-events: auto; }
+  .adv-pop--text-left .adv-pop__deal { margin-left: 0; margin-right: auto; }
+
+  .adv-pop__container { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
+
   .adv-pop__headline {
     margin-bottom: 5.6cqw;
     font-size: calc(var(--fs-head) * 1cqw);
@@ -123,56 +140,52 @@ export function AdventPopupStyles() {
   .adv-pop__pre {
     font-size: calc(var(--fs-pre) * 1cqw);
     font-weight: var(--fw-pre);
-    line-height: 1.15;
+    line-height: 1.2;
   }
   .adv-pop__title {
     font-size: calc(var(--fs-title) * 1cqw);
     font-weight: 700;
     line-height: var(--lh-title);
   }
-  .adv-pop__pre + .adv-pop__title { margin-top: var(--gap-pre); }
+  .adv-pop__pre ~ .adv-pop__title { margin-top: var(--gap-pre); }
   .adv-pop__subtitle {
     margin-top: var(--gap-sub);
     font-size: calc(var(--fs-sub) * 1cqw);
     font-weight: 400;
     line-height: 1.25;
   }
- 
+
   /* Code + copy */
-  .adv-pop__codes { display: flex; flex-direction: column; gap: 0.3cqw; margin-top: 0.3cqw; }
+  .adv-pop__codes { display: flex; flex-direction: column; align-items: center; gap: 0.3cqw; margin-top: 0.3cqw; }
   .adv-pop__code {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 0 0.6em;
+    gap: 0 0.5em;
     font-size: calc(var(--fs-body) * 1cqw);
     line-height: 1.25;
   }
   .adv-pop__code-value { -webkit-user-select: text; user-select: text; }
-  .adv-pop__copy {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px;
-    border: 0;
-    background: none;
-    color: #F6E7E6;
-    cursor: pointer;
-  }
-  .adv-pop__copy svg { width: 0.85em; height: 0.85em; display: block; }
-  .adv-pop__copied { font-size: 0.7em; opacity: .85; }
- 
+  /* copy icon from CopyCodeCTA.js (buildCopyIcon) */
+  .adv-pop__copy-wrap { display: inline-flex; align-items: center; }
+  .adv-pop__copy-wrap button { margin-left: 0 !important; font-size: inherit !important; }
+  .adv-pop__copy-icon { width: 0.75em; height: 0.75em; }   /* scales with the code text */
+
+  /* its slide-in notification must sit above the popup overlay (99999) */
+  [data-copy-notif] { z-index: 100001 !important; }
+
   /* Footer */
   .adv-pop__footer {
     display: flex;
     flex-direction: column;
-    align-items: inherit;
-    gap: 2cqw;
+    align-items: center;
+    gap: var(--gap-foot-items);
     margin-top: var(--gap-foot);
   }
   .adv-pop__footer:empty { display: none; }
   .adv-pop__today {
-    font-size: calc(var(--fs-body) * 1cqw);
+    font-size: calc(var(--fs-today) * 1cqw);
     font-weight: 600;
     line-height: 1.2;
   }
@@ -181,9 +194,9 @@ export function AdventPopupStyles() {
     padding: 0;
     border: 0;
     background: none;
-    color: #F6E7E6;
+    color: var(--pop-color);
     font-family: inherit;
-    font-size: calc(var(--fs-body) * 1cqw);
+    font-size: calc(var(--fs-cond) * 1cqw);
     font-weight: 400;
     line-height: 1.2;
     text-decoration: underline !important;
@@ -192,60 +205,67 @@ export function AdventPopupStyles() {
   }
   .adv-pop__cta { font-size: calc(var(--fs-cta) * 1cqw); font-weight: 700; }
   .adv-pop--special .adv-pop__footer { margin-top: 5.6cqw; }
- 
+
   /* =====================================================
-     MOBILE – image on top (curved bottom), text centered
-     sizes in cqw of the 257px design width
+     MOBILE – text on top, scene at the bottom (257 x 460)
      ===================================================== */
   @media screen and (max-width: 600px) {
     .adv-pop__content {
-      --fs-body: 4.67;   /* 12px */
-      --fs-head: 7;      /* 18px */
-      --fs-title: 9.7;   /* 25px */
-      --fs-sub: 4.67;
-      --fs-cta: 4.2;
+      /* mobile font sizes in px (exact design sizes) –
+         they only shrink on screens narrower than the 257px design */
+      --m-head: 18;
+      --m-pre: 30;
+      --m-title: 30;
+      --m-sub: 18;
+      --m-body: 18;     /* code */
+      --m-today: 18;    /* Only Today */
+      --m-cond: 12;     /* See conditions */
+      --m-cta: 12;      /* Shop now */
+      --gap-pre: 1.5cqw;
       --gap-sub: 3cqw;
-      --gap-foot: 6.5cqw;
- 
+      --gap-foot: 6cqw;
+      --gap-foot-items: 4cqw;
+
       flex-direction: column;
-      width: min(300px, 100%);
-      aspect-ratio: auto;
-      max-height: calc(100vh - 32px);
-      overflow-y: auto;
-      text-align: center;
+      width: min(257px, 100%, calc((100vh - 32px) * 0.5587));   /* max 257 x 460 */
+      aspect-ratio: 257 / 460;
     }
-    .adv-pop--percent { --fs-pre: 9.7; --fs-title: 19;   --gap-sub: 2.5cqw; }
-    .adv-pop--upto    { --fs-pre: 9.7; --fs-title: 11.7; --gap-pre: 4cqw; --lh-title: 1.3; }
-    .adv-pop--special { --fs-pre: 6.2; --fs-title: 12.4; --fs-sub: 6.2; --gap-pre: 0.5cqw; --gap-sub: 0; }
- 
-    .adv-pop__d { display: none !important; }
-    .adv-pop__m { display: block !important; }
- 
+    .adv-pop--percent { --m-pre: 30; --m-title: 35; --lh-title: 1.15; --gap-pre: 1.5cqw; }
+    .adv-pop--upto    { --m-pre: 30; --m-title: 35; --lh-title: 1.2;  --gap-pre: 2cqw; }
+    .adv-pop--special { --m-pre: 16; --m-title: 32; --m-sub: 16; --gap-pre: 0.5cqw; --gap-sub: 0; }
+
+    /* px size, scaled down only below 257px popup width */
+    .adv-pop__headline { font-size: min(calc(var(--m-head)  * 1px), calc(var(--m-head)  * 100cqw / 257)); }
+    .adv-pop__pre      { font-size: min(calc(var(--m-pre)   * 1px), calc(var(--m-pre)   * 100cqw / 257)); }
+    .adv-pop__title    { font-size: min(calc(var(--m-title) * 1px), calc(var(--m-title) * 100cqw / 257)); }
+    .adv-pop__subtitle { font-size: min(calc(var(--m-sub)   * 1px), calc(var(--m-sub)   * 100cqw / 257)); }
+    .adv-pop__code     { font-size: min(calc(var(--m-body)  * 1px), calc(var(--m-body)  * 100cqw / 257)); }
+    .adv-pop__today    { font-size: min(calc(var(--m-today) * 1px), calc(var(--m-today) * 100cqw / 257)); }
+    .adv-pop__cond     { font-size: min(calc(var(--m-cond)  * 1px), calc(var(--m-cond)  * 100cqw / 257)); }
+    .adv-pop__cta      { font-size: min(calc(var(--m-cta)   * 1px), calc(var(--m-cta)   * 100cqw / 257)); }
+
+    .adv-pop__bg {
+      background-image: var(--bg-m, var(--bg-d));
+      background-position: center bottom;
+    }
+
     .adv-pop__close { top: 4px; right: 4px; width: 28px; height: 28px; }
     .adv-pop__close svg { width: 20px; height: 20px; }
- 
-    .adv-pop__img {
-      position: relative;
-      top: auto; right: auto; bottom: auto;
+
+    /* text centered in the top 55% (the scene fills the bottom) */
+    .adv-pop__deal,
+    .adv-pop--text-left .adv-pop__deal {
       width: 100%;
+      height: 55%;
       flex: none;
-      aspect-ratio: 257 / 240;
-      -webkit-clip-path: ellipse(105% 100% at 50% 0%);
-              clip-path: ellipse(105% 100% at 50% 0%);
+      margin: 0;
+      justify-content: center;
+      padding: 4cqw 6cqw;
     }
- 
-    .adv-pop__deal {
-      width: 100%;
-      align-items: center;
-      padding: 8cqw 6cqw 9cqw;
-    }
-    .adv-pop__container { align-items: center; }
-    .adv-pop__code { justify-content: center; }
     .adv-pop__headline { margin-bottom: 7cqw; line-height: 1.3; }
-    .adv-pop__footer { gap: 5.5cqw; }
     .adv-pop--special .adv-pop__footer { margin-top: 9cqw; }
   }
- 
+
   @keyframes advPopFadeIn  { from { opacity: 0; } to { opacity: 1; } }
   @keyframes advPopFadeOut { from { opacity: 1; } to { opacity: 0; } }
   @keyframes advPopOpen  { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
@@ -253,12 +273,16 @@ export function AdventPopupStyles() {
   @media (prefers-reduced-motion: reduce) {
     .adv-pop, .adv-pop__content { animation-duration: 1ms !important; }
   }
- 
+
   .adv-pop__cond-src { display: none !important; }
- 
+
+  /* desktop-only / mobile-only texts (popup prop: mobile: { ... }) */
+  @media screen and (min-width: 601px) { .adv-pop .adv-pop__only-m { display: none !important; } }
+  @media screen and (max-width: 600px) { .adv-pop .adv-pop__only-d { display: none !important; } }
+
   /* ---------- Conditions block (AdventConditionsBox) ---------- */
-  .adv-cond { font-family: Poppins, sans-serif; color: #333; text-align: left; }
-  .adv-cond .adv-cond__title { font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #000; }
-  .adv-cond .adv-cond__text { font-size: 14px; line-height: 1.6; }
+  .adv-cond { font-family: Poppins, sans-serif; color: #333; text-align: left; box-sizing: border-box; }
+  .adv-cond .adv-cond__title { padding: 20px 20px 0; font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #000; }
+  .adv-cond .adv-cond__text { padding: 0 20px 20px; font-size: 14px; line-height: 1.6; }
 </style>`;
 }

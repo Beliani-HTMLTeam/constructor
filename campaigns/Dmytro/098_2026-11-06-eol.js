@@ -16,34 +16,70 @@ const tableQueries = [
   {
     tableRange: '24:30',
     name: 'categoryLinks',
+  }, 
+  {
+    tableRange: "36:37",
+    name: "timer"
   }
 ];
 
 const links = {
+  TopImageTitle_type: 'image',
+  TopImageTitle_src: translateImage({ value: '20261106_01.png' }),
   TopImageTitle_href: translateLink({ value: 'content/lp26-11-06' }),
 
-  TopImage_src: translateImage({ value: '20261106_gif.gif' }),
+  TopImage_src: getImageUrl('20261106_gif.gif', true),
 	TopImage_href: translateLink({ value: 'content/lp26-11-06' }),
+  Timer_href: translateLink({ value: 'content/lp26-11-02' }),
+
 };
 
 const additionalCss = `
-.newsletterTitleOverride{font-size: 28px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
-.newsletterProductTitleOverride{font-size: 15px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 700; padding-left: 10px;}
+.newsletter3ProductsLeft,
+.newsletter3ProductsCenter,
+.newsletter3ProductsRight {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.newsletterTitleOverride{font-size: 40px; font-family: "Open Sans", sans-serif; line-height: 1.2; font-weight: 600;}
+.newsletterProductTitleOverride{font-size: 20px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
 .newsletterProductPriceLeft {padding-left: 10px;}
 @media screen and (max-width: 768px) {
-.newsletterTitleOverride{font-size: 20px;}
-.newsletterProductTitleOverride{font-size: 13px; padding-left: 5px;}
+  .newsletter3ProductsLeft,
+  .newsletter3ProductsCenter,
+  .newsletter3ProductsRight {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+.newsletterTitleOverride{font-size: 34px;}
+.newsletterProductTitleOverride{font-size: 15px; }
 .newsletterProductPriceLeft {padding-left: 5px;}
 }
 `;
 
 const additionalCssLp = `
-#newsletter .newsletterTitleOverride{font-size: 28px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
-#newsletter .newsletterProductTitleOverride{font-size: 15px; font-family: "Open Sans", sans-serif; line-height: 1.2; text-transform: uppercase; font-weight: 700; padding-left: 10px;}
+#newsletter .newsletter3ProductsLeft,
+#newsletter .newsletter3ProductsCenter,
+#newsletter .newsletter3ProductsRight {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+@media screen and (max-width: 768px) {
+  #newsletter .newsletter3ProductsLeft,
+  #newsletter .newsletter3ProductsCenter,
+  #newsletter .newsletter3ProductsRight {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+}
+.newsletterTitleOverride{font-size: 40px; line-height: 1.2; font-weight: 600;}
+.newsletterProductTitleOverride{font-size: 20px; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
 #newsletter .newsletterProductPriceLeft {padding-left: 10px;}
 @media screen and (max-width: 768px) {
-#newsletter  .newsletterTitleOverride{font-size: 20px;}
-#newsletter  .newsletterProductTitleOverride{font-size: 13px; padding-left: 5px;}
+#newsletter  .newsletterTitleOverride{font-size: 34px;}
+#newsletter  .newsletterProductTitleOverride{font-size: 15px; }
 #newsletter  .newsletterProductPriceLeft {padding-left: 5px;}
 }
 `;
@@ -52,57 +88,49 @@ const TopImageTitle_data = {
 	mainColor: '#750000',
   secondaryColor: '#000000',
 	backgroundColor: '#FFCEB5',
-	type: 'eolTitle',
-  renderType: 'text',
+	type: 'eol',
+  position: 'afterTopImage',
 };
 
-const TopImage_data = {
-	container: "newsletterContainer"
-}
 
 const intro_cta_overrides = {
 }
 
 const timer = {
 	freebies: [
-		// TORNIO
+		// ANDIRIN
 		{
-			id: 229265,
-			titlePhrase: 'Candle Holders',
-			src: getImageUrl('20261001_free01.png', true),
+			id: 257987,
+			titlePhrase: 'Decorative Cushions',
+			src: getImageUrl('20261106freebie1.png', true),
 		},
-		// CANDELARIA
+		// PADRE
 		{
-			id: 251828,
-			titlePhrase: 'Wreath',
-			src: getImageUrl('20261001_free02.png', true),
+			id: 232377,
+			titlePhrase: 'Candle Holder',
+			src: getImageUrl('20261106freebie2.png', true),
 		},
-		// OURENSE
+		// FLORETTA
 		{
-			id: 336136,
-			titlePhrase: 'Garland',
-			src: getImageUrl('20261001_free03.png', true),
+			id: 367111,
+			titlePhrase: 'Neon LED Signs',
+			src: getImageUrl('20261106freebie3.png', true),
 		},
-		// CUPCAKE
+		// PONTIVY
 		{
-			id: 571807,
-			titlePhrase: 'Scatter cushion',
-			src: getImageUrl('20261001_free04.png', true),
-		},
-		// PUDDING
-		{
-			id: 571845,
-			titlePhrase: 'Scatter cushion',
-			src: getImageUrl('20261001_free05.png', true),
-		},
+			id: 232794,
+			titlePhrase: 'Decorative Tray',
+			src: getImageUrl('20261106freebie4.png', true),
+		}
 	],
-	theme: 'Subtle Peach',
+	theme: 'Soft Peach',
 	deadline: '2026-11-08',
 }
 
 const palette = {
   accent: '#FF2F00',
   dark: '#750000',
+  title: '#750000',
   text: '#000000',
   page: '#FFFFFF',
   body: '#FFF5F1',
@@ -110,23 +138,25 @@ const palette = {
   boxBorder: '#FFCCB7',
   price: '#750000',
   newbg:'#FDF8F8',
-  buttonCta: "#FFFFFF"
+  buttonCta: "#FFFFFF",
+  button: "#FF2F00"
 };
 
 const button = {
   show: true,
-  align: 'left',
+  align: 'center',
   variant: 'button',
-  background: palette.dark,
+  background: palette.button,
   fontSize: '15px',
   lineHeight: '16px',
-  fontWeight: '700',
+  fontWeight: '600',
   letterSpacing: '0',
-  paddingX: 45,
-  paddingY: 15,
+  paddingX: 35,
+  paddingY: 14,
   mobilePaddingX: 24,
-  mobilePaddingY: 14,
-  borderRadius: '0px',
+  mobilePaddingY: 13,
+  borderRadius: '4px',
+  textTransform: 'none',
 };
 
 const merge = (base, patch = {}) =>
@@ -140,24 +170,27 @@ const merge = (base, patch = {}) =>
 
 const productCategory = (number, name, href, products, overrides) => merge({
   paddingTop: 0,
-  spaceAfter: 'newsletterBottom35px',
+  spaceAfter: 'newsletterBottom80px',
   name,
   href,
   src: getImageUrl(`20261106Category${number}0.jpg`),
-  background: palette.newbg,
+  background: palette.body,
+
+  container: 'newsletterContainer35px',
+  insideContainer: true,
 
   color: palette.text,
 
   type: 'grid',
 
-  paragraph: { show: false, spaceAfter: 0 },
+  paragraph: { show: false, spaceAfter: 'newsletterBottom35px' },
 
   title: {
     show: true,
-    color: palette.text,
-    position: 'afterImg',
-    align: 'center',
-    spaceAfter: 0,
+    color: palette.title,
+    position: 'beforeImg',
+    align: 'left',
+    spaceAfter: 'newsletterBottom20px',
     className: 'newsletterTitleOverride',
 
     number: {
@@ -173,8 +206,8 @@ const productCategory = (number, name, href, products, overrides) => merge({
     ...button,
     position: 'afterProducts',
     color: '#FFFFFF',
-    spaceBefore: 'newsletterBottom30px',
-    spaceAfter: 'newsletterBottom30px',
+    spaceBefore: 'newsletterBottom20px',
+    spaceAfter: '',
     align: 'center',
   },
 
@@ -185,20 +218,17 @@ const productCategory = (number, name, href, products, overrides) => merge({
     spaceClass: 'newsletterBottom15px',
 
     gapBetweenVertical: 'newsletterBottom10px',
-    gapBetweenHorizontal: 5,
+    gapBetweenHorizontal: 10,
     containerInsetPct: 0,
     gapPct: 1,
     hideLastBottomGap: true,
-    spaceBetweenVertical: 'newsletterBottom35px',
+    spaceBetweenVertical: 0,
 
-    outlineFilledPadding: number % 2 === 0 ? 20 : null,
-    productsBg:palette.newbg,
 
     prices: {
       lowColor: palette.price,
       highColor: palette.price,
       reserveHighPrice: 17,
-      className: number % 2 !== 0 ? 'newsletterProductPriceLeft' : '',
     },
 
     title: { styles: number % 2 === 0 ? 'padding-left: 0 !important;' : '', color: palette.text, className: 'newsletterProductTitleOverride' },
@@ -215,32 +245,42 @@ const categories = [
     EVJA: 232046,
     VINTERBRO: 442853,
     TAMRE: 618747,
+  }, {
+    type: "3prods", paddingTop: 'newsletterBottom80px'
   }),
 
   productCategory(2, 'Beds', 'https://www.beliani.ch/bedroom-furniture/storage/', {
-    ORBEY: 615939,
+    ORBEY1: 615939,
     ZEN: 521610,
     MELLE: 187191,
-    ORBEY: 460226,
+    ORBEY2: 460226,
+  }, {
+    type: "grid",
   }),
 
   productCategory(3, 'Armchairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     DALBY: 458928,
     APATE: 649516,
     KINNO: 607821,
+  },{
+    type: "3prods"
   }),
 
   productCategory(4, 'Tables', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
-    ORBEY: 615939,
+    EMPORIA: 179197,
     POZZA: 675442,
     LANDER: 556654,
     MERCED: 310487,
+  }, {
+    type: "grid",
   }),
 
   productCategory(5, 'Chairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     KOBUK: 430797,
     LUANA: 407196,
     ARTESIA: 670151,
+  },{
+    type: "3prods"
   }),
 
   productCategory(6, 'Lighting', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
@@ -248,12 +288,16 @@ const categories = [
     JAVARI: 399266,
     KABOMPO: 497934,
     KITARE: 681466,
+  }, {
+    type: "grid",
   }),
 
   productCategory(7, 'Rugs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     MUGLA: 351291,
     GERZE: 379010,
     FENER: 376699,
+  },{
+    type: "3prods"
   })
 ];
 
@@ -274,25 +318,26 @@ export default new entities.Campaign({
       css: types.CSS.NS_FRIDAY,
       translationsSpreadsheet: campaignTranslationsSheet,
 
-      background: '#F2E6E6',
+      background: '#FFF5F1',
       color: '#000000',
 
       TopImageTitle_data: TopImageTitle_data,
-			TopImage_data: TopImage_data,
+			// TopImage_data: TopImage_data,
 
       wrapper: types.WRAPPER,
 
       intro: {
-				container: 'newsletterContainer',
+				container: 'newsletterContainer35px',
 				color: '#000000', // unused
 				backgroundColor: '#FFF5F1', // unused
 				alignment: 'center',
 				type: 'paragraph',
-				cta: {
+        cta: {
+          ...button,
 					phrase: 'Shop now',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
-          overrides: intro_cta_overrides,
+					overrides: intro_cta_overrides,
 				}
 			},
 			Inside: {
@@ -304,6 +349,7 @@ export default new entities.Campaign({
       tableQueries: tableQueries,
       additionalCss: additionalCss,
       optimizeCss: true,
+      timer: timer,
     },
 
     {
@@ -313,19 +359,20 @@ export default new entities.Campaign({
       css: types.CSS.LP_FRIDAY,
       translationsSpreadsheet: campaignTranslationsSheet,
 
-      background: '#F2E6E6',
+      background: '#FFF5F1',
       color: '#000000',
       
       TopImageTitle_data: TopImageTitle_data,
-			TopImage_data: TopImage_data,
+			// TopImage_data: TopImage_data,
       
       intro: {
-				container: 'newsletterContainer',
+				container: 'newsletterContainer35px',
 				color: '#000000', // unused
 				backgroundColor: '#FFF5F1', // unused
 				alignment: 'center',
 				type: 'paragraph',
 				cta: {
+          ...button,
 					phrase: 'Shop now',
 					show: true,
 					spaceAfter: 'newsletterBottom35px',
@@ -340,6 +387,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       additionalCss: additionalCssLp,
+      timer: timer,
     }
   ]
 })
