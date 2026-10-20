@@ -12,6 +12,7 @@ export const render = ({
   theme = {},
   tdClass = 'newsletterContainer',
   getCategoryLink,
+  add_utm,
 }) => {
   const cardEntries = Object.entries(queries ?? {})
     .filter(([key]) => /^card_\d+$/i.test(key))
@@ -110,7 +111,7 @@ export const render = ({
                 : "blackWeekDiscount"}" style="color: ${!hasPercentLabel
                 ? textColor
                 : discountColor};">
-                ${wrapInAnchor(labelText, ctaHref?.href, textColor)}
+                ${wrapInAnchor(labelText, add_utm(ctaHref?.href), textColor)}
               </td>
             </tr>
             ` : ''}
@@ -123,7 +124,7 @@ export const render = ({
                 : "blackWeekTitle"}" style="color: ${!hasPercentLabel
                 ? discountColor
                 : textColor};">
-              ${wrapInAnchor(discountText, ctaHref?.href, discountColor)}
+              ${wrapInAnchor(discountText, add_utm(ctaHref?.href), discountColor)}
               </td>
             </tr>
             ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
@@ -132,7 +133,7 @@ export const render = ({
             ${subtitleText ? `
             <tr>
               <td align="center" class="blackWeekSubtitle" style="color: ${textColor};">
-              ${wrapInAnchor(subtitleText, ctaHref?.href, textColor)}
+              ${wrapInAnchor(subtitleText, add_utm(ctaHref?.href), textColor)}
               </td>
             </tr>
             ` : ''}
@@ -153,7 +154,7 @@ export const render = ({
             }
             ${Space({ insideTr: true, className: 'newsletterBottom45px' })}
           </tbody>
-        </table>`, ctaHref?.href ?? "#", textColor)}
+        </table>`, add_utm(ctaHref?.href) ?? "#", textColor)}
       </td>
     `
 
@@ -169,7 +170,7 @@ export const render = ({
   <tr>
     <td class="blackWeekCta" width="100%" align="center" style="background: ${ctaBg}; color: ${ctaText};">
       
-      <a href="${renderType !== 'landing' ? ctaHref?.href ?? '#' : getCategoryLink(catHref)}" class="blackWeekCtaBorder" style="display: block; width: 100%; text-decoration: none; color: ${ctaText}; border-color: ${ctaBg};">
+      <a href="${renderType !== 'landing' ? add_utm(ctaHref?.href) ?? '#' : getCategoryLink(catHref)}" class="blackWeekCtaBorder" style="display: block; width: 100%; text-decoration: none; color: ${ctaText}; border-color: ${ctaBg};">
         ${renderType !== 'landing' ? getPhrase('Get codes') : getPhrase('Shop now')}
       </a>
       
