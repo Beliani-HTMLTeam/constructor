@@ -71,7 +71,7 @@ const styleLinks = (html, color) =>
         });
       }
       return part.replace(URL_RE, (url) => {
-        const clean = url.replace(/[.,;:!?)]+$/, ''); // a full stop at the end of a sentence is not part of the address
+        const clean = url.replace(/[.,;:!?)]+$/, ''); 
         const tail = url.slice(clean.length);
         const href = /^https?:\/\//i.test(clean) ? clean : `https://${clean}`;
         return `<a href="${href}" style="${linkStyle(color)}">${clean}</a>${tail}`;
@@ -84,7 +84,7 @@ const frameTable = (c, rows, { id = '', bg = FOOTER_THEMES.peach.frame, bottomCl
     <tbody>
       <tr>
         <td${cls([c.frame, bottomClass].filter(Boolean).join(' '))} bgcolor="${bg}" style="background-color: ${bg};">
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${bg}" style="width: 100%; background-color: ${bg}; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
             <tbody>
               ${rows}
             </tbody>
@@ -106,13 +106,13 @@ const ADVANTAGE_BG = '#F6E7E6';
 const ADVANTAGE_FILL_BG = [true, false, false, false];
 const ADVANTAGE_HEIGHT = 112;
 const ADVANTAGES_WIDTH = ADVANTAGE_WIDTHS.reduce((sum, w) => sum + w, 0);
-
+ 
 const advantageCell = (item, href, i) => {
   const width = ADVANTAGE_WIDTHS[i];
   const percent = ((width / ADVANTAGES_WIDTH) * 100).toFixed(2);
-
+ 
   const fill = ADVANTAGE_FILL_BG[i];
-
+ 
   return `
   <td width="${width}" valign="top"${fill ? ` bgcolor="${ADVANTAGE_BG}"` : ''} style="width: ${percent}%; font-size: 0; line-height: 0;${fill ? ` background-color: ${ADVANTAGE_BG};` : ''}">
     <a href="${href}">
@@ -120,7 +120,7 @@ const advantageCell = (item, href, i) => {
     </a>
   </td>`;
 };
-
+ 
 const thousandsMoreTile = (category, width) => `
   <a href="${category.href}">
     <img loading="lazy" src="${category.src}" alt="${category.name || ''}"${width ? ` width="${width}"` : ''} border="0" style="display: block; width: 100%; max-width: 100%; height: auto;" />
@@ -374,16 +374,15 @@ export function Footer(sections, options, name) {
     return `
             <tr>
               <td bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%; line-height: 10px; mso-line-height-rule: exactly; border-collapse: collapse;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${theme.frame}" style="width: 100%; background-color: ${theme.frame}; line-height: 10px; mso-line-height-rule: exactly; border-collapse: collapse;">
                   <tbody>
             ${Space({ className: c.bottom15, insideTr: true, background: theme.frame })}
                 <tr>
-                    <td align="center">
+                    <td align="center" bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
                     <span class="${c.conditions}" style="color: ${theme.legal}; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
                     </td>
                 </tr>
-            ${
-      isLP ? Space({ className: c.bottom15, insideTr: true, background: theme.frame }) : ''
+            ${isLP ? Space({ className: c.bottom15, insideTr: true, background: theme.frame }) : ''
       }
                   </tbody>
                 </table>
@@ -490,11 +489,14 @@ export function Footer(sections, options, name) {
         }) => {
           return `
                 <tr>
-                    <td align="center" class="${NL.companyDetails}" bgcolor="${theme.frame}" style="background-color: ${theme.frame}; color: ${theme.legal};">
-                        <span style="color: ${theme.legal};text-align: center; font-size:13px;">
+                    <td align="center" class="${NL.companyDetails}" bgcolor="${theme.frame}" style="background-color: ${theme.frame}; color: ${theme.legal}; line-height: 18px; mso-line-height-rule: exactly;">
+                        <span style="color: ${theme.legal}; text-align: center; font-size: 13px; line-height: 18px; mso-line-height-rule: exactly;">
                             ${address} | ${commercialRegister}
                         </span>
                     </td>
+                </tr>
+                <tr>
+                    <td bgcolor="${theme.frame}" height="1" style="background-color: ${theme.frame}; height: 1px; font-size: 1px; line-height: 1px; mso-line-height-rule: exactly;">&nbsp;</td>
                 </tr>
                 `;
         },
@@ -565,13 +567,13 @@ export function Footer(sections, options, name) {
   }
  
   if (!html) return html;
-
+ 
   const spacer = (className) =>
     className ? Space({ className, insideTr: true, background: theme.frame }) : '';
-
+ 
   const isLPType = options.type === types.LANDINGPAGE;
   const c = isLPType ? LP : NL;
-
+ 
   return frameTable(
     c,
     `${spacer(options.spaceTop)}${html}${spacer(options.spaceBottom)}`,
