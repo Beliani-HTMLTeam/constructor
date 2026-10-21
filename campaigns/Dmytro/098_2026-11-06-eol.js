@@ -14,11 +14,11 @@ const tableQueries = [
     name: "timer_freebies"
   },
   {
-    tableRange: '24:30',
+    tableRange: '24:37',
     name: 'categoryLinks',
   }, 
   {
-    tableRange: "36:37",
+    tableRange: "43:44",
     name: "timer"
   }
 ];
@@ -31,7 +31,7 @@ const links = {
   TopImage_src: getImageUrl('20261106_gif.gif', true),
 	TopImage_href: translateLink({ value: 'content/lp26-11-06' }),
   Timer_href: translateLink({ value: 'content/lp26-11-02' }),
-
+  Intro_cta_href: "https://www.beliani.ch/last-pieces/"
 };
 
 const additionalCss = `
@@ -40,6 +40,10 @@ const additionalCss = `
 .newsletter3ProductsRight {
   padding-left: 10px !important;
   padding-right: 10px !important;
+}
+
+.freebiesContainer--list .newsletterProductTitleFreebie {
+  font-size: 18px !important;
 }
 
 .newsletterTitleOverride{font-size: 40px; font-family: "Open Sans", sans-serif; line-height: 1.2; font-weight: 600;}
@@ -52,6 +56,9 @@ const additionalCss = `
     padding-left: 5px !important;
     padding-right: 5px !important;
   }
+  .newsletterParagraph {
+    font-size: 18px;
+}
 .newsletterTitleOverride{font-size: 34px;}
 .newsletterProductTitleOverride{font-size: 15px; }
 .newsletterProductPriceLeft {padding-left: 5px;}
@@ -66,6 +73,10 @@ const additionalCssLp = `
   padding-right: 10px !important;
 }
 
+#newsletter .freebiesContainer--list .newsletterProductTitleFreebie {
+  font-size: 18px !important;
+}
+
 @media screen and (max-width: 768px) {
   #newsletter .newsletter3ProductsLeft,
   #newsletter .newsletter3ProductsCenter,
@@ -73,15 +84,16 @@ const additionalCssLp = `
     padding-left: 5px !important;
     padding-right: 5px !important;
   }
+  #newsletter .newsletterParagraph {
+    font-size: 18px !important;
+  }
+  #newsletter  .newsletterTitleOverride{font-size: 34px;}
+  #newsletter  .newsletterProductTitleOverride{font-size: 15px; }
+  #newsletter  .newsletterProductPriceLeft {padding-left: 5px;}
 }
 .newsletterTitleOverride{font-size: 40px; line-height: 1.2; font-weight: 600;}
 .newsletterProductTitleOverride{font-size: 20px; line-height: 1.2; text-transform: uppercase; font-weight: 400;}
 #newsletter .newsletterProductPriceLeft {padding-left: 10px;}
-@media screen and (max-width: 768px) {
-#newsletter  .newsletterTitleOverride{font-size: 34px;}
-#newsletter  .newsletterProductTitleOverride{font-size: 15px; }
-#newsletter  .newsletterProductPriceLeft {padding-left: 5px;}
-}
 `;
 
 const TopImageTitle_data = {
@@ -149,6 +161,8 @@ const button = {
   background: palette.button,
   fontSize: '15px',
   lineHeight: '16px',
+  mobileFontSize: '18px',
+  mobileLineHeight: '20px',
   fontWeight: '600',
   letterSpacing: '0',
   paddingX: 35,
@@ -214,7 +228,7 @@ const productCategory = (number, name, href, products, overrides) => merge({
   product: {
     align: 'left',
 
-    imageWidth: number % 2 == 0 ? 280 : 180,
+    imageWidth: number == 1 || number == 5 || number == 9 || number == 13 ? 180 : 280,
     spaceClass: 'newsletterBottom15px',
 
     gapBetweenVertical: 'newsletterBottom10px',
@@ -244,71 +258,102 @@ const categories = [
   productCategory(0, 'Sofas', 'https://www.beliani.ch/bedroom-furniture/beds/', {
     LEIREN: 428030,
   }, {
-    type: "default", src: '', paddingTop: 'newsletterBottom80px', product: {title: false, prices: false}, cta: {show: false},
+    type: "default", src: '', paddingTop: 'newsletterBottom80px', product: {name: false, prices: false, gapBetweenVertical: false}, cta: {show: false}, spaceAfter: 0, paragraph: {spaceAfter: 0}, 
   }),
   productCategory(1, 'Sofas', 'https://www.beliani.ch/bedroom-furniture/beds/', {
     EVJA: 232046,
     VINTERBRO: 442853,
     TAMRE: 618747,
   }, {
-    type: "3prods", src: '', paddingTop: 'newsletterBottom80px'
+    type: "3prods", src: '', title: {show: false}
   }),
 
   productCategory(2, 'Beds', 'https://www.beliani.ch/bedroom-furniture/storage/', {
     GONFARON: 610528,
+  }, {
+    type: "default", src: '', paddingTop: 0, product: {name: false, prices: false, gapBetweenVertical: false}, cta: {show: false}, spaceAfter: 0, paragraph: {spaceAfter: 0}, 
+  }),
+
+  productCategory(3, 'Beds', 'https://www.beliani.ch/bedroom-furniture/storage/', {
     ORBEY1: 615939,
     ZEN: 521610,
     MELLE: 187191,
     ORBEY2: 460226,
   }, {
-    type: "grid",
+    type: "grid", src: '', title: {show: false}
   }),
 
-  productCategory(3, 'Armchairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
+  productCategory(4, 'Armchairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     AYLO: 590543,
+  }, {
+    type: "default", src: '', paddingTop: 0, product: {name: false, prices: false, gapBetweenVertical: false}, cta: {show: false}, spaceAfter: 0, paragraph: {spaceAfter: 0}, 
+  }),
+
+  productCategory(5, 'Armchairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     DALBY: 458928,
     APATE: 649516,
     KINNO: 607821,
   },{
-    type: "3prods"
+    type: "3prods",  src: '', title: {show: false}
   }),
 
-  productCategory(4, 'Tables', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
+  productCategory(6, 'Tables', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
+    SKYE: 504459,
+  }, {
+    type: "default", src: '', paddingTop: 0, product: {name: false, prices: false, gapBetweenVertical: false}, cta: {show: false}, spaceAfter: 0, paragraph: {spaceAfter: 0}, 
+  }),
+
+  productCategory(7, 'Tables', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
     EMPORIA: 179197,
     POZZA: 675442,
     LANDER: 556654,
     MERCED: 310487,
   }, {
-    type: "grid",
+    type: "grid", src: '', title: {show: false}
   }),
 
-  productCategory(5, 'Chairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
-    SKYE: 504459,
+  productCategory(8, 'Chairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
+    LUCINDA: 576107
+  }, {
+    type: "default", src: '', paddingTop: 0, product: {name: false, prices: false, gapBetweenVertical: false}, cta: {show: false}, spaceAfter: 0, paragraph: {spaceAfter: 0}, 
+  }),
+
+  productCategory(9, 'Chairs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     KOBUK: 430797,
     LUANA: 407196,
     ARTESIA: 670151,
   },{
-    type: "3prods"
+    type: "3prods", src: '', title: {show: false}
   }),
 
-  productCategory(6, 'Lighting', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
-    LUCINDA: 576107,
+  productCategory(10, 'Lighting', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
+    FABILOS: 414717,
+  }, {
+    type: "default", src: '', paddingTop: 0, product: {name: false, prices: false, gapBetweenVertical: false}, cta: {show: false}, spaceAfter: 0, paragraph: {spaceAfter: 0}, 
+  }),
+
+  productCategory(11, 'Lighting', 'https://www.beliani.ch/bedroom-furniture/lighting/table-lamps/', {
     APAYAO: 581973,
     JAVARI: 399266,
     KABOMPO: 497934,
     KITARE: 681466,
   }, {
-    type: "grid",
+    type: "grid", src: '', title: {show: false}
   }),
 
-  productCategory(7, 'Rugs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
+  productCategory(12, 'Rugs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     TACETTIN: 366197,
-    FABILOS: 414717,
+  }, {
+    type: "default", src: '', paddingTop: 0, product: {name: false, prices: false, gapBetweenVertical: false}, cta: {show: false}, spaceAfter: 0, paragraph: {spaceAfter: 0}, 
+  }),
+
+
+  productCategory(13, 'Rugs', 'https://www.beliani.ch/bedroom-furniture/storage/bedside-tables/', {
     MUGLA: 351291,
     GERZE: 379010,
     FENER: 376699,
   },{
-    type: "3prods"
+    type: "3prods", src: '', title: {show: false}
   })
 ];
 

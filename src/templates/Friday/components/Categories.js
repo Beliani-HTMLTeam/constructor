@@ -196,6 +196,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             tdClass: containerClass,
           })
         : CTA({
+          type: type,
             color: category.color ?? '#000000',
             href: ctaHref,
             text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
