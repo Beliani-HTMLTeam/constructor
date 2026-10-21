@@ -236,18 +236,22 @@ const productCategory = (number, name, href, products, overrides) => merge({
 
   products: Object.values(products).map((id, i) => ({
     id,
-    src: getImageUrl(`20261106Category${number}${i + 1}.png`),
+    src: getImageUrl(number == 0 || number == 2 || number == 4 || number == 6 || number == 8 || number == 10 || number == 12 ? `20261106Category${number}0.jpg` : `20261106Category${number}${i + 1}.png`),
   })),
 }, overrides);
 
 const categories = [
-  productCategory(1, 'Sofas', 'https://www.beliani.ch/bedroom-furniture/beds/', {
+  productCategory(0, 'Sofas', 'https://www.beliani.ch/bedroom-furniture/beds/', {
     LEIREN: 428030,
+  }, {
+    type: "default", src: '', paddingTop: 'newsletterBottom80px', product: {title: false, prices: false}, cta: {show: false},
+  }),
+  productCategory(1, 'Sofas', 'https://www.beliani.ch/bedroom-furniture/beds/', {
     EVJA: 232046,
     VINTERBRO: 442853,
     TAMRE: 618747,
   }, {
-    type: "3prods", paddingTop: 'newsletterBottom80px'
+    type: "3prods", src: '', paddingTop: 'newsletterBottom80px'
   }),
 
   productCategory(2, 'Beds', 'https://www.beliani.ch/bedroom-furniture/storage/', {
