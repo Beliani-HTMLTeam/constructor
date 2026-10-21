@@ -8,9 +8,11 @@ import {
   AdventPopupScript,
   AdventPopups, 
   AdventConfettiScript,
+  popupTextsFromQueries,
+  popupsFromQueries,
 } from './advent-popup/index.js';
  
-export function InteractiveHeroImage({ type }) {
+export function InteractiveHeroImage({ type,  queries = {} }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
@@ -39,13 +41,8 @@ export function InteractiveHeroImage({ type }) {
   ];
  
   // ===== Shared popup texts (translate per country) =====
-  const popupTexts = {
-    onlyToday: 'Only today',
-    seeConditions: 'See conditions',
-    shopNow: 'Shop now',          // used by type 'special'
-    conditionsTitle: 'Conditions:',
-    copied: 'Copied!',
-  };
+  const popupTexts = popupTextsFromQueries(queries);
+
  
   // ===== Popup per door (key = door number) =====
   // type: 'percent' | 'free' | 'buy4pay3' | 'cashback' | 'upto' | 'discount' | 'special'
@@ -59,30 +56,27 @@ export function InteractiveHeroImage({ type }) {
   //  conditions : text shown below the calendar after "See conditions"
   const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=10`;
 
-  const adventPopups = {
-    // 01.12 Tuesday – Up to 50% off Christmas Accessories
+  const fromQuery = (name) =>
+    (queries[name] || [])
+      .map((r) => String((Array.isArray(r) ? r[0] : r) ?? '').trim())
+      .filter(Boolean)
+      .join('<br />');
+  
+
+  const adventPopups = popupsFromQueries(queries, {
     1: {
       type: 'upto',
+      conditions: fromQuery('Regular Conditions'),                       // rows: pre, title
       imageDesktop: popupImg(1, 'd'),
       imageMobile: popupImg(1, 'm'),
-      link: 'https://www.beliani.co.uk/christmas-shop/christmas-accessories/',
-      pre: 'Christmas<br />Accessories',
-      title: 'Up to<br />50% OFF',
-      conditions: 'All items are subject to availability. All prices are subject to change without notification.',
+      link: 'https://www.beliani.co.uk/christmas-decorations/',
     },
-
-    // 02.12 Wednesday – Extra 10% off, minimum spend £500
     2: {
-      type: 'percent',
+      type: 'percent',                    // rows: pre, title, subtitle, code, (Voucher ID – skipped)
       imageDesktop: popupImg(2, 'd'),
       imageMobile: popupImg(2, 'm'),
-      pre: 'Extra',
-      title: '10% OFF',
-      subtitle: 'when you spend £500',
-      code: 'Code: 02advent26uk',
-      conditions: 'Add selected product(s) to your basket ... (conditions text)',
     },
-
+    // 3: { type: 'cashback', imageDesktop: popupImg(3, 'd'), imageMobile: popupImg(3, 'm') },
     // 03.12 Thursday – Up to 50% off Kid's Room
     3: {
       type: 'upto',
@@ -133,8 +127,8 @@ export function InteractiveHeroImage({ type }) {
       },
       conditions: 'Receive a free XXX ... (conditions text)',
     },
-  };
- 
+  });
+
   const InteractiveTopImage = `
     <tr>
       <td align="center" style="padding:0; line-height:0; font-size:0;">

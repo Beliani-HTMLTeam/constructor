@@ -43,6 +43,7 @@ const Friday = async ({
 }) => {
   // console.log(categories);
 
+  console.log("advent:", queries)
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
   const seeMore = getPhrase('See more');
