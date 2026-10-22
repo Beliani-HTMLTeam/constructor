@@ -8,6 +8,9 @@
 //                                                    (or element centre)
 //   window.AdventConfetti.burst(x, y)              -> x / y = 0..1 of the screen
 //
+// Desktop (wider than 600px) gets a bigger, wider burst than mobile.
+// Tune it with `desktop` / `mobile` (any canvas-confetti option).
+//
 // If the CDN can't be loaded (blocked, offline) nothing breaks –
 // the burst is simply skipped. To self-host, upload the file to
 // pictureserver and pass its URL as `src`.
@@ -16,8 +19,13 @@ export function AdventConfettiScript({
   src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js',
   colors = ['#750000', '#FFCCB7', '#FECD8C'],
   zIndex = 100000, // above the popup overlay (99999)
+  // mobile = same as the 2025 calendar
+  mobile = { particleCount: 30, startVelocity: 10, ticks: 100, scalar: 1.5 },
+  // desktop = more stars, flying further
+  desktop = { particleCount: 60, startVelocity: 28, ticks: 160, scalar: 1.8 },
+  desktopFrom = 601, // px – same breakpoint as the popups
 } = {}) {
-  const opts = JSON.stringify({ src, colors, zIndex });
+  const opts = JSON.stringify({ src, colors, zIndex, mobile, desktop, desktopFrom });
  
   return `
 <script>
@@ -41,9 +49,10 @@ export function AdventConfettiScript({
     return loading;
   }
  
-  // 3 small star bursts (same settings as the 2025 calendar)
+  // 3 star bursts – size depends on the screen
   function burst(x, y) {
     load().then(function (confetti) {
+      var size = window.innerWidth >= OPTS.desktopFrom ? OPTS.desktop : OPTS.mobile;
       var settings = {
         particleCount: 30,
         spread: 360,
@@ -58,6 +67,8 @@ export function AdventConfettiScript({
         disableForReducedMotion: true,
         origin: { x: x, y: y }
       };
+      for (var k in size) settings[k] = size[k];
+ 
       confetti(settings);
       setTimeout(function () { confetti(settings); }, 150);
       setTimeout(function () { confetti(settings); }, 300);
@@ -87,3 +98,4 @@ export function AdventConfettiScript({
 })();
 </script>`;
 }
+ 

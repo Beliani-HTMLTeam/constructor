@@ -1,33 +1,18 @@
-// ============================================================
-// Advent popup components
-//
-// Usage on any page:
-//   ${AdventPopupStyles()}                         – CSS (once)
-//   ${AdventPopups({ popups, texts })}             – all popup templates
-//   ${AdventConditionsBox()}                       – where "See conditions" text appears
-//   ${AdventPopupScript()}                         – runtime (once, after the templates)
-//   ${AdventConfettiScript()}                      – optional star confetti (window.AdventConfetti)
-//   then in the browser: window.AdventPopup.open(id)
-//
-// Single popup:  ${PercentOffPopup({ id: 4, pre: 'Extra', title: '10% OFF', ... })}
-// Texts from the sheet queries: popupsFromQueries / popupTextsFromQueries (fromQueries.js)
-// ============================================================
-import { PercentOffPopup } from './PercentOffPopup.js';
-import { FreeGiftPopup } from './FreeGiftPopup.js';
-import { Buy4Pay3Popup } from './Buy4Pay3Popup.js';
-import { CashbackPopup } from './CashbackPopup.js';
-import { UpToPopup } from './UpToPopup.js';
-import { DiscountPopup } from './DiscountPopup.js';
-import { SpecialDealPopup } from './SpecialDealPopup.js';
+import { PercentOffPopup } from './percentoff.js';
+import { FreeGiftPopup } from './freegift.js';
+import { Buy4Pay3Popup } from './buy4pay3.js';
+import { CashbackPopup } from './cashback.js';
+import { UpToPopup } from './upto.js';
+import { DiscountPopup } from './discount.js';
+import { SpecialDealPopup } from './special.js';
  
 export { PercentOffPopup, FreeGiftPopup, Buy4Pay3Popup, CashbackPopup, UpToPopup, DiscountPopup, SpecialDealPopup };
-export { AdventPopupShell, StandardPopup, PopupText, PopupCodes, PopupTiers, PopupFooter, AdventConditionsBox, DEFAULT_POPUP_TEXTS } from './parts.js';
+export { AdventPopupShell, StandardPopup, PopupText, PopupCodes, PopupFooter, AdventConditionsBox, DEFAULT_POPUP_TEXTS } from './parts.js';
 export { AdventPopupStyles } from './styles.js';
 export { AdventPopupScript } from './script.js';
 export { AdventConfettiScript } from './confetti.js';
 export { popupsFromQueries, popupTextsFromQueries, breakBeforeNumber, DEFAULT_POPUP_FIELDS, POPUP_TEXT_QUERIES } from './fromQueries.js';
- 
-// type name -> component
+
 export const ADVENT_POPUP_TYPES = {
   percent: PercentOffPopup,
   free: FreeGiftPopup,
