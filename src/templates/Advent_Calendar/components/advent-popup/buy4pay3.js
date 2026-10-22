@@ -8,11 +8,16 @@ import { StandardPopup } from './parts.js';
  *   title    – 'Buy 4 and<br />pay only for 3'
  *   subtitle – 'when you spend min. £200'
  *   code     – 'Code: XXX'
+ *   tiers    – pyramid version, each line with its own code:
+ *              [{ text: '<b>Buy 2</b> products and get <b>25% off</b><br />the cheapest product',
+ *                 mobileText: '<b>Buy 2</b> and get <b>25% off</b>', code: 'Code: XXX' }, ...]
  *
  * Common props:
  *   id           – popup id, used by AdventPopup.open(id) (e.g. the door number)
- *   imageDesktop – right side on desktop (plain rectangle ~1050 x 960 px)
- *   imageMobile  – top on mobile (plain rectangle ~600 x 560 px)
+ *   imageDesktop – background of the whole popup on desktop (967 x 480 design, export ~1934 x 960)
+ *   imageMobile  – background on mobile (257 x 460 design, export ~514 x 920, keep the top free for text)
+ *   textSide     – 'right' (default) or 'left': where the text sits on desktop
+ *   mobile       – optional mobile-only texts: { headline, pre, title, subtitle, code } ('' hides it on mobile)
  *   alt          – image alt text
  *   link         – image + texts become a link (new tab)
  *   conditions   – text shown under the calendar after "See conditions"
@@ -26,3 +31,4 @@ import { StandardPopup } from './parts.js';
 export function Buy4Pay3Popup(props) {
   return StandardPopup('deal', props, {});
 }
+ 

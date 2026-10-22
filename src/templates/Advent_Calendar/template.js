@@ -42,7 +42,7 @@ const AdventCalendar2026 = async ({
   add_utm,
 }) => {
   // console.log(categories);
-
+  console.log("advent:", queries)
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
   const seeMore = getPhrase('See more');
@@ -50,7 +50,7 @@ const AdventCalendar2026 = async ({
   const shopNow = getPhrase('Shop now');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ links, TopImage_data, type });
+  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type });
 
   const introCta_href = links.Intro_cta_href.includes("content/") ? links.Intro_cta_href : getIntroCtaHref({
     links,
@@ -93,10 +93,11 @@ const AdventCalendar2026 = async ({
   };
 
   const columnsImage = ImageWithLink({
-    href: '#',
+    href: links?.columnsImage_href,
     src: links?.columnsImage_src,
     insideTr: true,
     alt: 'Advantages',
+    tdClass: "newsletterContainer40px",
   });
 
   const dailyDealsImage = ImageWithLink({
@@ -104,6 +105,8 @@ const AdventCalendar2026 = async ({
     src: links?.daily_deals_src,
     insideTr: true,
     alt: 'Daily Deals',
+    
+    tdClass: "newsletterContainer40px",
   });
 
   const isAfterFreebies = introPosition === 'afterFreebies';
