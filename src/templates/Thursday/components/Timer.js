@@ -5,7 +5,7 @@ import { CTA } from './CTA.js';
 
 const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeColor, freeText, lineColor }) => {
 	if (!product) return '';
-	const lineStyle = lineColor ? ` style="border-bottom: 1px solid ${lineColor};"` : '';
+	const lineStyle = lineColor && !isLast ? ` style="border-bottom: 1px solid ${lineColor};"` : '';
 	const productHref = product.href;
 	const productSrc = typeof product.src === 'object' && product.src !== null ? product.src.src : product.src;
 	const rawTitle = (product.description?.trim() || product.name || '').trim();
@@ -35,9 +35,9 @@ const renderSingleFreebie = ({ product, isLast, freebiesTextColor, freebiesFreeC
           <!--<![endif]-->
         </td>
 
-        <td valign="middle" align="right" class="${isLast ? 'freebiePriceDesktopTdLast' : 'freebiePriceDesktopTd'}"${lineStyle}>
-          ${oldPrice ? `<div class="freebieOldPriceDesktop">${oldPrice}</div>` : ''}
-          <div class="freebieLowPriceDesktop" style="color: ${freebiesFreeColor};">${freeText}</div>
+        <td valign="middle" align="right" nowrap class="${isLast ? 'freebiePriceDesktopTdLast' : 'freebiePriceDesktopTd'}"${lineStyle}>
+          ${oldPrice ? `<div class="freebieOldPriceDesktop" style="white-space: nowrap;">${oldPrice}</div>` : ''}
+          <div class="freebieLowPriceDesktop" style="color: ${freebiesFreeColor}; white-space: nowrap;">${freeText}</div>
         </td>
   `;
 };
@@ -154,7 +154,7 @@ const renderFreebiesList = ({
           ${freebiesTitle
 		? `
           <tr>
-            <td colspan="${columns === 2 ? 7 : 3}" align="left" class="newsletterBottom10px">
+            <td colspan="${columns === 2 ? 7 : 3}" align="left" style="padding-bottom: 13px;">
               <span class="newsletterFreebiesTitle" style="color: ${freebiesTitleColor}; font-family: 'Open Sans', sans-serif; font-size: 20px; line-height: 1.2; font-weight: 400;">${freebiesTitle}</span>
             </td>
           </tr>

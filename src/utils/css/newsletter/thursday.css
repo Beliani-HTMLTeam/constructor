@@ -273,8 +273,8 @@ img {
 .freebiesContainer {
   padding-left: 40px;
   padding-right: 40px;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-top: 25px;
+  padding-bottom: 13px;
 }
 
 .freebieImage {
@@ -697,8 +697,8 @@ img {
   .freebiesContainer {
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 25px;
+    padding-bottom: 13px;
   }
 
   .freebieImageTd,
