@@ -2,7 +2,7 @@ import { Intro } from '../components/Intro';
 import { Space } from '../components/Space';
 import { CTA } from '../components/CTA';
 
-export const IntroHandler = ({ intro, queries, introCta_href, introCtaText, getCategoryLink, links }) => {
+export const IntroHandler = ({ intro, queries, introCta_href, introCtaText, getCategoryLink, links, type }) => {
   const introType = intro?.type ?? 'paragraph';
   const introColor = intro?.color ?? '#000000';
   const introBg = intro?.backgroundColor;
@@ -16,6 +16,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, introCtaText, getC
       <tr ${introBg ? `style="background-color: ${introBg};" bgcolor="${introBg}"` : ''}>
         <td ${ctaContainerClass ? `class="${ctaContainerClass}"` : ''} align="${intro?.cta?.align || intro?.alignment || 'center'}" ${introBg ? `style="background-color: ${introBg};" bgcolor="${introBg}"` : ''}>
           ${CTA({
+            type: type,
             href: introCta_href,
             text: introCtaText,
             color: introColor,

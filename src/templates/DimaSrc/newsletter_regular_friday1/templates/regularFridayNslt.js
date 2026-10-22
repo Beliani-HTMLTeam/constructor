@@ -32,6 +32,7 @@ import { OfferPartWrapper } from '../components/offerpart';
 import { FreebiesWrapper } from '../components/freebies';
 import { IntroWrapper } from '../components/intro/index.js';
 import { TimerHandler } from '../utils/_Timer_prolo.js';
+import { FOOTER_THEMES } from '@/components/footer_new.js';
 
 const RegularFridayNslt1 = async ({
   links,
@@ -200,9 +201,13 @@ const RegularFridayNslt1 = async ({
 
       ${timerData && timerData.position === 'afterTilesCategories' ? TimerElement : ''}
     
+      <tr>
+    <td valign="top" style="padding:0;border:0; background-color: ${FOOTER_THEMES.peach.frame};">
+      ${FooterElement}
+    </td>
+  </tr>
     </table>
       
-    ${FooterElement}
   `;
 };
 

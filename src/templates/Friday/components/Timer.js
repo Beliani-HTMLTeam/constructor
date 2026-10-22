@@ -111,6 +111,7 @@ const renderFreebiesList = ({
 	freeText = 'FREE',
 	columns = 1,
 	lineColors,
+	type
 }) => {
 	if (!Array.isArray(freebies) || freebies.length === 0) return '';
 
@@ -155,7 +156,7 @@ const renderFreebiesList = ({
 		? `
           <tr>
             <td colspan="${columns === 2 ? 7 : 3}" align="left" class="newsletterBottom10px">
-              <span class="newsletterFreebiesTitle" style="color: ${freebiesTitleColor}; font-family: 'Open Sans', sans-serif; font-size: 20px; line-height: 1.2; font-weight: 400;">${freebiesTitle}</span>
+              <span class="newsletterFreebiesTitle" style="color: ${freebiesTitleColor}; ${type == 'newsletter' ? 'font-family: "Open Sans", sans-serif;' : ''} font-size: 20px; line-height: 1.2; font-weight: 400;">${freebiesTitle}</span>
             </td>
           </tr>
           `
@@ -281,6 +282,7 @@ const Timer = ({
 				freeText,
 				columns: freebiesColumns,
 				lineColors: freebiesLineColors,
+				type,
 			})
 			: ''
 		}

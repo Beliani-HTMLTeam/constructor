@@ -1,5 +1,5 @@
 // Campaign generated from form
-const campaignTranslationsSheet = '2026::04.09.26 - Home Accessories';
+const campaignTranslationsSheet = '2026::Advent_calendar_popups';
 
 const tableQueries = [
   {
@@ -17,6 +17,31 @@ const tableQueries = [
   {
     "tableRange": "28:29",
     "name": "condition"
+  },
+  {
+		tableRange: '2',
+		name: 'SeeConditions',
+		tableName: '2026::Advent_calendar_popups',
+	},
+  {
+		tableRange: '3',
+		name: 'OnlyToday',
+		tableName: '2026::Advent_calendar_popups',
+	},
+  {
+		tableRange: '4:5',
+		name: 'Popup1',
+		tableName: '2026::Advent_calendar_popups',
+	},
+  {
+		tableRange: '6:10',
+		name: 'Popup2',
+		tableName: '2026::Advent_calendar_popups',
+	},
+  {
+    tableRange: '12',
+		name: 'Regular Conditions',
+		tableName: '2026::Advent_calendar_popups',
   }
 ];
 

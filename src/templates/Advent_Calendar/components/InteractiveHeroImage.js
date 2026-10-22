@@ -8,44 +8,45 @@ import {
   AdventPopupScript,
   AdventPopups, 
   AdventConfettiScript,
+  popupTextsFromQueries,
+  popupsFromQueries,
 } from './advent-popup/index.js';
  
-export function InteractiveHeroImage({ type }) {
+export function InteractiveHeroImage({ type,  queries = {} }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
   const adventImages = [
-    `${adventBase}advent_all_closed.webp?ver=11`, // 0 - all closed
-    `${adventBase}advent_open_1.webp?ver=11`,     // 1
-    `${adventBase}advent_open_2.webp?ver=11`,     // 2
-    `${adventBase}advent_open_3.webp?ver=11`,     // 3
-    `${adventBase}advent_open_4.webp?ver=11`,     // 4
-    `${adventBase}advent_open_5.webp?ver=11`,     // 5
-    `${adventBase}advent_open_6.webp?ver=11`,     // 6
-    `${adventBase}advent_open_7.webp?ver=11`,     // 7
-    `${adventBase}advent_open_8.webp?ver=11`,     // 8
-    `${adventBase}advent_open_9.webp?ver=11`,     // 9
-    `${adventBase}advent_open_10.webp?ver=11`,    // 10
-    `${adventBase}advent_open_11.webp?ver=11`,    // 11
-    `${adventBase}advent_open_12.webp?ver=11`,    // 12
-    `${adventBase}advent_open_13.webp?ver=11`,    // 13
-    `${adventBase}advent_open_14.webp?ver=11`,    // 14
-    `${adventBase}advent_open_15.webp?ver=11`,    // 15
-    `${adventBase}advent_open_16.webp?ver=11`,    // 16
-    `${adventBase}advent_open_17.webp?ver=11`,    // 17
-    `${adventBase}advent_open_18.webp?ver=11`,    // 18
-    `${adventBase}advent_open_19.webp?ver=11`,    // 19
-    `${adventBase}advent_open_20.webp?ver=11`,    // 20
+    `${adventBase}advent_all_closed.webp?ver=14`, // 0 - all closed
+    `${adventBase}advent_open_1.webp?ver=14`,     // 1
+    `${adventBase}advent_open_2.webp?ver=14`,     // 2
+    `${adventBase}advent_open_3.webp?ver=14`,     // 3
+    `${adventBase}advent_open_3.webp?ver=14`,     // 4 // placeholder, freebie
+    `${adventBase}advent_open_3.webp?ver=14`,     // 5 // placeholder, freebie
+    `${adventBase}advent_open_3.webp?ver=14`,     // 6 // placeholder, freebie
+    `${adventBase}advent_open_7.webp?ver=14`,     // 7
+    `${adventBase}advent_open_7.webp?ver=14`,     // 8 // placeholder, freebie
+    `${adventBase}advent_open_9.webp?ver=14`,     // 9
+    `${adventBase}advent_open_9.webp?ver=14`,    // 10 // placeholder, freebie
+    `${adventBase}advent_open_11.webp?ver=14`,    // 11
+    `${adventBase}advent_open_12.webp?ver=14`,    // 12
+    `${adventBase}advent_open_13.webp?ver=14`,    // 13 // placeholder, freebie
+    `${adventBase}advent_open_13.webp?ver=14`,    // 14 // placeholder, freebie
+    `${adventBase}advent_open_13.webp?ver=14`,    // 15 // placeholder, freebie
+    `${adventBase}advent_open_16.webp?ver=14`,    // 16
+    `${adventBase}advent_open_17.webp?ver=14`,    // 17
+    `${adventBase}advent_open_17.webp?ver=14`,    // 18 // placeholder, freebie 
+    `${adventBase}advent_open_17.webp?ver=14`,    // 19 // placeholder, freebie
+    `${adventBase}advent_open_17.webp?ver=14`,    // 20 // placeholder, freebie
+    `${adventBase}advent_open_21.webp?ver=14`,    // 21
+    `${adventBase}advent_open_21.webp?ver=14`,    // 22 // placeholder, freebie
+    `${adventBase}advent_open_21.webp?ver=14`,    // 23 // placeholder, freebie
+    `${adventBase}advent_open_24.webp?ver=14`,    // 24
   ];
  
   // ===== Shared popup texts (translate per country) =====
-  const popupTexts = {
-    onlyToday: 'Only today',
-    seeConditions: 'See conditions',
-    shopNow: 'Shop now',          // used by type 'special'
-    conditionsTitle: 'Conditions:',
-    copied: 'Copied!',
-  };
+  const popupTexts = popupTextsFromQueries(queries);
+
  
   // ===== Popup per door (key = door number) =====
   // type: 'percent' | 'free' | 'buy4pay3' | 'cashback' | 'upto' | 'discount' | 'special'
@@ -59,30 +60,27 @@ export function InteractiveHeroImage({ type }) {
   //  conditions : text shown below the calendar after "See conditions"
   const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=10`;
 
-  const adventPopups = {
-    // 01.12 Tuesday – Up to 50% off Christmas Accessories
+  const fromQuery = (name) =>
+    (queries[name] || [])
+      .map((r) => String((Array.isArray(r) ? r[0] : r) ?? '').trim())
+      .filter(Boolean)
+      .join('<br />');
+  
+
+  const adventPopups = popupsFromQueries(queries, {
     1: {
       type: 'upto',
+      conditions: fromQuery('Regular Conditions'),                       // rows: pre, title
       imageDesktop: popupImg(1, 'd'),
       imageMobile: popupImg(1, 'm'),
-      link: 'https://www.beliani.co.uk/christmas-shop/christmas-accessories/',
-      pre: 'Christmas<br />Accessories',
-      title: 'Up to<br />50% OFF',
-      conditions: 'All items are subject to availability. All prices are subject to change without notification.',
+      link: 'https://www.beliani.co.uk/christmas-decorations/',
     },
-
-    // 02.12 Wednesday – Extra 10% off, minimum spend £500
     2: {
-      type: 'percent',
+      type: 'percent',                    // rows: pre, title, subtitle, code, (Voucher ID – skipped)
       imageDesktop: popupImg(2, 'd'),
       imageMobile: popupImg(2, 'm'),
-      pre: 'Extra',
-      title: '10% OFF',
-      subtitle: 'when you spend £500',
-      code: 'Code: 02advent26uk',
-      conditions: 'Add selected product(s) to your basket ... (conditions text)',
     },
-
+    // 3: { type: 'cashback', imageDesktop: popupImg(3, 'd'), imageMobile: popupImg(3, 'm') },
     // 03.12 Thursday – Up to 50% off Kid's Room
     3: {
       type: 'upto',
@@ -133,8 +131,8 @@ export function InteractiveHeroImage({ type }) {
       },
       conditions: 'Receive a free XXX ... (conditions text)',
     },
-  };
- 
+  });
+
   const InteractiveTopImage = `
     <tr>
       <td align="center" style="padding:0; line-height:0; font-size:0;">
