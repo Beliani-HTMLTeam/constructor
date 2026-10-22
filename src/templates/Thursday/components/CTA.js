@@ -29,7 +29,6 @@ const CTA = ({
 	mobilePaddingY = null,
 	mobilePaddingTop = null,
 	mobilePaddingBottom = null,
-	msoTextRaise = null,
 	fontSize = '20px',
 	lineHeight = '20px',
 	fontWeight = '700',
@@ -102,33 +101,17 @@ const CTA = ({
 			const buttonContent = codeValue ? `${transformedText} ${copyIcon}` : transformedText;
 			const buttonHref = codeValue ? '#' : href;
 
-			const effectivePadTop = paddingTop ?? (paddingY !== null && paddingY !== undefined ? paddingY + 1 : 17);
-			const effectivePadBottom = paddingBottom ?? (paddingY !== null && paddingY !== undefined ? paddingY - 1 : 15);
+			const effectivePadTop = paddingTop ?? paddingY;
+			const effectivePadBottom = paddingBottom ?? paddingY;
 			const effectivePadX = paddingX;
 
-			const effectiveMobilePadTop = mobilePaddingTop ?? (mobilePaddingY !== null && mobilePaddingY !== undefined ? mobilePaddingY + 1 : effectivePadTop);
-			const effectiveMobilePadBottom = mobilePaddingBottom ?? (mobilePaddingY !== null && mobilePaddingY !== undefined ? mobilePaddingY - 1 : effectivePadBottom);
+			const effectiveMobilePadTop = mobilePaddingTop ?? mobilePaddingY ?? effectivePadTop;
+			const effectiveMobilePadBottom = mobilePaddingBottom ?? mobilePaddingY ?? effectivePadBottom;
 			const effectiveMobilePadX = mobilePaddingX ?? effectivePadX;
 
 			const effectiveMobileFontSize = mobileFontSize ?? fontSize;
 			const effectiveMobileLineHeight = mobileLineHeight ?? lineHeight;
 
-			const textLength = transformedText ? transformedText.length : 0;
-			const fontSizePx = parseFloat(fontSize) || 20;
-			const perCharWidth = fontSizePx * 0.6;
-			const letterSpacingPx = parseFloat(letterSpacing) || 0;
-			const estimatedTextWidth =
-				textLength * (perCharWidth + letterSpacingPx) + (codeValue ? 24 : 0);
-			const vmlWidth = Math.round(estimatedTextWidth + effectivePadX * 2);
-			
-			const parsedLineHeight = parseInt(lineHeight) || 16;
-			const parsedBorderRadius = Number.isNaN(parseInt(borderRadius)) ? 4 : parseInt(borderRadius);
-			
-			const vmlHeight = parsedLineHeight + effectivePadTop + effectivePadBottom;
-			const arcsize = Math.round((parsedBorderRadius / vmlHeight) * 100) + '%';
-
-			const vmlFontFamily = fontFamily.replace(/"/g, "'");
-			
 			const safeFontSize = fontSize.toString().replace(/[^0-9a-zA-Z]/g, '');
 			const safeMobileFontSize = effectiveMobileFontSize.toString().replace(/[^0-9a-zA-Z]/g, '');
 			const safeLetterSpacing = letterSpacing ? String(letterSpacing).replace(/[^0-9a-zA-Z-]/g, '') : '';
@@ -160,22 +143,26 @@ const CTA = ({
 			const tableAlignAttr = align === 'center' ? 'align="center"' : '';
 			const tableMarginStyle = align === 'left' ? 'margin: 0;' : align === 'right' ? 'margin: 0 0 0 auto;' : 'margin: 0 auto;';
 
-			const vmlRaiseStyle = `mso-text-raise:${msoTextRaise ?? '2pt'};`;
+			const outlookFontSizePx = Number.parseFloat(fontSize) || 20;
+
+			// Word-based Outlook ignores padding on <a>, so the padding is emulated with em-spaces scaled by mso-font-width.
+			// Outlook limits mso-font-width to 500%; use extra spaces above that.
+			const outlookSpace = (padding, raise = null) => {
+				const size = Math.max(0, Number(padding) || 0);
+				const count = Math.max(1, Math.ceil(size / (outlookFontSizePx * 5)));
+				const fontWidth = (size / (outlookFontSizePx * count)) * 100;
+
+				return `<i hidden style="font-style:normal;letter-spacing:0;mso-font-width:${fontWidth}%;${raise !== null ? `mso-text-raise:${raise}%;` : ''}">${'&emsp;'.repeat(count)}&#8203;</i>`;
+			};
+
+			const totalRaise = ((Number(effectivePadTop) + Number(effectivePadBottom)) / outlookFontSizePx) * 100;
+			const bottomRaise = (Number(effectivePadBottom) / outlookFontSizePx) * 100;
 
 			html = `
-        <table cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; ${tableMarginStyle}">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;${tableMarginStyle}">
           <tr>
-            <td align="${align}" style="font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;">
-              <!--[if gte mso 9]>
-              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${buttonHref}" style="height:${vmlHeight}px;v-text-anchor:middle;width:${vmlWidth}px;" arcsize="${arcsize}" stroke="f" fillcolor="${bgColor}">
-                <center style="color:${btnTextColor};font-family:${vmlFontFamily};font-size:${fontSize};font-weight:${fontWeight};letter-spacing:${letterSpacing ?? '0px'};text-transform: ${textTransform};"><span style="${vmlRaiseStyle}">${transformedText}</span></center>
-              </v:roundrect>
-              <![endif]-->
-              <!--[if !mso]><!-->
-                <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-family: ${fontFamily}; font-size: ${fontSize}; line-height: ${lineHeight}; font-weight: ${fontWeight};${letterSpacing ? ` letter-spacing: ${letterSpacing};` : ''} text-transform: ${textTransform}; color: ${btnTextColor}; padding: ${paddingCss}; text-decoration: none; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box; width: auto; max-width: 100%; white-space: normal; word-break: break-word;">
-                  <span style="color: ${btnTextColor}; display: inline-block; line-height: inherit;">${buttonContent}</span>
-                </a>
-              <!--<![endif]-->
+            <td align="${align}" style="font-size:${fontSize};line-height:${lineHeight};mso-line-height-rule:at-least;">
+              <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="background-color:${bgColor};border-radius:${borderRadius};color:${btnTextColor} !important;display:inline-block;font-family:${fontFamily};font-size:${fontSize};font-weight:${fontWeight};line-height:${lineHeight};mso-line-height-rule:at-least;${letterSpacing ? `letter-spacing:${letterSpacing};` : ''}padding:${paddingCss};mso-padding-alt:0;text-align:center;text-decoration:none !important;text-underline-color:${bgColor};text-transform:${textTransform};"><!--[if mso]>${outlookSpace(effectivePadX, totalRaise)}<span style="mso-text-raise:${bottomRaise}%;"><![endif]--><span style="color:${btnTextColor} !important;text-decoration:none !important;">${buttonContent}</span><!--[if mso]></span>${outlookSpace(effectivePadX)}<![endif]--></a>
             </td>
           </tr>
         </table>

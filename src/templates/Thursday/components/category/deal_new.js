@@ -405,7 +405,6 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		mobilePaddingY: 14,
 		mobilePaddingTop: 15,
 		mobilePaddingBottom: 13,
-		msoTextRaise: '2pt',
 		textTransform: category?.textTransform ?? 'uppercase',
 	};
 

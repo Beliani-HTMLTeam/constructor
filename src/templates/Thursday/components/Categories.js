@@ -201,6 +201,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
             text: category.cta.phrase ? getPhrase(category.cta.phrase) : getPhrase('shop now'),
             insideTr: true,
             tdClass: containerClass,
+            // newsletters load Open Sans (CTA default), landing pages only Poppins
+            fontFamily: type === 'landing' ? "'Poppins', sans-serif" : undefined,
             ...(typeof category.cta === 'object' ? {
               ...category.cta,
               bg: category.cta.background ?? category.cta.bg,
