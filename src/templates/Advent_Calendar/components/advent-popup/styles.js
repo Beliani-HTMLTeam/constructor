@@ -205,8 +205,9 @@ export function AdventPopupStyles() {
   }
   .adv-pop__tier .adv-pop__codes { margin-top: 0; }
   /* bold words from the sheet (<b>) – !important because the LP CSS has b { font-weight: 500 !important } */
+  /* and the same size as the text around them (the site CSS has b, strong { font-size: 14px }) */
   .adv-pop b,
-  .adv-pop strong { font-weight: 700 !important; }
+  .adv-pop strong { font-weight: 700 !important; font-size: inherit !important; }
   /* inline tags (<b>, <span>) must not make a text line taller than its block */
   .adv-pop__deal b,
   .adv-pop__deal strong,
@@ -361,4 +362,3 @@ export function AdventPopupStyles() {
   .adv-cond .adv-cond__text { padding: 0 20px 20px; font-size: 14px; line-height: 1.6; }
 </style>`;
 }
- 
