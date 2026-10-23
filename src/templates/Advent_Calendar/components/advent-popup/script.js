@@ -12,13 +12,13 @@
 // ============================================================
 export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar' } = {}) {
   const opts = JSON.stringify({ conditionsBoxId, trackingCategory });
-
+ 
   return `
 <script>
 (function () {
   if (window.AdventPopup) return;
   var OPTS = ${opts};
-
+ 
   function track(action, label, value) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -31,13 +31,13 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       eventID: ''
     });
   }
-
+ 
   var overlay, content, current = null, closeTimer = null;
-
+ 
   function getTpl(id) {
     return document.querySelector('template[data-adv-popup="' + String(id) + '"]');
   }
-
+ 
   function ensureOverlay() {
     if (overlay) return;
     overlay = document.getElementById('advent-popup');
@@ -51,33 +51,33 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       document.body.appendChild(overlay);
     }
     content = overlay.querySelector('.adv-pop__content');
-
+ 
     // grey background → close
     overlay.addEventListener('click', function (e) {
       if (e.target === overlay) close();
     });
-
+ 
     // copy icon (buildCopyIcon) handles copying + notification itself;
     // capture phase so we still track it before its onclick stops the event
     content.addEventListener('click', function (e) {
       if (e.target.closest('.adv-pop__copy-wrap button')) track('Verify', 'Promo', 'Voucher');
     }, true);
-
+ 
     // clicks inside the popup
     content.addEventListener('click', function (e) {
       var t = e.target;
       if (t.closest('.adv-pop__close')) { close(); return; }
-
+ 
       if (t.closest('.adv-pop__cond')) { showConditions(); return; }
-
+ 
       if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
     });
-
+ 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') close();
     });
   }
-
+ 
   function open(id) {
     var tpl = getTpl(id);
     if (!tpl) return false;
@@ -86,13 +86,15 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     current = id;
     content.className = 'adv-pop__content adv-pop--' + (tpl.getAttribute('data-layout') || 'deal') +
       (tpl.getAttribute('data-text') === 'left' ? ' adv-pop--text-left' : '');
+    // popup id on the box -> per-popup CSS, e.g. .adv-pop__content[data-popup="1"] { ... }
+    content.setAttribute('data-popup', String(id));
     content.innerHTML = '';
     content.appendChild(tpl.content.cloneNode(true));
     overlay.classList.remove('is-closing');
     overlay.classList.add('is-open');
     return true;
   }
-
+ 
   function close() {
     if (!overlay || !overlay.classList.contains('is-open')) return;
     overlay.classList.add('is-closing');
@@ -101,7 +103,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       content.innerHTML = '';
     }, 400);
   }
-
+ 
   function showConditions() {
     var src = content.querySelector('.adv-pop__cond-src');
     var box = document.getElementById(OPTS.conditionsBoxId);
@@ -115,7 +117,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 450);
   }
-
+ 
   // preload popup images so they appear instantly
   function preload() {
     var tpls = document.querySelectorAll('template[data-adv-popup]');
@@ -134,7 +136,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   } else {
     preload();
   }
-
+ 
   window.AdventPopup = {
     open: open,
     close: close,

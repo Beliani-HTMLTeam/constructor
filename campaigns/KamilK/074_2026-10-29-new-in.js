@@ -60,7 +60,7 @@ const intro = {
 		fontWeight: '400',
 		color: palette.text,
 		align: 'center',
-		phrase: 'Shop now',
+		phrase: 'Shop now First',
 		spaceBefore: 'newsletterBottom35px',
 	},
 };

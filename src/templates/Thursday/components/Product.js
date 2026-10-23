@@ -111,16 +111,20 @@ const Product = (
     .filter(Boolean)
     .join(' ');
 
-  let rows = fullRow(spaceClass);
+  const spaceTopClass = box.spaceTopClass ?? spaceClass;
+  const spaceBottomClass = box.spaceBottomClass ?? spaceClass;
+  const boxNameGapClass = box.nameGapClass ?? nameGapClass;
+
+  let rows = spaceTopClass ? fullRow(spaceTopClass) : '';
 
   if (ImageCell) rows += row(`<td align="${imageAlign}" valign="top">${ImageCell}</td>`);
   if (NameCell) {
-    if (nameGapClass) rows += fullRow(nameGapClass);
+    if (boxNameGapClass) rows += fullRow(boxNameGapClass);
     rows += row(`<td ${nameTdAttrs}>${NameCell}</td>`);
   }
   if (PricesTable) rows += row(`<td>${PricesTable}</td>`);
 
-  rows += fullRow(spaceClass);
+  if (spaceBottomClass) rows += fullRow(spaceBottomClass);
 
   return `
   <table cellspacing="0" cellpadding="0" border="0" width="100%" ${equalHeight ? 'style="height: 100%;"' : ''}>

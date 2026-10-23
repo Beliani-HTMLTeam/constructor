@@ -43,6 +43,7 @@ const Friday = async ({
 }) => {
   // console.log(categories);
 
+  console.log("advent:", queries)
   const HeaderElement = Header({ getHeader, country, background, type, id });
 
   const seeMore = getPhrase('See more');
@@ -67,7 +68,7 @@ const Friday = async ({
   });
 
   const introCtaText = intro?.cta?.phrase ? getPhrase(intro?.cta?.phrase) : shopNow;
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText, getCategoryLink, links });
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText, getCategoryLink, links, type });
   const TimerElement = await TimerHandler({
     Inside,
     queries,

@@ -130,8 +130,11 @@ const Thursday = async ({
   const isAfterFreebies = introPosition === 'afterFreebies' || introPosition === 'afterFirstCategory';
   const isAfterTimer = introPosition === 'afterTimer' && hasTimer;
   const isBeforeTopImage = introPosition === 'beforeTopImage';
+  const isAfterTopImageTitle = introPosition === 'afterTopImageTitle';
   const IntroBeforeTopImageElement = isBeforeTopImage ? IntroElement : '';
-  const IntroAfterTopImageElement = isAfterFreebies || isAfterTimer || isBeforeTopImage ? '' : IntroElement;
+  const IntroAfterTopImageTitleElement = isAfterTopImageTitle ? IntroElement : '';
+  const IntroAfterTopImageElement =
+    isAfterFreebies || isAfterTimer || isBeforeTopImage || isAfterTopImageTitle ? '' : IntroElement;
   const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
   const IntroAfterTimerBeforeCategoriesElement =
     isAfterTimer && timerPosition === 'beforeCategories' ? IntroElement : '';
@@ -155,6 +158,8 @@ const Thursday = async ({
       ${IntroBeforeTopImageElement}
 
       ${TopImageTitleElement}
+
+      ${IntroAfterTopImageTitleElement}
 
       ${TopImageElement}
 

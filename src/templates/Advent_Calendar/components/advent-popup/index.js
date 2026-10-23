@@ -11,8 +11,8 @@ export { AdventPopupShell, StandardPopup, PopupText, PopupCodes, PopupFooter, Ad
 export { AdventPopupStyles } from './styles.js';
 export { AdventPopupScript } from './script.js';
 export { AdventConfettiScript } from './confetti.js';
- 
-// type name -> component
+export { popupsFromQueries, popupTextsFromQueries, breakBeforeNumber, DEFAULT_POPUP_FIELDS, POPUP_TEXT_QUERIES } from './fromQueries.js';
+
 export const ADVENT_POPUP_TYPES = {
   percent: PercentOffPopup,
   free: FreeGiftPopup,
