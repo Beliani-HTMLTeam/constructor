@@ -112,11 +112,13 @@ export function PopupTiers({ tiers, texts = DEFAULT_POPUP_TEXTS }) {
 }
  
 // ---------- Footer: Only Today / See conditions / CTA ----------
+// "See conditions" is always shown (also when the conditions text is still empty);
+// conditions: false hides it.
 export function PopupFooter({ texts = DEFAULT_POPUP_TEXTS, onlyToday = true, conditions, cta, link }) {
   return (
     '<div class="adv-pop__footer">' +
     (onlyToday && texts.onlyToday ? `<div class="adv-pop__today">${texts.onlyToday}</div>` : '') +
-    (conditions ? `<button type="button" class="adv-pop__cond">${texts.seeConditions}</button>` : '') +
+    (conditions !== false && texts.seeConditions ? `<button type="button" class="adv-pop__cond">${texts.seeConditions}</button>` : '') +
     (cta && link
       ? `<a class="adv-pop__cta" href="${attr(link)}" target="_blank" rel="noopener" data-adv-link>${cta}</a>`
       : '') +
@@ -153,7 +155,7 @@ export function AdventPopupShell({ id, layout = 'deal', imageDesktop, imageMobil
   <button type="button" class="adv-pop__close" aria-label="${attr(t.close)}">${ICON_CLOSE}</button>
   ${PopupBackground({ imageDesktop, imageMobile, alt, link })}
   <div class="adv-pop__deal">${body}</div>
-  ${conditions ? `<div class="adv-pop__cond-src" hidden data-title="${attr(t.conditionsTitle)}">${conditions}</div>` : ''}
+  ${conditions !== false ? `<div class="adv-pop__cond-src" hidden data-title="${attr(t.conditionsTitle)}">${conditions || ''}</div>` : ''}
 </template>`;
 }
  
@@ -180,3 +182,4 @@ export function StandardPopup(layout, props, defaults = {}) {
 export function AdventConditionsBox({ id = 'advent-conditions', maxWidth = 570 } = {}) {
   return `<div id="${attr(id)}" class="adv-cond" style="display:none; max-width:${Number(maxWidth) || 570}px; margin:0 auto; background-color: #F7EAE9;"></div>`;
 }
+ 

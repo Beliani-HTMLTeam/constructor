@@ -68,7 +68,7 @@ export function AdventPopupStyles() {
     overflow: hidden;
     background-color: var(--pop-bg);
     color: var(--pop-color);
-    border-radius: 8px;
+    border-radius: 0;
     font-family: Poppins, sans-serif;
     text-align: center;
     container-type: inline-size;
@@ -169,9 +169,22 @@ export function AdventPopupStyles() {
   }
   .adv-pop__code-value { -webkit-user-select: text; user-select: text; }
   /* copy icon from CopyCodeCTA.js (buildCopyIcon) */
-  .adv-pop__copy-wrap { display: inline-flex; align-items: center; }
-  .adv-pop__copy-wrap button { margin-left: 0 !important; font-size: inherit !important; }
-  .adv-pop__copy-icon { width: 0.75em; height: 0.75em; }   /* scales with the code text */
+  /* the copy button must not make the "Code: XXX" line taller than the text:
+     its padding (bigger tap area) is cancelled by an equal negative margin */
+  .adv-pop__copy-wrap { display: inline-flex; align-items: center; line-height: 0; }
+  .adv-pop__copy-wrap button {
+    display: inline-flex !important;
+    align-items: center;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 6px !important;
+    margin: -6px !important;
+    line-height: 0 !important;
+    font-size: inherit !important;
+  }
+  .adv-pop__copy-icon { width: 0.75em !important; height: 0.75em !important; }   /* scales with the code text */
  
   /* its slide-in notification must sit above the popup overlay (99999) */
   [data-copy-notif] { z-index: 100001 !important; }
@@ -191,8 +204,15 @@ export function AdventPopupStyles() {
     line-height: 1.3;
   }
   .adv-pop__tier .adv-pop__codes { margin-top: 0; }
-  .adv-pop__tier-text b,
-  .adv-pop__tier-text strong { font-weight: 700; }
+  /* bold words from the sheet (<b>) – !important because the LP CSS has b { font-weight: 500 !important } */
+  .adv-pop b,
+  .adv-pop strong { font-weight: 700 !important; }
+  /* inline tags (<b>, <span>) must not make a text line taller than its block */
+  .adv-pop__deal b,
+  .adv-pop__deal strong,
+  .adv-pop__deal i,
+  .adv-pop__deal em,
+  .adv-pop__deal span { line-height: inherit !important; }
   .adv-pop__tiers + .adv-pop__footer { --gap-foot: 1.8cqw; --gap-foot-items: 1.4cqw; }
  
   /* Footer */
@@ -224,6 +244,15 @@ export function AdventPopupStyles() {
     cursor: pointer;
   }
   .adv-pop__cta { font-size: calc(var(--fs-cta) * 1cqw); font-weight: 700; }
+  /* LP CSS gives every <button> padding / min-height – keep our buttons as designed */
+  .adv-pop__cond,
+  .adv-pop__close {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  .adv-pop__cond { height: auto !important; }
   .adv-pop--special .adv-pop__footer { margin-top: 5.6cqw; }
  
   /* =====================================================
@@ -241,18 +270,22 @@ export function AdventPopupStyles() {
       --m-today: 18;    /* Only Today */
       --m-cond: 12;     /* See conditions */
       --m-cta: 12;      /* Shop now */
-      --m-tier: 12;     /* 4 for 3 pyramid lines + their codes */
-      --gap-pre: 1.5cqw;
-      --gap-sub: 3cqw;
-      --gap-foot: 6cqw;
-      --gap-foot-items: 4cqw;
+      --m-tier: 18;     /* 4 for 3 pyramid lines + their codes */
+      /* 10px between the text blocks (design) – shrinks only below 257px */
+      --m-gap: min(10px, calc(10 * 100cqw / 257));
+      --gap-pre: var(--m-gap);
+      --gap-sub: var(--m-gap);
+      --gap-foot: var(--m-gap);
+      --gap-foot-items: var(--m-gap);
  
       flex-direction: column;
       width: min(257px, 100%, calc((100vh - 32px) * 0.5587));   /* max 257 x 460 */
       aspect-ratio: 257 / 460;
     }
-    .adv-pop--percent { --m-pre: 30; --m-title: 35; --lh-title: 1.15; --gap-pre: 1.5cqw; }
-    .adv-pop--upto    { --m-pre: 25; --m-title: 35; --lh-title: 1.2;  --gap-pre: 2cqw; }
+    .adv-pop--percent { --m-pre: 30; --m-title: 35; --lh-title: 1.05; }
+    /* "Extra" sits close above "10% OFF" (design) */
+    .adv-pop--percent .adv-pop__pre { line-height: 1.05; }
+    .adv-pop--upto    { --m-pre: 25; --m-title: 35; --lh-title: 1.2; }
     .adv-pop--special { --m-pre: 16; --m-title: 32; --m-sub: 16; --gap-pre: 0.5cqw; --gap-sub: 0; }
  
     /* px size, scaled down only below 257px popup width */
@@ -266,8 +299,16 @@ export function AdventPopupStyles() {
     .adv-pop__cta      { font-size: min(calc(var(--m-cta)   * 1px), calc(var(--m-cta)   * 100cqw / 257)); }
     .adv-pop__tier-text,
     .adv-pop__tier .adv-pop__code { font-size: min(calc(var(--m-tier) * 1px), calc(var(--m-tier) * 100cqw / 257)); }
-    .adv-pop__tiers { gap: 1.5cqw; margin-top: 2cqw; }
-    .adv-pop__tiers + .adv-pop__footer { --gap-foot: 3cqw; --gap-foot-items: 2cqw; }
+    .adv-pop__tiers { gap: 0; margin-top: var(--m-gap); }
+    .adv-pop__tier-text,
+    .adv-pop__tier .adv-pop__code { line-height: 1.4 !important; }   /* 25px per line (design) */
+    .adv-pop__tiers + .adv-pop__footer { --gap-foot: var(--m-gap); --gap-foot-items: var(--m-gap); }
+    .adv-pop__tiers + .adv-pop__footer .adv-pop__today { font-weight: 400 !important; }   /* 4 for 3: regular "Only Today" (design) */
+ 
+    /* code: 10px below the title – but right under the subtitle
+       ("when you spend ... / Code: XXX" is one block in the design) */
+    .adv-pop__codes { margin-top: var(--m-gap); }
+    .adv-pop__container:has(.adv-pop__subtitle:not(.adv-pop__only-d)) + .adv-pop__codes { margin-top: 0; }
  
     .adv-pop__bg {
       background-image: var(--bg-m, var(--bg-d));
@@ -284,9 +325,18 @@ export function AdventPopupStyles() {
       height: 55%;
       flex: none;
       margin: 0;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 4cqw 6cqw;
+      /* 25px space at the top (shrinks only below the 257px design width) */
+      padding-top: min(25px, calc(25 * 100cqw / 257));
     }
+    /* text centered in the area – but when it's too long it starts at the top
+       (never cut off / pushed above the 25px) – works in every browser */
+    .adv-pop__deal > :first-child { margin-top: auto; }
+    .adv-pop__deal > :last-child { margin-bottom: auto; }
+ 
+    /* 4 for 3 pyramid has more lines -> taller text area (design: text ends at ~280 of 460) */
+    .adv-pop__deal:has(.adv-pop__tiers) { height: 64%; }
     .adv-pop__headline { margin-bottom: 7cqw; line-height: 1.3; }
     .adv-pop--special .adv-pop__footer { margin-top: 9cqw; }
   }
@@ -311,3 +361,4 @@ export function AdventPopupStyles() {
   .adv-cond .adv-cond__text { padding: 0 20px 20px; font-size: 14px; line-height: 1.6; }
 </style>`;
 }
+ 

@@ -21,31 +21,31 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
  
   const adventBase = 'https://pictureserver.net/static/2026/';
   const adventImages = [
-    `${adventBase}advent_all_closed.webp?ver=14`, // 0 - all closed
-    `${adventBase}advent_open_1.webp?ver=14`,     // 1
-    `${adventBase}advent_open_2.webp?ver=14`,     // 2
-    `${adventBase}advent_open_3.webp?ver=14`,     // 3
-    `${adventBase}advent_open_3.webp?ver=14`,     // 4 // placeholder, freebie
-    `${adventBase}advent_open_3.webp?ver=14`,     // 5 // placeholder, freebie
-    `${adventBase}advent_open_3.webp?ver=14`,     // 6 // placeholder, freebie
-    `${adventBase}advent_open_7.webp?ver=14`,     // 7
-    `${adventBase}advent_open_7.webp?ver=14`,     // 8 // placeholder, freebie
-    `${adventBase}advent_open_9.webp?ver=14`,     // 9
-    `${adventBase}advent_open_9.webp?ver=14`,    // 10 // placeholder, freebie
-    `${adventBase}advent_open_11.webp?ver=14`,    // 11
-    `${adventBase}advent_open_12.webp?ver=14`,    // 12
-    `${adventBase}advent_open_13.webp?ver=14`,    // 13 // placeholder, freebie
-    `${adventBase}advent_open_13.webp?ver=14`,    // 14 // placeholder, freebie
-    `${adventBase}advent_open_13.webp?ver=14`,    // 15 // placeholder, freebie
-    `${adventBase}advent_open_16.webp?ver=14`,    // 16
-    `${adventBase}advent_open_17.webp?ver=14`,    // 17
-    `${adventBase}advent_open_17.webp?ver=14`,    // 18 // placeholder, freebie 
-    `${adventBase}advent_open_17.webp?ver=14`,    // 19 // placeholder, freebie
-    `${adventBase}advent_open_17.webp?ver=14`,    // 20 // placeholder, freebie
-    `${adventBase}advent_open_21.webp?ver=14`,    // 21
-    `${adventBase}advent_open_21.webp?ver=14`,    // 22 // placeholder, freebie
-    `${adventBase}advent_open_21.webp?ver=14`,    // 23 // placeholder, freebie
-    `${adventBase}advent_open_24.webp?ver=14`,    // 24
+    `${adventBase}advent_all_closed.webp?ver=17`, // 0 - all closed
+    `${adventBase}advent_open_1.webp?ver=17`,     // 1
+    `${adventBase}advent_open_2.webp?ver=17`,     // 2
+    `${adventBase}advent_open_3.webp?ver=17`,     // 3
+    `${adventBase}advent_open_3.webp?ver=17`,     // 4 // placeholder, freebie
+    `${adventBase}advent_open_3.webp?ver=17`,     // 5 // placeholder, freebie
+    `${adventBase}advent_open_3.webp?ver=17`,     // 6 // placeholder, freebie
+    `${adventBase}advent_open_7.webp?ver=17`,     // 7
+    `${adventBase}advent_open_7.webp?ver=17`,     // 8 // placeholder, freebie
+    `${adventBase}advent_open_9.webp?ver=17`,     // 9
+    `${adventBase}advent_open_9.webp?ver=17`,    // 10 // placeholder, freebie
+    `${adventBase}advent_open_11.webp?ver=17`,    // 11
+    `${adventBase}advent_open_12.webp?ver=17`,    // 12
+    `${adventBase}advent_open_13.webp?ver=17`,    // 13 // placeholder, freebie
+    `${adventBase}advent_open_13.webp?ver=17`,    // 14 // placeholder, freebie
+    `${adventBase}advent_open_13.webp?ver=17`,    // 15 // placeholder, freebie
+    `${adventBase}advent_open_16.webp?ver=17`,    // 16
+    `${adventBase}advent_open_17.webp?ver=17`,    // 17
+    `${adventBase}advent_open_17.webp?ver=17`,    // 18 // placeholder, freebie 
+    `${adventBase}advent_open_17.webp?ver=17`,    // 19 // placeholder, freebie
+    `${adventBase}advent_open_17.webp?ver=17`,    // 20 // placeholder, freebie
+    `${adventBase}advent_open_21.webp?ver=17`,    // 21
+    `${adventBase}advent_open_21.webp?ver=17`,    // 22 // placeholder, freebie
+    `${adventBase}advent_open_21.webp?ver=17`,    // 23 // placeholder, freebie
+    `${adventBase}advent_open_24.webp?ver=17`,    // 24
   ];
  
   // ===== Shared popup texts (translate per country) =====
@@ -147,7 +147,8 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
       ...voucher(16, 'buy4pay3', ['title']),
       tiers: [0, 1, 2].map((i) => ({
         text: cell('Popup16', 1 + i),
-        mobileText: cell('Popup16', 4 + i) || undefined, // empty mobile cell -> desktop text
+        // mobile: one line per offer (design) – line breaks from the sheet are ignored
+        mobileText: cell('Popup16', 4 + i).replace(/\s*<br\s*\/?>\s*/gi, ' ') || undefined, // empty -> desktop text
         code: cell('Popup16', 7 + i),
       })),
     },
@@ -175,6 +176,10 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     <tr>
       <td align="center" style="padding:0; line-height:0; font-size:0;">
         ${AdventPopupStyles()}
+        <style>
+          /* TEST: "See conditions" 22px on desktop, popup 1 only (default 25px) – remove after the test */
+          .adv-pop__content[data-popup="1"] { --fs-cond: 2.275; }   /* 22 / 967 */
+        </style>
  
         <div id="advent-wrapper" style="
           position: relative;
@@ -207,59 +212,59 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
           <div class="advent-door" data-door="1" style="
             position: absolute;
             left: 50%;
-            top: 16%;
-            width: 15%;
-            height: 10%;
+            top: 5%;
+            width: 17%;
+            height: 12%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 1"></div>
           <!-- Door 2 -->
           <div class="advent-door" data-door="2" style="
             position: absolute;
-            left: 44%;
-            top: 26%;
-            width: 12%;
-            height: 9%;
+            left: 41%;
+            top: 17%;
+            width: 16%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 2"></div>
           <!-- Door 3 -->
           <div class="advent-door" data-door="3" style="
             position: absolute;
-            left: 56%;
-            top: 26%;
-            width: 15%;
-            height: 9%;
+            left: 57%;
+            top: 17%;
+            width: 17%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 3"></div>
           <!-- Door 4 -->
           <div class="advent-door" data-door="4" style="
             position: absolute;
-            left: 45%;
-            top: 42%;
-            width: 8%;
-            height: 6%;
+            left: 43%;
+            top: 37%;
+            width: 10%;
+            height: 7%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 4"></div>
           <!-- Door 5 -->
           <div class="advent-door" data-door="5" style="
             position: absolute;
-            left: 45%;
-            top: 36%;
-            width: 8%;
-            height: 6%;
+            left: 43%;
+            top: 29%;
+            width: 10%;
+            height: 8%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 5"></div>
           <!-- Door 6 -->
           <div class="advent-door" data-door="6" style="
             position: absolute;
-            left: 63%;
-            top: 36%;
-            width: 12%;
-            height: 12%;
+            left: 65%;
+            top: 29%;
+            width: 13%;
+            height: 15%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 6"></div>
@@ -267,19 +272,19 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
           <div class="advent-door" data-door="7" style="
             position: absolute;
             left: 54%;
-            top: 36%;
-            width: 9%;
-            height: 12%;
+            top: 30%;
+            width: 10%;
+            height: 14%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 7"></div>
           <!-- Door 8 -->
           <div class="advent-door" data-door="8" style="
             position: absolute;
-            left: 24%;
-            top: 49%;
-            width: 21%;
-            height: 11%;
+            left: 18%;
+            top: 46%;
+            width: 25%;
+            height: 12%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 8"></div>
@@ -287,59 +292,59 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
           <div class="advent-door" data-door="9" style="
             position: absolute;
             left: 58%;
-            top: 50%;
-            width: 12%;
-            height: 11%;
+            top: 46%;
+            width: 15%;
+            height: 13%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 9"></div>
           <!-- Door 10 -->
           <div class="advent-door" data-door="10" style="
             position: absolute;
-            left: 45%;
-            top: 48%;
-            width: 10%;
-            height: 12%;
+            left: 43%;
+            top: 44%;
+            width: 12%;
+            height: 14%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 10"></div>
           <!-- Door 11 -->
           <div class="advent-door" data-door="11" style="
             position: absolute;
-            left: 33%;
-            top: 60%;
-            width: 10%;
-            height: 8%;
+            left: 29%;
+            top: 58%;
+            width: 11%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 11"></div>
           <!-- Door 12 -->
           <div class="advent-door" data-door="12" style="
             position: absolute;
-            left: 23%;
-            top: 60%;
-            width: 10%;
-            height: 8%;
+            left: 17%;
+            top: 58%;
+            width: 12%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 12"></div>
           <!-- Door 13 -->
           <div class="advent-door" data-door="13" style="
             position: absolute;
-            left: 11%;
-            top: 77%;
-            width: 17%;
-            height: 10%;
+            left: 3%;
+            top: 79%;
+            width: 18%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 13"></div>
           <!-- Door 14 -->
           <div class="advent-door" data-door="14" style="
             position: absolute;
-            left: 43%;
-            top: 60%;
-            width: 14%;
-            height: 8%;
+            left: 40%;
+            top: 58%;
+            width: 18%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 14"></div>
@@ -347,99 +352,99 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
           <div class="advent-door" data-door="15" style="
             position: absolute;
             left: 58%;
-            top: 61%;
-            width: 13%;
-            height: 7%;
+            top: 59%;
+            width: 16%;
+            height: 9%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 15"></div>
           <!-- Door 16 -->
           <div class="advent-door" data-door="16" style="
             position: absolute;
-            left: 11%;
+            left: 3%;
             top: 69%;
-            width: 16%;
-            height: 9%;
+            width: 17%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 16"></div>
           <!-- Door 17 -->
           <div class="advent-door" data-door="17" style="
             position: absolute;
-            left: 59%;
-            top: 78%;
-            width: 15%;
-            height: 9%;
+            left: 60%;
+            top: 79%;
+            width: 18%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 17"></div>
           <!-- Door 18 -->
           <div class="advent-door" data-door="18" style="
             position: absolute;
-            left: 43%;
+            left: 40%;
             top: 69%;
-            width: 15%;
-            height: 8%;
+            width: 18%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 18"></div>
           <!-- Door 19 -->
           <div class="advent-door" data-door="19" style="
             position: absolute;
-            left: 27%;
+            left: 21%;
             top: 69%;
-            width: 15%;
-            height: 9%;
+            width: 18%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 19"></div>
           <!-- Door 20 -->
           <div class="advent-door" data-door="20" style="
             position: absolute;
-            left: 74%;
+            left: 78%;
             top: 69%;
-            width: 17%;
-            height: 9%;
+            width: 19%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 20"></div>
           <!-- Door 21 -->
           <div class="advent-door" data-door="21" style="
             position: absolute;
-            left: 27%;
-            top: 78%;
-            width: 16%;
-            height: 9%;
+            left: 22%;
+            top: 79%;
+            width: 18%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 21"></div>
           <!-- Door 22 -->
           <div class="advent-door" data-door="22" style="
             position: absolute;
-            left: 27%;
-            top: 78%;
-            width: 16%;
-            height: 9%;
+            left: 59%;
+            top: 69%;
+            width: 19%;
+            height: 10%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 22"></div>
           <!-- Door 23 -->
           <div class="advent-door" data-door="23" style="
             position: absolute;
-            left: 43%;
-            top: 78%;
-            width: 15%;
-            height: 9%;
+            left: 41%;
+            top: 79%;
+            width: 18%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 23"></div>
           <!-- Door 24 -->
           <div class="advent-door" data-door="24" style="
             position: absolute;
-            left: 75%;
-            top: 78%;
-            width: 15%;
-            height: 9%;
+            left: 79%;
+            top: 79%;
+            width: 18%;
+            height: 11%;
             cursor: pointer;
             z-index: 10;
           " title="Open door 24"></div>
@@ -630,4 +635,3 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
  
   return InteractiveTopImage;
 }
- 
