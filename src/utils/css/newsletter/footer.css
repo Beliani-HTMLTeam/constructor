@@ -107,6 +107,11 @@ img {
   font-size: 11px;
   line-height: 1.2;
 }
+
+.newsletterNewFooterConditions a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
  
 /* .newsletterNewFooterConditions a {
   color: #750000 !important;
