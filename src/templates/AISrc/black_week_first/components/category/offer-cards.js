@@ -13,6 +13,8 @@ export const render = ({
   tdClass = 'newsletterContainer',
   getCategoryLink,
   add_utm,
+  ctaSettings,
+  country,
 }) => {
   const cardEntries = Object.entries(queries ?? {})
     .filter(([key]) => /^card_\d+$/i.test(key))
@@ -51,17 +53,16 @@ export const render = ({
   `;
 
   const wrapInAnchor = (content, href, textColor) => {
-    if (renderType === 'landing')
-      return content;
-    
-    href = href ?? "#"
-    
-    return (`
+    if (renderType === 'landing') return content;
+
+    href = href ?? '#';
+
+    return `
     <a href="${href}" style="display:block;width:100%;text-decoration:none;color:${textColor};">
       ${content}
     </a>
-    `)
-  }
+    `;
+  };
 
   for (let i = 0; i < cardEntries.length; i++) {
     html += `<tr>`;
@@ -80,7 +81,7 @@ export const render = ({
     const subtitleText = lines[2] ?? `${cardEntries[i][0]} subtitle not found`;
     const codeText = lines[3] ?? `CODE: XXX`;
 
-    const hasPercentLabel = labelText.includes("%")
+    const hasPercentLabel = labelText.includes('%');
 
     const rawCode = String(codeText).trim();
     const code = (rawCode.split(':')[1] ?? rawCode).trim();
@@ -98,50 +99,66 @@ export const render = ({
           })
         : '';
 
-      html += `
+    let props = {
+      classes: {
+        title: !hasPercentLabel ? 'blackWeekTitle' : 'blackWeekDiscount',
+        discount: !hasPercentLabel ? 'blackWeekDiscount' : 'blackWeekTitle',
+      },
+      colors: {
+        title: !hasPercentLabel ? textColor : discountColor,
+        discount: !hasPercentLabel ? discountColor : textColor,
+      },
+    };
+
+    html += `
       <td width=100%" valign="top" style="width: 100%;">
-        ${wrapInAnchor(`
+        ${wrapInAnchor(
+          `
         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${cardBg}" class="blackWeekCard">
           <tbody>
           ${Space({ insideTr: true, className: 'newsletterBottom45px' })}
-            ${labelText ? `
+            ${
+              labelText
+                ? `
             <tr>
-              <td align="center" class="${!hasPercentLabel
-                ? "blackWeekTitle"
-                : "blackWeekDiscount"}" style="color: ${!hasPercentLabel
-                ? textColor
-                : discountColor};">
-                ${wrapInAnchor(labelText, add_utm(ctaHref?.href), textColor)}
+              <td align="center" class="${props.classes.title}" style="color: ${props.colors.title};">
+                ${wrapInAnchor(labelText, add_utm(ctaHref?.href), props.colors.title)}
               </td>
             </tr>
-            ` : ''}
+            `
+                : ''
+            }
 
-            ${discountText ? `
+            ${
+              discountText
+                ? `
             ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
             <tr>
-              <td align="center" class="${!hasPercentLabel
-                ? "blackWeekDiscount"
-                : "blackWeekTitle"}" style="color: ${!hasPercentLabel
-                ? discountColor
-                : textColor};">
-              ${wrapInAnchor(discountText, add_utm(ctaHref?.href), discountColor)}
+              <td align="center" class="${props.classes.discount}" style="color: ${props.colors.discount};">
+              ${wrapInAnchor(discountText, add_utm(ctaHref?.href), props.colors.discount)}
               </td>
             </tr>
             ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-            ` : ''}
+            `
+                : ''
+            }
 
-            ${subtitleText ? `
+            ${
+              subtitleText
+                ? `
             <tr>
               <td align="center" class="blackWeekSubtitle" style="color: ${textColor};">
               ${wrapInAnchor(subtitleText, add_utm(ctaHref?.href), textColor)}
               </td>
             </tr>
-            ` : ''}
+            `
+                : ''
+            }
             
-            ${renderType === 'landing'
-              ? codeButton
-                ?
-                  `
+            ${
+              renderType === 'landing'
+                ? codeButton
+                  ? `
                   ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
                   <tr>
                     <td align="center" class="blackWeekCode" style="color: ${codeColor};">
@@ -149,35 +166,42 @@ export const render = ({
                     </td>
                   </tr>
                   `
+                  : ''
                 : ''
-              : ''
             }
             ${Space({ insideTr: true, className: 'newsletterBottom45px' })}
           </tbody>
-        </table>`, add_utm(ctaHref?.href) ?? "#", textColor)}
+        </table>`,
+          add_utm(ctaHref?.href) ?? '#',
+          textColor
+        )}
       </td>
-    `
+    `;
 
     html += `</tr>`;
 
-    if (i < cardEntries.length - 1)
-      html += Space({ insideTr: true, className: 'newsletterBottom20px' });
+    if (i < cardEntries.length - 1) html += Space({ insideTr: true, className: 'newsletterBottom20px' });
   }
 
   html += Space({ insideTr: true, className: 'newsletterBottom35px' });
+
+  const countrySlug = String(country ?? '').toLowerCase();
+  const textOverrides = ctaSettings?.textOverrides?.[countrySlug];
+
+  console.log(textOverrides);
 
   html += `
   <tr>
     <td class="blackWeekCta" width="100%" align="center" style="background: ${ctaBg}; color: ${ctaText};">
       
-      <a href="${renderType !== 'landing' ? add_utm(ctaHref?.href) ?? '#' : getCategoryLink(catHref)}" class="blackWeekCtaBorder" style="display: block; width: 100%; text-decoration: none; color: ${ctaText}; border-color: ${ctaBg};">
-        ${renderType !== 'landing' ? getPhrase('Get codes') : getPhrase('Shop now')}
+      <a href="${renderType !== 'landing' ? (add_utm(ctaHref?.href) ?? '#') : getCategoryLink(catHref)}" class="blackWeekCtaBorder" style="display: block; width: 100%; text-decoration: none; color: ${ctaText}; border-color: ${ctaBg};">
+        ${renderType !== 'landing' ? getPhrase('Get codes') : textOverrides ? textOverrides : getPhrase('Shop now')}
       </a>
       
     </td>
   </tr>
   ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
-  `
+  `;
 
   html += `
     <tr>
