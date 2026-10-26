@@ -159,6 +159,7 @@ const categories = [
 		spaceAfter: 'newsletterBottom60px',
 		container: 'newsletterContainer30px',
 		containerPadding: 30,
+		tileImageSize: {width: 288, height: 216},
 		tileGap: 15,
 		tileTextLayout: 'inRow',
 		heading: {

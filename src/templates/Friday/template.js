@@ -167,9 +167,14 @@ const Friday = async ({
       ${TimerAfterCategories}
 
       ${IntroAfterTimerAfterCategoriesElement}
+
+     <tr>
+        <td valign="top" style="padding:0;border:0;">
+               ${FooterElement}
+        </td>
+      </tr>
     </table>
       
-    ${FooterElement}
   `;
 };
 

@@ -1,6 +1,6 @@
 const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTable = false, background, style = {} }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
-  let styleAttrib = '';
+  let styleAttrib = 'border:0;mso-border-alt:none;font-size:0;line-height:0;mso-line-height-rule:exactly;';
 
   const bg = background || style?.bg;
   if (bg) {
@@ -11,7 +11,7 @@ const Space = ({ className = 'newsletterBottom35px', insideTr = false, insideTab
     styleAttrib += style.rounded;
   }
 
-  let html = `<td class="${className}" ${styleAttrib ? `style="${styleAttrib}"` : ''} ${bg ? `bgcolor="${bg}"` : ''}></td>`;
+  let html = `<td class="${className}" style="${styleAttrib}" ${bg ? `bgcolor="${bg}"` : ''}></td>`;
 
   if (insideTr) {
     html = `<tr ${bg ? `style="background-color: ${bg};" bgcolor="${bg}"` : ''}>${html}</tr>`;

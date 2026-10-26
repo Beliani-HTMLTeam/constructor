@@ -4,6 +4,31 @@ import { Paragraph } from '../Paragraph.js';
 // Default number of tiles per row. Can be overridden per block with `category.columns`.
 const COLUMNS = 2;
  
+// ── Outlook (Word) whole-pixel heights ─────────────────────────────────────────────────────────
+// Outlook reads `line-height: 1.25` as "1.25 x its own single line spacing", not 1.25 x font size,
+// so every text line gets a fractional height. The tiles add those fractions up and Outlook leaves
+// a 1px gap (the line between the categories and the footer). How many lines a name takes changes
+// per shop - that's why one country had the line and another didn't.
+// mso-line-height-alt is read ONLY by Outlook: every other client keeps line-height 1.25 / 1.4.
+const msoLine = (px) => `mso-line-height-alt: ${px}px; mso-line-height-rule: exactly;`;
+const MSO_NAME_LINE = 25; // 20px * 1.25
+const MSO_STACKED_CTA_LINE = 20; // 16px * 1.25
+const MSO_TITLE_LINE = 48; // newsletterTitle 34px * 1.4 = 47.6
+ 
+// Image height attribute for Outlook (whole pixels). Size of the tile image FILE in the config:
+//   tileImageSize: { width: 288, height: 216 }   -> 287px tile = 215, 288px tile = 216
+// or the shown height directly:
+//   tileImageHeight: 216
+// Nothing set -> no height attribute (as before). CSS height stays auto, so other clients don't change.
+const getImageHeight = ({ category, width }) => {
+	if (category?.tileImageHeight) return Math.round(Number(category.tileImageHeight)) || null;
+ 
+	const size = category?.tileImageSize;
+	if (size?.width && size?.height) return Math.round((width * Number(size.height)) / Number(size.width)) || null;
+ 
+	return null;
+};
+ 
 const getSrc = (item) => {
 	if (!item?.src) return '';
  
@@ -75,15 +100,18 @@ const renderHeading = ({ heading, queries, getPhrase, color, containerClass }) =
  
 	if (!text) return '';
  
+	// Outlook-only whole-pixel line height for the title (heading.msoLineHeight: false switches it off)
+	const titleMso = heading.msoLineHeight === false ? '' : msoLine(heading.msoLineHeight ?? MSO_TITLE_LINE);
+ 
 	return `
     ${heading.spaceBefore ? Space({ insideTr: true, className: heading.spaceBefore }) : ''}
     <tr>
-      <td class="${heading.container ?? containerClass}" align="${heading.align ?? 'center'}">
+      <td class="${heading.container ?? containerClass}" align="${heading.align ?? 'center'}"${titleMso ? ` style="${titleMso}"` : ''}>
         ${Paragraph({
 		text,
 		align: heading.align ?? 'center',
 		className: heading.className ?? 'newsletterTitle',
-		spanStyle: `color: ${heading.color ?? color}; ${heading.styles ?? ''}`,
+		spanStyle: `color: ${heading.color ?? color}; ${titleMso} ${heading.styles ?? ''}`,
 	})}
       </td>
     </tr>
@@ -146,7 +174,8 @@ export const render = ({
 			const item = row[columnId];
 			const width = layout.widths[columnId]; // px – width attribute (Outlook) + image width
 			const widthPct = `${layout.widthsPct[columnId]}%`; // % – CSS width, scales with the screen
-			const gapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}" style="width: ${layout.gapPct}%; padding: 0; font-size: 0; line-height: 0;">&nbsp;</td>`;
+			// 1px exactly instead of 0: Outlook can't do font-size 0 and falls back to a default (fractional) line
+			const gapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}" style="width: ${layout.gapPct}%; padding: 0; font-size: 1px; line-height: 1px; mso-line-height-rule: exactly;">&nbsp;</td>`;
  
 			if (columnId > 0) {
 				imgCells += gapHtml;
@@ -169,10 +198,12 @@ export const render = ({
 			const href = getHref({ item, getCategoryLink, add_utm, fallbackHref: categoryHref });
 			const name = getName({ item, getCategoryTitle });
 			const src = getSrc(item);
+			const imgHeight = getImageHeight({ category, width });
  
+			// height attribute = Outlook only; css height: auto keeps every other client / mobile as before
 			imgCells += `
 				<td class="newsletterCategoryTile" width="${width}" style="width: ${widthPct}; padding: 0; vertical-align: top;" align="center">
-					<a href="${href}" style="text-decoration: none; display: block; line-height: 0;"><img src="${src}" alt="${name}" width="${width}" style="display: block; width: 100%; max-width: ${width}px; vertical-align: top;" loading="lazy"></a>
+					<a href="${href}" style="text-decoration: none; display: block; line-height: 0;"><img src="${src}" alt="${name}" width="${width}"${imgHeight ? ` height="${imgHeight}"` : ''} style="display: block; width: 100%; max-width: ${width}px; height: auto; vertical-align: top;" loading="lazy"></a>
 				</td>
 			`;
  
@@ -182,14 +213,15 @@ export const render = ({
 				// never pushes the tile wider than its column.
 				// Fixed px only: Gmail ignores clamp()/vw and would fall back to the biggest size.
 				// The cell is middle-aligned, so when one tile's name wraps the neighbour stays centred.
+				// mso-line-height-alt: every line exactly 25px in Outlook, also when the name wraps.
 				nameCells += `
 					<td class="newsletterCategoryTile categoryTileText" width="${width}" valign="middle" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: middle;">
 						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
 							<tr>
-								<td class="frenchDaysCategoryName categoryTileInRowName" width="100%" align="left" valign="middle" style="padding: 0 8px 0 0; text-align: left; vertical-align: middle; font-size: 20px; font-weight: 600; line-height: 1.25; word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
+								<td class="frenchDaysCategoryName categoryTileInRowName" width="100%" align="left" valign="middle" style="padding: 0 8px 0 0; text-align: left; vertical-align: middle; font-size: 20px; font-weight: 600; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
 									<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
 								</td>
-								<td class="categoryTileInRowCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; font-weight: 600;">
+								<td class="categoryTileInRowCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; font-weight: 600; ${msoLine(MSO_NAME_LINE)}">
 									<a href="${href}" class="frenchDaysCategoryCta" style="white-space: nowrap; color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
 								</td>
 							</tr>
@@ -198,13 +230,13 @@ export const render = ({
 				`;
 			} else if (showText) {
 				nameCells += `
-					<td class="newsletterCategoryTile frenchDaysCategoryName categoryTileStackedName" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 16px; font-size: 20px; font-weight: 700; line-height: 1.25; vertical-align: top; word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
+					<td class="newsletterCategoryTile frenchDaysCategoryName categoryTileStackedName" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 16px; font-size: 20px; font-weight: 700; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} vertical-align: top; word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
 						<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
 					</td>
 				`;
  
 				ctaCells += `
-					<td class="newsletterCategoryTile categoryTileStackedCta" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 6px; font-size: 16px; line-height: 1.25; vertical-align: top; word-break: break-word; overflow-wrap: break-word;">
+					<td class="newsletterCategoryTile categoryTileStackedCta" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 6px; font-size: 16px; line-height: 1.25; ${msoLine(MSO_STACKED_CTA_LINE)} vertical-align: top; word-break: break-word; overflow-wrap: break-word;">
 						<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
 					</td>
 				`;

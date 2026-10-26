@@ -18,10 +18,10 @@ const resolveSpaceClass = (value, fallback) => {
   return raw;
 };
 
-const renderSpace = (value, fallback) => {
+const renderSpace = (value, fallback, background) => {
   const className = resolveSpaceClass(value, fallback);
 
-  return className ? Space({ insideTr: true, className }) : '';
+  return className ? Space({ insideTr: true, className, background }) : '';
 };
 
 const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country }) => {
@@ -232,8 +232,8 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   return `
 
   <tr>
-    <td>
-      <table style="${styles}" cellspacing="0" cellpadding="0" border="0" width="100%">
+  <td bgcolor="${background}" style="background-color: ${background}; font-size: 1px; line-height: 1px; mso-line-height-rule: exactly;">
+  <table bgcolor="${background}" style="background-color: ${background}; color: ${color}; font-size: 13px; line-height: normal;" cellspacing="0" cellpadding="0" border="0" width="100%">
         ${renderSpace(category.paddingTop, id === 0 ? 60 : 35)}
 
         ${!category.title?.position || category.title?.position === 'beforeImg' ? TitleElement : ''}
@@ -262,7 +262,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${CTAAfterProducts}
 
-        ${renderSpace(category.spaceAfter, 'newsletterBottom80px')}
+        ${renderSpace(category.spaceAfter, 'newsletterBottom80px', background)}
 
         ${
           category?.line?.show
