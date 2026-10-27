@@ -6,6 +6,8 @@
 //   window.AdventPopup.open(id)  -> opens <template data-adv-popup="id">
 //   window.AdventPopup.close()
 //   window.AdventPopup.has(id)   -> true if that popup exists
+//   window.AdventPopup.notice('past' | 'future') -> small message for a few seconds
+//                                    (texts from <template data-adv-notice>, see AdventNotices)
 //
 // Handles: grey overlay, click outside / X / Esc to close, copy code,
 // "See conditions" (fills the AdventConditionsBox), dataLayer events.
@@ -19,8 +21,9 @@
 //     (wheel, touch swipe and scroll keys) – the scrollbar stays in place
 //   - "Code copied" is announced to screen readers
 // ============================================================
-export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar' } = {}) {
-  const opts = JSON.stringify({ conditionsBoxId, trackingCategory });
+// noticeMs: how long the small "past / future door" message stays (ms)
+export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar', noticeMs = 4000, closeLabel = 'Close' } = {}) {
+  const opts = JSON.stringify({ conditionsBoxId, trackingCategory, noticeMs, closeLabel });
  
   return `
 <script>
@@ -179,6 +182,54 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     }, 400);
   }
  
+  // ===== Small notice (past / future door) =====
+  var note, noteBody, noteTimer, noteCloseTimer;
+  var X_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M4 3 20 21M20 3 4 21"/></svg>';
+ 
+  function noteOpen() { return !!note && note.classList.contains('is-open') && !note.classList.contains('is-closing'); }
+ 
+  function ensureNote() {
+    if (note) return;
+    note = document.createElement('div');
+    note.className = 'adv-note';
+    note.innerHTML =
+      '<div class="adv-note__box" role="status" aria-live="polite">' +
+        '<div class="adv-note__body"></div>' +
+        '<button type="button" class="adv-note__close">' + X_ICON + '</button>' +
+      '</div>';
+    note.querySelector('.adv-note__close').setAttribute('aria-label', OPTS.closeLabel);
+    noteBody = note.querySelector('.adv-note__body');
+    document.body.appendChild(note);
+    note.addEventListener('click', function (e) {
+      if (e.target === note || e.target.closest('.adv-note__close')) hideNote();   // outside / X
+    });
+    note.addEventListener('wheel', function (e) { if (noteOpen()) e.preventDefault(); }, { passive: false });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && noteOpen()) hideNote();
+    });
+  }
+ 
+  function showNote(kind) {
+    var tpl = document.querySelector('template[data-adv-notice="' + kind + '"]');
+    if (!tpl) return false;
+    ensureNote();
+    clearTimeout(noteTimer); clearTimeout(noteCloseTimer);
+    noteBody.innerHTML = '';
+    noteBody.appendChild(tpl.content.cloneNode(true));
+    note.classList.remove('is-open', 'is-closing');
+    void note.offsetWidth;                       // restart the animation on a quick 2nd click
+    note.classList.add('is-open');
+    noteTimer = setTimeout(hideNote, OPTS.noticeMs);   // disappears by itself
+    return true;
+  }
+ 
+  function hideNote() {
+    if (!note || !note.classList.contains('is-open')) return;
+    clearTimeout(noteTimer);
+    note.classList.add('is-closing');
+    noteCloseTimer = setTimeout(function () { note.classList.remove('is-open', 'is-closing'); }, 300);
+  }
+ 
   function showConditions() {
     var src = content.querySelector('.adv-pop__cond-src');
     var box = document.getElementById(OPTS.conditionsBoxId);
@@ -216,6 +267,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   window.AdventPopup = {
     open: open,
     close: function () { close(); },
+    notice: showNote,
     has: function (id) { return !!getTpl(id); }
   };
 })();

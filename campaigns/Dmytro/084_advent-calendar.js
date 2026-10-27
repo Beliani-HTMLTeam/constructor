@@ -39,24 +39,29 @@ const tableQueries = [
   { tableRange: '83:86', name: 'Popup23', tableName: T },
   { tableRange: '87',    name: 'Popup24', tableName: T },
 
+
+
+  { tableRange: '88:89',    name: 'PastPopup', tableName: T },
+  { tableRange: '90:91',    name: 'FuturePopup', tableName: T },
+
   // ===== Conditions =====
-  { tableRange: '89',  name: 'Regular Conditions', tableName: T },
-  { tableRange: '90',  name: 'Conditions2',  tableName: T },
-  { tableRange: '91',  name: 'Conditions4',  tableName: T },
-  { tableRange: '92',  name: 'Conditions5',  tableName: T },
-  { tableRange: '93',  name: 'Conditions6',  tableName: T },
-  { tableRange: '94',  name: 'Conditions8',  tableName: T },
-  { tableRange: '95',  name: 'Conditions9',  tableName: T },
-  { tableRange: '96',  name: 'Conditions10', tableName: T },
-  { tableRange: '97',  name: 'Conditions14', tableName: T },
-  { tableRange: '98',  name: 'Conditions15', tableName: T },
-  { tableRange: '99',  name: 'Conditions16', tableName: T },
-  { tableRange: '100', name: 'Conditions18', tableName: T },
-  { tableRange: '101', name: 'Conditions19', tableName: T },
-  { tableRange: '102', name: 'Conditions20', tableName: T },
-  { tableRange: '103', name: 'Conditions21', tableName: T },
-  { tableRange: '104', name: 'Conditions22', tableName: T }, // not checked – the export stopped at row 103
-  { tableRange: '105', name: 'Conditions23', tableName: T }, // not checked – the export stopped at row 103
+  { tableRange: '93',  name: 'Regular Conditions', tableName: T },
+  { tableRange: '94',  name: 'Conditions2',  tableName: T },
+  { tableRange: '95',  name: 'Conditions4',  tableName: T },
+  { tableRange: '96',  name: 'Conditions5',  tableName: T },
+  { tableRange: '97',  name: 'Conditions6',  tableName: T },
+  { tableRange: '98',  name: 'Conditions8',  tableName: T },
+  { tableRange: '99',  name: 'Conditions9',  tableName: T },
+  { tableRange: '100',  name: 'Conditions10', tableName: T },
+  { tableRange: '111',  name: 'Conditions14', tableName: T },
+  { tableRange: '112',  name: 'Conditions15', tableName: T },
+  { tableRange: '113',  name: 'Conditions16', tableName: T },
+  { tableRange: '114', name: 'Conditions18', tableName: T },
+  { tableRange: '115', name: 'Conditions19', tableName: T },
+  { tableRange: '116', name: 'Conditions20', tableName: T },
+  { tableRange: '117', name: 'Conditions21', tableName: T },
+  { tableRange: '118', name: 'Conditions22', tableName: T }, // not checked – the export stopped at row 103
+  { tableRange: '119', name: 'Conditions23', tableName: T }, // not checked – the export stopped at row 103
 ];
 
 const links = {

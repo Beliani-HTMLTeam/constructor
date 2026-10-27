@@ -350,6 +350,73 @@ export function AdventPopupStyles() {
     .adv-pop--special .adv-pop__footer { margin-top: 9cqw; }
   }
  
+  /* =====================================================
+     SMALL NOTICE – past / future door (a few seconds)
+     desktop: like the popup (centered, grey background)
+     mobile:  at the bottom of the screen, page stays usable
+     ===================================================== */
+  .adv-note {
+    display: none;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 99999;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.55);
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .adv-note.is-open { display: flex; animation: advPopFadeIn .3s ease-out; }
+  .adv-note.is-closing { animation: advPopFadeOut .3s ease-out forwards; }
+  .adv-note, .adv-note * { box-sizing: border-box; }
+  .adv-note__box {
+    position: relative;
+    width: min(440px, 100%);
+    padding: 28px 44px;
+    background-color: #F6E7E6;       /* peach, same as the popups */
+    color: #750000;
+    font-family: Poppins, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+    animation: advPopOpen .4s cubic-bezier(.175, .885, .32, 1.275);
+  }
+  .adv-note__line { margin: 0; padding: 0; }
+  .adv-note__line + .adv-note__line { margin-top: 10px; }
+  .adv-note__close {
+    position: absolute !important;
+    top: 6px; right: 6px;
+    width: 26px; height: 26px;
+    min-width: 0 !important; min-height: 0 !important;
+    padding: 0 !important; margin: 0 !important;
+    display: flex; align-items: center; justify-content: center;
+    border: 0 !important; background: none !important; box-shadow: none !important;
+    color: #750000;
+    cursor: pointer;
+  }
+  .adv-note__close svg { width: 16px; height: 16px; display: block; }
+  .adv-note__close:focus-visible { outline: 2px solid #750000; outline-offset: 2px; }
+ 
+  @media screen and (max-width: 600px) {
+    .adv-note {
+      align-items: flex-end;
+      background-color: transparent;  /* no grey layer – just the message at the bottom */
+      pointer-events: none;
+      padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    }
+    .adv-note__box {
+      pointer-events: auto;
+      width: min(360px, 100%);
+      padding: 22px 34px;
+      font-size: 16px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+      animation: advNoteUp .35s ease-out;
+    }
+    .adv-note__close { top: 4px; right: 4px; }
+  }
+  @keyframes advNoteUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+ 
   @keyframes advPopFadeIn  { from { opacity: 0; } to { opacity: 1; } }
   @keyframes advPopFadeOut { from { opacity: 1; } to { opacity: 0; } }
   @keyframes advPopOpen  { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }

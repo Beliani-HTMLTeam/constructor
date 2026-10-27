@@ -175,6 +175,28 @@ export function StandardPopup(layout, props, defaults = {}) {
   return AdventPopupShell({ ...props, layout, texts: t, body });
 }
  
+// ---------- Small notices: past door / future door ----------
+// Short messages shown for a few seconds when a door that is not today's is clicked.
+// past / future: lines from the sheet (queries.PastPopup / queries.FuturePopup)
+export const DEFAULT_NOTICES = {
+  past: ['Too late for this one!', 'Find today’s door for a fresh deal.'],
+  future: ['Still wrapped!', 'Find today’s door to unwrap today’s deal.'],
+};
+ 
+export function AdventNotices({ past, future } = {}) {
+  const lines = (rows, fallback) => {
+    const list = [].concat(rows || [])
+      .map((r) => String((Array.isArray(r) ? r[0] : r) ?? '').trim())
+      .filter(Boolean);
+    return list.length ? list : fallback;
+  };
+  const tpl = (kind, list) =>
+    `<template data-adv-notice="${kind}">` +
+    list.map((l) => `<div class="adv-note__line">${l}</div>`).join('') +
+    `</template>`;
+  return tpl('past', lines(past, DEFAULT_NOTICES.past)) + tpl('future', lines(future, DEFAULT_NOTICES.future));
+}
+ 
 // ---------- Box under the calendar that shows the conditions ----------
 // Can be placed anywhere on the page (the script finds it by id).
 // maxWidth: match the width of the content around it (e.g. 650 for the LP table)

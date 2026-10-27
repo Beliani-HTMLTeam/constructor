@@ -14,7 +14,7 @@ import {
  
 const ADVENT_TEST_MODE = false;
  
-export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
+export function InteractiveHeroImage({ type,  queries = {} }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
@@ -77,7 +77,7 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
   // screen-reader name of the doors: "<DoorLabel> 5" (optional sheet row, e.g. "Door" / "Tür" / "Porte")
   const doorLabel = cell('DoorLabel', 0) || 'Door';
  
-  const HOME = getCategoryLink('https://www.beliani.ch/');   // voucher popups link to the home page
+  const HOME = 'https://www.beliani.ch/';   // voucher popups link to the home page
   const regularConditions = fromQuery('Regular Conditions');
   const upTo = fromQuery('UpTo'); // shared "Up to 50% OFF" (row 3)
  
@@ -89,7 +89,7 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
     conditions: regularConditions,
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
-    link: getCategoryLink(link),
+    link,
   });
  
   // Voucher day – conditions from "Conditions - DD.12"
@@ -115,7 +115,7 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
     2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null], HOME),
  
     // 03.12 – Kid's Room
-    3: category(3, 'https://www.beliani.ch/children-room/'),
+    3: category(3, 'https://www.beliani.co.uk/children-room/'),
  
     // 04.12 – Free XXX (sheet: Title, Description, Voucher, Code)
     4: voucher(4, 'free', CODE_THEN_VOUCHER, HOME),
@@ -463,7 +463,8 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
     <tr>
       <td align="center" style="padding:0;">
         ${AdventPopups({ popups: adventPopups, texts: popupTexts })}
-        ${AdventPopupScript()}
+        ${AdventNotices({ past: queries.PastPopup, future: queries.FuturePopup })}
+        ${AdventPopupScript({ closeLabel: popupTexts.close })}
         ${AdventConfettiScript({zIndex: 9999})}
       </td>
     </tr>
@@ -607,6 +608,20 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
         door.tabIndex = -1;                         // skipped by Tab
         door.setAttribute('aria-disabled', 'true'); // "unavailable" for screen readers
       }
+      // past / future door: no deal, a small message for a few seconds
+      //   'past'   -> "Too late for this one! ..."   (sheet: PastPopup)
+      //   'future' -> "Still wrapped! ..."           (sheet: FuturePopup)
+      function makeNotice(door, kind) {
+        door.style.pointerEvents = 'auto';
+        door.style.cursor = 'pointer';
+        door.tabIndex = -1;                         // still skipped by Tab
+        door.setAttribute('aria-disabled', 'true');
+        door.onclick = function () {
+          // the day is over (page left open past midnight) -> start the new day
+          if (!TEST_MODE && currentDay() !== day) { window.location.reload(); return; }
+          if (window.AdventPopup && window.AdventPopup.notice) window.AdventPopup.notice(kind);
+        };
+      }
  
       function updateDoorsTest() {
         doors.forEach(function (door) {
@@ -631,7 +646,7 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
               openPopup(doorNum);
             });
           } else {
-            makeLocked(door);
+            makeNotice(door, doorNum < testCurrent ? 'past' : 'future');
           }
         });
       }
@@ -641,7 +656,12 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
         doors.forEach(function (door) {
           var doorNum = parseInt(door.dataset.door, 10);
  
-          if (doorNum !== todayDoor) { makeLocked(door); return; }
+          if (doorNum !== todayDoor) {
+            // before 1 Dec everything is "future", after 24 Dec everything is "past"
+            var isPast = day > lastDoor || (todayDoor > 0 && doorNum < todayDoor);
+            makeNotice(door, isPast ? 'past' : 'future');
+            return;
+          }
  
           makeClickable(door, function (e) {
             // the day is over (page left open past midnight) -> start the new day
@@ -722,3 +742,4 @@ export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
  
   return InteractiveTopImage;
 }
+ 
