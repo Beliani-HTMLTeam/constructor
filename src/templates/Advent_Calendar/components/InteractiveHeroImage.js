@@ -10,6 +10,7 @@ import {
   AdventConfettiScript,
   popupTextsFromQueries,
   popupsFromQueries,
+  AdventNotices,
 } from './advent-popup/index.js';
  
 const ADVENT_TEST_MODE = false;
@@ -19,7 +20,7 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
  
   const adventBase = 'https://pictureserver.net/static/2026/';
   const adventImages = [
-    `${adventBase}advent_all_closed.webp?ver=17`, // 0 - all closed
+    `${adventBase}advent_all_closed_glow.webp?ver=17`, // 0 - all closed
     `${adventBase}advent_open_1.webp?ver=17`,     // 1
     `${adventBase}advent_open_2.webp?ver=17`,     // 2
     `${adventBase}advent_open_3.webp?ver=17`,     // 3
