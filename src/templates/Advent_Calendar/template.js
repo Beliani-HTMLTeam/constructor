@@ -50,7 +50,7 @@ const AdventCalendar2026 = async ({
   const shopNow = getPhrase('Shop now');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type });
+  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type, getCategoryLink });
 
   const introCta_href = links.Intro_cta_href.includes("content/") ? links.Intro_cta_href : getIntroCtaHref({
     links,

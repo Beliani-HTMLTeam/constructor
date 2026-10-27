@@ -14,7 +14,7 @@ import {
  
 const ADVENT_TEST_MODE = false;
  
-export function InteractiveHeroImage({ type,  queries = {} }) {
+export function InteractiveHeroImage({ type,  queries = {}, getCategoryLink }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
@@ -74,7 +74,10 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
       .filter(Boolean)
       .join('<br />');
  
-  const HOME = 'https://www.beliani.ch/';   // voucher popups link to the home page
+  // screen-reader name of the doors: "<DoorLabel> 5" (optional sheet row, e.g. "Door" / "Tür" / "Porte")
+  const doorLabel = cell('DoorLabel', 0) || 'Door';
+ 
+  const HOME = getCategoryLink('https://www.beliani.ch/');   // voucher popups link to the home page
   const regularConditions = fromQuery('Regular Conditions');
   const upTo = fromQuery('UpTo'); // shared "Up to 50% OFF" (row 3)
  
@@ -86,7 +89,7 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     conditions: regularConditions,
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
-    link,
+    link: getCategoryLink(link),
   });
  
   // Voucher day – conditions from "Conditions - DD.12"
@@ -112,7 +115,7 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null], HOME),
  
     // 03.12 – Kid's Room
-    3: category(3, 'https://www.beliani.co.uk/children-room/'),
+    3: category(3, 'https://www.beliani.ch/children-room/'),
  
     // 04.12 – Free XXX (sheet: Title, Description, Voucher, Code)
     4: voucher(4, 'free', CODE_THEN_VOUCHER, HOME),
@@ -178,6 +181,9 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
       <td align="center" style="padding:0; line-height:0; font-size:0;">
         ${AdventPopupStyles()}
         <style>
+          /* keyboard focus on a door (Tab) */
+          .advent-door:focus { outline: none; }
+          .advent-door:focus-visible { outline: 3px solid #750000; outline-offset: 2px; border-radius: 6px; }
           /* TEST: "See conditions" 22px on desktop, popup 1 only (default 25px) – remove after the test */
           .adv-pop__content[data-popup="1"] { --fs-cond: 2.275; }   /* 22 / 967 */
         </style>
@@ -470,6 +476,21 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
       var doors = document.querySelectorAll('.advent-door');
       if (!img || !doors.length) return;
  
+      // ===== Accessibility: doors are buttons with a name ("Door 5") =====
+      // Today's door can be reached with Tab and opened with Enter / Space;
+      // locked doors are announced as unavailable.
+      var DOOR_LABEL = ${JSON.stringify(doorLabel)};
+      Array.prototype.forEach.call(doors, function (door) {
+        door.setAttribute('role', 'button');
+        door.setAttribute('aria-label', DOOR_LABEL + ' ' + door.getAttribute('data-door'));
+        door.removeAttribute('title');   // English tooltip would be read twice
+        door.addEventListener('keydown', function (e) {
+          if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+          e.preventDefault();
+          if (typeof door.onclick === 'function') door.onclick(e);
+        });
+      });
+ 
       // ===== Analytics =====
       function track(action, label, value) {
         window.dataLayer = window.dataLayer || [];
@@ -576,11 +597,15 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
         door.style.pointerEvents = 'auto';
         door.style.cursor = 'pointer';
         door.onclick = onClick;
+        door.tabIndex = 0;                          // reachable with Tab
+        door.removeAttribute('aria-disabled');
       }
       function makeLocked(door) {
         door.style.pointerEvents = 'none';
         door.style.cursor = 'default';
         door.onclick = null;
+        door.tabIndex = -1;                         // skipped by Tab
+        door.setAttribute('aria-disabled', 'true'); // "unavailable" for screen readers
       }
  
       function updateDoorsTest() {
@@ -641,6 +666,45 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
  
       updateDoors();
  
+      // ===== "OPEN TODAY'S DEAL" button =====
+      // On the landing page, a link that points to this same page (the intro CTA
+      // links to content/advent-calendar) works like a click on TODAY'S door
+      // instead of reloading the page:
+      //   - today's door still closed -> it opens + popup
+      //   - today's door already open -> just the popup
+      // It never opens any other door. Any element with data-advent-today does the same.
+      // TEST MODE: "today" = the last opened test door (door 1 when none is open yet).
+      function todayNumber() {
+        return TEST_MODE ? Math.max(testCurrent, 1) : todayDoor;
+      }
+      function openToday(e) {
+        var n = todayNumber();
+        var door = n ? document.querySelector('.advent-door[data-door="' + n + '"]') : null;
+        if (!door || typeof door.onclick !== 'function') return false;   // no deal today
+        door.onclick(e);            // same as clicking today's door (confetti at the button)
+        return true;
+      }
+      window.AdventCalendar = { openToday: openToday };
+ 
+      function trimSlash(path) {
+        while (path.length > 1 && path.charAt(path.length - 1) === '/') path = path.slice(0, -1);
+        return path;
+      }
+      function isThisPage(a) {
+        try {
+          var u = new URL(a.getAttribute('href'), window.location.href);
+          return u.origin === window.location.origin &&
+                 trimSlash(u.pathname) === trimSlash(window.location.pathname);
+        } catch (err) { return false; }
+      }
+ 
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest && e.target.closest('[data-advent-today], a[href]');
+        if (!el || el.closest('#advent-wrapper, #advent-popup')) return;
+        if (!el.hasAttribute('data-advent-today') && !isThisPage(el)) return;
+        if (openToday(e)) e.preventDefault();   // before 1 Dec / after 24 Dec the link works as usual
+      });
+ 
       // TEST MODE label on the calendar, so it's never left on by mistake
       if (TEST_MODE) {
         var badge = document.createElement('div');
@@ -658,5 +722,3 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
  
   return InteractiveTopImage;
 }
- 
- 

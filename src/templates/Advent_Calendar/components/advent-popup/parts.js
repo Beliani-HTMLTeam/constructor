@@ -74,7 +74,7 @@ function codesBlock(code, texts, extraCls = '') {
           `<div class="adv-pop__code">` +
           `<span>${c.label}: <span class="adv-pop__code-value">${c.value}</span></span>` +
           // shared copy icon: icon switches to "ok" + slide-in notification
-          `<span class="adv-pop__copy-wrap">` +
+          `<span class="adv-pop__copy-wrap" data-copied="${attr(texts.copied)}">` +   // announced to screen readers
           buildCopyIcon({
             codeValue: c.value,
             color: '#750000',
@@ -140,7 +140,7 @@ function PopupBackground({ imageDesktop, imageMobile, alt = '', link }) {
   const a11y = alt ? ` role="img" aria-label="${attr(alt)}"` : ' aria-hidden="true"';
   const common = `class="adv-pop__bg" style="${attr(style)}" data-preload="${attr(d)} ${attr(m)}"${a11y}`;
   return link
-    ? `<a ${common} href="${attr(link)}" target="_blank" rel="noopener" data-adv-link></a>`
+    ? `<a ${common} href="${attr(link)}" target="_blank" rel="noopener" tabindex="-1" data-adv-link></a>`   // keyboard users get the text link instead
     : `<div ${common}></div>`;
 }
  
@@ -182,4 +182,3 @@ export function StandardPopup(layout, props, defaults = {}) {
 export function AdventConditionsBox({ id = 'advent-conditions', maxWidth = 570 } = {}) {
   return `<div id="${attr(id)}" class="adv-cond" style="display:none; max-width:${Number(maxWidth) || 570}px; margin:0 auto; background-color: #F7EAE9;"></div>`;
 }
- 

@@ -320,6 +320,10 @@ export function AdventPopupStyles() {
       background-position: center bottom;
     }
  
+    /* bigger copy icon (~20px next to an 18px code) + bigger tap area (~40px) */
+    .adv-pop__copy-icon { width: 1.1em !important; height: 1.1em !important; }
+    .adv-pop__copy-wrap button { padding: 10px !important; margin: -10px !important; }
+ 
     .adv-pop__close { top: 4px; right: 4px; width: 28px; height: 28px; }
     .adv-pop__close svg { width: 20px; height: 20px; }
  
@@ -355,6 +359,17 @@ export function AdventPopupStyles() {
   }
  
   .adv-pop__cond-src { display: none !important; }
+ 
+  /* screen-reader only text ("Code copied") */
+  .adv-pop__sr {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0; border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .adv-cond:focus { outline: none; }
  
   /* desktop-only / mobile-only texts (popup prop: mobile: { ... }) */
   @media screen and (min-width: 601px) { .adv-pop .adv-pop__only-m { display: none !important; } }
