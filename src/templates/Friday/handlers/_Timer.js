@@ -180,10 +180,27 @@ export const TimerHandler = async ({
 
   let freebies = null;
 
+  const currentSlugs = [shop?.slug, country]
+    .filter(Boolean)
+    .map((slug) => String(slug).trim().toLowerCase());
+
+  const isExcluded = (product) => {
+    const list = product && typeof product === 'object' ? product.exclude : null;
+    if (!list) return false;
+
+    const slugs = (Array.isArray(list) ? list : String(list).split(','))
+      .map((slug) => String(slug).trim().toLowerCase())
+      .filter(Boolean);
+
+    return slugs.some((slug) => currentSlugs.includes(slug));
+  };
+
   if (timer?.freebies) {
     if (Array.isArray(timer.freebies)) {
       const enriched = await Promise.all(
-        timer.freebies.map((product) => enrichProductEntry(product))
+        timer.freebies
+          .filter((product) => !isExcluded(product))
+          .map((product) => enrichProductEntry(product))
       );
       // freebies link to the timer LP, not to product pages
       freebies = enriched.filter(Boolean).map((product) => ({
@@ -192,6 +209,8 @@ export const TimerHandler = async ({
       }));
     } else if (typeof timer.freebies === 'string') {
       freebies = timer.freebies;
+    } else if (isExcluded(timer.freebies)) {
+      freebies = null;
     } else if (timer.freebies?.src && !timer.freebies.id) {
       freebies = typeof timer.freebies.src === 'object' ? timer.freebies.src.src : timer.freebies.src;
     } else if (timer.freebies?.id) {

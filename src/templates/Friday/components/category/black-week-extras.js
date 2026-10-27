@@ -256,7 +256,7 @@ const renderImageGrid = ({ tiers, images, href, ...gridProps }) =>
 	});
  
 // landing page: the same boxes in html, with the code under every tier
-const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSpacing, toast, ...gridProps }) => {
+const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSpacing, codeIconGap = 8, toast, breakCode, ...gridProps }) => {
 	const { cellWidth } = getGridSizes({ totalWidth: gridProps.totalWidth, gap: gridProps.gap });
  
 	const fitStyle = getFitStyle({
@@ -294,26 +294,42 @@ const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSp
 	const boxStyles = `background-color: ${colors.box}; border-radius: ${box.radius}px; padding: ${box.paddingY}px ${box.paddingX}px; box-sizing: border-box;`;
  
 	// same code line + copy icon as before
-	const renderCode = ({ code, codeValue, copyable }) =>
-		isEmpty(code)
-			? ''
-			: `
+	const renderCode = ({ code, codeValue, copyable }) => {
+		if (isEmpty(code)) return '';
+
+		const text = String(code);
+		const colon = text.indexOf(':');
+		const split = breakCode && colon > -1;
+
+		// split: ikonka jest absolutnie za kodem (poza układem), więc sam kod jest wyśrodkowany
+		// pod "CODE:" / "CÓDIGO:", a ikonka stoi po prawej, `codeIconGap` px od kodu
+		const iconStyle = split
+			? `position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: ${codeIconGap}px; display: inline-flex; align-items: center; width: 100%;`
+			: 'display: inline-flex; align-items: center;';
+
+		const icon = copyable
+			? `<span data-copy-icon style="${iconStyle}">${buildCopyIcon({
+				codeValue,
+				color: colors.value,
+				toastBg: toast.background,
+				toastText: toast.color,
+				label: toast.label,
+				className: 'blackWeekCopyImg',
+			})}</span>`
+			: '';
+
+		const content = split
+			? `<span class="${classes.codeLabel}" style="margin-right: 0.3em;">${text.slice(0, colon + 1).trim()}</span><span style="position: relative; display: inline-block; white-space: nowrap;">${text.slice(colon + 1).trim()}${icon}</span>`
+			: `${code}
+                    ${icon}`;
+
+		return `
                 <div style="padding-top: ${codeSpacing}px;">
-                  <span class="${classes.code}" style="color: ${colors.value}; display: inline-flex; align-items: center; white-space: nowrap;">
-                    ${code}
-                    ${copyable
-				? `<span data-copy-icon style="display: inline-flex; align-items: center;">${buildCopyIcon({
-					codeValue,
-					color: colors.value,
-					toastBg: toast.background,
-					toastText: toast.color,
-					label: toast.label,
-					className: 'blackWeekCopyImg',
-				})}</span>`
-				: ''
-			}
+                  <span class="${classes.code}${breakCode ? ` ${classes.codeBreak}` : ''}" style="color: ${colors.value}; display: inline-flex; align-items: center; ${split ? 'justify-content: center; flex-wrap: wrap;' : ''} white-space: nowrap;">
+                    ${content}
                   </span>
                 </div>`;
+	};
  
 	return renderGrid({
 		...gridProps,
@@ -379,6 +395,8 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		off: category?.dealClasses?.off ?? 'newsletterDealTierOff',
 		note: category?.dealClasses?.note ?? 'newsletterDealTierNote',
 		code: category?.dealClasses?.code ?? 'newsletterDealCode',
+		codeLabel: category?.dealClasses?.codeLabel ?? 'newsletterDealCodeLabel',
+		codeBreak: category?.dealClasses?.codeBreak ?? 'newsletterDealCodeBreak',
 	};
  
 	const tierLines = category?.dealTierLines ?? DEAL_TIER_LINES;
@@ -484,6 +502,8 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 				min: category?.dealFit?.min ?? 24,
 			},
 			codeSpacing: category?.dealCodeSpacing ?? 8,
+			breakCode: (category?.dealCodeBreak ?? []).map((c) => String(c).toLowerCase()).includes(String(country ?? '').toLowerCase()),
+			codeIconGap: category?.dealCopyIconGap ?? 8,
 			toast: {
 				background: category?.copyToast?.background ?? colors.value,
 				color: category?.copyToast?.color ?? '#ffffff',
@@ -493,8 +513,12 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		});
 	}
  
-	html += Space({ insideTr: true, className: category?.spaceAfterDeal ?? 'newsletterBottom20px' });
- 
+	const spaceAfterDeal = isNewsletter
+	? category?.spaceAfterDeal
+	: category?.spaceAfterDealLp ?? category?.spaceAfterDeal;
+
+	html += Space({ insideTr: true, className: spaceAfterDeal ?? 'newsletterBottom20px' }); 
+
 	if (isNewsletter) {
 		// more than one code in the deal -> plural cta
 		const codesCount = codes.filter((code) => !isEmpty(code)).length;

@@ -12,8 +12,6 @@ import {
   popupsFromQueries,
 } from './advent-popup/index.js';
  
-// TEST MODE: true = all doors can be opened one by one (ignores the date).
-// Set back to false before going live. (Also works without a rebuild: add ?advent-test to the URL.)
 const ADVENT_TEST_MODE = false;
  
 export function InteractiveHeroImage({ type,  queries = {} }) {
@@ -76,6 +74,7 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
       .filter(Boolean)
       .join('<br />');
  
+  const HOME = 'https://www.beliani.ch/';   // voucher popups link to the home page
   const regularConditions = fromQuery('Regular Conditions');
   const upTo = fromQuery('UpTo'); // shared "Up to 50% OFF" (row 3)
  
@@ -90,13 +89,15 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     link,
   });
  
-  // Voucher day – conditions from "Conditions - DD.12" (empty -> no "See conditions")
-  const voucher = (n, type, fields) => ({
+  // Voucher day – conditions from "Conditions - DD.12"
+  // link: the whole popup leads there (except the copy button and the code itself)
+  const voucher = (n, type, fields, link = HOME) => ({
     type,
     fields,
     conditions: fromQuery(`Conditions${n}`),
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
+    link,
   });
  
   // Row orders used in the sheet (null = Voucher ID row, not shown)
@@ -108,29 +109,29 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     1: { ...category(1, 'https://www.beliani.ch/christmas-accessories/decorations/'), fields: ['pre', 'title'] },
  
     // 02.12 – Extra / 10% OFF / when you spend €500 / Code
-    2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null]),
+    2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null], HOME),
  
     // 03.12 – Kid's Room
     3: category(3, 'https://www.beliani.co.uk/children-room/'),
  
     // 04.12 – Free XXX (sheet: Title, Description, Voucher, Code)
-    4: voucher(4, 'free', VOUCHER_THEN_CODE),
+    4: voucher(4, 'free', CODE_THEN_VOUCHER, HOME),
  
     // 05.12 / 06.12 – Free XXX
-    5: voucher(5, 'free', CODE_THEN_VOUCHER),
-    6: voucher(6, 'free', CODE_THEN_VOUCHER),
+    5: voucher(5, 'free', CODE_THEN_VOUCHER, HOME),
+    6: voucher(6, 'free', CODE_THEN_VOUCHER, HOME),
  
     // 07.12 – Dining Room
     7: category(7, "https://www.beliani.ch/dining-room-furniture/"),
  
     // 08.12 – Free XXX (sheet: Title, Description, Voucher, Code)
-    8: voucher(8, 'free', VOUCHER_THEN_CODE),
+    8: voucher(8, 'free', CODE_THEN_VOUCHER, HOME),
  
     // 09.12 – €10 Discount
-    9: voucher(9, 'discount', CODE_THEN_VOUCHER),
+    9: voucher(9, 'discount', CODE_THEN_VOUCHER, HOME),
  
     // 10.12 – Free XXX
-    10: voucher(10, 'free', CODE_THEN_VOUCHER),
+    10: voucher(10, 'free', CODE_THEN_VOUCHER, HOME),
  
     // 11.12 Scatter Cushions / 12.12 Tableware / 13.12 Lighting
     11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/"),
@@ -138,13 +139,13 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     13: category(13, "https://www.beliani.ch/lighting/"),
  
     // 14.12 / 15.12 – Free XXX
-    14: voucher(14, 'free', CODE_THEN_VOUCHER),
-    15: voucher(15, 'free', CODE_THEN_VOUCHER),
+    14: voucher(14, 'free', CODE_THEN_VOUCHER, HOME),
+    15: voucher(15, 'free', CODE_THEN_VOUCHER, HOME),
  
     // 16.12 – 4 for 3 pyramid: 3 lines, each with its own code
     // sheet: Title, Desc 1-3 desktop, Desc 1-3 mobile, Code 1-3, Voucher 1-3
     16: {
-      ...voucher(16, 'buy4pay3', ['title']),
+      ...voucher(16, 'buy4pay3', ['title'], HOME),
       tiers: [0, 1, 2].map((i) => ({
         text: cell('Popup16', 1 + i),
         // mobile: one line per offer (design) – line breaks from the sheet are ignored
@@ -157,16 +158,16 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     17: category(17, "https://www.beliani.ch/rugs/"),
  
     // 18.12 / 19.12 / 20.12 – Free XXX
-    18: voucher(18, 'free', CODE_THEN_VOUCHER),
-    19: voucher(19, 'free', CODE_THEN_VOUCHER),
-    20: voucher(20, 'free', CODE_THEN_VOUCHER),
+    18: voucher(18, 'free', CODE_THEN_VOUCHER, HOME),
+    19: voucher(19, 'free', CODE_THEN_VOUCHER, HOME),
+    20: voucher(20, 'free', CODE_THEN_VOUCHER, HOME),
  
     // 21.12 – €50 Cashback
-    21: voucher(21, 'cashback', CODE_THEN_VOUCHER),
+    21: voucher(21, 'cashback', CODE_THEN_VOUCHER, HOME),
  
     // 22.12 / 23.12 – Free XXX
-    22: voucher(22, 'free', CODE_THEN_VOUCHER),
-    23: voucher(23, 'free', CODE_THEN_VOUCHER),
+    22: voucher(22, 'free', CODE_THEN_VOUCHER, HOME),
+    23: voucher(23, 'free', CODE_THEN_VOUCHER, HOME),
  
     // 24.12 – Home Accessories
     24: category(24, "https://www.beliani.ch/home-accessories/"),
@@ -558,20 +559,38 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
       showImage();
  
       // ===== Click logic =====
-      // - today's door: opens the door (image swap) + shows its popup;
-      //   once opened it stays open (also after a reload) and is not clickable any more
+      // - today's door: first click opens the door (image swap) + shows its popup;
+      //   after that it stays open (also after a reload) and a click shows the popup again
+      //   – until the day is over
       // - past doors: shown open, not clickable
       // - future doors: not clickable
-      // TEST MODE: only the next door is clickable, opened doors are not
+      // TEST MODE: the last opened door shows its popup again, the next door opens
+ 
+      // day number right now (1 on 1 Dec) – the page may stay open past midnight
+      function currentDay() {
+        var n = new Date();
+        return n < start ? 0 : Math.floor((n - start) / msPerDay) + 1;
+      }
+ 
+      function makeClickable(door, onClick) {
+        door.style.pointerEvents = 'auto';
+        door.style.cursor = 'pointer';
+        door.onclick = onClick;
+      }
+      function makeLocked(door) {
+        door.style.pointerEvents = 'none';
+        door.style.cursor = 'default';
+        door.onclick = null;
+      }
+ 
       function updateDoorsTest() {
         doors.forEach(function (door) {
           var doorNum = parseInt(door.dataset.door, 10);
           var isNext = doorNum === testCurrent + 1 && doorNum <= lastDoor;
+          var isLast = doorNum === testCurrent;    // test "today": popup again
  
           if (isNext) {
-            door.style.pointerEvents = 'auto';
-            door.style.cursor = 'pointer';
-            door.onclick = function (e) {
+            makeClickable(door, function (e) {
               track('Click', 'Page', 'PopUp');
               if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
               testCurrent = doorNum;
@@ -579,11 +598,15 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
               showImage();
               updateDoorsTest();
               setTimeout(function () { openPopup(doorNum); }, 400);
-            };
+            });
+          } else if (isLast) {
+            makeClickable(door, function (e) {
+              track('Click', 'Page', 'PopUp');
+              if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
+              openPopup(doorNum);
+            });
           } else {
-            door.style.pointerEvents = 'none';
-            door.style.cursor = 'default';
-            door.onclick = null;
+            makeLocked(door);
           }
         });
       }
@@ -592,27 +615,27 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
         if (TEST_MODE) { updateDoorsTest(); return; }
         doors.forEach(function (door) {
           var doorNum = parseInt(door.dataset.door, 10);
-          var isToday = doorNum === todayDoor;
  
-          if (isToday && !todayOpened) {
-            door.style.pointerEvents = 'auto';
-            door.style.cursor = 'pointer';
-            door.onclick = function (e) {
-              track('Click', 'Page', 'PopUp');
-              if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
+          if (doorNum !== todayDoor) { makeLocked(door); return; }
  
-              todayOpened = true;
-              saveState();                        // remember it for the next visit
-              showImage();
-              updateDoors();
-              // short delay so the door opening is visible before the popup
-              setTimeout(function () { openPopup(doorNum); }, 400);
-            };
-          } else {
-            door.style.pointerEvents = 'none';
-            door.style.cursor = 'default';
-            door.onclick = null;
-          }
+          makeClickable(door, function (e) {
+            // the day is over (page left open past midnight) -> start the new day
+            if (currentDay() !== day) { window.location.reload(); return; }
+ 
+            track('Click', 'Page', 'PopUp');
+            if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);   // confetti on every click
+ 
+            if (todayOpened) {                   // already opened today -> popup again
+              openPopup(doorNum);
+              return;
+            }
+ 
+            todayOpened = true;
+            saveState();                         // remember it for the next visit
+            showImage();
+            // short delay so the door opening is visible before the popup
+            setTimeout(function () { openPopup(doorNum); }, 400);
+          });
         });
       }
  
@@ -635,3 +658,5 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
  
   return InteractiveTopImage;
 }
+ 
+ 

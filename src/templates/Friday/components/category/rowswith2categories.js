@@ -59,6 +59,17 @@ const getName = ({ item, getCategoryTitle }) => {
  
 	return translated ?? item.name;
 };
+
+const NAME_CTA_GAP = 8; // = right padding of the name cell
+const textLength = (text) => String(text ?? '').replace(/<[^>]*>/g, '').replace(/&[#a-z0-9]+;/gi, 'x').trim().length;
+
+const textCollides = ({ name, ctaText, width, category }) => {
+	const charWidth = category?.tileTextCharWidth ?? 0.6;
+	const nameWidth = textLength(name) * (category?.tileNameFontSize ?? 20) * charWidth;
+	const ctaWidth = textLength(ctaText) * (category?.tileCtaFontSize ?? 20) * charWidth;
+
+	return nameWidth + NAME_CTA_GAP + ctaWidth > width;
+};
  
 // outlook (word) adds td padding on top of the declared width, so the gaps are
 // spacer cells instead of padding and every width is an exact pixel value
@@ -153,6 +164,17 @@ export const render = ({
 	const nameColor = category?.tileNameColor;
 	const ctaColor = category?.tileCtaColor;
 	const spaceBetweenRows = category?.spaceBetweenRows ?? 'newsletterBottom35px';
+
+	const textStackMode = category?.tileTextStack ?? 'auto';
+	const stackText = showText && textInRow && textStackMode !== 'never' && (
+		textStackMode === 'always' ||
+		rows.some((row) => row.some((item, columnId) => item && textCollides({
+			name: getName({ item, getCategoryTitle }),
+			ctaText,
+			width: layout.widths[columnId],
+			category,
+		})))
+	);
  
 	let html = renderHeading({
 		heading: category?.heading,
@@ -208,23 +230,42 @@ export const render = ({
 			`;
  
 			if (showText && textInRow) {
-				// Desktop: name (left, takes all free width) + CTA (right edge) in one line.
-				// Mobile (<=768px, categoryTiles.css): name and CTA stack, smaller font – so a long name
-				// never pushes the tile wider than its column.
-				// Fixed px only: Gmail ignores clamp()/vw and would fall back to the biggest size.
-				// The cell is middle-aligned, so when one tile's name wraps the neighbour stays centred.
-				// mso-line-height-alt: every line exactly 25px in Outlook, also when the name wraps.
+				// stackText = false: name (left) + CTA (right) in one line
+				// stackText = true:  name, CTA underneath, both left (same as the mobile version)
+				// Names wrap only between words, never inside a word.
+				const nameLink = `<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>`;
+				const ctaLink = `<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>`;
+				const nameStyle = `text-align: left; font-size: 20px; font-weight: 600; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} word-break: normal; overflow-wrap: break-word; hyphens: manual; color: ${nameColor ?? '#750000'};`;
+				const ctaStyle = `font-weight: 600; ${msoLine(MSO_NAME_LINE)} word-break: normal; overflow-wrap: break-word; hyphens: manual;`;
+
+				const textTable = stackText
+					? `
+						<tr>
+							<td class="frenchDaysCategoryName categoryTileInRowName" align="left" valign="top" style="padding: 0; vertical-align: top; ${nameStyle}">
+								${nameLink}
+							</td>
+						</tr>
+						<tr>
+							<td class="categoryTileInRowCta" align="left" valign="top" style="padding: 6px 0 0 0; text-align: left; vertical-align: top; ${ctaStyle}">
+								${ctaLink}
+							</td>
+						</tr>
+					`
+					: `
+						<tr>
+							<td class="frenchDaysCategoryName categoryTileInRowName" align="left" valign="middle" style="padding: 0 ${NAME_CTA_GAP}px 0 0; vertical-align: middle; ${nameStyle}">
+								${nameLink}
+							</td>
+							<td class="categoryTileInRowCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; ${ctaStyle}">
+								${ctaLink}
+							</td>
+						</tr>
+					`;
+
 				nameCells += `
-					<td class="newsletterCategoryTile categoryTileText" width="${width}" valign="middle" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: middle;">
+					<td class="newsletterCategoryTile categoryTileText" width="${width}" valign="${stackText ? 'top' : 'middle'}" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: ${stackText ? 'top' : 'middle'};">
 						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
-							<tr>
-								<td class="frenchDaysCategoryName categoryTileInRowName" width="100%" align="left" valign="middle" style="padding: 0 8px 0 0; text-align: left; vertical-align: middle; font-size: 20px; font-weight: 600; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
-									<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
-								</td>
-								<td class="categoryTileInRowCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; font-weight: 600; ${msoLine(MSO_NAME_LINE)}">
-									<a href="${href}" class="frenchDaysCategoryCta" style="white-space: nowrap; color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
-								</td>
-							</tr>
+							${textTable}
 						</table>
 					</td>
 				`;

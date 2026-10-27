@@ -68,7 +68,7 @@ const Friday = async ({
   });
 
   const introCtaText = intro?.cta?.phrase ? getPhrase(intro?.cta?.phrase) : shopNow;
-  const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText, getCategoryLink, links, type });
+  const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText: intro.cta?.overrides?.[country] ?? introCtaText, getCategoryLink, links, type });
   const TimerElement = await TimerHandler({
     Inside,
     queries,

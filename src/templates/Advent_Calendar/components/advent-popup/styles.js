@@ -116,7 +116,9 @@ export function AdventPopupStyles() {
   .adv-pop__deal {
     position: relative;
     z-index: 1;
-    width: 49%;
+    /* text column centered at ~750px of the 967px popup, like the design
+       (the empty pink area right of the gift box) */
+    width: 45%;
     margin-left: auto;
     display: flex;
     flex-direction: column;
@@ -126,8 +128,10 @@ export function AdventPopupStyles() {
     pointer-events: none;           /* empty text area -> click goes to the background link */
   }
   .adv-pop__deal a,
-  .adv-pop__deal button,
-  .adv-pop__code-value { pointer-events: auto; }
+  .adv-pop__deal button { pointer-events: auto; }
+  /* the "Code: XXX" line is NOT part of the popup link:
+     the code can be highlighted and copied (one click selects the whole code) */
+  .adv-pop__code { pointer-events: auto; cursor: text; }
   .adv-pop--text-left .adv-pop__deal { margin-left: 0; margin-right: auto; }
  
   .adv-pop__container { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
@@ -167,7 +171,7 @@ export function AdventPopupStyles() {
     font-size: calc(var(--fs-body) * 1cqw);
     line-height: 1.25;
   }
-  .adv-pop__code-value { -webkit-user-select: text; user-select: text; }
+  .adv-pop__code-value { -webkit-user-select: all; user-select: all; }
   /* copy icon from CopyCodeCTA.js (buildCopyIcon) */
   /* the copy button must not make the "Code: XXX" line taller than the text:
      its padding (bigger tap area) is cancelled by an equal negative margin */
