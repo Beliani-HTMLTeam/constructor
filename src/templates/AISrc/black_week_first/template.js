@@ -8,6 +8,7 @@ import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 import { ShopByCategoryHeader } from './components/ShopByCategoryHeader.js';
+import { TimerHandler } from './handlers/_Timer.js';
 
 const BlackWeekFirst = async ({
   links,
@@ -29,6 +30,8 @@ const BlackWeekFirst = async ({
   shopByCategory,
   theme,
 
+  timer,
+  Inside,
   getHeader,
   getFooter,
   getCategoryLink,
@@ -64,6 +67,28 @@ const BlackWeekFirst = async ({
   const TopImageTitleElement = !disableTopImageTitle ? TopImageTitleHandler({ links, queries, TopImageTitle_data, type, countrySlug }) : '';
   const TopImageElement = TopImageHandler({ links, topImage });
   const shopNowImageElement = TopImageHandler({ links, topImage, type: "shop_now", getCategoryLink });
+
+    const TimerElement = await TimerHandler({
+      Inside,
+      queries,
+      links,
+      timer,
+      shopNow,
+      country,
+      type,
+      shop,
+      getProductById,
+      getCategoryLink,
+      getPhrase,
+      add_utm,
+    });
+    const timerPosition = Inside?.position ?? 'beforeCategories';
+  
+    const TimerAtTop = timerPosition === 'top' ? TimerElement : '';
+    const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
+    const TimerAfterCategories =
+      timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
+    const hasTimer = Boolean(TimerElement);
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
   const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug, type, links, getPhrase, theme: themeData });
@@ -128,9 +153,11 @@ const BlackWeekFirst = async ({
     ${HeaderElement}
 
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; background-color: ${background}; color: ${color};" id="newsletter">
-
-      ${TopImageTitleElement}
-
+    
+    ${TopImageTitleElement}
+    
+    ${TimerAtTop}
+    
       ${TopImageElement}
 
       ${shopNowImageElement}

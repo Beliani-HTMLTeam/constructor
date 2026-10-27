@@ -11,6 +11,7 @@ const ImageWithLink = ({
   tableContainer = false,
   type,
   background = '',
+  isStretched = true,
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -21,7 +22,7 @@ const ImageWithLink = ({
 
   html += isVideo
     ? `<a href="${href}"><video src="${src}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" autoplay muted loop playsinline></video></a>`
-    : `<a href="${href}"><img src="${src}" alt="${alt}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
+    : `<a href="${href}"><img src="${src}" alt="${alt}" ${isStretched ? 'width="100%"' : ''} style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
 
   if (insideTr) {
     html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}${background ? ` bgcolor="${background}"` : ''} style="border:0;mso-border-alt:none;${background ? `background-color:${background};` : ''}">${html}</td></tr>`;

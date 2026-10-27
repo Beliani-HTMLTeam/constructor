@@ -1,11 +1,12 @@
 import { Space } from './Space.js';
 
-const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type, renderType }) => {
-  const keywords = ['retrò', 'retró', 'rétro', '%', 'halloween', 'retro'];
+const TopImageTitle = ({ href, src, title1, title2, title3, backgroundColor, color, type, renderType }) => {
+  const keywords = ['retrò', 'retró', 'rétro', '%', 'halloween', 'retro', 'black weeks'];
 
   function includesKeywords(title) {
     for (let keyword of keywords) {
       if (String(title).toLowerCase().includes(keyword)) {
+        console.log("keyword", String(title).toLowerCase(), keyword)
         return true;
       }
     }
@@ -48,6 +49,13 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
       <h4 style="color:${color};" class="${String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title1}</h4>
       <h4 style="color:${color};" class="${String(title2).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title2}</h4>
     `,
+    three_lines: `
+          <h4 style="color:${color};" class="newsletterTitleH1">${title1}</h4>
+          <h4 style="color:${color};${includesKeywords(title2) ? 'font-weight: 600;' : ''}" class="newsletterTitleH1" style="">${
+            title2 ?? ''
+          }</h4>
+          <h4 style="color:${color};${includesKeywords(title3) ? 'font-weight: 600;' : ''}" class="newsletterTitleH1">${title3 ?? ''}</h4>
+        `
   };
 
   if (renderType === 'landing') {
@@ -62,9 +70,6 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
           </a>
         </td>
       </tr>
-
-      ${Space({ insideTr: true })}
-
     </table></td></tr>
     `;
   }
