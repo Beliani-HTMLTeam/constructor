@@ -126,7 +126,7 @@ const categories = [
 		color: '#000000',
 		type: 'black-week-extras',
 		textColor: '#FFFFFF',
-		href: translateLink({ value: 'content/lp26-11-11' }),
+		href: translateLink({ value: 'content/lp26-11-20' }),
 
 		// newsletter only - one image per box, same order as the tiers in deal_img (20, 15, 10, 5)
 		// on the landing page the boxes are rendered as html
