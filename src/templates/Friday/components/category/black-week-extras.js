@@ -308,7 +308,7 @@ const renderHtmlGrid = ({ tiers, codes, order, classes, colors, box, fit, codeSp
 			: 'display: inline-flex; align-items: center;';
 
 		const icon = copyable
-			? `<span data-copy-icon style="${iconStyle}">${buildCopyIcon({
+		? `<span data-copy-icon class="${classes.copyIcon}" style="${iconStyle}">${buildCopyIcon({
 				codeValue,
 				color: colors.value,
 				toastBg: toast.background,
@@ -397,6 +397,7 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		code: category?.dealClasses?.code ?? 'newsletterDealCode',
 		codeLabel: category?.dealClasses?.codeLabel ?? 'newsletterDealCodeLabel',
 		codeBreak: category?.dealClasses?.codeBreak ?? 'newsletterDealCodeBreak',
+		copyIcon: category?.dealClasses?.copyIcon ?? 'newsletterDealCopyIcon',
 	};
  
 	const tierLines = category?.dealTierLines ?? DEAL_TIER_LINES;
