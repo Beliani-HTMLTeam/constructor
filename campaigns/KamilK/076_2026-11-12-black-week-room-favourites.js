@@ -51,10 +51,10 @@ const links = {
 };
 
 const additionalCss = `
-.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}.newsletterCta{font-weight:700;}
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}.newsletterCta{font-size:30px;line-height:1.2;font-weight:700;}.roomTitle{font-size:30px;line-height:1.2;font-weight:700;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-@media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:18px}.newsletterProductTitle{font-size:12px;}.newsletterProductLowPrice{font-size:12px;}.newsletterProductHighPrice{font-size:10px;} #newsletter .frenchDaysDiscount {
+@media screen and (max-width:768px){.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.newsletterCta{font-size:18px;}.roomTitle{font-size:18px;}.blackWeekCondition{font-size:18px}.newsletterProductTitle{font-size:12px;}.newsletterProductLowPrice{font-size:12px;}.newsletterProductHighPrice{font-size:10px;} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -69,7 +69,7 @@ const additionalCss = `
 `;
 
 const additionalCssLp = `
-#newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}#newsletter .newsletterCta{font-weight:700;}
+#newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}#newsletter .newsletterCta{font-weight:700;}#newsletter .secondaryLinkMaroon{font-size:30px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:700;}#newsletter .roomTitle{font-size:30px;line-height:1.2;font-weight:700;}
 #newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:16px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:16px;line-height:21px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
 @media screen and (max-width:768px){
 	#newsletter .newsletterDealCopyIcon .blackWeekCopyImg,
@@ -79,7 +79,7 @@ const additionalCssLp = `
 	#newsletter .newsletterDealCopyIcon *{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
 	#newsletter .newsletterDealCode{font-size:15px;line-height:1}
 	#newsletter .newsletterDealCodeLabel{flex-basis:100%!important;margin-right:0!important;text-align:center!important}
-#newsletter .newsletterTitle{font-size:20px;}#newsletter .newsletterProductTitle{font-size:12px;}#newsletter .newsletterProductLowPrice{font-size:12px;}#newsletter .newsletterProductHighPrice{font-size:10px;}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}#newsletter .blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+#newsletter .newsletterTitle{font-size:20px;}#newsletter .secondaryLinkMaroon{font-size:18px;}#newsletter .roomTitle{font-size:18px;}#newsletter .newsletterProductTitle{font-size:12px;}#newsletter .newsletterProductLowPrice{font-size:12px;}#newsletter .newsletterProductHighPrice{font-size:10px;}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}#newsletter .blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -116,7 +116,7 @@ const roomCategory = (row, name, href, products) => ({
 	title: {
 		show: true,
 		align: 'center',
-		className: 'newsletterTitle',
+		className: 'newsletterTitle roomTitle',
 		styles: 'text-transform: uppercase;',
 		container: 'newsletterContainer30px',
 		spaceAfter: 'newsletterBottom20px',
@@ -202,7 +202,7 @@ const categories = [
 		title: {
 			show: true,
 			align: 'center',
-			className: 'newsletterTitle',
+			className: 'newsletterTitle roomTitle',
 			styles: 'text-transform: uppercase;',
 			container: 'newsletterContainer30px',
 		},
