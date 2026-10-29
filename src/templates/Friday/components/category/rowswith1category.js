@@ -1,7 +1,16 @@
 import { Space } from '../Space.js';
 import { Paragraph } from '../Paragraph.js';
  
-// One category per row: full-width image, underneath the name (left) and the CTA (right) in one line.
+const NAME_CTA_GAP = 12; // = right padding of the name cell
+ 
+const textLength = (text) =>
+	String(text ?? '')
+		.replace(/<[^>]*>/g, '')
+		.replace(/&[#a-z0-9]+;/gi, 'x')
+		.trim().length;
+ 
+const collides = ({ name, ctaText, width, nameSize, ctaSize, charWidth }) =>
+	textLength(name) * nameSize * charWidth + NAME_CTA_GAP + textLength(ctaText) * ctaSize * charWidth > width;
  
 const getSrc = (item) => {
 	if (!item?.src) return '';
@@ -93,6 +102,68 @@ export const render = ({
 	const radius = category?.tileRadius ?? 0;
 	const spaceBetweenRows = category?.spaceBetweenRows ?? 'newsletterBottom35px';
  
+	// one decision for the whole block (see the comment at the top)
+	const names = items.map((item) => getName({ item, getCategoryTitle }));
+	const stackMode = category?.tileTextStack ?? 'auto';
+	const charWidth = category?.tileTextCharWidth ?? 0.6;
+	const stackGap = category?.tileStackGap ?? 8;
+ 
+	const anyCollision = ({ width, nameSize, ctaSize }) =>
+		names.some((name) => collides({ name, ctaText, width, nameSize, ctaSize, charWidth }));
+ 
+	const stackDesktop =
+		showText &&
+		(stackMode === 'always' ||
+			(stackMode === 'auto' &&
+				anyCollision({
+					width: inner,
+					nameSize: category?.tileNameFontSize ?? 30,
+					ctaSize: category?.tileCtaFontSize ?? 30,
+				})));
+ 
+	const stackMobile =
+		showText &&
+		!stackDesktop &&
+		stackMode === 'auto' &&
+		anyCollision({
+			width: category?.tileTextMobileWidth ?? 300,
+			nameSize: category?.tileNameMobileFontSize ?? 18,
+			ctaSize: category?.tileCtaMobileFontSize ?? 18,
+		});
+ 
+	// names wrap only between words, never inside a word
+	const nameStyle = `text-align: left; mso-line-height-rule: at-least; word-break: normal; overflow-wrap: break-word; hyphens: manual; color: ${nameColor};`;
+ 
+	const renderText = ({ href, name }) => {
+		const nameLink = `<a href="${href}" style="color: ${nameColor}; text-decoration: none;">${name}</a>`;
+ 
+		if (stackDesktop) {
+			// name, CTA underneath - on desktop and mobile
+			return `
+                  <tr>
+                    <td class="categoryListName" align="left" valign="top" style="padding: 0; vertical-align: top; ${nameStyle}">
+                      ${nameLink}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="categoryListCta" align="left" valign="top" style="padding: ${stackGap}px 0 0 0; text-align: left; vertical-align: top; mso-line-height-rule: at-least;">
+                      <a href="${href}" style="color: ${ctaColor}; text-decoration: ${ctaDecoration};">${ctaText}</a>
+                    </td>
+                  </tr>`;
+		}
+ 
+		// name left + CTA right in one line; with stackMobile the mobile css stacks them
+		return `
+                  <tr>
+                    <td class="categoryListName${stackMobile ? ' categoryListNameStack' : ''}" width="100%" align="left" valign="middle" style="padding: 0 ${NAME_CTA_GAP}px 0 0; vertical-align: middle; ${nameStyle}">
+                      ${nameLink}
+                    </td>
+                    <td class="categoryListCta${stackMobile ? ' categoryListCtaStack' : ''}" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; mso-line-height-rule: at-least;">
+                      <a href="${href}" style="white-space: nowrap; color: ${ctaColor}; text-decoration: ${ctaDecoration};">${ctaText}</a>
+                    </td>
+                  </tr>`;
+	};
+ 
 	let html = renderHeading({
 		heading: category?.heading,
 		queries,
@@ -104,7 +175,7 @@ export const render = ({
 	items.forEach((item, index) => {
 		const isLast = index === items.length - 1;
 		const href = getHref({ item, getCategoryLink, add_utm, fallbackHref: categoryHref });
-		const name = getName({ item, getCategoryTitle });
+		const name = names[index];
 		const src = getSrc(item);
  
 		html += `
@@ -121,14 +192,7 @@ export const render = ({
             <tr>
               <td>
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
-                  <tr>
-                    <td class="categoryListName" width="100%" align="left" valign="middle" style="padding: 0 12px 0 0; text-align: left; vertical-align: middle; mso-line-height-rule: at-least; word-break: break-word; overflow-wrap: break-word; color: ${nameColor};">
-                      <a href="${href}" style="color: ${nameColor}; text-decoration: none;">${name}</a>
-                    </td>
-                    <td class="categoryListCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap;mso-line-height-rule: at-least;">
-                      <a href="${href}" style="white-space: nowrap; color: ${ctaColor}; text-decoration: ${ctaDecoration};">${ctaText}</a>
-                    </td>
-                  </tr>
+                  ${renderText({ href, name })}
                 </table>
               </td>
             </tr>
@@ -145,4 +209,3 @@ export const render = ({
  
 	return html;
 };
- 

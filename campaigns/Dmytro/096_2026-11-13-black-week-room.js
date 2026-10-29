@@ -51,7 +51,10 @@ const additionalCss = `
 .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-@media screen and (max-width:768px){.categoryListName{font-size:18px;}.categoryListCta{font-size:18px;}.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+@media screen and (max-width:768px){
+	.categoryListNameStack,.categoryListCtaStack{display:block!important;width:100%!important;box-sizing:border-box!important;padding:0!important;text-align:left!important}
+	.categoryListCtaStack{padding-top:8px!important}
+.categoryListName{font-size:18px;}.categoryListCta{font-size:18px;}.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -70,6 +73,8 @@ const additionalCssLp = `
 #newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}
 #newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:16px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:16px;line-height:21px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
 @media screen and (max-width:768px){
+	#newsletter .categoryListNameStack,#newsletter .categoryListCtaStack{display:block!important;width:100%!important;box-sizing:border-box!important;padding:0!important;text-align:left!important}
+	#newsletter .categoryListCtaStack{padding-top:8px!important}
 	#newsletter .newsletterDealCopyIcon .blackWeekCopyImg,
 	#newsletter .newsletterDealCopyIcon img,
 	#newsletter .newsletterDealCopyIcon svg{width:15px!important;height:15px!important;min-width:15px!important;max-width:15px!important;display:block!important}
