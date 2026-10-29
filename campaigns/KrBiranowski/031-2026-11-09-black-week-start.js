@@ -68,6 +68,12 @@ const categories = [
     background: theme.primary,
     title: { show: false },
     ctaHref: translateLink({ value: 'content/lp26-11-09' }),
+    cta: {
+      show: false,
+      textOverrides: {
+        fi: 'Ostoksille'
+      }
+    },
     tdClass: `newsletterContainer`,
   },
 ];
@@ -107,6 +113,7 @@ export default new entities.Campaign({
       intro: false,
       // disableFooterCategories: true,
       disableSoonEnding: true,
+      optimizeCss: true,
     },
     {
       background: theme.primary,

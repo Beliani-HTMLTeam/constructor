@@ -7,13 +7,12 @@ import { DiscountPopup } from './discount.js';
 import { SpecialDealPopup } from './special.js';
  
 export { PercentOffPopup, FreeGiftPopup, Buy4Pay3Popup, CashbackPopup, UpToPopup, DiscountPopup, SpecialDealPopup };
-export { AdventPopupShell, StandardPopup, PopupText, PopupCodes, PopupFooter, AdventConditionsBox, DEFAULT_POPUP_TEXTS } from './parts.js';
+export { AdventPopupShell, StandardPopup, PopupText, PopupCodes, PopupTiers, PopupFooter, AdventConditionsBox, AdventNotices, DEFAULT_NOTICES, DEFAULT_POPUP_TEXTS} from './parts.js';
 export { AdventPopupStyles } from './styles.js';
 export { AdventPopupScript } from './script.js';
 export { AdventConfettiScript } from './confetti.js';
 export { popupsFromQueries, popupTextsFromQueries, breakBeforeNumber, DEFAULT_POPUP_FIELDS, POPUP_TEXT_QUERIES } from './fromQueries.js';
 
-// type name -> component
 export const ADVENT_POPUP_TYPES = {
   percent: PercentOffPopup,
   free: FreeGiftPopup,
@@ -40,4 +39,3 @@ export function AdventPopups({ popups = {}, texts } = {}) {
     .map((id) => AdventPopup({ id, texts, ...popups[id] }))
     .join('');
 }
- 

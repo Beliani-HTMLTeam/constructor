@@ -6,19 +6,31 @@
 //   window.AdventPopup.open(id)  -> opens <template data-adv-popup="id">
 //   window.AdventPopup.close()
 //   window.AdventPopup.has(id)   -> true if that popup exists
+//   window.AdventPopup.notice('past' | 'future') -> small message for a few seconds
+//                                    (texts from <template data-adv-notice>, see AdventNotices)
 //
 // Handles: grey overlay, click outside / X / Esc to close, copy code,
 // "See conditions" (fills the AdventConditionsBox), dataLayer events.
+//
+// Accessibility:
+//   - the popup is a dialog named after its deal text ("Christmas Decorations Up to 50% OFF")
+//   - focus moves into the popup (close button) and Tab stays inside it
+//   - on close, focus goes back to where it was (the door / the button);
+//     after "See conditions" it goes to the conditions box
+//   - the page behind does not scroll while the popup is open
+//     (wheel, touch swipe and scroll keys) – the scrollbar stays in place
+//   - "Code copied" is announced to screen readers
 // ============================================================
-export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar' } = {}) {
-  const opts = JSON.stringify({ conditionsBoxId, trackingCategory });
-
+// noticeMs: how long the small "past / future door" message stays (ms)
+export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar', noticeMs = 4000, closeLabel = 'Close' } = {}) {
+  const opts = JSON.stringify({ conditionsBoxId, trackingCategory, noticeMs, closeLabel });
+ 
   return `
 <script>
 (function () {
   if (window.AdventPopup) return;
   var OPTS = ${opts};
-
+ 
   function track(action, label, value) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -31,13 +43,27 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       eventID: ''
     });
   }
-
-  var overlay, content, current = null, closeTimer = null;
-
+ 
+  var overlay, content, live, current = null, closeTimer = null, lastFocus = null;
+ 
   function getTpl(id) {
     return document.querySelector('template[data-adv-popup="' + String(id) + '"]');
   }
-
+ 
+  function isOpen() {
+    return !!overlay && overlay.classList.contains('is-open') && !overlay.classList.contains('is-closing');
+  }
+ 
+  // focusable elements inside the popup (only the visible desktop / mobile ones)
+  function focusables() {
+    var list = content.querySelectorAll('a[href], button, [tabindex]');
+    return Array.prototype.filter.call(list, function (el) {
+      return el.getAttribute('tabindex') !== '-1' && !el.disabled && el.offsetParent !== null;
+    });
+  }
+ 
+  function stop(e) { if (isOpen()) e.preventDefault(); }
+ 
   function ensureOverlay() {
     if (overlay) return;
     overlay = document.getElementById('advent-popup');
@@ -45,63 +71,165 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       overlay = document.createElement('div');
       overlay.id = 'advent-popup';
       overlay.className = 'adv-pop';
-      overlay.setAttribute('role', 'dialog');
-      overlay.setAttribute('aria-modal', 'true');
       overlay.innerHTML = '<div class="adv-pop__content"></div>';
       document.body.appendChild(overlay);
     }
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
     content = overlay.querySelector('.adv-pop__content');
-
+ 
+    // screen-reader announcements ("Code copied")
+    live = document.createElement('div');
+    live.className = 'adv-pop__sr';
+    live.setAttribute('aria-live', 'polite');
+    document.body.appendChild(live);
+ 
     // grey background → close
     overlay.addEventListener('click', function (e) {
       if (e.target === overlay) close();
     });
-
+ 
+    // the page behind must not scroll while the popup is open (scrollbar stays visible)
+    overlay.addEventListener('wheel', stop, { passive: false });
+    overlay.addEventListener('touchmove', stop, { passive: false });
+ 
     // copy icon (buildCopyIcon) handles copying + notification itself;
     // capture phase so we still track it before its onclick stops the event
     content.addEventListener('click', function (e) {
-      if (e.target.closest('.adv-pop__copy-wrap button')) track('Verify', 'Promo', 'Voucher');
+      var wrap = e.target.closest('.adv-pop__copy-wrap');
+      if (wrap && e.target.closest('button')) {
+        track('Verify', 'Promo', 'Voucher');
+        var msg = wrap.getAttribute('data-copied') || '';
+        live.textContent = '';
+        setTimeout(function () { live.textContent = msg; }, 100);
+      }
     }, true);
-
+ 
     // clicks inside the popup
     content.addEventListener('click', function (e) {
       var t = e.target;
       if (t.closest('.adv-pop__close')) { close(); return; }
-
+ 
       if (t.closest('.adv-pop__cond')) { showConditions(); return; }
-
+ 
       if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
     });
-
+ 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') close();
+      if (!isOpen()) return;
+ 
+      if (e.key === 'Escape') { close(); return; }
+ 
+      // keep Tab inside the popup
+      if (e.key === 'Tab') {
+        var f = focusables();
+        if (!f.length) { e.preventDefault(); return; }
+        var first = f[0], last = f[f.length - 1];
+        var inside = content.contains(document.activeElement);
+        if (e.shiftKey && (document.activeElement === first || !inside)) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && (document.activeElement === last || !inside)) { e.preventDefault(); first.focus(); }
+        return;
+      }
+ 
+      // no page scrolling with the keyboard while the popup is open
+      var scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'];
+      var onControl = e.target.closest && e.target.closest('a, button');
+      if (scrollKeys.indexOf(e.key) !== -1 || (e.key === ' ' && !onControl)) e.preventDefault();
     });
   }
-
+ 
   function open(id) {
     var tpl = getTpl(id);
     if (!tpl) return false;
     ensureOverlay();
     clearTimeout(closeTimer);
     current = id;
+    if (!isOpen()) lastFocus = document.activeElement;
     content.className = 'adv-pop__content adv-pop--' + (tpl.getAttribute('data-layout') || 'deal') +
       (tpl.getAttribute('data-text') === 'left' ? ' adv-pop--text-left' : '');
+    // popup id on the box -> per-popup CSS, e.g. .adv-pop__content[data-popup="1"] { ... }
+    content.setAttribute('data-popup', String(id));
     content.innerHTML = '';
     content.appendChild(tpl.content.cloneNode(true));
     overlay.classList.remove('is-closing');
     overlay.classList.add('is-open');
+ 
+    // dialog name = the visible deal text, e.g. "Christmas Decorations Up to 50% OFF"
+    var head = Array.prototype.filter.call(content.querySelectorAll('.adv-pop__container'), function (el) {
+      return el.offsetParent !== null;
+    })[0];
+    var name = head ? (head.innerText || head.textContent || '').split(String.fromCharCode(10)).join(' ').trim() : '';
+    if (name) overlay.setAttribute('aria-label', name); else overlay.removeAttribute('aria-label');
+ 
+    // move focus into the popup
+    var btn = content.querySelector('.adv-pop__close');
+    if (btn) { try { btn.focus({ preventScroll: true }); } catch (err) { btn.focus(); } }
     return true;
   }
-
-  function close() {
+ 
+  // focusTo: element that gets the focus after closing (default: where it was before)
+  function close(focusTo) {
     if (!overlay || !overlay.classList.contains('is-open')) return;
     overlay.classList.add('is-closing');
+    var target = focusTo && focusTo.nodeType === 1 ? focusTo : lastFocus;
+    lastFocus = null;
     closeTimer = setTimeout(function () {
       overlay.classList.remove('is-open', 'is-closing');
       content.innerHTML = '';
+      if (target && document.contains(target) && typeof target.focus === 'function') {
+        try { target.focus({ preventScroll: true }); } catch (err) { target.focus(); }
+      }
     }, 400);
   }
-
+ 
+  // ===== Small notice (past / future door) =====
+  var note, noteBody, noteTimer, noteCloseTimer;
+  var X_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M4 3 20 21M20 3 4 21"/></svg>';
+ 
+  function noteOpen() { return !!note && note.classList.contains('is-open') && !note.classList.contains('is-closing'); }
+ 
+  function ensureNote() {
+    if (note) return;
+    note = document.createElement('div');
+    note.className = 'adv-note';
+    note.innerHTML =
+      '<div class="adv-note__box" role="status" aria-live="polite">' +
+        '<div class="adv-note__body"></div>' +
+        '<button type="button" class="adv-note__close">' + X_ICON + '</button>' +
+      '</div>';
+    note.querySelector('.adv-note__close').setAttribute('aria-label', OPTS.closeLabel);
+    noteBody = note.querySelector('.adv-note__body');
+    document.body.appendChild(note);
+    note.addEventListener('click', function (e) {
+      if (e.target === note || e.target.closest('.adv-note__close')) hideNote();   // outside / X
+    });
+    note.addEventListener('wheel', function (e) { if (noteOpen()) e.preventDefault(); }, { passive: false });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && noteOpen()) hideNote();
+    });
+  }
+ 
+  function showNote(kind) {
+    var tpl = document.querySelector('template[data-adv-notice="' + kind + '"]');
+    if (!tpl) return false;
+    ensureNote();
+    clearTimeout(noteTimer); clearTimeout(noteCloseTimer);
+    noteBody.innerHTML = '';
+    noteBody.appendChild(tpl.content.cloneNode(true));
+    note.classList.remove('is-open', 'is-closing');
+    void note.offsetWidth;                       // restart the animation on a quick 2nd click
+    note.classList.add('is-open');
+    noteTimer = setTimeout(hideNote, OPTS.noticeMs);   // disappears by itself
+    return true;
+  }
+ 
+  function hideNote() {
+    if (!note || !note.classList.contains('is-open')) return;
+    clearTimeout(noteTimer);
+    note.classList.add('is-closing');
+    noteCloseTimer = setTimeout(function () { note.classList.remove('is-open', 'is-closing'); }, 300);
+  }
+ 
   function showConditions() {
     var src = content.querySelector('.adv-pop__cond-src');
     var box = document.getElementById(OPTS.conditionsBoxId);
@@ -110,12 +238,13 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       '<div class="adv-cond__title">' + (src.getAttribute('data-title') || '') + '</div>' +
       '<div class="adv-cond__text">' + src.innerHTML + '</div>';
     box.style.display = 'block';
-    close();
+    box.setAttribute('tabindex', '-1');     // so focus (and the screen reader) can go there
+    close(box);
     setTimeout(function () {
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 450);
   }
-
+ 
   // preload popup images so they appear instantly
   function preload() {
     var tpls = document.querySelectorAll('template[data-adv-popup]');
@@ -134,10 +263,11 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   } else {
     preload();
   }
-
+ 
   window.AdventPopup = {
     open: open,
-    close: close,
+    close: function () { close(); },
+    notice: showNote,
     has: function (id) { return !!getTpl(id); }
   };
 })();

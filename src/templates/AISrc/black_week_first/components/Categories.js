@@ -188,7 +188,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const ctaVariant = typeof category.cta === 'object' && category.cta?.variant ? category.cta.variant : 'maroon';
 
   // CTAElement only renders for non-deal categories
-  const CTAElement = category.cta && !isDeal
+  const CTAElement = category.cta && category?.cta?.show && !isDeal
     ? `
       ${category?.cta?.spaceAfter ? Space({ insideTr: true, className: category.cta.spaceAfter }) : ''}
       ${CTA({

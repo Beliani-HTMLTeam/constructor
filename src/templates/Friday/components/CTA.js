@@ -120,7 +120,8 @@ const CTA = ({
 		console.log("font-family:", fontFamily, "type:", type, "variant", variant);
 
 		if (variant === 'underline') {
-			html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLinkMaroon">${transformedText} ${copyIcon}</a>`;
+			const underlineStyle = color ? ` style="color: ${color}; text-decoration: underline;"` : '';
+			html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLinkMaroon"${underlineStyle}>${transformedText} ${copyIcon}</a>`;
 		}else if (variant === 'button') {
 			const buttonContent = codeValue ? `${transformedText} ${copyIcon}` : transformedText;
 			const buttonHref = codeValue ? '#' : href;

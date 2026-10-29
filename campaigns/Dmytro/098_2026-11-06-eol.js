@@ -106,6 +106,7 @@ const TopImageTitle_data = {
 
 
 const intro_cta_overrides = {
+  FI: "Tutustu valikoimaan"
 }
 
 const timer = {
@@ -115,6 +116,7 @@ const timer = {
 			id: 257987,
 			titlePhrase: 'Decorative Cushions',
 			src: getImageUrl('20261106freebie1.png', true),
+      exclude: ['no']
 		},
 		// PADRE
 		{
