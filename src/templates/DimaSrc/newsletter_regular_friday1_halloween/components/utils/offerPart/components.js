@@ -55,7 +55,7 @@ const NewsletterOfferPart = ({
     ${Space({ insideTr: true, className: 'newsletterBottom35px' })}
   
     <tr>
-      <td >
+      <td class="newsletterContainer">
         ${GetCode({
           color: color,
           code: queries?.codeCTA || 'Code tableQuery not found.',

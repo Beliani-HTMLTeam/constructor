@@ -132,7 +132,7 @@ const categories = [
       variant: 'button',
       bg: '#FF2F00',
       color: '#FFFFFF',
-      borderWidth: '13px 45px',
+      borderWidth: '13px 30px',
       borderColor: '#FF2F00',
       borderRadius: '4px',
     },

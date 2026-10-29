@@ -20,7 +20,7 @@ export function GetCode({ type, code = '', link, color, showCopyCode = false,  c
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
           <tbody>
               <tr>
-                  <td align="center">
+                  <td align="center" class="newsletterContainer">
                     <a href=${link} style="text-decoration:underline!important; color: ${color || '#000'};">
                         <span class="newsletterCode">
                         ${code}

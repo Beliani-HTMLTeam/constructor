@@ -39,6 +39,7 @@ export const IntroCTA = ({
       color: color,
       align: 'center',
       insideTr: true,
+      tdClass: 'newsletterContainer',
     })}
     ${cta.spaceAfter ? Space({ insideTr: true, className: cta.spaceAfter, backgroundColor }) : ''}
   `;

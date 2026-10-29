@@ -10,7 +10,7 @@ const CTA = ({
   variant = 'underline',
   bg = '#750000',
   borderColor = bg,
-  borderWidth = '15px 45px',
+  borderWidth = '15px 25px',
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -22,7 +22,7 @@ const CTA = ({
     : `<a style="color: ${color}; text-decoration: underline;" href="${href}"><span class="newsletterCta">${text}</span></a>`;
 
   if (insideTr) {
-    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align}>${html}</td></tr>`;
+    html = `<tr><td class="newsletterContainer" align=${align}>${html}</td></tr>`;
   }
 
   if (insideTable) {
