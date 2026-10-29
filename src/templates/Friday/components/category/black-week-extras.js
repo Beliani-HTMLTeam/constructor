@@ -356,7 +356,7 @@ const renderHtmlGrid = ({
 		// split: the icon is absolutely positioned after the code (out of the flow), so the code itself
 		// is centred under "CODE:" / "CÓDIGO:" and the icon sits on the right, `codeIconGap` px from the code
 		const iconStyle = split
-			? `position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: ${codeIconGap}px; display: inline-flex; align-items: center; width: 100%;`
+			? `position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: ${codeIconGap}px; display: inline-flex; align-items: center; `
 			: 'display: inline-flex; align-items: center;';
  
 		const icon = copyable
