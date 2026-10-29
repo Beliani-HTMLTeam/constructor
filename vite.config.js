@@ -54,6 +54,12 @@ export default defineConfig(({ mode }) => {
       }),
     ],
 
+    server: {
+      watch: {
+        ignored: ['**/.playwright-mcp/**'],
+      },
+    },
+
     resolve: {
       alias: Object.fromEntries(
         Object.entries(aliasEntries).map(([key, relPath]) => [key, fileURLToPath(new URL(relPath, import.meta.url))])

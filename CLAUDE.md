@@ -73,6 +73,6 @@ With `bun run dev` running, open the app on localhost (`:5500`) and select the c
 - `lang` — language key from [src/config/languages.js](src/config/languages.js), e.g. `UK`, `BENL`, `CHFR_Mattress`
 - `view` — `mobile` for mobile preview (omit for desktop)
 
-Example: `http://localhost:5500/?scope=KamilK&campaign=49505&template=newsletter&shop=<slug>&lang=UK`. The URL is kept in sync with the UI, so selecting things in the UI and copying the URL also works.
+Example: `http://localhost:5500/?scope=KamilK&campaign=49505&template=newsletter&shop=UK&lang=UK` (`shop` is case-sensitive, as shown on the shop buttons — `shop=uk` is silently dropped). The URL is kept in sync with the UI, so selecting things in the UI and copying the URL also works.
 
-**Wait before reading the render:** `staticTranslations` must finish loading first (`staticTranslations.whenReady()` in `templateRenderer.js`); until then the output is empty/incomplete. If it takes longer than ~10 seconds, reload the page.
+**Wait before reading the render:** `staticTranslations` must finish loading first (`staticTranslations.whenReady()` in `templateRenderer.js`); until then the output is empty/incomplete. Progress is shown as a `toast.promise` toast ([src/api/staticTranslations.js](src/api/staticTranslations.js)): wait until "Initializing static translations..." turns into "Translations successfully loaded" before reading the render. If it takes longer than ~10 seconds, reload the page.
