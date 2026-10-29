@@ -251,6 +251,7 @@ export default new entities.Campaign({
 			tableQueries: tableQueries,
 			additionalCss: additionalCss,
 			footer_theme: 'black',
+			optimizeCss: true,
 		},
 
 		{

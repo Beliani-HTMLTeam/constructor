@@ -287,6 +287,7 @@ export default new entities.Campaign({
 			additionalCss: additionalCss,
 
 			footer_theme: 'black',
+			optimizeCss: true,
 		},
 
 		{
