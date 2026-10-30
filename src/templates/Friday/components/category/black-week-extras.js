@@ -99,16 +99,20 @@ const GLYPH_WIDTH_RATIO = 0.62;
 // the longest value decides the size for every box, so all four stay equal
 const getFitStyle = ({ texts, maxWidth, maxFontSize, minFontSize }) => {
 	const longest = texts.reduce((max, text) => Math.max(max, stripTags(text).length), 0);
- 
+
 	if (!longest) return '';
- 
+
 	const fitted = Math.floor(maxWidth / (longest * GLYPH_WIDTH_RATIO));
 	const floor = Math.min(minFontSize, maxFontSize);
 	const size = Math.max(floor, Math.min(maxFontSize, fitted));
- 
-	return size < maxFontSize ? `font-size: ${size}px !important; line-height: 1 !important;` : '';
+
+	if (size >= maxFontSize) return '';
+
+	const fluid = (100 / (longest * GLYPH_WIDTH_RATIO)).toFixed(2);
+
+	return `font-size: ${size}px !important; font-size: min(${size}px, ${fluid}cqw) !important; line-height: 1 !important;`;
 };
- 
+
 const getDefaultRowOrder = (lines) => Array.from({ length: lines }, (_, i) => `row${i + 1}`);
  
 // per shop line order inside a box, same config shape as the french days template:
@@ -340,7 +344,7 @@ const renderHtmlGrid = ({
 		const className = lineClasses[index] ?? classes.note;
  
 		return isValue
-			? `<div style="white-space: nowrap;${valueSpaceAfter ? ` padding-bottom: ${valueSpaceAfter}px;` : ''}"><span class="${className}" style="color: ${colors.value}; ${fitStyle}">${text}</span></div>`
+			? `<div style="white-space: nowrap;${fitStyle ? ' container-type: inline-size;' : ''}${valueSpaceAfter ? ` padding-bottom: ${valueSpaceAfter}px;` : ''}"><span class="${className}" style="color: ${colors.value}; ${fitStyle}">${text}</span></div>`
 			: `<div><span class="${className}" style="color: ${colors.text};">${text}</span></div>`;
 	};
  
