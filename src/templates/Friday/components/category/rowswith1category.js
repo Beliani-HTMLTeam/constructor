@@ -1,7 +1,7 @@
 import { Space } from '../Space.js';
 import { Paragraph } from '../Paragraph.js';
  
-const NAME_CTA_GAP = 12; // = right padding of the name cell
+const NAME_CTA_GAP = 6; // = right padding of the name cell
  
 const textLength = (text) =>
 	String(text ?? '')
