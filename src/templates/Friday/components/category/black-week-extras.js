@@ -348,17 +348,21 @@ const renderHtmlGrid = ({
 	// code line + copy icon
 	const renderCode = ({ code, codeValue, copyable }) => {
 		if (isEmpty(code)) return '';
- 
+
 		const text = String(code);
 		const colon = text.indexOf(':');
-		const split = breakCode && colon > -1;
- 
+		const hasLabel = colon > -1;
+		const split = breakCode && hasLabel;
+
+		const label = hasLabel ? text.slice(0, colon + 1).trim() : '';
+		const value = hasLabel ? text.slice(colon + 1).trim() : text.trim();
+
 		// split: the icon is absolutely positioned after the code (out of the flow), so the code itself
 		// is centred under "CODE:" / "CÓDIGO:" and the icon sits on the right, `codeIconGap` px from the code
 		const iconStyle = split
-			? `position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: ${codeIconGap}px; display: inline-flex; align-items: center; `
+			? `position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: ${codeIconGap}px; display: inline-flex; align-items: center;`
 			: 'display: inline-flex; align-items: center;';
- 
+
 		const icon = copyable
 			? `<span data-copy-icon class="${classes.copyIcon}" style="${iconStyle}">${buildCopyIcon({
 				codeValue,
@@ -369,12 +373,16 @@ const renderHtmlGrid = ({
 				className: 'blackWeekCopyImg',
 			})}</span>`
 			: '';
- 
+
+		// codeLabel (mobile: own line) only for the split shops, all others get codePrefix (stays in the line)
+		const labelHtml = hasLabel
+			? `<span class="${split ? classes.codeLabel : classes.codePrefix}" style="margin-right: 0.3em; text-transform: uppercase;">${label}</span>`
+			: '';
+
 		const content = split
-			? `<span class="${classes.codeLabel}" style="margin-right: 0.3em;">${text.slice(0, colon + 1).trim()}</span><span style="position: relative; display: inline-block; white-space: nowrap;">${text.slice(colon + 1).trim()}${icon}</span>`
-			: `${code}
-                    ${icon}`;
- 
+			? `${labelHtml}<span style="position: relative; display: inline-block; white-space: nowrap; text-transform: none;">${value}${icon}</span>`
+			: `${labelHtml}<span style="text-transform: none;">${value}</span>${icon}`;
+
 		return `
                 <div>
                   <span class="${classes.code}${breakCode ? ` ${classes.codeBreak}` : ''}" style="color: ${colors.value}; display: inline-flex; align-items: center; ${split ? 'justify-content: center; flex-wrap: wrap;' : ''} white-space: nowrap;">
@@ -462,6 +470,7 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 		codeBreak: category?.dealClasses?.codeBreak ?? 'newsletterDealCodeBreak',
 		// wrapper of the copy icon - the mobile css sets the gap to the code and the icon size on it
 		copyIcon: category?.dealClasses?.copyIcon ?? 'newsletterDealCopyIcon',
+		codePrefix: category?.dealClasses?.codePrefix ?? 'newsletterDealCodePrefix',
 	};
  
 	const tierLines = category?.dealTierLines ?? DEAL_TIER_LINES;

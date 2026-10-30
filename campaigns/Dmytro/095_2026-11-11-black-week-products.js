@@ -3,8 +3,9 @@ const campaignTranslationsSheet = '2026::Voucher - 11.11.26 - Black Week product
 const tableQueries = [
 	{
 		// THE MORE YOU SPEND, THE MORE YOU SAVE - 1 row
-		tableRange: '45',
+		tableRange: '26',
 		name: 'deal_title',
+		tableName: '2026::Voucher - 09.11.26 - Black Week start',
 	},
 	{
 		// 4 boxes x 4 rows (EXTRA / 20% / OFF / when you spend min. €2500) - 16 rows, in order 20, 15, 10, 5
@@ -18,12 +19,14 @@ const tableQueries = [
 	},
 	{
 		// Limited-time offer. Valid until 29/11/2026 - 1 row
-		tableRange: '44',
+		tableRange: '43',
 		name: 'deal_condition',
+		tableName: '2026::Voucher - 09.11.26 - Black Week start',
 	},
 	{
-		tableRange: '46:48',
-		name: "condition"
+		tableRange: '44:46',
+		name: "condition",
+		tableName: '2026::Voucher - 09.11.26 - Black Week start'
 	}
 ];
 
@@ -68,6 +71,7 @@ const additionalCss = `
 const additionalCssLp = `
 #newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}
 #newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:16px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:16px;line-height:21px;font-family:"Poppins",sans-serif;font-weight:700;}
+#newsletter .newsletterDealCodePrefix{text-transform:uppercase;}
 @media screen and (max-width:768px){
 	#newsletter .newsletterDealCopyIcon .blackWeekCopyImg,
 	#newsletter .newsletterDealCopyIcon img,
@@ -251,6 +255,9 @@ const categories = [
 				},
 				{
 					name: "Accessories",
+					overrides: {
+						DACH: "Wohnaccessoires" 
+					},
 					href: 'https://www.beliani.ch/accessories-decor/',
 					src: getImageUrl('20261111Category12.png', true),
 				},]

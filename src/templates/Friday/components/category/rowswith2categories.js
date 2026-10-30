@@ -1,6 +1,10 @@
 import { Space } from '../Space.js';
 import { Paragraph } from '../Paragraph.js';
 
+const OVERRIDE_GROUPS = {
+	dach: ['chde', 'de', 'at'],
+};
+
 // Default number of tiles per row. Can be overridden per block with `category.columns`.
 const COLUMNS = 2;
  
@@ -52,11 +56,36 @@ const getHref = ({ item, getCategoryLink, add_utm, fallbackHref }) => {
 	return typeof add_utm === 'function' ? add_utm(rawHref) : rawHref;
 };
  
-const getName = ({ item, getCategoryTitle }) => {
+
+const getOverride = (overrides, country) => {
+	if (!overrides || typeof overrides !== 'object' || !country) return undefined;
+
+	const slug = String(country).trim().toLowerCase();
+	let fromGroup;
+
+	for (const [key, value] of Object.entries(overrides)) {
+		if (value === undefined || value === null || String(value).trim() === '') continue;
+
+		const shops = String(key)
+			.split(',')
+			.map((part) => part.trim().toLowerCase())
+			.flatMap((part) => OVERRIDE_GROUPS[part] ?? [part]);
+
+		if (String(key).trim().toLowerCase() === slug) return value;
+		if (fromGroup === undefined && shops.includes(slug)) fromGroup = value;
+	}
+
+	return fromGroup;
+};
+
+const getName = ({ item, getCategoryTitle, country }) => {
+	const override = getOverride(item?.overrides, country);
+	if (override !== undefined) return override;
+
 	if (!item?.name) return '';
- 
+
 	const translated = typeof getCategoryTitle === 'function' ? getCategoryTitle(item.name) : item.name;
- 
+
 	return translated ?? item.name;
 };
 
@@ -140,6 +169,7 @@ export const render = ({
 	getCategoryTitle,
 	getPhrase,
 	add_utm,
+	country
 }) => {
 	const columns = category?.columns ?? COLUMNS;
 	const rows = toRows(Array.isArray(category?.categories) ? category.categories : [], columns);
@@ -169,7 +199,7 @@ export const render = ({
 	const stackText = showText && textInRow && textStackMode !== 'never' && (
 		textStackMode === 'always' ||
 		rows.some((row) => row.some((item, columnId) => item && textCollides({
-			name: getName({ item, getCategoryTitle }),
+			name: getName({ item, getCategoryTitle, country  }),
 			ctaText,
 			width: layout.widths[columnId],
 			category,
@@ -218,7 +248,7 @@ export const render = ({
 			}
  
 			const href = getHref({ item, getCategoryLink, add_utm, fallbackHref: categoryHref });
-			const name = getName({ item, getCategoryTitle });
+			const name = getName({ item, getCategoryTitle, country });
 			const src = getSrc(item);
 			const imgHeight = getImageHeight({ category, width });
  

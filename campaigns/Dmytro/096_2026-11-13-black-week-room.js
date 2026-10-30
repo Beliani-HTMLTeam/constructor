@@ -3,32 +3,37 @@ const campaignTranslationsSheet = '2026::Voucher - 13.11.26 - Black Week room by
 const tableQueries = [
 	{
 		// THE MORE YOU SPEND, THE MORE YOU SAVE - 1 row
-		tableRange: '48',
+		tableRange: '26',
 		name: 'deal_title',
+		tableName: '2026::Voucher - 09.11.26 - Black Week start',
 	},
 	{
 		// 4 boxes x 4 rows (EXTRA / 20% / OFF / when you spend min. €2500) - 16 rows, in order 20, 15, 10, 5
-		tableRange: '23:42',
+		tableRange: '20:39',
 		name: 'deal_img',
+		tableName: '2026::Voucher - 11.11.26 - Black Week product categories',
 	},
 	{
 		// CODE: XXX - 4 rows, same order as the boxes
-		tableRange: '43:46',
+		tableRange: '40:43',
 		name: 'deal_codes',
+		tableName: '2026::Voucher - 11.11.26 - Black Week product categories',
 	},
 	{
 		// Limited-time offer. Valid until 29/11/2026 - 1 row
-		tableRange: '47',
+		tableRange: '43',
 		name: 'deal_condition',
+		tableName: '2026::Voucher - 09.11.26 - Black Week start',
 	},
 	{
-		tableRange: '49',
+		tableRange: '44:46',
+		name: "condition",
+		tableName: '2026::Voucher - 09.11.26 - Black Week start'
+	},
+	{
+		tableRange: '23',
 		name: "category_title"
 	},
-	{
-		tableRange: '50:52',
-		name: "condition"
-	}
 ];
 
 const links = {
