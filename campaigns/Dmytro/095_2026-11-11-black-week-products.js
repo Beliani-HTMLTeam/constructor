@@ -72,6 +72,7 @@ const additionalCssLp = `
 #newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}
 #newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:16px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:16px;line-height:21px;font-family:"Poppins",sans-serif;font-weight:700;}
 #newsletter .newsletterDealCodePrefix{text-transform:uppercase;}
+#newsletter .newsletterDealTierOff{font-size:20px;line-height:20px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase;display:block;padding-bottom:8px}
 @media screen and (max-width:768px){
 	#newsletter .newsletterDealCopyIcon .blackWeekCopyImg,
 	#newsletter .newsletterDealCopyIcon img,
