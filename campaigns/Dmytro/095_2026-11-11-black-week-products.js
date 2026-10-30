@@ -406,7 +406,8 @@ const categories = [
 				{
 					name: "Accessories",
 					overrides: {
-						DACH: "Wohnaccessoires" 
+						DACH: "Wohnaccessoires",
+						FI: "Sisustustarvikkeet"
 					},
 					href: 'https://www.beliani.ch/accessories-decor/',
 					src: getImageUrl('20261111Category12.png', true),

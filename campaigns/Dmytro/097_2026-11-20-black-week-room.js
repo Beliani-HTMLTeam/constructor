@@ -72,29 +72,202 @@ const additionalCss = `
 `;
 
 const additionalCssLp = `
-#newsletter .categoryListName{font-size:30px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .categoryListCta{font-size:30px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:700}
-#newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}
-#newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:16px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:16px;line-height:21px;font-family:"Poppins",sans-serif;font-weight:700;}
-@media screen and (max-width:768px){
+/* GENERAL */
+
+#newsletter .newsletterTitle {
+	font-size: 34px;
+	font-weight: 700;
+}
+
+#newsletter .blackWeekCondition {
+	font-size: 25px;
+	line-height: 1.2;
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
+}
+
+
+/* DEAL BOXES */
+
+#newsletter .newsletterDealTierLabel {
+	font-size: 20px;
+	line-height: 25px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+#newsletter .newsletterDealTierValue {
+	font-size: 75px;
+	line-height: 80px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .newsletterDealTierOff {
+	font-size: 20px;
+	line-height: 20px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	display: block;
+	padding-bottom: 8px;
+}
+
+#newsletter .newsletterDealTierNote {
+	font-size: 16px;
+	line-height: 18px;
+	font-family: "Poppins", sans-serif;
+}
+
+#newsletter .newsletterDealCode {
+	font-size: 16px;
+	line-height: 21px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .newsletterDealCodePrefix {
+	text-transform: uppercase;
+}
+
+
+/* CATEGORY LIST */
+
+#newsletter .categoryListName {
+	font-size: 30px;
+	line-height: 1.2;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .categoryListCta {
+	font-size: 30px;
+	line-height: 1.2;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .frenchDaysCategoryCta {
+	font-size: 20px !important;
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 768px) {
+
+	/* GENERAL */
+
+	#newsletter .newsletterTitle {
+		font-size: 20px;
+	}
+
+	#newsletter .blackWeekCondition {
+		font-size: 18px;
+	}
+
+	/* DEAL BOXES */
+
+	#newsletter .newsletterDealTierValue {
+		font-size: 48px;
+		line-height: 50px;
+	}
+
+	#newsletter .newsletterDealCode {
+		font-size: 15px;
+		line-height: 1;
+	}
+
+	#newsletter .newsletterDealCodeLabel {
+		flex-basis: 100% !important;
+		margin-right: 0 !important;
+		text-align: center !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon {
+		margin-left: 4px !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon * {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
 	#newsletter .newsletterDealCopyIcon .blackWeekCopyImg,
 	#newsletter .newsletterDealCopyIcon img,
-	#newsletter .newsletterDealCopyIcon svg{width:15px!important;height:15px!important;min-width:15px!important;max-width:15px!important;display:block!important}
-	#newsletter .newsletterDealCopyIcon{margin-left:4px!important}
-	#newsletter .newsletterDealCopyIcon *{margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
-	#newsletter .newsletterDealCode{font-size:15px;line-height:1}
-	#newsletter .newsletterDealCodeLabel{flex-basis:100%!important;margin-right:0!important;text-align:center!important}
-#newsletter .categoryListName{font-size:18px;}#newsletter .categoryListCta{font-size:18px;}#newsletter .newsletterTitle{font-size:20px;}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}#newsletter .blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
-	font-size: 40px !important;
-	font-size: clamp(32px, 12.5vw, 35px) !important;
+	#newsletter .newsletterDealCopyIcon svg {
+		width: 15px !important;
+		height: 15px !important;
+		min-width: 15px !important;
+		max-width: 15px !important;
+		display: block !important;
+	}
+
+	#newsletter .newsletterDealGrid {
+		width: 100% !important;
+		max-width: 100% !important;
+		table-layout: auto !important;
+	}
+
+	#newsletter .newsletterDealCell {
+		display: block !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	#newsletter .newsletterDealGapCol {
+		display: block !important;
+		width: 100% !important;
+		height: 10px !important;
+		line-height: 10px !important;
+		font-size: 0 !important;
+	}
+
+	#newsletter .newsletterDealEmpty {
+		display: none !important;
+	}
+
+	/* CATEGORY LIST */
+
+	#newsletter .categoryListName {
+		font-size: 18px;
+	}
+
+	#newsletter .categoryListCta {
+		font-size: 18px;
+	}
+
+	#newsletter .categoryListNameStack,
+	#newsletter .categoryListCtaStack {
+		display: block !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+		padding: 0 !important;
+		text-align: left !important;
+	}
+
+	#newsletter .categoryListCtaStack {
+		padding-top: 8px !important;
+	}
+
+	#newsletter .frenchDaysCategoryName {
+		font-size: 14px !important;
+		font-size: clamp(14px, 3.6vw, 20px) !important;
+	}
+
+	#newsletter .frenchDaysCategoryCta {
+		font-size: 12px !important;
+		font-size: clamp(12px, 3.2vw, 16px) !important;
+	}
+
+	#newsletter .frenchDaysDiscount {
+		font-size: 40px !important;
+		font-size: clamp(32px, 12.5vw, 35px) !important;
+	}
 }
-#newsletter .frenchDaysCategoryName {
-	font-size: 14px !important;
-	font-size: clamp(14px, 3.6vw, 20px) !important;
-}
-#newsletter .frenchDaysCategoryCta {
-	font-size: 12px !important;
-	font-size: clamp(12px, 3.2vw, 16px) !important;
-}}
 `;
 
 const palette = {
@@ -132,7 +305,7 @@ const categories = [
 		color: '#000000',
 		type: 'black-week-extras',
 		textColor: '#FFFFFF',
-		href: translateLink({ value: 'content/lp26-11-20' }),
+		href: translateLink({ value: 'content/lp26-11-11' }),
 
 		// newsletter only - one image per box, same order as the tiers in deal_img (20, 15, 10, 5)
 		// on the landing page the boxes are rendered as html
@@ -166,6 +339,7 @@ const categories = [
 		spaceAfterConditions: 0,
 		spaceAfter: 0,
 		dealCodeBreak: ['es', "pt", "it", "uk", "befr", "benl", "fi", "nl", "no", "si"],
+		dealValueSpaceAfter: { sk: 8 },
 	},
 	{
 		background: '#000000',
