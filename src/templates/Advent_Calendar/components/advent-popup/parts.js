@@ -118,10 +118,11 @@ export function PopupFooter({ texts = DEFAULT_POPUP_TEXTS, onlyToday = true, con
   return (
     '<div class="adv-pop__footer">' +
     (onlyToday && texts.onlyToday ? `<div class="adv-pop__today">${texts.onlyToday}</div>` : '') +
-    (conditions !== false && texts.seeConditions ? `<button type="button" class="adv-pop__cond">${texts.seeConditions}</button>` : '') +
+    // "Shop now" (needs a link) – between "Only Today" and "See conditions" (design)
     (cta && link
       ? `<a class="adv-pop__cta" href="${attr(link)}" target="_blank" rel="noopener" data-adv-link>${cta}</a>`
       : '') +
+    (conditions !== false && texts.seeConditions ? `<button type="button" class="adv-pop__cond">${texts.seeConditions}</button>` : '') +
     '</div>'
   );
 }

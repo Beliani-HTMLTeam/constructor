@@ -15,12 +15,12 @@ import {
  
 const ADVENT_TEST_MODE = false;
  
-export function InteractiveHeroImage({ type,  queries = {} }) {
+export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, getPhrase }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
   const adventImages = [
-    `${adventBase}advent_all_closed_glow.webp?ver=17`, // 0 - all closed
+    `${adventBase}advent_all_closed.webp?ver=17`, // 0 - all closed
     `${adventBase}advent_open_1.webp?ver=17`,     // 1
     `${adventBase}advent_open_2.webp?ver=17`,     // 2
     `${adventBase}advent_open_3.webp?ver=17`,     // 3
@@ -48,7 +48,11 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
   ];
  
   // ===== Shared popup texts (translate per country) =====
-  const popupTexts = popupTextsFromQueries(queries);
+  // "Shop now" on the category popups:
+  // the translated text passed in (shopNow = getPhrase('Shop now') in the template),
+  // or getPhrase itself, or English as the last fallback
+  const shopNow = shopNowText || (typeof getPhrase === 'function' && getPhrase('Shop now')) || 'Shop now';
+  const popupTexts = popupTextsFromQueries(queries, { shopNow });
  
  
   // ===== Popup per door (key = door number) =====
@@ -87,6 +91,7 @@ export function InteractiveHeroImage({ type,  queries = {} }) {
     type: 'upto',
     fields: ['pre'],
     title: upTo,
+    cta: popupTexts.shopNow,      // "Shop now" link (same link as the popup)
     conditions: regularConditions,
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),

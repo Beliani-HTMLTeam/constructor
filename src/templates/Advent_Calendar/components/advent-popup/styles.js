@@ -80,7 +80,8 @@ export function AdventPopupStyles() {
  
   /* per type – desktop */
   .adv-pop--percent { --fs-pre: 5.17; --fw-pre: 600; --fs-title: 9.31; --lh-title: 1.05; --gap-pre: 0.4cqw; }  /* 50 / 90 */
-  .adv-pop--upto    { --fs-pre: 4.14; --fw-pre: 400; --fs-title: 5.17; --lh-title: 1.22; --gap-pre: 1.6cqw; }  /* 40 / 50 */
+  .adv-pop--upto    { --fs-pre: 4.14; --fw-pre: 400; --fs-title: 5.17; --lh-title: 1.22; --gap-pre: 1.6cqw;
+                      --fs-cta: 2.585; --fs-cond: 2.07; }  /* 40 / 50, Shop now 25, See conditions 20 */
   .adv-pop--special { --fs-pre: 3.1;  --fw-pre: 400; --fs-title: 6.2;  --lh-title: 1.05; --fs-sub: 3.1; --gap-pre: 0.2cqw; --gap-sub: 0; }
  
   /* ---------- Background image (whole popup) ---------- */
@@ -290,7 +291,7 @@ export function AdventPopupStyles() {
     .adv-pop--percent { --m-pre: 30; --m-title: 35; --lh-title: 1.05; }
     /* "Extra" sits close above "10% OFF" (design) */
     .adv-pop--percent .adv-pop__pre { line-height: 1.05; }
-    .adv-pop--upto    { --m-pre: 25; --m-title: 35; --lh-title: 1.2; }
+    .adv-pop--upto    { --m-pre: 25; --m-title: 35; --lh-title: 1.2; --m-cta: 18; }   /* Shop now 18 */
     .adv-pop--special { --m-pre: 16; --m-title: 32; --m-sub: 16; --gap-pre: 0.5cqw; --gap-sub: 0; }
  
     /* px size, scaled down only below 257px popup width */
