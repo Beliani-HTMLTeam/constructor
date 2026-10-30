@@ -74,6 +74,23 @@ const stripTags = (text) =>
  
 // "20%", "20 %", "-20%" -> "20"
 const getPercent = (value) => (String(value ?? '').match(/\d+/) ?? [''])[0];
+
+const resolvePerShop = (config, country, fallback) => {
+	if (config === undefined || config === null) return fallback;
+	if (typeof config !== 'object') return config;
+
+	const slug = String(country ?? '').toLowerCase();
+	let value = config.default ?? fallback;
+
+	for (const [key, candidate] of Object.entries(config)) {
+		if (key === 'default') continue;
+
+		const shops = String(key).split(',').map((part) => part.trim().toLowerCase());
+		if (shops.includes(slug)) value = candidate;
+	}
+
+	return value;
+};
  
 // rough average glyph width of the landing page font, as a fraction of the font size
 const GLYPH_WIDTH_RATIO = 0.62;
@@ -296,6 +313,7 @@ const renderHtmlGrid = ({
 	fit,
 	codeSpacing,
 	codeIconGap = 8,
+	valueSpaceAfter = 0,
 	toast,
 	breakCode,
 	...gridProps
@@ -322,7 +340,7 @@ const renderHtmlGrid = ({
 		const className = lineClasses[index] ?? classes.note;
  
 		return isValue
-			? `<div style="white-space: nowrap;"><span class="${className}" style="color: ${colors.value}; ${fitStyle}">${text}</span></div>`
+			? `<div style="white-space: nowrap;${valueSpaceAfter ? ` padding-bottom: ${valueSpaceAfter}px;` : ''}"><span class="${className}" style="color: ${colors.value}; ${fitStyle}">${text}</span></div>`
 			: `<div><span class="${className}" style="color: ${colors.text};">${text}</span></div>`;
 	};
  
@@ -589,6 +607,7 @@ export const render = ({ queries, color, getPhrase, renderType, categoryHref, ca
 				// same phrase the french days template uses, eg. "Code kopiert"
 				label: category?.copyToast?.label ?? getPhrase('Copy code'),
 			},
+			valueSpaceAfter: resolvePerShop(category?.dealValueSpaceAfter, country, 0),
 		});
 	}
  

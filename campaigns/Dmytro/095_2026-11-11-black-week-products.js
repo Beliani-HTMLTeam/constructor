@@ -165,6 +165,7 @@ const categories = [
 		spaceAfterConditions: 0,
 		spaceAfter: 0,
 		dealCodeBreak: ['es', "pt", "it", "uk", "befr", "benl", "fi", "nl", "no", "si"],
+		dealValueSpaceAfter: { sk: 8 },
 	},
 	{
 		background: '#000000',
