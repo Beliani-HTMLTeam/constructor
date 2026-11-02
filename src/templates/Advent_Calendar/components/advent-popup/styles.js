@@ -354,7 +354,7 @@ export function AdventPopupStyles() {
   /* =====================================================
      SMALL NOTICE – past / future door (a few seconds)
      desktop: like the popup (centered, grey background)
-     mobile:  at the bottom of the screen, page stays usable
+     mobile:  in the middle of the screen, page stays usable
      ===================================================== */
   .adv-note {
     display: none;
@@ -383,6 +383,8 @@ export function AdventPopupStyles() {
     text-align: center;
     animation: advPopOpen .4s cubic-bezier(.175, .885, .32, 1.275);
   }
+  /* font shrinks for long translations: 18px × --note-scale, min 14px (set per text in AdventNotices) */
+  .adv-note__text { font-size: clamp(14px, calc(18px * var(--note-scale, 1)), 18px); overflow-wrap: break-word; }
   .adv-note__line { margin: 0; padding: 0; }
   .adv-note__line + .adv-note__line { margin-top: 10px; }
   .adv-note__close {
@@ -401,10 +403,10 @@ export function AdventPopupStyles() {
  
   @media screen and (max-width: 600px) {
     .adv-note {
-      align-items: flex-end;
-      background-color: transparent;  /* no grey layer – just the message at the bottom */
+      align-items: center;            /* middle of the screen – the chat bubble sits at the bottom */
+      background-color: transparent;  /* no grey layer – just the message */
       pointer-events: none;
-      padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+      padding: 16px;
     }
     .adv-note__box {
       pointer-events: auto;
@@ -412,6 +414,9 @@ export function AdventPopupStyles() {
       padding: 22px 34px;
       font-size: 16px;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    }
+    .adv-note__text { font-size: clamp(13px, calc(16px * var(--note-scale, 1)), 16px); }   /* mobile: 16px, min 13px */
+    .adv-note__box {
       animation: advNoteUp .35s ease-out;
     }
     .adv-note__close { top: 4px; right: 4px; }

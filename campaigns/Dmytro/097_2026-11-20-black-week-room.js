@@ -54,10 +54,11 @@ const links = {
 
 const additionalCss = `
 .categoryListName{font-size:30px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:700}.categoryListCta{font-size:30px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:700}
-.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:800; line-height: 1.2;}.frenchDaysCategoryCta {font-size: 20px !important;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-@media screen and (max-width:768px){.categoryListName{font-size:18px;}.categoryListCta{font-size:18px;}.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+.newsletterHeadingTitle {font-size: 30px; font-weight: 700; line-height: 1.2; text-transform: uppercase;}
+@media screen and (max-width:768px){	.newsletterHeadingTitle {font-size: 18px; }.categoryListName{font-size:18px;}.categoryListCta{font-size:18px;}.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:20px} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -73,10 +74,11 @@ const additionalCss = `
 
 const additionalCssLp = `
 /* GENERAL */
+#newsletter .newsletterHeadingTitle {font-size: 30px; font-weight: 700; line-height: 1.2; text-transform: uppercase;}
 
 #newsletter .newsletterTitle {
 	font-size: 34px;
-	font-weight: 700;
+	font-weight:800; line-height: 1.2;
 }
 
 #newsletter .blackWeekCondition {
@@ -156,6 +158,7 @@ const additionalCssLp = `
 /* MOBILE */
 
 @media screen and (max-width: 768px) {
+	#newsletter .newsletterHeadingTitle {font-size: 20px; }
 
 	/* GENERAL */
 
@@ -164,7 +167,7 @@ const additionalCssLp = `
 	}
 
 	#newsletter .blackWeekCondition {
-		font-size: 18px;
+		font-size: 20px;
 	}
 
 	/* DEAL BOXES */
@@ -360,7 +363,8 @@ const categories = [
 			phrase: 'Room by room, all reduced',
 			align: 'center',
 			spaceAfter: 'newsletterBottom35px',
-			styles: 'text-transform: uppercase; font-weight: 700;'
+			styles: 'text-transform: uppercase; font-weight: 700;',
+			className: 'newsletterHeadingTitle',
 		},
 		categories:
 			[

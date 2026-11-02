@@ -48,13 +48,13 @@ const links = {
 };
 
 const additionalCss = `
-.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:800; line-height: 1.2;}.frenchDaysCategoryCta {font-size: 20px !important;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
 @media screen and (max-width:768px){
 .categoryTileInRowName,.categoryTileInRowCta{display:block!important;width:100%!important;box-sizing:border-box!important;padding:0!important;text-align:left!important}
 .categoryTileInRowCta{padding-top:6px!important}
-.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:20px} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -73,7 +73,7 @@ const additionalCssLp = `
 
 #newsletter .newsletterTitle {
 	font-size: 34px;
-	font-weight: 700;
+	font-weight:800; line-height: 1.2;
 }
 
 #newsletter .blackWeekCondition {
@@ -147,7 +147,7 @@ const additionalCssLp = `
 	}
 
 	#newsletter .blackWeekCondition {
-		font-size: 18px;
+		font-size: 20px;
 	}
 
 	/* DEAL BOXES */

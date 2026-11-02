@@ -15,14 +15,27 @@ import {
  
 const ADVENT_TEST_MODE = false;
  
+// First day of the calendar (door 1), YYYY-MM-DD.
+// To try the real day-by-day mechanism before December, set e.g. '2026-11-02'
+// (door 1 = 2 Nov, door 2 = 3 Nov ...) – or, without a rebuild, open the LP with
+// ?advent-start=2026-11-02 (only for you; a "TEST START" label is shown).
+// Set back to '2026-12-01' before going live.
+const ADVENT_START = '2026-12-01';
+const ADVENT_REAL_START = '2026-12-01';
+ 
 export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, getPhrase }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
+  // ===== Calendar frames =====
+  // adventImages[N]     = doors 1..N open, NO glow   -> shown after today's door was opened
+  // adventGlowImages[N] = doors 1..N open, door N+1 GLOWS -> shown while today's door is still closed
+  // Day 2:  advent_open_1_glow (door 2 glows) -> click -> advent_open_2 (no glow)
+  // Day 3:  advent_open_2_glow (door 3 glows) -> click -> advent_open_3 (no glow) ...
   const adventImages = [
-    `${adventBase}advent_all_closed.webp?ver=17`, // 0 - all closed
-    `${adventBase}advent_open_1.webp?ver=17`,     // 1
-    `${adventBase}advent_open_2.webp?ver=17`,     // 2
+    `${adventBase}advent_all_closed.webp?ver=19`,      // 0 - all closed (before 1 Dec)
+    `${adventBase}advent_open_1.webp?ver=20`,     // 1
+    `${adventBase}advent_open_2.webp?ver=20`,     // 2
     `${adventBase}advent_open_3.webp?ver=17`,     // 3
     `${adventBase}advent_open_3.webp?ver=17`,     // 4 // placeholder, freebie
     `${adventBase}advent_open_3.webp?ver=17`,     // 5 // placeholder, freebie
@@ -45,6 +58,36 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     `${adventBase}advent_open_21.webp?ver=17`,    // 22 // placeholder, freebie
     `${adventBase}advent_open_21.webp?ver=17`,    // 23 // placeholder, freebie
     `${adventBase}advent_open_24.webp?ver=17`,    // 24
+  ];
+ 
+  // Glow frames: index N = doors 1..N open + door N+1 glowing.
+  // null = no glow frame yet -> the frame without glow (adventImages[N]) is used.
+  // (a glow frame that fails to load also falls back to the frame without glow)
+  const adventGlowImages = [
+    `${adventBase}advent_all_closed_glow.webp?ver=19`, // 0  - door 1 glows
+    `${adventBase}advent_open_1_glow.webp?ver=20`,     // 1  - door 2 glows
+    `${adventBase}advent_open_2_glow.webp?ver=20`,     // 2  - door 3 glows
+    `${adventBase}advent_open_3_glow.webp?ver=20`,     // 3  - door 4 glows
+    null,                                              // 4  - door 5 glows (frame 4 is a placeholder)
+    null,                                              // 5  - door 6 glows
+    null,                                              // 6  - door 7 glows
+    `${adventBase}advent_open_7_glow.webp?ver=20`,     // 7  - door 8 glows
+    null,                                              // 8  - door 9 glows
+    `${adventBase}advent_open_9_glow.webp?ver=20`,     // 9  - door 10 glows
+    null,                                              // 10 - door 11 glows
+    `${adventBase}advent_open_11_glow.webp?ver=20`,    // 11 - door 12 glows
+    `${adventBase}advent_open_12_glow.webp?ver=20`,    // 12 - door 13 glows
+    `${adventBase}advent_open_13_glow.webp?ver=20`,    // 13 - door 14 glows
+    null,                                              // 14 - door 15 glows
+    null,                                              // 15 - door 16 glows
+    `${adventBase}advent_open_16_glow.webp?ver=20`,    // 16 - door 17 glows
+    `${adventBase}advent_open_17_glow.webp?ver=20`,    // 17 - door 18 glows
+    null,                                              // 18 - door 19 glows
+    null,                                              // 19 - door 20 glows
+    null,                                              // 20 - door 21 glows
+    `${adventBase}advent_open_21_glow.webp?ver=20`,    // 21 - door 22 glows
+    null,                                              // 22 - door 23 glows
+    null,                                              // 23 - door 24 glows
   ];
  
   // ===== Shared popup texts (translate per country) =====
@@ -477,6 +520,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     <script>
     (function () {
       var images = ${JSON.stringify(adventImages)};
+      var glowImages = ${JSON.stringify(adventGlowImages)};
  
       var img = document.getElementById('advent-img');
       var doors = document.querySelectorAll('.advent-door');
@@ -526,12 +570,33 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       //   ...
       //  24 Dec -> doors 1-23 shown open, door 24 can be opened
       // Past doors are shown open but are not clickable, future doors are closed.
+      // Today's door glows until it is opened (see "Calendar frame" below).
       var lastDoor = images.length - 1;            // 24
-      var start = new Date(2026, 11, 1);           // 1 December 2026
-      var now = new Date();
       var msPerDay = 24 * 60 * 60 * 1000;
  
-      var day = now < start ? 0 : Math.floor((now - start) / msPerDay) + 1;  // 1 on 1 Dec
+      // start date: ADVENT_START, or ?advent-start=YYYY-MM-DD for a test
+      function parseDate(s) {
+        var p = String(s || '').split('-');
+        if (p.length !== 3) return null;
+        var d = new Date(+p[0], +p[1] - 1, +p[2]);
+        return isNaN(d.getTime()) ? null : d;
+      }
+      var START = ${JSON.stringify(ADVENT_START)};
+      try {
+        var startParam = new URLSearchParams(window.location.search).get('advent-start');
+        if (startParam && parseDate(startParam)) START = startParam;
+      } catch (e) {}
+      var start = parseDate(START) || new Date(2026, 11, 1);
+      var START_TEST = START !== ${JSON.stringify(ADVENT_REAL_START)};
+ 
+      // calendar day number of a date: 1 on the start day, 0 before it
+      function dayOf(d) {
+        var a = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
+        var b = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
+        return a < b ? 0 : Math.round((a - b) / msPerDay) + 1;
+      }
+ 
+      var day = dayOf(new Date());                 // 1 on the start day (1 Dec)
       var todayDoor = day >= 1 && day <= lastDoor ? day : 0;                 // 0 = no door today
       var pastDoors = Math.min(Math.max(day - 1, 0), lastDoor);              // shown open by date
  
@@ -562,7 +627,8 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
  
       // ===== Remember today's door (this user / this browser) =====
       // { opened: N } -> the user already opened door N (rewritten with every new door)
-      var STORE_KEY = 'beliani_advent_2026';
+      // (a test start date gets its own key, so the test never touches the real progress)
+      var STORE_KEY = 'beliani_advent_2026' + (START_TEST ? '_start_' + START : '');
  
       function loadState() {
         try { return JSON.parse(window.localStorage.getItem(STORE_KEY)) || {}; }
@@ -579,11 +645,35 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         } catch (e) {}
       }
  
+      // ===== Calendar frame =====
+      // today's door closed -> doors before today open + today's door GLOWS
+      // today's door opened -> doors up to today open, NO glow
+      // before the start / after the 24th -> no glow
+      function setFrame(opened, glow) {
+        var plain = images[Math.min(Math.max(opened, 0), lastDoor)];
+        var glowSrc = glow && opened < lastDoor ? glowImages[opened] : null;
+        if (glowSrc) {
+          img.onerror = function () { img.onerror = null; img.src = plain; };   // glow frame missing -> plain
+          img.src = glowSrc;
+        } else {
+          img.onerror = null;
+          img.src = plain;
+        }
+      }
       function showImage() {
-        if (TEST_MODE) { img.src = images[testCurrent]; return; }
-        img.src = images[todayOpened ? todayDoor : pastDoors];
+        // TEST MODE: always the glow frame – the next door glows right after opening one
+        if (TEST_MODE) { setFrame(testCurrent, true); return; }
+        if (todayOpened) setFrame(todayDoor, false);
+        else setFrame(pastDoors, todayDoor > 0);
       }
       showImage();
+ 
+      // preload the "door opened" frame so the swap is instant
+      (function () {
+        var next = TEST_MODE ? testCurrent + 1 : (todayOpened ? 0 : todayDoor);
+        var src = TEST_MODE ? (glowImages[next] || images[next]) : images[next];
+        if (next > 0 && src) { var pre = new Image(); pre.src = src; }
+      })();
  
       // ===== Click logic =====
       // - today's door: first click opens the door (image swap) + shows its popup;
@@ -595,8 +685,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
  
       // day number right now (1 on 1 Dec) – the page may stay open past midnight
       function currentDay() {
-        var n = new Date();
-        return n < start ? 0 : Math.floor((n - start) / msPerDay) + 1;
+        return dayOf(new Date());
       }
  
       function makeClickable(door, onClick) {
@@ -730,45 +819,72 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         if (openToday(e)) e.preventDefault();   // before 1 Dec / after 24 Dec the link works as usual
       });
  
-      // TEST MODE label on the calendar, so it's never left on by mistake
-      if (TEST_MODE) {
+      // TEST label on the calendar, so it's never left on by mistake
+      if (TEST_MODE || START_TEST) {
         var badge = document.createElement('div');
-        badge.textContent = 'TEST MODE';
+        badge.textContent = TEST_MODE ? 'TEST MODE' : 'TEST START ' + START;
         badge.style.cssText = 'position:absolute; top:8px; left:8px; z-index:20; padding:4px 8px; ' +
           'background:#000; color:#fff; font:600 12px/1.2 Poppins, sans-serif; border-radius:4px; pointer-events:none;';
         img.parentNode.appendChild(badge);
       }
  
-      // ===== Mobile: open the LP at its top (more of the calendar visible) =====
-      // On phones the page starts scrolled to the top of the LP content, past the
-      // shop header. Only when the visitor hasn't scrolled yet and there is no #anchor.
-      // A sticky / fixed shop header is taken into account.
+      // ===== Mobile: open the LP at the calendar image =====
+      // On phones the page starts scrolled so the calendar image is at the top of the
+      // screen (only when there is no #anchor). A sticky / fixed shop header is taken
+      // into account.
+      // The position is held for a few seconds after loading, because images loading
+      // above the calendar, the browser's own scroll restore or shop scripts can push
+      // the page back to the top. As soon as the visitor touches / scrolls, we stop.
       // SCROLL_TARGET: optional CSS selector of the element that should be at the top
-      // (empty = the LP table that contains the calendar).
+      // (empty = the calendar image).
       var SCROLL_TARGET = '';
-      function startAtLp() {
+      (function () {
         try {
           if (!window.matchMedia('(max-width: 600px)').matches) return;
           if (window.location.hash) return;
-          if ((window.pageYOffset || document.documentElement.scrollTop || 0) > 5) return;
-          var target = SCROLL_TARGET ? document.querySelector(SCROLL_TARGET) : img.closest('table');
-          if (!target) return;
-          var top = target.getBoundingClientRect().top + (window.pageYOffset || 0);
-          if (top <= 0) return;
-          window.scrollTo(0, top);
-          // a sticky / fixed header covering the top? -> keep the LP just below it
-          for (var el = document.elementFromPoint(window.innerWidth / 2, 1); el && el !== document.body; el = el.parentElement) {
-            var pos = window.getComputedStyle(el).position;
-            if (pos === 'fixed' || pos === 'sticky') {
-              var h = el.getBoundingClientRect().bottom;
-              if (h > 0 && h < window.innerHeight / 2) window.scrollTo(0, Math.max(0, top - h));
-              break;
+          if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+ 
+          var userMoved = false;
+          ['touchstart', 'wheel', 'mousedown', 'keydown'].forEach(function (ev) {
+            window.addEventListener(ev, function () { userMoved = true; }, { passive: true, once: true });
+          });
+ 
+          function headerHeight() {
+            for (var el = document.elementFromPoint(window.innerWidth / 2, 1); el && el !== document.body; el = el.parentElement) {
+              var pos = window.getComputedStyle(el).position;
+              if (pos === 'fixed' || pos === 'sticky') {
+                var h = el.getBoundingClientRect().bottom;
+                return h > 0 && h < window.innerHeight / 2 ? h : 0;
+              }
             }
+            return 0;
           }
+          function targetY() {
+            var target = SCROLL_TARGET ? document.querySelector(SCROLL_TARGET) : document.getElementById('advent-wrapper');
+            if (!target) return null;
+            return Math.max(0, target.getBoundingClientRect().top + (window.pageYOffset || 0) - headerHeight());
+          }
+          function go() {
+            if (userMoved) return;
+            var y = targetY();
+            if (y === null) return;
+            if (Math.abs((window.pageYOffset || 0) - y) > 2) window.scrollTo(0, y);
+          }
+ 
+          go();                                                    // right away
+          document.addEventListener('DOMContentLoaded', go);
+          window.addEventListener('load', function () {
+            go();
+            // hold the position for 3 s (late images / scroll restore / shop scripts)
+            [100, 300, 600, 1000, 1600, 2400].forEach(function (t) { setTimeout(go, t); });
+            var until = Date.now() + 3000;
+            window.addEventListener('scroll', function onScroll() {
+              if (userMoved || Date.now() > until) { window.removeEventListener('scroll', onScroll); return; }
+              go();
+            }, { passive: true });
+          });
         } catch (e) {}
-      }
-      if (document.readyState === 'complete') startAtLp();
-      else window.addEventListener('load', startAtLp);
+      })();
  
       // Prevent image dragging on mobile
       img.addEventListener('dragstart', function (e) { e.preventDefault(); });

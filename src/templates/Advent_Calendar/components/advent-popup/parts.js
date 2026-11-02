@@ -78,7 +78,7 @@ function codesBlock(code, texts, extraCls = '') {
           buildCopyIcon({
             codeValue: c.value,
             color: '#750000',
-            toastBg: '#000000',
+            toastBg: '#750000',
             toastText: '#ffffff',
             label: texts.copied,
             className: 'adv-pop__copy-icon',
@@ -185,6 +185,9 @@ export const DEFAULT_NOTICES = {
   future: ['Still wrapped!', 'Find today’s door to unwrap today’s deal.'],
 };
  
+// characters (both lines together) that still fit the design size
+export const NOTICE_FIT_CHARS = 70;
+ 
 export function AdventNotices({ past, future } = {}) {
   const lines = (rows, fallback) => {
     const list = [].concat(rows || [])
@@ -192,10 +195,18 @@ export function AdventNotices({ past, future } = {}) {
       .filter(Boolean);
     return list.length ? list : fallback;
   };
+  // Longer translations get a smaller font: up to NOTICE_FIT_CHARS characters the
+  // design size is used (18px desktop / 16px mobile), above that it shrinks in
+  // proportion – never below 14px desktop / 13px mobile (see .adv-note__text in styles.js)
+  const scaleFor = (list) => {
+    const chars = list.join(' ').replace(/<[^>]*>/g, '').replace(/&[a-z#0-9]+;/gi, 'x').length;
+    return Math.round(Math.min(1, NOTICE_FIT_CHARS / Math.max(chars, 1)) * 100) / 100;
+  };
   const tpl = (kind, list) =>
     `<template data-adv-notice="${kind}">` +
+    `<div class="adv-note__text" style="--note-scale:${scaleFor(list)};">` +
     list.map((l) => `<div class="adv-note__line">${l}</div>`).join('') +
-    `</template>`;
+    `</div></template>`;
   return tpl('past', lines(past, DEFAULT_NOTICES.past)) + tpl('future', lines(future, DEFAULT_NOTICES.future));
 }
  

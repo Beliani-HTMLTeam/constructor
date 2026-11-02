@@ -105,6 +105,20 @@ const intro_data = {
   }
 }
 
+const additionalCss = `
+@media screen and (max-width:768px){
+  .newsletterParagraph {
+    font-size: 16px !important;}
+}
+`;
+
+const additionalCssLp = `
+@media screen and (max-width:768px){
+ #newsletter .newsletterParagraph {
+    font-size: 16px !important;}
+}
+`
+
 export default new entities.Campaign({
   startId: "47412",
   name: "Advent Calendar 2026",
@@ -136,6 +150,8 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       TopImage_data: TopImage_data,
+      optimizeCss: true,
+			additionalCss: additionalCss,
     },
     {
       name: "Landing",
@@ -153,6 +169,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       TopImage_data: TopImage_data,
+      additionalCss: additionalCssLp,
     },
   ],
 });
