@@ -170,11 +170,13 @@ const BlackWeekFirst = async ({
 
       ${CategoriesAfterIntroElement}
 
-    </table>
-
-    ${disableSE ? '' : SoonEndingBannersHandler({ links, shopLimitedTimeDeals, country })}
-
-    ${FooterElement}
+      
+      <tr>
+      <td valign="top" style="padding:0;border:0;">
+      ${FooterElement}
+      </td>
+      </tr>
+      </table>
   `;
 };
 

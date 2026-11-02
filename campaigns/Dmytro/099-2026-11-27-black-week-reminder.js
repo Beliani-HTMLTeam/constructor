@@ -14,27 +14,27 @@ const theme = {
 let cardData = [
   {
     name: 'card_1',
-    tableRange: '27:30',
+    tableRange: '27:30', tableName: '2026::Voucher - 09.11.26 - Black Week start'
   },
   {
     name: 'card_2',
-    tableRange: '31:34',
+    tableRange: '31:34',  tableName: '2026::Voucher - 09.11.26 - Black Week start'
   },
   {
     name: 'card_3',
-    tableRange: '35:38',
+    tableRange: '35:38', tableName: '2026::Voucher - 09.11.26 - Black Week start'
   },
   {
     name: 'card_4',
-    tableRange: '39:42',
+    tableRange: '39:42',  tableName: '2026::Voucher - 09.11.26 - Black Week start'
   },
 ]
 
 const tableQueries = [
   { name: "TopImageTitle", tableRange: '22:24'},
-  { name: 'card_title', tableRange: '26' },
-  { name: 'offer_date', tableRange: '43' },
-  { name: 'condition', tableRange: '44:46' },
+  { name: 'card_title', tableRange: '26',  tableName: '2026::Voucher - 09.11.26 - Black Week start' },
+  { name: 'offer_date', tableRange: '43',  tableName: '2026::Voucher - 09.11.26 - Black Week start'},
+  { name: 'condition', tableRange: '44:46',  tableName: '2026::Voucher - 09.11.26 - Black Week start'},
   ...cardData,
 ];
 
@@ -81,7 +81,7 @@ const categories = [
     spaceAfter: 0,
     background: theme.primary,
     title: { show: false },
-    ctaHref: translateLink({ value: 'content/lp26-11-09' }),
+    ctaHref: translateLink({ value: 'content/lp26-11-27' }),
     cta: {
       show: false,
       textOverrides: {
