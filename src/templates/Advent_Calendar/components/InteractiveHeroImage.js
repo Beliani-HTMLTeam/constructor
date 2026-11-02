@@ -58,7 +58,8 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   // ===== Popup per door (key = door number) =====
   // type: 'percent' | 'free' | 'buy4pay3' | 'cashback' | 'upto' | 'discount' | 'special'
   //  imageDesktop / imageMobile : full background images (desktop ~1934x960, mobile ~514x920)
-  //  link       : background + texts become a link (opens in new tab)
+  //  link       : background + texts become a link (opens in new tab) – not used any more
+  //  ctaLink    : only the "Shop now" link goes there (category popups)
   //  pre        : line above the title ("Extra", "Christmas Accessories")
   //  title      : main deal (<br /> for a line break)
   //  subtitle   : "when you spend min. £200"
@@ -82,7 +83,6 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   // screen-reader name of the doors: "<DoorLabel> 5" (optional sheet row, e.g. "Door" / "Tür" / "Porte")
   const doorLabel = cell('DoorLabel', 0) || 'Door';
  
-  const HOME = 'https://www.beliani.ch/';   // voucher popups link to the home page
   const regularConditions = fromQuery('Regular Conditions');
   const upTo = fromQuery('UpTo'); // shared "Up to 50% OFF" (row 3)
  
@@ -91,22 +91,21 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     type: 'upto',
     fields: ['pre'],
     title: upTo,
-    cta: popupTexts.shopNow,      // "Shop now" link (same link as the popup)
+    cta: popupTexts.shopNow,      // "Shop now" – the only link in the popup
     conditions: regularConditions,
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
-    link,
+    ctaLink: link,                // the popup itself is not a link
   });
  
   // Voucher day – conditions from "Conditions - DD.12"
-  // link: the whole popup leads there (except the copy button and the code itself)
-  const voucher = (n, type, fields, link = HOME) => ({
+  // no link – voucher popups don't lead anywhere (the code is copied with the copy button)
+  const voucher = (n, type, fields) => ({
     type,
     fields,
     conditions: fromQuery(`Conditions${n}`),
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
-    link,
   });
  
   // Row orders used in the sheet (null = Voucher ID row, not shown)
@@ -118,29 +117,29 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     1: { ...category(1, 'https://www.beliani.ch/christmas-accessories/decorations/'), fields: ['pre', 'title'] },
  
     // 02.12 – Extra / 10% OFF / when you spend €500 / Code
-    2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null], HOME),
+    2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null]),
  
     // 03.12 – Kid's Room
     3: category(3, 'https://www.beliani.co.uk/children-room/'),
  
     // 04.12 – Free XXX (sheet: Title, Description, Voucher, Code)
-    4: voucher(4, 'free', CODE_THEN_VOUCHER, HOME),
+    4: voucher(4, 'free', CODE_THEN_VOUCHER),
  
     // 05.12 / 06.12 – Free XXX
-    5: voucher(5, 'free', CODE_THEN_VOUCHER, HOME),
-    6: voucher(6, 'free', CODE_THEN_VOUCHER, HOME),
+    5: voucher(5, 'free', CODE_THEN_VOUCHER),
+    6: voucher(6, 'free', CODE_THEN_VOUCHER),
  
     // 07.12 – Dining Room
     7: category(7, "https://www.beliani.ch/dining-room-furniture/"),
  
     // 08.12 – Free XXX (sheet: Title, Description, Voucher, Code)
-    8: voucher(8, 'free', CODE_THEN_VOUCHER, HOME),
+    8: voucher(8, 'free', CODE_THEN_VOUCHER),
  
     // 09.12 – €10 Discount
-    9: voucher(9, 'discount', CODE_THEN_VOUCHER, HOME),
+    9: voucher(9, 'discount', CODE_THEN_VOUCHER),
  
     // 10.12 – Free XXX
-    10: voucher(10, 'free', CODE_THEN_VOUCHER, HOME),
+    10: voucher(10, 'free', CODE_THEN_VOUCHER),
  
     // 11.12 Scatter Cushions / 12.12 Tableware / 13.12 Lighting
     11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/"),
@@ -148,13 +147,13 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     13: category(13, "https://www.beliani.ch/lighting/"),
  
     // 14.12 / 15.12 – Free XXX
-    14: voucher(14, 'free', CODE_THEN_VOUCHER, HOME),
-    15: voucher(15, 'free', CODE_THEN_VOUCHER, HOME),
+    14: voucher(14, 'free', CODE_THEN_VOUCHER),
+    15: voucher(15, 'free', CODE_THEN_VOUCHER),
  
     // 16.12 – 4 for 3 pyramid: 3 lines, each with its own code
     // sheet: Title, Desc 1-3 desktop, Desc 1-3 mobile, Code 1-3, Voucher 1-3
     16: {
-      ...voucher(16, 'buy4pay3', ['title'], HOME),
+      ...voucher(16, 'buy4pay3', ['title']),
       tiers: [0, 1, 2].map((i) => ({
         text: cell('Popup16', 1 + i),
         // mobile: one line per offer (design) – line breaks from the sheet are ignored
@@ -167,16 +166,16 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     17: category(17, "https://www.beliani.ch/rugs/"),
  
     // 18.12 / 19.12 / 20.12 – Free XXX
-    18: voucher(18, 'free', CODE_THEN_VOUCHER, HOME),
-    19: voucher(19, 'free', CODE_THEN_VOUCHER, HOME),
-    20: voucher(20, 'free', CODE_THEN_VOUCHER, HOME),
+    18: voucher(18, 'free', CODE_THEN_VOUCHER),
+    19: voucher(19, 'free', CODE_THEN_VOUCHER),
+    20: voucher(20, 'free', CODE_THEN_VOUCHER),
  
     // 21.12 – €50 Cashback
-    21: voucher(21, 'cashback', CODE_THEN_VOUCHER, HOME),
+    21: voucher(21, 'cashback', CODE_THEN_VOUCHER),
  
     // 22.12 / 23.12 – Free XXX
-    22: voucher(22, 'free', CODE_THEN_VOUCHER, HOME),
-    23: voucher(23, 'free', CODE_THEN_VOUCHER, HOME),
+    22: voucher(22, 'free', CODE_THEN_VOUCHER),
+    23: voucher(23, 'free', CODE_THEN_VOUCHER),
  
     // 24.12 – Home Accessories
     24: category(24, "https://www.beliani.ch/home-accessories/"),
@@ -740,6 +739,37 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         img.parentNode.appendChild(badge);
       }
  
+      // ===== Mobile: open the LP at its top (more of the calendar visible) =====
+      // On phones the page starts scrolled to the top of the LP content, past the
+      // shop header. Only when the visitor hasn't scrolled yet and there is no #anchor.
+      // A sticky / fixed shop header is taken into account.
+      // SCROLL_TARGET: optional CSS selector of the element that should be at the top
+      // (empty = the LP table that contains the calendar).
+      var SCROLL_TARGET = '';
+      function startAtLp() {
+        try {
+          if (!window.matchMedia('(max-width: 600px)').matches) return;
+          if (window.location.hash) return;
+          if ((window.pageYOffset || document.documentElement.scrollTop || 0) > 5) return;
+          var target = SCROLL_TARGET ? document.querySelector(SCROLL_TARGET) : img.closest('table');
+          if (!target) return;
+          var top = target.getBoundingClientRect().top + (window.pageYOffset || 0);
+          if (top <= 0) return;
+          window.scrollTo(0, top);
+          // a sticky / fixed header covering the top? -> keep the LP just below it
+          for (var el = document.elementFromPoint(window.innerWidth / 2, 1); el && el !== document.body; el = el.parentElement) {
+            var pos = window.getComputedStyle(el).position;
+            if (pos === 'fixed' || pos === 'sticky') {
+              var h = el.getBoundingClientRect().bottom;
+              if (h > 0 && h < window.innerHeight / 2) window.scrollTo(0, Math.max(0, top - h));
+              break;
+            }
+          }
+        } catch (e) {}
+      }
+      if (document.readyState === 'complete') startAtLp();
+      else window.addEventListener('load', startAtLp);
+ 
       // Prevent image dragging on mobile
       img.addEventListener('dragstart', function (e) { e.preventDefault(); });
     })();
@@ -748,4 +778,3 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
  
   return InteractiveTopImage;
 }
- 

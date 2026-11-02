@@ -171,7 +171,8 @@ export function StandardPopup(layout, props, defaults = {}) {
     PopupText(props) +
     PopupTiers({ tiers: props.tiers, texts: t }) +
     PopupCodes({ code: props.code, mobileCode: (props.mobile || {}).code, texts: t }) +
-    PopupFooter({ texts: t, onlyToday, conditions: props.conditions, cta, link: props.link });
+    // ctaLink: only the "Shop now" link goes there (the rest of the popup is not a link)
+    PopupFooter({ texts: t, onlyToday, conditions: props.conditions, cta, link: props.ctaLink || props.link });
  
   return AdventPopupShell({ ...props, layout, texts: t, body });
 }
