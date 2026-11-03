@@ -500,7 +500,7 @@ export function Footer(sections, options, name) {
           return `
                 <tr>
                     <td align="center" class="${NL.companyDetails}" bgcolor="${theme.frame}" style="background-color: ${theme.frame}; color: ${theme.legal}; line-height: 18px; mso-line-height-rule: exactly;">
-                        <span style="color: ${theme.legal}; text-align: center; font-size: 11px; line-height: 1.2; mso-line-height-rule: exactly;">
+                        <span style="color: ${theme.legal}; text-align: center; font-size: 11px; line-height: 13px; mso-line-height-rule: exactly;">
                         ${styleLinks(`${address} | ${commercialRegister}`, theme.legal)}
                         </span>
                     </td>
