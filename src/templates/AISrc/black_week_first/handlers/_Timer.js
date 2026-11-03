@@ -127,7 +127,7 @@ export const TimerHandler = async ({
 		`&lang=${shop?.slug === 'PT' ? 'portugal' : languages[country]?.title}` +
 		`&bg=${(unitBackground || backgroundColor).replace('#', '')}` +
 		`&color=${color.replace('#', '')}` +
-		`&label=${color.replace('#', '')}` +
+		`&label=${labelColor.replace('#', '')}` +
 		`&background=${backgroundColor.replace('#', '')}`;
 	// + `&uid=USER_ID`
 

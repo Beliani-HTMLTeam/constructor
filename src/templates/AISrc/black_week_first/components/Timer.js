@@ -199,7 +199,7 @@ const Timer = ({
     <tr>
       <td>
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="color: ${color}; background-color: ${background};">
-          ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
+          ${type === 'landing' ? Space({ insideTr: true, className: 'newsletterBottom20px' }) : ''}
 
           ${type === 'newsletter'
 						? ImageWithLink({
