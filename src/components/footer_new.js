@@ -389,7 +389,7 @@ export function Footer(sections, options, name) {
             ${Space({ className: c.bottom15, insideTr: true, background: theme.frame })}
                 <tr>
                     <td align="center" bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
-                    <span class="${c.conditions}" style="color: ${theme.legal}; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
+                    <span class="${c.conditions}" style="color: ${theme.legal}; text-align: center; mso-line-height-rule: exactly;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
                     </td>
                 </tr>
             ${isLP ? Space({ className: c.bottom15, insideTr: true, background: theme.frame }) : ''
@@ -500,7 +500,7 @@ export function Footer(sections, options, name) {
           return `
                 <tr>
                     <td align="center" class="${NL.companyDetails}" bgcolor="${theme.frame}" style="background-color: ${theme.frame}; color: ${theme.legal}; line-height: 18px; mso-line-height-rule: exactly;">
-                        <span style="color: ${theme.legal}; text-align: center; font-size: 13px; line-height: 18px; mso-line-height-rule: exactly;">
+                        <span style="color: ${theme.legal}; text-align: center; font-size: 11px; line-height: 1.2; mso-line-height-rule: exactly;">
                         ${styleLinks(`${address} | ${commercialRegister}`, theme.legal)}
                         </span>
                     </td>
