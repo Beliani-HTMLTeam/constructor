@@ -61,20 +61,30 @@ const styleLinks = (html, color) =>
     .split(/(<a\b[\s\S]*?<\/a>)/gi)
     .map((part) => {
       if (/^<a\b/i.test(part)) {
-        return part.replace(/^<a\b([^>]*)>/i, (tag, attrs) => {
-          const style = attrs.match(/\bstyle\s*=\s*(["'])([\s\S]*?)\1/i);
-          if (style) {
-            const rest = style[2].trim().replace(/;?$/, ';');
-            return tag.replace(style[0], `style=${style[1]}${rest} color: ${color};${style[1]}`);
-          }
-          return `<a${attrs} style="${linkStyle(color)}">`;
-        });
+        return part
+          .replace(/^<a\b([^>]*)>/i, (tag, attrs) => {
+            const style = attrs.match(/\bstyle\s*=\s*(["'])([\s\S]*?)\1/i);
+            if (style) {
+              // drop any existing color (eg. color:inherit – Outlook doesn't support inherit)
+              const rest = style[2]
+                .replace(/(^|;)\s*color\s*:[^;]*/gi, '$1')
+                .replace(/;\s*;/g, ';')
+                .trim()
+                .replace(/^;/, '')
+                .replace(/;?$/, ';');
+              return tag.replace(style[0], `style=${style[1]}${rest === ';' ? '' : rest + ' '}color: ${color};${style[1]}`);
+            }
+            return `<a${attrs} style="${linkStyle(color)}">`;
+          })
+          // Outlook: colour also on a span inside the link
+          .replace(/^(<a\b[^>]*>)([\s\S]*?)(<\/a>)$/i, (m, open, inner, close) =>
+            `${open}<span style="color: ${color};">${inner}</span>${close}`);
       }
       return part.replace(URL_RE, (url) => {
-        const clean = url.replace(/[.,;:!?)]+$/, ''); 
+        const clean = url.replace(/[.,;:!?)]+$/, '');
         const tail = url.slice(clean.length);
         const href = /^https?:\/\//i.test(clean) ? clean : `https://${clean}`;
-        return `<a href="${href}" style="${linkStyle(color)}">${clean}</a>${tail}`;
+        return `<a href="${href}" style="${linkStyle(color)}"><span style="color: ${color};">${clean}</span></a>${tail}`;
       });
     })
     .join('');
@@ -374,12 +384,12 @@ export function Footer(sections, options, name) {
     return `
             <tr>
               <td bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${theme.frame}" style="width: 100%; background-color: ${theme.frame}; line-height: 10px; mso-line-height-rule: exactly; border-collapse: collapse;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${theme.frame}" style="width: 100%; background-color: ${theme.frame}; border-collapse: collapse;">
                   <tbody>
             ${Space({ className: c.bottom15, insideTr: true, background: theme.frame })}
                 <tr>
-                    <td align="center" bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
-                    <span class="${c.conditions}" style="color: ${theme.legal}; text-align: center; mso-line-height-rule: exactly;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
+                    <td align="center" bgcolor="${theme.frame}" style="line-height: 13px; mso-line-height-rule: exactly; background-color: ${theme.frame};">
+                    <span class="${c.conditions}" style="mso-line-height-rule: exactly; color: ${theme.legal}; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
                     </td>
                 </tr>
             ${isLP ? Space({ className: c.bottom15, insideTr: true, background: theme.frame }) : ''
@@ -490,8 +500,8 @@ export function Footer(sections, options, name) {
           return `
                 <tr>
                     <td align="center" class="${NL.companyDetails}" bgcolor="${theme.frame}" style="background-color: ${theme.frame}; color: ${theme.legal}; line-height: 18px; mso-line-height-rule: exactly;">
-                        <span style="color: ${theme.legal}; text-align: center; font-size: 11px; line-height: 15px; mso-line-height-rule: exactly;">
-                            ${address} | ${commercialRegister}
+                        <span style="color: ${theme.legal}; text-align: center; font-size: 11px; line-height: 13px; mso-line-height-rule: exactly;">
+                        ${styleLinks(`${address} | ${commercialRegister}`, theme.legal)}
                         </span>
                     </td>
                 </tr>
