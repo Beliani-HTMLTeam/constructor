@@ -284,6 +284,16 @@ inclusive (`>=`); older campaigns keep the old look.
   `templateRenderer.js` with the same `21.10.2026` cutoff (`FOOTER_CSS_CUTOFF`)
   — keep both cutoffs in sync.
 
+## Prologistics (issue logs, SA lists, product IDs)
+
+prologistics.info (issue logs, `saved_details.php` SA lists, newsletter / LP
+admin) needs a login. The user is logged in in their own Chrome, so always
+open prologistics there — same tools as for the preview below (Claude in
+Chrome, or Playwright MCP in `--extension` mode). The default Playwright MCP
+plugin runs its own empty profile and only gets the login page. If neither
+tool is connected, ask the user to connect one (or paste the data) instead of
+leaving placeholders.
+
 ## Previewing a live campaign (agent / browser)
 
 With `bun run dev` running, open the app on localhost (`:5500`) and select the
