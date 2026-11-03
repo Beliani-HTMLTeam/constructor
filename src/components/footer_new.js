@@ -384,12 +384,12 @@ export function Footer(sections, options, name) {
     return `
             <tr>
               <td bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${theme.frame}" style="width: 100%; background-color: ${theme.frame}; line-height: 10px; mso-line-height-rule: exactly; border-collapse: collapse;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="${theme.frame}" style="width: 100%; background-color: ${theme.frame}; border-collapse: collapse;">
                   <tbody>
             ${Space({ className: c.bottom15, insideTr: true, background: theme.frame })}
                 <tr>
-                    <td align="center" bgcolor="${theme.frame}" style="background-color: ${theme.frame};">
-                    <span class="${c.conditions}" style="color: ${theme.legal}; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
+                    <td align="center" bgcolor="${theme.frame}" style="mso-line-height-rule: exactly; background-color: ${theme.frame};">
+                    <span class="${c.conditions}" style="mso-line-height-rule: exactly; color: ${theme.legal}; text-align: center;">${styleLinks(`${conditionsTitle} ${text}`, theme.legal)}</span>
                     </td>
                 </tr>
             ${isLP ? Space({ className: c.bottom15, insideTr: true, background: theme.frame }) : ''
