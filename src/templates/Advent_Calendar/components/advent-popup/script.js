@@ -31,6 +31,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   if (window.AdventPopup) return;
   var OPTS = ${opts};
  
+  // eventOption = the day (door number) of the open popup, e.g. '18'
   function track(action, label, value) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
@@ -39,9 +40,15 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       eventAction: action,
       eventLabel: label,
       eventValue: value,
-      eventOption: '',
+      eventOption: current === null ? '' : String(current),
       eventID: ''
     });
+  }
+  var lastVerify = 0;
+  function trackVerify() {            // copy button + manual copy of the code, once per action
+    if (Date.now() - lastVerify < 800) return;
+    lastVerify = Date.now();
+    track('Verify', 'Promo', 'Voucher');
   }
  
   var overlay, content, live, current = null, closeTimer = null, lastFocus = null;
@@ -98,7 +105,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     content.addEventListener('click', function (e) {
       var wrap = e.target.closest('.adv-pop__copy-wrap');
       if (wrap && e.target.closest('button')) {
-        track('Verify', 'Promo', 'Voucher');
+        trackVerify();
         var msg = wrap.getAttribute('data-copied') || '';
         live.textContent = '';
         setTimeout(function () { live.textContent = msg; }, 100);
@@ -112,7 +119,19 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
  
       if (t.closest('.adv-pop__cond')) { showConditions(); return; }
  
-      if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
+      if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');   // "Shop now"
+    });
+    // "Shop now" opened with the middle mouse button
+    content.addEventListener('auxclick', function (e) {
+      if (e.button === 1 && e.target.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
+    });
+    // code highlighted and copied by hand (Ctrl+C / long press -> Copy) counts as Verify too
+    document.addEventListener('copy', function () {
+      if (!isOpen()) return;
+      var sel = window.getSelection && window.getSelection();
+      var node = sel && sel.anchorNode;
+      var el = node && (node.nodeType === 1 ? node : node.parentElement);
+      if (el && el.closest && el.closest('.adv-pop__code') && content.contains(el)) trackVerify();
     });
  
     document.addEventListener('keydown', function (e) {

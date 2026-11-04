@@ -67,7 +67,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     `${adventBase}advent_all_closed_glow.webp?ver=19`, // 0  - door 1 glows
     `${adventBase}advent_open_1_glow.webp?ver=20`,     // 1  - door 2 glows
     `${adventBase}advent_open_2_glow.webp?ver=20`,     // 2  - door 3 glows
-    `${adventBase}advent_open_3_glow.webp?ver=20`,     // 3  - door 4 glows
+    null,     // 3  - door 4 glows
     null,                                              // 4  - door 5 glows (frame 4 is a placeholder)
     null,                                              // 5  - door 6 glows
     null,                                              // 6  - door 7 glows
@@ -542,7 +542,8 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       });
  
       // ===== Analytics =====
-      function track(action, label, value) {
+      // option = the selected day (door number), e.g. '18'
+      function track(action, label, value, option) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: 'custom_event',
@@ -550,7 +551,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
           eventAction: action,
           eventLabel: label,
           eventValue: value,
-          eventOption: '',
+          eventOption: option === undefined || option === null ? '' : String(option),
           eventID: ''
         });
       }
@@ -725,7 +726,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
  
           if (isNext) {
             makeClickable(door, function (e) {
-              track('Click', 'Page', 'PopUp');
+              track('Click', 'Page', 'PopUp', doorNum);
               if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
               testCurrent = doorNum;
               saveTest();          // remember test progress for the next reload
@@ -735,7 +736,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
             });
           } else if (isLast) {
             makeClickable(door, function (e) {
-              track('Click', 'Page', 'PopUp');
+              track('Click', 'Page', 'PopUp', doorNum);
               if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
               openPopup(doorNum);
             });
@@ -761,7 +762,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
             // the day is over (page left open past midnight) -> start the new day
             if (currentDay() !== day) { window.location.reload(); return; }
  
-            track('Click', 'Page', 'PopUp');
+            track('Click', 'Page', 'PopUp', doorNum);
             if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);   // confetti on every click
  
             if (todayOpened) {                   // already opened today -> popup again
