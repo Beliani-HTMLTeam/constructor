@@ -364,7 +364,7 @@ const categories = [
 		tileGap: 15,
 		tileTextLayout: 'inRow',
 		heading: {
-			phrase: 'Room by room, all reduced',
+			query: 'category_title',
 			align: 'center',
 			spaceAfter: 'newsletterBottom35px',
 			styles: 'text-transform: uppercase; font-weight: 700;',
