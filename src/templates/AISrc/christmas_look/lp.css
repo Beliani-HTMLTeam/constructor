@@ -1,0 +1,339 @@
+.wideLanding,
+.wideLanding * {
+  box-sizing: border-box;
+}
+
+.wideLanding {
+  width: 100%;
+  max-width: 1815px;
+  min-height: 100vh;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.wideLanding .lpIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wideLanding .lpIntro .header {
+  margin: 0;
+  padding: 0 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.wideLanding .lpIntro .lpCatTitle {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.wideLanding .lpIntro .lpCatDescription {
+  padding-bottom: 80px;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.wideLanding .lpCatColors {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+.wideLanding .lpCategory {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.wideLanding .lpCategory > a {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.wideLanding .lpCategory .lpIntro .lpCatDescription {
+  padding-bottom: 15px;
+}
+
+.wideLanding .lpCategoryImage {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 35px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.wideLanding .lpProducts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  width: 100%;
+  margin: 0;
+  padding: 5px 0 100px;
+}
+
+.wideLanding .lpCategory:last-child .lpProducts {
+  padding-bottom: 80px;
+}
+
+.wideLanding .lpProduct {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.wideLanding .lpProduct > a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.wideLanding .lpProduct img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 300ms ease;
+}
+
+.wideLanding .lpProduct .productInfo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.wideLanding .lpProduct .productName {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.wideLanding .lpProduct .prices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.wideLanding .lpProduct .lowPrice {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.wideLanding .lpProduct .highPrice {
+  font-size: 18px;
+  text-decoration: line-through;
+}
+
+.wideLanding .lpProduct:hover img {
+  transform: scale(1.2);
+}
+
+.wideLanding .lpProduct:hover .productInfo {
+  opacity: 1;
+}
+
+.wideLanding .topCategories {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 868fr)
+    minmax(0, 473fr)
+    minmax(0, 473fr);
+  gap: 5px;
+  width: 100%;
+  max-width: 1824px;
+  margin: 0 auto 35px;
+}
+
+.wideLanding .topCategories > a {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wideLanding .topCategories img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: center;
+}
+
+.wideLanding .topCategories > a:first-child {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: stretch;
+}
+
+.wideLanding .topCategories > a:first-child img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.wideLanding .lpCta {
+  display: inline-block;
+  padding: 15px 45px;
+  border: 0;
+  border-radius: 5px;
+  background: #750000;
+  color: #fff4e6;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .wideLanding .lpIntro {
+    padding: 0 16px;
+  }
+
+  .wideLanding .lpIntro .header {
+    padding-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .wideLanding .lpIntro .lpCatTitle {
+    padding-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .wideLanding .lpIntro .lpCatDescription {
+    padding-bottom: 40px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .wideLanding .lpIntro .lpCategory .lpCatDescription {
+    padding-bottom: 12px;
+  }
+
+  .wideLanding .lpCatColors {
+    padding-bottom: 16px;
+  }
+
+  .wideLanding .lpCta {
+    max-width: 100%;
+    padding: 12px 30px;
+    font-size: 14px;
+  }
+
+  .wideLanding .lpCategoryImage {
+    margin-top: 24px;
+  }
+
+  .wideLanding .lpProducts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-items: stretch;
+    padding: 8px 0 80px;
+  }
+
+  .wideLanding .lpCategory:last-child .lpProducts {
+    padding-bottom: 40px;
+  }
+
+  .wideLanding .lpProduct {
+    background: #fff;
+  }
+
+  .wideLanding .lpProduct > a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .wideLanding .lpProduct img {
+    margin: 0;
+    transform: none;
+    transition: none;
+  }
+
+  .wideLanding .lpProduct:hover img {
+    transform: none;
+  }
+
+  .wideLanding .lpProduct .productInfo {
+    display: none;
+  }
+
+  .wideLanding .topCategories {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wideLanding .topCategories > a:first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .wideLanding .topCategories > a:first-child img {
+    position: static;
+    height: auto;
+  }
+
+  .wideLanding .topCategories img {
+    transition: none;
+  }
+
+  .wideLanding .topCategories > a:hover img,
+  .wideLanding .topCategories > a:focus-visible img {
+    transform: none;
+  }
+}
+
+@media (hover: none) {
+  .wideLanding .lpProduct .productInfo {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wideLanding .lpProduct img,
+  .wideLanding .lpProduct .productInfo,
+  .wideLanding .topCategories img,
+  .wideLanding .topCategories > a::after {
+    transition: none;
+  }
+
+  .wideLanding .lpProduct:hover img,
+  .wideLanding .topCategories > a:hover img,
+  .wideLanding .topCategories > a:focus-visible img {
+    transform: none;
+  }
+}

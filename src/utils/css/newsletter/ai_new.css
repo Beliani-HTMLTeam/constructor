@@ -83,6 +83,11 @@ img {
   padding-right: 20px;
 }
 
+.newsletterContainer5px {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .col2imgGap.newsletterContainer {
   width: 20px;
   height: 20px;
@@ -171,6 +176,12 @@ img {
 
 .newsletterCtaBtn {
   font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  display: inline-block;
+  font-size: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
 }
 
 .newsletterCode {
@@ -189,6 +200,10 @@ img {
 
 .newsletterTop55px {
   padding-top: 55px;
+}
+
+.newsletterBottom5px {
+  padding-bottom: 5px;
 }
 
 .newsletterBottom10px {
@@ -667,12 +682,15 @@ img {
     display: inline-block !important;
   }
 
-  .newsletterCtaBtn {
-    display: block !important;
+  .newsletterCtaTable {
     width: 100% !important;
+  }
+
+  .newsletterCtaBtn {
     text-align: center !important;
     box-sizing: border-box !important;
-    border-width: 10px 20px !important;
+    font-size: 16px !important;
+    padding: 10px 20px !important;
   }
 
   .secondaryLink {
@@ -715,6 +733,11 @@ img {
   .newsletterContainer {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .newsletterContainer5px {
+    padding-left: 3px;
+    padding-right: 3px;
   }
 
   .col2imgGap.newsletterContainer {
@@ -797,6 +820,10 @@ img {
     padding-left: 10px;
     padding-right: 0px !important;
   }
+
+  .newsletterBottom5px {
+		padding-bottom: 3px;
+	}
 
 	.newsletterBottom10px {
 		padding-bottom: 4px;

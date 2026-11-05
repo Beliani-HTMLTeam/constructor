@@ -12,6 +12,7 @@ import { MondayAI } from './AISrc/monday_ai/template.js';
 import { MondayNewV2 } from './AISrc/monday_new_v2/template.js';
 import { ThursdayNew } from './AISrc/thursday_new/template.js';
 import { FrenchDaysNew } from './AISrc/french_days/template.js';
+import { ChristmasLook } from './AISrc/christmas_look/template.js';
 
 import { MondayNewAI } from './DimaSrc/monday_new/template.js';
 import { Friday } from './Friday/template.js';
@@ -36,6 +37,7 @@ export const templates = {
   ThursdayNew,
   FrenchDaysNew,
   MondayNewAI,
+  ChristmasLook,
   Friday,
 
   // Black Week
