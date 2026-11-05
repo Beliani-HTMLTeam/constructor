@@ -75,7 +75,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     null,                                              // 8  - door 9 glows
     null,     // 9  - door 10 glows
     null,                                              // 10 - door 11 glows
-    null,                                              // 11 - door 12 glows
+    null,    // 11 - door 12 glows
     null,    // 12 - door 13 glows
     null,    // 13 - door 14 glows
     null,                                              // 14 - door 15 glows
@@ -85,7 +85,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     null,                                              // 18 - door 19 glows
     null,                                              // 19 - door 20 glows
     null,                                              // 20 - door 21 glows
-    null,                                              // 21 - door 22 glows
+    null,    // 21 - door 22 glows
     null,                                              // 22 - door 23 glows
     null,                                              // 23 - door 24 glows
   ];
@@ -129,14 +129,11 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   const regularConditions = fromQuery('Regular Conditions');
   const upTo = fromQuery('UpTo'); // shared "Up to 50% OFF" (row 3)
  
-  // Category name for the tracking (eventID), e.g. "Christmas Accessories/Christmas Decorations".
-  // Given per day below (English, the same in every country); without it, it's made from the link path.
-  const categoryName = (link) => {
-    try {
-      return new URL(link).pathname.split('/').filter(Boolean)
-        .map((seg) => seg.split('-').map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w)).join(' '))
-        .join('/');
-    } catch (e) { return ''; }
+  // Category for the tracking (eventID): the English URL path, e.g. "/christmas-accessories/decorations/"
+  // (analyst's request – the same in every country). Given per day below;
+  // without it, the path of the "Shop now" link is used.
+  const categoryPath = (link) => {
+    try { return new URL(link).pathname; } catch (e) { return ''; }
   };
  
   // Category day – sheet: Title  ->  pre = category, title = shared "Up to 50% OFF"
@@ -149,7 +146,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
     ctaLink: link,                // the popup itself is not a link
-    trackId: trackName || categoryName(link),   // eventID in the dataLayer
+    trackId: trackName || categoryPath(link),   // eventID in the dataLayer
   });
  
   // Voucher day – conditions from "Conditions - DD.12"
@@ -168,13 +165,13 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
  
   const adventPopups = popupsFromQueries(queries, {
     // 01.12 – Christmas Decorations / Up to 50% OFF (sheet: Title, Description)
-    1: { ...category(1, 'https://www.beliani.ch/christmas-accessories/decorations/', 'Christmas Accessories/Christmas Decorations'), fields: ['pre', 'title'] },
+    1: { ...category(1, 'https://www.beliani.ch/christmas-accessories/decorations/', '/christmas-accessories/decorations/'), fields: ['pre', 'title'] },
  
     // 02.12 – Extra / 10% OFF / when you spend €500 / Code
     2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null]),
  
     // 03.12 – Kid's Room
-    3: category(3, 'https://www.beliani.co.uk/children-room/', 'Children Room'),
+    3: category(3, 'https://www.beliani.co.uk/children-room/', '/children-room/'),
  
     // 04.12 – Free XXX (sheet: Title, Description, Voucher, Code)
     4: voucher(4, 'free', CODE_THEN_VOUCHER),
@@ -184,7 +181,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     6: voucher(6, 'free', CODE_THEN_VOUCHER),
  
     // 07.12 – Dining Room
-    7: category(7, "https://www.beliani.ch/dining-room-furniture/", 'Dining Room Furniture'),
+    7: category(7, "https://www.beliani.ch/dining-room-furniture/", '/dining-room-furniture/'),
  
     // 08.12 – Free XXX (sheet: Title, Description, Voucher, Code)
     8: voucher(8, 'free', CODE_THEN_VOUCHER),
@@ -196,9 +193,9 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     10: voucher(10, 'free', CODE_THEN_VOUCHER),
  
     // 11.12 Scatter Cushions / 12.12 Tableware / 13.12 Lighting
-    11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/", 'Textiles/Scatter Cushions'),
-    12: category(12 , "https://www.beliani.ch/kitchenware-tableware/", 'Kitchenware & Tableware'),
-    13: category(13, "https://www.beliani.ch/lighting/", 'Lighting'),
+    11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/", '/scatter-cushions/'),
+    12: category(12 , "https://www.beliani.ch/kitchenware-tableware/", '/kitchenware-tableware/'),
+    13: category(13, "https://www.beliani.ch/lighting/", '/lighting/'),
  
     // 14.12 / 15.12 – Free XXX
     14: voucher(14, 'free', CODE_THEN_VOUCHER),
@@ -217,7 +214,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     },
  
     // 17.12 – Rugs
-    17: category(17, "https://www.beliani.ch/rugs/", 'Rugs'),
+    17: category(17, "https://www.beliani.ch/rugs/", '/rugs/'),
  
     // 18.12 / 19.12 / 20.12 – Free XXX
     18: voucher(18, 'free', CODE_THEN_VOUCHER),
@@ -232,7 +229,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     23: voucher(23, 'free', CODE_THEN_VOUCHER),
  
     // 24.12 – Home Accessories
-    24: category(24, "https://www.beliani.ch/home-accessories/", 'Home Accessories'),
+    24: category(24, "https://www.beliani.ch/home-accessories/", '/home-accessories/'),
   });
  
   const InteractiveTopImage = `
