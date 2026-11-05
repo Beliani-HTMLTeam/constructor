@@ -349,7 +349,8 @@ table {
 }
 
 
-.newsletterFreebiesTitle {
+#newsletter .newsletterFreebiesTitle {
+  font-family: 'Poppins', sans-serif !important;
   font-size: 20px;
   line-height: 1.2;
   font-weight: 400;
