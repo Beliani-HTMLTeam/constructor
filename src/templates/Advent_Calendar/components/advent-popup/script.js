@@ -32,7 +32,8 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   var OPTS = ${opts};
  
   // eventOption = the day (door number) of the open popup, e.g. '18'
-  function track(action, label, value) {
+  // eventID     = category name of the popup / the voucher code (see trackId in parts.js)
+  function track(action, label, value, id) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'custom_event',
@@ -41,17 +42,23 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       eventLabel: label,
       eventValue: value,
       eventOption: current === null ? '' : String(current),
-      eventID: ''
+      eventID: id !== undefined ? String(id) : currentTrackId
     });
   }
   var lastVerify = 0;
-  function trackVerify() {            // copy button + manual copy of the code, once per action
+  // code = the copied voucher code -> eventID
+  function trackVerify(code) {        // copy button + manual copy of the code, once per action
     if (Date.now() - lastVerify < 800) return;
     lastVerify = Date.now();
-    track('Verify', 'Promo', 'Voucher');
+    track('Verify', 'Promo', 'Voucher', code || currentTrackId);
+  }
+  function codeOf(el) {
+    var line = el && el.closest && el.closest('.adv-pop__code');
+    var v = line && line.querySelector('.adv-pop__code-value');
+    return v ? (v.textContent || '').trim() : '';
   }
  
-  var overlay, content, live, current = null, closeTimer = null, lastFocus = null;
+  var overlay, content, live, current = null, currentTrackId = '', closeTimer = null, lastFocus = null;
  
   function getTpl(id) {
     return document.querySelector('template[data-adv-popup="' + String(id) + '"]');
@@ -105,7 +112,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     content.addEventListener('click', function (e) {
       var wrap = e.target.closest('.adv-pop__copy-wrap');
       if (wrap && e.target.closest('button')) {
-        trackVerify();
+        trackVerify(codeOf(wrap));
         var msg = wrap.getAttribute('data-copied') || '';
         live.textContent = '';
         setTimeout(function () { live.textContent = msg; }, 100);
@@ -131,7 +138,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       var sel = window.getSelection && window.getSelection();
       var node = sel && sel.anchorNode;
       var el = node && (node.nodeType === 1 ? node : node.parentElement);
-      if (el && el.closest && el.closest('.adv-pop__code') && content.contains(el)) trackVerify();
+      if (el && el.closest && el.closest('.adv-pop__code') && content.contains(el)) trackVerify(codeOf(el));
     });
  
     document.addEventListener('keydown', function (e) {
@@ -163,6 +170,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     ensureOverlay();
     clearTimeout(closeTimer);
     current = id;
+    currentTrackId = tpl.getAttribute('data-track-id') || '';
     if (!isOpen()) lastFocus = document.activeElement;
     content.className = 'adv-pop__content adv-pop--' + (tpl.getAttribute('data-layout') || 'deal') +
       (tpl.getAttribute('data-text') === 'left' ? ' adv-pop--text-left' : '');

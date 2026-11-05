@@ -148,11 +148,12 @@ function PopupBackground({ imageDesktop, imageMobile, alt = '', link }) {
 // ---------- Shell: close button + background image + text ----------
 // layout  : 'percent' | 'deal' | 'upto' | 'special' (controls font sizes)
 // textSide: 'right' (default, as in the design) | 'left' – desktop only
-export function AdventPopupShell({ id, layout = 'deal', imageDesktop, imageMobile, alt = '', link, conditions, texts, textSide = 'right', body }) {
+// trackId: sent as eventID in the dataLayer (category name / voucher code)
+export function AdventPopupShell({ id, layout = 'deal', imageDesktop, imageMobile, alt = '', link, conditions, texts, textSide = 'right', body, trackId = '' }) {
   const t = { ...DEFAULT_POPUP_TEXTS, ...texts };
  
   return `
-<template data-adv-popup="${attr(id)}" data-layout="${attr(layout)}" data-text="${attr(textSide)}">
+<template data-adv-popup="${attr(id)}" data-layout="${attr(layout)}" data-text="${attr(textSide)}" data-track-id="${attr(trackId)}">
   <button type="button" class="adv-pop__close" aria-label="${attr(t.close)}">${ICON_CLOSE}</button>
   ${PopupBackground({ imageDesktop, imageMobile, alt, link })}
   <div class="adv-pop__deal">${body}</div>
@@ -174,7 +175,15 @@ export function StandardPopup(layout, props, defaults = {}) {
     // ctaLink: only the "Shop now" link goes there (the rest of the popup is not a link)
     PopupFooter({ texts: t, onlyToday, conditions: props.conditions, cta, link: props.ctaLink || props.link });
  
-  return AdventPopupShell({ ...props, layout, texts: t, body });
+  // eventID for the tracking: props.trackId (e.g. category name),
+  // otherwise the voucher code(s) of the popup ("02advent26uk", pyramid: "A, B, C")
+  const codes = []
+    .concat(props.code || [], (props.tiers || []).map((tier) => tier && tier.code))
+    .map((c) => (splitCode(c) || {}).value)
+    .filter(Boolean);
+  const trackId = props.trackId !== undefined ? props.trackId : codes.join(', ');
+ 
+  return AdventPopupShell({ ...props, layout, texts: t, body, trackId });
 }
  
 // ---------- Small notices: past door / future door ----------
