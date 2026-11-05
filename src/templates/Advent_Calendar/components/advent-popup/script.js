@@ -31,7 +31,9 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   if (window.AdventPopup) return;
   var OPTS = ${opts};
  
-  function track(action, label, value) {
+  // eventOption = the day (door number) of the open popup, e.g. '18'
+  // eventID     = category name of the popup / the voucher code (see trackId in parts.js)
+  function track(action, label, value, id) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'custom_event',
@@ -39,12 +41,24 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       eventAction: action,
       eventLabel: label,
       eventValue: value,
-      eventOption: '',
-      eventID: ''
+      eventOption: current === null ? '' : String(current),
+      eventID: id !== undefined ? String(id) : currentTrackId
     });
   }
+  var lastVerify = 0;
+  // code = the copied voucher code -> eventID
+  function trackVerify(code) {        // copy button + manual copy of the code, once per action
+    if (Date.now() - lastVerify < 800) return;
+    lastVerify = Date.now();
+    track('Verify', 'Promo', 'Voucher', code || currentTrackId);
+  }
+  function codeOf(el) {
+    var line = el && el.closest && el.closest('.adv-pop__code');
+    var v = line && line.querySelector('.adv-pop__code-value');
+    return v ? (v.textContent || '').trim() : '';
+  }
  
-  var overlay, content, live, current = null, closeTimer = null, lastFocus = null;
+  var overlay, content, live, current = null, currentTrackId = '', closeTimer = null, lastFocus = null;
  
   function getTpl(id) {
     return document.querySelector('template[data-adv-popup="' + String(id) + '"]');
@@ -98,7 +112,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     content.addEventListener('click', function (e) {
       var wrap = e.target.closest('.adv-pop__copy-wrap');
       if (wrap && e.target.closest('button')) {
-        track('Verify', 'Promo', 'Voucher');
+        trackVerify(codeOf(wrap));
         var msg = wrap.getAttribute('data-copied') || '';
         live.textContent = '';
         setTimeout(function () { live.textContent = msg; }, 100);
@@ -112,7 +126,19 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
  
       if (t.closest('.adv-pop__cond')) { showConditions(); return; }
  
-      if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
+      if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');   // "Shop now"
+    });
+    // "Shop now" opened with the middle mouse button
+    content.addEventListener('auxclick', function (e) {
+      if (e.button === 1 && e.target.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
+    });
+    // code highlighted and copied by hand (Ctrl+C / long press -> Copy) counts as Verify too
+    document.addEventListener('copy', function () {
+      if (!isOpen()) return;
+      var sel = window.getSelection && window.getSelection();
+      var node = sel && sel.anchorNode;
+      var el = node && (node.nodeType === 1 ? node : node.parentElement);
+      if (el && el.closest && el.closest('.adv-pop__code') && content.contains(el)) trackVerify(codeOf(el));
     });
  
     document.addEventListener('keydown', function (e) {
@@ -144,6 +170,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     ensureOverlay();
     clearTimeout(closeTimer);
     current = id;
+    currentTrackId = tpl.getAttribute('data-track-id') || '';
     if (!isOpen()) lastFocus = document.activeElement;
     content.className = 'adv-pop__content adv-pop--' + (tpl.getAttribute('data-layout') || 'deal') +
       (tpl.getAttribute('data-text') === 'left' ? ' adv-pop--text-left' : '');

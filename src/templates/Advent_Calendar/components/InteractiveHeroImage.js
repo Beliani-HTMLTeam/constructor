@@ -23,7 +23,7 @@ const ADVENT_TEST_MODE = false;
 const ADVENT_START = '2026-12-01';
 const ADVENT_REAL_START = '2026-12-01';
  
-export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, getPhrase }) {
+export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, getPhrase, getCategoryLink }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
@@ -67,25 +67,25 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     `${adventBase}advent_all_closed_glow.webp?ver=19`, // 0  - door 1 glows
     `${adventBase}advent_open_1_glow.webp?ver=20`,     // 1  - door 2 glows
     `${adventBase}advent_open_2_glow.webp?ver=20`,     // 2  - door 3 glows
-    `${adventBase}advent_open_3_glow.webp?ver=20`,     // 3  - door 4 glows
+    null,     // 3  - door 4 glows
     null,                                              // 4  - door 5 glows (frame 4 is a placeholder)
     null,                                              // 5  - door 6 glows
     null,                                              // 6  - door 7 glows
-    `${adventBase}advent_open_7_glow.webp?ver=20`,     // 7  - door 8 glows
+    null,     // 7  - door 8 glows
     null,                                              // 8  - door 9 glows
-    `${adventBase}advent_open_9_glow.webp?ver=20`,     // 9  - door 10 glows
+    null,     // 9  - door 10 glows
     null,                                              // 10 - door 11 glows
-    `${adventBase}advent_open_11_glow.webp?ver=20`,    // 11 - door 12 glows
-    `${adventBase}advent_open_12_glow.webp?ver=20`,    // 12 - door 13 glows
-    `${adventBase}advent_open_13_glow.webp?ver=20`,    // 13 - door 14 glows
+    null,    // 11 - door 12 glows
+    null,    // 12 - door 13 glows
+    null,    // 13 - door 14 glows
     null,                                              // 14 - door 15 glows
     null,                                              // 15 - door 16 glows
-    `${adventBase}advent_open_16_glow.webp?ver=20`,    // 16 - door 17 glows
-    `${adventBase}advent_open_17_glow.webp?ver=20`,    // 17 - door 18 glows
+    null,    // 16 - door 17 glows
+    null,    // 17 - door 18 glows
     null,                                              // 18 - door 19 glows
     null,                                              // 19 - door 20 glows
     null,                                              // 20 - door 21 glows
-    `${adventBase}advent_open_21_glow.webp?ver=20`,    // 21 - door 22 glows
+    null,    // 21 - door 22 glows
     null,                                              // 22 - door 23 glows
     null,                                              // 23 - door 24 glows
   ];
@@ -129,8 +129,15 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   const regularConditions = fromQuery('Regular Conditions');
   const upTo = fromQuery('UpTo'); // shared "Up to 50% OFF" (row 3)
  
+  // Category for the tracking (eventID): the English URL path, e.g. "/christmas-accessories/decorations/"
+  // (analyst's request – the same in every country). Given per day below;
+  // without it, the path of the "Shop now" link is used.
+  const categoryPath = (link) => {
+    try { return new URL(link).pathname; } catch (e) { return ''; }
+  };
+ 
   // Category day – sheet: Title  ->  pre = category, title = shared "Up to 50% OFF"
-  const category = (n, link) => ({
+  const category = (n, link, trackName) => ({
     type: 'upto',
     fields: ['pre'],
     title: upTo,
@@ -138,7 +145,8 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     conditions: regularConditions,
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
-    ctaLink: link,                // the popup itself is not a link
+    ctaLink: getCategoryLink(link),                // the popup itself is not a link
+    trackId: trackName || categoryPath(link),   // eventID in the dataLayer
   });
  
   // Voucher day – conditions from "Conditions - DD.12"
@@ -157,13 +165,13 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
  
   const adventPopups = popupsFromQueries(queries, {
     // 01.12 – Christmas Decorations / Up to 50% OFF (sheet: Title, Description)
-    1: { ...category(1, 'https://www.beliani.ch/christmas-accessories/decorations/'), fields: ['pre', 'title'] },
+    1: { ...category(1, 'https://www.beliani.ch/christmas-accessories/decorations/', '/christmas-accessories/decorations/'), fields: ['pre', 'title'] },
  
     // 02.12 – Extra / 10% OFF / when you spend €500 / Code
     2: voucher(2, 'percent', ['pre', 'title', 'subtitle', 'code', null]),
  
     // 03.12 – Kid's Room
-    3: category(3, 'https://www.beliani.co.uk/children-room/'),
+    3: category(3, 'https://www.beliani.co.uk/children-room/', '/children-room/'),
  
     // 04.12 – Free XXX (sheet: Title, Description, Voucher, Code)
     4: voucher(4, 'free', CODE_THEN_VOUCHER),
@@ -173,7 +181,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     6: voucher(6, 'free', CODE_THEN_VOUCHER),
  
     // 07.12 – Dining Room
-    7: category(7, "https://www.beliani.ch/dining-room-furniture/"),
+    7: category(7, "https://www.beliani.ch/dining-room-furniture/", '/dining-room-furniture/'),
  
     // 08.12 – Free XXX (sheet: Title, Description, Voucher, Code)
     8: voucher(8, 'free', CODE_THEN_VOUCHER),
@@ -185,9 +193,9 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     10: voucher(10, 'free', CODE_THEN_VOUCHER),
  
     // 11.12 Scatter Cushions / 12.12 Tableware / 13.12 Lighting
-    11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/"),
-    12: category(12 , "https://www.beliani.ch/kitchenware-tableware/"),
-    13: category(13, "https://www.beliani.ch/lighting/"),
+    11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/", '/textiles/scatter-cushions/'),
+    12: category(12 , "https://www.beliani.ch/kitchenware-tableware/", '/kitchenware-tableware/'),
+    13: category(13, "https://www.beliani.ch/lighting/", '/lighting/'),
  
     // 14.12 / 15.12 – Free XXX
     14: voucher(14, 'free', CODE_THEN_VOUCHER),
@@ -206,7 +214,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     },
  
     // 17.12 – Rugs
-    17: category(17, "https://www.beliani.ch/rugs/"),
+    17: category(17, "https://www.beliani.ch/rugs/", '/rugs/'),
  
     // 18.12 / 19.12 / 20.12 – Free XXX
     18: voucher(18, 'free', CODE_THEN_VOUCHER),
@@ -221,7 +229,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     23: voucher(23, 'free', CODE_THEN_VOUCHER),
  
     // 24.12 – Home Accessories
-    24: category(24, "https://www.beliani.ch/home-accessories/"),
+    24: category(24, "https://www.beliani.ch/home-accessories/", '/home-accessories/'),
   });
  
   const InteractiveTopImage = `
@@ -542,7 +550,9 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       });
  
       // ===== Analytics =====
-      function track(action, label, value) {
+      // option = the selected day (door number), e.g. '18'
+      // id     = category name / voucher code of that day's popup (eventID)
+      function track(action, label, value, option, id) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: 'custom_event',
@@ -550,13 +560,24 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
           eventAction: action,
           eventLabel: label,
           eventValue: value,
-          eventOption: '',
-          eventID: ''
+          eventOption: option === undefined || option === null ? '' : String(option),
+          eventID: id === undefined || id === null ? '' : String(id)
         });
       }
       if (!window.__adventPageViewSent) {
         window.__adventPageViewSent = true;
         track('View', 'Page', '');
+      }
+ 
+      // eventID of a day's popup: category name or voucher code (set in the popup template)
+      function trackIdOf(doorNum) {
+        var tpl = document.querySelector('template[data-adv-popup="' + doorNum + '"]');
+        return tpl ? tpl.getAttribute('data-track-id') || '' : '';
+      }
+      // Click / Page / PopUp: once per day – when today's door is opened
+      // (by the door or by the "OPEN TODAY'S DEAL" button), not on later clicks
+      function trackOpen(doorNum) {
+        track('Click', 'Page', 'PopUp', doorNum, trackIdOf(doorNum));
       }
  
       function openPopup(doorNum) {
@@ -649,16 +670,51 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       // today's door closed -> doors before today open + today's door GLOWS
       // today's door opened -> doors up to today open, NO glow
       // before the start / after the 24th -> no glow
-      function setFrame(opened, glow) {
+      // No flicker: a new frame is first loaded + decoded off-screen and only then
+      // swapped in (the old frame stays visible meanwhile). The next frame is
+      // preloaded in advance, so a door click swaps instantly.
+      var frameToken = 0;
+      var preloaded = {};
+      function preloadFrame(src) {
+        if (!src || preloaded[src]) return preloaded[src];
+        var pre = new Image();
+        pre.decoding = 'async';
+        preloaded[src] = new Promise(function (resolve, reject) {
+          pre.onload = function () {
+            if (pre.decode) pre.decode().then(resolve, resolve); else resolve();
+          };
+          pre.onerror = reject;
+        });
+        preloaded[src].catch(function () {});
+        pre.src = src;
+        return preloaded[src];
+      }
+      function swapTo(src, fallback) {
+        var token = ++frameToken;
+        preloadFrame(src).then(function () {
+          if (token === frameToken && img.src !== src) img.src = src;
+        }, function () {
+          if (token === frameToken && fallback) swapTo(fallback);   // glow frame missing -> plain
+        });
+      }
+      function frameSrc(opened, glow) {
         var plain = images[Math.min(Math.max(opened, 0), lastDoor)];
         var glowSrc = glow && opened < lastDoor ? glowImages[opened] : null;
-        if (glowSrc) {
-          img.onerror = function () { img.onerror = null; img.src = plain; };   // glow frame missing -> plain
-          img.src = glowSrc;
-        } else {
-          img.onerror = null;
-          img.src = plain;
+        return { src: glowSrc || plain, fallback: glowSrc ? plain : null };
+      }
+      var firstFrame = true;
+      function setFrame(opened, glow) {
+        var f = frameSrc(opened, glow);
+        if (firstFrame) {
+          // page load: nothing shown yet -> set the right frame straight away
+          // (no flash of the "all closed" picture from the HTML)
+          firstFrame = false;
+          img.onerror = f.fallback ? function () { img.onerror = null; img.src = f.fallback; } : null;
+          img.src = f.src;
+          preloadFrame(f.src);
+          return;
         }
+        swapTo(f.src, f.fallback);
       }
       function showImage() {
         // TEST MODE: always the glow frame – the next door glows right after opening one
@@ -666,14 +722,16 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         if (todayOpened) setFrame(todayDoor, false);
         else setFrame(pastDoors, todayDoor > 0);
       }
+      // the frame that a click on today's / the next door will show -> load it now
+      function preloadNext() {
+        if (TEST_MODE) {
+          if (testCurrent < lastDoor) { var t = frameSrc(testCurrent + 1, true); preloadFrame(t.src); }
+        } else if (!todayOpened && todayDoor > 0) {
+          preloadFrame(frameSrc(todayDoor, false).src);
+        }
+      }
       showImage();
- 
-      // preload the "door opened" frame so the swap is instant
-      (function () {
-        var next = TEST_MODE ? testCurrent + 1 : (todayOpened ? 0 : todayDoor);
-        var src = TEST_MODE ? (glowImages[next] || images[next]) : images[next];
-        if (next > 0 && src) { var pre = new Image(); pre.src = src; }
-      })();
+      preloadNext();
  
       // ===== Click logic =====
       // - today's door: first click opens the door (image swap) + shows its popup;
@@ -725,17 +783,18 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
  
           if (isNext) {
             makeClickable(door, function (e) {
-              track('Click', 'Page', 'PopUp');
+              trackOpen(doorNum);
               if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
               testCurrent = doorNum;
               saveTest();          // remember test progress for the next reload
               showImage();
+              preloadNext();       // the next door's frame, for the next click
               updateDoorsTest();
               setTimeout(function () { openPopup(doorNum); }, 400);
             });
           } else if (isLast) {
             makeClickable(door, function (e) {
-              track('Click', 'Page', 'PopUp');
+              // already opened -> popup again, not counted again
               if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
               openPopup(doorNum);
             });
@@ -761,13 +820,14 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
             // the day is over (page left open past midnight) -> start the new day
             if (currentDay() !== day) { window.location.reload(); return; }
  
-            track('Click', 'Page', 'PopUp');
             if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);   // confetti on every click
  
-            if (todayOpened) {                   // already opened today -> popup again
+            if (todayOpened) {                   // already opened today -> popup again (not counted again)
               openPopup(doorNum);
               return;
             }
+ 
+            trackOpen(doorNum);                  // counted once per day
  
             todayOpened = true;
             saveState();                         // remember it for the next visit
