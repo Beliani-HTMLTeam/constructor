@@ -349,7 +349,8 @@ table {
 }
 
 
-.newsletterFreebiesTitle {
+#newsletter .newsletterFreebiesTitle {
+  font-family: 'Poppins', sans-serif !important;
   font-size: 20px;
   line-height: 1.2;
   font-weight: 400;
@@ -788,8 +789,8 @@ table {
   }
 
   .newsletterProductTitleFreebie {
-    font-size: 17px;
-    line-height: 1.25;
+    font-size: 20px !important;
+    line-height: 1.25 !important;
   }
 
   .freebiePriceDesktopTd,
@@ -889,24 +890,6 @@ table {
 
   #newsletter .newsletterSocialIcon {
     padding-left: 13px !important;
-  }
-}
-
-@media screen and (max-width: 570px) {
-  .newsletterProductTitleFreebie {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 460px) {
-  .newsletterProductTitleFreebie {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .newsletterProductTitleFreebie {
-    font-size: 12px;
   }
 }
 

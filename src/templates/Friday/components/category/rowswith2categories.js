@@ -184,8 +184,14 @@ export const render = ({
 		columns,
 	});
 	const showText = category?.showTileText ?? false;
+	// CTA text: tileCta.query (first row of a tableQuery, e.g. "Shop ›" from the campaign tab)
+	// -> tileCta.phrase (static phrase) -> static 'Shop now'
+	const ctaQueryRow = category?.tileCta?.query ? queries?.[category.tileCta.query] : null;
+	const ctaFromQuery = Array.isArray(ctaQueryRow) ? ctaQueryRow[0] : ctaQueryRow;
 	const ctaText = showText
-		? (category?.tileCta?.phrase ? getPhrase(category.tileCta.phrase) : getPhrase('Shop now'))
+		? (ctaFromQuery && String(ctaFromQuery).trim()
+			? String(ctaFromQuery).trim()
+			: (category?.tileCta?.phrase ? getPhrase(category.tileCta.phrase) : getPhrase('Shop now')))
 		: '';
 	// Tile text layout:
 	//   'stacked' (default) – name centered, CTA centered underneath
@@ -193,6 +199,8 @@ export const render = ({
 	const textInRow = category?.tileTextLayout === 'inRow';
 	const nameColor = category?.tileNameColor;
 	const ctaColor = category?.tileCtaColor;
+	// text-decoration of the tile CTA link ('none' = no underline), default underline
+	const ctaDecoration = category?.tileCtaDecoration ?? 'underline';
 	const spaceBetweenRows = category?.spaceBetweenRows ?? 'newsletterBottom35px';
 
 	const textStackMode = category?.tileTextStack ?? 'auto';
@@ -264,7 +272,7 @@ export const render = ({
 				// stackText = true:  name, CTA underneath, both left (same as the mobile version)
 				// Names wrap only between words, never inside a word.
 				const nameLink = `<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>`;
-				const ctaLink = `<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>`;
+				const ctaLink = `<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: ${ctaDecoration};">${ctaText}</a>`;
 				const nameStyle = `text-align: left; font-size: 20px; font-weight: 600; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} word-break: normal; overflow-wrap: break-word; hyphens: manual; color: ${nameColor ?? '#750000'};`;
 				const ctaStyle = `font-weight: 600; ${msoLine(MSO_NAME_LINE)} word-break: normal; overflow-wrap: break-word; hyphens: manual;`;
 
@@ -308,7 +316,7 @@ export const render = ({
  
 				ctaCells += `
 					<td class="newsletterCategoryTile categoryTileStackedCta" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 6px; font-size: 16px; line-height: 1.25; ${msoLine(MSO_STACKED_CTA_LINE)} vertical-align: top; word-break: break-word; overflow-wrap: break-word;">
-						<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
+						<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: ${ctaDecoration};">${ctaText}</a>
 					</td>
 				`;
 			}
