@@ -23,7 +23,7 @@ const ADVENT_TEST_MODE = false;
 const ADVENT_START = '2026-12-01';
 const ADVENT_REAL_START = '2026-12-01';
  
-export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, getPhrase }) {
+export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, getPhrase, getCategoryLink }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
@@ -145,7 +145,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     conditions: regularConditions,
     imageDesktop: popupImg(n, 'd'),
     imageMobile: popupImg(n, 'm'),
-    ctaLink: link,                // the popup itself is not a link
+    ctaLink: getCategoryLink(link),                // the popup itself is not a link
     trackId: trackName || categoryPath(link),   // eventID in the dataLayer
   });
  
@@ -193,7 +193,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
     10: voucher(10, 'free', CODE_THEN_VOUCHER),
  
     // 11.12 Scatter Cushions / 12.12 Tableware / 13.12 Lighting
-    11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/", '/scatter-cushions/'),
+    11: category(11, "https://www.beliani.ch/textiles/scatter-cushions/", '/textiles/scatter-cushions/'),
     12: category(12 , "https://www.beliani.ch/kitchenware-tableware/", '/kitchenware-tableware/'),
     13: category(13, "https://www.beliani.ch/lighting/", '/lighting/'),
  
