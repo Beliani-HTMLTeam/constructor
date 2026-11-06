@@ -370,6 +370,7 @@ img {
   text-decoration: line-through;
   color: #666666;
   margin-right: 8px;
+  white-space: nowrap;
 }
 
 .freebieLowPriceMobile {
@@ -386,6 +387,7 @@ img {
   line-height: 1.0;
   text-decoration: line-through;
   color: #000000;
+  white-space: nowrap;
 }
 
 .freebieLowPriceDesktop {
