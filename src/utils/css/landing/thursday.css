@@ -422,6 +422,7 @@ table {
   line-height: 1.2;
   text-decoration: line-through;
   color: #666666;
+  white-space: nowrap;
 }
 
 .freebieOldPriceMobileSingleColumn {
@@ -440,6 +441,7 @@ table {
   line-height: 1.0;
   text-decoration: line-through;
   color: #000000;
+  white-space: nowrap;
 }
 
 .freebieLowPriceDesktop {

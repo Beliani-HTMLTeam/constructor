@@ -9,6 +9,59 @@ export const FOOTER_THEMES = {
  
 export const getFooterTheme = (theme) => FOOTER_THEMES[theme] ?? FOOTER_THEMES.peach;
  
+// ── "Download our app" ─────────────────────────────────────────────────────────────────────────
+// Shown from the newsletter of 16.11.2026 on (campaign date "dd.mm.yyyy", also accepts "yyyy-mm-dd").
+const APP_DOWNLOAD_FROM = new Date(2026, 10, 16); // months are 0-based -> 10 = November
+ 
+const parseCampaignDate = (value) => {
+  if (!value) return null;
+  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : value;
+ 
+  const text = String(value).trim();
+ 
+  const dmy = text.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (dmy) return new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1]));
+ 
+  const ymd = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (ymd) return new Date(Number(ymd[1]), Number(ymd[2]) - 1, Number(ymd[3]));
+ 
+  return null;
+};
+ 
+const isFromDate = (cDate, fromDate) => {
+  const campaignDate = parseCampaignDate(cDate);
+ 
+  return Boolean(campaignDate) && campaignDate >= fromDate;
+};
+ 
+export function shouldShowAppDownload(cDate) {
+  return isFromDate(cDate, APP_DOWNLOAD_FROM);
+}
+ 
+// "See you soon" banner: the "See you soon src v2" image from the newsletter of 16.11.2026 on
+const SEE_YOU_SOON_V2_FROM = new Date(2026, 10, 16); // 10 = November
+ 
+export function shouldUseSeeYouSoonV2(cDate) {
+  return isFromDate(cDate, SEE_YOU_SOON_V2_FROM);
+}
+ 
+// Bigger titles ("Download our app", "Stay up to date") from the newsletter of 16.11.2026 on:
+// 22px desktop / 20px mobile (classes ...TitleV2 in footer.css / footer-landing.css).
+// Older campaigns keep the old classes (18px).
+const FOOTER_TITLE_V2_FROM = new Date(2026, 10, 16); // 10 = November
+ 
+export function shouldUseFooterTitleV2(cDate) {
+  return isFromDate(cDate, FOOTER_TITLE_V2_FROM);
+}
+ 
+// Store badges: both the same height (32px), the width follows each image (it differs per language).
+// Only `height` is used from here; the widths are kept for reference / an explicit badge.width override.
+const APP_BADGE = {
+  googlePlay: { width: 108, height: 32 },
+  appStore: { width: 96, height: 32 },
+};
+const APP_BADGE_GAP = 15;
+ 
 const CLASSES = {
   [types.NEWSLETTER]: {
     frame: 'newsletterContainerFooter20px',
@@ -24,8 +77,19 @@ const CLASSES = {
     thousandsCellRight: 'thousandsMoreBtnCellRIGHT',
     socialCol: 'footer',
     socialTitle: 'newsletterNewFooterTitle',
+    socialTitleV2: 'newsletterNewFooterTitleV2',
     socialSubtitle: 'newsletterFooterSubtitle',
     socialIcon: 'newsletterNewSocialIcon',
+    socialIconImg: 'newsletterNewSocialIconImg',
+    socialTitleCol: 'newsletterSocialTitleCol',
+    socialIconsCol: 'newsletterSocialIconsCol',
+    socialIcons: 'newsletterSocialIcons',
+    appTitleCol: 'newsletterAppTitleCol',
+    appBadgesCol: 'newsletterAppBadgesCol',
+    appBadges: 'newsletterAppBadges',
+    appBadge: 'newsletterAppBadge',
+    appBadgeImg: 'newsletterAppBadgeImg',
+    appBadgeGap: 'newsletterAppBadgeGap',
     conditions: 'newsletterNewFooterConditions',
     companyDetails: 'newsletterNewFooterCompanyDetails',
   },
@@ -43,8 +107,19 @@ const CLASSES = {
     thousandsCellRight: 'footerThousandsCellRIGHT',
     socialCol: '',
     socialTitle: 'footerSocialTitle',
+    socialTitleV2: 'footerSocialTitleV2',
     socialSubtitle: 'footerSocialSubtitle',
     socialIcon: 'footerSocialIcon',
+    socialIconImg: 'footerSocialIconImg',
+    socialTitleCol: 'footerSocialTitleCol',
+    socialIconsCol: 'footerSocialIconsCol',
+    socialIcons: 'footerSocialIcons',
+    appTitleCol: 'footerAppTitleCol',
+    appBadgesCol: 'footerAppBadgesCol',
+    appBadges: 'footerAppBadges',
+    appBadge: 'footerAppBadge',
+    appBadgeImg: 'footerAppBadgeImg',
+    appBadgeGap: 'footerAppBadgeGap',
     conditions: 'footerConditions',
     companyDetails: 'footerCompanyDetails',
   },
@@ -174,7 +249,7 @@ const thousandsMoreGrid = (c, categories, width) => `
 const socialIcon = (c, item, alt, href) => `
   <td class="${c.socialIcon}" valign="middle" style="line-height: ${SOCIAL_ICON_SIZE}px; mso-line-height-rule: at-least;">
     <a href="${href}">
-      <img loading="lazy" src="${item.src}" width="${SOCIAL_ICON_SIZE}" border="0" style="display:block; max-width: 100%; vertical-align: middle;" alt="${alt}">
+      <img loading="lazy" class="${c.socialIconImg}" src="${item.src}" width="${SOCIAL_ICON_SIZE}" border="0" style="display:block; max-width: 100%; vertical-align: middle;" alt="${alt}">
     </a>
   </td>`;
  
@@ -185,11 +260,25 @@ export function Footer(sections, options, name) {
  
   const theme = getFooterTheme(options?.theme);
  
+  // title class: the bigger V2 titles from 16.11.2026 (options.campaignDate comes from the template's Footer.js)
+  const useTitleV2 = shouldUseFooterTitleV2(options?.campaignDate);
+  const titleClass = (c) => (useTitleV2 ? c.socialTitleV2 : c.socialTitle);
+  // same date: "Stay up to date" goes into two rows on mobile (title, icons under it) – before 16.11
+  // the row stays as it was (title + icons in one line), so no stacking classes are printed
+  const stackSocials = useTitleV2;
+ 
   const frame = (c, rows) => rows;
  
-  // UTM parameters
+  // LP only: the shop CSS stretches tables to the full width (!important), which spreads the store badges
+  // and the social icons over the whole row. An inline !important beats any !important in a stylesheet,
+  // so the table stays as narrow as its content. Not used in the newsletter (no shop CSS there).
+  const shrinkTable = (isLP) => (isLP ? ' style="width: auto !important;"' : '');
+ 
+  // UTM parameters (& instead of ? when the link already has a query, eg. the Google Play link)
   const track = (href, isLP) =>
-    isLP ? href : `${href}?utm_source=newsletter&utm_medium=email&utm_campaign=${id}`;
+    isLP
+      ? href
+      : `${href}${String(href).includes('?') ? '&' : '?'}utm_source=newsletter&utm_medium=email&utm_campaign=${id}`;
  
   const seeYouSoon = ({ src, href }, isLP) => {
     const c = isLP ? LP : NL;
@@ -321,6 +410,78 @@ export function Footer(sections, options, name) {
         `);
   };
  
+  // one store badge (Google Play / App Store); no src -> no badge
+  const appBadge = (c, badge, alt, size, isLP) => {
+    if (!badge?.src) return '';
+ 
+    // Same HEIGHT for both badges, the width follows each image file. The badges have a different
+    // width in every language ("Szerezd be: Google Play", "App Store-ból"...), so a fixed width
+    // would give them different heights. Only height in the attributes too (Outlook scales the width
+    // by the image ratio); a width is only set when the footer data gives one (badge.width).
+    const height = Number(badge.height) || size.height;
+    const width = Number(badge.width) || null;
+    const img = `<img loading="lazy" class="${c.appBadgeImg}" src="${badge.src}" alt="${alt}"${width ? ` width="${width}"` : ''} height="${height}" border="0" style="display: block; border: 0; height: ${height}px; width: ${width ? `${width}px` : 'auto'}; max-width: none; vertical-align: middle;" />`;
+ 
+    // Outlook: line-height 0 there means "exactly 0" and clips the top of the image. A line at least as
+    // tall as the badge (same trick as the social icons) shows the whole image; font-size 0 stays for
+    // the other clients (no extra space under the image).
+    return `
+                                                    <td class="${c.appBadge}" valign="middle" style="font-size: 0; line-height: ${height}px; mso-line-height-rule: at-least; vertical-align: middle;">
+                                                        ${badge.href ? `<a href="${track(badge.href, isLP)}" target="_blank" style="text-decoration: none;">${img}</a>` : img}
+                                                    </td>`;
+  };
+ 
+  // Download our app: line, title on the left + store badges on the right (on mobile the badges go
+  // under the title – footer.css / footer-landing.css), same look as the "Stay up to date" row
+  const appDownload = ({ title, googlePlay, appStore }, isLP) => {
+    const c = isLP ? LP : NL;
+    const google = appBadge(c, googlePlay, 'Google Play', APP_BADGE.googlePlay, isLP);
+    const apple = appBadge(c, appStore, 'App Store', APP_BADGE.appStore, isLP);
+ 
+    if (!google && !apple) return '';
+ 
+    const gap =
+      google && apple
+        ? `<td class="${c.appBadgeGap}" width="${APP_BADGE_GAP}" style="width: ${APP_BADGE_GAP}px; font-size: 1px; line-height: 1px; mso-line-height-rule: exactly;">&nbsp;</td>`
+        : '';
+ 
+    return frame(c, `
+                <tr>
+                    <td class="${c.container30}" style="background-color: #FFFFFF;">
+                        ${Line("https://pictureserver.net/static/footer/new_footer_line.png")}
+                    </td>
+                </tr>
+                ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
+                <tr>
+                    <td align="center" class="${c.container30}" style="background-color: #FFFFFF;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="left" valign="middle" class="${c.appTitleCol}" style="padding-right: 15px; vertical-align: middle;">
+                                        <span class="${titleClass(c)}">
+                                              ${title ?? ''}
+                                        </span>
+                                    </td>
+                                    <td align="right" valign="middle" class="${c.appBadgesCol}" style="vertical-align: middle;">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right" class="${c.appBadges}"${shrinkTable(isLP)}>
+                                            <tbody>
+                                                <tr>
+                                                    ${google}
+                                                    ${gap}
+                                                    ${apple}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                ${Space({ className: c.bottom30, insideTr: true, background: '#FFFFFF' })}
+        `);
+  };
+ 
   const socials = ({ title, subtitle, instagram, facebook, youtube, pinterest, Xsocial, Tiktok }, isLP) => {
     const c = isLP ? LP : NL;
     return frame(c, `
@@ -329,12 +490,12 @@ export function Footer(sections, options, name) {
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tbody>
                                 <tr>
-                                    <td align="left"${cls(c.socialCol)}>
+                                    <td align="left"${cls([c.socialCol, stackSocials && c.socialTitleCol].filter(Boolean).join(' '))}${stackSocials ? ' style="padding-right: 15px; vertical-align: middle;"' : ''}>
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <span class="${c.socialTitle}">
+                                                        <span class="${titleClass(c)}">
                                                               ${title}
                                                         </span>
                                                     </td>
@@ -353,8 +514,8 @@ export function Footer(sections, options, name) {
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td align="right"${cls(c.socialCol)} style="padding-right:5px; vertical-align: middle;">
-                                        <table cellpadding="0" cellspacing="0" border="0">
+                                    <td align="right"${cls([c.socialCol, stackSocials && c.socialIconsCol].filter(Boolean).join(' '))} style="padding-right:5px; vertical-align: middle;">
+                                        <table cellpadding="0" cellspacing="0" border="0"${stackSocials ? ` align="right"${cls(c.socialIcons)}` : ''}${shrinkTable(isLP)}>
                                             <tbody>
                                                 <tr>
                                                     ${socialIcon(c, instagram, 'Instagram', track(instagram.href, isLP))}
@@ -365,7 +526,6 @@ export function Footer(sections, options, name) {
       }
                                                     ${socialIcon(c, pinterest, 'Pinterest', track(pinterest.href, isLP))}
                                                     ${Tiktok ? socialIcon(c, Tiktok, 'Tik-Tok', track(Tiktok.href, isLP)) : ''}
-                                                    ${Xsocial ? socialIcon(c, Xsocial, 'X', track(Xsocial.href, isLP)) : ''}
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -449,6 +609,10 @@ export function Footer(sections, options, name) {
     klarna: {
       [types.NEWSLETTER]: { value: (data) => klarna(data, false) },
       [types.LANDINGPAGE]: { value: (data) => klarna(data, true) },
+    },
+    appDownload: {
+      [types.NEWSLETTER]: { value: (data) => appDownload(data, false) },
+      [types.LANDINGPAGE]: { value: (data) => appDownload(data, true) },
     },
     socials: {
       [types.NEWSLETTER]: { value: (data) => socials(data, false) },
