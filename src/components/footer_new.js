@@ -10,7 +10,7 @@ export const FOOTER_THEMES = {
 export const getFooterTheme = (theme) => FOOTER_THEMES[theme] ?? FOOTER_THEMES.peach;
  
 // ── "Download our app" ─────────────────────────────────────────────────────────────────────────
-// Shown from the newsletter of 16.12.2026 on (campaign date "dd.mm.yyyy", also accepts "yyyy-mm-dd").
+// Shown from the newsletter of 16.11.2026 on (campaign date "dd.mm.yyyy", also accepts "yyyy-mm-dd").
 const APP_DOWNLOAD_FROM = new Date(2026, 10, 16); // months are 0-based -> 10 = November
  
 const parseCampaignDate = (value) => {
@@ -54,9 +54,8 @@ export function shouldUseFooterTitleV2(cDate) {
   return isFromDate(cDate, FOOTER_TITLE_V2_FROM);
 }
  
-// Store badges: whole-pixel width + height attributes for Outlook, same height for both.
-// 32px high = 80% of the original 135x40 / 120x40 (ratio kept, no fractional pixels).
-// Can be overridden per badge with width / height in the footer data.
+// Store badges: both the same height (32px), the width follows each image (it differs per language).
+// Only `height` is used from here; the widths are kept for reference / an explicit badge.width override.
 const APP_BADGE = {
   googlePlay: { width: 108, height: 32 },
   appStore: { width: 96, height: 32 },
@@ -81,6 +80,7 @@ const CLASSES = {
     socialTitleV2: 'newsletterNewFooterTitleV2',
     socialSubtitle: 'newsletterFooterSubtitle',
     socialIcon: 'newsletterNewSocialIcon',
+    socialIconImg: 'newsletterNewSocialIconImg',
     socialTitleCol: 'newsletterSocialTitleCol',
     socialIconsCol: 'newsletterSocialIconsCol',
     socialIcons: 'newsletterSocialIcons',
@@ -88,6 +88,7 @@ const CLASSES = {
     appBadgesCol: 'newsletterAppBadgesCol',
     appBadges: 'newsletterAppBadges',
     appBadge: 'newsletterAppBadge',
+    appBadgeImg: 'newsletterAppBadgeImg',
     appBadgeGap: 'newsletterAppBadgeGap',
     conditions: 'newsletterNewFooterConditions',
     companyDetails: 'newsletterNewFooterCompanyDetails',
@@ -109,6 +110,7 @@ const CLASSES = {
     socialTitleV2: 'footerSocialTitleV2',
     socialSubtitle: 'footerSocialSubtitle',
     socialIcon: 'footerSocialIcon',
+    socialIconImg: 'footerSocialIconImg',
     socialTitleCol: 'footerSocialTitleCol',
     socialIconsCol: 'footerSocialIconsCol',
     socialIcons: 'footerSocialIcons',
@@ -116,6 +118,7 @@ const CLASSES = {
     appBadgesCol: 'footerAppBadgesCol',
     appBadges: 'footerAppBadges',
     appBadge: 'footerAppBadge',
+    appBadgeImg: 'footerAppBadgeImg',
     appBadgeGap: 'footerAppBadgeGap',
     conditions: 'footerConditions',
     companyDetails: 'footerCompanyDetails',
@@ -246,7 +249,7 @@ const thousandsMoreGrid = (c, categories, width) => `
 const socialIcon = (c, item, alt, href) => `
   <td class="${c.socialIcon}" valign="middle" style="line-height: ${SOCIAL_ICON_SIZE}px; mso-line-height-rule: at-least;">
     <a href="${href}">
-      <img loading="lazy" src="${item.src}" width="${SOCIAL_ICON_SIZE}" border="0" style="display:block; max-width: 100%; vertical-align: middle;" alt="${alt}">
+      <img loading="lazy" class="${c.socialIconImg}" src="${item.src}" width="${SOCIAL_ICON_SIZE}" border="0" style="display:block; max-width: 100%; vertical-align: middle;" alt="${alt}">
     </a>
   </td>`;
  
@@ -265,6 +268,11 @@ export function Footer(sections, options, name) {
   const stackSocials = useTitleV2;
  
   const frame = (c, rows) => rows;
+ 
+  // LP only: the shop CSS stretches tables to the full width (!important), which spreads the store badges
+  // and the social icons over the whole row. An inline !important beats any !important in a stylesheet,
+  // so the table stays as narrow as its content. Not used in the newsletter (no shop CSS there).
+  const shrinkTable = (isLP) => (isLP ? ' style="width: auto !important;"' : '');
  
   // UTM parameters (& instead of ? when the link already has a query, eg. the Google Play link)
   const track = (href, isLP) =>
@@ -406,9 +414,13 @@ export function Footer(sections, options, name) {
   const appBadge = (c, badge, alt, size, isLP) => {
     if (!badge?.src) return '';
  
-    const width = Number(badge.width) || size.width;
+    // Same HEIGHT for both badges, the width follows each image file. The badges have a different
+    // width in every language ("Szerezd be: Google Play", "App Store-ból"...), so a fixed width
+    // would give them different heights. Only height in the attributes too (Outlook scales the width
+    // by the image ratio); a width is only set when the footer data gives one (badge.width).
     const height = Number(badge.height) || size.height;
-    const img = `<img loading="lazy" src="${badge.src}" alt="${alt}" width="${width}" height="${height}" border="0" style="display: block; border: 0; width: ${width}px; max-width: 100%; height: auto; vertical-align: middle;" />`;
+    const width = Number(badge.width) || null;
+    const img = `<img loading="lazy" class="${c.appBadgeImg}" src="${badge.src}" alt="${alt}"${width ? ` width="${width}"` : ''} height="${height}" border="0" style="display: block; border: 0; height: ${height}px; width: ${width ? `${width}px` : 'auto'}; max-width: none; vertical-align: middle;" />`;
  
     // Outlook: line-height 0 there means "exactly 0" and clips the top of the image. A line at least as
     // tall as the badge (same trick as the social icons) shows the whole image; font-size 0 stays for
@@ -451,7 +463,7 @@ export function Footer(sections, options, name) {
                                         </span>
                                     </td>
                                     <td align="right" valign="middle" class="${c.appBadgesCol}" style="vertical-align: middle;">
-                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right" class="${c.appBadges}">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right" class="${c.appBadges}"${shrinkTable(isLP)}>
                                             <tbody>
                                                 <tr>
                                                     ${google}
@@ -503,7 +515,7 @@ export function Footer(sections, options, name) {
                                         </table>
                                     </td>
                                     <td align="right"${cls([c.socialCol, stackSocials && c.socialIconsCol].filter(Boolean).join(' '))} style="padding-right:5px; vertical-align: middle;">
-                                        <table cellpadding="0" cellspacing="0" border="0"${stackSocials ? ` align="right"${cls(c.socialIcons)}` : ''}>
+                                        <table cellpadding="0" cellspacing="0" border="0"${stackSocials ? ` align="right"${cls(c.socialIcons)}` : ''}${shrinkTable(isLP)}>
                                             <tbody>
                                                 <tr>
                                                     ${socialIcon(c, instagram, 'Instagram', track(instagram.href, isLP))}
