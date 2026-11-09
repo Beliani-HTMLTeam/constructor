@@ -59,6 +59,26 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   }
  
   var overlay, content, live, current = null, currentTrackId = '', closeTimer = null, lastFocus = null;
+  var lockX = 0, lockY = null;   // page position while the popup is open
+ 
+  // Hide the page scrollbar while the popup is open. The scrollbar's width is added
+  // as padding to <body>, so the page behind doesn't shift sideways.
+  var savedOverflow = null, savedPad = '';
+  function hideScrollbar() {
+    if (savedOverflow !== null) return;
+    var html = document.documentElement, body = document.body;
+    var sbw = window.innerWidth - html.clientWidth;          // 0 on phones (no visible scrollbar)
+    savedOverflow = html.style.overflow;
+    savedPad = body.style.paddingRight;
+    html.style.overflow = 'hidden';
+    if (sbw > 0) body.style.paddingRight = ((parseFloat(window.getComputedStyle(body).paddingRight) || 0) + sbw) + 'px';
+  }
+  function showScrollbar() {
+    if (savedOverflow === null) return;
+    document.documentElement.style.overflow = savedOverflow;
+    document.body.style.paddingRight = savedPad;
+    savedOverflow = null;
+  }
  
   function getTpl(id) {
     return document.querySelector('template[data-adv-popup="' + String(id) + '"]');
@@ -106,6 +126,15 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     // the page behind must not scroll while the popup is open (scrollbar stays visible)
     overlay.addEventListener('wheel', stop, { passive: false });
     overlay.addEventListener('touchmove', stop, { passive: false });
+    // anything else that still moves the page (dragging the scrollbar, scripts,
+    // browser gestures) -> put it straight back where it was when the popup opened
+    window.addEventListener('scroll', function () {
+      if (!isOpen() || lockY === null) return;
+      if (Math.abs((window.pageYOffset || 0) - lockY) > 1 || Math.abs((window.pageXOffset || 0) - lockX) > 1) {
+        try { window.scrollTo({ left: lockX, top: lockY, behavior: 'instant' }); }
+        catch (err) { window.scrollTo(lockX, lockY); }
+      }
+    }, { passive: true });
  
     // copy icon (buildCopyIcon) handles copying + notification itself;
     // capture phase so we still track it before its onclick stops the event
@@ -178,6 +207,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     content.setAttribute('data-popup', String(id));
     content.innerHTML = '';
     content.appendChild(tpl.content.cloneNode(true));
+    if (!isOpen()) { lockX = window.pageXOffset || 0; lockY = window.pageYOffset || 0; hideScrollbar(); }   // freeze the page here
     overlay.classList.remove('is-closing');
     overlay.classList.add('is-open');
  
@@ -198,6 +228,8 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   function close(focusTo) {
     if (!overlay || !overlay.classList.contains('is-open')) return;
     overlay.classList.add('is-closing');
+    lockY = null;                  // page can scroll again
+    showScrollbar();
     var target = focusTo && focusTo.nodeType === 1 ? focusTo : lastFocus;
     lastFocus = null;
     closeTimer = setTimeout(function () {

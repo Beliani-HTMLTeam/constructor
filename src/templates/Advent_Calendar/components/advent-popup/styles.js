@@ -30,7 +30,11 @@ export function AdventPopupStyles() {
     line-height: normal;
     font-size: 16px;
     -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: contain;   /* no scroll chaining to the page (mobile) */
+    touch-action: none;             /* no swipe-scrolling of the page through the popup (taps still work) */
+    touch-action: none;             /* no swipe-scrolling through the grey background */
   }
+  .adv-pop__content { touch-action: manipulation; }
   .adv-pop.is-open { display: flex; animation: advPopFadeIn .3s ease-out; }
   .adv-pop.is-closing { animation: advPopFadeOut .3s ease-out forwards; }
   .adv-pop a { color: inherit; text-decoration: none; }

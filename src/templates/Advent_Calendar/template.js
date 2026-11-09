@@ -31,6 +31,7 @@ const AdventCalendar2026 = async ({
   timer,
   TopImageTitle_data,
   TopImage_data,
+  selectedCampaign,
 
   // functions passed:
   getHeader,
@@ -40,6 +41,7 @@ const AdventCalendar2026 = async ({
   getPhrase,
   getProductById,
   add_utm,
+  footer_theme
 }) => {
   // console.log(categories);
   console.log("advent:", queries)
@@ -119,7 +121,7 @@ const AdventCalendar2026 = async ({
     isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
 
 
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory: false });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory: false, selectedCampaign,  theme: footer_theme  });
 
   return `
     ${HeaderElement}

@@ -242,6 +242,8 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
           .advent-door:focus-visible { outline: 3px solid #750000; outline-offset: 2px; border-radius: 6px; }
           /* TEST: "See conditions" 22px on desktop, popup 1 only (default 25px) – remove after the test */
           .adv-pop__content[data-popup="1"] { --fs-cond: 2.275; }   /* 22 / 967 */
+          /* TEST (Figma): "Shop now" same weight as "Only Today" (600 instead of 700) – popup 1 only */
+          .adv-pop__content[data-popup="1"] .adv-pop__cta { font-weight: 600; }
         </style>
  
         <div id="advent-wrapper" style="
@@ -898,6 +900,9 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       // SCROLL_TARGET: optional CSS selector of the element that should be at the top
       // (empty = the calendar image).
       var SCROLL_TARGET = '';
+      // SCROLL_OFFSET: how many px ABOVE the calendar stay visible (smaller scroll).
+      // 0 = calendar exactly at the top; bigger number = the page scrolls less.
+      var SCROLL_OFFSET = 230;
       (function () {
         try {
           if (!window.matchMedia('(max-width: 600px)').matches) return;
@@ -922,7 +927,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
           function targetY() {
             var target = SCROLL_TARGET ? document.querySelector(SCROLL_TARGET) : document.getElementById('advent-wrapper');
             if (!target) return null;
-            return Math.max(0, target.getBoundingClientRect().top + (window.pageYOffset || 0) - headerHeight());
+            return Math.max(0, target.getBoundingClientRect().top + (window.pageYOffset || 0) - headerHeight() - SCROLL_OFFSET);
           }
           function go() {
             if (userMoved) return;
