@@ -264,8 +264,10 @@ export const TimerHandler = async ({
       freebiesTextColor: colors.text,
       freebiesColumns: timer?.columns ?? 1,
       freebiesLineColors: colors.lines,
+      showTitles: Inside.showTitles ?? timer?.showTitles ?? true,
       freeText,
       ctaText,
+      showCta: Inside.showCta ?? timer?.showCta ?? true,
       type: type,
       script: buildProloTimerScript({ deadline: timer.deadline, timezone, timerLabels }),
     })}

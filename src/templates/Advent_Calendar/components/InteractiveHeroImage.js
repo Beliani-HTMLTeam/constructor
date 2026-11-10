@@ -849,6 +849,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       //   - today's door still closed -> it opens + popup
       //   - today's door already open -> just the popup
       // It never opens any other door. Any element with data-advent-today does the same.
+      // Only links ABOVE the calendar do this – links below it scroll up to the calendar.
       // TEST MODE: "today" = the last opened test door (door 1 when none is open yet).
       function todayNumber() {
         return TEST_MODE ? Math.max(testCurrent, 1) : todayDoor;
@@ -874,9 +875,34 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         } catch (err) { return false; }
       }
  
+      // Links to this page BELOW the calendar (e.g. the "Daily Deals – Don't miss the next deal"
+      // banner, the advantages image) don't open a popup: they take the visitor up to the
+      // calendar with today's view. In the newsletter they simply open the LP.
+      function scrollToCalendar() {
+        var w = document.getElementById('advent-wrapper');
+        if (!w) return;
+        var top = w.getBoundingClientRect().top + (window.pageYOffset || 0);
+        var hdr = 0;                                   // sticky / fixed shop header
+        for (var el = document.elementFromPoint(window.innerWidth / 2, 1); el && el !== document.body; el = el.parentElement) {
+          var pos = window.getComputedStyle(el).position;
+          if (pos === 'fixed' || pos === 'sticky') { hdr = Math.max(0, el.getBoundingClientRect().bottom); break; }
+        }
+        var y = Math.max(0, top - hdr - 10);
+        try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch (err) { window.scrollTo(0, y); }
+      }
+ 
       document.addEventListener('click', function (e) {
-        var el = e.target.closest && e.target.closest('[data-advent-today], a[href]');
+        var el = e.target.closest && e.target.closest('[data-advent-today], [data-advent-calendar], a[href]');
         if (!el || el.closest('#advent-wrapper, #advent-popup')) return;
+        var wrapper = document.getElementById('advent-wrapper');
+        // below the calendar (or data-advent-calendar) -> scroll to the calendar, no popup
+        var below = wrapper && (wrapper.compareDocumentPosition(el) & 4);   // 4 = el comes after the calendar
+        if (el.hasAttribute('data-advent-calendar') || (below && !el.hasAttribute('data-advent-today') && isThisPage(el))) {
+          e.preventDefault();
+          scrollToCalendar();
+          return;
+        }
+        // above the calendar ("OPEN TODAY'S DEAL") or data-advent-today -> today's popup
         if (!el.hasAttribute('data-advent-today') && !isThisPage(el)) return;
         if (openToday(e)) e.preventDefault();   // before 1 Dec / after 24 Dec the link works as usual
       });

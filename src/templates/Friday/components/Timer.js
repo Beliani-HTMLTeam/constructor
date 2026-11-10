@@ -188,7 +188,9 @@ const Timer = ({
 	freebiesLineColors,
 	ctaText,
 	type,
+	showCta = true,
 	script = '',
+	showTitles = true
 }) => {
 	const hasProductList = Array.isArray(freebies) && freebies.length > 0;
 	const hasSingleImage =
@@ -201,6 +203,8 @@ const Timer = ({
         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="color: ${color}; background-color: ${background};">
           ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
           
+					${showTitles ?
+						`
           <tr>
             <td align="center" class="newsletterContainer">
               ${Paragraph({
@@ -212,7 +216,7 @@ const Timer = ({
 							})}
             </td>
           </tr>
-          
+					
           <tr>
             <td align="center" class="newsletterContainer">
               ${Paragraph({
@@ -226,7 +230,9 @@ const Timer = ({
           </tr>
 
           ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
-
+					` : ''
+				}
+				
           ${type === 'newsletter'
 						? ImageWithLink({
 							href: href,
@@ -239,7 +245,7 @@ const Timer = ({
 
           ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
 
-          ${CTA({
+          ${showCta ?  CTA({
 						className: 'newsletterFreebieCta',
 						spanStyle: hasProductList ? 'font-size: 20px; line-height: 1.2; text-decoration: underline;' : '',
 						href: href,
@@ -247,7 +253,7 @@ const Timer = ({
 						color: color,
 						align: 'center',
 						insideTr: true,
-					})}
+					}) : ''}
           
           ${hasSingleImage ? `
             ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
