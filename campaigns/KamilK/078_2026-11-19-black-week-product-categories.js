@@ -284,7 +284,6 @@ const categories = [
 		type: 'black-week-extras',
 		textColor: '#FFFFFF',
 		href: translateLink({ value: 'content/lp26-11-19' }),
-		container: 'newsletterContainer30px',
 
 		// newsletter only - one image per box, same order as the tiers in deal_img (20, 15, 10, 5)
 		// on the landing page the boxes are rendered as html
@@ -304,8 +303,8 @@ const categories = [
 		dealBoxTextColor: '#000000',
 		dealValueColor: '#FF2F00',
 
-		// grid - inner width of newsletterContainer30px (2 x 290px images + gap), gap between the boxes
-		dealWidth: 590,
+		// grid - same as Dmytro 095-097 (default newsletterContainer), gap between the boxes
+		dealWidth: 560,
 		dealGap: 10,
 
 		paddingTop: 0,
