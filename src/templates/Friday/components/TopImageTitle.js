@@ -1,6 +1,6 @@
 import { Space } from './Space.js';
 
-const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type, renderType, container, links }) => {
+const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type, renderType, container, links, spaceAfter = 'newsletterBottom35px' }) => {
   const keywords = ['retrò', 'retró', 'rétro', '%', 'halloween', 'retro'];
 
   function includesKeywords(title) {
@@ -70,7 +70,7 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
         </td>
       </tr>
 
-      ${Space({ insideTr: true })}
+      ${spaceAfter ? Space({ className: spaceAfter ?? 'newsletterBottom35px', insideTr: true }) : ''}
 
     </table></td></tr>
     `;

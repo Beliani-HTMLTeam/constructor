@@ -9,6 +9,8 @@ import { TimerHandler } from './handlers/_Timer.js';
 import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
+import { ImageWithLink } from './components/ImageWithLink.js';
+import { TopImageSubtitleHandler } from './handlers/_TopImageSubtitle.js';
 
 const Friday = async ({
   links,
@@ -50,6 +52,8 @@ const Friday = async ({
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNow = getPhrase('Shop now');
 
+  const TopImageSubtitleElement = TopImageSubtitleHandler({ links });
+
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
 
   const TopImageTitleAfterTopImageElement = TopImageTitle_data?.position === 'afterTopImage' ? TopImageTitleElement : '';
@@ -87,6 +91,7 @@ const Friday = async ({
   const timerPosition = Inside?.position ?? 'beforeCategories';
 
   const TimerAtTop = timerPosition === 'top' ? TimerElement : '';
+  const TimerAfterTiT = timerPosition === 'afterTiT' ? TimerElement : '';
   const TimerBeforeCategories = timerPosition === 'beforeCategories' ? TimerElement : '';
   const TimerAfterCategories =
     timerPosition === 'afterCategories' || timerPosition === 'underCategories' ? TimerElement : '';
@@ -144,9 +149,13 @@ const Friday = async ({
     ${HeaderElement}
 
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" ${background ? `bgcolor="${background}"` : ''} id="newsletter">
+      ${TopImageSubtitleElement}
+
       ${TimerAtTop}
 
       ${TopImageTitleBeforeTopImageElement}
+
+      ${TimerAfterTiT}
 
       ${TopImageElement}
 

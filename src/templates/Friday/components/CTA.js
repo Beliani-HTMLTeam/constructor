@@ -121,7 +121,7 @@ const CTA = ({
 
 		if (variant === 'underline') {
 			const underlineStyle = color ? ` style="color: ${color}; text-decoration: underline;"` : '';
-			html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLinkMaroon"${underlineStyle}>${transformedText} ${copyIcon}</a>`;
+			html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="newsletterCta"${underlineStyle}>${transformedText} ${copyIcon}</a>`;
 		}else if (variant === 'button') {
 			const buttonContent = codeValue ? `${transformedText} ${copyIcon}` : transformedText;
 			const buttonHref = codeValue ? '#' : href;
