@@ -53,6 +53,12 @@ const FOOTER_TITLE_V2_FROM = new Date(2026, 10, 16); // 10 = November
 export function shouldUseFooterTitleV2(cDate) {
   return isFromDate(cDate, FOOTER_TITLE_V2_FROM);
 }
+
+const HIDE_X_SOCIAL_FROM = new Date(2026, 10, 16); // 10 = November
+
+export function shouldShowXSocial(cDate) {
+  return !isFromDate(cDate, HIDE_X_SOCIAL_FROM);
+}
  
 // Store badges: both the same height (32px), the width follows each image (it differs per language).
 // Only `height` is used from here; the widths are kept for reference / an explicit badge.width override.
@@ -266,6 +272,8 @@ export function Footer(sections, options, name) {
   // same date: "Stay up to date" goes into two rows on mobile (title, icons under it) – before 16.11
   // the row stays as it was (title + icons in one line), so no stacking classes are printed
   const stackSocials = useTitleV2;
+
+  const showXSocial = shouldShowXSocial(options?.campaignDate);
  
   const frame = (c, rows) => rows;
  
@@ -526,6 +534,7 @@ export function Footer(sections, options, name) {
       }
                                                     ${socialIcon(c, pinterest, 'Pinterest', track(pinterest.href, isLP))}
                                                     ${Tiktok ? socialIcon(c, Tiktok, 'Tik-Tok', track(Tiktok.href, isLP)) : ''}
+                                                    ${showXSocial && Xsocial && Xsocial.href && Xsocial.src ? socialIcon(c, Xsocial, 'X', track(Xsocial.href, isLP)) : ''}
                                                 </tr>
                                             </tbody>
                                         </table>
