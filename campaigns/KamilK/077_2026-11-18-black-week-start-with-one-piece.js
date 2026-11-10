@@ -58,11 +58,10 @@ const links = {
 };
 
 const additionalCss = `
-.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:800; line-height: 1.2;}.frenchDaysCategoryCta {font-size: 20px !important;}.newsletterCta{font-size:30px;line-height:1.2;font-weight:700;}.roomName{font-size:30px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:600;}
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:800; line-height: 1.2;}.frenchDaysCategoryCta {font-size: 20px !important;}.newsletterCta{font-size:30px;line-height:1.2;font-weight:600;}.roomName{font-size:30px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:600;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
-.newsletterHeadingTitle {font-size: 30px; font-weight: 700; line-height: 1.2; text-transform: uppercase;}
-@media screen and (max-width:768px){	.newsletterHeadingTitle {font-size: 18px; }.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.roomName{font-size:20px;}.newsletterCta{font-size:18px;}.blackWeekCondition{font-size:20px}.newsletterProductTitle{font-size:12px;} #newsletter .frenchDaysDiscount {
+@media screen and (max-width:768px){	.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.roomName{font-size:20px;}.newsletterCta{font-size:18px;}.blackWeekCondition{font-size:20px}.newsletterProductTitle{font-size:12px;} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -77,8 +76,6 @@ const additionalCss = `
 `;
 
 const additionalCssLp = `
-#newsletter .newsletterHeadingTitle {font-size: 30px; font-weight: 700; line-height: 1.2; text-transform: uppercase;}
-
 /* GENERAL */
 
 #newsletter .newsletterTitle {
@@ -148,8 +145,11 @@ const additionalCssLp = `
 	font-weight: 600;
 }
 
+/* Shop now under every room - 30px semibold, as in the newsletter */
 #newsletter .newsletterCta {
-	font-weight: 700;
+	font-size: 30px;
+	line-height: 1.2;
+	font-weight: 600;
 }
 
 #newsletter .secondaryLinkMaroon {
@@ -167,8 +167,6 @@ const additionalCssLp = `
 /* MOBILE */
 
 @media screen and (max-width: 768px) {
-	#newsletter .newsletterHeadingTitle {font-size: 18px; }
-
 	/* GENERAL */
 
 	#newsletter .newsletterTitle {
@@ -248,6 +246,10 @@ const additionalCssLp = `
 		font-size: 20px;
 	}
 
+	#newsletter .newsletterCta {
+		font-size: 18px;
+	}
+
 	#newsletter .secondaryLinkMaroon {
 		font-size: 18px;
 	}
@@ -299,7 +301,7 @@ const roomCategory = (row, name, href, products) => ({
 	title: {
 		show: true,
 		align: 'center',
-		// semibold - the intro title uses newsletterHeadingTitle (bold)
+		// semibold - the intro title uses newsletterTitle (bold)
 		className: 'roomName',
 		container: 'newsletterContainer30px',
 		spaceAfter: 'newsletterBottom20px',
@@ -340,7 +342,6 @@ const categories = [
 		type: 'black-week-extras',
 		textColor: '#FFFFFF',
 		href: translateLink({ value: 'content/lp26-11-18' }),
-		container: 'newsletterContainer30px',
 
 		// newsletter only - one image per box, same order as the tiers in deal_img (20, 15, 10, 5)
 		// on the landing page the boxes are rendered as html
@@ -360,8 +361,8 @@ const categories = [
 		dealBoxTextColor: '#000000',
 		dealValueColor: '#FF2F00',
 
-		// grid - inner width of newsletterContainer30px (2 x 290px images + gap), gap between the boxes
-		dealWidth: 590,
+		// grid - same as Dmytro 095-097 (default newsletterContainer), gap between the boxes
+		dealWidth: 560,
 		dealGap: 10,
 
 		paddingTop: 0,
@@ -387,8 +388,9 @@ const categories = [
 		title: {
 			show: true,
 			align: 'center',
-			className: 'newsletterHeadingTitle',
-			styles: 'text-transform: uppercase;',
+			// same style as SHOP BY CATEGORY (Dmytro 095) - same size as the deal title, also on mobile
+			className: 'newsletterTitle',
+			styles: 'text-transform: uppercase; font-weight: 700;',
 			container: 'newsletterContainer30px',
 		},
 		paragraph: { spaceAfter: 0 },
@@ -422,7 +424,7 @@ const categories = [
 	}),
 	roomCategory(5, 'Hallway', 'https://www.beliani.ch/hallway/', {
 		RIDDLE: 592553,
-		SALINS: 498149,
+		SALINS: 715613,
 		KEITH: 839071,
 	}),
 ];
