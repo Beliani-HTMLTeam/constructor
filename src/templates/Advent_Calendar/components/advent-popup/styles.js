@@ -84,8 +84,10 @@ export function AdventPopupStyles() {
  
   /* per type – desktop */
   .adv-pop--percent { --fs-pre: 5.17; --fw-pre: 600; --fs-title: 9.31; --lh-title: 1.05; --gap-pre: 0.4cqw; }  /* 50 / 90 */
-  .adv-pop--upto    { --fs-pre: 4.14; --fw-pre: 400; --fs-title: 5.17; --lh-title: 1.22; --gap-pre: 1.6cqw;
-                      --fs-cta: 2.585; --fs-cond: 2.07; }  /* 40 / 50, Shop now 25, See conditions 20 */
+  .adv-pop--upto    { --fs-pre: 4.14; --fw-pre: 400; --fs-title: 5.17; --lh-title: 1.22; --gap-pre: 0.8cqw;
+                      --fs-cta: 2.07; --fs-cond: 1.55; --gap-foot: 1.8cqw; }  /* 40 / 50, Shop now button 20, See conditions 15 */
+  /* 4 for 3 pyramid (2026 final design: a bit smaller) – title 46, lines + codes 18.5, Only Today 23, See conditions 18.4 */
+  .adv-pop__content:has(.adv-pop__tiers) { --fs-title: 4.76; --fs-tier: 1.91; --fs-today: 2.38; --fs-cond: 1.9; }
   .adv-pop--special { --fs-pre: 3.1;  --fw-pre: 400; --fs-title: 6.2;  --lh-title: 1.05; --fs-sub: 3.1; --gap-pre: 0.2cqw; --gap-sub: 0; }
  
   /* ---------- Background image (whole popup) ---------- */
@@ -100,12 +102,12 @@ export function AdventPopupStyles() {
     background-repeat: no-repeat;
   }
  
-  /* ---------- Close (thin dark-red X) ---------- */
+  /* ---------- Close (letter "X" in Poppins, ~26 x 29 – 20px from the top, 8px from the right) ---------- */
   .adv-pop__close {
     position: absolute;
-    top: 6px; right: 10px;
+    top: 1.8cqw; right: 0.5cqw;
     z-index: 3;
-    width: 32px; height: 32px;
+    width: 3.4cqw; height: 3.7cqw;
     padding: 0;
     display: flex;
     align-items: center;
@@ -115,7 +117,16 @@ export function AdventPopupStyles() {
     color: var(--pop-color);
     cursor: pointer;
   }
-  .adv-pop__close svg { width: 24px; height: 24px; display: block; }
+  .adv-pop__close-x {
+    display: block;
+    font-family: Poppins, sans-serif !important;
+    font-size: 4.34cqw !important;    /* 42px at 967 -> X ~26 x 29 */
+    font-weight: 400 !important;
+    font-style: normal !important;
+    line-height: 1 !important;
+    text-transform: none !important;
+    color: var(--pop-color);
+  }
  
   /* ---------- Text column (right half, centered) ---------- */
   .adv-pop__deal {
@@ -125,6 +136,7 @@ export function AdventPopupStyles() {
        (the empty pink area right of the gift box) */
     width: 45%;
     margin-left: auto;
+    margin-right: 2cqw;             /* 2026 final design: column centered at ~730px */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,9 +155,10 @@ export function AdventPopupStyles() {
   /* every popup text is centered – also when a line wraps, and whatever the LP / shop CSS says
      (e.g. a global "div { text-align: left }" would otherwise win over the inherited value) */
   .adv-pop__deal,
-  .adv-pop__deal *,
+  .adv-pop__deal * { text-align: center !important; }
+  /* the small past / future notice is left-aligned (design "small pop ups_FINAL") */
   .adv-note__box,
-  .adv-note__box * { text-align: center !important; }
+  .adv-note__box * { text-align: left !important; }
   .adv-pop__container > * { max-width: 100%; }
  
   .adv-pop__headline {
@@ -210,14 +223,14 @@ export function AdventPopupStyles() {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2cqw;
-    margin-top: 1.2cqw;
+    gap: 0.5cqw;
+    margin-top: 2cqw;
   }
   .adv-pop__tier { display: flex; flex-direction: column; align-items: center; }
   .adv-pop__tier-text,
   .adv-pop__tier .adv-pop__code {
     font-size: calc(var(--fs-tier) * 1cqw);
-    line-height: 1.3;
+    line-height: 1.5;
   }
   .adv-pop__tier .adv-pop__codes { margin-top: 0; }
   /* bold words from the sheet (<b>) – !important because the LP CSS has b { font-weight: 500 !important } */
@@ -230,7 +243,7 @@ export function AdventPopupStyles() {
   .adv-pop__deal i,
   .adv-pop__deal em,
   .adv-pop__deal span { line-height: inherit !important; }
-  .adv-pop__tiers + .adv-pop__footer { --gap-foot: 1.8cqw; --gap-foot-items: 1.4cqw; }
+  .adv-pop__tiers + .adv-pop__footer { --gap-foot: 2.1cqw; --gap-foot-items: 2.3cqw; }
  
   /* Footer */
   .adv-pop__footer {
@@ -260,7 +273,20 @@ export function AdventPopupStyles() {
     text-underline-offset: 0.15em;
     cursor: pointer;
   }
-  .adv-pop__cta { font-size: calc(var(--fs-cta) * 1cqw); font-weight: 600; }   /* same weight as "Only Today" (Figma) */
+  /* "Shop now" (category popups) = filled dark-red button, white text – 180 x 49 in the design */
+  .adv-pop .adv-pop__cta {
+    display: inline-block;
+    min-width: 18.6cqw;
+    padding: 1.3cqw 2cqw;
+    border-radius: 4px;
+    background-color: var(--pop-color);
+    color: #FFFFFF !important;
+    font-size: calc(var(--fs-cta) * 1cqw);
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none !important;
+  }
+  .adv-pop__cta + .adv-pop__cond { margin-top: -0.4cqw; }   /* 15px between the button and "See conditions" */
   /* LP CSS gives every <button> padding / min-height – keep our buttons as designed */
   .adv-pop__cond,
   .adv-pop__close {
@@ -302,7 +328,9 @@ export function AdventPopupStyles() {
     .adv-pop--percent { --m-pre: 30; --m-title: 35; --lh-title: 1.05; }
     /* "Extra" sits close above "10% OFF" (design) */
     .adv-pop--percent .adv-pop__pre { line-height: 1.05; }
-    .adv-pop--upto    { --m-pre: 25; --m-title: 35; --lh-title: 1.2; --m-cta: 18; }   /* Shop now 18 */
+    .adv-pop--upto    { --m-pre: 25; --m-title: 35; --lh-title: 1.2; --m-cta: 18;   /* Shop now 18 */
+                        --gap-pre: min(6px, calc(6 * 100cqw / 257)); --gap-foot: min(7px, calc(7 * 100cqw / 257));
+                        --gap-foot-items: min(8px, calc(8 * 100cqw / 257)); }   /* tighter, as in the 2026 final design */
     .adv-pop--special { --m-pre: 16; --m-title: 32; --m-sub: 16; --gap-pre: 0.5cqw; --gap-sub: 0; }
  
     /* px size, scaled down only below 257px popup width */
@@ -317,10 +345,13 @@ export function AdventPopupStyles() {
     .adv-pop__tier-text,
     .adv-pop__tier .adv-pop__code { font-size: min(calc(var(--m-tier) * 1px), calc(var(--m-tier) * 100cqw / 257)); }
     .adv-pop__tiers { gap: 0; margin-top: var(--m-gap); }
-    .adv-pop__tier-text,
-    .adv-pop__tier .adv-pop__code { line-height: 1.4 !important; }   /* 25px per line (design) */
     .adv-pop__tiers + .adv-pop__footer { --gap-foot: var(--m-gap); --gap-foot-items: var(--m-gap); }
-    .adv-pop__tiers + .adv-pop__footer .adv-pop__today { font-weight: 400 !important; }   /* 4 for 3: regular "Only Today" (design) */
+    /* 4 for 3 (2026 final design): title 28, lines + codes 17, Only Today 17, See conditions 11 */
+    .adv-pop__content:has(.adv-pop__tiers) { --m-title: 28; --m-tier: 17; --m-today: 17; --m-cond: 11; }
+    .adv-pop__deal .adv-pop__tiers { margin-top: min(3px, calc(3 * 100cqw / 257)); }
+    .adv-pop__tiers + .adv-pop__footer { --gap-foot: min(12px, calc(12 * 100cqw / 257)); }
+    .adv-pop__tier-text,
+    .adv-pop__tier .adv-pop__code { line-height: 1.5 !important; }
  
     /* code: 10px below the title – but right under the subtitle
        ("when you spend ... / Code: XXX" is one block in the design) */
@@ -336,8 +367,21 @@ export function AdventPopupStyles() {
     .adv-pop__copy-icon { width: 1.1em !important; height: 1.1em !important; }
     .adv-pop__copy-wrap button { padding: 10px !important; margin: -10px !important; }
  
-    .adv-pop__close { top: 4px; right: 4px; width: 28px; height: 28px; }
-    .adv-pop__close svg { width: 20px; height: 20px; }
+    .adv-pop__close { top: 11px; right: 4px; width: 30px; height: 32px; }
+    .adv-pop__close-x { font-size: 35px !important; }   /* X ~22 x 25 */
+ 
+    /* "Shop now" button: 159 x 39, 18px */
+    .adv-pop .adv-pop__cta {
+      min-width: min(159px, calc(159 * 100cqw / 257));
+      padding: min(9px, 3.5cqw) min(16px, 6.2cqw);
+      border-radius: 4px;
+      font-size: min(calc(var(--m-cta) * 1px), calc(var(--m-cta) * 100cqw / 257));
+    }
+    .adv-pop__cta + .adv-pop__cond { margin-top: min(3px, calc(3 * 100cqw / 257)); }
+ 
+    /* "when you spend ... / Code: XXX": 28px per line (design) */
+    .adv-pop__subtitle,
+    .adv-pop__code { line-height: 1.5; }
  
     /* text centered in the top 55% (the scene fills the bottom) */
     .adv-pop__deal,
@@ -347,7 +391,7 @@ export function AdventPopupStyles() {
       flex: none;
       margin: 0;
       justify-content: flex-start;
-      padding: 4cqw 6cqw;
+      padding: 4cqw 9cqw;             /* text max ~211px wide, e.g. "Scatter / Cushions" on 2 lines (design) */
       /* 25px space at the top (shrinks only below the 257px design width) */
       padding-top: min(25px, calc(25 * 100cqw / 257));
     }
@@ -381,46 +425,43 @@ export function AdventPopupStyles() {
   .adv-note.is-open { display: flex; animation: advPopFadeIn .3s ease-out; }
   .adv-note.is-closing { animation: advPopFadeOut .3s ease-out forwards; }
   .adv-note, .adv-note * { box-sizing: border-box; }
-  /* Sizes in em = proportional to the font size (Figma "Small_POP UP"), so the
-     texts break into lines as in the design. Font: 18px desktop / 16px mobile. */
+  /* Design "small pop ups_FINAL": left-aligned title + text, thin X top right.
+     desktop 337px wide, 18px  |  mobile 230px wide, 15px  |  line height 24px, 20px between title and text */
   .adv-note__box {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: min(20.9em, 100%);        /* 376px at 18px */
-    min-height: 5em;                 /* 90px */
-    padding: 0.5em 1.8em;
-    border-radius: 0.52em;           /* rounded corners (design) */
+    width: min(337px, 100%);
+    min-height: 137px;
+    padding: 22px 20px;
+    border-radius: 8px;
     background-color: #F6E7E6;
     color: #750000;
     font-family: Poppins, sans-serif;
     font-size: 18px;
     font-weight: 600;
-    line-height: 1.25;
-    text-align: center;
+    line-height: 24px;
     animation: advPopOpen .4s cubic-bezier(.175, .885, .32, 1.275);
   }
   /* font shrinks for long translations: 18px × --note-scale, min 14px (set per text in AdventNotices) */
-  .adv-note__text { font-size: clamp(14px, calc(18px * var(--note-scale, 1)), 18px); overflow-wrap: break-word; }
+  .adv-note__text { font-size: clamp(14px, calc(18px * var(--note-scale, 1)), 18px); line-height: 24px; overflow-wrap: break-word; }
   .adv-note__line { margin: 0; padding: 0; }
-  .adv-note__line + .adv-note__line { margin-top: 0.4em; }
-  /* close: a plain "X" in the top right corner (design) */
+  .adv-note__line:first-child { padding-right: 32px; }          /* title: keeps clear of the X */
+  .adv-note__line + .adv-note__line { margin-top: 20px; }
+  /* close: thin X, 16px, 20px from the right, level with the title */
   .adv-note__close {
     position: absolute !important;
-    top: 0; right: 0;
-    width: 25px; height: 25px;       /* tap area, the "X" in its middle */
+    top: 19px; right: 12px;
+    width: 32px; height: 32px;       /* tap area, the X in its middle */
     min-width: 0 !important; min-height: 0 !important;
     padding: 0 !important; margin: 0 !important;
     display: flex; align-items: center; justify-content: center;
     border: 0 !important; background: none !important; box-shadow: none !important;
     color: #750000 !important;
-    font-family: Poppins, sans-serif !important;
-    font-size: 11px !important;      /* the "X": 7 x 16px (design) */
-    font-weight: 400 !important;
-    line-height: 16px !important;
     cursor: pointer;
   }
+  .adv-note__close svg { width: 16px; height: 16px; display: block; }
   .adv-note__close:focus-visible { outline: 2px solid #750000; outline-offset: 2px; }
  
   @media screen and (max-width: 600px) {
@@ -432,16 +473,17 @@ export function AdventPopupStyles() {
     }
     .adv-note__box {
       pointer-events: auto;
-      font-size: 16px;
-      width: min(208px, 100%);        /* design: 208px */
-      min-height: 5.5em;              /* 88px */
-      padding: 0.5em 1em;             /* 16px sides -> lines break as in the design */
-      border-radius: 0.53em;
+      width: min(230px, 100%);
+      min-height: 0;
+      padding: 15px 19px;
+      font-size: 15px;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);   /* no grey layer on mobile -> shadow keeps it visible */
       animation: advNoteUp .35s ease-out;
     }
-    .adv-note__text { font-size: clamp(13px, calc(16px * var(--note-scale, 1)), 16px); }   /* mobile: 16px, min 13px */
-    .adv-note__close { font-size: 9.5px !important; line-height: 13px !important; width: 24px; height: 24px; }   /* "X": 6 x 13px */
+    .adv-note__text { font-size: clamp(12px, calc(15px * var(--note-scale, 1)), 15px); }   /* mobile: 15px, min 12px */
+    .adv-note__line:first-child { padding-right: 40px; }
+    .adv-note__close { top: 10px; right: 12px; width: 28px; height: 28px; }
+    .adv-note__close svg { width: 12px; height: 12px; }
   }
   @keyframes advNoteUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
  

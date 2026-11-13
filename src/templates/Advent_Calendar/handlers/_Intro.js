@@ -37,7 +37,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, type }) =
         lineHeight: '22px',
         fontWeight: '600',
         textTransform: 'none',
-        borderRadius: '2px',
+        borderRadius: '4px',
         paddingX: 32,
         paddingTop: 16,
         paddingBottom: 16,mobilePaddingX: 20,

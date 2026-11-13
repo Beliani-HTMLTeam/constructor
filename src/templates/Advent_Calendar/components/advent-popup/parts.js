@@ -20,8 +20,8 @@ export const DEFAULT_POPUP_TEXTS = {
 export const attr = (v = '') =>
   String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
  
-const ICON_CLOSE =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M4 3 20 21M20 3 4 21"/></svg>';
+// the letter "X" in Poppins, as in the 2026 final design (size: .adv-pop__close-x in styles.js)
+const ICON_CLOSE = '<span class="adv-pop__close-x" aria-hidden="true">X</span>';
  
 function linkOrDiv(link, cls, inner) {
   return link
@@ -205,8 +205,8 @@ export function AdventNotices({ past, future } = {}) {
     return list.length ? list : fallback;
   };
   // Longer translations get a smaller font: up to NOTICE_FIT_CHARS characters the
-  // design size is used (18px desktop / 16px mobile), above that it shrinks in
-  // proportion – never below 14px desktop / 13px mobile (see .adv-note__text in styles.js)
+  // design size is used (18px desktop / 15px mobile), above that it shrinks in
+  // proportion – never below 14px desktop / 12px mobile (see .adv-note__text in styles.js)
   const scaleFor = (list) => {
     const chars = list.join(' ').replace(/<[^>]*>/g, '').replace(/&[a-z#0-9]+;/gi, 'x').length;
     return Math.round(Math.min(1, NOTICE_FIT_CHARS / Math.max(chars, 1)) * 100) / 100;

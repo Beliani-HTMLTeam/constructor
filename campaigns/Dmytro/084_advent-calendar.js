@@ -5,11 +5,10 @@ const T = campaignTranslationsSheet;
 
 const tableQueries = [
   { tableRange: '16:17', name: 'TopImageTitle', tableName: adventSheet },
-  { tableRange: '27',    name: 'intro', tableName: adventSheet },
-  { tableRange: '24:27', name: 'paragraph', tableName: adventSheet },
-  { tableRange: '36:37', name: 'condition', tableName: adventSheet },
-  { tableRange: '29:32', name: 'icons',      tableName: adventSheet },
-  { tableRange: '33:35', name: 'dailyDeals', tableName: adventSheet },
+  { tableRange: '87',    name: 'intro', tableName: adventSheet },
+  { tableRange: '37:38', name: 'condition', tableName: adventSheet },
+  { tableRange: '30:33', name: 'icons',      tableName: adventSheet },
+  { tableRange: '34:36', name: 'dailyDeals', tableName: adventSheet },
 
   // ===== Shared popup texts =====
   { tableRange: '2', name: 'SeeConditions', tableName: T },

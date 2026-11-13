@@ -30,64 +30,68 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   // ===== Calendar frames =====
   // adventImages[N]     = doors 1..N open, NO glow   -> shown after today's door was opened
   // adventGlowImages[N] = doors 1..N open, door N+1 GLOWS -> shown while today's door is still closed
-  // Day 2:  advent_open_1_glow (door 2 glows) -> click -> advent_open_2 (no glow)
-  // Day 3:  advent_open_2_glow (door 3 glows) -> click -> advent_open_3 (no glow) ...
+  // Glow files are named after the door that glows:
+  // Day 1:  advent_open_1_glow (door 1 glows) -> click -> advent_open_1 (no glow)
+  // Day 2:  advent_open_2_glow (door 2 glows) -> click -> advent_open_2 (no glow) ...
   const adventImages = [
     `${adventBase}advent_all_closed.webp?ver=19`,      // 0 - all closed (before 1 Dec)
     `${adventBase}advent_open_1.webp?ver=20`,     // 1
     `${adventBase}advent_open_2.webp?ver=20`,     // 2
     `${adventBase}advent_open_3.webp?ver=17`,     // 3
-    `${adventBase}advent_open_3.webp?ver=17`,     // 4 // placeholder, freebie
-    `${adventBase}advent_open_3.webp?ver=17`,     // 5 // placeholder, freebie
-    `${adventBase}advent_open_3.webp?ver=17`,     // 6 // placeholder, freebie
+    `${adventBase}advent_open_4.webp?ver=17`,     // 4
+    `${adventBase}advent_open_5.webp?ver=17`,     // 5
+    `${adventBase}advent_open_6.webp?ver=17`,     // 6
     `${adventBase}advent_open_7.webp?ver=17`,     // 7
-    `${adventBase}advent_open_7.webp?ver=17`,     // 8 // placeholder, freebie
+    `${adventBase}advent_open_8.webp?ver=17`,     // 8
     `${adventBase}advent_open_9.webp?ver=17`,     // 9
-    `${adventBase}advent_open_9.webp?ver=17`,    // 10 // placeholder, freebie
+    `${adventBase}advent_open_10.webp?ver=17`,    // 10
     `${adventBase}advent_open_11.webp?ver=17`,    // 11
     `${adventBase}advent_open_12.webp?ver=17`,    // 12
-    `${adventBase}advent_open_13.webp?ver=17`,    // 13 // placeholder, freebie
-    `${adventBase}advent_open_13.webp?ver=17`,    // 14 // placeholder, freebie
-    `${adventBase}advent_open_13.webp?ver=17`,    // 15 // placeholder, freebie
+    `${adventBase}advent_open_13.webp?ver=17`,    // 13
+    `${adventBase}advent_open_14.webp?ver=17`,    // 14
+    `${adventBase}advent_open_15.webp?ver=17`,    // 15
     `${adventBase}advent_open_16.webp?ver=17`,    // 16
     `${adventBase}advent_open_17.webp?ver=17`,    // 17
-    `${adventBase}advent_open_17.webp?ver=17`,    // 18 // placeholder, freebie 
-    `${adventBase}advent_open_17.webp?ver=17`,    // 19 // placeholder, freebie
-    `${adventBase}advent_open_17.webp?ver=17`,    // 20 // placeholder, freebie
+    `${adventBase}advent_open_18.webp?ver=17`,    // 18
+    `${adventBase}advent_open_19.webp?ver=17`,    // 19
+    `${adventBase}advent_open_20.webp?ver=17`,    // 20
     `${adventBase}advent_open_21.webp?ver=17`,    // 21
-    `${adventBase}advent_open_21.webp?ver=17`,    // 22 // placeholder, freebie
-    `${adventBase}advent_open_21.webp?ver=17`,    // 23 // placeholder, freebie
+    `${adventBase}advent_open_22.webp?ver=17`,    // 22
+    `${adventBase}advent_open_23.webp?ver=17`,    // 23
     `${adventBase}advent_open_24.webp?ver=17`,    // 24
   ];
  
-  // Glow frames: index N = doors 1..N open + door N+1 glowing.
-  // null = no glow frame yet -> the frame without glow (adventImages[N]) is used.
-  // (a glow frame that fails to load also falls back to the frame without glow)
+  // Glow frames: index N = doors 1..N open + door N+1 glowing (today's door, not opened yet).
+  // The file name is the number of the glowing door: advent_open_1_glow = door 1 glows.
+  //   before the start date -> adventImages[0] (all closed, NO glow)
+  //   start day (1 Dec)     -> advent_open_1_glow (door 1 glows)
+  // A glow frame that fails to load (not uploaded yet) falls back to the frame without glow.
+  // null = no glow frame for that day -> the frame without glow is used.
   const adventGlowImages = [
-    `${adventBase}advent_all_closed_glow.webp?ver=19`, // 0  - door 1 glows
-    `${adventBase}advent_open_1_glow.webp?ver=20`,     // 1  - door 2 glows
-    `${adventBase}advent_open_2_glow.webp?ver=20`,     // 2  - door 3 glows
-    null,     // 3  - door 4 glows
-    null,                                              // 4  - door 5 glows (frame 4 is a placeholder)
-    null,                                              // 5  - door 6 glows
-    null,                                              // 6  - door 7 glows
-    null,     // 7  - door 8 glows
-    null,                                              // 8  - door 9 glows
-    null,     // 9  - door 10 glows
-    null,                                              // 10 - door 11 glows
-    null,    // 11 - door 12 glows
-    null,    // 12 - door 13 glows
-    null,    // 13 - door 14 glows
-    null,                                              // 14 - door 15 glows
-    null,                                              // 15 - door 16 glows
-    null,    // 16 - door 17 glows
-    null,    // 17 - door 18 glows
-    null,                                              // 18 - door 19 glows
-    null,                                              // 19 - door 20 glows
-    null,                                              // 20 - door 21 glows
-    null,    // 21 - door 22 glows
-    null,                                              // 22 - door 23 glows
-    null,                                              // 23 - door 24 glows
+    `${adventBase}advent_open_1_glow.webp?ver=21`,     // 0  - day 1: door 1 glows
+    `${adventBase}advent_open_2_glow.webp?ver=21`,     // 1  - day 2: door 2 glows
+    `${adventBase}advent_open_3_glow.webp?ver=1`,     // 2  - day 3: door 3 glows
+    `${adventBase}advent_open_4_glow.webp?ver=1`,     // 3  - day 4: door 4 glows
+    `${adventBase}advent_open_5_glow.webp?ver=1`,     // 4  - day 5: door 5 glows
+    `${adventBase}advent_open_6_glow.webp?ver=1`,     // 5  - day 6: door 6 glows
+    `${adventBase}advent_open_7_glow.webp?ver=1`,     // 6  - day 7: door 7 glows
+    `${adventBase}advent_open_8_glow.webp?ver=1`,     // 7  - day 8: door 8 glows
+    `${adventBase}advent_open_9_glow.webp?ver=1`,     // 8  - day 9: door 9 glows
+    `${adventBase}advent_open_10_glow.webp?ver=1`,    // 9  - day 10: door 10 glows
+    `${adventBase}advent_open_11_glow.webp?ver=1`,    // 10 - day 11: door 11 glows
+    `${adventBase}advent_open_12_glow.webp?ver=1`,    // 11 - day 12: door 12 glows
+    `${adventBase}advent_open_13_glow.webp?ver=1`,    // 12 - day 13: door 13 glows
+    `${adventBase}advent_open_14_glow.webp?ver=1`,    // 13 - day 14: door 14 glows
+    `${adventBase}advent_open_15_glow.webp?ver=1`,    // 14 - day 15: door 15 glows
+    `${adventBase}advent_open_16_glow.webp?ver=1`,    // 15 - day 16: door 16 glows
+    `${adventBase}advent_open_17_glow.webp?ver=1`,    // 16 - day 17: door 17 glows
+    `${adventBase}advent_open_18_glow.webp?ver=1`,    // 17 - day 18: door 18 glows
+    `${adventBase}advent_open_19_glow.webp?ver=1`,    // 18 - day 19: door 19 glows
+    `${adventBase}advent_open_20_glow.webp?ver=1`,    // 19 - day 20: door 20 glows
+    `${adventBase}advent_open_21_glow.webp?ver=1`,    // 20 - day 21: door 21 glows
+    `${adventBase}advent_open_22_glow.webp?ver=1`,    // 21 - day 22: door 22 glows
+    `${adventBase}advent_open_23_glow.webp?ver=1`,    // 22 - day 23: door 23 glows
+    `${adventBase}advent_open_24_glow.webp?ver=1`,    // 23 - day 24: door 24 glows
   ];
  
   // ===== Shared popup texts (translate per country) =====
@@ -109,7 +113,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   //  code       : "Code: xxx" -> copy button
   //  mobile     : { pre, title, subtitle, code } – different texts on mobile ('' hides it)
   //  conditions : text shown below the calendar after "See conditions"
-  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=10`;
+  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=20`;
  
   // one sheet cell of a query (row index i, 0-based)
   const cell = (name, i) => {
@@ -240,14 +244,12 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
           /* keyboard focus on a door (Tab) */
           .advent-door:focus { outline: none; }
           .advent-door:focus-visible { outline: 3px solid #750000; outline-offset: 2px; border-radius: 6px; }
-          /* TEST: "See conditions" 22px on desktop, popup 1 only (default 25px) – remove after the test */
-          .adv-pop__content[data-popup="1"] { --fs-cond: 2.275; }   /* 22 / 967 */
-          /* TEST (Figma): "Shop now" same weight as "Only Today" (600 instead of 700) – popup 1 only */
-          .adv-pop__content[data-popup="1"] .adv-pop__cta { font-weight: 600; }
           /* Dining Room (7) and Rugs (17): narrower text column on desktop (42% instead of 45%) */
           @media screen and (min-width: 601px) {
             .adv-pop__content[data-popup="7"] .adv-pop__deal,
             .adv-pop__content[data-popup="17"] .adv-pop__deal { width: 42%; }
+            .adv-pop__content[data-popup="3"] .adv-pop__deal { width: 40%; }
+            .adv-pop__content[data-popup="6"] .adv-pop__deal { width: 50%; }
           }
         </style>
  
