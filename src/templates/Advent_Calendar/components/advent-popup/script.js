@@ -22,7 +22,7 @@
 //   - "Code copied" is announced to screen readers
 // ============================================================
 // noticeMs: how long the small "past / future door" message stays (ms)
-export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar', noticeMs = 4000, closeLabel = 'Close' } = {}) {
+export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar', noticeMs = 5000, closeLabel = 'Close' } = {}) {
   const opts = JSON.stringify({ conditionsBoxId, trackingCategory, noticeMs, closeLabel });
  
   return `
@@ -243,7 +243,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
  
   // ===== Small notice (past / future door) =====
   var note, noteBody, noteTimer, noteCloseTimer;
-  var X_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M4 3 20 21M20 3 4 21"/></svg>';
+  var X_ICON = '<span aria-hidden="true">X</span>';   // plain "X" as in the design
  
   function noteOpen() { return !!note && note.classList.contains('is-open') && !note.classList.contains('is-closing'); }
  

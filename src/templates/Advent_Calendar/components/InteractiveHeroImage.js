@@ -244,6 +244,11 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
           .adv-pop__content[data-popup="1"] { --fs-cond: 2.275; }   /* 22 / 967 */
           /* TEST (Figma): "Shop now" same weight as "Only Today" (600 instead of 700) – popup 1 only */
           .adv-pop__content[data-popup="1"] .adv-pop__cta { font-weight: 600; }
+          /* Dining Room (7) and Rugs (17): narrower text column on desktop (42% instead of 45%) */
+          @media screen and (min-width: 601px) {
+            .adv-pop__content[data-popup="7"] .adv-pop__deal,
+            .adv-pop__content[data-popup="17"] .adv-pop__deal { width: 42%; }
+          }
         </style>
  
         <div id="advent-wrapper" style="
@@ -741,6 +746,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       //   – until the day is over
       // - past doors: shown open, not clickable
       // - future doors: not clickable
+      // - after 24 Dec: no door does anything (no popups, no "past" messages)
       // TEST MODE: the last opened door shows its popup again, the next door opens
  
       // day number right now (1 on 1 Dec) – the page may stay open past midnight
@@ -811,9 +817,16 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         doors.forEach(function (door) {
           var doorNum = parseInt(door.dataset.door, 10);
  
+          // after 24 Dec the calendar is over: no deals, no popups, no messages
+          // (all doors shown open, nothing clickable)
+          if (day > lastDoor) {
+            makeLocked(door);
+            return;
+          }
+ 
           if (doorNum !== todayDoor) {
-            // before 1 Dec everything is "future", after 24 Dec everything is "past"
-            var isPast = day > lastDoor || (todayDoor > 0 && doorNum < todayDoor);
+            // before 1 Dec everything is "future"
+            var isPast = todayDoor > 0 && doorNum < todayDoor;
             makeNotice(door, isPast ? 'past' : 'future');
             return;
           }

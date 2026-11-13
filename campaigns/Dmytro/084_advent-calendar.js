@@ -1,12 +1,15 @@
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::Advent_calendar_popups';
+const adventSheet = '2026::01.12.26 - Advent Calendar'
 const T = campaignTranslationsSheet;
 
 const tableQueries = [
-  { tableRange: '16:17', name: 'TopImageTitle' },
-  { tableRange: '23',    name: 'intro' },
-  { tableRange: '24:27', name: 'paragraph' },
-  { tableRange: '28:29', name: 'condition' },
+  { tableRange: '16:17', name: 'TopImageTitle', tableName: adventSheet },
+  { tableRange: '27',    name: 'intro', tableName: adventSheet },
+  { tableRange: '24:27', name: 'paragraph', tableName: adventSheet },
+  { tableRange: '36:37', name: 'condition', tableName: adventSheet },
+  { tableRange: '29:32', name: 'icons',      tableName: adventSheet },
+  { tableRange: '33:35', name: 'dailyDeals', tableName: adventSheet },
 
   // ===== Shared popup texts =====
   { tableRange: '2', name: 'SeeConditions', tableName: T },
@@ -68,6 +71,7 @@ const links = {
   TopImage_src: getImageUrl('uk_advent_img.png'),
   TopImage_src_lp: translateImage({value: '_advent_lp.png'}),
   TopImage_href: translateLink({ value: 'content/advent-calendar' }),
+  TopImageTitle_href: translateLink({ value: 'content/advent-calendar' }),
   Banner_1: translateLink({ value: 'content/lp26-08-28' }),
   Banner_1_Image: translateImage({ value: '20260828b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-27' }),
@@ -106,16 +110,24 @@ const intro_data = {
 }
 
 const additionalCss = `
+
 @media screen and (max-width:768px){
+  .advent-icons__label { font-size: 13px !important; line-height: 19px !important; }
+  .advent-deals__text { font-size: 21px !important; line-height: 28px !important; max-width: 260px !important; }
   .newsletterParagraph {
     font-size: 16px !important;}
+    .advent-icons__label { padding-top: 10px !important; font-size: 13px !important; line-height: 19px !important; }
 }
 `;
 
 const additionalCssLp = `
+
 @media screen and (max-width:768px){
+  #newsletter .advent-icons__label { font-size: 13px !important; line-height: 19px !important; }
+  #newsletter .advent-deals__text { font-size: 21px !important; line-height: 28px !important; max-width: 260px !important; }
  #newsletter .newsletterParagraph {
     font-size: 16px !important;}
+  #newsletter .advent-icons__label { padding-top: 10px !important; font-size: 13px !important; line-height: 19px !important; }
 }
 `
 

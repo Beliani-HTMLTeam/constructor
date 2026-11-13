@@ -140,6 +140,13 @@ export function AdventPopupStyles() {
   .adv-pop--text-left .adv-pop__deal { margin-left: 0; margin-right: auto; }
  
   .adv-pop__container { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
+  /* every popup text is centered – also when a line wraps, and whatever the LP / shop CSS says
+     (e.g. a global "div { text-align: left }" would otherwise win over the inherited value) */
+  .adv-pop__deal,
+  .adv-pop__deal *,
+  .adv-note__box,
+  .adv-note__box * { text-align: center !important; }
+  .adv-pop__container > * { max-width: 100%; }
  
   .adv-pop__headline {
     margin-bottom: 5.6cqw;
@@ -253,7 +260,7 @@ export function AdventPopupStyles() {
     text-underline-offset: 0.15em;
     cursor: pointer;
   }
-  .adv-pop__cta { font-size: calc(var(--fs-cta) * 1cqw); font-weight: 700; }
+  .adv-pop__cta { font-size: calc(var(--fs-cta) * 1cqw); font-weight: 600; }   /* same weight as "Only Today" (Figma) */
   /* LP CSS gives every <button> padding / min-height – keep our buttons as designed */
   .adv-pop__cond,
   .adv-pop__close {
@@ -374,35 +381,46 @@ export function AdventPopupStyles() {
   .adv-note.is-open { display: flex; animation: advPopFadeIn .3s ease-out; }
   .adv-note.is-closing { animation: advPopFadeOut .3s ease-out forwards; }
   .adv-note, .adv-note * { box-sizing: border-box; }
+  /* Sizes in em = proportional to the font size (Figma "Small_POP UP"), so the
+     texts break into lines as in the design. Font: 18px desktop / 16px mobile. */
   .adv-note__box {
     position: relative;
-    width: min(440px, 100%);
-    padding: 28px 44px;
-    background-color: #F6E7E6;       /* peach, same as the popups */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: min(20.9em, 100%);        /* 376px at 18px */
+    min-height: 5em;                 /* 90px */
+    padding: 0.5em 1.8em;
+    border-radius: 0.52em;           /* rounded corners (design) */
+    background-color: #F6E7E6;
     color: #750000;
     font-family: Poppins, sans-serif;
     font-size: 18px;
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 1.25;
     text-align: center;
     animation: advPopOpen .4s cubic-bezier(.175, .885, .32, 1.275);
   }
   /* font shrinks for long translations: 18px × --note-scale, min 14px (set per text in AdventNotices) */
   .adv-note__text { font-size: clamp(14px, calc(18px * var(--note-scale, 1)), 18px); overflow-wrap: break-word; }
   .adv-note__line { margin: 0; padding: 0; }
-  .adv-note__line + .adv-note__line { margin-top: 10px; }
+  .adv-note__line + .adv-note__line { margin-top: 0.4em; }
+  /* close: a plain "X" in the top right corner (design) */
   .adv-note__close {
     position: absolute !important;
-    top: 6px; right: 6px;
-    width: 26px; height: 26px;
+    top: 0; right: 0;
+    width: 25px; height: 25px;       /* tap area, the "X" in its middle */
     min-width: 0 !important; min-height: 0 !important;
     padding: 0 !important; margin: 0 !important;
     display: flex; align-items: center; justify-content: center;
     border: 0 !important; background: none !important; box-shadow: none !important;
-    color: #750000;
+    color: #750000 !important;
+    font-family: Poppins, sans-serif !important;
+    font-size: 11px !important;      /* the "X": 7 x 16px (design) */
+    font-weight: 400 !important;
+    line-height: 16px !important;
     cursor: pointer;
   }
-  .adv-note__close svg { width: 16px; height: 16px; display: block; }
   .adv-note__close:focus-visible { outline: 2px solid #750000; outline-offset: 2px; }
  
   @media screen and (max-width: 600px) {
@@ -414,16 +432,16 @@ export function AdventPopupStyles() {
     }
     .adv-note__box {
       pointer-events: auto;
-      width: min(360px, 100%);
-      padding: 22px 34px;
       font-size: 16px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
-    }
-    .adv-note__text { font-size: clamp(13px, calc(16px * var(--note-scale, 1)), 16px); }   /* mobile: 16px, min 13px */
-    .adv-note__box {
+      width: min(208px, 100%);        /* design: 208px */
+      min-height: 5.5em;              /* 88px */
+      padding: 0.5em 1em;             /* 16px sides -> lines break as in the design */
+      border-radius: 0.53em;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);   /* no grey layer on mobile -> shadow keeps it visible */
       animation: advNoteUp .35s ease-out;
     }
-    .adv-note__close { top: 4px; right: 4px; }
+    .adv-note__text { font-size: clamp(13px, calc(16px * var(--note-scale, 1)), 16px); }   /* mobile: 16px, min 13px */
+    .adv-note__close { font-size: 9.5px !important; line-height: 13px !important; width: 24px; height: 24px; }   /* "X": 6 x 13px */
   }
   @keyframes advNoteUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
  
