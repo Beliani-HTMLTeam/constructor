@@ -13,14 +13,15 @@ import {
   AdventNotices,
 } from './advent-popup/index.js';
  
-const ADVENT_TEST_MODE = true;
+const ADVENT_TEST_MODE = false;
 
 // TRANSLATOR MODE – for checking the translations:
-// every door can be clicked at any time and opens its popup, in any order.
-// Nothing is saved (no opened doors are remembered) and nothing is sent to the dataLayer.
+// works like the test mode (doors open one by one: 1, 2, 3 ... whatever the date),
+// but nothing is saved – after a reload all doors are closed again –
+// and nothing is sent to the dataLayer.
 // On: ADVENT_TRANSLATOR_MODE = true (only this flag – no URL parameter).
 // Wins over the test mode. Set back to false before going live.
-const ADVENT_TRANSLATOR_MODE = false;
+const ADVENT_TRANSLATOR_MODE = true;
  
 // First day of the calendar (door 1), YYYY-MM-DD.
 // To try the real day-by-day mechanism before December, set e.g. '2026-11-02'
@@ -676,17 +677,17 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         if (params.has('advent-test')) TEST_MODE = true;
         TEST_RESET = params.get('advent-test') === 'reset';
       } catch (e) {}
-      if (TRANSLATOR_MODE) TEST_MODE = false;              // translator mode wins
-      var translatorDoor = 0;                              // translator mode: last clicked door
+      if (TRANSLATOR_MODE) TEST_MODE = true;               // translator mode = test mode without saving
       var TEST_KEY = 'beliani_advent_2026_test';
-      var testCurrent = 0;   // test mode: doors opened so far
-      if (TEST_MODE) {
+      var testCurrent = 0;   // test mode: doors opened so far (translator mode: always starts at 0)
+      if (TEST_MODE && !TRANSLATOR_MODE) {
         try {
           if (TEST_RESET) window.localStorage.removeItem(TEST_KEY);
           testCurrent = Math.min(parseInt(window.localStorage.getItem(TEST_KEY), 10) || 0, lastDoor);
         } catch (e) {}
       }
       function saveTest() {
+        if (TRANSLATOR_MODE) return;                       // translator mode: nothing is saved
         try { window.localStorage.setItem(TEST_KEY, String(testCurrent)); } catch (e) {}
       }
  
@@ -761,8 +762,6 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         swapTo(f.src, f.fallback);
       }
       function showImage() {
-        // TRANSLATOR MODE: doors 1..N open (N = the door clicked last), no glow
-        if (TRANSLATOR_MODE) { setFrame(translatorDoor, false); return; }
         // TEST MODE: always the glow frame – the next door glows right after opening one
         if (TEST_MODE) { setFrame(testCurrent, true); return; }
         if (todayOpened) setFrame(todayDoor, false);
@@ -770,7 +769,6 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       }
       // the frame that a click on today's / the next door will show -> load it now
       function preloadNext() {
-        if (TRANSLATOR_MODE) return;
         if (TEST_MODE) {
           if (testCurrent < lastDoor) { var t = frameSrc(testCurrent + 1, true); preloadFrame(t.src); }
         } else if (!todayOpened && todayDoor > 0) {
@@ -852,21 +850,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
         });
       }
  
-      // TRANSLATOR MODE: every door opens its own popup, any order, as often as needed
-      function updateDoorsTranslator() {
-        doors.forEach(function (door) {
-          var doorNum = parseInt(door.dataset.door, 10);
-          makeClickable(door, function (e) {
-            if (window.AdventConfetti) window.AdventConfetti.burstAt(door, e);
-            translatorDoor = doorNum;
-            showImage();                       // nothing is saved
-            setTimeout(function () { openPopup(doorNum); }, 400);
-          });
-        });
-      }
-
       function updateDoors() {
-        if (TRANSLATOR_MODE) { updateDoorsTranslator(); return; }
         if (TEST_MODE) { updateDoorsTest(); return; }
         doors.forEach(function (door) {
           var doorNum = parseInt(door.dataset.door, 10);
@@ -919,7 +903,6 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       // Only links ABOVE the calendar do this – links below it scroll up to the calendar.
       // TEST MODE: "today" = the last opened test door (door 1 when none is open yet).
       function todayNumber() {
-        if (TRANSLATOR_MODE) return Math.max(translatorDoor, 1);   // last clicked door (door 1 at first)
         return TEST_MODE ? Math.max(testCurrent, 1) : todayDoor;
       }
       function openToday(e) {
