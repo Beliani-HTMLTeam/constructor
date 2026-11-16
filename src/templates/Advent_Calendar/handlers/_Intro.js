@@ -33,7 +33,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, type }) =
         textColor: ctaColor,
         align: 'center',
         insideTr: true,
-        fontSize: '18px',
+        fontSize: '20px',
         lineHeight: '22px',
         fontWeight: '600',
         textTransform: 'none',

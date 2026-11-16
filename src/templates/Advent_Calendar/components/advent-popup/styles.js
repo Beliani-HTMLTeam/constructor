@@ -17,7 +17,7 @@ export function AdventPopupStyles() {
      Mobile:  1cqw = 2.57px at design size (257px)
      ===================================================== */
   .adv-pop, .adv-pop * { box-sizing: border-box; }
- 
+
   .adv-pop {
     display: none;
     position: fixed;
@@ -40,12 +40,12 @@ export function AdventPopupStyles() {
   .adv-pop a { color: inherit; text-decoration: none; }
   .adv-pop button:focus-visible,
   .adv-pop a:focus-visible { outline: 2px solid #750000; outline-offset: 2px; }
- 
+
   /* ---------- Box ---------- */
   .adv-pop__content {
     --pop-color: #750000;
     --pop-bg: #F6E7E6;
- 
+
     /* desktop font sizes (cqw of 967) */
     --fs-head: 5.17;    /* 50px */
     --fs-pre: 4.14;     /* 40px */
@@ -62,7 +62,7 @@ export function AdventPopupStyles() {
     --gap-sub: 2cqw;
     --gap-foot: 2.6cqw;
     --gap-foot-items: 2cqw;
- 
+
     position: relative;
     display: flex;
     flex-direction: row;
@@ -81,7 +81,7 @@ export function AdventPopupStyles() {
   .adv-pop.is-closing .adv-pop__content {
     animation: advPopClose .4s cubic-bezier(.6, -.28, .735, .045) forwards;
   }
- 
+
   /* per type – desktop */
   .adv-pop--percent { --fs-pre: 5.17; --fw-pre: 600; --fs-title: 9.31; --lh-title: 1.05; --gap-pre: 0.4cqw; }  /* 50 / 90 */
   .adv-pop--upto    { --fs-pre: 4.14; --fw-pre: 400; --fs-title: 5.17; --lh-title: 1.22; --gap-pre: 0.8cqw;
@@ -89,7 +89,7 @@ export function AdventPopupStyles() {
   /* 4 for 3 pyramid (2026 final design: a bit smaller) – title 46, lines + codes 18.5, Only Today 23, See conditions 18.4 */
   .adv-pop__content:has(.adv-pop__tiers) { --fs-title: 4.76; --fs-tier: 1.91; --fs-today: 2.38; --fs-cond: 1.9; }
   .adv-pop--special { --fs-pre: 3.1;  --fw-pre: 400; --fs-title: 6.2;  --lh-title: 1.05; --fs-sub: 3.1; --gap-pre: 0.2cqw; --gap-sub: 0; }
- 
+
   /* ---------- Background image (whole popup) ---------- */
   .adv-pop__bg {
     position: absolute;
@@ -101,7 +101,7 @@ export function AdventPopupStyles() {
     background-position: center center;
     background-repeat: no-repeat;
   }
- 
+
   /* ---------- Close (letter "X" in Poppins, ~26 x 29 – 20px from the top, 8px from the right) ---------- */
   .adv-pop__close {
     position: absolute;
@@ -127,7 +127,7 @@ export function AdventPopupStyles() {
     text-transform: none !important;
     color: var(--pop-color);
   }
- 
+
   /* ---------- Text column (right half, centered) ---------- */
   .adv-pop__deal {
     position: relative;
@@ -150,7 +150,7 @@ export function AdventPopupStyles() {
      the code can be highlighted and copied (one click selects the whole code) */
   .adv-pop__code { pointer-events: auto; cursor: text; }
   .adv-pop--text-left .adv-pop__deal { margin-left: 0; margin-right: auto; }
- 
+
   .adv-pop__container { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
   /* every popup text is centered – also when a line wraps, and whatever the LP / shop CSS says
      (e.g. a global "div { text-align: left }" would otherwise win over the inherited value) */
@@ -160,7 +160,7 @@ export function AdventPopupStyles() {
   .adv-note__box,
   .adv-note__box * { text-align: left !important; }
   .adv-pop__container > * { max-width: 100%; }
- 
+
   .adv-pop__headline {
     margin-bottom: 5.6cqw;
     font-size: calc(var(--fs-head) * 1cqw);
@@ -184,7 +184,7 @@ export function AdventPopupStyles() {
     font-weight: 400;
     line-height: 1.25;
   }
- 
+
   /* Code + copy */
   .adv-pop__codes { display: flex; flex-direction: column; align-items: center; gap: 0.3cqw; margin-top: 0.3cqw; }
   .adv-pop__code {
@@ -214,10 +214,10 @@ export function AdventPopupStyles() {
     font-size: inherit !important;
   }
   .adv-pop__copy-icon { width: 0.75em !important; height: 0.75em !important; }   /* scales with the code text */
- 
+
   /* its slide-in notification must sit above the popup overlay (99999) */
   [data-copy-notif] { z-index: 100001 !important; }
- 
+
   /* Tiers – each line with its own code (4 for 3 pyramid) */
   .adv-pop__tiers {
     display: flex;
@@ -244,7 +244,7 @@ export function AdventPopupStyles() {
   .adv-pop__deal em,
   .adv-pop__deal span { line-height: inherit !important; }
   .adv-pop__tiers + .adv-pop__footer { --gap-foot: 2.1cqw; --gap-foot-items: 2.3cqw; }
- 
+
   /* Footer */
   .adv-pop__footer {
     display: flex;
@@ -297,7 +297,7 @@ export function AdventPopupStyles() {
   }
   .adv-pop__cond { height: auto !important; }
   .adv-pop--special .adv-pop__footer { margin-top: 5.6cqw; }
- 
+
   /* =====================================================
      MOBILE – text on top, scene at the bottom (257 x 460)
      ===================================================== */
@@ -320,7 +320,7 @@ export function AdventPopupStyles() {
       --gap-sub: var(--m-gap);
       --gap-foot: var(--m-gap);
       --gap-foot-items: var(--m-gap);
- 
+
       flex-direction: column;
       width: min(257px, 100%, calc((100vh - 32px) * 0.5587));   /* max 257 x 460 */
       aspect-ratio: 257 / 460;
@@ -331,8 +331,10 @@ export function AdventPopupStyles() {
     .adv-pop--upto    { --m-pre: 25; --m-title: 35; --lh-title: 1.2; --m-cta: 18;   /* Shop now 18 */
                         --gap-pre: min(6px, calc(6 * 100cqw / 257)); --gap-foot: min(7px, calc(7 * 100cqw / 257));
                         --gap-foot-items: min(8px, calc(8 * 100cqw / 257)); }   /* tighter, as in the 2026 final design */
+    /* category popups: text starts 6px higher (19px from the top instead of 25px) */
+    .adv-pop--upto { --m-pad-top: min(19px, calc(19 * 100cqw / 257)); }
     .adv-pop--special { --m-pre: 16; --m-title: 32; --m-sub: 16; --gap-pre: 0.5cqw; --gap-sub: 0; }
- 
+
     /* px size, scaled down only below 257px popup width */
     .adv-pop__headline { font-size: min(calc(var(--m-head)  * 1px), calc(var(--m-head)  * 100cqw / 257)); }
     .adv-pop__pre      { font-size: min(calc(var(--m-pre)   * 1px), calc(var(--m-pre)   * 100cqw / 257)); }
@@ -352,24 +354,24 @@ export function AdventPopupStyles() {
     .adv-pop__tiers + .adv-pop__footer { --gap-foot: min(12px, calc(12 * 100cqw / 257)); }
     .adv-pop__tier-text,
     .adv-pop__tier .adv-pop__code { line-height: 1.5 !important; }
- 
+
     /* code: 10px below the title – but right under the subtitle
        ("when you spend ... / Code: XXX" is one block in the design) */
     .adv-pop__codes { margin-top: var(--m-gap); }
     .adv-pop__container:has(.adv-pop__subtitle:not(.adv-pop__only-d)) + .adv-pop__codes { margin-top: 0; }
- 
+
     .adv-pop__bg {
       background-image: var(--bg-m, var(--bg-d));
       background-position: center bottom;
     }
- 
+
     /* bigger copy icon (~20px next to an 18px code) + bigger tap area (~40px) */
     .adv-pop__copy-icon { width: 1.1em !important; height: 1.1em !important; }
     .adv-pop__copy-wrap button { padding: 10px !important; margin: -10px !important; }
- 
+
     .adv-pop__close { top: 11px; right: 4px; width: 30px; height: 32px; }
     .adv-pop__close-x { font-size: 35px !important; }   /* X ~22 x 25 */
- 
+
     /* "Shop now" button: 159 x 39, 18px */
     .adv-pop .adv-pop__cta {
       min-width: min(159px, calc(159 * 100cqw / 257));
@@ -378,11 +380,11 @@ export function AdventPopupStyles() {
       font-size: min(calc(var(--m-cta) * 1px), calc(var(--m-cta) * 100cqw / 257));
     }
     .adv-pop__cta + .adv-pop__cond { margin-top: min(3px, calc(3 * 100cqw / 257)); }
- 
+
     /* "when you spend ... / Code: XXX": 28px per line (design) */
     .adv-pop__subtitle,
     .adv-pop__code { line-height: 1.5; }
- 
+
     /* text centered in the top 55% (the scene fills the bottom) */
     .adv-pop__deal,
     .adv-pop--text-left .adv-pop__deal {
@@ -393,19 +395,20 @@ export function AdventPopupStyles() {
       justify-content: flex-start;
       padding: 4cqw 9cqw;             /* text max ~211px wide, e.g. "Scatter / Cushions" on 2 lines (design) */
       /* 25px space at the top (shrinks only below the 257px design width) */
-      padding-top: min(25px, calc(25 * 100cqw / 257));
+      /* change per popup with --m-pad-top, e.g. .adv-pop__content[data-popup="8"] { --m-pad-top: 15px; } */
+      padding-top: var(--m-pad-top, min(25px, calc(25 * 100cqw / 257)));
     }
     /* text centered in the area – but when it's too long it starts at the top
        (never cut off / pushed above the 25px) – works in every browser */
     .adv-pop__deal > :first-child { margin-top: auto; }
     .adv-pop__deal > :last-child { margin-bottom: auto; }
- 
+
     /* 4 for 3 pyramid has more lines -> taller text area (design: text ends at ~280 of 460) */
     .adv-pop__deal:has(.adv-pop__tiers) { height: 64%; }
     .adv-pop__headline { margin-bottom: 7cqw; line-height: 1.3; }
     .adv-pop--special .adv-pop__footer { margin-top: 9cqw; }
   }
- 
+
   /* =====================================================
      SMALL NOTICE – past / future door (a few seconds)
      desktop: like the popup (centered, grey background)
@@ -463,7 +466,7 @@ export function AdventPopupStyles() {
   }
   .adv-note__close svg { width: 16px; height: 16px; display: block; }
   .adv-note__close:focus-visible { outline: 2px solid #750000; outline-offset: 2px; }
- 
+
   @media screen and (max-width: 600px) {
     .adv-note {
       align-items: center;            /* middle of the screen – the chat bubble sits at the bottom */
@@ -486,7 +489,7 @@ export function AdventPopupStyles() {
     .adv-note__close svg { width: 12px; height: 12px; }
   }
   @keyframes advNoteUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
- 
+
   @keyframes advPopFadeIn  { from { opacity: 0; } to { opacity: 1; } }
   @keyframes advPopFadeOut { from { opacity: 1; } to { opacity: 0; } }
   @keyframes advPopOpen  { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
@@ -494,9 +497,9 @@ export function AdventPopupStyles() {
   @media (prefers-reduced-motion: reduce) {
     .adv-pop, .adv-pop__content { animation-duration: 1ms !important; }
   }
- 
+
   .adv-pop__cond-src { display: none !important; }
- 
+
   /* screen-reader only text ("Code copied") */
   .adv-pop__sr {
     position: absolute !important;
@@ -507,11 +510,11 @@ export function AdventPopupStyles() {
     white-space: nowrap;
   }
   .adv-cond:focus { outline: none; }
- 
+
   /* desktop-only / mobile-only texts (popup prop: mobile: { ... }) */
   @media screen and (min-width: 601px) { .adv-pop .adv-pop__only-m { display: none !important; } }
   @media screen and (max-width: 600px) { .adv-pop .adv-pop__only-d { display: none !important; } }
- 
+
   /* ---------- Conditions block (AdventConditionsBox) ---------- */
   .adv-cond { font-family: Poppins, sans-serif; color: #333; text-align: left; box-sizing: border-box; }
   .adv-cond .adv-cond__title { padding: 20px 20px 0; font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #000; }

@@ -69,18 +69,18 @@ const tableQueries = [
 const links = {
   TopImage_src: getImageUrl('uk_advent_img.png'),
   TopImage_src_lp: translateImage({value: '_advent_lp.png'}),
-  TopImage_href: translateLink({ value: 'content/advent-calendar' }),
-  TopImageTitle_href: translateLink({ value: 'content/advent-calendar' }),
+  TopImage_href: translateLink({ value: 'content/lp26-12-01' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-12-01' }),
   Banner_1: translateLink({ value: 'content/lp26-08-28' }),
   Banner_1_Image: translateImage({ value: '20260828b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-27' }),
   Banner_2_Image: translateImage({ value: '20260827b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-08-31' }),
   columnsImage_src: translateImage({ value: '_advent_cols.png' }),
-  columnsImage_href: translateLink({ value: 'content/advent-calendar' }),
+  columnsImage_href: translateLink({ value: 'content/lp26-12-01' }),
   daily_deals_src: translateImage({ value: '_advent_footer.png' }),
-  daily_deals_href: translateLink({ value: 'content/advent-calendar' }),
-  Intro_cta_href: translateLink({ value: 'content/advent-calendar' }),
+  daily_deals_href: translateLink({ value: 'content/lp26-12-01' }),
+  Intro_cta_href: translateLink({ value: 'content/lp26-12-01' }),
 };
 
 const TopImage_data = {
