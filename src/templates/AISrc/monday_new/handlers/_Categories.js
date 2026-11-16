@@ -78,7 +78,9 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
     }
   }
 
-  let src = category?.srcByType?.[type] ?? category?.src;
+  let src = category?.srcByCountry?.[country]
+    ?? category?.srcByType?.[type]
+    ?? category?.src;
   if (src && typeof src === 'object') {
     src = src.src;
   }

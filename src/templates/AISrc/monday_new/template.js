@@ -8,6 +8,7 @@ import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 import { ShopByCategoryHeader } from './components/ShopByCategoryHeader.js';
+import { TimerHandler } from './handlers/_Timer.js';
 
 const MondayNew = async ({
   links,
@@ -25,9 +26,13 @@ const MondayNew = async ({
   intro,
   TopImageTitle_data,
   topImage_data,
+  topImageTdClass,
   conditionOverrides,
   shopByCategory,
   theme,
+
+  Inside,
+  timer,
 
   getHeader,
   getFooter,
@@ -51,7 +56,7 @@ const MondayNew = async ({
 
   const countrySlug = String(country ?? '').toLowerCase();
   const conditionText = conditionOverrides?.[countrySlug] ?? queries.condition;
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date, theme: footer_theme, });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries: { ...queries, condition: conditionText }, country, type, id, disableFooterCategories, disableKlarna, selectedCampaign, date, theme: footer_theme, campaignDate, });
   const shopNow = intro?.cta?.textOverrides?.[countrySlug] ?? getPhrase('Shop now');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
 
@@ -62,7 +67,27 @@ const MondayNew = async ({
   }
 
   const TopImageTitleElement = !disableTopImageTitle ? TopImageTitleHandler({ links, queries, TopImageTitle_data, type, countrySlug }) : '';
-  const TopImageElement = TopImageHandler({ links, topImage });
+  const TopImageElement = TopImageHandler({
+    links,
+    topImage,
+    tdClass: topImageTdClass,
+    background: theme?.secondary,
+  });
+
+  const TimerElement = await TimerHandler({
+    Inside,
+    queries,
+    links,
+    timer,
+    shopNow,
+    country,
+    type,
+    shop,
+    getProductById,
+    getCategoryLink,
+    getPhrase,
+    add_utm,
+  });
 
   const introCta_href = getIntroCtaHref({ links, queries, categories, add_utm, getCategoryLink });
   const IntroElement = IntroHandler({ intro, queries, introCta_href, shopNow, countrySlug, type, links, getPhrase, theme: themeData });
@@ -112,6 +137,8 @@ const MondayNew = async ({
   const IntroAfterTopImageElement = isAfterFreebies ? '' : IntroElement;
   const IntroAfterFreebiesElement = isAfterFreebies ? IntroElement : '';
 
+  const timerAfterIntro = Inside?.position === 'afterIntro';
+
   let disableSE = false;
 
   if (typeof disableSoonEnding === "boolean" && disableSoonEnding)
@@ -132,11 +159,15 @@ const MondayNew = async ({
 
       ${TopImageElement}
 
+      ${timerAfterIntro ? '' : TimerElement}
+
       ${IntroAfterTopImageElement}
+      ${timerAfterIntro && !isAfterFreebies ? TimerElement : ''}
 
       ${CategoriesBeforeIntroElement}
 
       ${IntroAfterFreebiesElement}
+      ${timerAfterIntro && isAfterFreebies ? TimerElement : ''}
 
       ${CategoriesAfterIntroElement}
 

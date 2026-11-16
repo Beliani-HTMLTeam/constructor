@@ -1,5 +1,5 @@
 import { Footer as FooterComponent } from '@/components/footer.js';
-import { FOOTER_THEMES, Footer as NewFooterComponent } from '@/components/footer_new.js';
+import { FOOTER_THEMES, Footer as NewFooterComponent, shouldShowAppDownload, shouldUseSeeYouSoonV2 } from '@/components/footer_new.js';
 import { Space } from './components/Space.js';
 import { wrapFooterUrl } from "@/utils/getTrackingUrl";
 import { getState } from '@/main/state/appState';
@@ -170,31 +170,36 @@ function shouldUseNewFooter(cDate) {
   return new Date(year, month - 1, day) >= NEW_FOOTER_FROM;
 }
 
-const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date, theme = {} }) => {
+const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date, theme = 'peach' }) => {
+  const campaignDate = date || selectedCampaign?.date || getState('selectedCampaign')?.date;
   const assemblyBanner =  {
         src: getFooter('Assembly src new'),
         href: getFooter('Assembly href NEW'),
       }
+    
+  const seeYouSoonSrc =
+      (shouldUseSeeYouSoonV2(campaignDate) && getFooter('See you soon src v2')) || getFooter('See you soon src');
 
   const FooterElement = NewFooterComponent(
     {
       id,
       seeYouSoon: {
-        src: getFooter('See you soon src'),
+        src: seeYouSoonSrc,
         href: getFooter('See you soon href'),
       },
-
+ 
       deliveryBanner: {
         src: getFooter('Delivery src'),
         href: getFooter('Delivery href'),
       },
-
+ 
       workBanner: {
         src: getFooter('Job src'),
         href: getFooter('Job href'),
         exclude: !['PL'].includes(country),
       },
       thousandsMore: {
+				exclude: hasSmallTilesCategory,
         title: getFooter('Title'),
         firstCategory: {
           src: getFooter('Category src 1 new'),
@@ -255,14 +260,29 @@ const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, coun
           href: getFooter('Advantages href 4'),
         },
       },
-
+ 
       klarna: {
         src: getFooter('Klarna src new'),
         href: getFooter('Klarna href'),
 				exclude: ['HR', 'SI'].includes(country),
         //exclude: ["HU"].includes(country),
       },
-
+ 
+      // between Klarna and the socials (the footer renders the sections in this order).
+      // From the newsletter of 16.12.2026 on – before that the section is left out.
+      appDownload: {
+        exclude: !shouldShowAppDownload(campaignDate),
+        title: getFooter('Download our app'),
+        googlePlay: {
+          src: getFooter('Google Play src'),
+          href: getFooter('Google Play href'),
+        },
+        appStore: {
+          src: getFooter('Apple src'),
+          href: getFooter('Apple href'),
+        },
+      },
+ 
       socials: {
         title: getFooter('Stay up to date'),
         instagram: {
@@ -290,13 +310,13 @@ const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, coun
           href: getFooter('Tiktok href'),
         },
       },
-
-     
+ 
+ 
       conditions: {
         conditionsTitle: getFooter('Conditions title'),
         conditionsText: queries.condition || [getFooter('Conditions_description'), getFooter('Conditions_unsubscribe new')],
       },
-
+ 
       companyDetails: {
         title: getFooter('Company Details'),
         address: getFooter('Address new'),
@@ -308,7 +328,7 @@ const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, coun
         vat: getFooter('VAT'),
       },
     },
-    { type, theme }
+    { type, theme, campaignDate }
   );
 
   return `
