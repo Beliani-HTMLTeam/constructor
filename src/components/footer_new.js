@@ -534,7 +534,7 @@ export function Footer(sections, options, name) {
       }
                                                     ${socialIcon(c, pinterest, 'Pinterest', track(pinterest.href, isLP))}
                                                     ${Tiktok ? socialIcon(c, Tiktok, 'Tik-Tok', track(Tiktok.href, isLP)) : ''}
-                                                    ${showXSocial && Xsocial && Xsocial.href && Xsocial.src ? socialIcon(c, Xsocial, 'X', track(Xsocial.href, isLP)) : ''}
+                                                   
                                                 </tr>
                                             </tbody>
                                         </table>

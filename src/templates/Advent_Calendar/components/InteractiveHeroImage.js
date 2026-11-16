@@ -20,7 +20,7 @@ const ADVENT_TEST_MODE = false;
 // Nothing is saved (no opened doors are remembered) and nothing is sent to the dataLayer.
 // On: ADVENT_TRANSLATOR_MODE = true (only this flag – no URL parameter).
 // Wins over the test mode. Set back to false before going live.
-const ADVENT_TRANSLATOR_MODE = true;
+const ADVENT_TRANSLATOR_MODE = false;
  
 // First day of the calendar (door 1), YYYY-MM-DD.
 // To try the real day-by-day mechanism before December, set e.g. '2026-11-02'
