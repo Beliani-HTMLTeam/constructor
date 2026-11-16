@@ -1,0 +1,472 @@
+// based on campaigns/Dmytro/096_2026-11-13-black-week-room.js - room tiles replaced with 3prods (2 rows x 3) per room
+const campaignTranslationsSheet = '2026::Voucher - 25.11.26 - Black Week room favourites';
+
+// Deal spreadsheets
+const dealTranslationsSheets = [
+  '2026::Voucher - 09.11.26 - Black Week start',
+  '2026::Voucher - 11.11.26 - Black Week product categories',
+	'2026::Voucher - 12.11.26 - Black Week room favourites'
+];
+
+const tableQueries = [
+  ...[
+    ['deal_title', '26', dealTranslationsSheets[0]],
+    ['deal_img', '20:39', dealTranslationsSheets[1]],
+    ['deal_codes', '40:43', dealTranslationsSheets[1]],
+    ['deal_condition', '43', dealTranslationsSheets[0]],
+		['categories', '21:28', dealTranslationsSheets[2]],
+    ['condition', '44:46', dealTranslationsSheets[0]],
+  ].map(([name, tableRange, tableName]) => ({
+    name,
+    tableRange,
+    tableName,
+  })),
+  { name: 'category_cta', tableRange: '52' },
+];
+
+const links = {
+	TopImageTitle_type: 'image',
+	TopImageTitle_src: translateImage({ value: '20261125_topImage.jpg' }),
+	TopImageTitle_href: translateLink({ value: 'content/lp26-11-25' }),
+
+	TopImage_src: translateImage({ value: '20261125_shopNow.jpg' }),
+	TopImage_href: "Home Page",
+};
+
+const additionalCss = `
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:800; line-height: 1.2;}.frenchDaysCategoryCta {font-size: 20px !important;}.newsletterCta{font-size:30px;line-height:1.2;font-weight:700;}.roomTitle{font-size:30px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:700;}
+.campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
+.campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
+.newsletterHeadingTitle {font-size: 30px; font-weight: 700; line-height: 1.2; text-transform: uppercase;}
+@media screen and (max-width:768px){	.newsletterHeadingTitle {font-size: 20px; }.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.roomTitle{font-size:20px;}.newsletterCta{font-size:18px;}.blackWeekCondition{font-size:20px}.newsletterProductTitle{font-size:12px;}.newsletterProductLowPrice{font-size:12px;}.newsletterProductHighPrice{font-size:10px;} #newsletter .frenchDaysDiscount {
+	font-size: 40px !important;
+	font-size: clamp(32px, 12.5vw, 35px) !important;
+}
+#newsletter .frenchDaysCategoryName {
+	font-size: 14px !important;
+	font-size: clamp(14px, 3.6vw, 20px) !important;
+}
+#newsletter .frenchDaysCategoryCta {
+	font-size: 12px !important;
+	font-size: clamp(12px, 3.2vw, 16px) !important;
+}}
+`;
+
+const additionalCssLp = `
+#newsletter .newsletterHeadingTitle {font-size: 30px; font-weight: 700; line-height: 1.2; text-transform: uppercase;}
+
+/* GENERAL */
+
+#newsletter .newsletterTitle {
+	font-size: 34px;
+	font-weight:800; line-height: 1.2;
+}
+
+#newsletter .blackWeekCondition {
+	font-size: 25px;
+	line-height: 1.2;
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
+}
+
+
+/* DEAL BOXES */
+
+#newsletter .newsletterDealTierLabel {
+	font-size: 20px;
+	line-height: 25px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+#newsletter .newsletterDealTierValue {
+	font-size: 75px;
+	line-height: 80px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .newsletterDealTierOff {
+	font-size: 20px;
+	line-height: 20px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	display: block;
+	padding-bottom: 8px;
+}
+
+#newsletter .newsletterDealTierNote {
+	font-size: 16px;
+	line-height: 18px;
+	font-family: "Poppins", sans-serif;
+}
+
+#newsletter .newsletterDealCode {
+	font-size: 16px;
+	line-height: 21px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .newsletterDealCodePrefix {
+	text-transform: uppercase;
+}
+
+
+/* ROOMS */
+
+#newsletter .roomTitle {
+	font-size: 30px;
+	line-height: 1.2;
+	font-weight: 700;
+}
+
+#newsletter .newsletterCta {
+	font-weight: 700;
+}
+
+#newsletter .secondaryLinkMaroon {
+	font-size: 30px;
+	line-height: 1.2;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .frenchDaysCategoryCta {
+	font-size: 20px !important;
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 768px) {
+	#newsletter .newsletterHeadingTitle {font-size: 20px; }
+
+	/* GENERAL */
+
+	#newsletter .newsletterTitle {
+		font-size: 20px;
+	}
+
+	#newsletter .blackWeekCondition {
+		font-size: 20px;
+	}
+
+	/* DEAL BOXES */
+
+	#newsletter .newsletterDealTierValue {
+		font-size: 48px;
+		line-height: 50px;
+	}
+
+	#newsletter .newsletterDealCode {
+		font-size: 15px;
+		line-height: 1;
+	}
+
+	#newsletter .newsletterDealCodeLabel {
+		flex-basis: 100% !important;
+		margin-right: 0 !important;
+		text-align: center !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon {
+		margin-left: 4px !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon * {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon .blackWeekCopyImg,
+	#newsletter .newsletterDealCopyIcon img,
+	#newsletter .newsletterDealCopyIcon svg {
+		width: 15px !important;
+		height: 15px !important;
+		min-width: 15px !important;
+		max-width: 15px !important;
+		display: block !important;
+	}
+
+	#newsletter .newsletterDealGrid {
+		width: 100% !important;
+		max-width: 100% !important;
+		table-layout: auto !important;
+	}
+
+	#newsletter .newsletterDealCell {
+		display: block !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	#newsletter .newsletterDealGapCol {
+		display: block !important;
+		width: 100% !important;
+		height: 10px !important;
+		line-height: 10px !important;
+		font-size: 0 !important;
+	}
+
+	#newsletter .newsletterDealEmpty {
+		display: none !important;
+	}
+
+	/* ROOMS */
+
+	#newsletter .roomTitle {
+		font-size: 20px;
+	}
+
+	#newsletter .secondaryLinkMaroon {
+		font-size: 18px;
+	}
+
+	#newsletter .newsletterProductTitle {
+		font-size: 12px;
+	}
+
+	#newsletter .newsletterProductLowPrice {
+		font-size: 12px;
+	}
+
+	#newsletter .newsletterProductHighPrice {
+		font-size: 10px;
+	}
+
+	#newsletter .frenchDaysCategoryName {
+		font-size: 14px !important;
+		font-size: clamp(14px, 3.6vw, 20px) !important;
+	}
+
+	#newsletter .frenchDaysCategoryCta {
+		font-size: 12px !important;
+		font-size: clamp(12px, 3.2vw, 16px) !important;
+	}
+
+	#newsletter .frenchDaysDiscount {
+		font-size: 40px !important;
+		font-size: clamp(32px, 12.5vw, 35px) !important;
+	}
+}
+`;
+
+const palette = {
+	accent: '#FF2F00',
+	dark: '#750000',
+	text: '#ffffff',
+	page: '#000000',
+	highPrice: '#8c8c8c',
+	toastBg: '#ffe0d4',
+};
+
+const roomCategory = (row, name, href, products) => ({
+	name,
+	href,
+	type: '3prods',
+	background: palette.page,
+	color: palette.text,
+	container: 'newsletterContainer30px',
+
+	paddingTop: 0,
+	spaceAfter: 'newsletterBottom80px',
+
+	title: {
+		show: true,
+		align: 'center',
+		className: 'roomTitle',
+		styles: 'text-transform: uppercase;',
+		container: 'newsletterContainer30px',
+		spaceAfter: 'newsletterBottom20px',
+	},
+	paragraph: { spaceAfter: 0 },
+
+	product: {
+		align: 'center',
+		gapBetweenVertical: 'newsletterBottom10px',
+		spaceBetweenVertical: 'newsletterBottom25px',
+		title: { styles: 'text-transform: uppercase;' },
+		prices: { highColor: palette.highPrice },
+	},
+
+	cta: {
+		variant: 'underline',
+		phrase: 'Shop now',
+		textTransform: 'none',
+		color: palette.text,
+		align: 'center',
+		spaceBefore: 0,
+		spaceAfter: 0,
+	},
+
+	// ids from the SA list of the issue (SA Details link), images 20261112_Pic<row><1-6>.png
+	products: Object.values(products).map((id, i) => ({
+		id,
+		src: getImageUrl(`20261125_Pic${row}${i + 1}.png`, true),
+	})),
+});
+
+const categories = [
+	{
+		// section background - also the text colour of the GET CODES button
+		background: '#000000',
+		color: '#000000',
+		type: 'black-week-extras',
+		textColor: '#FFFFFF',
+		href: translateLink({ value: 'content/lp26-11-25' }),
+		container: 'newsletterContainer30px',
+
+		// newsletter only - one image per box, same order as the tiers in deal_img (20, 15, 10, 5)
+		// on the landing page the boxes are rendered as html
+		dealImgs: [
+			translateImage({ value: '_black_week_extra_20.png' }),
+			translateImage({ value: '_black_week_extra_15.png' }),
+			translateImage({ value: '_black_week_extra_10.png' }),
+			translateImage({ value: '_black_week_extra_5.png' }),
+		],
+		dealTierLines: 5,
+		copyToast: {
+			background: palette.toastBg,
+			color: '#000000',
+		},
+		// landing page boxes
+		dealBoxColor: '#FFF3E6',
+		dealBoxTextColor: '#000000',
+		dealValueColor: '#FF2F00',
+
+		// grid - inner width of newsletterContainer30px (2 x 290px images + gap), gap between the boxes
+		dealWidth: 590,
+		dealGap: 10,
+
+		paddingTop: 0,
+		paragraph: { spaceAfter: 'newsletterBottom35px' },
+		spaceBeforeDeal: 'newsletterBottom35px',
+		spaceAfterDeal: 'newsletterBottom20px',
+		// landing page only - space between the boxes and the conditions
+		spaceAfterDealLp: 'newsletterBottom35px',
+		spaceAfterCodeCta: 'newsletterBottom35px',
+		// bottom padding of the deal block - space before the intro title
+		spaceAfterConditions: 'newsletterBottom35px',
+		spaceAfter: 0,
+		dealCodeBreak: ['es', "pt", "it", "uk", "befr", "benl", "fi", "nl", "no", "si"],
+		dealValueSpaceAfter: { sk: 8 },
+	},
+	{
+		// THE BEST OF EVERY ROOM, ALL REDUCED (Intro title) - title only
+		name: 'Room by room, all reduced',
+		background: palette.page,
+		color: palette.text,
+		container: 'newsletterContainer30px',
+		paddingTop: 0,
+		title: {
+			show: true,
+			align: 'center',
+			className: 'newsletterHeadingTitle',
+			styles: 'text-transform: uppercase;',
+			container: 'newsletterContainer30px',
+		},
+		paragraph: { spaceAfter: 0 },
+		spaceAfter: 'newsletterBottom35px',
+	},
+	roomCategory(0, 'Living Room', 'https://www.beliani.ch/living-room-furniture/', {
+		DORA: 676321,
+		SKARO: 842891,
+		BRADLEY: 624313,
+		VIDSEL: 842345,
+		CHARGES: 685534,
+		KORDEA: 839249,
+	}),
+	roomCategory(1, 'Bedroom', 'https://www.beliani.ch/bedroom-furniture/', {
+		VAUCLUSE: 411828,
+		CHARLIEU: 838154,
+		JUNO: 812920,
+		SELVORI: 832605,
+		LUNAN: 589723,
+		TOMINGLEY: 837389,
+	}),
+	roomCategory(2, 'Dining Room', 'https://www.beliani.ch/dining-room-furniture/', {
+		ZANE: 695858,
+		BARROY: 643954,
+		CLOVES: 677979,
+		NJORO: 681541,
+		QUARTZ: 469011,
+		GLENWOOD: 639619,
+	}),
+	roomCategory(3, 'Bathroom', 'https://www.beliani.ch/bathroom-furniture/', {
+		YATA: 840888,
+		TARIJA: 643760,
+		GUDAR: 510931,
+		CHIDDES: 817987,
+		ATAI: 604525,
+		GOELA: 676093,
+	}),
+	roomCategory(4, 'Home Office', 'https://www.beliani.ch/office-furniture/', {
+		CAROGA: 839026,
+		TAVARES: 609383,
+		OMBURA: 813824,
+		TAVRA: 818791,
+		CANDOR: 838984,
+		DENEB: 668608,
+	}),
+	roomCategory(5, 'Kids Room', 'https://www.beliani.ch/children-room/', {
+		GRISETOT: 591962,
+		LUCAS: 817268,
+		BOO: 428541,
+		JAJPUR: 841943,
+		FLOWER: 812079,
+		BONNEVAL: 839334, // Inactive on DK
+	}),
+];
+
+export default new entities.Campaign({
+	startId: 50049,
+	lpId: 33588,
+	issueCardId: 545787,
+	version: 'new',
+	name: 'Black Week room favourites',
+	date: '25.11.2026',
+	figmaUrl: 'https://www.figma.com/design/ljot6VrtW4z6eW4x1fXbZG/',
+	templates: [
+		{
+			name: 'Newsletter',
+			type: types.NEWSLETTER,
+			template: templates.Friday,
+			css: types.CSS.NS_FRIDAY,
+			translationsSpreadsheet: campaignTranslationsSheet,
+
+			background: '#000000',
+			color: '#ffffff',
+
+			wrapper: types.WRAPPER,
+			optimizeCss: true,
+
+			categories: categories,
+			links: links,
+			tableQueries: tableQueries,
+			additionalCss: additionalCss,
+			footer_theme: 'black',
+		},
+
+		{
+			name: 'Landing',
+			type: types.LANDINGPAGE,
+			template: templates.Friday,
+			css: types.CSS.LP_FRIDAY,
+			translationsSpreadsheet: campaignTranslationsSheet,
+
+			background: '#000000',
+			color: '#ffffff',
+
+			categories: categories,
+			links: links,
+			tableQueries: tableQueries,
+			additionalCss: additionalCssLp,
+			footer_theme: 'black',
+		}
+	]
+})
