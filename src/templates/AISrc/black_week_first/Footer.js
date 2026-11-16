@@ -273,7 +273,7 @@ const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, coun
         // between Klarna and the socials (the footer renders the sections in this order).
         // From the newsletter of 16.12.2026 on – before that the section is left out.
         appDownload: {
-          exclude: !shouldShowAppDownload(campaignDate),
+          exclude: !shouldShowAppDownload(selectedCampaign.date),
           title: getFooter('Download our app'),
           googlePlay: {
             src: getFooter('Google Play src'),
@@ -330,7 +330,7 @@ const NewFooter = ({ getFooter, getCategoryLink, getCategoryTitle, queries, coun
           vat: getFooter('VAT'),
         },
       },
-      { type, theme, campaignDate }
+      { type, theme, campaignDate: selectedCampaign.date }
     );
 
   return `
