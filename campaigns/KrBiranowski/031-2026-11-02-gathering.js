@@ -52,11 +52,12 @@ const catData = [
 const prodData = [
   [
     [
-      { id: '257987', src: getImageUrl('20261102_Free01.png', true), useDescription: true },
+      { id: '257987', src: getImageUrl('20261102_Free01.png', true), useDescription: true, exclude: ["NO"] },
       { id: '232377', src: getImageUrl('20261102_Free02.png', true), useDescription: true },
+      { id: '367111', src: getImageUrl('20261102_Free03.png', true), useDescription: true, visibility: ["NO"] },
     ],
     [
-      { id: '367111', src: getImageUrl('20261102_Free03.png', true), useDescription: true },
+      { id: '367111', src: getImageUrl('20261102_Free03.png', true), useDescription: true, exclude: ["NO"] },
       { id: '232794', src: getImageUrl('20261102_Free04.png', true), useDescription: true },
     ],
   ],
@@ -175,6 +176,11 @@ const links = {
   Banner_2: translateLink({ value: 'content/lp26-09-02' }),
   Banner_2_Image: translateImage({ value: '20260902b.png' }),
 };
+
+const topImage_data = {
+  ['NO']: getImageUrl('20261102_topImage_NO.gif', true),
+  ['default']: getImageUrl('20261102_topImage.gif', true),
+}
 
 const TopImageTitle_data = {
   color: theme.black,
@@ -333,6 +339,9 @@ const categories = [
   },
   {
     name: catData[2].name,
+    nameOverrides: {
+      es: 'Menaje',
+    },
     // nameOverride: 'OPOCO',
     src: catData[2].catImg,
     href: catData[2].href,
@@ -453,6 +462,7 @@ export default new entities.Campaign({
       translationsSpreadsheet: campaignTranslationsSheet,
       wrapper: types.WRAPPER,
       TopImageTitle_data: TopImageTitle_data,
+      topImage_data,
       categories: categories,
       categoryImageTdClass: false,
       links: links,
@@ -480,6 +490,9 @@ export default new entities.Campaign({
           borderColor: theme.ctaPrimary,
           borderWidth: '15px 45px',
           transform: 'none',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
         },
         disableLine: true,
         containerClass: 'newsletterContainer',
@@ -499,6 +512,7 @@ export default new entities.Campaign({
       type: types.LANDINGPAGE,
       translationsSpreadsheet: campaignTranslationsSheet,
       TopImageTitle_data: TopImageTitle_data,
+      topImage_data,
       categories: categories,
       categoryImageTdClass: false,
       links: links,
@@ -525,6 +539,9 @@ export default new entities.Campaign({
           borderColor: theme.ctaPrimary,
           borderWidth: '15px 45px',
           transform: 'none',
+          textOverrides: {
+            fi: 'Tutustu valikoimaan',
+          },
         },
         disableLine: true,
         containerClass: 'newsletterContainer',

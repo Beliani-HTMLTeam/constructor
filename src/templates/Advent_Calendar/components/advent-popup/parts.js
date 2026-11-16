@@ -20,8 +20,8 @@ export const DEFAULT_POPUP_TEXTS = {
 export const attr = (v = '') =>
   String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
  
-const ICON_CLOSE =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M4 3 20 21M20 3 4 21"/></svg>';
+// the letter "X" in Poppins, as in the 2026 final design (size: .adv-pop__close-x in styles.js)
+const ICON_CLOSE = '<span class="adv-pop__close-x" aria-hidden="true">X</span>';
  
 function linkOrDiv(link, cls, inner) {
   return link
@@ -78,7 +78,7 @@ function codesBlock(code, texts, extraCls = '') {
           buildCopyIcon({
             codeValue: c.value,
             color: '#750000',
-            toastBg: '#000000',
+            toastBg: '#750000',
             toastText: '#ffffff',
             label: texts.copied,
             className: 'adv-pop__copy-icon',
@@ -118,10 +118,11 @@ export function PopupFooter({ texts = DEFAULT_POPUP_TEXTS, onlyToday = true, con
   return (
     '<div class="adv-pop__footer">' +
     (onlyToday && texts.onlyToday ? `<div class="adv-pop__today">${texts.onlyToday}</div>` : '') +
-    (conditions !== false && texts.seeConditions ? `<button type="button" class="adv-pop__cond">${texts.seeConditions}</button>` : '') +
+    // "Shop now" (needs a link) – between "Only Today" and "See conditions" (design)
     (cta && link
       ? `<a class="adv-pop__cta" href="${attr(link)}" target="_blank" rel="noopener" data-adv-link>${cta}</a>`
       : '') +
+    (conditions !== false && texts.seeConditions ? `<button type="button" class="adv-pop__cond">${texts.seeConditions}</button>` : '') +
     '</div>'
   );
 }
@@ -147,11 +148,12 @@ function PopupBackground({ imageDesktop, imageMobile, alt = '', link }) {
 // ---------- Shell: close button + background image + text ----------
 // layout  : 'percent' | 'deal' | 'upto' | 'special' (controls font sizes)
 // textSide: 'right' (default, as in the design) | 'left' – desktop only
-export function AdventPopupShell({ id, layout = 'deal', imageDesktop, imageMobile, alt = '', link, conditions, texts, textSide = 'right', body }) {
+// trackId: sent as eventID in the dataLayer (category name / voucher code)
+export function AdventPopupShell({ id, layout = 'deal', imageDesktop, imageMobile, alt = '', link, conditions, texts, textSide = 'right', body, trackId = '' }) {
   const t = { ...DEFAULT_POPUP_TEXTS, ...texts };
  
   return `
-<template data-adv-popup="${attr(id)}" data-layout="${attr(layout)}" data-text="${attr(textSide)}">
+<template data-adv-popup="${attr(id)}" data-layout="${attr(layout)}" data-text="${attr(textSide)}" data-track-id="${attr(trackId)}">
   <button type="button" class="adv-pop__close" aria-label="${attr(t.close)}">${ICON_CLOSE}</button>
   ${PopupBackground({ imageDesktop, imageMobile, alt, link })}
   <div class="adv-pop__deal">${body}</div>
@@ -170,9 +172,51 @@ export function StandardPopup(layout, props, defaults = {}) {
     PopupText(props) +
     PopupTiers({ tiers: props.tiers, texts: t }) +
     PopupCodes({ code: props.code, mobileCode: (props.mobile || {}).code, texts: t }) +
-    PopupFooter({ texts: t, onlyToday, conditions: props.conditions, cta, link: props.link });
+    // ctaLink: only the "Shop now" link goes there (the rest of the popup is not a link)
+    PopupFooter({ texts: t, onlyToday, conditions: props.conditions, cta, link: props.ctaLink || props.link });
  
-  return AdventPopupShell({ ...props, layout, texts: t, body });
+  // eventID for the tracking: props.trackId (e.g. category name),
+  // otherwise the voucher code(s) of the popup ("02advent26uk", pyramid: "A, B, C")
+  const codes = []
+    .concat(props.code || [], (props.tiers || []).map((tier) => tier && tier.code))
+    .map((c) => (splitCode(c) || {}).value)
+    .filter(Boolean);
+  const trackId = props.trackId !== undefined ? props.trackId : codes.join(', ');
+ 
+  return AdventPopupShell({ ...props, layout, texts: t, body, trackId });
+}
+ 
+// ---------- Small notices: past door / future door ----------
+// Short messages shown for a few seconds when a door that is not today's is clicked.
+// past / future: lines from the sheet (queries.PastPopup / queries.FuturePopup)
+export const DEFAULT_NOTICES = {
+  past: ['Too late for this one!', 'Find today’s door for a fresh deal.'],
+  future: ['Still wrapped!', 'Find today’s door to unwrap today’s deal.'],
+};
+ 
+// characters (both lines together) that still fit the design size
+export const NOTICE_FIT_CHARS = 70;
+ 
+export function AdventNotices({ past, future } = {}) {
+  const lines = (rows, fallback) => {
+    const list = [].concat(rows || [])
+      .map((r) => String((Array.isArray(r) ? r[0] : r) ?? '').trim())
+      .filter(Boolean);
+    return list.length ? list : fallback;
+  };
+  // Longer translations get a smaller font: up to NOTICE_FIT_CHARS characters the
+  // design size is used (18px desktop / 15px mobile), above that it shrinks in
+  // proportion – never below 14px desktop / 12px mobile (see .adv-note__text in styles.js)
+  const scaleFor = (list) => {
+    const chars = list.join(' ').replace(/<[^>]*>/g, '').replace(/&[a-z#0-9]+;/gi, 'x').length;
+    return Math.round(Math.min(1, NOTICE_FIT_CHARS / Math.max(chars, 1)) * 100) / 100;
+  };
+  const tpl = (kind, list) =>
+    `<template data-adv-notice="${kind}">` +
+    `<div class="adv-note__text" style="--note-scale:${scaleFor(list)};">` +
+    list.map((l) => `<div class="adv-note__line">${l}</div>`).join('') +
+    `</div></template>`;
+  return tpl('past', lines(past, DEFAULT_NOTICES.past)) + tpl('future', lines(future, DEFAULT_NOTICES.future));
 }
  
 // ---------- Box under the calendar that shows the conditions ----------

@@ -3,8 +3,9 @@ const campaignTranslationsSheet = '2026::Voucher - 11.11.26 - Black Week product
 const tableQueries = [
 	{
 		// THE MORE YOU SPEND, THE MORE YOU SAVE - 1 row
-		tableRange: '45',
+		tableRange: '26',
 		name: 'deal_title',
+		tableName: '2026::Voucher - 09.11.26 - Black Week start',
 	},
 	{
 		// 4 boxes x 4 rows (EXTRA / 20% / OFF / when you spend min. €2500) - 16 rows, in order 20, 15, 10, 5
@@ -18,12 +19,14 @@ const tableQueries = [
 	},
 	{
 		// Limited-time offer. Valid until 29/11/2026 - 1 row
-		tableRange: '44',
+		tableRange: '43',
 		name: 'deal_condition',
+		tableName: '2026::Voucher - 09.11.26 - Black Week start',
 	},
 	{
-		tableRange: '46:47',
-		name: "condition"
+		tableRange: '44:46',
+		name: "condition",
+		tableName: '2026::Voucher - 09.11.26 - Black Week start'
 	}
 ];
 
@@ -45,13 +48,13 @@ const links = {
 };
 
 const additionalCss = `
-.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:700;}.frenchDaysCategoryCta {font-size: 20px !important;}
+.blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Open Sans",sans-serif;font-weight:400;}.newsletterTitle {font-size:34px;font-weight:800; line-height: 1.2;}.frenchDaysCategoryCta {font-size: 20px !important;}
 .campaignEyebrow{font-size:12px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:2px;line-height:1}
 .campaignHeadline{font-size:53px;font-family:"Open Sans",sans-serif;font-weight:700;letter-spacing:-2px;line-height:1}
 @media screen and (max-width:768px){
 .categoryTileInRowName,.categoryTileInRowCta{display:block!important;width:100%!important;box-sizing:border-box!important;padding:0!important;text-align:left!important}
 .categoryTileInRowCta{padding-top:6px!important}
-.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
+.campaignHeadline{font-size:32px}.campaignInset{width:10px!important}.campaignTileLink{padding:10px!important}.newsletterTitle{font-size:20px;}.blackWeekCondition{font-size:20px} #newsletter .frenchDaysDiscount {
 	font-size: 40px !important;
 	font-size: clamp(32px, 12.5vw, 35px) !important;
 }
@@ -66,24 +69,180 @@ const additionalCss = `
 `;
 
 const additionalCssLp = `
-#newsletter .blackWeekCondition{font-size:25px;line-height:1.2;font-family:"Poppins",sans-serif;font-weight:400;}#newsletter .newsletterTitle {font-size:34px;font-weight:700;}#newsletter .frenchDaysCategoryCta {font-size: 20px !important;}
-#newsletter .newsletterDealTierLabel{font-size:20px;line-height:25px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierValue{font-size:75px;line-height:80px;font-family:"Poppins",sans-serif;font-weight:700}#newsletter .newsletterDealTierOff{font-size:20px;line-height:16px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}#newsletter .newsletterDealTierNote{font-size:16px;line-height:18px;font-family:"Poppins",sans-serif}#newsletter .newsletterDealCode{font-size:16px;line-height:21px;font-family:"Poppins",sans-serif;font-weight:700;text-transform:uppercase}
-@media screen and (max-width:768px){
-	#newsletter .newsletterDealCodeLabel{flex-basis:100%!important;margin-right:0!important;text-align:center!important}
-	#newsletter .categoryTileInRowName,#newsletter .categoryTileInRowCta{display:block!important;width:100%!important;box-sizing:border-box!important;padding:0!important;text-align:left!important}
-	#newsletter .categoryTileInRowCta{padding-top:6px!important}
-#newsletter .newsletterTitle{font-size:20px;}#newsletter .newsletterDealTierValue{font-size:48px;line-height:50px}#newsletter .newsletterDealGrid{width:100%!important;max-width:100%!important;table-layout:auto!important}#newsletter .newsletterDealCell{display:block!important;width:100%!important;box-sizing:border-box!important}#newsletter .newsletterDealGapCol{display:block!important;width:100%!important;height:10px!important;line-height:10px!important;font-size:0!important}#newsletter .newsletterDealEmpty{display:none!important}#newsletter .blackWeekCondition{font-size:18px} #newsletter .frenchDaysDiscount {
-	font-size: 40px !important;
-	font-size: clamp(32px, 12.5vw, 35px) !important;
+/* GENERAL */
+
+#newsletter .newsletterTitle {
+	font-size: 34px;
+	font-weight:800; line-height: 1.2;
 }
-#newsletter .frenchDaysCategoryName {
-	font-size: 14px !important;
-	font-size: clamp(14px, 3.6vw, 20px) !important;
+
+#newsletter .blackWeekCondition {
+	font-size: 25px;
+	line-height: 1.2;
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
 }
+
+
+/* DEAL BOXES */
+
+#newsletter .newsletterDealTierLabel {
+	font-size: 20px;
+	line-height: 25px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+#newsletter .newsletterDealTierValue {
+	font-size: 75px;
+	line-height: 80px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .newsletterDealTierOff {
+	font-size: 20px;
+	line-height: 20px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	display: block;
+	padding-bottom: 8px;
+}
+
+#newsletter .newsletterDealTierNote {
+	font-size: 16px;
+	line-height: 18px;
+	font-family: "Poppins", sans-serif;
+}
+
+#newsletter .newsletterDealCode {
+	font-size: 16px;
+	line-height: 21px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+}
+
+#newsletter .newsletterDealCodePrefix {
+	text-transform: uppercase;
+}
+
+
+/* CATEGORY TILES */
+
 #newsletter .frenchDaysCategoryCta {
-	font-size: 12px !important;
-	font-size: clamp(12px, 3.2vw, 16px) !important;
-}}
+	font-size: 20px !important;
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 768px) {
+
+	/* GENERAL */
+
+	#newsletter .newsletterTitle {
+		font-size: 20px;
+	}
+
+	#newsletter .blackWeekCondition {
+		font-size: 20px;
+	}
+
+	/* DEAL BOXES */
+
+	#newsletter .newsletterDealTierValue {
+		font-size: 48px;
+		line-height: 50px;
+	}
+
+	#newsletter .newsletterDealCode {
+		font-size: 15px;
+		line-height: 1;
+	}
+
+	#newsletter .newsletterDealCodeLabel {
+		flex-basis: 100% !important;
+		margin-right: 0 !important;
+		text-align: center !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon {
+		margin-left: 4px !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon * {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	#newsletter .newsletterDealCopyIcon .blackWeekCopyImg,
+	#newsletter .newsletterDealCopyIcon img,
+	#newsletter .newsletterDealCopyIcon svg {
+		width: 15px !important;
+		height: 15px !important;
+		min-width: 15px !important;
+		max-width: 15px !important;
+		display: block !important;
+	}
+
+	#newsletter .newsletterDealGrid {
+		width: 100% !important;
+		max-width: 100% !important;
+		table-layout: auto !important;
+	}
+
+	#newsletter .newsletterDealCell {
+		display: block !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	#newsletter .newsletterDealGapCol {
+		display: block !important;
+		width: 100% !important;
+		height: 10px !important;
+		line-height: 10px !important;
+		font-size: 0 !important;
+	}
+
+	#newsletter .newsletterDealEmpty {
+		display: none !important;
+	}
+
+	/* CATEGORY TILES */
+
+	#newsletter .categoryTileInRowName,
+	#newsletter .categoryTileInRowCta {
+		display: block !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+		padding: 0 !important;
+		text-align: left !important;
+	}
+
+	#newsletter .categoryTileInRowCta {
+		padding-top: 6px !important;
+	}
+
+	#newsletter .frenchDaysCategoryName {
+		font-size: 14px !important;
+		font-size: clamp(14px, 3.6vw, 20px) !important;
+	}
+
+	#newsletter .frenchDaysCategoryCta {
+		font-size: 12px !important;
+		font-size: clamp(12px, 3.2vw, 16px) !important;
+	}
+
+	#newsletter .frenchDaysDiscount {
+		font-size: 40px !important;
+		font-size: clamp(32px, 12.5vw, 35px) !important;
+	}
+}
 `;
 
 const palette = {
@@ -154,7 +313,8 @@ const categories = [
 		// bottom padding of the deal block
 		spaceAfterConditions: 0,
 		spaceAfter: 0,
-		dealCodeBreak: ['benl', 'befr', "pt", "it"],
+		dealCodeBreak: ['es', "pt", "it", "uk", "befr", "benl", "fi", "nl", "no", "si"],
+		dealValueSpaceAfter: { sk: 8 },
 	},
 	{
 		background: '#000000',
@@ -245,6 +405,10 @@ const categories = [
 				},
 				{
 					name: "Accessories",
+					overrides: {
+						DACH: "Wohnaccessoires",
+						FI: "Sisustustarvikkeet"
+					},
 					href: 'https://www.beliani.ch/accessories-decor/',
 					src: getImageUrl('20261111Category12.png', true),
 				},]
@@ -281,6 +445,7 @@ export default new entities.Campaign({
 			additionalCss: additionalCss,
 
 			footer_theme: 'black',
+			optimizeCss: true,
 		},
 
 		{

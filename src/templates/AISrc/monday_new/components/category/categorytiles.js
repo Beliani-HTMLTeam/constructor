@@ -13,6 +13,7 @@ export const render = ({
   queries,
   insideContainer = true,
   color,
+  background = '',
   id,
   imageSide,
   getCategoryLink,
@@ -32,7 +33,7 @@ export const render = ({
     productsInnerHtml += `
     <tr>
       <td style="color: ${color}" ${insideContainer ? `class="${tdClass}"` : ''}>
-        <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" ${background ? `bgcolor="${background}"` : ''} style="border-collapse:collapse;border-spacing:0;">`;
 
     if (displayType === '4col' && tiles) {
       const gap = 5;
@@ -69,39 +70,33 @@ export const render = ({
       productsInnerHtml += `</tr>`;
     } else if (displayType === '2col-img' && tiles) {
       const cols = 2;
-      // Gap dimensions follow the container's desktop and mobile CSS rules.
-      const gapClass = `col2imgGap ${tdClass || 'newsletterContainer'}`;
-      const gapStyle = 'padding:0!important;line-height:0;font-size:0;mso-line-height-rule:exactly;';
 
       for (let i = 0; i < items.length; i += cols) {
         if (i > 0) {
-          //productsInnerHtml += `<tr><td colspan="3" class="${gapClass}" style="${gapStyle}"></td></tr>`;
-          productsInnerHtml += Space({ insideTr: true, className: tileSettings?.bottomTileSpace ?? 'newsletterBottom70px' });
+          productsInnerHtml += `<tr><td colspan="2" class="${tileSettings?.bottomTileSpace ?? 'newsletterBottom70px'}" style="font-size:0;line-height:0;mso-line-height-rule:exactly;"></td></tr>`;
         }
         productsInnerHtml += '<tr>';
 
         for (let c = 0; c < cols; c++) {
           const item = items[i + c];
 
-          if (c > 0) {
-            // Padding cannot collapse like an empty cell's width when both images request 50%.
-            productsInnerHtml += `<td width="0" class="${tdClass || 'newsletterContainer'}" style="width:0;padding-right:0!important;padding-top:0!important;padding-bottom:0!important;line-height:0;font-size:0;mso-line-height-rule:exactly;"></td>`;
-          }
-
-          productsInnerHtml += `<td width="50%" style="width:50%;vertical-align:top;">`;
+          const gapPaddingClass = c === 0 ? 'newsletterRight10px' : 'newsletterLeft10px';
+          productsInnerHtml += `<td width="50%" class="${gapPaddingClass}" ${background ? `bgcolor="${background}"` : ''} style="${background ? `background-color:${background};` : ''}width:50%;vertical-align:top;font-size:0;line-height:0;">`;
 
           if (item) {
             const href = item.resolvedHref ?? (getCategoryLink ? getCategoryLink(item.href) : item.href);
             const name = getCategoryTitle ? getCategoryTitle(item.name) : item.name;
             const nameOverride = item?.nameOverrides?.[country?.toLowerCase()] ?? name;
 
-            productsInnerHtml += `<table width="100%" border="0" cellpadding="0" cellspacing="0">`;
+            productsInnerHtml += `<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0;">`;
             productsInnerHtml += ImageWithLink({
               src: typeof item.src === 'object' ? item.src.src : item.src,
               href,
               alt: nameOverride ?? '',
               insideTr: true,
               align: 'center',
+              background,
+              block: true,
             });
             productsInnerHtml += '</table>';
           }

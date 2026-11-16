@@ -4,150 +4,231 @@
    no font-family (the LP uses Poppins) – nothing that exists in regular.css changes.
    ═══════════════════════════════════════════════════════════════════════════ */
  
-/* Peach side frame (on a <td> – Outlook ignores padding on <table>) */
-.footerFrame {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-}
- 
-/* White panel inner padding */
-.footerContainer30px {
-  padding-left: 30px !important;
-  padding-right: 30px !important;
-}
- 
-.footerContainer40px {
-  padding-left: 40px !important;
-  padding-right: 40px !important;
-}
- 
-/* Vertical spacers (Space component) */
-.footerBottom15px {
-  padding-bottom: 15px !important;
-}
- 
-.footerBottom20px {
-  padding-bottom: 20px !important;
-}
- 
-.footerBottom30px {
-  padding-bottom: 30px !important;
-}
- 
-.footerBottom35px {
-  padding-bottom: 35px !important;
-}
- 
-/* See thousands more */
-.footerThousandsTitle {
-  display: block;
-  text-align: left;
-  color: #750000;
-  font-size: 22px;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-}
- 
-.footerThousandsRowGap {
-  padding-bottom: 18px !important;
-}
- 
-/* 10px gap between the tiles of a pair: 5px + 5px */
-.footerThousandsCellLEFT {
-  padding-right: 5px !important;
-}
- 
-.footerThousandsCellRIGHT {
-  padding-left: 5px !important;
-}
- 
-/* Follow us */
-.footerSocialTitle {
-  text-align: left;
-  color: #750000;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 700;
-}
- 
-.footerSocialSubtitle {
-  text-align: left;
-  color: #750000;
-  font-size: 13px;
-  font-weight: 400;
-}
- 
-.footerSocialIcon {
-  width: 28px;
-  padding-left: 20px !important;
-  padding-right: 5px !important;
-  font-size: 0;
-  text-align: center;
-  vertical-align: middle;
-}
- 
-/* Conditions */
-.footerConditions {
-  color: #750000;
-  font-size: 11px;
-  line-height: 1.2;
-}
- 
-@media screen and (max-width: 768px) {
-  .footerFrame {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
- 
-  .footerContainer30px {
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-  }
- 
-  .footerContainer40px {
+   /* Peach side frame (on a <td> – Outlook ignores padding on <table>) */
+   .footerFrame {
     padding-left: 20px !important;
     padding-right: 20px !important;
   }
- 
+   
+  /* White panel inner padding */
+  .footerContainer30px {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+   
+  .footerContainer40px {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+   
+  /* Vertical spacers (Space component) */
   .footerBottom15px {
-    padding-bottom: 10px !important;
-  }
- 
-  .footerBottom20px {
-    padding-bottom: 10px !important;
-  }
- 
-  .footerBottom30px {
     padding-bottom: 15px !important;
   }
- 
-  .footerBottom35px {
+   
+  .footerBottom20px {
     padding-bottom: 20px !important;
   }
- 
+   
+  .footerBottom30px {
+    padding-bottom: 30px !important;
+  }
+   
+  .footerBottom35px {
+    padding-bottom: 35px !important;
+  }
+   
+  /* See thousands more */
   .footerThousandsTitle {
-    font-size: 20px !important;
+    display: block;
+    text-align: left;
+    color: #750000;
+    font-size: 22px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.4px;
   }
- 
+   
   .footerThousandsRowGap {
-    padding-bottom: 10px !important;
+    padding-bottom: 18px !important;
   }
- 
-  .footerSocialIcon {
-    padding-left: 13px !important;
+   
+  /* 10px gap between the tiles of a pair: 5px + 5px */
+  .footerThousandsCellLEFT {
+    padding-right: 5px !important;
   }
-}
- 
-@media screen and (max-width: 650px) {
+   
+  .footerThousandsCellRIGHT {
+    padding-left: 5px !important;
+  }
+   
+  /* Follow us (also the "Download our app" title) */
   .footerSocialTitle {
-    font-size: 16px !important;
-    line-height: 21px !important;
+    text-align: left;
+    color: #750000;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
   }
- 
+   
+  /* from 16.11.2026: bigger footer titles (footer_new.js picks this class by the campaign date) */
+  .footerSocialTitleV2 {
+    text-align: left;
+    color: #750000;
+    font-size: 22px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+   
+  .footerSocialSubtitle {
+    text-align: left;
+    color: #750000;
+    font-size: 13px;
+    font-weight: 400;
+  }
+   
   .footerSocialIcon {
-    width: 22px !important;
-    padding-left: 3px !important;
-    padding-right: 3px !important;
+    width: 28px;
+    padding-left: 20px !important;
+    padding-right: 5px !important;
+    font-size: 0;
+    text-align: center;
+    vertical-align: middle;
   }
-}
+   
+  /* Conditions */
+  .footerConditions {
+    color: #750000;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+   
+  @media screen and (max-width: 768px) {
+    .footerFrame {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+    }
+   
+    .footerContainer30px {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+    }
+   
+    .footerContainer40px {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+   
+    .footerBottom15px {
+      padding-bottom: 10px !important;
+    }
+   
+    .footerBottom20px {
+      padding-bottom: 10px !important;
+    }
+   
+    .footerBottom30px {
+      padding-bottom: 15px !important;
+    }
+   
+    .footerBottom35px {
+      padding-bottom: 20px !important;
+    }
+   
+    .footerThousandsTitle {
+      font-size: 20px !important;
+    }
+   
+    .footerThousandsRowGap {
+      padding-bottom: 10px !important;
+    }
+   
+    .footerSocialIcon {
+      padding-left: 13px !important;
+    }
+  }
+   
+  @media screen and (max-width: 650px) {
+    .footerSocialTitle {
+      font-size: 16px !important;
+      line-height: 21px !important;
+    }
+   
+    .footerSocialTitleV2 {
+      font-size: 20px !important;
+    }
+   
+    .footerSocialIcon {
+      width: 22px !important;
+      padding-left: 3px !important;
+      padding-right: 3px !important;
+    }
+  }
+   
+  /* Download our app + Stay up to date – the shop CSS on the LP would override them:
+     ".b-content img { max-width: 100%; height: auto !important; }" makes the badges huge, and a full-width
+     table rule spreads the icons over the whole row. Two classes beat its one class + tag, so these win. */
+  .footerAppBadge img.footerAppBadgeImg {
+    height: 32px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+   
+  .footerAppBadgesCol table.footerAppBadges,
+  .footerSocialIconsCol table.footerSocialIcons {
+    width: auto !important;
+  }
+   
+  /* social icons: fixed size, so the narrow icons table can't shrink them
+     (the shop CSS ".b-content img { max-width: 100% }" otherwise squeezes them to a few px) */
+  .footerSocialIcon img.footerSocialIconImg {
+    width: 28px !important;
+    max-width: none !important;
+  }
+   
+  @media screen and (max-width: 650px) {
+    .footerSocialIcon img.footerSocialIconImg {
+      width: 22px !important;
+    }
+  }
+   
+  /* Download our app + Stay up to date – narrow screens: badges / icons go under the title */
+  @media screen and (max-width: 520px) {
+    .footerAppTitleCol,
+    .footerAppBadgesCol,
+    .footerSocialTitleCol,
+    .footerSocialIconsCol {
+      display: block !important;
+      width: 100% !important;
+      text-align: left !important;
+      padding-right: 0 !important;
+    }
+   
+    .footerAppBadgesCol,
+    .footerSocialIconsCol {
+      padding-top: 15px !important;
+    }
+   
+    /* align="right" works like a float – back to the left under the title */
+    .footerAppBadges,
+    .footerSocialIcons {
+      float: none !important;
+      margin: 0 !important;
+    }
+   
+    .footerAppBadge {
+      line-height: 32px !important;
+    }
+   
+    /* social icons under the title: first icon in line with the title, 14px between the icons */
+    .footerSocialIcons .footerSocialIcon {
+      padding-left: 0 !important;
+      padding-right: 14px !important;
+    }
+  }
+   
+  @media screen and (max-width: 400px) {
+    .footerAppBadgeGap {
+      width: 10px !important;
+    }
+  }

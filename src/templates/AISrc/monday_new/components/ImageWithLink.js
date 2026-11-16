@@ -11,6 +11,7 @@ const ImageWithLink = ({
   tableContainer = false,
   type,
   background = '',
+  block = false,
 }) => {
   const tableAttributes = `cellspacing="0" cellpadding="0" border="0" width="100%"`;
 
@@ -21,10 +22,10 @@ const ImageWithLink = ({
 
   html += isVideo
     ? `<a href="${href}"><video src="${src}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" autoplay muted loop playsinline></video></a>`
-    : `<a href="${href}"><img src="${src}" alt="${alt}" width="100%" style="vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
+    : `<a href="${href}"${block ? ' style="display:block;line-height:0;font-size:0;"' : ''}><img src="${src}" alt="${alt}" width="100%" style="${block ? 'display:block;border:0;' : ''}vertical-align: ${imgVAlign}; max-width: 100%;" loading="lazy"></a>`;
 
   if (insideTr) {
-    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}${background ? ` bgcolor="${background}"` : ''} style="border:0;mso-border-alt:none;${background ? `background-color:${background};` : ''}">${html}</td></tr>`;
+    html = `<tr><td ${tdClass ? `class="${tdClass}"` : ''} align=${align} vAlign=${vAlign}${background ? ` bgcolor="${background}"` : ''} style="border:0;mso-border-alt:none;${block ? 'font-size:0;line-height:0;mso-line-height-rule:exactly;' : ''}${background ? `background-color:${background};` : ''}">${html}</td></tr>`;
   }
 
   if (insideTable) {

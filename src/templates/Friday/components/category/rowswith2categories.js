@@ -1,6 +1,10 @@
 import { Space } from '../Space.js';
 import { Paragraph } from '../Paragraph.js';
 
+const OVERRIDE_GROUPS = {
+	dach: ['chde', 'de', 'at'],
+};
+
 // Default number of tiles per row. Can be overridden per block with `category.columns`.
 const COLUMNS = 2;
  
@@ -52,11 +56,36 @@ const getHref = ({ item, getCategoryLink, add_utm, fallbackHref }) => {
 	return typeof add_utm === 'function' ? add_utm(rawHref) : rawHref;
 };
  
-const getName = ({ item, getCategoryTitle }) => {
+
+const getOverride = (overrides, country) => {
+	if (!overrides || typeof overrides !== 'object' || !country) return undefined;
+
+	const slug = String(country).trim().toLowerCase();
+	let fromGroup;
+
+	for (const [key, value] of Object.entries(overrides)) {
+		if (value === undefined || value === null || String(value).trim() === '') continue;
+
+		const shops = String(key)
+			.split(',')
+			.map((part) => part.trim().toLowerCase())
+			.flatMap((part) => OVERRIDE_GROUPS[part] ?? [part]);
+
+		if (String(key).trim().toLowerCase() === slug) return value;
+		if (fromGroup === undefined && shops.includes(slug)) fromGroup = value;
+	}
+
+	return fromGroup;
+};
+
+const getName = ({ item, getCategoryTitle, country }) => {
+	const override = getOverride(item?.overrides, country);
+	if (override !== undefined) return override;
+
 	if (!item?.name) return '';
- 
+
 	const translated = typeof getCategoryTitle === 'function' ? getCategoryTitle(item.name) : item.name;
- 
+
 	return translated ?? item.name;
 };
 
@@ -140,6 +169,7 @@ export const render = ({
 	getCategoryTitle,
 	getPhrase,
 	add_utm,
+	country
 }) => {
 	const columns = category?.columns ?? COLUMNS;
 	const rows = toRows(Array.isArray(category?.categories) ? category.categories : [], columns);
@@ -154,8 +184,14 @@ export const render = ({
 		columns,
 	});
 	const showText = category?.showTileText ?? false;
+	// CTA text: tileCta.query (first row of a tableQuery, e.g. "Shop ›" from the campaign tab)
+	// -> tileCta.phrase (static phrase) -> static 'Shop now'
+	const ctaQueryRow = category?.tileCta?.query ? queries?.[category.tileCta.query] : null;
+	const ctaFromQuery = Array.isArray(ctaQueryRow) ? ctaQueryRow[0] : ctaQueryRow;
 	const ctaText = showText
-		? (category?.tileCta?.phrase ? getPhrase(category.tileCta.phrase) : getPhrase('Shop now'))
+		? (ctaFromQuery && String(ctaFromQuery).trim()
+			? String(ctaFromQuery).trim()
+			: (category?.tileCta?.phrase ? getPhrase(category.tileCta.phrase) : getPhrase('Shop now')))
 		: '';
 	// Tile text layout:
 	//   'stacked' (default) – name centered, CTA centered underneath
@@ -163,13 +199,15 @@ export const render = ({
 	const textInRow = category?.tileTextLayout === 'inRow';
 	const nameColor = category?.tileNameColor;
 	const ctaColor = category?.tileCtaColor;
+	// text-decoration of the tile CTA link ('none' = no underline), default underline
+	const ctaDecoration = category?.tileCtaDecoration ?? 'underline';
 	const spaceBetweenRows = category?.spaceBetweenRows ?? 'newsletterBottom35px';
 
 	const textStackMode = category?.tileTextStack ?? 'auto';
 	const stackText = showText && textInRow && textStackMode !== 'never' && (
 		textStackMode === 'always' ||
 		rows.some((row) => row.some((item, columnId) => item && textCollides({
-			name: getName({ item, getCategoryTitle }),
+			name: getName({ item, getCategoryTitle, country  }),
 			ctaText,
 			width: layout.widths[columnId],
 			category,
@@ -218,7 +256,7 @@ export const render = ({
 			}
  
 			const href = getHref({ item, getCategoryLink, add_utm, fallbackHref: categoryHref });
-			const name = getName({ item, getCategoryTitle });
+			const name = getName({ item, getCategoryTitle, country });
 			const src = getSrc(item);
 			const imgHeight = getImageHeight({ category, width });
  
@@ -230,45 +268,49 @@ export const render = ({
 			`;
  
 			if (showText && textInRow) {
-				// stackText = false: name (left) + CTA (right) in one line
-				// stackText = true:  name, CTA underneath, both left (same as the mobile version)
-				// Names wrap only between words, never inside a word.
 				const nameLink = `<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>`;
-				const ctaLink = `<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>`;
+				const ctaLink = `<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: ${ctaDecoration};">${ctaText}</a>`;
 				const nameStyle = `text-align: left; font-size: 20px; font-weight: 600; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} word-break: normal; overflow-wrap: break-word; hyphens: manual; color: ${nameColor ?? '#750000'};`;
 				const ctaStyle = `font-weight: 600; ${msoLine(MSO_NAME_LINE)} word-break: normal; overflow-wrap: break-word; hyphens: manual;`;
 
-				const textTable = stackText
-					? `
-						<tr>
-							<td class="frenchDaysCategoryName categoryTileInRowName" align="left" valign="top" style="padding: 0; vertical-align: top; ${nameStyle}">
-								${nameLink}
-							</td>
-						</tr>
-						<tr>
-							<td class="categoryTileInRowCta" align="left" valign="top" style="padding: 6px 0 0 0; text-align: left; vertical-align: top; ${ctaStyle}">
-								${ctaLink}
-							</td>
-						</tr>
-					`
-					: `
-						<tr>
-							<td class="frenchDaysCategoryName categoryTileInRowName" align="left" valign="middle" style="padding: 0 ${NAME_CTA_GAP}px 0 0; vertical-align: middle; ${nameStyle}">
-								${nameLink}
-							</td>
-							<td class="categoryTileInRowCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; ${ctaStyle}">
-								${ctaLink}
-							</td>
-						</tr>
+				if (stackText) {
+					// Name and CTA in SEPARATE rows of the outer table: the name row is as tall as the
+					// tallest name in the row, so every CTA starts at the same height,
+					// even when the neighbour's name wraps to two lines.
+					nameCells += `
+						<td class="newsletterCategoryTile categoryTileText" width="${width}" valign="top" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: top;">
+							<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
+								<tr>
+									<td class="frenchDaysCategoryName categoryTileInRowName" align="left" valign="top" style="padding: 0; vertical-align: top; ${nameStyle}">
+										${nameLink}
+									</td>
+								</tr>
+							</table>
+						</td>
 					`;
 
-				nameCells += `
-					<td class="newsletterCategoryTile categoryTileText" width="${width}" valign="${stackText ? 'top' : 'middle'}" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: ${stackText ? 'top' : 'middle'};">
-						<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
-							${textTable}
-						</table>
-					</td>
-				`;
+					ctaCells += `
+						<td class="newsletterCategoryTile categoryTileInRowCta" width="${width}" align="left" valign="top" style="width: ${widthPct}; padding: 6px 0 0 0; text-align: left; vertical-align: top; ${ctaStyle}">
+							${ctaLink}
+						</td>
+					`;
+				} else {
+					// name (left) + CTA (right) in one line
+					nameCells += `
+						<td class="newsletterCategoryTile categoryTileText" width="${width}" valign="middle" style="width: ${widthPct}; padding: 10px 0 0 0; vertical-align: middle;">
+							<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
+								<tr>
+									<td class="frenchDaysCategoryName categoryTileInRowName" align="left" valign="middle" style="padding: 0 ${NAME_CTA_GAP}px 0 0; vertical-align: middle; ${nameStyle}">
+										${nameLink}
+									</td>
+									<td class="categoryTileInRowCta" align="right" valign="middle" style="padding: 0; text-align: right; vertical-align: middle; white-space: nowrap; ${ctaStyle}">
+										${ctaLink}
+									</td>
+								</tr>
+							</table>
+						</td>
+					`;
+				}
 			} else if (showText) {
 				nameCells += `
 					<td class="newsletterCategoryTile frenchDaysCategoryName categoryTileStackedName" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 16px; font-size: 20px; font-weight: 700; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} vertical-align: top; word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
@@ -278,7 +320,7 @@ export const render = ({
  
 				ctaCells += `
 					<td class="newsletterCategoryTile categoryTileStackedCta" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 6px; font-size: 16px; line-height: 1.25; ${msoLine(MSO_STACKED_CTA_LINE)} vertical-align: top; word-break: break-word; overflow-wrap: break-word;">
-						<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: underline;">${ctaText}</a>
+						<a href="${href}" class="frenchDaysCategoryCta" style="color: ${ctaColor ?? '#000000'}; text-decoration: ${ctaDecoration};">${ctaText}</a>
 					</td>
 				`;
 			}
@@ -295,7 +337,7 @@ export const render = ({
             <tr>
               ${nameCells}
             </tr>
-            ${textInRow ? '' : `
+            ${textInRow && !stackText ? '' : `
             <tr>
               ${ctaCells}
             </tr>

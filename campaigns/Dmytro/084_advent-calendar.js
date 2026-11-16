@@ -1,12 +1,14 @@
 // Campaign generated from form
 const campaignTranslationsSheet = '2026::Advent_calendar_popups';
+const adventSheet = '2026::01.12.26 - Advent Calendar'
 const T = campaignTranslationsSheet;
 
 const tableQueries = [
-  { tableRange: '16:17', name: 'TopImageTitle' },
-  { tableRange: '23',    name: 'intro' },
-  { tableRange: '24:27', name: 'paragraph' },
-  { tableRange: '28:29', name: 'condition' },
+  { tableRange: '16:17', name: 'TopImageTitle', tableName: adventSheet },
+  { tableRange: '87',    name: 'intro', tableName: adventSheet },
+  { tableRange: '37:38', name: 'condition', tableName: adventSheet },
+  { tableRange: '30:33', name: 'icons',      tableName: adventSheet },
+  { tableRange: '34:36', name: 'dailyDeals', tableName: adventSheet },
 
   // ===== Shared popup texts =====
   { tableRange: '2', name: 'SeeConditions', tableName: T },
@@ -67,17 +69,18 @@ const tableQueries = [
 const links = {
   TopImage_src: getImageUrl('uk_advent_img.png'),
   TopImage_src_lp: translateImage({value: '_advent_lp.png'}),
-  TopImage_href: translateLink({ value: 'content/advent-calendar' }),
+  TopImage_href: translateLink({ value: 'content/lp26-12-01' }),
+  TopImageTitle_href: translateLink({ value: 'content/lp26-12-01' }),
   Banner_1: translateLink({ value: 'content/lp26-08-28' }),
   Banner_1_Image: translateImage({ value: '20260828b.png' }),
   Banner_2: translateLink({ value: 'content/lp26-08-27' }),
   Banner_2_Image: translateImage({ value: '20260827b.png' }),
   Timer_href: translateLink({ value: 'content/lp26-08-31' }),
   columnsImage_src: translateImage({ value: '_advent_cols.png' }),
-  columnsImage_href: translateLink({ value: 'content/advent-calendar' }),
+  columnsImage_href: translateLink({ value: 'content/lp26-12-01' }),
   daily_deals_src: translateImage({ value: '_advent_footer.png' }),
-  daily_deals_href: translateLink({ value: 'content/advent-calendar' }),
-  Intro_cta_href: translateLink({ value: 'content/advent-calendar' }),
+  daily_deals_href: translateLink({ value: 'content/lp26-12-01' }),
+  Intro_cta_href: translateLink({ value: 'content/lp26-12-01' }),
 };
 
 const TopImage_data = {
@@ -104,6 +107,28 @@ const intro_data = {
     backgroundColor: "#750000",
   }
 }
+
+const additionalCss = `
+
+@media screen and (max-width:768px){
+  .advent-icons__label { font-size: 13px !important; line-height: 19px !important; }
+  .advent-deals__text { font-size: 21px !important; line-height: 28px !important; max-width: 260px !important; }
+  .newsletterParagraph {
+    font-size: 16px !important;}
+    .advent-icons__label { padding-top: 10px !important; font-size: 13px !important; line-height: 19px !important; }
+}
+`;
+
+const additionalCssLp = `
+
+@media screen and (max-width:768px){
+  #newsletter .advent-icons__label { font-size: 13px !important; line-height: 19px !important; }
+  #newsletter .advent-deals__text { font-size: 21px !important; line-height: 28px !important; max-width: 260px !important; }
+ #newsletter .newsletterParagraph {
+    font-size: 16px !important;}
+  #newsletter .advent-icons__label { padding-top: 10px !important; font-size: 13px !important; line-height: 19px !important; }
+}
+`
 
 export default new entities.Campaign({
   startId: "47412",
@@ -136,6 +161,8 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       TopImage_data: TopImage_data,
+      optimizeCss: true,
+			additionalCss: additionalCss,
     },
     {
       name: "Landing",
@@ -153,6 +180,7 @@ export default new entities.Campaign({
       links: links,
       tableQueries: tableQueries,
       TopImage_data: TopImage_data,
+      additionalCss: additionalCssLp,
     },
   ],
 });

@@ -170,6 +170,7 @@ const BlackWeekFirst = async ({
 
       ${CategoriesAfterIntroElement}
 
+<<<<<<< HEAD
       
       <tr>
       <td valign="top" style="padding:0;border:0;">
@@ -177,6 +178,22 @@ const BlackWeekFirst = async ({
       </td>
       </tr>
       </table>
+=======
+      <tr>
+        <td valign="top" style="padding:0;border:0;">
+          ${!disableSE
+            ? SoonEndingBannersHandler({
+                links,
+                shopLimitedTimeDeals,
+                country,
+              })
+            : ''}
+          ${FooterElement}
+        </td>
+      </tr>
+
+    </table>
+>>>>>>> c422e63d8ea6c717f214eb5cf6f654cf27eab67a
   `;
 };
 

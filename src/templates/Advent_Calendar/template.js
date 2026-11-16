@@ -13,6 +13,8 @@ import { Space } from './components/Space.js';
 import { ImageWithLink } from './components/ImageWithLink.js';
 
 import { AdventConditionsBox } from './components/advent-popup/index.js';
+import { AdventIcons } from './components/adventIcons.js';
+import { AdventDailyDeals } from './components/adventDailyDeals.js';
 
 const AdventCalendar2026 = async ({
   links,
@@ -31,6 +33,7 @@ const AdventCalendar2026 = async ({
   timer,
   TopImageTitle_data,
   TopImage_data,
+  selectedCampaign,
 
   // functions passed:
   getHeader,
@@ -40,6 +43,7 @@ const AdventCalendar2026 = async ({
   getPhrase,
   getProductById,
   add_utm,
+  footer_theme
 }) => {
   // console.log(categories);
   console.log("advent:", queries)
@@ -50,7 +54,7 @@ const AdventCalendar2026 = async ({
   const shopNow = getPhrase('Shop now');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type, getCategoryLink });
+  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type, getCategoryLink, shopNow  });
 
   const introCta_href = links.Intro_cta_href.includes("content/") ? links.Intro_cta_href : getIntroCtaHref({
     links,
@@ -92,21 +96,18 @@ const AdventCalendar2026 = async ({
     getPhrase,
   };
 
-  const columnsImage = ImageWithLink({
+  const columnsImage = AdventIcons({
+    queries,
+    type,
     href: links?.columnsImage_href,
-    src: links?.columnsImage_src,
-    insideTr: true,
-    alt: 'Advantages',
-    tdClass: "newsletterContainer40px",
+    tdClass: 'newsletterContainer40px',
   });
-
-  const dailyDealsImage = ImageWithLink({
+  
+  const dailyDealsImage = AdventDailyDeals({
+    queries,
+    type,
     href: links?.daily_deals_href,
-    src: links?.daily_deals_src,
-    insideTr: true,
-    alt: 'Daily Deals',
-    
-    tdClass: "newsletterContainer40px",
+    tdClass: 'newsletterContainer40px',
   });
 
   const isAfterFreebies = introPosition === 'afterFreebies';
@@ -119,7 +120,7 @@ const AdventCalendar2026 = async ({
     isAfterTimer && (timerPosition === 'afterCategories' || timerPosition === 'underCategories') ? IntroElement : '';
 
 
-  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory: false });
+  const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory: false, selectedCampaign,  theme: footer_theme  });
 
   return `
     ${HeaderElement}
@@ -131,7 +132,7 @@ const AdventCalendar2026 = async ({
     
     <tr>
       <td style="color: ${TopImageTitle_data.color}; text-align: center;" class="newsletterContainer40px">
-        <a style="color: ${TopImageTitle_data.color}" class="newsletterHrefTit" href="#">
+        <a style="color: ${TopImageTitle_data.color}" class="newsletterHrefTit" href="${links.TopImageTitle_href}">
         <h4 style="color:${TopImageTitle_data.color};" class="newsletterTitleH1">Advent Calendar</h4>
         </a>
       </td>

@@ -6,6 +6,8 @@
 //   window.AdventPopup.open(id)  -> opens <template data-adv-popup="id">
 //   window.AdventPopup.close()
 //   window.AdventPopup.has(id)   -> true if that popup exists
+//   window.AdventPopup.notice('past' | 'future') -> small message for a few seconds
+//                                    (texts from <template data-adv-notice>, see AdventNotices)
 //
 // Handles: grey overlay, click outside / X / Esc to close, copy code,
 // "See conditions" (fills the AdventConditionsBox), dataLayer events.
@@ -19,8 +21,9 @@
 //     (wheel, touch swipe and scroll keys) – the scrollbar stays in place
 //   - "Code copied" is announced to screen readers
 // ============================================================
-export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar' } = {}) {
-  const opts = JSON.stringify({ conditionsBoxId, trackingCategory });
+// noticeMs: how long the small "past / future door" message stays (ms)
+export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar', noticeMs = 5000, closeLabel = 'Close' } = {}) {
+  const opts = JSON.stringify({ conditionsBoxId, trackingCategory, noticeMs, closeLabel });
  
   return `
 <script>
@@ -28,7 +31,9 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   if (window.AdventPopup) return;
   var OPTS = ${opts};
  
-  function track(action, label, value) {
+  // eventOption = the day (door number) of the open popup, e.g. '18'
+  // eventID     = category name of the popup / the voucher code (see trackId in parts.js)
+  function track(action, label, value, id) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'custom_event',
@@ -36,12 +41,44 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       eventAction: action,
       eventLabel: label,
       eventValue: value,
-      eventOption: '',
-      eventID: ''
+      eventOption: current === null ? '' : String(current),
+      eventID: id !== undefined ? String(id) : currentTrackId
     });
   }
+  var lastVerify = 0;
+  // code = the copied voucher code -> eventID
+  function trackVerify(code) {        // copy button + manual copy of the code, once per action
+    if (Date.now() - lastVerify < 800) return;
+    lastVerify = Date.now();
+    track('Verify', 'Promo', 'Voucher', code || currentTrackId);
+  }
+  function codeOf(el) {
+    var line = el && el.closest && el.closest('.adv-pop__code');
+    var v = line && line.querySelector('.adv-pop__code-value');
+    return v ? (v.textContent || '').trim() : '';
+  }
  
-  var overlay, content, live, current = null, closeTimer = null, lastFocus = null;
+  var overlay, content, live, current = null, currentTrackId = '', closeTimer = null, lastFocus = null;
+  var lockX = 0, lockY = null;   // page position while the popup is open
+ 
+  // Hide the page scrollbar while the popup is open. The scrollbar's width is added
+  // as padding to <body>, so the page behind doesn't shift sideways.
+  var savedOverflow = null, savedPad = '';
+  function hideScrollbar() {
+    if (savedOverflow !== null) return;
+    var html = document.documentElement, body = document.body;
+    var sbw = window.innerWidth - html.clientWidth;          // 0 on phones (no visible scrollbar)
+    savedOverflow = html.style.overflow;
+    savedPad = body.style.paddingRight;
+    html.style.overflow = 'hidden';
+    if (sbw > 0) body.style.paddingRight = ((parseFloat(window.getComputedStyle(body).paddingRight) || 0) + sbw) + 'px';
+  }
+  function showScrollbar() {
+    if (savedOverflow === null) return;
+    document.documentElement.style.overflow = savedOverflow;
+    document.body.style.paddingRight = savedPad;
+    savedOverflow = null;
+  }
  
   function getTpl(id) {
     return document.querySelector('template[data-adv-popup="' + String(id) + '"]');
@@ -89,13 +126,22 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     // the page behind must not scroll while the popup is open (scrollbar stays visible)
     overlay.addEventListener('wheel', stop, { passive: false });
     overlay.addEventListener('touchmove', stop, { passive: false });
+    // anything else that still moves the page (dragging the scrollbar, scripts,
+    // browser gestures) -> put it straight back where it was when the popup opened
+    window.addEventListener('scroll', function () {
+      if (!isOpen() || lockY === null) return;
+      if (Math.abs((window.pageYOffset || 0) - lockY) > 1 || Math.abs((window.pageXOffset || 0) - lockX) > 1) {
+        try { window.scrollTo({ left: lockX, top: lockY, behavior: 'instant' }); }
+        catch (err) { window.scrollTo(lockX, lockY); }
+      }
+    }, { passive: true });
  
     // copy icon (buildCopyIcon) handles copying + notification itself;
     // capture phase so we still track it before its onclick stops the event
     content.addEventListener('click', function (e) {
       var wrap = e.target.closest('.adv-pop__copy-wrap');
       if (wrap && e.target.closest('button')) {
-        track('Verify', 'Promo', 'Voucher');
+        trackVerify(codeOf(wrap));
         var msg = wrap.getAttribute('data-copied') || '';
         live.textContent = '';
         setTimeout(function () { live.textContent = msg; }, 100);
@@ -109,7 +155,19 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
  
       if (t.closest('.adv-pop__cond')) { showConditions(); return; }
  
-      if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
+      if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');   // "Shop now"
+    });
+    // "Shop now" opened with the middle mouse button
+    content.addEventListener('auxclick', function (e) {
+      if (e.button === 1 && e.target.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');
+    });
+    // code highlighted and copied by hand (Ctrl+C / long press -> Copy) counts as Verify too
+    document.addEventListener('copy', function () {
+      if (!isOpen()) return;
+      var sel = window.getSelection && window.getSelection();
+      var node = sel && sel.anchorNode;
+      var el = node && (node.nodeType === 1 ? node : node.parentElement);
+      if (el && el.closest && el.closest('.adv-pop__code') && content.contains(el)) trackVerify(codeOf(el));
     });
  
     document.addEventListener('keydown', function (e) {
@@ -141,6 +199,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     ensureOverlay();
     clearTimeout(closeTimer);
     current = id;
+    currentTrackId = tpl.getAttribute('data-track-id') || '';
     if (!isOpen()) lastFocus = document.activeElement;
     content.className = 'adv-pop__content adv-pop--' + (tpl.getAttribute('data-layout') || 'deal') +
       (tpl.getAttribute('data-text') === 'left' ? ' adv-pop--text-left' : '');
@@ -148,6 +207,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     content.setAttribute('data-popup', String(id));
     content.innerHTML = '';
     content.appendChild(tpl.content.cloneNode(true));
+    if (!isOpen()) { lockX = window.pageXOffset || 0; lockY = window.pageYOffset || 0; hideScrollbar(); }   // freeze the page here
     overlay.classList.remove('is-closing');
     overlay.classList.add('is-open');
  
@@ -168,6 +228,8 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   function close(focusTo) {
     if (!overlay || !overlay.classList.contains('is-open')) return;
     overlay.classList.add('is-closing');
+    lockY = null;                  // page can scroll again
+    showScrollbar();
     var target = focusTo && focusTo.nodeType === 1 ? focusTo : lastFocus;
     lastFocus = null;
     closeTimer = setTimeout(function () {
@@ -177,6 +239,54 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
         try { target.focus({ preventScroll: true }); } catch (err) { target.focus(); }
       }
     }, 400);
+  }
+ 
+  // ===== Small notice (past / future door) =====
+  var note, noteBody, noteTimer, noteCloseTimer;
+  var X_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M1 1 15 15M15 1 1 15"/></svg>';   // thin X (design)
+ 
+  function noteOpen() { return !!note && note.classList.contains('is-open') && !note.classList.contains('is-closing'); }
+ 
+  function ensureNote() {
+    if (note) return;
+    note = document.createElement('div');
+    note.className = 'adv-note';
+    note.innerHTML =
+      '<div class="adv-note__box" role="status" aria-live="polite">' +
+        '<div class="adv-note__body"></div>' +
+        '<button type="button" class="adv-note__close">' + X_ICON + '</button>' +
+      '</div>';
+    note.querySelector('.adv-note__close').setAttribute('aria-label', OPTS.closeLabel);
+    noteBody = note.querySelector('.adv-note__body');
+    document.body.appendChild(note);
+    note.addEventListener('click', function (e) {
+      if (e.target === note || e.target.closest('.adv-note__close')) hideNote();   // outside / X
+    });
+    note.addEventListener('wheel', function (e) { if (noteOpen()) e.preventDefault(); }, { passive: false });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && noteOpen()) hideNote();
+    });
+  }
+ 
+  function showNote(kind) {
+    var tpl = document.querySelector('template[data-adv-notice="' + kind + '"]');
+    if (!tpl) return false;
+    ensureNote();
+    clearTimeout(noteTimer); clearTimeout(noteCloseTimer);
+    noteBody.innerHTML = '';
+    noteBody.appendChild(tpl.content.cloneNode(true));
+    note.classList.remove('is-open', 'is-closing');
+    void note.offsetWidth;                       // restart the animation on a quick 2nd click
+    note.classList.add('is-open');
+    noteTimer = setTimeout(hideNote, OPTS.noticeMs);   // disappears by itself
+    return true;
+  }
+ 
+  function hideNote() {
+    if (!note || !note.classList.contains('is-open')) return;
+    clearTimeout(noteTimer);
+    note.classList.add('is-closing');
+    noteCloseTimer = setTimeout(function () { note.classList.remove('is-open', 'is-closing'); }, 300);
   }
  
   function showConditions() {
@@ -216,6 +326,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   window.AdventPopup = {
     open: open,
     close: function () { close(); },
+    notice: showNote,
     has: function (id) { return !!getTpl(id); }
   };
 })();

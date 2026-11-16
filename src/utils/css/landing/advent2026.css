@@ -94,6 +94,11 @@ table {
   padding-bottom: 40px;
 }
 
+#newsletter .newsletterBottom30px {
+  padding-bottom: 30px;
+}
+
+
 #newsletter .newsletterContainer {
   padding-left: 20px;
   padding-right: 20px;
@@ -123,7 +128,6 @@ table {
   font-size: 18px;
   line-height: 1.2;
   font-weight: 600;
-  text-transform: uppercase;
 }
 
 #newsletter .newsletterCode {
@@ -482,6 +486,10 @@ table {
   }
 
   #newsletter .newsletterBottom35px {
+    padding-bottom: 20px;
+  }
+
+  #newsletter .newsletterBottom30px {
     padding-bottom: 20px;
   }
 

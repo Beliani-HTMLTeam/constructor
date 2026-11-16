@@ -3,17 +3,24 @@ import { getImageUrl } from '../../../../utils/ImageManager.js';
 const toSlug = (name) =>
   name
     .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '');
 
 const buildTileSrc = ({ tiles, itemName, country }) => {
-  const bg = tiles.background ?? '';
-  const text = tiles.text ?? '';
+  const bg = (tiles.background ?? '').toLowerCase();
+  const text = (tiles.text ?? '').toLowerCase();
   const slug = (country ?? '').toLowerCase();
   const name = toSlug(itemName);
   const dimensions = tiles.dimensions ? `${tiles.dimensions}/` : '';
-  // formula: /category_tiles/${bg}/${text}/[${dimensions}]/${slug}_${name}.jpg
-  return getImageUrl(`category_tiles/${bg}/${text}/${dimensions}${slug}_${name}.png`, true);
+
+  const roundedPath = tiles.rounded === true
+    ? `rounded/${tiles.borderRadius ?? '0px'}/`
+    : '';
+
+  return getImageUrl(
+    `category_tiles/${bg}/${text}/${roundedPath}${dimensions}${slug}_${name}.png`,
+    true,
+  );
 };
 
 const renderTileCard = ({ item, tiles, color, getCategoryLink, getCategoryTitle, country, side }) => {
@@ -78,9 +85,9 @@ export const render = ({ tiles, color, getCategoryLink, getCategoryTitle, countr
     html += `
       <tr>
         <td class="newsletterContainer"${styleStr ? ` style="${styleStr}"` : ''}>
-          ${paddingBottomClass 
-            ? `<table cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td class="${paddingBottomClass}">${tilesContent}</td></tr></tbody></table>` 
-            : tilesContent}
+          ${paddingBottomClass
+        ? `<table cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td class="${paddingBottomClass}">${tilesContent}</td></tr></tbody></table>`
+        : tilesContent}
         </td>
       </tr>
     `;
