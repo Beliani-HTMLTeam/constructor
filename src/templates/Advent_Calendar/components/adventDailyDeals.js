@@ -34,7 +34,7 @@ export function AdventDailyDeals({
     lineHeight: '28px',
     fontWeight: '600',
     textTransform: 'none',
-    borderRadius: '0px',
+    borderRadius: '4px',
     paddingX: 28,
     paddingTop: 15,
     paddingBottom: 15,

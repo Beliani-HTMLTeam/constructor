@@ -243,7 +243,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
  
   // ===== Small notice (past / future door) =====
   var note, noteBody, noteTimer, noteCloseTimer;
-  var X_ICON = '<span aria-hidden="true">X</span>';   // plain "X" as in the design
+  var X_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M1 1 15 15M15 1 1 15"/></svg>';   // thin X (design)
  
   function noteOpen() { return !!note && note.classList.contains('is-open') && !note.classList.contains('is-closing'); }
  
