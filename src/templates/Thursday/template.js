@@ -71,6 +71,8 @@ const Thursday = async ({
   const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText, getCategoryLink, links });
   const TimerElement = await TimerHandler({
     Inside,
+    date,
+    selectedCampaign,
     queries,
     links,
     timer,

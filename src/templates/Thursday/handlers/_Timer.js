@@ -3,6 +3,18 @@ import { Space } from '../components/Space';
 import { resolveTimerTheme } from '../helpers/timerColors.js';
 import languages from "@config/languages"
 
+// Sunday of the campaign week: '03.12.2026' -> '2026-12-06' (null for a missing / broken date)
+const getCampaignWeekSunday = (campaignDate) => {
+	const [day, month, year] = String(campaignDate ?? '').split('.').map(Number);
+	if (!day || !month || !year) return null;
+
+	const date = new Date(Date.UTC(year, month - 1, day));
+	// getUTCDay: 0 = Sunday
+	date.setUTCDate(date.getUTCDate() + ((7 - date.getUTCDay()) % 7));
+
+	return date.toISOString().slice(0, 10);
+};
+
 const buildProloTimerScript = ({ deadline, timezone, timerLabels }) => {
 	const wallClock = `${deadline}T23:59:00`;
 
@@ -86,6 +98,8 @@ const buildProloTimerScript = ({ deadline, timezone, timerLabels }) => {
 
 export const TimerHandler = async ({
 	Inside,
+	date,
+	selectedCampaign,
 	queries,
 	links,
 	timer,
@@ -99,7 +113,13 @@ export const TimerHandler = async ({
 	getPhrase,
 	add_utm,
 }) => {
-	if (!Inside || Inside.type !== 'timer' || !timer?.deadline) {
+	if (!Inside || Inside.type !== 'timer' || !timer) {
+		return '';
+	}
+
+	// timer.deadline, or the Sunday of the campaign week (23:59:00 in the market's time zone)
+	const deadline = timer.deadline || getCampaignWeekSunday(date || selectedCampaign?.date);
+	if (!deadline) {
 		return '';
 	}
 
@@ -116,11 +136,11 @@ export const TimerHandler = async ({
 		getPhrase('timer-seconds'),
 	];
 
-	const base = (shop?.origin ?? 'https://prologistics.info') + '/timer.gif';
+	const base = (shop?.origin ?? 'https://prologistics.info').replace(/\/+$/, '') + '/timer.gif';
 
 	let link =
 		base +
-		`?deadline=${timer.deadline}T23:59:00` +
+		`?deadline=${deadline}T23:59:00` +
 		`&timezone=${timezone}` +
 		// in prolo timer generator pt uses "portugal" instead of portugese
 		`&lang=${shop?.slug === 'PT' ? 'portugal' : languages[country]?.title}` +
@@ -248,7 +268,7 @@ export const TimerHandler = async ({
 			freeText,
 			ctaText,
 			type: type,
-			script: buildProloTimerScript({ deadline: timer.deadline, timezone, timerLabels }),
+			script: buildProloTimerScript({ deadline, timezone, timerLabels }),
 		})}
       `
 		: '';
