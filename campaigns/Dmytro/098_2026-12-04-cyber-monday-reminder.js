@@ -71,6 +71,7 @@ const button = {
 
 const timer = {
 	deadline: '2026-12-06',
+	// utmContent: 'advent_inside_banner',
 };
 
 const timerInside = {
