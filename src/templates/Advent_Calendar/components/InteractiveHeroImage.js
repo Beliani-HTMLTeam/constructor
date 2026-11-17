@@ -42,31 +42,31 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   // Day 1:  advent_open_1_glow (door 1 glows) -> click -> advent_open_1 (no glow)
   // Day 2:  advent_open_2_glow (door 2 glows) -> click -> advent_open_2 (no glow) ...
   const adventImages = [
-    `${adventBase}advent_all_closed.webp?ver=19`,      // 0 - all closed (before 1 Dec)
-    `${adventBase}advent_open_1.webp?ver=20`,     // 1
-    `${adventBase}advent_open_2.webp?ver=20`,     // 2
-    `${adventBase}advent_open_3.webp?ver=17`,     // 3
-    `${adventBase}advent_open_4.webp?ver=17`,     // 4
-    `${adventBase}advent_open_5.webp?ver=17`,     // 5
-    `${adventBase}advent_open_6.webp?ver=17`,     // 6
-    `${adventBase}advent_open_7.webp?ver=17`,     // 7
-    `${adventBase}advent_open_8.webp?ver=17`,     // 8
-    `${adventBase}advent_open_9.webp?ver=17`,     // 9
-    `${adventBase}advent_open_10.webp?ver=17`,    // 10
-    `${adventBase}advent_open_11.webp?ver=17`,    // 11
-    `${adventBase}advent_open_12.webp?ver=17`,    // 12
-    `${adventBase}advent_open_13.webp?ver=17`,    // 13
-    `${adventBase}advent_open_14.webp?ver=17`,    // 14
-    `${adventBase}advent_open_15.webp?ver=17`,    // 15
-    `${adventBase}advent_open_16.webp?ver=17`,    // 16
-    `${adventBase}advent_open_17.webp?ver=17`,    // 17
-    `${adventBase}advent_open_18.webp?ver=17`,    // 18
-    `${adventBase}advent_open_19.webp?ver=17`,    // 19
-    `${adventBase}advent_open_20.webp?ver=17`,    // 20
-    `${adventBase}advent_open_21.webp?ver=17`,    // 21
-    `${adventBase}advent_open_22.webp?ver=17`,    // 22
-    `${adventBase}advent_open_23.webp?ver=17`,    // 23
-    `${adventBase}advent_open_24.webp?ver=17`,    // 24
+    `${adventBase}advent_all_closed.webp?ver=40`,      // 0 - all closed (before 1 Dec)
+    `${adventBase}advent_open_1.webp?ver=40`,     // 1
+    `${adventBase}advent_open_2.webp?ver=40`,     // 2
+    `${adventBase}advent_open_3.webp?ver=40`,     // 3
+    `${adventBase}advent_open_4.webp?ver=40`,     // 4
+    `${adventBase}advent_open_5.webp?ver=40`,     // 5
+    `${adventBase}advent_open_6.webp?ver=40`,     // 6
+    `${adventBase}advent_open_7.webp?ver=40`,     // 7
+    `${adventBase}advent_open_8.webp?ver=40`,     // 8
+    `${adventBase}advent_open_9.webp?ver=40`,     // 9
+    `${adventBase}advent_open_10.webp?ver=40`,    // 10
+    `${adventBase}advent_open_11.webp?ver=40`,    // 11
+    `${adventBase}advent_open_12.webp?ver=40`,    // 12
+    `${adventBase}advent_open_13.webp?ver=40`,    // 13
+    `${adventBase}advent_open_14.webp?ver=40`,    // 14
+    `${adventBase}advent_open_15.webp?ver=40`,    // 15
+    `${adventBase}advent_open_16.webp?ver=40`,    // 16
+    `${adventBase}advent_open_17.webp?ver=40`,    // 17
+    `${adventBase}advent_open_18.webp?ver=40`,    // 18
+    `${adventBase}advent_open_19.webp?ver=40`,    // 19
+    `${adventBase}advent_open_20.webp?ver=40`,    // 20
+    `${adventBase}advent_open_21.webp?ver=40`,    // 21
+    `${adventBase}advent_open_22.webp?ver=40`,    // 22
+    `${adventBase}advent_open_23.webp?ver=40`,    // 23
+    `${adventBase}advent_open_24.webp?ver=40`,    // 24
   ];
  
   // Glow frames: index N = doors 1..N open + door N+1 glowing (today's door, not opened yet).
@@ -76,30 +76,30 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   // A glow frame that fails to load (not uploaded yet) falls back to the frame without glow.
   // null = no glow frame for that day -> the frame without glow is used.
   const adventGlowImages = [
-    `${adventBase}advent_open_1_glow.webp?ver=21`,     // 0  - day 1: door 1 glows
-    `${adventBase}advent_open_2_glow.webp?ver=21`,     // 1  - day 2: door 2 glows
-    `${adventBase}advent_open_3_glow.webp?ver=1`,     // 2  - day 3: door 3 glows
-    `${adventBase}advent_open_4_glow.webp?ver=1`,     // 3  - day 4: door 4 glows
-    `${adventBase}advent_open_5_glow.webp?ver=1`,     // 4  - day 5: door 5 glows
-    `${adventBase}advent_open_6_glow.webp?ver=1`,     // 5  - day 6: door 6 glows
-    `${adventBase}advent_open_7_glow.webp?ver=1`,     // 6  - day 7: door 7 glows
-    `${adventBase}advent_open_8_glow.webp?ver=1`,     // 7  - day 8: door 8 glows
-    `${adventBase}advent_open_9_glow.webp?ver=1`,     // 8  - day 9: door 9 glows
-    `${adventBase}advent_open_10_glow.webp?ver=1`,    // 9  - day 10: door 10 glows
-    `${adventBase}advent_open_11_glow.webp?ver=1`,    // 10 - day 11: door 11 glows
-    `${adventBase}advent_open_12_glow.webp?ver=1`,    // 11 - day 12: door 12 glows
-    `${adventBase}advent_open_13_glow.webp?ver=1`,    // 12 - day 13: door 13 glows
-    `${adventBase}advent_open_14_glow.webp?ver=1`,    // 13 - day 14: door 14 glows
-    `${adventBase}advent_open_15_glow.webp?ver=1`,    // 14 - day 15: door 15 glows
-    `${adventBase}advent_open_16_glow.webp?ver=1`,    // 15 - day 16: door 16 glows
-    `${adventBase}advent_open_17_glow.webp?ver=1`,    // 16 - day 17: door 17 glows
-    `${adventBase}advent_open_18_glow.webp?ver=1`,    // 17 - day 18: door 18 glows
-    `${adventBase}advent_open_19_glow.webp?ver=1`,    // 18 - day 19: door 19 glows
-    `${adventBase}advent_open_20_glow.webp?ver=1`,    // 19 - day 20: door 20 glows
-    `${adventBase}advent_open_21_glow.webp?ver=1`,    // 20 - day 21: door 21 glows
-    `${adventBase}advent_open_22_glow.webp?ver=1`,    // 21 - day 22: door 22 glows
-    `${adventBase}advent_open_23_glow.webp?ver=1`,    // 22 - day 23: door 23 glows
-    `${adventBase}advent_open_24_glow.webp?ver=1`,    // 23 - day 24: door 24 glows
+    `${adventBase}advent_open_1_glow.webp?ver=40`,     // 0  - day 1: door 1 glows
+    `${adventBase}advent_open_2_glow.webp?ver=40`,     // 1  - day 2: door 2 glows
+    `${adventBase}advent_open_3_glow.webp?ver=40`,     // 2  - day 3: door 3 glows
+    `${adventBase}advent_open_4_glow.webp?ver=40`,     // 3  - day 4: door 4 glows
+    `${adventBase}advent_open_5_glow.webp?ver=40`,     // 4  - day 5: door 5 glows
+    `${adventBase}advent_open_6_glow.webp?ver=40`,     // 5  - day 6: door 6 glows
+    `${adventBase}advent_open_7_glow.webp?ver=40`,     // 6  - day 7: door 7 glows
+    `${adventBase}advent_open_8_glow.webp?ver=40`,     // 7  - day 8: door 8 glows
+    `${adventBase}advent_open_9_glow.webp?ver=40`,     // 8  - day 9: door 9 glows
+    `${adventBase}advent_open_10_glow.webp?ver=40`,    // 9  - day 10: door 10 glows
+    `${adventBase}advent_open_11_glow.webp?ver=40`,    // 10 - day 11: door 11 glows
+    `${adventBase}advent_open_12_glow.webp?ver=40`,    // 11 - day 12: door 12 glows
+    `${adventBase}advent_open_13_glow.webp?ver=40`,    // 12 - day 13: door 13 glows
+    `${adventBase}advent_open_14_glow.webp?ver=40`,    // 13 - day 14: door 14 glows
+    `${adventBase}advent_open_15_glow.webp?ver=40`,    // 14 - day 15: door 15 glows
+    `${adventBase}advent_open_16_glow.webp?ver=40`,    // 15 - day 16: door 16 glows
+    `${adventBase}advent_open_17_glow.webp?ver=40`,    // 16 - day 17: door 17 glows
+    `${adventBase}advent_open_18_glow.webp?ver=40`,    // 17 - day 18: door 18 glows
+    `${adventBase}advent_open_19_glow.webp?ver=40`,    // 18 - day 19: door 19 glows
+    `${adventBase}advent_open_20_glow.webp?ver=40`,    // 19 - day 20: door 20 glows
+    `${adventBase}advent_open_21_glow.webp?ver=40`,    // 20 - day 21: door 21 glows
+    `${adventBase}advent_open_22_glow.webp?ver=40`,    // 21 - day 22: door 22 glows
+    `${adventBase}advent_open_23_glow.webp?ver=40`,    // 22 - day 23: door 23 glows
+    `${adventBase}advent_open_24_glow.webp?ver=40`,    // 23 - day 24: door 24 glows
   ];
  
   // ===== Shared popup texts (translate per country) =====
@@ -121,7 +121,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   //  code       : "Code: xxx" -> copy button
   //  mobile     : { pre, title, subtitle, code } – different texts on mobile ('' hides it)
   //  conditions : text shown below the calendar after "See conditions"
-  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=20`;
+  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=40`;
  
   // one sheet cell of a query (row index i, 0-based)
   const cell = (name, i) => {
@@ -253,33 +253,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
           .advent-door:focus { outline: none; }
           .advent-door:focus-visible { outline: 3px solid #750000; outline-offset: 2px; border-radius: 6px; }
           /* Dining Room (7) and Rugs (17): narrower text column on desktop (42% instead of 45%) */
-          @media screen and (min-width: 601px) {
-            .adv-pop__content[data-popup="12"] .adv-pop__deal,
-            .adv-pop__content[data-popup="22"] .adv-pop__deal,
-            .adv-pop__content[data-popup="23"] .adv-pop__deal,
-            .adv-pop__content[data-popup="8"] .adv-pop__deal {
-            width: 43%;
-            }
-            .adv-pop__content[data-popup="10"] .adv-pop__deal,
-            .adv-pop__content[data-popup="11"] .adv-pop__deal,
-            .adv-pop__content[data-popup="14"] .adv-pop__deal,
-            .adv-pop__content[data-popup="18"] .adv-pop__deal,
-            .adv-pop__content[data-popup="19"] .adv-pop__deal,
-            .adv-pop__content[data-popup="15"] .adv-pop__deal { width: 42%; }
-            .adv-pop__content[data-popup="13"] .adv-pop__deal,
-            .adv-pop__content[data-popup="7"] .adv-pop__deal,
-            .adv-pop__content[data-popup="3"] .adv-pop__deal { width: 40%; }
-            .adv-pop__content[data-popup="6"] .adv-pop__deal { width: 50%; }
-            .adv-pop__content[data-popup="17"] .adv-pop__deal { width: 38%; }
-            .adv-pop__content[data-popup="20"] .adv-pop__deal { width: 39%; }
-          }
-          @media screen and (max-width: 600px) {
-            .adv-pop__content[data-popup="4"] { --m-pad-top: 12px; --gap-sub: 0px; --gap-foot: 8px; }
-            .adv-pop__content[data-popup="8"] { --m-pad-top: 12px; --gap-sub: 0px; --gap-foot: 8px; }
-            .adv-pop__content[data-popup="10"] {--m-pad-top: 12px; --gap-sub: 0px; --gap-foot: 8px; }
-            .adv-pop__content[data-popup="14"] {--m-pad-top: 12px; --gap-sub: 0px; --gap-foot: 8px; }
-            .adv-pop__content[data-popup="6"] { --m-pad-top: 12px; --gap-sub: 0px;}
-          }
+         
         </style>
  
         <div id="advent-wrapper" style="

@@ -14,7 +14,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, type }) =
   ${Intro({
     spaceTop: intro?.spaceTop,
     spaceBottom: intro?.spaceBottom,
-    text: `Unwrap a new festive deal every day and make the countdown to Christmas truly magical. </br>Hurry—today’s offer disappears at midnight.`,
+    text: queries.introDescription,
     paragraphAlign: intro?.alignment,
     color: introColor,
     backgroundColor: intro?.backgroundColor,
@@ -26,7 +26,7 @@ export const IntroHandler = ({ intro, queries, introCta_href, shopNow, type }) =
       ${intro.cta.spaceBefore ? Space({ insideTr: true, className: intro.cta.spaceBefore }) : ''}
       ${CTA_new({
         href: introCta_href,
-        text: 'Open Today’s deal',
+        text: queries.introCta_text || shopNow,
         variant: 'button',
         type,
         bg: ctaBg,

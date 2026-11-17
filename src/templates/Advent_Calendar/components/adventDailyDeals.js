@@ -6,6 +6,7 @@ const CREAM = '#FFF4E6';
 const NSLT_FONT = "'Open Sans', Arial, Helvetica, sans-serif";
 const LP_FONT = "'Poppins', Arial, Helvetica, sans-serif";
 const TEXT_WIDTH = 300;   // the text breaks into lines as in the design ("A new offer every day / until Christmas Eve")
+const SIDE_PADDING = 30;  // space between the dark red box and the button / text (also for long translations)
 
 const DEFAULT_TEXTS = ['Daily deals', 'A new offer every day until Christmas Eve', 'Don’t miss the next deal'];
 
@@ -54,7 +55,7 @@ export function AdventDailyDeals({
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; border-collapse:collapse;">
             ${Space({insideTr: true, className: "newsletterBottom25px"})}
               <tr>
-                <td align="center">
+                <td align="center" style="padding:0 ${SIDE_PADDING}px;">
                   <!--[if mso]><table role="presentation" align="center" width="${TEXT_WIDTH}" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="font-family:Arial, sans-serif; font-size:26px; line-height:32px; mso-line-height-rule:exactly; color:${CREAM};"><![endif]-->
                   <div class="advent-deals__text" style="max-width:${TEXT_WIDTH}px; margin:0 auto; font-family:${font}; font-size:26px; line-height:32px; mso-line-height-rule:exactly; font-weight:400; color:${CREAM}; text-align:center;">${title}<br />${text}</div>
                   <!--[if mso]></td></tr></table><![endif]-->
@@ -62,7 +63,8 @@ export function AdventDailyDeals({
               </tr>
               ${Space({insideTr: true, className: "newsletterBottom20px"})}
               <tr>
-                <td align="center">${button}</td>
+                <!-- side padding: a long button text (e.g. HU) wraps inside the box instead of filling its whole width -->
+                <td align="center" style="padding:0 ${SIDE_PADDING}px;">${button}</td>
               </tr>
               ${Space({insideTr: true, className: "newsletterBottom30px"})}
             </table>

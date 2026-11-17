@@ -128,16 +128,19 @@ const AdventCalendar2026 = async ({
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000;" id="newsletter">
 
     <tr><td><table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: ${TopImageTitle_data.backgroundColor}; color: ${TopImageTitle_data.color}; text-align: center;">
-    ${Space({ insideTr: true, className: "newsletterBottom35px" })}
-    
+    <!-- space above the title: font-size / line-height 0 so classic Outlook doesn't add
+         an empty text line (~15-18px) on top of the 35px padding -->
+    <tr><td class="newsletterBottom35px" style="font-size:0; line-height:0; mso-line-height-rule:exactly;">&nbsp;</td></tr>
+
     <tr>
       <td style="color: ${TopImageTitle_data.color}; text-align: center;" class="newsletterContainer40px">
-        <a style="color: ${TopImageTitle_data.color}" class="newsletterHrefTit" href="${links.TopImageTitle_href}">
-        <h4 style="color:${TopImageTitle_data.color};" class="newsletterTitleH1">Advent Calendar</h4>
-        </a>
+        <!-- link inside the heading (a link around a heading becomes an extra empty line in Outlook);
+             margins inline + mso-margin-*-alt: Outlook ignores the class margin on headings -->
+        <h4 style="color:${TopImageTitle_data.color}; margin:0; mso-margin-top-alt:0; mso-margin-bottom-alt:0;" class="newsletterTitleH1">
+          <a style="color: ${TopImageTitle_data.color}; text-decoration: none;" class="newsletterHrefTit" href="${links.TopImageTitle_href}">${queries.introTitle}</a>
+        </h4>
       </td>
     </tr>
-  </table></td></tr>
   ${IntroAfterTopImageElement}
 
   ${TopImageElement}
