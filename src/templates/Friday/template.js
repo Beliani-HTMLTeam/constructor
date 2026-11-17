@@ -11,6 +11,7 @@ import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 import { ImageWithLink } from './components/ImageWithLink.js';
 import { TopImageSubtitleHandler } from './handlers/_TopImageSubtitle.js';
+import { getTimerLinks } from './helpers/getTimerLinks.js';
 
 const Friday = async ({
   links,
@@ -73,20 +74,21 @@ const Friday = async ({
 
   const introCtaText = intro?.cta?.phrase ? getPhrase(intro?.cta?.phrase) : shopNow;
   const IntroElement = IntroHandler({ intro, queries, introCta_href, introCtaText: intro?.cta?.overrides?.[country] ?? introCtaText, getCategoryLink, links, type });
-  const TimerElement = await TimerHandler({
-    Inside,
-    queries,
-    links,
-    timer,
-    shopNow,
-    country,
-    type,
-    shop,
-    getProductById,
-    getCategoryLink,
-    getPhrase,
-    add_utm,
-  });
+
+const TimerElement = await TimerHandler({
+  Inside,
+  queries,
+  links:  getTimerLinks({ links, timer, type }),
+  timer,
+  shopNow,
+  country,
+  type,
+  shop,
+  getProductById,
+  getCategoryLink,
+  getPhrase,
+  add_utm,
+});
   const introPosition = intro?.position ?? 'afterTopImage';
   const timerPosition = Inside?.position ?? 'beforeCategories';
 

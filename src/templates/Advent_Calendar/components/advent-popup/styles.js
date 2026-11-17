@@ -134,7 +134,7 @@ export function AdventPopupStyles() {
     z-index: 1;
     /* text column centered at ~750px of the 967px popup, like the design
        (the empty pink area right of the gift box) */
-    width: 45%;
+    width: 50%;
     margin-left: auto;
     margin-right: 2cqw;             /* 2026 final design: column centered at ~730px */
     display: flex;
@@ -178,6 +178,7 @@ export function AdventPopupStyles() {
     line-height: var(--lh-title);
   }
   .adv-pop__pre ~ .adv-pop__title { margin-top: var(--gap-pre); }
+  .adv-pop__nowrap { white-space: nowrap; }   /* hyphenated words in the title stay in one piece */
   .adv-pop__subtitle {
     margin-top: var(--gap-sub);
     font-size: calc(var(--fs-sub) * 1cqw);

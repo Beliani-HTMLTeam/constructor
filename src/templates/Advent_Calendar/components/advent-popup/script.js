@@ -24,16 +24,17 @@
 // noticeMs: how long the small "past / future door" message stays (ms)
 export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', trackingCategory = 'AdventCalendar', noticeMs = 5000, closeLabel = 'Close' } = {}) {
   const opts = JSON.stringify({ conditionsBoxId, trackingCategory, noticeMs, closeLabel });
- 
+
   return `
 <script>
 (function () {
   if (window.AdventPopup) return;
   var OPTS = ${opts};
- 
+
   // eventOption = the day (door number) of the open popup, e.g. '18'
   // eventID     = category name of the popup / the voucher code (see trackId in parts.js)
   function track(action, label, value, id) {
+    if (window.AdventNoTracking) return;   // translator mode (InteractiveHeroImage) – nothing is sent
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'custom_event',
@@ -57,10 +58,10 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     var v = line && line.querySelector('.adv-pop__code-value');
     return v ? (v.textContent || '').trim() : '';
   }
- 
+
   var overlay, content, live, current = null, currentTrackId = '', closeTimer = null, lastFocus = null;
   var lockX = 0, lockY = null;   // page position while the popup is open
- 
+
   // Hide the page scrollbar while the popup is open. The scrollbar's width is added
   // as padding to <body>, so the page behind doesn't shift sideways.
   var savedOverflow = null, savedPad = '';
@@ -79,15 +80,15 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     document.body.style.paddingRight = savedPad;
     savedOverflow = null;
   }
- 
+
   function getTpl(id) {
     return document.querySelector('template[data-adv-popup="' + String(id) + '"]');
   }
- 
+
   function isOpen() {
     return !!overlay && overlay.classList.contains('is-open') && !overlay.classList.contains('is-closing');
   }
- 
+
   // focusable elements inside the popup (only the visible desktop / mobile ones)
   function focusables() {
     var list = content.querySelectorAll('a[href], button, [tabindex]');
@@ -95,9 +96,9 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       return el.getAttribute('tabindex') !== '-1' && !el.disabled && el.offsetParent !== null;
     });
   }
- 
+
   function stop(e) { if (isOpen()) e.preventDefault(); }
- 
+
   function ensureOverlay() {
     if (overlay) return;
     overlay = document.getElementById('advent-popup');
@@ -111,18 +112,18 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
     content = overlay.querySelector('.adv-pop__content');
- 
+
     // screen-reader announcements ("Code copied")
     live = document.createElement('div');
     live.className = 'adv-pop__sr';
     live.setAttribute('aria-live', 'polite');
     document.body.appendChild(live);
- 
+
     // grey background → close
     overlay.addEventListener('click', function (e) {
       if (e.target === overlay) close();
     });
- 
+
     // the page behind must not scroll while the popup is open (scrollbar stays visible)
     overlay.addEventListener('wheel', stop, { passive: false });
     overlay.addEventListener('touchmove', stop, { passive: false });
@@ -135,7 +136,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
         catch (err) { window.scrollTo(lockX, lockY); }
       }
     }, { passive: true });
- 
+
     // copy icon (buildCopyIcon) handles copying + notification itself;
     // capture phase so we still track it before its onclick stops the event
     content.addEventListener('click', function (e) {
@@ -147,14 +148,14 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
         setTimeout(function () { live.textContent = msg; }, 100);
       }
     }, true);
- 
+
     // clicks inside the popup
     content.addEventListener('click', function (e) {
       var t = e.target;
       if (t.closest('.adv-pop__close')) { close(); return; }
- 
+
       if (t.closest('.adv-pop__cond')) { showConditions(); return; }
- 
+
       if (t.closest('[data-adv-link]')) track('Click', 'PopUp', 'Promo');   // "Shop now"
     });
     // "Shop now" opened with the middle mouse button
@@ -169,12 +170,12 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       var el = node && (node.nodeType === 1 ? node : node.parentElement);
       if (el && el.closest && el.closest('.adv-pop__code') && content.contains(el)) trackVerify(codeOf(el));
     });
- 
+
     document.addEventListener('keydown', function (e) {
       if (!isOpen()) return;
- 
+
       if (e.key === 'Escape') { close(); return; }
- 
+
       // keep Tab inside the popup
       if (e.key === 'Tab') {
         var f = focusables();
@@ -185,14 +186,117 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
         else if (!e.shiftKey && (document.activeElement === last || !inside)) { e.preventDefault(); first.focus(); }
         return;
       }
- 
+
       // no page scrolling with the keyboard while the popup is open
       var scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'];
       var onControl = e.target.closest && e.target.closest('a, button');
       if (scrollKeys.indexOf(e.key) !== -1 || (e.key === ' ' && !onControl)) e.preventDefault();
     });
   }
- 
+
+  // ===== Long translations: shrink a line only when one of its words doesn't fit =====
+  // e.g. HU "kedvezménnyel" at 90px is wider than the text column. CSS can't measure
+  // words, so after opening we check every text line: if its longest word is wider than
+  // the column, that line (only that one) gets a smaller font until it fits.
+  // Lines that fit keep the design size – English and other short texts never change.
+  // The deal title also may not wrap into more lines than the sheet has (see fitLines),
+  // and on desktop the whole text block must fit the popup's height (see fitHeight).
+  var FIT_SEL = '.adv-pop__headline, .adv-pop__pre, .adv-pop__title, .adv-pop__subtitle, .adv-pop__code, ' +
+                '.adv-pop__tier-text, .adv-pop__today, .adv-pop__cta, .adv-pop__cond';
+  function fitText() {
+    if (!content || !isOpen()) return;
+    var deal = content.querySelector('.adv-pop__deal');
+    if (!deal) return;
+    var els = deal.querySelectorAll(FIT_SEL);
+    Array.prototype.forEach.call(els, function (el) { el.style.fontSize = ''; el.style.maxWidth = ''; });   // back to the design
+    var cs = window.getComputedStyle(deal);
+    var avail = deal.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+    if (avail <= 0) return;
+    // the X in the top right corner: lines at the height of the X must stay clear of it.
+    // The text is centered, so such a line gets a narrower width (the X's overlap taken off
+    // on both sides) – it wraps earlier; only a single word that is still too long shrinks.
+    // (offset* values: not affected by the opening animation)
+    var x = content.querySelector('.adv-pop__close');
+    var colRight = deal.offsetLeft + deal.clientWidth - (parseFloat(cs.paddingRight) || 0);
+    var xOverlap = x ? Math.max(0, colRight - x.offsetLeft + 4) : 0;   // + 4px air
+    var xBottom = x ? x.offsetTop + x.offsetHeight : 0;
+    Array.prototype.forEach.call(els, function (el) {
+      if (el.offsetParent === null) return;                 // hidden (desktop-only / mobile-only text)
+      var base = parseFloat(window.getComputedStyle(el).fontSize) || 0;   // design size
+      if (!base) return;
+      el._advBase = base;
+      var room = avail;
+      if (xOverlap && deal.offsetTop + el.offsetTop < xBottom) {   // next to the X
+        room = avail - 2 * xOverlap;
+        el.style.maxWidth = room + 'px';
+      }
+      for (var i = 0; i < 5; i++) {
+        var w = el.scrollWidth;                             // width of its longest word / line
+        if (w <= room + 1) break;
+        var size = parseFloat(window.getComputedStyle(el).fontSize) || 0;
+        if (!size) break;
+        el.style.fontSize = (size * (room / w) * 0.98) + 'px';
+      }
+      // the deal title keeps its lines: the lines of the sheet ("akár<br />50% kedvezménnyel" = 2)
+      // or max. 2 lines without breaks. If it wraps into more, it gets smaller until it fits –
+      // but never below 60% of the design size.
+      if (el.classList.contains('adv-pop__title')) fitLines(el, base);
+    });
+    // desktop: all texts together must fit the height of the popup (e.g. FI "Ylimääräinen /
+    // 10% alennus / vähintään 500 € tilauksen yhteydessä ..." is taller than the 480px design).
+    // Mobile is not limited – there the text may run into the picture area as designed.
+    if (window.matchMedia && window.matchMedia('(min-width: 601px)').matches) fitHeight(deal, els);
+  }
+  // height of the visible text block (first line top -> last line bottom)
+  function blockHeight(deal) {
+    var kids = Array.prototype.filter.call(deal.children, function (k) { return k.offsetParent !== null; });
+    if (!kids.length) return 0;
+    var first = kids[0], last = kids[kids.length - 1];
+    return last.offsetTop + last.offsetHeight - first.offsetTop;
+  }
+  // too tall -> the big title gets smaller first (down to 60% of its design size),
+  // then the other lines a little (down to 75%) – until the block fits between the paddings
+  function fitHeight(deal, els) {
+    var cs = window.getComputedStyle(deal);
+    var avail = deal.clientHeight - (parseFloat(cs.paddingTop) || 0) - (parseFloat(cs.paddingBottom) || 0);
+    if (avail <= 0) return;
+    var visible = Array.prototype.filter.call(els, function (el) { return el.offsetParent !== null && el._advBase; });
+    for (var i = 0; i < 40 && blockHeight(deal) > avail + 1; i++) {
+      var titles = visible.filter(function (el) {
+        return el.classList.contains('adv-pop__title') && parseFloat(window.getComputedStyle(el).fontSize) > el._advBase * 0.6;
+      });
+      var group = titles.length ? titles : visible.filter(function (el) {
+        return !el.classList.contains('adv-pop__title') && parseFloat(window.getComputedStyle(el).fontSize) > el._advBase * 0.75;
+      });
+      if (!group.length) break;                            // everything at its minimum
+      group.forEach(function (el) {
+        var size = parseFloat(window.getComputedStyle(el).fontSize);
+        var min = el._advBase * (el.classList.contains('adv-pop__title') ? 0.6 : 0.75);
+        el.style.fontSize = Math.max(min, size * 0.95) + 'px';
+      });
+    }
+  }
+  function lineCount(el) {
+    var lh = parseFloat(window.getComputedStyle(el).lineHeight) || 0;
+    return lh ? Math.round(el.offsetHeight / lh) : 1;   // offsetHeight: not affected by the opening animation
+  }
+  function fitLines(el, base) {
+    var breaks = (el.innerHTML.match(/<br/gi) || []).length;
+    // with line breaks from the sheet: exactly those lines ("akár" + "50% kedvezménnyel" = 2);
+    // without: at most 2 lines, like the design ("Free / candle holder") – a longer title
+    // ("Ajándék / díszpárna- / szett") gets smaller until it fits on 2 lines
+    var allowed = breaks ? breaks + 1 : 2;
+    var min = base * 0.6;
+    for (var i = 0; i < 20 && lineCount(el) > allowed; i++) {
+      var size = parseFloat(window.getComputedStyle(el).fontSize) || 0;
+      if (!size || size <= min) break;
+      el.style.fontSize = Math.max(min, size * 0.95) + 'px';
+    }
+  }
+  // fit again when the web font has loaded or the window size changes
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitText);
+  window.addEventListener('resize', function () { if (isOpen()) fitText(); });
+
   function open(id) {
     var tpl = getTpl(id);
     if (!tpl) return false;
@@ -210,20 +314,21 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     if (!isOpen()) { lockX = window.pageXOffset || 0; lockY = window.pageYOffset || 0; hideScrollbar(); }   // freeze the page here
     overlay.classList.remove('is-closing');
     overlay.classList.add('is-open');
- 
+    fitText();                     // long translations: shrink only lines that don't fit
+
     // dialog name = the visible deal text, e.g. "Christmas Decorations Up to 50% OFF"
     var head = Array.prototype.filter.call(content.querySelectorAll('.adv-pop__container'), function (el) {
       return el.offsetParent !== null;
     })[0];
     var name = head ? (head.innerText || head.textContent || '').split(String.fromCharCode(10)).join(' ').trim() : '';
     if (name) overlay.setAttribute('aria-label', name); else overlay.removeAttribute('aria-label');
- 
+
     // move focus into the popup
     var btn = content.querySelector('.adv-pop__close');
     if (btn) { try { btn.focus({ preventScroll: true }); } catch (err) { btn.focus(); } }
     return true;
   }
- 
+
   // focusTo: element that gets the focus after closing (default: where it was before)
   function close(focusTo) {
     if (!overlay || !overlay.classList.contains('is-open')) return;
@@ -240,13 +345,13 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       }
     }, 400);
   }
- 
+
   // ===== Small notice (past / future door) =====
   var note, noteBody, noteTimer, noteCloseTimer;
   var X_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M1 1 15 15M15 1 1 15"/></svg>';   // thin X (design)
- 
+
   function noteOpen() { return !!note && note.classList.contains('is-open') && !note.classList.contains('is-closing'); }
- 
+
   function ensureNote() {
     if (note) return;
     note = document.createElement('div');
@@ -267,7 +372,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       if (e.key === 'Escape' && noteOpen()) hideNote();
     });
   }
- 
+
   function showNote(kind) {
     var tpl = document.querySelector('template[data-adv-notice="' + kind + '"]');
     if (!tpl) return false;
@@ -281,14 +386,14 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     noteTimer = setTimeout(hideNote, OPTS.noticeMs);   // disappears by itself
     return true;
   }
- 
+
   function hideNote() {
     if (!note || !note.classList.contains('is-open')) return;
     clearTimeout(noteTimer);
     note.classList.add('is-closing');
     noteCloseTimer = setTimeout(function () { note.classList.remove('is-open', 'is-closing'); }, 300);
   }
- 
+
   function showConditions() {
     var src = content.querySelector('.adv-pop__cond-src');
     var box = document.getElementById(OPTS.conditionsBoxId);
@@ -303,7 +408,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 450);
   }
- 
+
   // preload popup images so they appear instantly
   function preload() {
     var tpls = document.querySelectorAll('template[data-adv-popup]');
@@ -322,7 +427,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   } else {
     preload();
   }
- 
+
   window.AdventPopup = {
     open: open,
     close: function () { close(); },

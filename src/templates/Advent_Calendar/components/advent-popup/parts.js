@@ -15,20 +15,20 @@ export const DEFAULT_POPUP_TEXTS = {
   close: 'Close',
   copy: 'Copy',
 };
- 
+
 // Escape a value used inside an HTML attribute
 export const attr = (v = '') =>
   String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
- 
+
 // the letter "X" in Poppins, as in the 2026 final design (size: .adv-pop__close-x in styles.js)
 const ICON_CLOSE = '<span class="adv-pop__close-x" aria-hidden="true">X</span>';
- 
+
 function linkOrDiv(link, cls, inner) {
   return link
     ? `<a class="${cls}" href="${attr(link)}" target="_blank" rel="noopener" data-adv-link>${inner}</a>`
     : `<div class="${cls}">${inner}</div>`;
 }
- 
+
 // ---------- Desktop / mobile text ----------
 // If a mobile version is given (and differs), both are rendered and CSS
 // shows the right one per screen. mobile '' = hide that line on mobile.
@@ -41,18 +41,29 @@ function dm(cls, desktop, mobile) {
     (mobile ? `<div class="${cls} adv-pop__only-m">${mobile}</div>` : '')
   );
 }
- 
+
 // ---------- Text block: headline / pre / title / subtitle ----------
 // mobile = { headline, pre, title, subtitle } – optional mobile texts
+// Words with a hyphen ("díszpárna-szett") are never split in the big title
+// ("díszpárna- / szett"): they go to the next line as a whole (or get smaller, see script.js).
+// Only the text between HTML tags is changed.
+const keepHyphenWords = (html) =>
+  html === undefined || html === null
+    ? html
+    : String(html)
+        .split(/(<[^>]*>)/)
+        .map((part) => (part.charAt(0) === '<' ? part : part.replace(/([^\s<>]+-[^\s<>]+)/g, '<span class="adv-pop__nowrap">$1</span>')))
+        .join('');
+
 export function PopupText({ headline, pre, title, subtitle, link, mobile = {} }) {
   const inner =
     dm('adv-pop__headline', headline, mobile.headline) +
     dm('adv-pop__pre', pre, mobile.pre) +
-    dm('adv-pop__title', title, mobile.title) +
+    dm('adv-pop__title', keepHyphenWords(title), keepHyphenWords(mobile.title)) +
     dm('adv-pop__subtitle', subtitle, mobile.subtitle);
   return linkOrDiv(link, 'adv-pop__container', inner);
 }
- 
+
 // ---------- Voucher code(s) with copy button ----------
 function splitCode(raw) {
   raw = String(raw || '').trim();
@@ -62,7 +73,7 @@ function splitCode(raw) {
   if (i === -1) return { label: 'Code', value: raw };
   return { label: raw.slice(0, i).trim(), value: raw.slice(i + 1).trim() };
 }
- 
+
 function codesBlock(code, texts, extraCls = '') {
   const codes = [].concat(code || []).map(splitCode).filter(Boolean);
   if (!codes.length) return '';
@@ -90,13 +101,13 @@ function codesBlock(code, texts, extraCls = '') {
     '</div>'
   );
 }
- 
+
 // mobileCode: optional different code text on mobile ('' = hide on mobile)
 export function PopupCodes({ code, mobileCode, texts = DEFAULT_POPUP_TEXTS }) {
   if (mobileCode === undefined || mobileCode === code) return codesBlock(code, texts);
   return codesBlock(code, texts, ' adv-pop__only-d') + codesBlock(mobileCode, texts, ' adv-pop__only-m');
 }
- 
+
 // ---------- Tiers: each line has its own code (e.g. 4 for 3 pyramid) ----------
 // tiers = [{ text, mobileText, code }]   mobileText: optional ('' hides on mobile)
 export function PopupTiers({ tiers, texts = DEFAULT_POPUP_TEXTS }) {
@@ -110,7 +121,7 @@ export function PopupTiers({ tiers, texts = DEFAULT_POPUP_TEXTS }) {
     '</div>'
   );
 }
- 
+
 // ---------- Footer: Only Today / See conditions / CTA ----------
 // "See conditions" is always shown (also when the conditions text is still empty);
 // conditions: false hides it.
@@ -126,11 +137,11 @@ export function PopupFooter({ texts = DEFAULT_POPUP_TEXTS, onlyToday = true, con
     '</div>'
   );
 }
- 
+
 // URL safe to use inside url('...') in a style attribute
 const cssUrl = (u = '') =>
   String(u).replace(/'/g, '%27').replace(/"/g, '%22').replace(/\(/g, '%28').replace(/\)/g, '%29');
- 
+
 // ---------- Background image (covers the whole popup) ----------
 // imageDesktop: 967 x 480 design (export ~1934 x 960)
 // imageMobile : 257 x 460 design (export ~514 x 920), text area at the top
@@ -144,14 +155,14 @@ function PopupBackground({ imageDesktop, imageMobile, alt = '', link }) {
     ? `<a ${common} href="${attr(link)}" target="_blank" rel="noopener" tabindex="-1" data-adv-link></a>`   // keyboard users get the text link instead
     : `<div ${common}></div>`;
 }
- 
+
 // ---------- Shell: close button + background image + text ----------
 // layout  : 'percent' | 'deal' | 'upto' | 'special' (controls font sizes)
 // textSide: 'right' (default, as in the design) | 'left' – desktop only
 // trackId: sent as eventID in the dataLayer (category name / voucher code)
 export function AdventPopupShell({ id, layout = 'deal', imageDesktop, imageMobile, alt = '', link, conditions, texts, textSide = 'right', body, trackId = '' }) {
   const t = { ...DEFAULT_POPUP_TEXTS, ...texts };
- 
+
   return `
 <template data-adv-popup="${attr(id)}" data-layout="${attr(layout)}" data-text="${attr(textSide)}" data-track-id="${attr(trackId)}">
   <button type="button" class="adv-pop__close" aria-label="${attr(t.close)}">${ICON_CLOSE}</button>
@@ -160,21 +171,21 @@ export function AdventPopupShell({ id, layout = 'deal', imageDesktop, imageMobil
   ${conditions !== false ? `<div class="adv-pop__cond-src" hidden data-title="${attr(t.conditionsTitle)}">${conditions || ''}</div>` : ''}
 </template>`;
 }
- 
+
 // ---------- Standard popup = text + codes + footer in a shell ----------
 // Used by every type component; `defaults` holds per-type defaults.
 export function StandardPopup(layout, props, defaults = {}) {
   const t = { ...DEFAULT_POPUP_TEXTS, ...props.texts };
   const onlyToday = props.onlyToday !== undefined ? props.onlyToday : defaults.onlyToday !== false;
   const cta = props.cta !== undefined ? props.cta : defaults.cta ? t[defaults.cta] : '';
- 
+
   const body =
     PopupText(props) +
     PopupTiers({ tiers: props.tiers, texts: t }) +
     PopupCodes({ code: props.code, mobileCode: (props.mobile || {}).code, texts: t }) +
     // ctaLink: only the "Shop now" link goes there (the rest of the popup is not a link)
     PopupFooter({ texts: t, onlyToday, conditions: props.conditions, cta, link: props.ctaLink || props.link });
- 
+
   // eventID for the tracking: props.trackId (e.g. category name),
   // otherwise the voucher code(s) of the popup ("02advent26uk", pyramid: "A, B, C")
   const codes = []
@@ -182,10 +193,10 @@ export function StandardPopup(layout, props, defaults = {}) {
     .map((c) => (splitCode(c) || {}).value)
     .filter(Boolean);
   const trackId = props.trackId !== undefined ? props.trackId : codes.join(', ');
- 
+
   return AdventPopupShell({ ...props, layout, texts: t, body, trackId });
 }
- 
+
 // ---------- Small notices: past door / future door ----------
 // Short messages shown for a few seconds when a door that is not today's is clicked.
 // past / future: lines from the sheet (queries.PastPopup / queries.FuturePopup)
@@ -193,10 +204,10 @@ export const DEFAULT_NOTICES = {
   past: ['Too late for this one!', 'Find today’s door for a fresh deal.'],
   future: ['Still wrapped!', 'Find today’s door to unwrap today’s deal.'],
 };
- 
+
 // characters (both lines together) that still fit the design size
 export const NOTICE_FIT_CHARS = 70;
- 
+
 export function AdventNotices({ past, future } = {}) {
   const lines = (rows, fallback) => {
     const list = [].concat(rows || [])
@@ -218,7 +229,7 @@ export function AdventNotices({ past, future } = {}) {
     `</div></template>`;
   return tpl('past', lines(past, DEFAULT_NOTICES.past)) + tpl('future', lines(future, DEFAULT_NOTICES.future));
 }
- 
+
 // ---------- Box under the calendar that shows the conditions ----------
 // Can be placed anywhere on the page (the script finds it by id).
 // maxWidth: match the width of the content around it (e.g. 650 for the LP table)

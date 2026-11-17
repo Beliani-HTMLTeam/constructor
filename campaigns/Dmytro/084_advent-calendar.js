@@ -4,8 +4,9 @@ const adventSheet = '2026::01.12.26 - Advent Calendar'
 const T = campaignTranslationsSheet;
 
 const tableQueries = [
-  { tableRange: '16:17', name: 'TopImageTitle', tableName: adventSheet },
-  { tableRange: '87',    name: 'intro', tableName: adventSheet },
+  { tableRange: '27',    name: 'introTitle', tableName: adventSheet },
+  { tableRange: '28',    name: 'introDescription', tableName: adventSheet },
+  { tableRange: '29',    name: 'introCta_text', tableName: adventSheet },
   { tableRange: '37:38', name: 'condition', tableName: adventSheet },
   { tableRange: '30:33', name: 'icons',      tableName: adventSheet },
   { tableRange: '34:36', name: 'dailyDeals', tableName: adventSheet },
@@ -134,7 +135,7 @@ export default new entities.Campaign({
   startId: "47412",
   name: "Advent Calendar 2026",
   date: "01.12.2026",
-  issueCardId: "524693",
+  issueCardId: "550437",
   lpId: "32057",
   alarm: {
     isActive: false,
