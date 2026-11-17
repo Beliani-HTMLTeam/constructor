@@ -6,6 +6,7 @@ import { TopImageTitleHandler } from './handlers/_TopImageTitle.js';
 import { TopImageHandler } from './handlers/_TopImage.js';
 import { IntroHandler } from './handlers/_Intro.js';
 import { TimerHandler } from './handlers/_Timer.js';
+import { inlineFontFamily } from './helpers/inlineFontFamily.js';
 import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
@@ -151,7 +152,7 @@ const Thursday = async ({
 
   const FooterElement = Footer({ getFooter, getCategoryLink, getCategoryTitle, queries, country, type, id, hasSmallTilesCategory, selectedCampaign, date, theme: footer_theme });
 
-  return `
+  const html = `
     ${HeaderElement}
 
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" ${background ? `bgcolor="${background}"` : ''} id="newsletter">
@@ -187,6 +188,9 @@ const Thursday = async ({
       
     ${FooterElement}
   `;
+
+  // NSLT text elements get an inline 'Open Sans' (Outlook falls back to Times New Roman without it)
+  return type === 'newsletter' ? inlineFontFamily(html) : html;
 };
 
 export { Thursday };
