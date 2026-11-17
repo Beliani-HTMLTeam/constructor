@@ -192,8 +192,8 @@ const categories = [
 		href: 'https://www.beliani.ch/christmas-shop/',
 		// tree: FARNHAM
 		imageProductId: 296254,
-		// TROSAAN, GJENDE, RENSJON, WINTERFALL, ASNEN, VANERN, CAPELLA, IMATRA
-		products: lpProducts(4, [679152, 674662, 668206, 851609, 674587, 674015, 428988, 657102]),
+		// TROSAAN, VANERN, RENSJON, WINTERFALL, ASNEN, GJENDE, CAPELLA, IMATRA
+		products: lpProducts(4, [679152, 674015, 668206, 851609, 674587, 674662, 428988, 657102]),
 	},
 ];
 
