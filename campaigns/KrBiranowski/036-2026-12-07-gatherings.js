@@ -1,12 +1,13 @@
 import { createTemplates } from './shared/createTemplates';
+import { generateLinks } from './shared/generateLinks.js';
 import { createImages } from './shared/createImages';
 
-const image = createImages(getImageUrl, '20261207');
-
+// Options
 const campaignTranslationsSheet = '2026::07.12.26 - Gatherings';
+const imageData = '20261207';
+const image = createImages(getImageUrl, imageData);
 
 const theme = {
-  // Core colors
   primary: '#FFEFD9',
   primaryText: '#ffffff',
   secondary: '#FFEFD9',
@@ -15,11 +16,39 @@ const theme = {
   white: '#ffffff',
   priceText: '#750000',
 
-  // Timer
   timerBg: '#750000',
   timerColor: '#ffffff',
   unitBackground: '#AC6666',
 };
+
+const tableQueries = [
+  { name: 'TopImageTitle', tableRange: '17:18' },
+  { name: 'intro', tableRange: '20' },
+  { name: 'paragraphs', tableRange: '21:24' },
+  { name: 'condition', tableRange: '25:26' },
+  {
+    name: 'timer',
+    tableRange: '12:13',
+    tableName: '01.12.26 - Advent Calendar',
+  },
+];
+
+const links = generateLinks({
+  date: imageData,
+  custom: {
+    Intro_cta_href: 'https://www.beliani.ch/dining-room-furniture/',
+  },
+});
+
+const TopImageTitle_data = {
+  color: theme.black,
+  backgroundColor: theme.secondary,
+  type: 'twoSameLines',
+};
+
+const topImage_data = image('{date}_topImage.jpg', {
+  regional: true,
+});
 
 const catData = [
   {
@@ -53,45 +82,6 @@ const prodData = [
     }),
   }))
 );
-
-const tableQueries = [
-  { name: 'TopImageTitle', tableRange: '17:18' },
-  { name: 'intro', tableRange: '20' },
-  { name: 'paragraphs', tableRange: '21:24' },
-  { name: 'condition', tableRange: '25:26' },
-  {
-    name: 'timer',
-    tableRange: '12:13',
-    tableName: '01.12.26 - Advent Calendar',
-  },
-];
-
-const links = {
-  Intro_cta_href: 'https://www.beliani.ch/dining-room-furniture/',
-  TopImageTitle_href: translateLink({ value: 'content/lp26-12-07' }),
-  TopImageTitle_src: translateImage({ value: '20261207_01.png' }),
-
-  TopImage_src: image('{date}_topImage.jpg'),
-  TopImage_href: translateLink({ value: 'content/lp26-12-07' }),
-
-  Timer_href: translateLink({ value: 'content/lp26-12-07' }),
-
-  Banner_1: translateLink({ value: 'content/lp26-08-28' }),
-  Banner_1_Image: translateImage({ value: '20260828b.png' }),
-
-  Banner_2: translateLink({ value: 'content/lp26-09-02' }),
-  Banner_2_Image: translateImage({ value: '20260902b.png' }),
-};
-
-const topImage_data = image('{date}_topImage.jpg', {
-  regional: true,
-});
-
-const TopImageTitle_data = {
-  color: theme.black,
-  backgroundColor: theme.secondary,
-  type: 'twoSameLines',
-};
 
 const categories = catData.map((cat, index) => ({
   name: cat.name,
