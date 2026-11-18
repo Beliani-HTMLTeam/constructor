@@ -52,9 +52,10 @@ const AdventCalendar2026 = async ({
   const seeMore = getPhrase('See more');
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNow = getPhrase('Shop now');
+  const conditions = getFooter('Conditions title');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type, getCategoryLink, shopNow  });
+  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type, getCategoryLink, shopNow , conditions  });
 
   const introCta_href = links.Intro_cta_href.includes("content/") ? links.Intro_cta_href : getIntroCtaHref({
     links,

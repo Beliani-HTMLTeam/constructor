@@ -55,11 +55,34 @@ const keepHyphenWords = (html) =>
         .map((part) => (part.charAt(0) === '<' ? part : part.replace(/([^\s<>]+-[^\s<>]+)/g, '<span class="adv-pop__nowrap">$1</span>')))
         .join('');
 
+// Title with line breaks ("cu reduceri de până la<br />50%") -> one block per line, so each
+// line can be fitted on its own (script.js): a long text line gets smaller, the deal line
+// ("50%", "50% OFF") keeps its size.
+const titleLines = (html) => {
+  if (html === undefined || html === null) return html;
+  const parts = String(html).split(/<br\s*\/?>/i);
+  return parts.length < 2 ? html : parts.map((part) => `<span class="adv-pop__tline">${part}</span>`).join('');
+};
+
+// The deal number ("50%", "€10", "200 Ft") in the title -> <span class="adv-pop__num">.
+// When a long translation makes the title smaller, the number keeps the big size
+// (script.js fitTitleLines) – wherever it stands in the sentence:
+//   EN "Up to / 50% OFF"   HU "akár / 50% kedvezménnyel"   RO "cu reduceri de până la / 50%"
+const NUM_RE = /([£€$]\s?\d[\d.,]*|\d[\d.,]*\s?(?:%|€|£|\$|Ft|kr|zł|Kč|lei|CHF))/g;
+const markNumbers = (html) =>
+  html === undefined || html === null
+    ? html
+    : String(html)
+        .split(/(<[^>]*>)/)
+        .map((part) => (part.charAt(0) === '<' ? part : part.replace(NUM_RE, '<span class="adv-pop__num">$1</span>')))
+        .join('');
+const titleHtml = (html) => titleLines(keepHyphenWords(markNumbers(html)));
+
 export function PopupText({ headline, pre, title, subtitle, link, mobile = {} }) {
   const inner =
     dm('adv-pop__headline', headline, mobile.headline) +
     dm('adv-pop__pre', pre, mobile.pre) +
-    dm('adv-pop__title', keepHyphenWords(title), keepHyphenWords(mobile.title)) +
+    dm('adv-pop__title', titleHtml(title), titleHtml(mobile.title)) +
     dm('adv-pop__subtitle', subtitle, mobile.subtitle);
   return linkOrDiv(link, 'adv-pop__container', inner);
 }

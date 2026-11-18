@@ -179,6 +179,8 @@ export function AdventPopupStyles() {
   }
   .adv-pop__pre ~ .adv-pop__title { margin-top: var(--gap-pre); }
   .adv-pop__nowrap { white-space: nowrap; }   /* hyphenated words in the title stay in one piece */
+  .adv-pop__tline { display: block; }          /* one title line from the sheet (see parts.js titleLines) */
+  .adv-pop__num { white-space: nowrap; }       /* "50 %" / "€ 10" never split */
   .adv-pop__subtitle {
     margin-top: var(--gap-sub);
     font-size: calc(var(--fs-sub) * 1cqw);
@@ -286,6 +288,7 @@ export function AdventPopupStyles() {
     font-weight: 600;
     line-height: 1.2;
     text-decoration: none !important;
+    white-space: nowrap;            /* one line – a long translation ("Acheter maintenant") gets a smaller font instead (script.js) */
   }
   .adv-pop__cta + .adv-pop__cond { margin-top: -0.4cqw; }   /* 15px between the button and "See conditions" */
   /* LP CSS gives every <button> padding / min-height – keep our buttons as designed */
