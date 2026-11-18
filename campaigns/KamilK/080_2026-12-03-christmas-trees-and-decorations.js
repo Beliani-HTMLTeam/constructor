@@ -63,7 +63,7 @@ const button = {
 	paddingY: 13,
 	mobilePaddingX: 30,
 	mobilePaddingY: 11,
-	borderRadius: '2px',
+	borderRadius: '5px',
 	textTransform: 'none',
 	phrase: 'See more',
 };
@@ -83,7 +83,8 @@ const Inside = {
 const intro = {
 	type: 'paragraph',
 	position: 'afterTimer',
-	container: 'newsletterContainer60px',
+	// own class - newsletterContainer60px has no mobile rule in thursday.css and is also used by the header
+	container: 'introContainer',
 	alignment: 'center',
 	color: palette.text,
 	backgroundColor: palette.page,
@@ -128,10 +129,17 @@ const categoriesNs = [
 
 const additionalCss = `
 .newsletterIntroTitle{font-size:28px;font-weight:700;line-height:1.2;font-family:"Open Sans",sans-serif;}
-@media screen and (max-width:768px){.newsletterIntroTitle{font-size:22px;}}
+.introContainer{padding-left:60px;padding-right:60px;}
+@media screen and (max-width:768px){.newsletterIntroTitle{font-size:22px;}.introContainer{padding-left:25px;padding-right:25px;}}
 `;
 
 // ---------- LP (ChristmasLook) ----------
+
+// mobile product grid: 4px gap + 4px top instead of 8px (lp.css, shared with Krzysztof's LP - so overridden here).
+// additionalCss lands before the LP html and its own <style>${lpCss}</style>, so the selector needs more specificity.
+const additionalCssLp = `
+@media (max-width:768px){.wideLanding div.lpProducts{gap:4px !important;padding-top:4px !important;}}
+`;
 
 const lpImages = (prefix, translate, ext = 'png') =>
 	[1, 2, 3, 4, 5].map((n) => ({ src: `${prefix}${String(n).padStart(2, '0')}.${ext}`, translate }));
@@ -160,16 +168,17 @@ const categories = [
 	{
 		name: 'Nordic Hygge',
 		href: 'https://www.beliani.ch/christmas-shop/',
-		// tree: JACINTO
-		imageProductId: 202594,
-		// ALTAELVA, AMBRE, IVRESSE (not in products.json), VALKAMA (inactive on SE), VUOTSO, PITEA, LAITON, MOTTI white
-		products: lpProducts(0, [671432, 446905, 664722, 848081, 657273, 843143, 446887, 340697]),
+		// tree: PALOMAR 210 cm
+		imageProductId: 296157,
+		// ALTAELVA, AMBRE, IVRESSE (not in products.json), VALKAMA (inactive on SE), VUOTSO, PITEA, LAITON,
+		// MOTTI green velvet 45 cm (not on the SA list - the stars image shows the green ones)
+		products: lpProducts(0, [671432, 446905, 664722, 848081, 657273, 843143, 446887, 340869]),
 	},
 	{
 		name: 'Timeless Red & Gold',
 		href: 'https://www.beliani.ch/christmas-shop/',
-		// tree: PALOMAR 210 cm
-		imageProductId: 296157,
+		// tree: JACINTO
+		imageProductId: 202594,
 		// FLICKER, HUMPPLIA, KINNARI, VELKUA, WAPTA, TWINKLE, MOTTI red, FERIABLE
 		products: lpProducts(1, [677354, 846816, 847552, 848079, 335252, 677258, 340565, 656323]),
 	},
@@ -248,6 +257,7 @@ export default new entities.Campaign({
 			disableTopImageTitle: true,
 			intro: false,
 			disableSoonEnding: true,
+			additionalCss: additionalCssLp,
 		},
 	],
 });
