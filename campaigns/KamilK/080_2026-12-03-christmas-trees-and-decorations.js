@@ -135,6 +135,12 @@ const additionalCss = `
 
 // ---------- LP (ChristmasLook) ----------
 
+// mobile product grid: 4px gap + 4px top instead of 8px (lp.css, shared with Krzysztof's LP - so overridden here).
+// additionalCss lands before the LP html and its own <style>${lpCss}</style>, so the selector needs more specificity.
+const additionalCssLp = `
+@media (max-width:768px){.wideLanding div.lpProducts{gap:4px !important;padding-top:4px !important;}}
+`;
+
 const lpImages = (prefix, translate, ext = 'png') =>
 	[1, 2, 3, 4, 5].map((n) => ({ src: `${prefix}${String(n).padStart(2, '0')}.${ext}`, translate }));
 
@@ -166,7 +172,7 @@ const categories = [
 		imageProductId: 296157,
 		// ALTAELVA, AMBRE, IVRESSE (not in products.json), VALKAMA (inactive on SE), VUOTSO, PITEA, LAITON,
 		// MOTTI green velvet 45 cm (not on the SA list - the stars image shows the green ones)
-		products: lpProducts(0, [671432, 446905, 664722, 848081, 657273, 843143, 446887, 340756]),
+		products: lpProducts(0, [671432, 446905, 664722, 848081, 657273, 843143, 446887, 340869]),
 	},
 	{
 		name: 'Timeless Red & Gold',
@@ -251,6 +257,7 @@ export default new entities.Campaign({
 			disableTopImageTitle: true,
 			intro: false,
 			disableSoonEnding: true,
+			additionalCss: additionalCssLp,
 		},
 	],
 });
