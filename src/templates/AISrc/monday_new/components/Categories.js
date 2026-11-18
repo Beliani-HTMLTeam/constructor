@@ -60,7 +60,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
           background: background,
           align: category.title?.align ?? 'left',
           insideTable: true,
-          spanStyle: `color: ${color};`,
+          spanStyle: `color: ${color};${category?.title?.style ?? ''}`,
           tableContainer: false,
           className: category.title?.className ?? 'categoryTitle',
         })}
