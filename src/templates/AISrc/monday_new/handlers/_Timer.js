@@ -227,7 +227,7 @@ export const TimerHandler = async ({
 
 	return Inside && Inside.type === 'timer'
 		? `
-    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, background: Inside.spaceBeforeBackground ?? backgroundColor }) : ''}
+    ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, bg: Inside.spaceBeforeBackground ?? backgroundColor }) : ''}
 
     ${Timer({
 			title: queries?.timer?.[0] ?? 'Translation not found',
