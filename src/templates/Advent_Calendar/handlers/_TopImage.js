@@ -1,14 +1,14 @@
 import { ImageWithLink } from '../components/ImageWithLink';
 import { InteractiveHeroImage } from '../components/InteractiveHeroImage';
 
-export const TopImageHandler = ({queries, links, TopImage_data, type, getCategoryLink, shopNow , conditions  }) => {
+export const TopImageHandler = ({queries, links, TopImage_data, type, getCategoryLink, shopNow , conditions, codeCopied  }) => {
   if (!links?.TopImage_href) return '';
 
   let html = '';
 
   if (type === 'landing'){
    
-      html += InteractiveHeroImage({type, queries, getCategoryLink, shopNow, conditions });
+      html += InteractiveHeroImage({type, queries, getCategoryLink, shopNow, conditions, codeCopied });
   }
   else {
   if (links?.TopImage_src) {

@@ -181,6 +181,7 @@ export function AdventPopupStyles() {
   .adv-pop__nowrap { white-space: nowrap; }   /* hyphenated words in the title stay in one piece */
   .adv-pop__tline { display: block; }          /* one title line from the sheet (see parts.js titleLines) */
   .adv-pop__num { white-space: nowrap; }       /* "50 %" / "€ 10" never split */
+  .adv-pop__amount { white-space: nowrap; }    /* CZ/SK "nad XXX Kč" stays together (parts.js amountLine) */
   .adv-pop__subtitle {
     margin-top: var(--gap-sub);
     font-size: calc(var(--fs-sub) * 1cqw);
@@ -384,6 +385,9 @@ export function AdventPopupStyles() {
       font-size: min(calc(var(--m-cta) * 1px), calc(var(--m-cta) * 100cqw / 257));
     }
     .adv-pop__cta + .adv-pop__cond { margin-top: min(3px, calc(3 * 100cqw / 257)); }
+
+    /* CZ/SK: "nad XXX Kč" on its own line on mobile ("při nákupu" / "nad XXX Kč") */
+    .adv-pop__amount { display: block; }
 
     /* "when you spend ... / Code: XXX": 28px per line (design) */
     .adv-pop__subtitle,

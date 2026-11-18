@@ -78,12 +78,41 @@ const markNumbers = (html) =>
         .join('');
 const titleHtml = (html) => titleLines(keepHyphenWords(markNumbers(html)));
 
+// CZ / SK "… nad XXX Kč" in the subtitle ("při nákupu nad 2 000 Kč"):
+// the amount part is kept together, and on MOBILE it always starts on its own line
+//   mobile:  "při nákupu" / "nad XXX Kč"      desktop: one line as before
+// (styles.js .adv-pop__amount)
+const AMOUNT_RE = /\s(nad\s+(?:[\d\s.,]*\d|X+|x+)\s*(?:Kč|€))/;
+const amountLine = (html) =>
+  html === undefined || html === null
+    ? html
+    : String(html)
+        .split(/(<[^>]*>)/)
+        .map((part) => (part.charAt(0) === '<' ? part : part.replace(AMOUNT_RE, ' <span class="adv-pop__amount">$1</span>')))
+        .join('');
+
+// Amounts of money are never torn apart: "190 €" / "€ 190" / "2 000 Kč" / "XXX Ft" stay on one
+// line (a line break comes before the amount, never between the number and the currency).
+// Also with a non-breaking space (&nbsp;) or &euro; from the sheet.
+const SP = '(?:\\s|\\u00a0|&nbsp;)';
+const NUM = '(?:\\d(?:[\\d.,\'’]|' + SP + '(?=\\d{3}))*|X+|x+)';
+const CUR = '(?:€|&euro;|£|\\$|CHF|Fr\\.|EUR|Ft|HUF|kr\\.?|DKK|NOK|SEK|zł|PLN|Kč|CZK|lei|RON)';
+const MONEY_RE = new RegExp('((?:€|&euro;|£|\\$|CHF|Fr\\.|EUR)' + SP + '?' + NUM + '|' + NUM + SP + '?' + CUR + '(?![A-Za-zÀ-ž]))', 'g');
+const keepAmounts = (html) =>
+  html === undefined || html === null
+    ? html
+    : String(html)
+        .split(/(<[^>]*>)/)
+        .map((part) => (part.charAt(0) === '<' ? part : part.replace(MONEY_RE, '<span class="adv-pop__nowrap">$1</span>')))
+        .join('');
+const subtitleHtml = (html) => keepAmounts(amountLine(html));
+
 export function PopupText({ headline, pre, title, subtitle, link, mobile = {} }) {
   const inner =
-    dm('adv-pop__headline', headline, mobile.headline) +
-    dm('adv-pop__pre', pre, mobile.pre) +
+    dm('adv-pop__headline', keepAmounts(headline), keepAmounts(mobile.headline)) +
+    dm('adv-pop__pre', keepAmounts(pre), keepAmounts(mobile.pre)) +
     dm('adv-pop__title', titleHtml(title), titleHtml(mobile.title)) +
-    dm('adv-pop__subtitle', subtitle, mobile.subtitle);
+    dm('adv-pop__subtitle', subtitleHtml(subtitle), subtitleHtml(mobile.subtitle));
   return linkOrDiv(link, 'adv-pop__container', inner);
 }
 
@@ -139,7 +168,7 @@ export function PopupTiers({ tiers, texts = DEFAULT_POPUP_TEXTS }) {
   return (
     '<div class="adv-pop__tiers">' +
     list
-      .map((t) => '<div class="adv-pop__tier">' + dm('adv-pop__tier-text', t.text, t.mobileText) + codesBlock(t.code, texts) + '</div>')
+      .map((t) => '<div class="adv-pop__tier">' + dm('adv-pop__tier-text', keepAmounts(t.text), keepAmounts(t.mobileText)) + codesBlock(t.code, texts) + '</div>')
       .join('') +
     '</div>'
   );
