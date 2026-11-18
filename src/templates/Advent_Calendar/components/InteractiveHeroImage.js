@@ -31,7 +31,7 @@ const ADVENT_TRANSLATOR_MODE = true;
 const ADVENT_START = '2026-12-01';
 const ADVENT_REAL_START = '2026-12-01';
  
-export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, conditions: conditionsText, getPhrase, getCategoryLink }) {
+export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, conditions: conditionsText, codeCopied: codeCopiedText, getPhrase, getCategoryLink }) {
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
@@ -112,7 +112,14 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   // A colon is added when the phrase has none ("Feltételek" -> "Feltételek:").
   const conditionsWord = conditionsText || (typeof getPhrase === 'function' && getPhrase('Conditions')) || '';
   const conditionsTitle = conditionsWord ? (/:\s*$/.test(conditionsWord) ? conditionsWord : conditionsWord + ':') : '';
-  const popupTexts = popupTextsFromQueries(queries, { shopNow, ...(conditionsTitle ? { conditionsTitle } : {}) });
+  // "Code copied" message after the copy icon is clicked – the same phrase as the CopyCodeCTA in
+  // the other templates: the text passed in (codeCopied = getPhrase('Copy code')), or getPhrase itself
+  const copied = codeCopiedText || (typeof getPhrase === 'function' && getPhrase('Copy code')) || '';
+  const popupTexts = popupTextsFromQueries(queries, {
+    shopNow,
+    ...(conditionsTitle ? { conditionsTitle } : {}),
+    ...(copied ? { copied } : {}),
+  });
  
  
   // ===== Popup per door (key = door number) =====
