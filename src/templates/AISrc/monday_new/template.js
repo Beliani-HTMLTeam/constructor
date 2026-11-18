@@ -9,6 +9,7 @@ import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 import { ShopByCategoryHeader } from './components/ShopByCategoryHeader.js';
 import { TimerHandler } from './handlers/_Timer.js';
+import { getTimerLinks } from '@/templates/Friday/helpers/getTimerLinks.js';
 
 const MondayNew = async ({
   links,
@@ -77,7 +78,7 @@ const MondayNew = async ({
   const TimerElement = await TimerHandler({
     Inside,
     queries,
-    links,
+    links: getTimerLinks({ links, timer, type }),
     timer,
     shopNow,
     country,
