@@ -209,6 +209,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     if (!deal) return;
     var els = deal.querySelectorAll(FIT_SEL);
     Array.prototype.forEach.call(els, function (el) { el.style.fontSize = ''; el.style.maxWidth = ''; });   // back to the design
+    Array.prototype.forEach.call(deal.querySelectorAll('.adv-pop__tline, .adv-pop__num'), function (ln) { ln.style.fontSize = ''; });
     var cs = window.getComputedStyle(deal);
     var avail = deal.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
     if (avail <= 0) return;
@@ -230,6 +231,9 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
         room = avail - 2 * xOverlap;
         el.style.maxWidth = room + 'px';
       }
+      // title with lines from the sheet: every line is fitted on its own (see fitTitleLines)
+      var tlines = el.classList.contains('adv-pop__title') ? el.querySelectorAll('.adv-pop__tline') : [];
+      if (tlines.length) { fitTitleLines(el, tlines, room); return; }
       for (var i = 0; i < 5; i++) {
         var w = el.scrollWidth;                             // width of its longest word / line
         if (w <= room + 1) break;
@@ -242,10 +246,12 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       // but never below 60% of the design size.
       if (el.classList.contains('adv-pop__title')) fitLines(el, base);
     });
-    // desktop: all texts together must fit the height of the popup (e.g. FI "Ylimääräinen /
-    // 10% alennus / vähintään 500 € tilauksen yhteydessä ..." is taller than the 480px design).
-    // Mobile is not limited – there the text may run into the picture area as designed.
-    if (window.matchMedia && window.matchMedia('(min-width: 601px)').matches) fitHeight(deal, els);
+    // all texts together must fit the height:
+    //  desktop – the popup (e.g. FI "Ylimääräinen / 10% alennus / vähintään 500 € ..." is taller than 480px);
+    //  mobile  – the top 62% of the popup (the gift box below must stay visible; the English
+    //            designs end at ~59%), or the text area itself when it is taller (4 for 3)
+    var desktop = window.matchMedia && window.matchMedia('(min-width: 601px)').matches;
+    fitHeight(deal, els, desktop ? 0 : Math.max(deal.clientHeight, content.clientHeight * 0.62));
   }
   // height of the visible text block (first line top -> last line bottom)
   function blockHeight(deal) {
@@ -254,27 +260,160 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     var first = kids[0], last = kids[kids.length - 1];
     return last.offsetTop + last.offsetHeight - first.offsetTop;
   }
-  // too tall -> the big title gets smaller first (down to 60% of its design size),
-  // then the other lines a little (down to 75%) – until the block fits between the paddings
-  function fitHeight(deal, els) {
+  // too tall -> shrink step by step until the block fits:
+  //   1. the title: with lines from the sheet only its WORDS ("Jusqu'à", "de réduction"), the deal
+  //      number ("50 %") keeps its size; without lines ("10% alennus") the whole title –
+  //      down to 60% of the title size;
+  //   2. the other lines (category, Only Today, button, ...) – down to 75% of their design size;
+  //   3. a title with lines as a whole (number included) – down to 60% of its design size.
+  // maxBottom: mobile – the text may end no lower than this (px from the top of the text area)
+  function fitHeight(deal, els, maxBottom) {
     var cs = window.getComputedStyle(deal);
-    var avail = deal.clientHeight - (parseFloat(cs.paddingTop) || 0) - (parseFloat(cs.paddingBottom) || 0);
+    // desktop: 20px air above and below (a little less than the column padding, so the
+    // English designs – e.g. the 4 for 3 pyramid – keep their sizes)
+    var avail = maxBottom
+      ? maxBottom - (parseFloat(cs.paddingTop) || 0)
+      : deal.clientHeight - 40;
     if (avail <= 0) return;
+    var px = function (el) { return parseFloat(window.getComputedStyle(el).fontSize) || 0; };
     var visible = Array.prototype.filter.call(els, function (el) { return el.offsetParent !== null && el._advBase; });
-    for (var i = 0; i < 40 && blockHeight(deal) > avail + 1; i++) {
-      var titles = visible.filter(function (el) {
-        return el.classList.contains('adv-pop__title') && parseFloat(window.getComputedStyle(el).fontSize) > el._advBase * 0.6;
+    var titles = visible.filter(function (el) { return el.classList.contains('adv-pop__title'); });
+    var others = visible.filter(function (el) { return !el.classList.contains('adv-pop__title'); });
+    var tooTall = function () { return blockHeight(deal) > avail + 1; };
+
+    // 1. title words / titles without lines
+    titles.forEach(function (t) {
+      if (!t.querySelector('.adv-pop__tline')) {
+        for (var n = 0; n < 20 && tooTall() && px(t) > t._advBase * 0.6; n++) {
+          t.style.fontSize = Math.max(t._advBase * 0.6, px(t) * 0.95) + 'px';
+        }
+        return;
+      }
+      var words = Array.prototype.filter.call(t.querySelectorAll('.adv-pop__tline'), function (ln) {
+        return !ln.classList.contains('adv-pop__tline--num');
       });
-      var group = titles.length ? titles : visible.filter(function (el) {
-        return !el.classList.contains('adv-pop__title') && parseFloat(window.getComputedStyle(el).fontSize) > el._advBase * 0.75;
-      });
-      if (!group.length) break;                            // everything at its minimum
-      group.forEach(function (el) {
-        var size = parseFloat(window.getComputedStyle(el).fontSize);
-        var min = el._advBase * (el.classList.contains('adv-pop__title') ? 0.6 : 0.75);
-        el.style.fontSize = Math.max(min, size * 0.95) + 'px';
-      });
+      if (!words.length) return;
+      var tpx = px(t), size = Math.min.apply(null, words.map(px));
+      for (var i = 0; i < 20 && tooTall() && size > tpx * 0.6; i++) {
+        size = Math.max(tpx * 0.6, size * 0.95);
+        words.forEach(function (ln) { setLineSize(ln, size, tpx); });
+      }
+    });
+    // 2. the other lines
+    for (var j = 0; j < 20 && tooTall(); j++) {
+      var group = others.filter(function (el) { return px(el) > el._advBase * 0.75; });
+      if (!group.length) break;
+      group.forEach(function (el) { el.style.fontSize = Math.max(el._advBase * 0.75, px(el) * 0.95) + 'px'; });
     }
+    // 3. the whole title
+    for (var k = 0; k < 20 && tooTall(); k++) {
+      var tgroup = titles.filter(function (el) { return px(el) > el._advBase * 0.6; });
+      if (!tgroup.length) break;
+      tgroup.forEach(function (el) { el.style.fontSize = Math.max(el._advBase * 0.6, px(el) * 0.95) + 'px'; });
+    }
+  }
+  // one title line at text size px; its deal number ("50%", parts.js markNumbers) stays at the title size.
+  // Sizes are set in em of the title, so fitHeight can still scale the whole title.
+  function setLineSize(ln, px, titlePx) {
+    ln.style.fontSize = (px / titlePx) + 'em';
+    Array.prototype.forEach.call(ln.querySelectorAll('.adv-pop__num'), function (n) {
+      n.style.fontSize = (titlePx / px) + 'em';             // back to the title size
+    });
+  }
+  // rows a line really takes (a bigger number on the same row counts as the same row)
+  function textRows(ln) {
+    var range = document.createRange();
+    range.selectNodeContents(ln);
+    var rects = Array.prototype.slice.call(range.getClientRects())
+      .filter(function (r) { return r.width > 0 && r.height > 0; })
+      .sort(function (a, b) { return a.top - b.top; });
+    var rows = 0, bottom = -Infinity;
+    rects.forEach(function (r) {
+      if ((r.top + r.bottom) / 2 > bottom) { rows++; bottom = r.bottom; }
+      else bottom = Math.max(bottom, r.bottom);
+    });
+    return rows || 1;
+  }
+  // text size for these lines: the largest size at which each of them fits on one line
+  // (numbers stay at the title size while measuring)
+  function textSizeFor(lines, titlePx, room) {
+    var min = titlePx * 0.6, text = titlePx;
+    Array.prototype.forEach.call(lines, function (ln) {
+      var px = titlePx;
+      setLineSize(ln, px, titlePx);
+      for (var i = 0; i < 5; i++) {                       // a word wider than the column
+        var w = ln.scrollWidth;
+        if (w <= room + 1) break;
+        px = Math.max(min, px * (room / w) * 0.98);
+        setLineSize(ln, px, titlePx);
+        if (px <= min) break;
+      }
+      for (var j = 0; j < 20 && textRows(ln) > 1 && px > min; j++) {   // wraps -> smaller
+        px = Math.max(min, px * 0.95);
+        setLineSize(ln, px, titlePx);
+      }
+      text = Math.min(text, px);
+    });
+    return text;
+  }
+  // "50% kedvezménnyel" -> "50%" on its own line + "kedvezménnyel" (the line is split around the number)
+  function splitNumbers(el) {
+    var split = false;
+    Array.prototype.forEach.call(el.querySelectorAll('.adv-pop__tline'), function (ln) {
+      var num = ln.querySelector('.adv-pop__num');
+      if (!num || ln.classList.contains('adv-pop__tline--num')) return;
+      var parts = ln.innerHTML.split(num.outerHTML);
+      if (parts.length !== 2) return;
+      var before = parts[0].trim(), after = parts[1].trim();
+      if (!before && !after) { ln.classList.add('adv-pop__tline--num'); return; }   // number alone already
+      var html = (before ? '<span class="adv-pop__tline">' + before + '</span>' : '') +
+                 '<span class="adv-pop__tline adv-pop__tline--num">' + num.outerHTML + '</span>' +
+                 (after ? '<span class="adv-pop__tline">' + after + '</span>' : '');
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      while (tmp.firstChild) ln.parentNode.insertBefore(tmp.firstChild, ln);
+      ln.parentNode.removeChild(ln);
+      split = true;
+    });
+    return split;
+  }
+  // Title with lines from the sheet:
+  //  - the words get one common size (largest at which every line fits on one line, min 60%);
+  //  - the deal number ("50%") keeps the full title size;
+  //  - if the words had to get smaller, the number goes on its OWN line and gets bigger
+  //    (desktop: up to 120% of the title size, as wide as the column allows; mobile: title size):
+  //      HU "akár / 50% kedvezménnyel" -> "akár / 50% / kedvezménnyel"
+  function fitTitleLines(el, lines, room) {
+    var titlePx = parseFloat(window.getComputedStyle(el).fontSize) || 0;
+    if (!titlePx) return;
+    var text = textSizeFor(lines, titlePx, room);
+    if (text >= titlePx - 0.5 || !el.querySelector('.adv-pop__num')) {
+      Array.prototype.forEach.call(lines, function (ln) { setLineSize(ln, text, titlePx); });
+      return;
+    }
+    splitNumbers(el);
+    Array.prototype.forEach.call(el.querySelectorAll('.adv-pop__tline'), function (ln) {
+      if (ln.querySelector('.adv-pop__num') && !ln.classList.contains('adv-pop__tline--num')) return;
+      if (ln.querySelector('.adv-pop__num')) ln.classList.add('adv-pop__tline--num');
+    });
+    var all = el.querySelectorAll('.adv-pop__tline');
+    var words = Array.prototype.filter.call(all, function (ln) { return !ln.classList.contains('adv-pop__tline--num'); });
+    var nums = Array.prototype.filter.call(all, function (ln) { return ln.classList.contains('adv-pop__tline--num'); });
+    text = words.length ? textSizeFor(words, titlePx, room) : titlePx;
+    words.forEach(function (ln) { setLineSize(ln, text, titlePx); });
+    // desktop: 120% of the title size; mobile: the title size (more height would cover the picture)
+    var numScale = window.matchMedia && window.matchMedia('(min-width: 601px)').matches ? 1.2 : 1;
+    nums.forEach(function (ln) {
+      var px = titlePx * numScale;
+      ln.style.fontSize = (px / titlePx) + 'em';
+      Array.prototype.forEach.call(ln.querySelectorAll('.adv-pop__num'), function (n) { n.style.fontSize = ''; });
+      for (var i = 0; i < 5; i++) {                       // never wider than the column
+        var w = ln.scrollWidth;
+        if (w <= room + 1) break;
+        px = px * (room / w) * 0.98;
+        ln.style.fontSize = (px / titlePx) + 'em';
+      }
+    });
   }
   function lineCount(el) {
     var lh = parseFloat(window.getComputedStyle(el).lineHeight) || 0;
@@ -285,7 +424,9 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     // with line breaks from the sheet: exactly those lines ("akár" + "50% kedvezménnyel" = 2);
     // without: at most 2 lines, like the design ("Free / candle holder") – a longer title
     // ("Ajándék / díszpárna- / szett") gets smaller until it fits on 2 lines
-    var allowed = breaks ? breaks + 1 : 2;
+    // 4 for 3 popup (with the pyramid lines): the title on ONE line ("3-at fizet, 4-et vihet")
+    var oneLine = !breaks && el.closest('.adv-pop__deal') && el.closest('.adv-pop__deal').querySelector('.adv-pop__tiers');
+    var allowed = breaks ? breaks + 1 : (oneLine ? 1 : 2);
     var min = base * 0.6;
     for (var i = 0; i < 20 && lineCount(el) > allowed; i++) {
       var size = parseFloat(window.getComputedStyle(el).fontSize) || 0;
