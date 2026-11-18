@@ -4,8 +4,8 @@ import { createImages } from './shared/createImages';
 
 // Options
 const campaignTranslationsSheet = '2026::07.12.26 - Gatherings';
-const imageData = '20261207';
-const image = createImages(getImageUrl, imageData);
+const imageDate = '20261207';
+const image = createImages(getImageUrl, imageDate);
 
 const theme = {
   primary: '#FFEFD9',
@@ -34,7 +34,7 @@ const tableQueries = [
 ];
 
 const links = generateLinks({
-  date: imageData,
+  date: imageDate,
   custom: {
     Intro_cta_href: 'https://www.beliani.ch/dining-room-furniture/',
   },

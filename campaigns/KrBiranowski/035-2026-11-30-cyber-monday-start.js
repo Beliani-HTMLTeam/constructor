@@ -1,76 +1,58 @@
 import { createTemplates } from './shared/createTemplates';
+import { generateLinks } from './shared/generateLinks.js';
 import { createImages } from './shared/createImages';
 
-const image = createImages(getImageUrl, '20261130');
+const imageDate = '20261130';
+const image = createImages(getImageUrl, imageDate);
 
 const campaignTranslationsSheet = '2026::Voucher - 30.11.26 - Cyber Monday Start';
-
-const dealTranslationsSheets = [
-  '2026::Voucher - 30.11.26 - Cyber Monday Start',
-  '2026::Voucher - 04.12.26 - Cyber Monday Reminder',
-];
-
-const tableQueries = [
-  ...[
-    ['TopImageTitle', '22:23', dealTranslationsSheets[1]],
-    ['deal_1', '25:27', dealTranslationsSheets[0]],
-    ['deal_2', '28:30', dealTranslationsSheets[0]],
-    ['deal_3', '31:33', dealTranslationsSheets[0]],
-    ['deal_condition', '34', dealTranslationsSheets[0]],
-    ['deal_date', '35', dealTranslationsSheets[0]],
-    ['condition', '37:39', dealTranslationsSheets[0]],
-  ].map(([name, tableRange, tableName]) => ({
-    name,
-    tableRange,
-    tableName,
-  })),
-];
-
-const lpHref = translateLink({ value: 'content/lp26-11-30' });
-
-const links = {
-  TopImageSubtitle_href: lpHref,
-  TopImageSubtitle_src: image('{date}_top_{index}.png', { index: 1 }),
-
-  TopImage_src: translateImage({ value: '20261130_Pic.jpg' }),
-  TopImage_href: lpHref,
-
-  Timer_href: lpHref,
-};
-
-const TopImageTitle_data = {
-  color: '#020101',
-  backgroundColor: '#FD9000',
-  type: 'twoSameLines',
-  spaceAfter: false,
-};
+const dealTranslationsSheets = [campaignTranslationsSheet, '2026::Voucher - 04.12.26 - Cyber Monday Reminder'];
 
 const palette = {
-  accent: '#FF2F00',
   light: '#FFFFFF',
-  dark: '#750000',
   line: '#000000',
   text: '#000000',
   page: '#FD9000',
   cta: '#FF2F00',
-  tilesBg: '#F6E7E6',
   toastBg: '#FFE0D4',
-  buttonBg: '#FF2F00',
 };
 
-const button = {
-  show: true,
-  align: 'center',
-  variant: 'button',
-  background: palette.dark,
-  fontSize: '20px',
-  lineHeight: '24px',
-  fontWeight: '800',
-  letterSpacing: '0',
-  paddingX: 38,
-  paddingY: 18,
-  mobilePaddingX: 24,
-  mobilePaddingY: 14,
+const tableQueries = [
+  ['TopImageTitle', '22:23', dealTranslationsSheets[1]],
+  ['deal_1', '25:27', dealTranslationsSheets[0]],
+  ['deal_2', '28:30', dealTranslationsSheets[0]],
+  ['deal_3', '31:33', dealTranslationsSheets[0]],
+  ['deal_condition', '34', dealTranslationsSheets[0]],
+  ['deal_date', '35', dealTranslationsSheets[0]],
+  ['condition', '37:39', dealTranslationsSheets[0]],
+].map(([name, tableRange, tableName]) => ({
+  name,
+  tableRange,
+  tableName,
+}));
+
+const links = generateLinks({
+  date: imageDate,
+  custom: {
+    TopImageSubtitle_href: translateLink({
+      value: 'content/lp26-11-30',
+    }),
+    TopImageSubtitle_src: image('{date}_top_{index}.png', {
+      index: 1,
+    }),
+    TopImage_src: translateImage({
+      value: `${imageDate}_Pic.jpg`,
+    }),
+  },
+});
+
+const lpHref = links.TopImage_href;
+
+const TopImageTitle_data = {
+  color: '#020101',
+  backgroundColor: palette.page,
+  type: 'twoSameLines',
+  spaceAfter: false,
 };
 
 const additionalCss = `
@@ -177,12 +159,27 @@ const additionalCssLp = `
 }
 `;
 
+const categoryRows = [
+  ['Sofas', 'https://www.beliani.ch/sofas/'],
+  ['Beds', 'https://www.beliani.ch/bedroom-furniture/beds/'],
+  ['Tables', 'https://www.beliani.ch/living-room-furniture/tables/'],
+  ['Armchairs', 'https://www.beliani.ch/bedroom-furniture/armchairs/'],
+  ['Dining Chairs', 'https://www.beliani.ch/chairs/dining-chairs/'],
+  ['Table & Bedside Lamps', 'https://www.beliani.ch/lighting/table-lamps/'],
+].map(([name, href], index) => [
+  {
+    name,
+    href,
+    src: image('{date}_catTile{index}.jpg', { index: index + 1 }),
+  },
+]);
+
 const categories = [
   {
     type: 'offer_tiers',
     background: palette.page,
     color: palette.text,
-    href: lpHref, // "Get codes" link
+    href: lpHref,
     paddingTop: 0,
     spaceAfter: 'newsletterBottom80px',
     offerTiers: {
@@ -191,13 +188,23 @@ const categories = [
       dateQuery: 'deal_date',
       valueColor: palette.text,
       highlightColor: palette.light,
-      highlight: [2], // FREE in dark red
+      highlight: [2],
       codeColor: palette.light,
       lineColor: palette.line,
       conditionColor: palette.light,
-      copyToast: { background: palette.toastBg, color: palette.text },
-      cta: { phrase: 'Get codes', background: palette.cta, color: palette.text },
-      spacing: { beforeNSLTLastLine: 50, beforeLPLastLine: 30 },
+      copyToast: {
+        background: palette.toastBg,
+        color: palette.text,
+      },
+      cta: {
+        phrase: 'Get codes',
+        background: palette.cta,
+        color: palette.text,
+      },
+      spacing: {
+        beforeNSLTLastLine: 50,
+        beforeLPLastLine: 30,
+      },
     },
   },
   {
@@ -214,7 +221,6 @@ const categories = [
     tileCta: { phrase: 'Shop now' },
     tileCtaUnderline: true,
     tileStackGap: 8,
-    showTileText: true,
     tileTextStack: 'always',
     tileTextAlign: 'center',
     spaceBetweenText: 'newsletterBottom10px',
@@ -224,20 +230,7 @@ const categories = [
       className: 'cyberMondayCategoryHeading',
       spaceAfter: 'newsletterBottom40px',
     },
-    categories: [
-      ['Sofas', 'https://www.beliani.ch/sofas/'],
-      ['Beds', 'https://www.beliani.ch/bedroom-furniture/beds/'],
-      ['Tables', 'https://www.beliani.ch/living-room-furniture/tables/'],
-      ['Armchairs', 'https://www.beliani.ch/bedroom-furniture/armchairs/'],
-      ['Dining Chairs', 'https://www.beliani.ch/chairs/dining-chairs/'],
-      ['Table & Bedside Lamps', 'https://www.beliani.ch/lighting/table-lamps/'],
-    ].map(([name, href], index) => [
-      {
-        name,
-        href,
-        src: image('{date}_catTile{index}.jpg', { index: index + 1 }),
-      }
-    ])
+    categories: categoryRows,
   },
 ];
 
