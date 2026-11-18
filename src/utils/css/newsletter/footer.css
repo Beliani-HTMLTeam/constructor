@@ -86,7 +86,7 @@ img {
 /* from 16.11.2026: bigger footer titles (footer_new.js picks this class by the campaign date) */
 .newsletterNewFooterTitleV2 {
     color: #750000;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 22px;
     line-height: 24px;
     font-weight: 700;

@@ -8,7 +8,7 @@
   max-width: 1815px;
   min-height: 100vh;
   margin: 0 auto;
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .wideLanding .lpIntro {
@@ -173,6 +173,24 @@
   width: 100%;
   max-width: 1824px;
   margin: 0 auto 35px;
+}
+
+/* optional single full-width hero (props.images.hero), replaces the topCategories collage */
+.wideLanding .lpHero {
+  width: 100%;
+  max-width: 1824px;
+  margin: 0 auto 35px;
+  line-height: 0;
+}
+
+.wideLanding .lpHero a {
+  display: block;
+}
+
+.wideLanding .lpHero img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .wideLanding .topCategories > a {

@@ -52,6 +52,15 @@ const renderTopCategories = (images = [], categories = []) => `
     `).join('')}
   </div>
 `;
+// optional single full-width hero (props.images.hero) - used instead of the topCats collage when set
+const renderHero = (src, href, alt = 'Top Image') => `
+  <div class="lpHero">
+    ${href ? `<a href="${href}" target="_blank">` : ''}
+      <img src="${src}" alt="${alt}">
+    ${href ? '</a>' : ''}
+  </div>
+`;
+
 const renderCategory = (category, index, shopNow) => `
 <section class="lpCategory" id="lp-cetegory-${index + 1}">
   <div class="lpIntro">
@@ -75,14 +84,14 @@ const renderCategory = (category, index, shopNow) => `
     `: ''}
   </div>
   ${category.src ? `
-    ${category.href ? `<a href="${category.href}" target="_blank">` : ''}
+    ${(category.imageHref || category.href) ? `<a href="${category.imageHref || category.href}" target="_blank">` : ''}
       <img
         class="lpCategoryImage"
         src="${category.src}"
         alt=""
         loading="lazy"
       >
-    ${category.href ? '</a>' : ''}
+    ${(category.imageHref || category.href) ? '</a>' : ''}
   ` : ''}
   <div class="lpProducts">
     ${category.products?.map(renderProduct).join('') ?? ''}
@@ -113,7 +122,9 @@ export const Landing = async ({
 
 <!-- LANDING PAGE -->
 <div class="wideLanding">
-${renderTopCategories(images.topCats ?? [], resolvedCategories)}
+${images.hero
+  ? renderHero(images.hero, links.hero || resolvedCategories[0]?.href)
+  : renderTopCategories(images.topCats ?? [], resolvedCategories)}
   ${renderIntro(queries, true)}
   ${resolvedCategories.map((category, index) =>
     renderCategory({
