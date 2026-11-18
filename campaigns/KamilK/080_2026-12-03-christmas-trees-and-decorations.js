@@ -39,7 +39,7 @@ const links = {
 	Intro_cta_href: lpHref,
 
 	// Cyber Monday LP (issue 545830)
-	Timer_href: translateLink({ value: 'content/lp26-11-30' }),
+	Timer_href: translateLink({ value: 'content/lp26-12-04' }),
 };
 
 const palette = {
