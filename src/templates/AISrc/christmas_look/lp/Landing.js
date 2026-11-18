@@ -61,6 +61,19 @@ const renderHero = (src, href, alt = 'Top Image') => `
   </div>
 `;
 
+// wide LP has no footer - props.conditions: true renders only the footer conditions (static footer translations,
+// without the unsubscribe message, which is NSLT-only) under the last category
+const renderConditions = (getFooter) => {
+  if (!getFooter) return '';
+  const text = getFooter('Conditions_description');
+  const title = getFooter('Conditions title');
+
+  return `
+<div class="lpConditions">
+  <span class="lpConditionsText">${title ? `${title} ` : ''}${text}</span>
+</div>`;
+};
+
 const renderCategory = (category, index, shopNow) => `
 <section class="lpCategory" id="lp-cetegory-${index + 1}">
   <div class="lpIntro">
@@ -106,6 +119,7 @@ export const Landing = async ({
   getCategoryTitle,
   getCategoryLink,
   getPhrase,
+  getFooter,
 }) => {
   const { images, links } = resolveAssets(props);
   const shopNow = getPhrase('Shop now');
@@ -136,5 +150,6 @@ ${images.hero
       shopNow
     )
   ).join('')}
+  ${props.conditions ? renderConditions(getFooter) : ''}
 </div>`;
 };

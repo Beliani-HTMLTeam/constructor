@@ -39,7 +39,7 @@ const links = {
 	Intro_cta_href: lpHref,
 
 	// Cyber Monday LP (issue 545830)
-	Timer_href: translateLink({ value: 'content/lp26-11-30' }),
+	Timer_href: translateLink({ value: 'content/lp26-12-04' }),
 };
 
 const palette = {
@@ -145,6 +145,8 @@ const props = {
 		// colour dots under the paragraph
 		catColors: lpImages('lp20261203_catColors', false),
 	},
+	// no footer on the wide LP - only the footer conditions (getFooter, without the unsubscribe message)
+	conditions: true,
 };
 
 // 8 products per style, ids from the SA list (SA Details link of issue 552241)
