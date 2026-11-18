@@ -7,14 +7,28 @@ import { Line } from './Line.js';
 import { translateImage } from '@/helpers/translateImage.js';
 import { translateLink } from '@/helpers/translateLink.js';
 
-const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, categories, queries, add_utm, links, type, country, categoryImageTdClass, theme = {}, disableHighPrice = false, }) => {
+const Categories = async ({
+  getPhrase,
+  getCategoryLink,
+  getCategoryTitle,
+  categories,
+  queries,
+  add_utm,
+  links,
+  type,
+  country,
+  categoryImageTdClass,
+  theme = {},
+  disableHighPrice = false,
+  indexOffset = 0
+}) => {
   let html = '';
 
   if (Array.isArray(categories)) {
-    for (const category of categories) {
+    for (const [index, category] of categories.entries()) {
       html += await renderCategory(
         category,
-        categories.indexOf(category),
+        index + indexOffset,
         queries,
         getPhrase,
         getCategoryLink,
@@ -30,26 +44,38 @@ const Categories = async ({ getPhrase, getCategoryLink, getCategoryTitle, catego
     }
   }
 
-  console.log('Categories HTML:', categories);
-
   return html;
 };
 
-const renderCategory = async (category, id, queries, getPhrase, getCategoryLink, getCategoryTitle, add_utm, links, type, country, categoryImageTdClass, theme, disableHighPrice = false) => {
+const renderCategory = async (
+  category,
+  id,
+  queries,
+  getPhrase,
+  getCategoryLink,
+  getCategoryTitle,
+  add_utm,
+  links,
+  type,
+  country,
+  categoryImageTdClass,
+  theme,
+  disableHighPrice = false
+) => {
   const isDeal = category.type === 'deal';
-  const background = isDeal ? theme?.dealBg ?? 'transparent' : (category.background ?? theme.white ?? 'white');
+  const background = isDeal ? (theme?.dealBg ?? 'transparent') : (category.background ?? theme.white ?? 'white');
   const color = category.color ?? theme.black ?? '#000000';
 
   const styles = `background: ${background}; color: ${color}; ${category.styles || ''}`;
 
   const catLinkQuery = queries.categoryLinks ? queries.categoryLinks[id] : '';
   const ctaHref = category.href ?? (catLinkQuery ? add_utm(catLinkQuery) : '');
-  const ctaButtonHref = (typeof category.cta === 'object' && category.cta?.href)
-    ? getCategoryLink(category.cta.href)
-    : ctaHref;
+  const ctaButtonHref =
+    typeof category.cta === 'object' && category.cta?.href ? getCategoryLink(category.cta.href) : ctaHref;
 
-  const TitleElement = category?.title?.show !== false && category.name
-    ? `
+  const TitleElement =
+    category?.title?.show !== false && category.name
+      ? `
     ${category.title?.spaceBefore ? Space({ insideTr: true, className: category.title.spaceBefore }) : ''}
    
     <tr>
@@ -69,7 +95,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
     ${category.title?.spaceAfter ? Space({ insideTr: true, className: category.title.spaceAfter }) : Space({ insideTr: true, className: 'newsletterBottom15px' })}
     `
-    : '';
+      : '';
 
   const ImageElement = category.src
     ? ImageWithLink({
@@ -77,6 +103,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
         src: category.src,
         insideTr: true,
         tdClass: categoryImageTdClass ?? category.tdClass ?? 'newsletterContainer',
+        background,
         type,
       })
     : '';
@@ -100,7 +127,9 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
       ${category.paragraph.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : ''}
     `
-    : category?.paragraph?.spaceAfter ? Space({ insideTr: true, className: category.paragraph.spaceAfter }) : '';
+    : category?.paragraph?.spaceAfter
+      ? Space({ insideTr: true, className: category.paragraph.spaceAfter })
+      : '';
 
   const paragraphPositionRaw = category?.paragraph?.position ?? 'beforeProducts';
   const paragraphPosition =
@@ -121,7 +150,6 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
     : '';
 
   const ctaSrc = typeof category.cta === 'object' && category.cta?.src ? category.cta.src : null;
-  console.log(theme, 'theme in renderCategory');
   const ProductsElement =
     category.products || category.tiles || category.freebies
       ? await renderBody({
@@ -171,27 +199,35 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
   const insideBannerElement = category?.insideBanner
     ? `
       ${category.insideBanner?.spaceAfter ? Space({ insideTr: true, className: category.insideBanner?.spaceAfter }) : ''}
-      ${category?.insideBanner?.image && category?.insideBanner?.link ? ImageWithLink({
-        href: add_utm(category.insideBanner?.link.href),
-        src: category.insideBanner?.image.src,
-        insideTr: true,
-        tdClass: categoryImageTdClass ?? category.insideBanner?.tdClass,
-        type,
-      }) : ''}
+      ${
+        category?.insideBanner?.image && category?.insideBanner?.link
+          ? ImageWithLink({
+              href: add_utm(category.insideBanner?.link.href),
+              src: category.insideBanner?.image.src,
+              insideTr: true,
+              tdClass: categoryImageTdClass ?? category.insideBanner?.tdClass,
+              type,
+            })
+          : ''
+      }
       ${category.insideBanner?.spaceBefore ? Space({ insideTr: true, className: category.insideBanner?.spaceBefore }) : ''}
     `
     : '';
 
   // Object-format cta uses categoryButton from queries; fallback is TRANSLATION NOT FOUND (not a phrase)
-  const ctaText = category.ctaText
-    ?? (typeof category.cta === 'object'
+  const ctaText =
+    category.ctaText ??
+    (typeof category.cta === 'object'
       ? (category.cta?.text ?? (category.cta?.phrase ? getPhrase(category.cta.phrase) : 'TRANSLATION NOT FOUND'))
-      : (category.cta?.phrase ? getPhrase(category.cta.phrase) : (getPhrase('See more') ?? 'TRANSLATION NOT FOUND')));
+      : category.cta?.phrase
+        ? getPhrase(category.cta.phrase)
+        : (getPhrase('See more') ?? 'TRANSLATION NOT FOUND'));
   const ctaVariant = typeof category.cta === 'object' && category.cta?.variant ? category.cta.variant : 'maroon';
 
   // CTAElement only renders for non-deal categories
-  const CTAElement = category.cta && !isDeal
-    ? `
+  const CTAElement =
+    category.cta && !isDeal
+      ? `
       ${category?.cta?.spaceAfter ? Space({ insideTr: true, className: category.cta.spaceAfter }) : ''}
       ${CTA({
         color: category?.cta?.color ?? category.color ?? '#000000',
@@ -211,24 +247,25 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
       })}
       ${category?.cta?.spaceBefore ? Space({ insideTr: true, className: category.cta.spaceBefore }) : ''}
     `
-    : '';
-  
+      : '';
+
   let ctaPos = 'afterProducts';
 
-  if (category?.ctaPosition) ctaPos = category.ctaPosition
+  if (category?.ctaPosition) ctaPos = category.ctaPosition;
 
-  const ConditionElement = (!isDeal && category.showCondition) && queries?.condition
-    ? `
+  const ConditionElement =
+    !isDeal && category.showCondition && queries?.condition
+      ? `
       ${Space({ insideTr: true, className: 'newsletterBottom20px' })}
       <tr>
         <td align="center" class="newsletterContainer" style="text-align: center;">
-          <span class="conditionText" style="${type === 'newsletter' ? 'font-family: \'Open Sans\', Arial, sans-serif;' : ''} font-size: 11px; color: #777777; line-height: 1.4; display: block;">
+          <span class="conditionText" style="${type === 'newsletter' ? "font-family: 'Open Sans', Arial, sans-serif;" : ''} font-size: 11px; color: #777777; line-height: 1.4; display: block;">
             ${Array.isArray(queries.condition) ? queries.condition.join('<br>') : queries.condition}
           </span>
         </td>
       </tr>
     `
-    : '';
+      : '';
 
   return `
   <tr>
@@ -267,7 +304,7 @@ const renderCategory = async (category, id, queries, getPhrase, getCategoryLink,
 
         ${ConditionElement}
 
-        ${(ctaPos === 'afterProducts') ? CTAElement : ''}
+        ${ctaPos === 'afterProducts' ? CTAElement : ''}
 
         ${category.spaceAfter === 0 ? '' : Space({ insideTr: true, className: category.spaceAfter ?? 'newsletterBottom60px', bg: category?.spaceColor ?? '' })}
 
