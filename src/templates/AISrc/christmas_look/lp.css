@@ -237,7 +237,29 @@
   text-decoration: none;
 }
 
+/* conditions under the last category (props.conditions) - the wide LP has no footer */
+.wideLanding .lpConditions {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 0 40px;
+  text-align: center;
+}
+
+.wideLanding .lpConditionsText {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 @media (max-width: 768px) {
+  .wideLanding .lpConditions {
+    padding: 0 16px 30px;
+  }
+
+  .wideLanding .lpConditionsText {
+    font-size: 11px;
+  }
+
   .wideLanding .lpIntro {
     padding: 0 16px;
   }

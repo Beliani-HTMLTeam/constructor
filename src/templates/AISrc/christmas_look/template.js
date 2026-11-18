@@ -165,7 +165,7 @@ const ChristmasLook = async ({
       </table>
     `;
   else
-    return Landing({queries, props, categories, getProductById, getCategoryTitle, getCategoryLink, getPhrase });
+    return Landing({queries, props, categories, getProductById, getCategoryTitle, getCategoryLink, getPhrase, getFooter });
 };
 
 export { ChristmasLook };
