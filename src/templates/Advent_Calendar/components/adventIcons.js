@@ -33,10 +33,10 @@ const DEFAULT_ICON_SIZES = [
   [31, 44],   // hourglass
   [48, 45],   // flower
 ];
-const ICON_BOX = 56;   // size used when an icon has no entry in iconSizes
-// Icons shrink with the screen (no media query needed – works in every mail app):
-// each icon takes the same share of its column as in the 570px design, never bigger than its design size.
-const COLUMN_WIDTH = 570 / 4 - 8;   // inner width of one column on desktop (134.5px)
+const ICON_BOX = 56;      // all icons stand on one line at the bottom of a 56px high box (labels stay level)
+const ITEM_WIDTH = 135;   // one icon + label: 4 x 135 = 540 fits the 570px desktop row,
+                          // on phones (content ~270-350px) only 2 fit -> 2 rows of 2
+const ROW_GAP = 12;       // space under each icon + label (= between the 2 rows on mobile)
 
 const DEFAULT_LABELS = ['24 Days', 'Exclusive Offers', '24-Hour Deals', 'Don’t Miss Out'];
 
@@ -71,26 +71,29 @@ export function AdventIcons({
     return { label: breakLabels ? twoLines(text) : text, w, h, src: icons[i] };
   });
 
-  // row 1: the 4 icons, all standing on one line (the row is as high as the tallest icon)
-  const iconCells = items.map(({ w, h, src }, i) => `
-          <td class="advent-icons__box" width="25%" align="center" valign="bottom" style="width:25%; padding:0 4px; font-size:0;">${wrap(
-            // width / height attributes: Outlook (fixed size); style: % of the column for all other clients
-            `<img class="advent-icons__img advent-icons__img--${i + 1}" src="${src}" alt="" width="${w}" height="${h}" style="display:block; width:${((w / COLUMN_WIDTH) * 100).toFixed(1)}%; max-width:${w}px; height:auto; margin:0 auto; border:0; outline:none;" />`
-          )}</td>`).join('');
+  // one icon + its label (a small table: icon box on top, label below)
+  const item = ({ label, w, h, src }, i) =>
+    `<div class="advent-icons__item" style="display:inline-block; width:100%; max-width:${ITEM_WIDTH}px; vertical-align:top; padding-bottom:${ROW_GAP}px;">` +
+      `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; border-collapse:collapse;">` +
+        `<tr><td class="advent-icons__box" align="center" valign="bottom" height="${ICON_BOX}" style="height:${ICON_BOX}px; font-size:0;">${wrap(
+          `<img class="advent-icons__img advent-icons__img--${i + 1}" src="${src}" alt="" width="${w}" height="${h}" style="display:block; width:${w}px; height:${h}px; margin:0 auto; border:0; outline:none;" />`
+        )}</td></tr>` +
+        `<tr><td class="advent-icons__label" align="center" valign="top" style="padding:14px 4px 0 4px; font-family:${font}; font-size:16px; line-height:24px; mso-line-height-rule:exactly; font-weight:600; color:${RED}; text-align:center;">${wrap(label)}</td></tr>` +
+      `</table>` +
+    `</div>`;
 
-  // row 2: the 4 labels
-  const labelCells = items.map(({ label }) => `
-          <td class="advent-icons__label" width="25%" align="center" valign="top" style="width:25%; padding:14px 4px 0 4px; font-family:${font}; font-size:16px; line-height:24px; mso-line-height-rule:exactly; font-weight:600; color:${RED}; text-align:center;">${wrap(label)}</td>`).join('');
+  // no spaces between the boxes (a space would push the 4th box to a new line on desktop);
+  // classic Outlook: each box in its own cell of a fixed 4-column table
+  const cells = items
+    .map((it, i) =>
+      (i === 0
+        ? `<!--[if mso]><table role="presentation" align="center" width="${ITEM_WIDTH * 4}" cellpadding="0" cellspacing="0" border="0"><tr><td width="${ITEM_WIDTH}" valign="top"><![endif]-->`
+        : `<!--[if mso]></td><td width="${ITEM_WIDTH}" valign="top"><![endif]-->`) + item(it, i)
+    )
+    .join('') + `<!--[if mso]></td></tr></table><![endif]-->`;
 
   return `
   <tr>
-    <td class="${tdClass}" align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; border-collapse:collapse;">
-        <tr>${iconCells}
-        </tr>
-        <tr>${labelCells}
-        </tr>
-      </table>
-    </td>
+    <td class="${tdClass}" align="center" style="text-align:center; font-size:0; line-height:0;">${cells}</td>
   </tr>`;
 }

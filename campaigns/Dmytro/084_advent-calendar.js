@@ -56,15 +56,15 @@ const tableQueries = [
   { tableRange: '98',  name: 'Conditions8',  tableName: T },
   { tableRange: '99',  name: 'Conditions9',  tableName: T },
   { tableRange: '100',  name: 'Conditions10', tableName: T },
-  { tableRange: '111',  name: 'Conditions14', tableName: T },
-  { tableRange: '112',  name: 'Conditions15', tableName: T },
-  { tableRange: '113',  name: 'Conditions16', tableName: T },
-  { tableRange: '114', name: 'Conditions18', tableName: T },
-  { tableRange: '115', name: 'Conditions19', tableName: T },
-  { tableRange: '116', name: 'Conditions20', tableName: T },
-  { tableRange: '117', name: 'Conditions21', tableName: T },
-  { tableRange: '118', name: 'Conditions22', tableName: T }, // not checked – the export stopped at row 103
-  { tableRange: '119', name: 'Conditions23', tableName: T }, // not checked – the export stopped at row 103
+  { tableRange: '101',  name: 'Conditions14', tableName: T },
+  { tableRange: '102',  name: 'Conditions15', tableName: T },
+  { tableRange: '103',  name: 'Conditions16', tableName: T },
+  { tableRange: '104', name: 'Conditions18', tableName: T },
+  { tableRange: '105', name: 'Conditions19', tableName: T },
+  { tableRange: '106', name: 'Conditions20', tableName: T },
+  { tableRange: '107', name: 'Conditions21', tableName: T },
+  { tableRange: '108', name: 'Conditions22', tableName: T }, // not checked – the export stopped at row 103
+  { tableRange: '109', name: 'Conditions23', tableName: T }, // not checked – the export stopped at row 103
 ];
 
 const links = {
@@ -112,22 +112,20 @@ const intro_data = {
 const additionalCss = `
 
 @media screen and (max-width:768px){
-  .advent-icons__label { font-size: 13px !important; line-height: 19px !important; }
   .advent-deals__text { font-size: 21px !important; line-height: 28px !important; max-width: 260px !important; }
   .newsletterParagraph {
     font-size: 16px !important;}
-    .advent-icons__label { padding-top: 10px !important; font-size: 13px !important; line-height: 19px !important; }
+    .advent-icons__label { padding-top: 10px !important; }
 }
 `;
 
 const additionalCssLp = `
 
 @media screen and (max-width:768px){
-  #newsletter .advent-icons__label { font-size: 13px !important; line-height: 19px !important; }
   #newsletter .advent-deals__text { font-size: 21px !important; line-height: 28px !important; max-width: 260px !important; }
  #newsletter .newsletterParagraph {
     font-size: 16px !important;}
-  #newsletter .advent-icons__label { padding-top: 10px !important; font-size: 13px !important; line-height: 19px !important; }
+  #newsletter .advent-icons__label { padding-top: 10px !important; }
 }
 `
 

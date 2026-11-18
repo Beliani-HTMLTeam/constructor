@@ -1,4 +1,7 @@
 import { createTemplates } from './shared/createTemplates';
+import { createImages } from './shared/createImages';
+
+const image = createImages(getImageUrl, '20261130');
 
 const campaignTranslationsSheet = '2026::Voucher - 30.11.26 - Cyber Monday Start';
 
@@ -27,7 +30,7 @@ const lpHref = translateLink({ value: 'content/lp26-11-30' });
 
 const links = {
   TopImageSubtitle_href: lpHref,
-  TopImageSubtitle_src: getImageUrl('20261130_top_01.png', true),
+  TopImageSubtitle_src: image('{date}_top_{index}.png', { index: 1 }),
 
   TopImage_src: translateImage({ value: '20261130_Pic.jpg' }),
   TopImage_href: lpHref,
@@ -37,7 +40,7 @@ const links = {
 
 const TopImageTitle_data = {
   color: '#020101',
-  backgroundColor: '##FD9000',
+  backgroundColor: '#FD9000',
   type: 'twoSameLines',
   spaceAfter: false,
 };
@@ -222,49 +225,19 @@ const categories = [
       spaceAfter: 'newsletterBottom40px',
     },
     categories: [
-      [
-        {
-          name: 'Sofas',
-          href: 'https://www.beliani.ch/sofas/',
-          src: getImageUrl('20261130_catTile01.jpg', true),
-        },
-      ],
-      [
-        {
-          name: 'Beds',
-          href: 'https://www.beliani.ch/bedroom-furniture/beds/',
-          src: getImageUrl('20261130_catTile02.jpg', true),
-        },
-      ],
-      [
-        {
-          name: 'Tables',
-          href: 'https://www.beliani.ch/living-room-furniture/tables/',
-          src: getImageUrl('20261130_catTile03.jpg', true),
-        },
-      ],
-      [
-        {
-          name: 'Armchairs',
-          href: 'https://www.beliani.ch/bedroom-furniture/armchairs/',
-          src: getImageUrl('20261130_catTile04.jpg', true),
-        },
-      ],
-      [
-        {
-          name: 'Dining Chairs',
-          href: 'https://www.beliani.ch/chairs/dining-chairs/',
-          src: getImageUrl('20261130_catTile05.jpg', true),
-        },
-      ],
-      [
-        {
-          name: 'Table & Bedside Lamps',
-          href: 'https://www.beliani.ch/lighting/table-lamps/',
-          src: getImageUrl('20261130_catTile06.jpg', true),
-        },
-      ],
-    ],
+      ['Sofas', 'https://www.beliani.ch/sofas/'],
+      ['Beds', 'https://www.beliani.ch/bedroom-furniture/beds/'],
+      ['Tables', 'https://www.beliani.ch/living-room-furniture/tables/'],
+      ['Armchairs', 'https://www.beliani.ch/bedroom-furniture/armchairs/'],
+      ['Dining Chairs', 'https://www.beliani.ch/chairs/dining-chairs/'],
+      ['Table & Bedside Lamps', 'https://www.beliani.ch/lighting/table-lamps/'],
+    ].map(([name, href], index) => [
+      {
+        name,
+        href,
+        src: image('{date}_catTile{index}.jpg', { index: index + 1 }),
+      }
+    ])
   },
 ];
 

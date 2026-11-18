@@ -1,4 +1,7 @@
 import { createTemplates } from './shared/createTemplates';
+import { createImages } from './shared/createImages';
+
+const image = createImages(getImageUrl, '20261207');
 
 const campaignTranslationsSheet = '2026::07.12.26 - Gatherings';
 
@@ -22,22 +25,18 @@ const catData = [
   {
     name: 'Dining tables',
     href: 'https://www.beliani.ch/dining-room-furniture/tables/dining-tables/',
-    catImg: getImageUrl('20261207_Cat01.jpg', true),
   },
   {
     name: 'Dining chairs',
     href: 'https://www.beliani.ch/chairs/dining-chairs/',
-    catImg: getImageUrl('20261207_Cat02.jpg', true),
   },
   {
     name: 'Tableware',
     href: 'https://www.beliani.ch/dining-room-furniture/kitchenware-tableware/',
-    catImg: getImageUrl('20261207_Cat03.jpg', true),
   },
   {
     name: 'Storage',
     href: 'https://www.beliani.ch/dining-room-furniture/storage/',
-    catImg: getImageUrl('20261207_Cat04.jpg', true),
   },
 ];
 
@@ -46,15 +45,13 @@ const prodData = [
   ['729868', '842599', '631562', '835266'],
   ['678038', '452784', '467639', '677960'],
   ['833872', '311036', '849552', '576378'],
-].map((ids, group) =>
-  ids.map((id, prodIdx) => {
-    const suffix = String(group * 4 + prodIdx + 1).padStart(2, '0');
-
-    return {
-      id,
-      src: getImageUrl(`20261207_Prod${suffix}.png`, true),
-    };
-  })
+].map((ids, groupIdx) =>
+  ids.map((id, prodIdx) => ({
+    id,
+    src: image('{date}_Prod{index}.png', {
+      index: groupIdx * 4 + prodIdx + 1,
+    }),
+  }))
 );
 
 const tableQueries = [
@@ -74,7 +71,7 @@ const links = {
   TopImageTitle_href: translateLink({ value: 'content/lp26-12-07' }),
   TopImageTitle_src: translateImage({ value: '20261207_01.png' }),
 
-  TopImage_src: getImageUrl('20261207_topImage.jpg', true),
+  TopImage_src: image('{date}_topImage.jpg'),
   TopImage_href: translateLink({ value: 'content/lp26-12-07' }),
 
   Timer_href: translateLink({ value: 'content/lp26-12-07' }),
@@ -86,31 +83,9 @@ const links = {
   Banner_2_Image: translateImage({ value: '20260902b.png' }),
 };
 
-const imageRegions = [
-  ['scandinavian', ['NO', 'DK', 'SE', 'FI']],
-  ['southern', ['ES', 'FR', 'PT', 'IT', 'HR']],
-  ['central', ['DE', 'AT', 'CHDE', 'CHFR', 'NL', 'BENL', 'BEFR', 'UK']],
-  ['eastern', ['PL', 'HU', 'CZ', 'SK', 'RO', 'SI']],
-];
-
-const regionalImages = (filename) => {
-  const images = {};
-
-  for (const [region, countries] of imageRegions) {
-    const src = getImageUrl(filename(region), true);
-
-    for (const country of countries) {
-      images[country] = src;
-    }
-  }
-
-  return images;
-};
-
-const topImage_data = {
-  default: links.TopImage_src,
-  ...regionalImages((region) => `20261207_topImage_${region}.jpg`),
-};
+const topImage_data = image('{date}_topImage.jpg', {
+  regional: true,
+});
 
 const TopImageTitle_data = {
   color: theme.black,
@@ -121,8 +96,11 @@ const TopImageTitle_data = {
 const categories = catData.map((cat, index) => ({
   name: cat.name,
   // nameOverride: 'PASCO',
-  src: cat.catImg,
-  srcByCountry: regionalImages((region) => `20261207_Cat${String(index + 1).padStart(2, '0')}_${region}.jpg`),
+  src: image(`{date}_Cat{index}.jpg`, { index: index + 1 }),
+  srcByCountry: image(`{date}_Cat{index}.jpg`, {
+    index: index + 1,
+    regional: true,
+  }),
   spaceBefore: false,
   href: cat.href,
   skipLinkTranslation: true,
