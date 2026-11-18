@@ -51,7 +51,16 @@ const enrichCategoryProducts = async ({ category, getProductById, getCategoryLin
   };
 };
 
-const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle, getCategoryLink, add_utm, country, type }) => {
+const normalizeCategoryForRender = ({
+  category,
+  index,
+  queries,
+  getCategoryTitle,
+  getCategoryLink,
+  add_utm,
+  country,
+  type,
+}) => {
   const countrySlug = String(country ?? '').toLowerCase();
   const name = queries?.categories?.[index]
     ? queries.categories[index]
@@ -70,17 +79,21 @@ const normalizeCategoryForRender = ({ category, index, queries, getCategoryTitle
     href = add_utm(category.hrefOverrides[countrySlug]);
   } else if (category?.href) {
     if (category?.skipLinkTranslation) {
-      href = typeof category.href === 'string'
-        ? getCategoryLink(category.href, { suppressWarning: true })
-        : add_utm(category.href?.href);
+      href =
+        typeof category.href === 'string'
+          ? getCategoryLink(category.href, { suppressWarning: true })
+          : add_utm(category.href?.href);
     } else {
       href = typeof category.href === 'string' ? getCategoryLink(category.href) : add_utm(category.href?.href);
     }
   }
 
-  let src = category?.srcByCountry?.[country]
-    ?? category?.srcByType?.[type]
-    ?? category?.src;
+  let src =
+    category?.srcByCountry?.[country] ??
+    category?.srcByCountry?.default ??
+    category?.srcByType?.[type] ??
+    category?.src;
+
   if (src && typeof src === 'object') {
     src = src.src;
   }
@@ -120,6 +133,7 @@ export const CategoriesHandler = async ({
   categoryImageTdClass,
   theme,
   disableHighPrice = false,
+  indexOffset = 0,
 }) => {
   const safeCategories = Array.isArray(categories) ? categories : [];
   if (safeCategories.length === 0) {
@@ -134,7 +148,7 @@ export const CategoriesHandler = async ({
   const categoriesForRender = source.map((category, index) =>
     normalizeCategoryForRender({
       category,
-      index,
+      index: index + indexOffset,
       queries,
       getCategoryTitle,
       getCategoryLink,
@@ -143,8 +157,6 @@ export const CategoriesHandler = async ({
       type,
     })
   );
-
-  console.log(categoriesForRender)
 
   return Categories({
     getPhrase,
@@ -159,5 +171,6 @@ export const CategoriesHandler = async ({
     categoryImageTdClass,
     theme,
     disableHighPrice,
+    indexOffset
   });
 };
