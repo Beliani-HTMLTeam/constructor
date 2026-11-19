@@ -133,7 +133,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   //  code       : "Code: xxx" -> copy button
   //  mobile     : { pre, title, subtitle, code } – different texts on mobile ('' hides it)
   //  conditions : text shown below the calendar after "See conditions"
-  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=40`;
+  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=50`;
  
   // one sheet cell of a query (row index i, 0-based)
   const cell = (name, i) => {

@@ -201,6 +201,8 @@ export function AdventPopupStyles() {
     line-height: 1.25;
   }
   .adv-pop__code-value { -webkit-user-select: all; user-select: all; }
+  /* code + copy icon never split: if "Code: XXX" doesn't fit, the code moves under "Code:" with its icon */
+  .adv-pop__code-pair { display: inline-flex; align-items: center; gap: 0.5em; white-space: nowrap; }
   /* copy icon from CopyCodeCTA.js (buildCopyIcon) */
   /* the copy button must not make the "Code: XXX" line taller than the text:
      its padding (bigger tap area) is cancelled by an equal negative margin */

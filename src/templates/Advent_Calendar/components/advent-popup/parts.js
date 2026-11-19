@@ -134,8 +134,13 @@ function codesBlock(code, texts, extraCls = '') {
     codes
       .map(
         (c) =>
+          // "Code:" + [code + copy icon]: the code and its copy icon are one unit that is never split.
+          // Everything fits -> one line ("Code: XXX [copy]"); too long -> the code goes UNDER "Code:"
+          // together with the icon ("Code:" / "WanddekoCH26 [copy]") – mobile and desktop
           `<div class="adv-pop__code">` +
-          `<span>${c.label}: <span class="adv-pop__code-value">${c.value}</span></span>` +
+          `<span class="adv-pop__code-label">${c.label}:</span>` +
+          `<span class="adv-pop__code-pair">` +
+          `<span class="adv-pop__code-value">${c.value}</span>` +
           // shared copy icon: icon switches to "ok" + slide-in notification
           `<span class="adv-pop__copy-wrap" data-copied="${attr(texts.copied)}">` +   // announced to screen readers
           buildCopyIcon({
@@ -146,6 +151,7 @@ function codesBlock(code, texts, extraCls = '') {
             label: texts.copied,
             className: 'adv-pop__copy-icon',
           }) +
+          `</span>` +
           `</span>` +
           `</div>`
       )
