@@ -27,6 +27,7 @@ export function getDOMElements() {
     newCampaign: document.querySelector('#new_campaign'),
     copyTemplate: document.querySelector('.copyTemplate'),
     downloadEml: document.querySelector('.downloadEml'),
+    outlookPreview: document.querySelector('.outlookPreview'),
     openCampaign: document.querySelector('.openCampaign'),
     openIssue: document.querySelector('.openIssue'),
     openFigma: document.querySelector('.figmaCard'),

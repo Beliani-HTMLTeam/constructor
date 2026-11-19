@@ -35,6 +35,7 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 			openLP,
 			copyTemplate,
 			downloadEml,
+			outlookPreview,
 			redirectCheck,
 		} = getDOMElements();
 
@@ -46,6 +47,7 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 			openLP,
 			copyTemplate,
 			downloadEml,
+			outlookPreview,
 			redirectCheck,
 		};
 	}, []);
@@ -61,6 +63,7 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 				actionEls.openLP,
 				actionEls.copyTemplate,
 				actionEls.downloadEml,
+				actionEls.outlookPreview,
 				actionEls.redirectCheck
 			);
 
@@ -163,9 +166,9 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 			}
 
 			if (foundTemplate?.type !== 'landing') {
-				showElements(actionEls.downloadEml);
+				showElements(actionEls.downloadEml, actionEls.outlookPreview);
 			} else {
-				hideElements(actionEls.downloadEml);
+				hideElements(actionEls.downloadEml, actionEls.outlookPreview);
 			}
 
 			render();
@@ -218,9 +221,9 @@ export function useUpperSelectsHandlers({ onScopeChange, campaigns, selectedTemp
 			showElements(actionEls.copyTemplate);
 
 			if (currentTemplate?.type !== 'landing') {
-				showElements(actionEls.downloadEml);
+				showElements(actionEls.downloadEml, actionEls.outlookPreview);
 			} else {
-				hideElements(actionEls.downloadEml);
+				hideElements(actionEls.downloadEml, actionEls.outlookPreview);
 			}
 
 			hideElements(actionEls.openLP, actionEls.openCampaign, actionEls.redirectCheck);

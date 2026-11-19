@@ -9,6 +9,7 @@ import {
 import { generateLpLinks } from '@/helpers/incrementIds.js';
 import { openCreateCampaignModal } from '@/main/ui/createCampaign.js';
 import { openManageProductsModal } from '@/main/ui/manageProducts/index.js';
+import { openOutlookPreview } from '@/main/ui/outlookPreview/index.js';
 import { renderTemplateHtmlForCountry } from '@/main/rendering/templateRenderer.js';
 import { initialUrlParams } from '@/utils/urlState.js';
 import { PREVIEW_MODE, MOBILE_PREVIEW_WIDTH, setPreviewMode } from '@/main/rendering/preview.js';
@@ -180,6 +181,12 @@ export function setupDownloadEmlHandler(elements, getState) {
 
     saveFile();
   })
+}
+
+export function setupOutlookPreviewHandler(elements) {
+  const { outlookPreview } = elements;
+
+  outlookPreview?.addEventListener('click', () => openOutlookPreview());
 }
 
 function readStoredPreviewMode() {

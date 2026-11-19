@@ -281,6 +281,26 @@ body {
   border-color: #16a34a;
 }
 
+/* Outlook preview popup button */
+.container #panel .upper_navigation .outlookPreview {
+  background: #1756a9;
+  border-color: #1756a9;
+  color: #ffffff;
+}
+
+.container #panel .upper_navigation .outlookPreview .svg-icon {
+  filter: brightness(0) invert(1);
+}
+
+.container #panel .upper_navigation .outlookPreview:hover:not(:disabled) {
+  background: #134a91;
+}
+
+.container #panel .upper_navigation .outlookPreview:active:not(:disabled) {
+  background: #134a91;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
 /* floating tools, bottom-right; outside #panel so `.container #panel button` doesn't apply */
 #floating-tools {
   position: fixed;
