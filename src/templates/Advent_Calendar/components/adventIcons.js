@@ -22,7 +22,7 @@ const DEFAULT_ICONS = [
   `${ICON_BASE}advent_icon_1.png?ver=29`,   // calendar "24"
   `${ICON_BASE}advent_icon_2.png?ver=10`,   // star
   `${ICON_BASE}advent_icon_3.png?ver=10`,   // hourglass
-  `${ICON_BASE}advent_icon_4.png?ver=10`,   // flower
+  `${ICON_BASE}advent_icon_4_2.png?ver=40`,   // flower
 ];
 // Display size of each icon in px [width, height] – sizes from the design.
 // Outlook needs both numbers (otherwise it shows the PNG at its own size).
