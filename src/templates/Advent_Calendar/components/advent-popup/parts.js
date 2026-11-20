@@ -61,7 +61,9 @@ const keepHyphenWords = (html) =>
 const titleLines = (html) => {
   if (html === undefined || html === null) return html;
   const parts = String(html).split(/<br\s*\/?>/i);
-  return parts.length < 2 ? html : parts.map((part) => `<span class="adv-pop__tline">${part}</span>`).join('');
+  // joined with a space: the lines are blocks (the space is not shown), but on the desktop
+  // 10% popup they stand in one line ("10% reducere") – styles.js
+  return parts.length < 2 ? html : parts.map((part) => `<span class="adv-pop__tline">${part.trim()}</span>`).join(' ');
 };
 
 // The deal number ("50%", "€10", "200 Ft") in the title -> <span class="adv-pop__num">.

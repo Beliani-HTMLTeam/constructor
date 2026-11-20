@@ -221,6 +221,11 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     var colRight = deal.offsetLeft + deal.clientWidth - (parseFloat(cs.paddingRight) || 0);
     var xOverlap = x ? Math.max(0, colRight - x.offsetLeft + 4) : 0;   // + 4px air
     var xBottom = x ? x.offsetTop + x.offsetHeight : 0;
+    var desktop = window.matchMedia && window.matchMedia('(min-width: 601px)').matches;
+    // "Extra / 10% OFF" popup on desktop: the deal title is ONE line, like the design –
+    // a longer translation ("10% reducere", "10% kedvezmény") gets smaller instead of
+    // wrapping into 2 huge lines (a <br /> from the sheet is ignored on desktop, styles.js)
+    var oneLineTitle = desktop && content.classList.contains('adv-pop--percent');
     Array.prototype.forEach.call(els, function (el) {
       if (el.offsetParent === null) return;                 // hidden (desktop-only / mobile-only text)
       var base = parseFloat(window.getComputedStyle(el).fontSize) || 0;   // design size
@@ -232,7 +237,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
         el.style.maxWidth = room + 'px';
       }
       // title with lines from the sheet: every line is fitted on its own (see fitTitleLines)
-      var tlines = el.classList.contains('adv-pop__title') ? el.querySelectorAll('.adv-pop__tline') : [];
+      var tlines = el.classList.contains('adv-pop__title') && !oneLineTitle ? el.querySelectorAll('.adv-pop__tline') : [];
       if (tlines.length) { fitTitleLines(el, tlines, room); return; }
       for (var i = 0; i < 5; i++) {
         var w = el.scrollWidth;                             // width of its longest word / line
@@ -244,13 +249,12 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       // the deal title keeps its lines: the lines of the sheet ("akár<br />50% kedvezménnyel" = 2)
       // or max. 2 lines without breaks. If it wraps into more, it gets smaller until it fits –
       // but never below 60% of the design size.
-      if (el.classList.contains('adv-pop__title')) fitLines(el, base);
+      if (el.classList.contains('adv-pop__title')) fitLines(el, base, oneLineTitle ? 1 : 0);
     });
     // all texts together must fit the height:
     //  desktop – the popup (e.g. FI "Ylimääräinen / 10% alennus / vähintään 500 € ..." is taller than 480px);
     //  mobile  – the top 62% of the popup (the gift box below must stay visible; the English
     //            designs end at ~59%), or the text area itself when it is taller (4 for 3)
-    var desktop = window.matchMedia && window.matchMedia('(min-width: 601px)').matches;
     fitHeight(deal, els, desktop ? 0 : Math.max(deal.clientHeight, content.clientHeight * 0.62));
   }
   // height of the visible text block (first line top -> last line bottom)
@@ -268,6 +272,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
   //   3. a title with lines as a whole (number included) – down to 60% of its design size.
   // maxBottom: mobile – the text may end no lower than this (px from the top of the text area)
   function fitHeight(deal, els, maxBottom) {
+    var oneLineTitle = !maxBottom && content.classList.contains('adv-pop--percent');   // desktop 10% popup
     var cs = window.getComputedStyle(deal);
     // desktop: 20px air above and below (a little less than the column padding, so the
     // English designs – e.g. the 4 for 3 pyramid – keep their sizes)
@@ -283,7 +288,7 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
 
     // 1. title words / titles without lines
     titles.forEach(function (t) {
-      if (!t.querySelector('.adv-pop__tline')) {
+      if (!t.querySelector('.adv-pop__tline') || oneLineTitle) {
         for (var n = 0; n < 20 && tooTall() && px(t) > t._advBase * 0.6; n++) {
           t.style.fontSize = Math.max(t._advBase * 0.6, px(t) * 0.95) + 'px';
         }
@@ -366,9 +371,9 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
       if (parts.length !== 2) return;
       var before = parts[0].trim(), after = parts[1].trim();
       if (!before && !after) { ln.classList.add('adv-pop__tline--num'); return; }   // number alone already
-      var html = (before ? '<span class="adv-pop__tline">' + before + '</span>' : '') +
+      var html = (before ? '<span class="adv-pop__tline">' + before + '</span> ' : '') +
                  '<span class="adv-pop__tline adv-pop__tline--num">' + num.outerHTML + '</span>' +
-                 (after ? '<span class="adv-pop__tline">' + after + '</span>' : '');
+                 (after ? ' <span class="adv-pop__tline">' + after + '</span>' : '');
       var tmp = document.createElement('div');
       tmp.innerHTML = html;
       while (tmp.firstChild) ln.parentNode.insertBefore(tmp.firstChild, ln);
@@ -419,20 +424,33 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     var lh = parseFloat(window.getComputedStyle(el).lineHeight) || 0;
     return lh ? Math.round(el.offsetHeight / lh) : 1;   // offsetHeight: not affected by the opening animation
   }
-  function fitLines(el, base) {
+  // forceLines: 1 = the title must be on one line (desktop 10% popup)
+  function fitLines(el, base, forceLines) {
     var breaks = (el.innerHTML.match(/<br/gi) || []).length;
     // with line breaks from the sheet: exactly those lines ("akár" + "50% kedvezménnyel" = 2);
     // without: at most 2 lines, like the design ("Free / candle holder") – a longer title
     // ("Ajándék / díszpárna- / szett") gets smaller until it fits on 2 lines
     // 4 for 3 popup (with the pyramid lines): the title on ONE line ("3-at fizet, 4-et vihet")
     var oneLine = !breaks && el.closest('.adv-pop__deal') && el.closest('.adv-pop__deal').querySelector('.adv-pop__tiers');
-    var allowed = breaks ? breaks + 1 : (oneLine ? 1 : 2);
-    var min = base * 0.6;
-    for (var i = 0; i < 20 && lineCount(el) > allowed; i++) {
+    var allowed = forceLines || (breaks ? breaks + 1 : (oneLine ? 1 : 2));
+    var start = el.style.fontSize;
+    // desktop 10% popup: one line down to 50% of the design size ("10% kedvezmény");
+    // a text that is too long even then ("-10% de réduction supplémentaire") gets 2 lines (min 60%)
+    if (forceLines === 1 && !shrinkTo(el, 1, base * 0.5)) {
+      el.style.fontSize = start;
+      shrinkTo(el, 2, base * 0.6);
+      return;
+    }
+    shrinkTo(el, allowed, base * 0.6);
+  }
+  // smaller until the element takes max. "lines" lines (not below min px); true = it fits
+  function shrinkTo(el, lines, min) {
+    for (var i = 0; i < 30 && lineCount(el) > lines; i++) {
       var size = parseFloat(window.getComputedStyle(el).fontSize) || 0;
       if (!size || size <= min) break;
       el.style.fontSize = Math.max(min, size * 0.95) + 'px';
     }
+    return lineCount(el) <= lines;
   }
   // fit again when the web font has loaded or the window size changes
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitText);
