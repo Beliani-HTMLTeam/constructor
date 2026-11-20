@@ -40,6 +40,7 @@ const links = generateLinks({
     TopImageSubtitle_src: image('{date}_top_{index}.png', {
       index: 1,
     }),
+    TopImageTitle_src: null,
     TopImage_src: translateImage({
       value: `${imageDate}_Pic.jpg`,
     }),
