@@ -11,6 +11,7 @@ import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
 import { ImageWithLink } from './components/ImageWithLink.js';
 import { TopImageSubtitleHandler } from './handlers/_TopImageSubtitle.js';
+import { TopImageUpHandler } from './handlers/_TopImageUp.js';
 import { getTimerLinks } from './helpers/getTimerLinks.js';
 
 const Friday = async ({
@@ -32,6 +33,8 @@ const Friday = async ({
   timer,
   TopImageTitle_data,
   TopImage_data,
+  TopImageSubtitle_data,
+  TopImageUp_data,
 
   // functions passed:
   getHeader,
@@ -53,7 +56,18 @@ const Friday = async ({
   const shopLimitedTimeDeals = getPhrase('Shop limited-time deals');
   const shopNow = getPhrase('Shop now');
 
-  const TopImageSubtitleElement = TopImageSubtitleHandler({ links });
+  // optional: TopImageUp_data.position = 'top' (default) | 'beforeTopImage'
+  const TopImageUpElement = TopImageUpHandler({ links, TopImageUp_data });
+  const topImageUpPosition = TopImageUp_data?.position ?? 'top';
+  const TopImageUpAtTop = topImageUpPosition === 'top' ? TopImageUpElement : '';
+  const TopImageUpBeforeTopImage = topImageUpPosition === 'beforeTopImage' ? TopImageUpElement : '';
+
+  // optional: TopImageSubtitle_data.position = 'top' (default) | 'afterTopImage' | 'afterTopImageTitle'
+  const TopImageSubtitleElement = TopImageSubtitleHandler({ links, TopImageSubtitle_data });
+  const topImageSubtitlePosition = TopImageSubtitle_data?.position ?? 'top';
+  const TopImageSubtitleAtTop = topImageSubtitlePosition === 'top' ? TopImageSubtitleElement : '';
+  const TopImageSubtitleAfterTopImage = topImageSubtitlePosition === 'afterTopImage' ? TopImageSubtitleElement : '';
+  const TopImageSubtitleAfterTopImageTitle = topImageSubtitlePosition === 'afterTopImageTitle' ? TopImageSubtitleElement : '';
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
 
@@ -151,7 +165,9 @@ const TimerElement = await TimerHandler({
     ${HeaderElement}
 
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 650px; width: 100%; background-color: ${background}; color: #000; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" ${background ? `bgcolor="${background}"` : ''} id="newsletter">
-      ${TopImageSubtitleElement}
+      ${TopImageUpAtTop}
+
+      ${TopImageSubtitleAtTop}
 
       ${TimerAtTop}
 
@@ -159,9 +175,15 @@ const TimerElement = await TimerHandler({
 
       ${TimerAfterTiT}
 
+      ${TopImageUpBeforeTopImage}
+
       ${TopImageElement}
 
+      ${TopImageSubtitleAfterTopImage}
+
       ${TopImageTitleAfterTopImageElement}
+
+      ${TopImageSubtitleAfterTopImageTitle}
 
       ${IntroAfterTopImageElement}
 

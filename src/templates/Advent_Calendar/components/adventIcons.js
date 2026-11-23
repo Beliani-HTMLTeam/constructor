@@ -40,6 +40,10 @@ const ROW_GAP = 12;       // space under each icon + label (= between the 2 rows
 
 const DEFAULT_LABELS = ['24 Days', 'Exclusive Offers', '24-Hour Deals', 'Don’t Miss Out'];
 
+// Labels that stay on ONE line (not split into 2) – per shop, icon numbers 1-4:
+//   FR / BEFR / CHFR "Offres de 24 h" (otherwise "Offres de 24" / "h")
+const ONE_LINE_LABELS = { fr: [3], befr: [3], chfr: [3] };
+
 // all rows of a query as a list of texts
 const rowsOf = (rows) =>
   [].concat(rows || []).map((r) => String((Array.isArray(r) ? r[0] : r) ?? '').trim());
@@ -59,7 +63,10 @@ export function AdventIcons({
   iconSizes = DEFAULT_ICON_SIZES,
   tdClass = 'newsletterContainer40px',
   breakLabels = true,      // false = labels wrap by themselves
+  country,                 // shop code ('fr', 'befr', 'chfr' ...) – see ONE_LINE_LABELS
 }) {
+  const shop = String(country || '').toLowerCase().replace(/[^a-z]/g, '');
+  const oneLine = ONE_LINE_LABELS[shop] || ONE_LINE_LABELS[shop.length === 4 ? shop.slice(2) + shop.slice(0, 2) : ''] || [];
   const font = String(type || '').toLowerCase().includes('landing') ? LP_FONT : NSLT_FONT;
   const labels = rowsOf(queries.icons);
   const wrap = (inner) =>
@@ -68,7 +75,11 @@ export function AdventIcons({
   const items = DEFAULT_LABELS.map((fallback, i) => {
     const text = labels[i] || fallback;
     const [w, h] = iconSizes[i] || [ICON_BOX, ICON_BOX];
-    return { label: breakLabels ? twoLines(text) : text, w, h, src: icons[i] };
+    // one-line label: spaces -> non-breaking spaces (works in every email client)
+    const label = oneLine.includes(i + 1)
+      ? text.replace(/<br\s*\/?>/gi, ' ').replace(/ +/g, '&nbsp;')
+      : breakLabels ? twoLines(text) : text;
+    return { label, w, h, src: icons[i] };
   });
 
   // one icon + its label (a small table: icon box on top, label below)

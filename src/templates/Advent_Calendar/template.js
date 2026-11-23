@@ -101,6 +101,7 @@ const AdventCalendar2026 = async ({
   const columnsImage = AdventIcons({
     queries,
     type,
+    country,
     href: links?.columnsImage_href,
     tdClass: 'newsletterContainer40px',
   });

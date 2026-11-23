@@ -65,6 +65,7 @@ const CTA = ({
 	fontWeight = '700',
 	letterSpacing = null,
 	textTransform = 'uppercase',
+	textDecoration = 'none',
 	borderRadius = '4px',
 	fontFamily = "'Open Sans', sans-serif",
 	msoFontFamily = 'Arial, sans-serif', // font classic Outlook draws the VML button text in (web fonts don't load there)
@@ -112,9 +113,9 @@ const CTA = ({
 	if (src || alwaysRenderAsImage) {
 		const effectiveSrc = src || '';
 		if (type === 'landing' && codeValue) {
-			html = `<a href="#" style="text-decoration: none; cursor: pointer; display: inline-block;"><img src="${effectiveSrc}" alt="${transformedText || 'CTA'}" border="0" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" /></a>`;
+			html = `<a href="#" style="text-decoration: ${textDecoration}; cursor: pointer; display: inline-block;"><img src="${effectiveSrc}" alt="${transformedText || 'CTA'}" border="0" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" /></a>`;
 		} else {
-			html = `<a href="${href}" style="text-decoration: none;"><img src="${effectiveSrc}" alt="${transformedText || 'CTA'}" border="0" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" /></a>`;
+			html = `<a href="${href}" style="text-decoration: ${textDecoration};"><img src="${effectiveSrc}" alt="${transformedText || 'CTA'}" border="0" style="display: block; margin: 0 auto; max-width: 100%; height: auto;" /></a>`;
 		}
 	} else if (type === 'landing') {
 		console.log("font-family:", fontFamily, "type:", type, "variant", variant);
@@ -212,8 +213,8 @@ const CTA = ({
         <table cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; ${tableMarginStyle}">
           <tr>
             <td align="${align}" style="font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;">
-                <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-size: ${fontSize}; line-height: ${lineHeight}; font-weight: ${fontWeight};${letterSpacing ? ` letter-spacing: ${letterSpacing};` : ''} text-transform: ${textTransform}; color: ${btnTextColor}; padding: ${paddingCss}; text-decoration: none; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box; width: auto; max-width: 100%; white-space: normal; word-break: break-word;">
-                  <span style="color: ${btnTextColor}; display: inline-block; line-height: inherit;">${buttonContent}</span>
+                <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="mso-hide: all; background-color: ${bgColor}; font-size: ${fontSize}; line-height: ${lineHeight}; font-weight: ${fontWeight};${letterSpacing ? ` letter-spacing: ${letterSpacing};` : ''} text-transform: ${textTransform}; color: ${btnTextColor}; padding: ${paddingCss}; text-decoration: ${textDecoration}; display: inline-block; border-radius: ${borderRadius}; box-sizing: border-box; width: auto; max-width: 100%; white-space: normal; word-break: break-word;">
+                  <span style="color: ${btnTextColor}; display: inline-block; line-height: inherit; text-decoration: ${textDecoration};">${buttonContent}</span>
                 </a>
             </td>
           </tr>
@@ -333,7 +334,7 @@ const CTA = ({
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;${tableMarginStyle}">
      <tr>
       <td align="${align}" style="font-size:${fontSize};line-height:${lineHeight};mso-line-height-rule:at-least;">
-       <a href="${safeHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="background-color:${bgColor};${htmlBorderCss}border-radius:${borderRadius};color:${btnTextColor} !important;display:inline-block; ${type == 'newsletter' ? `font-family:${fontFamily};` : ''}font-size:${fontSize};font-weight:${fontWeight};line-height:${lineHeight};mso-line-height-rule:at-least;${letterSpacing ? `letter-spacing:${letterSpacing};` : ''}padding:${paddingCss};mso-padding-alt:0;text-align:center;text-decoration:none !important;text-underline-color:${bgColor};text-transform:${textTransform};"><!--[if mso]>${outlookSpace(effectivePadX, totalRaise)}<span style="mso-text-raise:${bottomRaise}%;"><![endif]--><span style="color:${btnTextColor} !important;text-decoration:none !important;">${buttonContent}</span><!--[if mso]></span>${outlookSpace(effectivePadX)}<![endif]--></a>
+       <a href="${safeHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="background-color:${bgColor};${htmlBorderCss}border-radius:${borderRadius};color:${btnTextColor} !important;display:inline-block; ${type == 'newsletter' ? `font-family:${fontFamily};` : ''}font-size:${fontSize};font-weight:${fontWeight};line-height:${lineHeight};mso-line-height-rule:at-least;${letterSpacing ? `letter-spacing:${letterSpacing};` : ''}padding:${paddingCss};mso-padding-alt:0;text-align:center;text-decoration:${textDecoration} !important;text-underline-color:${bgColor};text-transform:${textTransform};"><!--[if mso]>${outlookSpace(effectivePadX, totalRaise)}<span style="mso-text-raise:${bottomRaise}%;"><![endif]--><span style="color:${btnTextColor} !important;text-decoration:${textDecoration} !important;">${buttonContent}</span><!--[if mso]></span>${outlookSpace(effectivePadX)}<![endif]--></a>
       </td>
      </tr>
     </table>
