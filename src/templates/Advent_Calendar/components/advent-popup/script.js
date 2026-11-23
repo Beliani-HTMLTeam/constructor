@@ -255,7 +255,22 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     //  desktop – the popup (e.g. FI "Ylimääräinen / 10% alennus / vähintään 500 € ..." is taller than 480px);
     //  mobile  – the top 62% of the popup (the gift box below must stay visible; the English
     //            designs end at ~59%), or the text area itself when it is taller (4 for 3)
+    smallAfterBig(deal);
     fitHeight(deal, els, desktop ? 0 : Math.max(deal.clientHeight, content.clientHeight * 0.62));
+    smallAfterBig(deal);
+  }
+  // PT "10% de desconto" (big) / "adicional" (small) – PercentOffPopup bigPre:
+  // the small line keeps the size ratio of the EN design: desktop "Extra" 50 / "10% OFF" 90,
+  // mobile 30 / 35 – it is never bigger than that part of the big line
+  function smallAfterBig(deal) {
+    var big = Array.prototype.filter.call(deal.querySelectorAll('.adv-pop__title--first'), function (el) { return el.offsetParent !== null; })[0];
+    if (!big) return;
+    var desktop = window.matchMedia && window.matchMedia('(min-width: 601px)').matches;
+    var max = (parseFloat(window.getComputedStyle(big).fontSize) || 0) * (desktop ? 50 / 90 : 30 / 35);
+    Array.prototype.forEach.call(deal.querySelectorAll('.adv-pop__pre--after'), function (el) {
+      if (el.offsetParent === null || !max) return;
+      if ((parseFloat(window.getComputedStyle(el).fontSize) || 0) > max) el.style.fontSize = max + 'px';
+    });
   }
   // height of the visible text block (first line top -> last line bottom)
   function blockHeight(deal) {
@@ -286,6 +301,13 @@ export function AdventPopupScript({ conditionsBoxId = 'advent-conditions', track
     var others = visible.filter(function (el) { return !el.classList.contains('adv-pop__title'); });
     var tooTall = function () { return blockHeight(deal) > avail + 1; };
 
+    // 0. PT "adicional" (small line under the big "10% de desconto") goes first – down to 60%
+    others.forEach(function (el) {
+      if (!el.classList.contains('adv-pop__pre--after')) return;
+      for (var m = 0; m < 20 && tooTall() && px(el) > el._advBase * 0.6; m++) {
+        el.style.fontSize = Math.max(el._advBase * 0.6, px(el) * 0.95) + 'px';
+      }
+    });
     // 1. title words / titles without lines
     titles.forEach(function (t) {
       if (!t.querySelector('.adv-pop__tline') || oneLineTitle) {

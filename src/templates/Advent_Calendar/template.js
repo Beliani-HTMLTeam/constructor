@@ -56,7 +56,7 @@ const AdventCalendar2026 = async ({
   const codeCopied = getPhrase('Copy code');
 
   const TopImageTitleElement = TopImageTitleHandler({ links, queries, TopImageTitle_data, type });
-  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type, getCategoryLink, shopNow , conditions, codeCopied  });
+  const TopImageElement = TopImageHandler({ queries, links, TopImage_data, type, getCategoryLink, shopNow , conditions, codeCopied, country  });
 
   const introCta_href = links.Intro_cta_href.includes("content/") ? links.Intro_cta_href : getIntroCtaHref({
     links,

@@ -109,11 +109,19 @@ const keepAmounts = (html) =>
         .join('');
 const subtitleHtml = (html) => keepAmounts(amountLine(html));
 
-export function PopupText({ headline, pre, title, subtitle, link, mobile = {} }) {
+// bigPre: the FIRST line is the big deal line and the second one the small line
+// (PT "10% de desconto" / "adicional" – the other way round than EN "Extra" / "10% OFF").
+// The order of the lines stays as in the sheet, only the sizes are swapped (PercentOffPopup).
+export function PopupText({ headline, pre, title, subtitle, link, mobile = {}, bigPre = false }) {
+  const big = (html) => titleHtml(html);
+  const small = (html) => keepAmounts(html);
   const inner =
     dm('adv-pop__headline', keepAmounts(headline), keepAmounts(mobile.headline)) +
-    dm('adv-pop__pre', keepAmounts(pre), keepAmounts(mobile.pre)) +
-    dm('adv-pop__title', titleHtml(title), titleHtml(mobile.title)) +
+    (bigPre
+      ? dm('adv-pop__title adv-pop__title--first', big(pre), big(mobile.pre)) +
+        dm('adv-pop__pre adv-pop__pre--after', small(title), small(mobile.title))
+      : dm('adv-pop__pre', small(pre), small(mobile.pre)) +
+        dm('adv-pop__title', big(title), big(mobile.title))) +
     dm('adv-pop__subtitle', subtitleHtml(subtitle), subtitleHtml(mobile.subtitle));
   return linkOrDiv(link, 'adv-pop__container', inner);
 }

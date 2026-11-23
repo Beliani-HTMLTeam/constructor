@@ -178,6 +178,7 @@ export function AdventPopupStyles() {
     line-height: var(--lh-title);
   }
   .adv-pop__pre ~ .adv-pop__title { margin-top: var(--gap-pre); }
+  .adv-pop__title ~ .adv-pop__pre--after { margin-top: var(--gap-pre); }   /* PT: big "10% de desconto" / small "adicional" */
   .adv-pop__nowrap { white-space: nowrap; }   /* hyphenated words in the title stay in one piece */
   .adv-pop__tline { display: block; }          /* one title line from the sheet (see parts.js titleLines) */
   .adv-pop__num { white-space: nowrap; }       /* "50 %" / "€ 10" never split */
@@ -523,6 +524,9 @@ export function AdventPopupStyles() {
 
   /* desktop-only / mobile-only texts (popup prop: mobile: { ... }) */
   @media screen and (min-width: 601px) { .adv-pop .adv-pop__only-m { display: none !important; } }
+  /* desktop "Extra / 10% OFF" popup: the deal title on ONE line like the design ("10% reducere"),
+     lines from the sheet are ignored here – a long translation gets smaller instead (script.js fitText) */
+  @media screen and (min-width: 601px) { .adv-pop--percent .adv-pop__title .adv-pop__tline { display: inline; } }
   @media screen and (max-width: 600px) { .adv-pop .adv-pop__only-d { display: none !important; } }
 
   /* ---------- Conditions block (AdventConditionsBox) ---------- */

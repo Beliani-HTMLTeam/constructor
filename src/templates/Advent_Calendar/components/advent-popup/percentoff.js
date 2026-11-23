@@ -24,6 +24,11 @@ import { StandardPopup } from './parts.js';
  * Example:
  *   PercentOffPopup({ id: 4, pre: 'Extra', title: '10% OFF', subtitle: 'when you spend £500', code: 'Code: 04advent26uk', conditions: '...' })
  */
+const HAS_PERCENT = /\d\s*%|%\s*\d/;
 export function PercentOffPopup(props) {
-  return StandardPopup('percent', props, {});
+  const pre = String(props.pre || ''), title = String(props.title || '');
+  const bigPre = props.bigLine
+    ? props.bigLine === 'pre'
+    : HAS_PERCENT.test(pre) && !HAS_PERCENT.test(title);
+  return StandardPopup('percent', { ...props, bigPre }, {});
 }

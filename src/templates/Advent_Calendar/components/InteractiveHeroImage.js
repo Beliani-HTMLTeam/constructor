@@ -31,7 +31,14 @@ const ADVENT_TRANSLATOR_MODE = true;
 const ADVENT_START = '2026-12-01';
 const ADVENT_REAL_START = '2026-12-01';
  
-export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, conditions: conditionsText, codeCopied: codeCopiedText, getPhrase, getCategoryLink }) {
+// Shops that keep the <br /> of the 4 for 3 lines on mobile too (German is too long for one line):
+//   "Kaufe 4 / und erhalte / 1 gratis"  – all other shops: one line per offer on mobile (design)
+const KEEP_MOBILE_TIER_BREAKS = ['de', 'at', 'chde'];
+
+export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText, conditions: conditionsText, codeCopied: codeCopiedText, getPhrase, getCategoryLink, country }) {
+  // 'DE' / 'de' / 'CH-DE' / 'de_CH' ... -> 'de' / 'chde'
+  const shopCode = String(country || '').toLowerCase().replace(/[^a-z]/g, '');
+  const keepTierBreaks = KEEP_MOBILE_TIER_BREAKS.includes(shopCode) || shopCode === 'dech';
   const isLanding = type === String(type).toLowerCase().includes('landing');
  
   const adventBase = 'https://pictureserver.net/static/2026/';
@@ -133,7 +140,7 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
   //  code       : "Code: xxx" -> copy button
   //  mobile     : { pre, title, subtitle, code } – different texts on mobile ('' hides it)
   //  conditions : text shown below the calendar after "See conditions"
-  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=50`;
+  const popupImg = (n, device) => `${adventBase}advent_popup_${n}_${device}.webp?ver=40`;
  
   // one sheet cell of a query (row index i, 0-based)
   const cell = (name, i) => {
@@ -231,8 +238,11 @@ export function InteractiveHeroImage({ type, queries = {}, shopNow: shopNowText,
       ...voucher(16, 'buy4pay3', ['title']),
       tiers: [0, 1, 2].map((i) => ({
         text: cell('Popup16', 1 + i),
-        // mobile: one line per offer (design) – line breaks from the sheet are ignored
-        mobileText: cell('Popup16', 4 + i).replace(/\s*<br\s*\/?>\s*/gi, ' ') || undefined, // empty -> desktop text
+        // mobile: one line per offer (design) – line breaks from the sheet are ignored,
+        // except DACH (DE, AT, CHDE – KEEP_MOBILE_TIER_BREAKS): there the <br /> from the sheet stay
+        mobileText: (keepTierBreaks
+          ? cell('Popup16', 4 + i)
+          : cell('Popup16', 4 + i).replace(/\s*<br\s*\/?>\s*/gi, ' ')) || undefined, // empty -> desktop text
         code: cell('Popup16', 7 + i),
       })),
     },
