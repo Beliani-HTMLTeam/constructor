@@ -320,7 +320,7 @@ const CTA = ({
 				const count = Math.max(1, Math.ceil(size / (outlookFontSizePx * 5)));
 				const fontWidth = size / (outlookFontSizePx * count) * 100;
 
-				return `<i hidden style="font-style:normal;letter-spacing:0;mso-font-width:${fontWidth}%;${raise !== null ? `mso-text-raise:${raise}%;` : ''}">${'&emsp;'.repeat(count)}&#8203;</i>`;
+				return `<i hidden style="font-style:normal;letter-spacing:0;text-decoration:none;mso-font-width:${fontWidth}%;${raise !== null ? `mso-text-raise:${raise}%;` : ''}">${'&emsp;'.repeat(count)}&#8203;</i>`;
 			};
 
 			const totalRaise =
@@ -330,15 +330,15 @@ const CTA = ({
 			const bottomRaise =
 				Number(effectivePadBottom) / outlookFontSizePx * 100;
 				console.log("before new button, type:", type)
-			html = `
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;${tableMarginStyle}">
-     <tr>
-      <td align="${align}" style="font-size:${fontSize};line-height:${lineHeight};mso-line-height-rule:at-least;">
-       <a href="${safeHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="background-color:${bgColor};${htmlBorderCss}border-radius:${borderRadius};color:${btnTextColor} !important;display:inline-block; ${type == 'newsletter' ? `font-family:${fontFamily};` : ''}font-size:${fontSize};font-weight:${fontWeight};line-height:${lineHeight};mso-line-height-rule:at-least;${letterSpacing ? `letter-spacing:${letterSpacing};` : ''}padding:${paddingCss};mso-padding-alt:0;text-align:center;text-decoration:${textDecoration} !important;text-underline-color:${bgColor};text-transform:${textTransform};"><!--[if mso]>${outlookSpace(effectivePadX, totalRaise)}<span style="mso-text-raise:${bottomRaise}%;"><![endif]--><span style="color:${btnTextColor} !important;text-decoration:${textDecoration} !important;">${buttonContent}</span><!--[if mso]></span>${outlookSpace(effectivePadX)}<![endif]--></a>
-      </td>
-     </tr>
-    </table>
-   `;
+				html = `
+				<table role="presentation" cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;${tableMarginStyle}">
+				 <tr>
+					<td align="${align}" style="font-size:${fontSize};line-height:${lineHeight};mso-line-height-rule:at-least;">
+					 <a href="${safeHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="background-color:${bgColor};${htmlBorderCss}border-radius:${borderRadius};color:${btnTextColor} !important;display:inline-block; ${type == 'newsletter' ? `font-family:${fontFamily};` : ''}font-size:${fontSize};font-weight:${fontWeight};line-height:${lineHeight};mso-line-height-rule:at-least;${letterSpacing ? `letter-spacing:${letterSpacing};` : ''}padding:${paddingCss};mso-padding-alt:0;text-align:center;text-decoration:none !important;text-underline-color:${bgColor};text-transform:${textTransform};"><!--[if mso]>${outlookSpace(effectivePadX, totalRaise)}<span style="mso-text-raise:${bottomRaise}%;"><![endif]--><span style="color:${btnTextColor} !important;text-decoration:${textDecoration} !important;text-underline-color:${btnTextColor};">${buttonContent}</span><!--[if mso]></span>${outlookSpace(effectivePadX)}<![endif]--></a>
+					</td>
+				 </tr>
+				</table>
+			 `;
 		} else {
 			// default: text variant
 			const textClass = className || 'newsletterCta';
