@@ -3,7 +3,7 @@ const campaignTranslationsSheet = '2026::11.12.26 - Christmas Last minute';
 const tableQueries = [
   ...[
 		["intro", "20", campaignTranslationsSheet],
-		["timer", "20:21", '2026::01.12.26 - Advent Calendar']
+		["timer", "60:61", '2026::01.12.26 - Advent Calendar']
   ].map(([name, tableRange, tableName]) => ({
     name,
     tableRange,
