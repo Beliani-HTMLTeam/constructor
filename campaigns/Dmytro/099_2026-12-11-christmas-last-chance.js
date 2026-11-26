@@ -121,7 +121,7 @@ const intro = {
 	position: 'beforeTimer',
 	// own class - newsletterContainer60px has no mobile rule in thursday.css and is also used by the header
 	container: 'newsletterContainer',
-	alignment: 'left',
+	alignment: 'center',
 	color: palette.text,
 	backgroundColor: palette.page,
 	spaceTop: 'newsletterBottom35px',
