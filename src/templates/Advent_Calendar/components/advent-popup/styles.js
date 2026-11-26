@@ -440,33 +440,34 @@ export function AdventPopupStyles() {
   .adv-note.is-closing { animation: advPopFadeOut .3s ease-out forwards; }
   .adv-note, .adv-note * { box-sizing: border-box; }
   /* Design "small pop ups_FINAL": left-aligned title + text, thin X top right.
-     desktop 337px wide, 18px  |  mobile 230px wide, 15px  |  line height 24px, 20px between title and text */
+     desktop 440px wide, 24px text (line 32px)  |  mobile 300px wide, 20px text (line 26px)  |  20px between title and text */
   .adv-note__box {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: min(337px, 100%);
+    width: min(440px, 100%);
     min-height: 137px;
     padding: 22px 20px;
     border-radius: 8px;
     background-color: #F6E7E6;
     color: #750000;
     font-family: Poppins, sans-serif;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 24px;
+    line-height: 32px;
     animation: advPopOpen .4s cubic-bezier(.175, .885, .32, 1.275);
   }
-  /* font shrinks for long translations: 18px × --note-scale, min 14px (set per text in AdventNotices) */
-  .adv-note__text { font-size: clamp(14px, calc(18px * var(--note-scale, 1)), 18px); line-height: 24px; overflow-wrap: break-word; }
+  /* font shrinks for long translations: 24px × --note-scale, min 19px (set per text in AdventNotices);
+     line height = 1.33 × the font size (24 / 32) */
+  .adv-note__text { font-size: clamp(19px, calc(24px * var(--note-scale, 1)), 24px); line-height: 1.333; overflow-wrap: break-word; }
   .adv-note__line { margin: 0; padding: 0; }
   .adv-note__line:first-child { padding-right: 32px; }          /* title: keeps clear of the X */
   .adv-note__line + .adv-note__line { margin-top: 20px; }
-  /* close: thin X, 16px, 20px from the right, level with the title */
+  /* close: thin X, 16px, 20px from the right, level with the title (first line: 22px + 32px line) */
   .adv-note__close {
     position: absolute !important;
-    top: 19px; right: 12px;
+    top: 22px; right: 12px;
     width: 32px; height: 32px;       /* tap area, the X in its middle */
     min-width: 0 !important; min-height: 0 !important;
     padding: 0 !important; margin: 0 !important;
@@ -487,16 +488,17 @@ export function AdventPopupStyles() {
     }
     .adv-note__box {
       pointer-events: auto;
-      width: min(230px, 100%);
+      width: min(300px, 100%);
       min-height: 0;
       padding: 15px 19px;
-      font-size: 15px;
+      font-size: 20px;
+      line-height: 26px;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);   /* no grey layer on mobile -> shadow keeps it visible */
       animation: advNoteUp .35s ease-out;
     }
-    .adv-note__text { font-size: clamp(12px, calc(15px * var(--note-scale, 1)), 15px); }   /* mobile: 15px, min 12px */
+    .adv-note__text { font-size: clamp(16px, calc(20px * var(--note-scale, 1)), 20px); }   /* mobile: 20px, min 16px */
     .adv-note__line:first-child { padding-right: 40px; }
-    .adv-note__close { top: 10px; right: 12px; width: 28px; height: 28px; }
+    .adv-note__close { top: 14px; right: 12px; width: 28px; height: 28px; }   /* level with the 1st line (15px + 26px line) */
     .adv-note__close svg { width: 12px; height: 12px; }
   }
   @keyframes advNoteUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
