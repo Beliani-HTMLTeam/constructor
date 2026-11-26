@@ -117,7 +117,7 @@ export const TimerHandler = async ({
 		getPhrase('timer-seconds'),
 	];
 
-	const base = (shop?.origin ?? 'https://prologistics.info') + '/timer.gif';
+	const base = (shop?.origin ?? 'https://prologistics.info').replace(/\/+$/, '') + '/timer.gif';
 
 	let link =
 		base +
