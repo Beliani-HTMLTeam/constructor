@@ -1,5 +1,28 @@
 import { Space } from '../Space.js';
 import { Paragraph } from '../Paragraph.js';
+import { CTA } from '../CTA.js';
+
+// Default look of the 'button' tile text layout (name centered + filled button underneath).
+// Every key can be overridden per block with `category.tileButton: { ... }` (same props as CTA variant 'button').
+const TILE_BUTTON_DEFAULTS = {
+	background: '#750000',
+	color: '#ffffff',
+	fontSize: '20px',
+	lineHeight: '24px',
+	fontWeight: '500',
+	letterSpacing: null,
+	borderRadius: '3px',
+	paddingX: 45,
+	paddingTop: 5,
+	paddingBottom: 5,
+	mobilePaddingX: 20,
+	mobilePaddingTop: 5,
+	mobilePaddingBottom: 5,
+	mobileFontSize: '16px',
+	mobileLineHeight: '20px',
+	textTransform: 'none',
+	spaceBefore: 8, // px between the name and the button
+};
 
 const OVERRIDE_GROUPS = {
 	dach: ['chde', 'de', 'at'],
@@ -169,7 +192,8 @@ export const render = ({
 	getCategoryTitle,
 	getPhrase,
 	add_utm,
-	country
+	country,
+	renderType,
 }) => {
 	const columns = category?.columns ?? COLUMNS;
 	const rows = toRows(Array.isArray(category?.categories) ? category.categories : [], columns);
@@ -196,12 +220,37 @@ export const render = ({
 	// Tile text layout:
 	//   'stacked' (default) – name centered, CTA centered underneath
 	//   'inRow'             – name on the left, CTA on the right, in one line
+	//   'button'            – name centered, filled CTA button underneath (style: category.tileButton)
 	const textInRow = category?.tileTextLayout === 'inRow';
+	const textAsButton = category?.tileTextLayout === 'button';
+	const tileButton = { ...TILE_BUTTON_DEFAULTS, ...(category?.tileButton ?? {}) };
 	const nameColor = category?.tileNameColor;
 	const ctaColor = category?.tileCtaColor;
 	// text-decoration of the tile CTA link ('none' = no underline), default underline
 	const ctaDecoration = category?.tileCtaDecoration ?? 'underline';
 	const spaceBetweenRows = category?.spaceBetweenRows ?? 'newsletterBottom35px';
+
+	// Outlook (Word) doesn't always pass the section background down to cells without their own
+	// background, so the white wrapper shows through as thin white lines (e.g. in the gap between
+	// two CTA buttons). Every table / row / gap cell of the tiles gets the category background.
+	const tileBg = category?.tileBackground ?? category?.background;
+	const bgAttr = tileBg ? ` bgcolor="${tileBg}"` : '';
+	const bgCss = tileBg ? ` background-color: ${tileBg};` : '';
+
+	// 'button' layout: the CTA button (VML-free, mso-text-raise padding) can come out a fractional
+	// height in Outlook (Word). The gap cell next to it then ends 1px early and a white line shows
+	// at the bottom of the gap. The gap cell of the button row gets an Outlook-only block of the
+	// expected row height in whole pixels (space above + padding + line height), so Word snaps
+	// the whole row to that. Other clients only see the usual 1px &nbsp;.
+	// Tweak with category.tileButton.msoRowHeight if Outlook still shows a line.
+	const ctaRowHeight = Math.ceil(
+		tileButton.msoRowHeight ??
+			(Number(tileButton.spaceBefore) || 0) +
+			(Number(tileButton.paddingTop) || 0) +
+			(parseFloat(tileButton.lineHeight) || 0) +
+			(Number(tileButton.paddingBottom) || 0)
+	);
+	const ctaGapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}"${bgAttr} valign="top" style="width: ${layout.gapPct}%; padding: 0; font-size: 1px; line-height: 1px; mso-line-height-rule: exactly; vertical-align: top;${bgCss}"><!--[if mso]><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td height="${ctaRowHeight}" style="height: ${ctaRowHeight}px; font-size: 1px; line-height: ${ctaRowHeight}px; mso-line-height-rule: exactly;${bgCss}">&nbsp;</td></tr></table><![endif]--><!--[if !mso]><!-->&nbsp;<!--<![endif]--></td>`;
 
 	const textStackMode = category?.tileTextStack ?? 'auto';
 	const stackText = showText && textInRow && textStackMode !== 'never' && (
@@ -235,13 +284,13 @@ export const render = ({
 			const width = layout.widths[columnId]; // px – width attribute (Outlook) + image width
 			const widthPct = `${layout.widthsPct[columnId]}%`; // % – CSS width, scales with the screen
 			// 1px exactly instead of 0: Outlook can't do font-size 0 and falls back to a default (fractional) line
-			const gapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}" style="width: ${layout.gapPct}%; padding: 0; font-size: 1px; line-height: 1px; mso-line-height-rule: exactly;">&nbsp;</td>`;
+			const gapHtml = `<td class="newsletterCategoryGap" width="${layout.gap}"${bgAttr} style="width: ${layout.gapPct}%; padding: 0; font-size: 1px; line-height: 1px; mso-line-height-rule: exactly;${bgCss}">&nbsp;</td>`;
  
 			if (columnId > 0) {
 				imgCells += gapHtml;
 				if (showText) {
 					nameCells += gapHtml;
-					ctaCells += gapHtml;
+					ctaCells += textAsButton ? ctaGapHtml : gapHtml;
 				}
 			}
  
@@ -311,6 +360,42 @@ export const render = ({
 						</td>
 					`;
 				}
+			} else if (showText && textAsButton) {
+				// Name and button in separate rows of the outer table, so all buttons of a row
+				// start at the same height even when a neighbour's name wraps to two lines.
+				nameCells += `
+					<td class="newsletterCategoryTile" width="${width}" valign="top" align="center"${bgAttr} style="width: ${widthPct};${bgCss} padding-top: ${category?.tileNameSpaceBefore ?? 10}px; font-size: 20px; font-weight: 600; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} vertical-align: top; text-align: center; word-break: normal; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
+						<a href="${href}" style="color: ${nameColor ?? '#750000'}; text-decoration: none;">${name}</a>
+					</td>
+				`;
+
+				ctaCells += `
+					<td class="newsletterCategoryTile" width="${width}" valign="top" align="center"${bgAttr} style="width: ${widthPct}; padding-top: ${tileButton.spaceBefore}px; vertical-align: top;${bgCss}">
+						${CTA({
+							href,
+							text: ctaText,
+							variant: 'button',
+							type: renderType === 'landing' ? 'landing' : 'newsletter',
+							align: 'center',
+							bg: tileButton.background,
+							textColor: tileButton.color,
+							fontSize: tileButton.fontSize,
+							lineHeight: tileButton.lineHeight,
+							fontWeight: tileButton.fontWeight,
+							letterSpacing: tileButton.letterSpacing,
+							borderRadius: tileButton.borderRadius,
+							paddingX: tileButton.paddingX,
+							paddingTop: tileButton.paddingTop,
+							paddingBottom: tileButton.paddingBottom,
+							mobilePaddingX: tileButton.mobilePaddingX,
+							mobilePaddingTop: tileButton.mobilePaddingTop,
+							mobilePaddingBottom: tileButton.mobilePaddingBottom,
+							mobileFontSize: tileButton.mobileFontSize,
+							mobileLineHeight: tileButton.mobileLineHeight,
+							textTransform: tileButton.textTransform,
+						})}
+					</td>
+				`;
 			} else if (showText) {
 				nameCells += `
 					<td class="newsletterCategoryTile frenchDaysCategoryName categoryTileStackedName" width="${width}" valign="top" align="center" style="width: ${widthPct}; padding-top: 16px; font-size: 20px; font-weight: 700; line-height: 1.25; ${msoLine(MSO_NAME_LINE)} vertical-align: top; word-break: break-word; overflow-wrap: break-word; color: ${nameColor ?? '#750000'};">
@@ -327,18 +412,18 @@ export const render = ({
 		}
  
 		html += `
-      <tr>
-        <td class="${containerClass}">
-          <table cellspacing="0" cellpadding="0" border="0" width="${layout.inner}" style="width: 100%; max-width: ${layout.inner}px; table-layout: fixed;">
-            <tr>
+      <tr${bgAttr}>
+        <td class="${containerClass}"${bgAttr}${bgCss ? ` style="${bgCss.trim()}"` : ''}>
+          <table cellspacing="0" cellpadding="0" border="0" width="${layout.inner}"${bgAttr} style="width: 100%; max-width: ${layout.inner}px; table-layout: fixed;${bgCss}">
+            <tr${bgAttr}>
               ${imgCells}
             </tr>
             ${showText ? `
-            <tr>
+            <tr${bgAttr}>
               ${nameCells}
             </tr>
             ${textInRow && !stackText ? '' : `
-            <tr>
+            <tr${bgAttr}>
               ${ctaCells}
             </tr>
             `}

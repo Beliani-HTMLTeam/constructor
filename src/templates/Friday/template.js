@@ -76,7 +76,7 @@ const Friday = async ({
   if(links?.TopImage_href == 'Home Page') {
     links.TopImage_href = getCategoryLink('https://www.beliani.ch');
   }
-  const TopImageElement = TopImageHandler({ links, TopImage_data });
+  const TopImageElement = TopImageHandler({ links, TopImage_data, type });
 
   const introCta_href = getIntroCtaHref({
     links,

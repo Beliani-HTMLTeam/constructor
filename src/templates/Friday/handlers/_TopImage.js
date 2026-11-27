@@ -1,11 +1,35 @@
 import { ImageWithLink } from '../components/ImageWithLink';
 
-export const TopImageHandler = ({ links, TopImage_data }) => {
+const isVideo = (src) => /\.mp4(\?|$)/i.test(String(src ?? ''));
+
+// Video top image for landing pages (emails can't play video, so it's never used in the newsletter).
+const VideoWithLink = ({ href, src, tdClass }) => `
+  <tr>
+    <td ${tdClass ? `class="${tdClass}"` : ''} align="center" valign="top">
+      <a href="${href}" style="display: block; line-height: 0;"><video src="${src}" width="100%" style="display: block; width: 100%; max-width: 100%; height: auto; vertical-align: top;" autoplay muted loop playsinline></video></a>
+    </td>
+  </tr>
+`;
+
+export const TopImageHandler = ({ links, TopImage_data, type }) => {
   if (!links?.TopImage_href) return '';
 
   let html = '';
 
-  if (links?.TopImage_src) {
+  // Landing only: links.TopImage_src_landing replaces TopImage_src (.mp4 -> <video>, anything else -> image)
+  const landingSrc = type === 'landing' ? links?.TopImage_src_landing : null;
+
+  if (landingSrc) {
+    html += isVideo(landingSrc)
+      ? VideoWithLink({ href: links.TopImage_href, src: landingSrc, tdClass: TopImage_data?.container })
+      : ImageWithLink({
+          href: links.TopImage_href,
+          src: landingSrc,
+          insideTr: true,
+          alt: 'Top Image',
+          tdClass: TopImage_data?.container,
+        });
+  } else if (links?.TopImage_src) {
     html += ImageWithLink({
       href: links.TopImage_href,
       src: links.TopImage_src,
