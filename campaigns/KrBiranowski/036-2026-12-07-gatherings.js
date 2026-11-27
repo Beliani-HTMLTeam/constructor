@@ -37,6 +37,7 @@ const links = generateLinks({
   date: imageDate,
   custom: {
     Intro_cta_href: 'https://www.beliani.ch/dining-room-furniture/',
+    Timer_href: 'content/lp26-12-01',
   },
 });
 
@@ -145,7 +146,7 @@ const timer = {
 
 const Inside = {
   type: 'timer',
-  position: 'afterIntro',
+  position: 'afterTopImage',
   spaceAfter: 'newsletterBottom60px',
   spaceAfterBackground: theme.secondary,
   color: theme.timerColor,

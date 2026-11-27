@@ -375,7 +375,7 @@ const categories = [
 	},
 	roomCategory(0, 'Living Room', 'https://www.beliani.ch/living-room-furniture/', {
 		DORA: 676321,
-		SKARO: 842891,
+		PILARNE: 843413,
 		BRADLEY: 624313,
 		VIDSEL: 842345,
 		CHARGES: 685534,
@@ -419,7 +419,7 @@ const categories = [
 		BOO: 428541,
 		JAJPUR: 841943,
 		FLOWER: 812079,
-		BONNEVAL: 839334, // Inactive on DK
+		BONNEVAL: 841520, // Inactive on DK
 	}),
 ];
 

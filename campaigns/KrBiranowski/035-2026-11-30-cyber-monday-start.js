@@ -24,6 +24,7 @@ const tableQueries = [
   ['deal_3', '31:33', dealTranslationsSheets[0]],
   ['deal_condition', '34', dealTranslationsSheets[0]],
   ['deal_date', '35', dealTranslationsSheets[0]],
+  ['categories', '36', dealTranslationsSheets[0]],
   ['condition', '37:39', dealTranslationsSheets[0]],
 ].map(([name, tableRange, tableName]) => ({
   name,
@@ -226,7 +227,7 @@ const categories = [
     tileTextAlign: 'center',
     spaceBetweenText: 'newsletterBottom10px',
     heading: {
-      text: 'Shop the look',
+      query: 'categories',
       align: 'center',
       className: 'cyberMondayCategoryHeading',
       spaceAfter: 'newsletterBottom40px',
