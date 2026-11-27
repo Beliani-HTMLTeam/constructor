@@ -78,6 +78,7 @@ img {
 .newsletterFreebieContainer {
   padding-left: 10px;
 }
+
 .newsletterContainer {
   padding-left: 20px;
   padding-right: 20px;
@@ -86,6 +87,11 @@ img {
 .newsletterContainer5px {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.newsletterContainer35px {
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 .col2imgGap.newsletterContainer {
@@ -287,6 +293,19 @@ img {
 .newsletterRight20px {
   padding-right: 20px;
 }
+
+.newsletter3ProdsLeft10px {
+  padding: 0 10px 0 0;
+}
+
+.newsletter3ProdsCenter10px {
+  padding: 0 5px;
+}
+
+.newsletter3ProdsRight10px {
+  padding: 0 0 0 10px;
+}
+
 .newsletterParagraph {
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
@@ -627,6 +646,18 @@ img {
   .newsletterFooterTitle {
     font-size: 18px;
   }
+
+  .newsletter3ProdsLeft10px {
+    padding: 0 5px 0 0 !important;
+  }
+  
+  .newsletter3ProdsCenter10px {
+    padding: 0 2.5px !important;
+  }
+  
+  .newsletter3ProdsRight10px {
+    padding: 0 0 0 5px !important;
+  }
  
   .col4tileImg {
     height: auto !important;
@@ -738,6 +769,11 @@ img {
   .newsletterContainer5px {
     padding-left: 3px;
     padding-right: 3px;
+  }
+
+  .newsletterContainer35px {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .col2imgGap.newsletterContainer {

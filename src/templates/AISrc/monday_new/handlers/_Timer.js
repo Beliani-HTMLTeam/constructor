@@ -230,6 +230,10 @@ export const TimerHandler = async ({
     ${Inside.spaceBefore ? Space({ insideTr: true, className: Inside.spaceBefore, bg: Inside.spaceBeforeBackground ?? backgroundColor }) : ''}
 
     ${Timer({
+			heading: Array.isArray(queries?.timer_title)
+				? queries.timer_title[0]
+				: queries?.timer_title,
+			joinTexts: timer?.joinTexts === true,
 			title: queries?.timer?.[0] ?? 'Translation not found',
 			subtitle: queries?.timer?.[1] ?? 'Translation not found',
 			href: links?.Timer_href,

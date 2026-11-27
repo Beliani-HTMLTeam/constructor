@@ -5,20 +5,40 @@ const defaultRegions = [
   ['eastern', ['PL', 'HU', 'CZ', 'SK', 'RO', 'SI']],
 ];
 
-export const createImages = (getImageUrl, date) => {
-  return (pattern, { index, regional = false, regions = defaultRegions } = {}) => {
-    const filename = pattern.replaceAll('{date}', date).replaceAll('{index}', String(index ?? '').padStart(2, '0'));
+export const createImages = (getImageUrl, date, translateImage = null) => {
+  return (
+    pattern,
+    {
+      index,
+      regional = false,
+      translate = false,
+      regions = defaultRegions,
+    } = {}
+  ) => {
+    const filename = pattern
+      .replaceAll('{date}', date)
+      .replaceAll('{index}', String(index ?? '').padStart(2, '0'));
 
-    const src = getImageUrl(filename, true);
+    const getSrc = (filename) => {
+      if (translate && translateImage) {
+        return translateImage({ value: filename });
+      }
 
-    if (!regional) return src;
+      return getImageUrl(filename, true);
+    };
+
+    if (!regional) return getSrc(filename);
 
     const images = {};
 
     for (const [region, countries] of regions) {
-      const regionalFilename = filename.replace(/(\.[^.]+)$/, `_${region}$1`);
-      const regionalSrc = getImageUrl(regionalFilename, true);
-  
+      const regionalFilename = filename.replace(
+        /(\.[^.]+)$/,
+        `_${region}$1`
+      );
+
+      const regionalSrc = getSrc(regionalFilename);
+
       for (const country of countries) {
         images[country] = regionalSrc;
       }

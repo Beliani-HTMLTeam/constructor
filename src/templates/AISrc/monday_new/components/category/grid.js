@@ -77,7 +77,7 @@ export const render = ({
 
       productsInnerHtml += '</tr>';
 
-      if (prodSettings?.outsideSpace)
+      if (prodSettings?.outsideSpace && i + cols < filteredProducts.length)
         productsInnerHtml += Space({ insideTr: true, className: prodSettings.outsideSpace })
     }
 

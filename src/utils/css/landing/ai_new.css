@@ -105,6 +105,11 @@ table {
   padding-right: 20px;
 }
 
+#newsletter .newsletterContainer35px {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
 #newsletter .col2imgGap.newsletterContainer {
   width: 20px;
   height: 20px;
@@ -661,6 +666,11 @@ table {
     padding-right: 10px;
   }
 
+  #newsletter .newsletterContainer35px {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   #newsletter .col2imgGap.newsletterContainer {
     width: 10px;
     height: 10px;
@@ -877,6 +887,18 @@ table {
   #newsletter .categoryTitleNormal {
     font-size: 19px !important;
   }
+
+  .newsletter3ProdsLeft10px {
+    padding: 0 5px 0 0 !important;
+  }
+  
+  .newsletter3ProdsCenter10px {
+    padding: 0 2.5px !important;
+  }
+  
+  .newsletter3ProdsRight10px {
+    padding: 0 0 0 5px !important;
+  }
 }
 
 @media screen and (max-width: 570px) {
@@ -926,6 +948,18 @@ table {
 
 .newsletter3ProductsRight {
   padding-right: 20px !important;
+}
+
+.newsletter3ProdsLeft10px {
+  padding: 0 10px 0 0;
+}
+
+.newsletter3ProdsCenter10px {
+  padding: 0 5px;
+}
+
+.newsletter3ProdsRight10px {
+  padding: 0 0 0 10px;
 }
 
 @media screen and (max-width: 768px) {

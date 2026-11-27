@@ -7,17 +7,30 @@ export const renderContent = ({
   introPosition,
   timerPosition,
 }) => {
-  const afterFreebies = introPosition === 'afterFreebies';
-  const afterIntro = timerPosition === 'afterIntro';
-
-  const introWithTimer = `${intro}${afterIntro ? timer : ''}`;
+  const positions = {
+    beforeTopImage: {
+      intro: introPosition === 'beforeTopImage' ? intro : '',
+      timer: timerPosition === 'beforeTopImage' ? timer : '',
+    },
+    afterTopImage: {
+      intro: introPosition === 'afterTopImage' ? intro : '',
+      timer: timerPosition === 'afterTopImage' ? timer : '',
+    },
+    afterFreebies: {
+      intro: introPosition === 'afterFreebies' ? intro : '',
+      timer: timerPosition === 'afterFreebies' ? timer : '',
+    },
+  };
 
   return [
+    positions.beforeTopImage.intro,
+    positions.beforeTopImage.timer,
     topImage,
-    afterIntro ? '' : timer,
-    afterFreebies ? '' : introWithTimer,
+    positions.afterTopImage.intro,
+    positions.afterTopImage.timer,
     categoriesBeforeIntro,
-    afterFreebies ? introWithTimer : '',
+    positions.afterFreebies.intro,
+    positions.afterFreebies.timer,
     categoriesAfterIntro,
   ].join('');
 };

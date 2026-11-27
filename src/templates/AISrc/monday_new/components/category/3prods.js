@@ -1,15 +1,20 @@
 import { Product } from '../Product.js';
+import { Space } from '../Space.js';
 
 export const render = ({
   products,
   showPrices,
   showNames,
+  prodSettings = {},
   gapBetweenVertical = true,
   gapBetweenHorizontal = true,
   align = 'left',
   queries,
   insideContainer = true,
   color,
+  theme = {},
+  tdClass = 'newsletterContainer',
+  containerWidth = 600,
   id,
   imageSide,
   categoryHref,
@@ -20,12 +25,18 @@ export const render = ({
 
   const columns = 3;
 
+  const productBackground = prodSettings.background ?? '';
+
   // ${insideContainer ? 'class="newsletterContainer"' : ''}
 
   productsInnerHtml += `
     <tr>
-      <td style="color: ${color}" >
+    <td style="color: ${color};"
+      ${insideContainer ? `class="${prodSettings.tdClass ?? tdClass}"` : ''}>
         <table cellspacing="0" cellpadding="0" border="0" width="100%">`;
+  
+  if (prodSettings.spaceBefore)
+    productsInnerHtml += Space({ insideTr: true, className: prodSettings.spaceBefore, bg: productBackground })
 
   for (let prodId = 0; prodId < products.length; prodId += columns) {
     productsInnerHtml += '<tr>';
@@ -37,15 +48,21 @@ export const render = ({
 
       const horizontalGapClass = !gapBetweenHorizontal
         ? ''
-        : columnId === 0
-          ? 'newsletter3ProductsLeft'
-          : columnId === columns - 1
-            ? 'newsletter3ProductsRight'
-            : 'newsletter3ProductsCenter';
+        : Array.isArray(gapBetweenHorizontal)
+          ? gapBetweenHorizontal[columnId] ?? ''
+          : typeof gapBetweenHorizontal === 'string'
+            ? gapBetweenHorizontal
+            : columnId === 0
+              ? 'newsletter3ProductsLeft'
+              : columnId === columns - 1
+                ? 'newsletter3ProductsRight'
+                : 'newsletter3ProductsCenter';
 
       productsInnerHtml += `<td style="color: ${color}; width:33.333333333333336%;vertical-align:top;" width="33.333333333333336%" ${horizontalGapClass ? `class="${horizontalGapClass}"` : ''}>`;
 
       if (product) {
+        product.settings = prodSettings ?? {};
+
         const productWithCategoryHref =
           product?.useCategoryLink && categoryHref ? { ...product, categoryLink: categoryHref } : product;
 
@@ -54,6 +71,7 @@ export const render = ({
           showPrices,
           showNames,
           color,
+          theme,
           align,
           gapBetweenVertical,
           product?.useCategoryLink,
@@ -67,7 +85,7 @@ export const render = ({
     productsInnerHtml += '</tr>';
   }
 
-  productsInnerHtml += '</td></tr></table>';
+  productsInnerHtml += '</table></td></tr>';
 
   return productsInnerHtml;
 };

@@ -19,7 +19,7 @@ export const generateLinks = ({
 
   const filename = (pattern) => pattern.replaceAll('{date}', date);
 
-  return {
+  const links = {
     TopImageTitle_href: href,
     TopImageTitle_src: translateImage({
       value: filename(topImageTitle),
@@ -29,4 +29,18 @@ export const generateLinks = ({
     Timer_href: href,
     ...custom,
   };
+
+  Object.keys(custom).forEach((key) => {
+    if (
+      key.endsWith('_href') &&
+      typeof custom[key] === 'string' &&
+      custom[key].startsWith('content/lp')
+    ) {
+      links[key] = translateLink({
+        value: custom[key],
+      });
+    }
+  });
+
+  return links;
 };
