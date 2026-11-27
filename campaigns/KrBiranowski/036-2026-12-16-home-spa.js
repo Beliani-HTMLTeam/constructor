@@ -2,18 +2,13 @@ import { createTemplates } from './shared/createTemplates.js';
 import { generateLinks } from './shared/generateLinks.js';
 import { createImages } from './shared/createImages.js';
 import { getCampaignInfo } from './shared/getCampaignInfo.js';
-import { brandColors } from './shared/brandColors.js';
+import { mapProducts } from './shared/mapProducts.js';
+import { theme } from './shared/theme.js';
 
 // Main
 const campaignTranslationsSheet = '2026::16.12.26 - Home SPA';
 const campaignInfo = getCampaignInfo('20261216');
 const image = createImages(getImageUrl, campaignInfo.dateString, translateImage);
-
-const theme = {
-  ...brandColors,
-  black: '#000000',
-  white: '#ffffff',
-};
 
 const tableQueries = [
   { name: 'TopImageTitle', tableRange: '17:18' },
@@ -86,21 +81,12 @@ const addData = [
   },
 ];
 
-const prodData = [
+const prodData = mapProducts(image, [
   ['666475', '687843', '202262', '232789'],
   ['655014', '655052', '653433', '654216'],
   ['819887', '819338', '360194', '378034'],
   ['635163', '561281', '355889', '311897'],
-].map((ids, groupIdx, groups) => {
-  const offset = groups.slice(0, groupIdx).reduce((sum, group) => sum + group.length, 0);
-
-  return ids.map((id, prodIdx) => ({
-    id,
-    src: image('{date}_Prod{index}.png', {
-      index: offset + prodIdx + 1,
-    }),
-  }));
-});
+]);
 
 let categories = catData.map((cat, index) => ({
   name: cat.name,
