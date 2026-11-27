@@ -5,13 +5,16 @@ export const TopImageHandler = ({ links, TopImage_data }) => {
 
   let html = '';
 
+  // per-image td class, e.g. { TopImage_src_1: 'hideDesktop' } for a desktop/mobile image swap; default: container
+  const tdClassFor = (key) => TopImage_data?.tdClasses?.[key] ?? TopImage_data?.container;
+
   if (links?.TopImage_src) {
     html += ImageWithLink({
       href: links.TopImage_href,
       src: links.TopImage_src,
       insideTr: true,
       alt: 'Top Image',
-      tdClass: TopImage_data?.container,
+      tdClass: tdClassFor('TopImage_src'),
     });
   }
 
@@ -29,7 +32,7 @@ export const TopImageHandler = ({ links, TopImage_data }) => {
         src,
         insideTr: true,
         alt: 'Top Image',
-        tdClass: TopImage_data?.container,
+        tdClass: tdClassFor(key),
       });
     });
 
