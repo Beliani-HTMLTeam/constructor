@@ -13,7 +13,7 @@ import {
   AdventNotices,
 } from './advent-popup/index.js';
  
-const ADVENT_TEST_MODE = true;
+const ADVENT_TEST_MODE = false;
 
 // TRANSLATOR MODE – for checking the translations:
 // works like the test mode (doors open one by one: 1, 2, 3 ... whatever the date),
