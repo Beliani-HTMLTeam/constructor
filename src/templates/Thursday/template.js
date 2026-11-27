@@ -10,6 +10,7 @@ import { inlineFontFamily } from './helpers/inlineFontFamily.js';
 import { CategoriesHandler } from './handlers/_Categories.js';
 import { SoonEndingBannersHandler } from './handlers/_SoonEndingBanners.js';
 import { getIntroCtaHref } from './helpers/getIntroCtaHref.js';
+import { getTimerLinks } from '@/templates/Friday/helpers/getTimerLinks.js';
 
 const Thursday = async ({
   links,
@@ -75,7 +76,8 @@ const Thursday = async ({
     date,
     selectedCampaign,
     queries,
-    links,
+    // newsletter only: utm_content=<timer.utmContent> on Timer_href (same helper as Friday)
+    links: getTimerLinks({ links, timer, type }),
     timer,
     shopNow,
     country,
