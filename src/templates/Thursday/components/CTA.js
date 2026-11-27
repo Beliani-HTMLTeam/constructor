@@ -34,6 +34,8 @@ const CTA = ({
 	fontWeight = '700',
 	letterSpacing = null,
 	textTransform = 'uppercase',
+	// button variant: 'underline' underlines the button text (default: none)
+	textDecoration = 'none',
 	borderRadius = '4px',
 	fontFamily = "'Open Sans', sans-serif",
 	mobileFontSize = null,
@@ -90,7 +92,8 @@ const CTA = ({
 			html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="secondaryLinkMaroon">${transformedText} ${copyIcon}</a>`;
 		} else {
 			const buttonContent = codeValue ? `${transformedText} ${copyIcon}` : transformedText;
-			html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bgColor}; color: ${btnTextColor} !important;">${buttonContent}</a>`;
+			const lpDecoration = textDecoration !== 'none' ? ` text-decoration: ${textDecoration} !important;` : '';
+			html = `<a href="${codeValue ? '#' : href}" ${codeCopyHandler} class="ctaBtn" style="background-color: ${bgColor}; color: ${btnTextColor} !important;${lpDecoration}">${buttonContent}</a>`;
 		}
 	} else {
 		// newsletter type
@@ -162,7 +165,7 @@ const CTA = ({
         <table role="presentation" cellspacing="0" cellpadding="0" border="0" ${tableAlignAttr} style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;${tableMarginStyle}">
           <tr>
             <td align="${align}" style="font-size:${fontSize};line-height:${lineHeight};mso-line-height-rule:at-least;">
-              <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="background-color:${bgColor};border-radius:${borderRadius};color:${btnTextColor} !important;display:inline-block;font-family:${fontFamily};font-size:${fontSize};font-weight:${fontWeight};line-height:${lineHeight};mso-line-height-rule:at-least;${letterSpacing ? `letter-spacing:${letterSpacing};` : ''}padding:${paddingCss};mso-padding-alt:0;text-align:center;text-decoration:none !important;text-underline-color:${bgColor};text-transform:${textTransform};"><!--[if mso]>${outlookSpace(effectivePadX, totalRaise)}<span style="mso-text-raise:${bottomRaise}%;"><![endif]--><span style="color:${btnTextColor} !important;text-decoration:none !important;">${buttonContent}</span><!--[if mso]></span>${outlookSpace(effectivePadX)}<![endif]--></a>
+              <a href="${buttonHref}" class="${buttonClass}" ${codeValue ? codeCopyHandler : 'target="_blank"'} style="background-color:${bgColor};border-radius:${borderRadius};color:${btnTextColor} !important;display:inline-block;font-family:${fontFamily};font-size:${fontSize};font-weight:${fontWeight};line-height:${lineHeight};mso-line-height-rule:at-least;${letterSpacing ? `letter-spacing:${letterSpacing};` : ''}padding:${paddingCss};mso-padding-alt:0;text-align:center;text-decoration:${textDecoration} !important;text-underline-color:${textDecoration === 'none' ? bgColor : btnTextColor};text-transform:${textTransform};"><!--[if mso]>${outlookSpace(effectivePadX, totalRaise)}<span style="mso-text-raise:${bottomRaise}%;"><![endif]--><span style="color:${btnTextColor} !important;text-decoration:${textDecoration} !important;">${buttonContent}</span><!--[if mso]></span>${outlookSpace(effectivePadX)}<![endif]--></a>
             </td>
           </tr>
         </table>
