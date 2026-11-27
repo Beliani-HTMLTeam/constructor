@@ -41,6 +41,11 @@ const TopImageTitle = ({ href, src, title1, title2, backgroundColor, color, type
     singleLine: `
       <h4 style="color:${color};" class="newsletterTitleH1">${title1}</h4>
     `,
+    // small line (eyebrow) over a big title, left aligned - the eyebrow class comes from the campaign's additionalCss
+    eyebrowLeft: `
+      <h5 style="color:${color}; text-align:left;" class="newsletterTitleEyebrow">${title1}</h5>
+      <h4 style="color:${color}; text-align:left;" class="newsletterTitleH1">${title2}</h4>
+    `,
     halloween: `
       <h4 style="color:${color};" class="${String(title1).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title1}</h4>
       <h4 style="color:${color};" class="${String(title2).toLowerCase().includes('halloween') ? 'newsletterTitleH1' : 'newsletterTitleH2'}">${title2}</h4>
